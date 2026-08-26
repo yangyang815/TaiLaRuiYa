@@ -1,0 +1,49 @@
+<view class="page-root {{themeClass}} list-root" wx:if="{{conf}}">
+
+  <!-- 顶部 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">{{conf.title}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="head" style="background: radial-gradient(60% 80% at 50% 0%, rgba(255, 215, 0, 0.13), transparent 70%);">
+    <text class="h-sub">{{conf.sub}}</text>
+    <scroll-view class="subs" wx:if="{{conf.subs.length > 1}}" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="subs-in">
+        <view class="chip {{sub === item.k ? 'on' : ''}}" wx:for="{{conf.subs}}" wx:key="n"
+          bindtap="onSub" data-k="{{item.k}}">{{item.n}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 排行榜 / 列表 -->
+  <view class="l-list">
+    <view class="l-item card tappable fade-in" wx:for="{{list}}" wx:key="id"
+      bindtap="onItem" data-id="{{item.id}}">
+      <view class="l-rank px {{item.rank <= 3 ? 'top' : ''}}" wx:if="{{conf.rank}}">
+        {{item.rank > 0 ? (item.rank <= 9 ? '0' + item.rank : item.rank) : ''}}
+      </view>
+      <view class="l-art" style="box-shadow: 0 0 16rpx {{item.glow}}55;">
+        <pixel-icon art-id="{{item.artId}}" size="88" />
+      </view>
+      <view class="col flex-1">
+        <text class="l-name">{{item.name}}</text>
+        <text class="l-en px" wx:if="{{item.en}}">{{item.en}}</text>
+        <text class="l-meta" wx:if="{{item.meta}}">{{item.meta}}</text>
+      </view>
+      <view class="col l-right">
+        <text class="l-dmg px" wx:if="{{item.rankV}}">{{item.rankV}}</text>
+        <text class="l-dmg-k" wx:if="{{item.rankV}}">伤害</text>
+        <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : 'tag-item')}}" wx:else>
+          {{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : '物品')}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!list.length}}">
+    <view class="e-icon">🗺️</view>
+    <text>暂无数据</text>
+  </view>
+  <view class="pad-bottom" />
+</view>

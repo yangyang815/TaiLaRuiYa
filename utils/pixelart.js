@@ -1,0 +1,1435 @@
+// ============================================================
+// 像素艺术库：所有图标以字符画定义，运行时由 pixel-icon 组件
+// 在 Canvas 上逐像素绘制（自带容错：行宽自动补齐）
+// ============================================================
+
+const A = (w, h, pal, rows) => {
+  const out = []
+  for (let y = 0; y < h; y++) {
+    let r = rows[y] || ''
+    if (r.length < w) r += '.'.repeat(w - r.length)
+    out.push(r.slice(0, w))
+  }
+  return { w, h, pal, rows: out }
+}
+
+// 稀有度 → 光晕颜色（对应泰拉瑞亚稀有度色系）
+const RARITY = {
+  0: '#E0D6C8', 1: '#9696FF', 2: '#4CAF50', 3: '#FF9C40', 4: '#E86E6E',
+  5: '#FF6ED8', 6: '#C86EE8', 7: '#8EE800', 8: '#FFE900', 9: '#4CE0E0',
+  10: '#FF4040', 11: '#B455E8'
+}
+
+const ARTS = {}
+
+/* ================= 模板 ================= */
+
+// 竖剑：a 刃亮边 / b 刃身 / G 金护手 / h 握柄
+const SWORD = [
+  '.....aa.....',
+  '....aaba....',
+  '....abba....',
+  '....abba....',
+  '....abba....',
+  '....abba....',
+  '....abba....',
+  '..GGGGGGGG..',
+  '....hhhh....',
+  '....hhhh....',
+  '....hhhh....',
+  '....GGGG....'
+]
+function sword (a, b) {
+  return A(12, 12, { a, b, G: '#FFD700', h: '#7A4A21' }, SWORD)
+}
+
+// 十字镐：a/b 金属镐头，h 木柄
+const PICKAXE = [
+  '..bbbbbbbb..',
+  '.baaaaaaaab.',
+  '.ba..hh..ab.',
+  '.b...hh...b.',
+  'b....hh....b',
+  '.....hh.....',
+  '.....hh.....',
+  '.....hh.....',
+  '.....hh.....',
+  '.....hh.....',
+  '.....hh.....',
+  '....dddd....'
+]
+function pick (a, b, h, d) {
+  return A(12, 12, { a, b, h: h || '#8B5A2B', d: d || '#5C3A1A' }, PICKAXE)
+}
+
+// 金属锭
+const INGOT = [
+  '..bbbbbbbbb.',
+  '.baaaaaalab.',
+  '.baaaaaaaab.',
+  '.baaaaaaaab.',
+  '.bbbbbbbbbb.',
+  '..cccccccc..'
+]
+function ingot (light, mid, dark) {
+  return A(12, 12, { a: light, b: mid, c: dark, l: light }, INGOT)
+}
+
+// 凝胶 / 史莱姆
+function gel (base, hi) {
+  return A(12, 12, { g: base, l: hi }, [
+    '............', '............', '............',
+    '....gggg....', '..gggggggg..', '.glgggggggg.',
+    '.gggggggggg.', '.gggggggggg.', '..gggggggg..',
+    '............', '............', '............'
+  ])
+}
+
+// 火把
+const TORCH_ART = A(12, 12, { f: '#FF7B2E', F: '#FFE066', h: '#8B5A2B' }, [
+  '.....FF.....', '....FFFF....', '....fFFf....', '.....ff.....',
+  '.....hh.....', '.....hh.....', '.....hh.....', '.....hh.....',
+  '.....hh.....', '.....hh.....', '.....hh.....', '............'
+])
+
+// 药水：c 木塞 / g 玻璃 / p 药液 / l 高光
+const POTION = [
+  '....cccc....',
+  '....cccc....',
+  '.....gg.....',
+  '.....gg.....',
+  '....g..g....',
+  '...g....g...',
+  '..gppppppg..',
+  '..gplpplpg..',
+  '..gppppppg..',
+  '...gppppg...',
+  '....gggg....',
+  '............'
+]
+function potion (liquid, light) {
+  return A(12, 12, {
+    c: '#B0784A', g: 'rgba(200,228,248,0.75)', p: liquid, l: light
+  }, POTION)
+}
+
+// 戒指（r 宝石）
+const RING = [
+  '....rrrr....',
+  '....rlrr....',
+  '.....GG.....',
+  '....G..G....',
+  '...G....G...',
+  '...G....G...',
+  '...G....G...',
+  '....G..G....',
+  '.....GG.....'
+]
+function ring (gem, gemL) {
+  return A(12, 12, { r: gem, l: gemL || '#FFFFFF', G: '#FFD700' }, RING)
+}
+
+// 护符挂坠
+const AMULET = [
+  '..G......G..',
+  '...G....G...',
+  '....GGGG....',
+  '.....GG.....',
+  '.....rr.....',
+  '....rlrr....',
+  '....rlrr....',
+  '.....rr.....'
+]
+function amulet (gem, gemL) {
+  return A(12, 12, { r: gem, l: gemL || '#FFFFFF', G: '#FFD700' }, AMULET)
+}
+
+// 盾
+const SHIELD = [
+  '.GGGGGGGGGG.',
+  '.GaaaaaaaaG.',
+  '.GaaBBBBaaG.',
+  '.GaBBBBBBaG.',
+  '.GaaBBBBaaG.',
+  '.GaaaaaaaaG.',
+  '..GaaaaaaG..',
+  '...GaaaaG...',
+  '....GaaG....',
+  '.....GG.....'
+]
+function shield (face, emblem, edge) {
+  return A(12, 12, { a: face, B: emblem, G: edge || '#FFD700' }, SHIELD)
+}
+
+// 靴子（f 翅膀/喷焰）
+const BOOTS = [
+  '..ff........',
+  '..fff.......',
+  '..ffff......',
+  '..hhhhh.....',
+  '..hhhhhh....',
+  '..hhhhhhh...',
+  '..hhhhhhhh..',
+  '..hhhhhhhh..',
+  '..dddddddd..'
+]
+function boots (base, sole, wing) {
+  return A(12, 12, { h: base, d: sole, f: wing }, BOOTS)
+}
+
+// 翅膀
+const WINGS = [
+  '.w........w.',
+  '.ww......ww.',
+  '.www....www.',
+  '.wwww..wwww.',
+  '.wwwwwwwwww.',
+  '..wwwwwwww..',
+  '...wwwwww...',
+  '....wwww....'
+]
+function wings (c) {
+  return A(12, 12, { w: c }, WINGS)
+}
+
+// 蘑菇
+function mushroom (cap, capL, stem) {
+  return A(12, 12, { r: cap, R: capL, w: stem || '#F0EDE8' }, [
+    '............', '...rrrrrr...', '..rRrrrrrr..', '.rrrrrrrrrr.',
+    '.rrrrrrrrrr.', '....wwww....', '....wwww....', '....wwww....',
+    '....wwww....', '...wwwwww...', '............', '............'
+  ])
+}
+
+// 镜片 / 眼球
+const LENS = [
+  '...wwwwww...',
+  '..wwwwwwww..',
+  '..wwrrrrww..',
+  '.wwrrIIrrww.',
+  '.wwrrkkrrww.',
+  '..wwrrrrww..',
+  '..wwwwwwww..',
+  '...wwwwww...'
+]
+function lens (white, iris, pupil) {
+  return A(12, 12, { w: white, r: iris, k: pupil, I: iris }, LENS)
+}
+
+// 生命之心
+const HEART = A(12, 12, { r: '#E85555', l: '#FFB0C8', d: '#8B0000' }, [
+  '............', '............', '..rr....rr..', '.rrrr..rrrr.',
+  '.rlrrrrrrrd.', '.rrrrrrrrrr.', '..rrrrrrrr..', '...rrrrrr...',
+  '....rrrr....', '.....rr.....', '............', '............'
+])
+
+// 星星
+function star (c, l) {
+  return A(12, 12, { f: c, l: l || '#FFFFFF' }, [
+    '.....ff.....', '.....ff.....', '....flff....', '.ffffffffff.',
+    '..ffffffff..', '...ffffff...', '...ffffff...', '..fff..fff..',
+    '..ff....ff..', '.ff......ff.', '............', '............'
+  ])
+}
+
+// 晶菱（魔力/生命水晶）
+function crystal (c, l) {
+  return A(12, 12, { c, l }, [
+    '............', '.....cc.....', '....clcc....', '...clcccc...',
+    '..clcccccc..', '...cccccc...', '....cccc....', '.....cc.....',
+    '............', '............', '............', '............'
+  ])
+}
+
+// 宝箱
+const CHEST = A(12, 12, { G: '#FFD700', h: '#8B5A2B', d: '#5C3A1A' }, [
+  '............', '............', '..GGGGGGGG..', '.GhhhhhhhhG.',
+  '.GhhhhhhhhG.', '.GGGGGGGGGG.', '.GhhhGGhhhG.', '.GhhhGGhhhG.',
+  '.GhhhhhhhhG.', '.GGGGGGGGGG.', '............', '............'
+])
+
+// 工作台
+const WORKBENCH = A(12, 12, { h: '#C89858', d: '#8B5A2B' }, [
+  '............', '............', '............', '.hhhhhhhhhh.',
+  'hhhhhhhhhhhh', '.dddddddddd.', '..dd....dd..', '..dd....dd..',
+  '..dd....dd..', '..dd....dd..', '............', '............'
+])
+
+// 熔炉
+const FURNACE = A(12, 12, { a: '#8E93A8', b: '#565B70', k: '#26202E', F: '#FF9C40', f: '#FFE066' }, [
+  '............', '...bbbbbb...', '..baaaaaab..', '..baakkaab..',
+  '..bafFkaab..', '..bafFkaab..', '..baakkaab..', '..baaaaaab..',
+  '..bbbbbbbb..', '............', '............', '............'
+])
+
+// 铁砧
+const ANVIL = A(12, 12, { a: '#B8BEC8', b: '#5A5F78' }, [
+  '............', '............', '.bbbbbbbbbb.', '.baaaaaaaab.',
+  '....bbbb....', '....b..b....', '...bbbbbb...', '..bbbbbbbb..',
+  '............', '............', '............', '............'
+])
+
+// 书
+function book (cover, edge) {
+  return A(12, 12, { d: edge || '#3A2A5C', c: cover, w: '#F0EBE0' }, [
+    '............', '............', '..dddddddd..', '.dccccccccd.',
+    '.dcwwwwwwcd.', '.dcwwwwwwcd.', '.dccccccccd.', '..dddddddd..',
+    '............', '............', '............', '............'
+  ])
+}
+
+// 骨头
+const BONE = A(12, 12, { w: '#E8E4D8', d: '#B8B0A0' }, [
+  '............', '............', '..ww...ww...', '.www...www..',
+  '..wwdwwwd...', '...wwwwww...', '..wwdwwwd...', '.www...www..',
+  '..ww...ww...', '............', '............', '............'
+])
+
+// 藤蔓
+const VINE = A(12, 12, { g: '#4CAF50', d: '#2E7D32' }, [
+  '............', '.....gg.....', '....ggg.....', '.....gd.....',
+  '.....ggg....', '....gg......', '....gd......', '.....gg.....',
+  '.....ggg....', '.....gg.....', '............', '............'
+])
+
+// 丝绸 / 布
+function cloth (c, l) {
+  return A(12, 12, { c, l }, [
+    '............', '............', '............', '..cccccccc..',
+    '.clcccccccc.', '.cccccccccc.', '.cccccclccc.', '..cccccccc..',
+    '............', '............', '............', '............'
+  ])
+}
+
+// 蜂蜡
+const WAX = A(12, 12, { y: '#E8A020', Y: '#F8C850' }, [
+  '............', '............', '............', '..yyyyyyyy..',
+  '.yYyYyYyYyY.', '.yyyyyyyyyy.', '.yYyYyYyYyY.', '..yyyyyyyy..',
+  '............', '............', '............', '............'
+])
+
+// 蜂刺
+const STINGER = A(12, 12, { y: '#E8E4D8', d: '#B8B0A0' }, [
+  '............', '............', '.......yy...', '......yyy...',
+  '.....yyy....', '....yyy.....', '...yyy......', '..yy........',
+  '..y.........', '............', '............', '............'
+])
+
+// 丛林孢子
+const SPORE = A(12, 12, { g: '#8FE06A', l: '#D8FFC8' }, [
+  '............', '............', '..g...g.....', '..gl..gg..g.',
+  '...g...g.gl.', '..g..gl..g..', '.....g..g...', '............',
+  '............', '............', '............', '............'
+])
+
+// 之魂（幽火）
+function soul (c, l) {
+  return A(12, 12, { s: c, l }, [
+    '............', '.....s......', '....sss.....', '...sssss....',
+    '...slsss....', '..sssssss...', '...sssss....', '....sss.....',
+    '.....s......', '............', '............', '............'
+  ])
+}
+
+// 徽章
+function emblem (c) {
+  return A(12, 12, { G: '#FFD700', a: c, w: '#FFF0B0' }, [
+    '............', '............', '....GGGG....', '...GaaaaG...',
+    '..GaaGGaaG..', '..GaaGGaaG..', '...GawwaG...', '....GGGG....',
+    '............', '............', '............', '............'
+  ])
+}
+
+// 恶魔祭坛
+const ALTAR = A(12, 12, { p: '#6A4EC8', P: '#9A7CE8', d: '#4A3898' }, [
+  '............', '...pppppp...', '..pPPPPPPp..', '.pPPdPPdPPp.',
+  '.pPPPPPPPPp.', '.pddddddddp.', '..pppppppp..', '............',
+  '............', '............', '............', '............'
+])
+
+// 远古操纵机
+const MANIPULATOR = A(12, 12, { c: '#B455E8', l: '#E8C0FF', b: '#4A3898', B: '#6A5AC8' }, [
+  '............', '....cccc....', '...ccllcc...', '..ccllllcc..',
+  '...ccllcc...', '.BBBBBBBBBB.', '..b.bbbb.b..', '..b.bbbb.b..',
+  '............', '............', '............', '............'
+])
+
+// 摆放的瓶子（炼药站）
+const BOTTLE_STATION = potion('#8AB0FF', '#D8E8FF')
+
+// 枪（f 背鳍）
+const GUN = [
+  '............',
+  '......f.....',
+  '..bbbbbbbb..',
+  '.baaaaaaab..',
+  '.baaaaabbbb.',
+  '....bb......',
+  '....bb......',
+  '....bb......'
+]
+function gun (a, b, f) {
+  return A(12, 12, { a, b, f: f || b }, GUN)
+}
+
+// 连弩
+const XBOW = A(12, 12, { b: '#8B5A2B', a: '#C89858', s: '#E8E4D8', G: '#FFD700' }, [
+  '............', '..b......b..', '..bb....bb..', '...b....b...',
+  '...b.GG.b...', '....ssss....', '...b.ss.b...', '...b....b...',
+  '..bb....bb..', '..b......b..', '............', '............'
+])
+
+// 法杖
+function staff (gem, gemL) {
+  return A(12, 12, { c: gem, l: gemL || '#FFFFFF', h: '#8B5A2B' }, [
+    '............', '.....cc.....', '....clcc....', '.....cc.....',
+    '.....hh.....', '.....hh.....', '.....hh.....', '.....hh.....',
+    '.....hh.....', '.....hh.....', '............', '............'
+  ])
+}
+
+// 最终棱镜
+const PRISM = A(12, 12, { w: '#B8F8F8', c: '#6AE8E8', l: '#FFFFFF', r: '#E86E6E', g: '#7CD86A', b: '#6A9CF0' }, [
+  '............', '............', '.....ww.....', '....wclw....',
+  '...wcrccw...', '..wclccgbw..', '...wccccw...', '....wccw....',
+  '.....ww.....', '............', '............', '............'
+])
+
+// 盔甲（胸甲）
+function armor (body, trim, hi) {
+  return A(12, 12, { a: body, b: trim, l: hi }, [
+    '............', '............', '.bb......bb.', '.bbbbbbbbbb.',
+    '.bbaaaaaabb.', '..baaaaaab..', '..baalaaab..', '..baaaaaab..',
+    '...baaaab...', '...bbbbbb...', '............', '............'
+  ])
+}
+
+// 头盔
+function helmet (face, trim) {
+  return A(12, 12, { a: face, b: trim }, [
+    '............', '............', '...bbbbbb...', '..baaaaaab..',
+    '..baaaaaab..', '..baa..aab..', '..baaaaaab..', '..bbbbbbbb..',
+    '............', '............', '............', '............'
+  ])
+}
+
+// 坐骑鞍
+const SADDLE = A(12, 12, { G: '#FFD700', h: '#C89858', d: '#8B5A2B' }, [
+  '............', '............', '..GG....GG..', '.GhhhhhhhhG.',
+  '.GhhdhhhdhhG.', '.GhhhhhhhhG.', '..GG....GG..', '............',
+  '............', '............', '............', '............'
+])
+
+// 胡萝卜
+const CARROT = A(12, 12, { o: '#F28C28', O: '#FFB05C', g: '#4CAF50', G: '#7CD86A' }, [
+  '............', '.....gG.....', '....gGg.....', '.....Oo.....',
+  '....Ooo.....', '....oooo....', '.....ooo....', '.....ooo....',
+  '......oo....', '......o.....', '............', '............'
+])
+
+// 鱼
+function fish (body, belly, iris) {
+  return A(12, 12, { b: body, a: body, F: belly || body, i: iris || '#1A0A20' }, [
+    '............', '............', '...bbbb.....', '..baaaabb...',
+    '.biaaabFbF..', '..baaaabb...', '...bbbb.....', '............',
+    '............', '............', '............', '............'
+  ])
+}
+
+// 人物（NPC）：h 发色 / s 皮肤 / k 眼 / c 衣服 / p 裤 / d 鞋
+const PERSON = [
+  '....hhhh....',
+  '...hhhhhh...',
+  '...hssssh...',
+  '...skssks...',
+  '...ssssss...',
+  '....ssss....',
+  '..cccccccc..',
+  '.cscccccsc..',
+  '.cccccccccc.',
+  '..cc....cc..',
+  '..pp....pp..',
+  '..dd....dd..'
+]
+function person (hair, cloth0, pants, skin) {
+  return A(12, 12, {
+    h: hair, s: skin || '#F0C8A0', k: '#2A1A34', c: cloth0, p: pants || '#4A5068', d: '#2A2A34'
+  }, PERSON)
+}
+
+// 巫师（尖帽长袍）
+const WIZARD = [
+  '.....mm.....',
+  '....mmmm....',
+  '...mmmmmm...',
+  '.mmmmmmmmmm.',
+  '...hssssh...',
+  '...skssks...',
+  '...ssssss...',
+  '..cccccccc..',
+  '.cccccccccc.',
+  '.cccccccccc.',
+  '.cccccccccc.',
+  '............'
+]
+function wizard (hat, cloth0, hair) {
+  return A(12, 12, {
+    m: hat, h: hair || '#E8E4D8', s: '#F0C8A0', k: '#2A1A34', c: cloth0
+  }, WIZARD)
+}
+
+/* ================= 注册图标 ================= */
+
+function reg (id, art) { ARTS[id] = art }
+
+// —— 剑系（天顶剑全家桶）——
+reg('copper_shortsword', sword('#F2B27E', '#C06B35'))
+reg('light_bane', sword('#8F7BE8', '#5A48C8'))
+reg('muramasa', sword('#B8D8E8', '#5A8AA8'))
+reg('blade_of_grass', sword('#8FE06A', '#4CAF50'))
+reg('volcano', sword('#FF9C40', '#E8541E'))
+reg('nights_edge', sword('#9A7BE8', '#4A2E8C'))
+reg('excalibur', sword('#FFF6D0', '#F2E6B8'))
+reg('true_nights_edge', sword('#C8A0FF', '#6A3ED8'))
+reg('true_excalibur', sword('#FFFFE0', '#FFE98A'))
+reg('terra_blade', sword('#A0F070', '#58C840'))
+reg('horseman', sword('#FFB040', '#E87020'))
+reg('influx_waver', sword('#A0F0F8', '#40C8E8'))
+reg('seedler', sword('#B8E858', '#78A830'))
+reg('starfury', sword('#FFF6A0', '#FFD700'))
+reg('bee_keeper', sword('#FFE060', '#C89010'))
+reg('enchanted_sword', sword('#B8E8FF', '#6AA0F0'))
+reg('starlight', sword('#FFFBE0', '#FFF0A0'))
+reg('meowmere', sword('#FF9CD8', '#F06EC0'))
+// 天顶剑：彩虹之刃
+reg('zenith', A(12, 12, {
+  a: '#FFFFFF', G: '#FFD700', h: '#7A4A21',
+  r1: '#E86E6E', r2: '#FF9C40', r3: '#FFE066', r4: '#7CD86A', r5: '#4CE0E0', r6: '#B455E8'
+}, [
+  '.....aa.....',
+  '....aara....',
+  '....arba....',
+  '....abba....',
+  '....abba....',
+  '....abba....',
+  '....abba....',
+  '..GGGGGGGG..',
+  '....hhhh....',
+  '....hhhh....',
+  '....hhhh....',
+  '....GGGG....'
+].map((row, i) => {
+  const rainbow = ['r1', 'r2', 'r3', 'r4', 'r5', 'r6']
+  if (i >= 1 && i <= 6) {
+    const c = rainbow[i - 1]
+    return row.split('').map(ch => ch === 'b' ? c : ch).join('')
+  }
+  return row
+})))
+
+// —— 远程武器 ——
+reg('minishark', gun('#B8BEC8', '#7A82A0', '#9CA4B8'))
+reg('megashark', gun('#9CA4B8', '#5A5F78', '#B8BEC8'))
+reg('sdmg', gun('#FFE98A', '#C9A400', '#FFF0B0'))
+reg('shotbow', XBOW)
+
+// —— 法系 / 召唤 ——
+reg('water_bolt', book('#4A6DE0', '#2A3A8C'))
+reg('nebula_blaze', staff('#C86EE8', '#F0C0FF'))
+reg('last_prism', PRISM)
+reg('slime_staff', A(12, 12, { g: '#4FA8E8', l: '#A8D8FF', k: '#1A1040', h: '#8B5A2B' }, [
+  '....gggg....', '..gggggggg..', '..glggkgkg..', '.gggggggggg.',
+  '..gggggggg..', '.....hh.....', '.....hh.....', '.....hh.....',
+  '.....hh.....', '.....hh.....', '............', '............'
+]))
+reg('stardust_dragon', staff('#4CA8FF', '#C8E0FF'))
+reg('terraprisma', A(12, 12, { w: '#FFF6E0', G: '#FFD700', p: '#FF9CD8', c: '#4CE0E0' }, [
+  '.....ww.....', '....wGGw....', '...wGwwGw...', '..wGwppwGw..',
+  '...wGwwGw...', '....wccw....', '.....ww.....', '.....GG.....',
+  '.....GG.....', '.....GG.....', '............', '............'
+]))
+
+// —— 工具 ——
+reg('copper_pick', pick('#F2B27E', '#C06B35'))
+reg('iron_pick', pick('#D8DCE8', '#8A90A8'))
+reg('molten_pick', pick('#FF9C40', '#C8501C', '#5C2010', '#3A1408'))
+reg('picksaw', pick('#FFE98A', '#C9A400', '#6A4A20', '#4A3418'))
+
+// —— 盔甲 ——
+reg('molten_armor', armor('#C8401C', '#7A2810', '#FF9C40'))
+reg('chlorophyte_armor', armor('#4CAF50', '#2E7D32', '#8FE06A'))
+reg('hallowed_armor', armor('#F5EDE0', '#C9A400', '#FFF6D0'))
+reg('beetle_armor', armor('#4A3A8C', '#2A2058', '#8A78E8'))
+reg('solar_armor', armor('#E8541E', '#8C2A0E', '#FFB040'))
+reg('vortex_armor', armor('#3AE8C8', '#1E8C78', '#A8FFF0'))
+reg('nebula_armor', armor('#C86EE8', '#7A3A9C', '#F0C0FF'))
+reg('stardust_armor', armor('#4CA8FF', '#2A5A9C', '#C8E0FF'))
+reg('copper_helmet', helmet('#C06B35', '#8A4820'))
+
+// —— 饰品 ——
+reg('cloud_bottle', potion('#F0F4FF', '#FFFFFF'))
+reg('hermes_boots', boots('#F0E0C8', '#8B5A2B', '#FFFFFF'))
+reg('frostspark_boots', boots('#A8E0FF', '#4A7CA8', '#E8FFFF'))
+reg('cobalt_shield', shield('#4A6DE0', '#2E3A8C', '#B8BEC8'))
+reg('obsidian_shield', shield('#5A4A78', '#2A1C46', '#9A7CE8'))
+reg('ankh_shield', shield('#E5B800', '#FFF0B0', '#FFD700'))
+reg('obsidian_skull', A(12, 12, { w: '#4A3A5C', k: '#1A0E20', p: '#9A7CE8', d: '#2A1C3C' }, [
+  '...wwwwww...', '..wwwwwwww..', '..wkwwwwkw..', '..wwpwwpww..',
+  '..wwwppwww..', '..wwwwwwww..', '...wdwwdw...', '...wwwwww...',
+  '....w..w....', '............', '............', '............'
+]))
+reg('ankh_charm', amulet('#FFE98A', '#FFFFFF'))
+reg('armor_polish', potion('#C8C850', '#E8E8A0'))
+reg('vitamin', potion('#F28C28', '#FFC8A0'))
+reg('adhesive_bandage', cloth('#F0E8E8', '#FFFFFF'))
+reg('bezoar', crystal('#B8B0A0', '#E8E4D8'))
+reg('fast_clock', A(12, 12, { w: '#E8E4D8', d: '#8A90A8', G: '#FFD700' }, [
+  '....dddd....', '...dwwwwd...', '..dwGwwGwd..', '..dwwwwwdd..',
+  '...dwwwwd...', '....dddd....', '.....GG.....', '.....GG.....',
+  '............', '............', '............', '............'
+]))
+reg('trifold_map', A(12, 12, { c: '#E8D8A8', d: '#A8905A', G: '#FFD700' }, [
+  '............', '............', '.cccccccccc.', '.cdcccccdcc.', '.cccccccccc.',
+  '.cdcccccdcc.', '.cccccccccc.', '.GGGGGGGGGG.', '............', '............',
+  '............', '............'
+]))
+reg('blindfold', A(12, 12, { c: '#2A2A34', l: '#4A4A58', s: '#E0D6C8' }, [
+  '............', '............', '............', '.cccccccccc.',
+  '.cllccccclc.', '.ccssccsscc.', '.cccccccccc.', '............',
+  '............', '............', '............', '............'
+]))
+reg('nazar', A(12, 12, { w: '#E0D6C8', b: '#4A6DE0', k: '#1A1040', G: '#FFD700' }, [
+  '....GGGG....', '...GwwwwG...', '..GwbbbwG...', '.GwbkbbbwbG.',
+  '.GwbbbbbwG..', '..GwbbbwG...', '...GwwwwG...', '....GGGG....',
+  '............', '............', '............', '............'
+]))
+reg('pocket_mirror', A(12, 12, { s: '#C8E0F0', l: '#FFFFFF', G: '#C9A400' }, [
+  '.....GG.....', '....GllG....', '...GslssG...', '..GslssssG..',
+  '...GssssG...', '....GssG....', '.....GG.....', '............',
+  '............', '............', '............', '............'
+]))
+reg('sunglasses', A(12, 12, { c: '#1A1A24', l: '#4A4A66', G: '#FFD700' }, [
+  '............', '............', '............', '.cccccccccc.',
+  '.cllcccllcc.', '.cccccccccc.', '..GG....GG..', '............',
+  '............', '............', '............', '............'
+]))
+reg('armor_bracing', ring('#C8C850', '#E8E8A0'))
+reg('medicated_bandage', ring('#F0E8E8', '#FFFFFF'))
+reg('the_plan', ring('#E8E4D8', '#FFFFFF'))
+reg('countercurse_mantra', ring('#7CD86A', '#D8FFC8'))
+reg('reflective_shades', ring('#4CE0E0', '#C8F8F8'))
+reg('warrior_emblem', emblem('#E85555'))
+reg('avenger_emblem', emblem('#FFD700'))
+reg('moon_charm', amulet('#FFE98A', '#FFF6D0'))
+reg('sun_stone', crystal('#FF9C40', '#FFD8A0'))
+reg('moon_stone', crystal('#A8C8E8', '#E0F0FF'))
+reg('celestial_stone', crystal('#FFD700', '#FFF0B0'))
+reg('neptunes_shell', A(12, 12, { c: '#4CA8FF', l: '#C8E0FF', G: '#FFD700' }, [
+  '............', '....G..G....', '...GccccG...', '..GcclcccG..',
+  '..GccccccG..', '...GccccG...', '....GccG....', '.....GG.....',
+  '............', '............', '............', '............'
+]))
+reg('moon_shell', A(12, 12, { c: '#A8C8E8', l: '#E0F0FF', G: '#C9A400' }, [
+  '............', '....G..G....', '...GccccG...', '..GcclcccG..',
+  '..GccccccG..', '...GccccG...', '....GccG....', '.....GG.....',
+  '............', '............', '............', '............'
+]))
+reg('celestial_shell', A(12, 12, { c: '#FFD700', l: '#FFF6D0', G: '#FFFFFF' }, [
+  '............', '....G..G....', '...GccccG...', '..GcclcccG..',
+  '..GccccccG..', '...GccccG...', '....GccG....', '.....GG.....',
+  '............', '............', '............', '............'
+]))
+reg('leaf_wings', wings('#7CC85A'))
+reg('frozen_wings', wings('#A8E0FF'))
+
+// —— 材料 ——
+reg('wood', A(12, 12, { h: '#8B5A2B', d: '#5C3A1A', r: '#A87848' }, [
+  '............', '............', '............', '.dhhhhhhhhh.',
+  '.dhrrhhhhhh.', '.dhrrrhhhhh.', '.dhrrhhhhhh.', '.dhhhhhhhhh.', '.dddddddddd.',
+  '............', '............', '............'
+]))
+reg('stone', A(12, 12, { a: '#8E93A8', b: '#565B70', l: '#B8BEC8' }, [
+  '............', '............', '...bbbbb....', '..balllbb...',
+  '.baaaaaab...', '.baabaaab...', '.bbaaaaaab..', '..bbbbbbb...',
+  '............', '............', '............', '............'
+]))
+reg('obsidian', A(12, 12, { a: '#4A3A5C', b: '#2A1C3C', l: '#6A5A8C' }, [
+  '............', '............', '...bbbbb....', '..balllbb...',
+  '.baaaaaab...', '.baabaaab...', '.bbaaaaaab..', '..bbbbbbb...',
+  '............', '............', '............', '............'
+]))
+reg('gel_blue', gel('#4FA8E8', '#A8D8FF'))
+reg('gel_green', gel('#4CAF50', '#A8E8A8'))
+reg('gel_pink', gel('#F08CD8', '#FFC8F0'))
+reg('gel_purple', gel('#9A7CE8', '#D0BCFF'))
+reg('torch', TORCH_ART)
+reg('copper_bar', ingot('#F2B27E', '#C06B35', '#8A4820'))
+reg('iron_bar', ingot('#D8DCE8', '#8A90A8', '#5A5F78'))
+reg('gold_bar', ingot('#FFE98A', '#E5B800', '#A88A00'))
+reg('demonite_bar', ingot('#9A7CE8', '#5A48C8', '#3A2A8C'))
+reg('meteorite_bar', ingot('#C89858', '#A86838', '#6A4018'))
+reg('hellstone_bar', ingot('#FF9C40', '#E8541E', '#A83010'))
+reg('mythril_bar', ingot('#7CE8C8', '#40C8A8', '#2A8C74'))
+reg('chlorophyte_bar', ingot('#8FE06A', '#4CAF50', '#2E7D32'))
+reg('hallowed_bar', ingot('#FFF6D0', '#E5D8A0', '#B8A868'))
+reg('luminite_bar', ingot('#A8ECFF', '#4CE0E0', '#2A9CA8'))
+reg('lens', lens('#F0EDE8', '#C43030', '#1A0A20'))
+reg('black_lens', lens('#3A3A48', '#8B0000', '#E85555'))
+reg('vine', VINE)
+reg('bone', BONE)
+reg('silk', cloth('#F0E8F8', '#FFFFFF'))
+reg('cobweb', A(12, 12, { w: '#E8E8F0', l: '#FFFFFF' }, [
+  '............', '..w.......w.', '...w.....w..', '....w...w...',
+  '.wwwwwwwwww.', '....w...w...', '...w.....w..', '..w.......w.',
+  '............', '............', '............', '............'
+]))
+reg('bee_wax', WAX)
+reg('stinger', STINGER)
+reg('jungle_spore', SPORE)
+reg('glowing_mushroom', mushroom('#3AD8C8', '#8AF0E8', '#D8F8F4'))
+reg('mushroom', mushroom('#C43030', '#E86E6E', '#F0EDE8'))
+reg('glass', A(12, 12, { g: 'rgba(200,230,255,0.55)', l: 'rgba(255,255,255,0.7)' }, [
+  '............', '............', '.gggggggggg.', '.gllggggggg.',
+  '.gggggggggg.', '.ggggggllgg.', '.gggggggggg.', '.gggggggggg.',
+  '............', '............', '............', '............'
+]))
+reg('bottled_water', potion('#7AB8E8', '#C8E8FF'))
+reg('pixie_dust', A(12, 12, { p: '#F8C8E8', l: '#FFFFFF' }, [
+  '............', '............', '.....p......', '.....p......', '..p..l..p...',
+  '...pppppp...', '....ppp.....', '...p.p.p....', '..p..p......', '............',
+  '............', '............'
+]))
+reg('soul_of_night', soul('#5A48C8', '#9A8CE8'))
+reg('soul_of_light', soul('#F8E8A0', '#FFFFD8'))
+reg('soul_of_flight', soul('#E8E8F4', '#FFFFFF'))
+reg('soul_of_might', soul('#E85555', '#FFB0B0'))
+reg('soul_of_sight', soul('#4CE0E0', '#C8F8F8'))
+reg('soul_of_fright', soul('#FF9C40', '#FFD8A0'))
+reg('ectoplasm', A(12, 12, { g: 'rgba(220,228,255,0.75)', l: 'rgba(255,255,255,0.9)', k: '#4A5A9C' }, [
+  '............', '....gggg....', '..gggggggg..', '..glggggkg..',
+  '.gggggggggg.', '.ggggggggg..', '..gggggggg..', '...gggggg...',
+  '............', '............', '............', '............'
+]))
+reg('shark_fin', A(12, 12, { b: '#7A82A0', l: '#B8BEC8' }, [
+  '............', '.....bl.....', '....bll.....', '...blll.....',
+  '..bbbbbbbb..', '.bbbbbbbbbb.', '..bbbbbbbb..', '............',
+  '............', '............', '............', '............'
+]))
+reg('nebula_fragment', crystal('#C86EE8', '#F0C0FF'))
+reg('stardust_fragment', crystal('#4CA8FF', '#C8E0FF'))
+reg('luminite', crystal('#4CE0E0', '#C8F8F8'))
+
+// —— 药水 ——
+reg('lesser_healing', potion('#E85555', '#FF9C9C'))
+reg('healing_potion', potion('#C43030', '#FF6E6E'))
+reg('lesser_mana', potion('#4A7BE8', '#8AB0FF'))
+reg('mana_potion', potion('#2A4AC8', '#6E8EFF'))
+reg('iron_skin', potion('#C8C850', '#E8E8A0'))
+reg('regeneration', potion('#4CAF50', '#8FE06A'))
+reg('swiftness', potion('#FFB040', '#FFD8A0'))
+reg('spelunker', potion('#FFE066', '#FFF6C8'))
+reg('battle_potion', potion('#C86ED8', '#F0BCF8'))
+reg('luck_potion', potion('#8EE800', '#D8FF9C'))
+reg('fishing_potion', potion('#40C8E8', '#A0F0FF'))
+reg('summoning_potion', potion('#E89C40', '#FFD0A0'))
+
+// —— 坐骑 / 宠物 ——
+reg('slime_mount', SADDLE)
+reg('drill_mount', A(12, 12, { a: '#D8DCE8', b: '#7A82A0', y: '#FFE98A', r: '#E85555' }, [
+  '............', '..bbbbbbbb..', '.baybybybab.', '.bbbbbbbbbb.', '...b.bb.b...',
+  '...b.bb.b...', '...b.bb.b...', '...b.bb.b...',
+  '............', '............', '............', '............'
+]))
+reg('unicorn_mount', A(12, 12, { w: '#FFF6E0', G: '#FFD700', p: '#FF9CD8' }, [
+  '..G......G..', '...G....G...', '....G..G....', '....wwww....',
+  '...wwwwww...', '...wkwwkw...', '...wwwwww...', '..wwwwwwww..',
+  '..ww....ww..', '..GG....GG..', '............', '............'
+]))
+reg('carrot', CARROT)
+reg('eaters_bone', BONE)
+reg('pet_fish', fish('#7AB8E8', '#D8ECFF', '#1A0A20'))
+
+// —— 功能图标 ——
+reg('workbench', WORKBENCH)
+reg('furnace', FURNACE)
+reg('anvil', ANVIL)
+reg('altar', ALTAR)
+reg('tinkerer', A(12, 12, { h: '#C89858', d: '#8B5A2B', G: '#FFD700', s: '#B8BEC8' }, [
+  '............', '............', '.hhhhhhhhhh.', 'hhhhhhhhhhhh',
+  '.dddddddddd.', '..dd.s..dd..', '..ddsGs.dd..', '..dd.s..dd..',
+  '............', '............', '............', '............'
+]))
+reg('manipulator', MANIPULATOR)
+reg('bottle_station', BOTTLE_STATION)
+reg('chest', CHEST)
+reg('heart_crystal', HEART)
+reg('life_crystal', crystal('#E85555', '#FFB0C8'))
+reg('mana_crystal', star('#6A9CF0', '#C8E0FF'))
+reg('fallen_star', star('#FFE98A', '#FFF6D0'))
+reg('coin', A(12, 12, { G: '#FFD700', l: '#FFF0B0', d: '#C9A400' }, [
+  '............', '....GGGG....', '..GGllllGG..', '..GllGGllG..',
+  '..GllGGllG..', '..GGllllGG..', '....GGGG....', '.....dd.....',
+  '............', '............', '............', '............'
+]))
+reg('question', A(12, 12, { b: '#565B70', y: '#FFE98A' }, [
+  '...bbbbbb...', '..byybbbbb..', '..bbyyybbb..', '....byybb...',
+  '...byybb....', '...byybb....', '...bbbbbb...', '...byybb....',
+  '...byybb....', '...bbbbbb...', '............', '............'
+]))
+
+// —— NPC ——
+reg('npc_guide', person('#6A4A2A', '#4A6DE0', '#3A508C'))
+reg('npc_merchant', person('#8A6A3A', '#4CAF50', '#2E7D32'))
+reg('npc_nurse', person('#E8C85A', '#F0F4F8', '#C8CCD8'))
+reg('npc_demo', person('#C43030', '#6A5AC8', '#4A408C'))
+reg('npc_dryad', person('#4CAF50', '#C86ED8', '#9C4AB0'))
+reg('npc_mechanic', person('#C8783A', '#C8783A', '#8A5020'))
+reg('npc_wizard', wizard('#3A4A9C', '#4A5AC8', '#E8E4D8'))
+reg('npc_party', person('#FF6ED8', '#FFD700', '#E5B800'))
+reg('npc_goblin', person('#8A90A8', '#8B5A2B', '#5C3A1A', '#8AA860'))
+reg('npc_tavernkeep', person('#5C3A1A', '#8A6A3A', '#4A2E14'))
+
+// —— 怪物 ——
+reg('m_green_slime', gel('#4CAF50', '#A8E8A8'))
+reg('m_blue_slime', gel('#4FA8E8', '#A8D8FF'))
+reg('m_purple_slime', gel('#9A7CE8', '#D0BCFF'))
+reg('m_zombie', person('#6A8A4A', '#8B5A2B', '#4A3418', '#8AA860'))
+reg('m_demon_eye', lens('#E8D8C8', '#C43030', '#1A0A20'))
+reg('m_skeleton', A(12, 12, { w: '#E8E4D8', k: '#1A0A20', d: '#B8B0A0' }, [
+  '...wwwwww...', '..wwwwwwww..', '..wkkwwkkw..', '..wwwwwwww..',
+  '...wkkkkw...', '...wwwwww...', '..wkwwwwkw..', '...wdwwdw...',
+  '....wwww....', '...ww..ww...', '............', '............'
+]))
+reg('m_bat', A(12, 12, { b: '#6A5AC8', w: '#4A3A9C', k: '#FFE98A', r: '#E85555' }, [
+  '............', '............', '.ww.....ww..', 'www.bbb.www.',
+  'ww..bbkb..ww', 'ww.bbbkbbb.w', '...bbbbbb...', '....brrb....',
+  '....bbbb....', '............', '............', '............'
+]))
+reg('m_piranha', fish('#5A8AA8', '#A8C8D8', '#E85555'))
+reg('m_hornet', A(12, 12, { y: '#F2C94C', B: '#2A2A1A', w: 'rgba(255,255,255,0.6)', s: '#E8E4D8', k: '#1A0A20' }, [
+  '............', '..ww....ww..', '...yyyyyy...', '..ykyyyyky..',
+  '...yyBBBBy..', '..yyyyBBBy..', '...yyBBBBy..', '....yyyy....',
+  '.....ss.....', '............', '............', '............'
+]))
+reg('m_eater_souls', A(12, 12, { p: '#7A5AD0', d: '#4A3898', t: '#F0EDE8', k: '#2A1850' }, [
+  '...pppppp...', '..pppppppp..', '..pttttttp..', '..pttttttp..',
+  '..pppppppp..', '.pppppppppp.', '.ppdppppdpp.', '..pppppppp..',
+  '...pppppp...', '............', '............', '............'
+]))
+reg('m_cursed_hammer', A(12, 12, { b: '#B8BEC8', d: '#5A5F78', k: '#C86ED8', G: '#8A6A3A' }, [
+  '............', '....dddd....', '...dbbbbd...', '..dbkbbkbd..',
+  '..dbbbbbbd..', '...dbbbbd...', '....dddd....', '.....GG.....',
+  '.....GG.....', '............', '............', '............'
+]))
+reg('m_werewolf', A(12, 12, { w: '#9CA4B8', d: '#5A5F78', k: '#FFE98A', t: '#E8E4D8', n: '#2A2A34' }, [
+  '..d......d..', '..dd....dd..', '...wwwwww...', '..wwwwwwww..',
+  '..wkwwwwkw..', '..wwwwwwww..', '...wwttww...', '...wtwtww...',
+  '...wwwnww...', '....wwww....', '............', '............'
+]))
+reg('m_mothron', A(12, 12, { w: '#8A90A8', b: '#565B70', k: '#E85555', y: '#F2C94C' }, [
+  '............', '.ww......ww.', 'www..bb..www', 'ww..bbbb..ww',
+  'ww.bbkkbb.ww', '.wwbbbbbbww.', '..wbybbybw..', '...bbbbbb...',
+  '....b..b....', '............', '............', '............'
+]))
+
+/* ================= 1.4.5 扩充模板 ================= */
+
+// 悠悠球：线 + 圆球
+function yoyo (c, l) {
+  return A(12, 12, { w: '#E0D6C8', c, l }, [
+    '.....w......', '.....w......', '.....w......', '....cc......',
+    '...cccc.....', '..cclccc....', '..clcccc....', '...cccc.....',
+    '....cc......', '............', '............', '............'
+  ])
+}
+
+// 弓：弓臂 + 弦
+function bowT (c, s) {
+  return A(12, 12, { c, s: s || '#E0D6C8', G: '#C9A400' }, [
+    '........G..c', '.......G..cc', '......G..cc.', '.....G..cc..',
+    '....G..cc...', '...G..cc....', '...G..cc....', '....G..cc...',
+    '.....G..cc..', '......G..cc.', '.......G..cc', '........G..c'
+  ])
+}
+
+// 长矛（斜置）
+function spearT (a, b) {
+  return A(12, 12, { a, b, h: '#8B5A2B' }, [
+    '.........aa.', '........aab.', '.......aab..', '......aab...',
+    '.....aab....', '....aab.....', '...aab......', '..aab.......',
+    '.aab........', 'aab.........', 'ab..........', 'b...........'
+  ])
+}
+
+// 鞭子（波浪）
+function whipT (c) {
+  return A(12, 12, { c, G: '#FFD700' }, [
+    'cc..........', 'ccc.........', '..ccc.......', '...ccc......',
+    '....ccc.....', '.....ccc....', '......ccc...', '.......ccc..',
+    '........cc..', '.......G....', '......GG....', '......G.....'
+  ])
+}
+
+// 发射器（筒状）
+function launcherT (a, b) {
+  return A(12, 12, { a, b, f: '#FF9C40', G: '#C9A400' }, [
+    '............', '............', '..bbbbbbbb..', '.baaaaaaaab.',
+    '.baaffffaab.', '.baaaaaaaab.', '.baaffffaab.', '.bbaaaaaabb.',
+    '..bbb..bbb..', '............', '............', '............'
+  ])
+}
+
+// 斧
+function axeT (a, b) {
+  return A(12, 12, { a, b, h: '#8B5A2B' }, [
+    '..bbb.......', '.baaab......', '.baaaab.....', '.baaab......',
+    '..bbbhh.....', '.....hh.....', '.....hh.....', '.....hh.....',
+    '.....hh.....', '.....hh.....', '.....hh.....', '............'
+  ])
+}
+
+// 锤
+function hammerT (a, b) {
+  return A(12, 12, { a, b, h: '#8B5A2B' }, [
+    '..bbbbbb....', '.baaaaaab...', '.baaaaaab...', '.baaaaaab...',
+    '..bbbbbb....', '....hh......', '....hh......', '....hh......',
+    '....hh......', '....hh......', '....hh......', '............'
+  ])
+}
+
+// 钻头（斜钻）
+function drillT (c, d) {
+  return A(12, 12, { c, d, G: '#C9A400', m: '#565B70' }, [
+    '..........d.', '.........dd.', '........ddc.', '.......ddcc.',
+    '......ddccG.', '.....ddccG..', '....ddccG...', '...ddccG....',
+    '..m dccG....'.replace(' ', ''), '.mm.cc......', '.mm.........', '............'
+  ])
+}
+
+// 抓钩（三爪）
+function hookT (c, d) {
+  return A(12, 12, { c, d, r: '#E0D6C8' }, [
+    'c...........', 'cc..........', '.cc.........', '..cc........',
+    '...cc.......', '....cc......', '...ccccc....', '..c.....c...',
+    '..c..d..c...', '.c..ddd..c..', '.c.d...d.c..', '............'
+  ])
+}
+
+// 钓竿
+function rodT (c) {
+  return A(12, 12, { c, r: '#E0D6C8', l: '#4CE0E0' }, [
+    '........cc..', '.......ccc..', '......ccc...', '.....ccc....',
+    '....ccc.....', '...ccc......', '..ccc.......', '.ccc....r...',
+    '.cc.....r...', '........r...', '.......rl...'.replace('l', ''), '............'
+  ])
+}
+
+// 气球
+function balloon (c) {
+  return A(12, 12, { c, l: '#FFFFFF', s: '#E0D6C8' }, [
+    '....cccc....', '..cccccccc..', '..cclccccc..', '.ccclcccccc.',
+    '.cccccccccc.', '.cccccccccc.', '..cccccccc..', '....cccc....',
+    '.....ss.....', '.....ss.....', '.....ss.....', '............'
+  ])
+}
+
+// 魔镜
+function mirrorT (c, l) {
+  return A(12, 12, { c, l, G: '#C9A400' }, [
+    '...GGGGGG...', '..GccccccG..', '.GccclccccG.', '.GcccllcccG.',
+    '.GccllllccG.', '.GcccllcccG.', '.GcccllcccG.', '..GccccccG..',
+    '...GGGGGG...', '....GG......', '....GG......', '............'
+  ])
+}
+
+// 硬币
+function coinT (c, l) {
+  return A(12, 12, { c, l }, [
+    '............', '............', '...cccccc...', '..clllccc...', '..clccccc...',
+    '..cccccccc..', '..cccccccc..', '...cccccc...', '............', '............',
+    '............', '............'
+  ])
+}
+
+// 钥匙
+function keyT (c) {
+  return A(12, 12, { c, k: '#3A2400' }, [
+    '....ccc.....', '...cc.cc....', '...cc.cc....', '....ccc.....',
+    '.....c......', '.....c......', '.....c.cc...', '.....c.cc...',
+    '.....ccc....', '.....c......', '............', '............'
+  ])
+}
+
+// 药草（茎+花）
+function herb (c) {
+  return A(12, 12, { c, g: '#4CAF50', l: '#FFFFFF' }, [
+    '....ccc.....', '...clccc....', '....ccc.....', '.....g......',
+    '.....g......', '..g..g......', '...g.g......', '....gg......',
+    '.....g......', '.....g......', '............', '............'
+  ])
+}
+
+// 水晶心（生命/魔力水晶）
+function heartT (c, l, d) {
+  return A(12, 12, { c, l, d }, [
+    '............', '............', '..cc....cc..', '.cccc..cccc.',
+    '.clcccccccd.', '.cccccccccc.', '..cccccccc..', '...cccccc...',
+    '....cccc....', '.....cc.....', '............', '............'
+  ])
+}
+
+// 萝卜（坐骑/宠物用）
+function carrotT () {
+  return A(12, 12, { c: '#F28C28', l: '#FFD8A0', g: '#4CAF50' }, [
+    '.....gg.....', '....gg......', '....ggg.....', '.....g......',
+    '....cc......', '....cl......', '...ccc......', '...clc......',
+    '..ccc.......', '..cc........', '..c.........', '............'
+  ])
+}
+
+/* ===== 武器 · 近战剑 ===== */
+reg('iron_broadsword', sword('#D8DCE8', '#8A90A8'))
+reg('silver_broadsword', sword('#E8ECF4', '#B8C4D8'))
+reg('gold_broadsword', sword('#FFE98A', '#E5B800'))
+reg('platinum_broadsword', sword('#D8F0F8', '#A8D8E8'))
+reg('ice_blade', sword('#C8F0FF', '#70B8E8'))
+reg('bone_sword', sword('#F0EDE0', '#C8BFA8'))
+reg('keybrand', sword('#C8C8E0', '#7A7AA8'))
+reg('frostbrand', sword('#A8E8FF', '#58A8D8'))
+reg('death_sickle', sword('#B8B8C8', '#5A5A78'))
+
+/* ===== 悠悠球 ===== */
+reg('wooden_yoyo', yoyo('#8B5A2B', '#C89858'))
+reg('rally', yoyo('#E85555', '#FFB0B0'))
+reg('amazon', yoyo('#7CC85A', '#B8E890'))
+reg('code1', yoyo('#8A90A8', '#C8D0E0'))
+reg('cascade', yoyo('#FF9C40', '#FFD8A0'))
+reg('amarok', yoyo('#A8E0FF', '#E8F8FF'))
+reg('kraken', yoyo('#4A6DE0', '#8CA8FF'))
+reg('code2', yoyo('#FFE98A', '#FFF6C8'))
+reg('terrarian', yoyo('#58E888', '#A8FFC8'))
+
+/* ===== 长矛 ===== */
+reg('spear', spearT('#C89858', '#8B5A2B'))
+reg('trident', spearT('#8CA8FF', '#4A6DE0'))
+reg('dark_lance', spearT('#9A7CE8', '#5A48C8'))
+reg('cobalt_naginata', spearT('#4A6DE0', '#2E3A8C'))
+reg('mythril_halberd', spearT('#7CE8C8', '#40C8A8'))
+reg('adamantite_glaive', spearT('#E86E6E', '#B04040'))
+reg('titanium_trident', spearT('#A8ECFF', '#4CE0E0'))
+reg('gungnir', spearT('#FFF6D0', '#E5D8A0'))
+reg('mushroom_spear', spearT('#F27E8C', '#C85568'))
+reg('obsidian_swordfish', spearT('#6A5A8C', '#4A3A5C'))
+
+/* ===== 远程 · 弓 ===== */
+reg('wooden_bow', bowT('#8B5A2B'))
+reg('iron_bow', bowT('#D8DCE8'))
+reg('molten_fury', bowT('#FF9C40'))
+reg('bees_knees', bowT('#FFE060'))
+reg('hellwing_bow', bowT('#E8541E'))
+reg('daedalus_stormbow', bowT('#C89858'))
+reg('pulse_bow', bowT('#A8E0FF'))
+reg('tsunami', bowT('#4A7BC8'))
+reg('phantom_phoenix', bowT('#FFB040'))
+
+/* ===== 远程 · 枪 ===== */
+reg('musket', gun('#8A90A8', '#5A5F78'))
+reg('undertaker', gun('#7A5AD0', '#4A3898'))
+reg('clockwork_assault_rifle', gun('#D8DCE8', '#8A90A8'))
+reg('shotgun', gun('#B8A480', '#8A6838'))
+reg('tactical_shotgun', gun('#565B70', '#3A3E4C'))
+reg('uzi', gun('#4A4A58', '#2A2A34'))
+reg('chain_gun', gun('#9CA4B8', '#5A5F78'))
+reg('xenopopper', gun('#A8ECFF', '#58C8E8'))
+reg('vortex_beater', gun('#3AE8C8', '#1E8C78'))
+
+/* ===== 远程 · 发射器与回旋镖 ===== */
+reg('grenade_launcher', launcherT('#8A6838', '#B8A480'))
+reg('rocket_launcher', launcherT('#565B70', '#9CA4B8'))
+reg('jack_o_lantern_launcher', launcherT('#FF9C40', '#E8541E'))
+reg('elf_melter', launcherT('#58E888', '#2E7D32'))
+reg('snowman_cannon', launcherT('#E8F4FF', '#A8D0E8'))
+reg('electrosphere_launcher', launcherT('#4CE0E0', '#1EA8A8'))
+reg('celebration_mk2', launcherT('#FFD700', '#FFE98A'))
+reg('enchanted_boomerang', yoyo('#B8E8FF', '#6AA0F0'))
+reg('ice_boomerang', yoyo('#A8E0FF', '#58A8D8'))
+reg('light_disc', yoyo('#FFE98A', '#FFF6C8'))
+reg('paladin_hammer', yoyo('#E8E4D8', '#B8B0A0'))
+
+/* ===== 魔法 ===== */
+reg('demon_scythe', staff('#9A7CE8', '#D0BCFF'))
+reg('magic_missile', staff('#8CA8FF', '#C8E0FF'))
+reg('flamelash', staff('#FF9C40', '#FFD8A0'))
+reg('crystal_storm', staff('#FF6ED8', '#FFC8F0'))
+reg('golden_shower', staff('#FFE98A', '#FFF6C8'))
+reg('cursed_flames_staff', staff('#7CD86A', '#D8FFC8'))
+reg('rainbow_rod', staff('#FF9CD8', '#FFC8F0'))
+reg('rainbow_gun', staff('#FF6ED8', '#FF9CD8'))
+reg('magnet_sphere', crystal('#4A6DE0', '#8CA8FF'))
+reg('spectre_staff', staff('#E8F4FF', '#FFFFFF'))
+reg('nightglow', staff('#C86EE8', '#F0C0FF'))
+reg('razorpine', staff('#58E888', '#B8E8A8'))
+reg('lunar_flare', staff('#A8ECFF', '#E8FFFF'))
+reg('staff_of_earth', staff('#B8A480', '#E8D8A8'))
+
+/* ===== 召唤 ===== */
+reg('hornet_staff', staff('#FFE060', '#FFF0A0'))
+reg('spider_staff', staff('#4A3A5C', '#8A78E8'))
+reg('blade_staff', staff('#D8DCE8', '#FFFFFF'))
+reg('imp_staff', staff('#E85555', '#FFB0B0'))
+reg('optic_staff', staff('#F0EDE8', '#E85555'))
+reg('pygmy_staff', staff('#B8A480', '#E8D8A8'))
+reg('raven_staff', staff('#4A4A58', '#8A90A8'))
+reg('sanguine_staff', staff('#E85555', '#FF8A8A'))
+reg('stardust_cell', crystal('#4CA8FF', '#C8E0FF'))
+reg('leather_whip', whipT('#8B5A2B'))
+reg('snapthorn', whipT('#7CC85A'))
+reg('firecracker', whipT('#FF9C40'))
+reg('durendal', whipT('#C9A400'))
+reg('morningstar_whip', whipT('#D8DCE8'))
+reg('kaleidoscope', whipT('#FF6ED8'))
+
+/* ===== 工具 ===== */
+reg('silver_pick', pick('#E8ECF4', '#B8C4D8'))
+reg('gold_pick', pick('#FFE98A', '#E5B800'))
+reg('platinum_pick', pick('#D8F0F8', '#A8D8E8'))
+reg('bone_pick', pick('#F0EDE0', '#C8BFA8'))
+reg('cobalt_pick', pick('#4A6DE0', '#2E3A8C'))
+reg('mythril_pick', pick('#7CE8C8', '#40C8A8'))
+reg('orichalcum_pick', pick('#FF9C40', '#E8541E'))
+reg('adamantite_pick', pick('#E86E6E', '#B04040'))
+reg('titanium_pick', pick('#A8ECFF', '#4CE0E0'))
+reg('chlorophyte_pick', pick('#8FE06A', '#4CAF50'))
+reg('cobalt_drill', drillT('#4A6DE0', '#8CA8FF'))
+reg('mythril_drill', drillT('#7CE8C8', '#C8F8E8'))
+reg('orichalcum_drill', drillT('#FF9C40', '#FFD8A0'))
+reg('adamantite_drill', drillT('#E86E6E', '#FFB0B0'))
+reg('titanium_drill', drillT('#A8ECFF', '#E8FFFF'))
+reg('laser_drill', drillT('#FF6ED8', '#FFC8F0'))
+reg('copper_axe', axeT('#F2B27E', '#C06B35'))
+reg('iron_axe', axeT('#D8DCE8', '#8A90A8'))
+reg('mythril_axe', axeT('#7CE8C8', '#40C8A8'))
+reg('adamantite_axe', axeT('#E86E6E', '#B04040'))
+reg('titanium_axe', axeT('#A8ECFF', '#4CE0E0'))
+reg('chlorophyte_axe', axeT('#8FE06A', '#4CAF50'))
+reg('copper_hammer', hammerT('#F2B27E', '#C06B35'))
+reg('pwnhammer', hammerT('#FFF6D0', '#E5D8A0'))
+reg('hammush', hammerT('#F27E8C', '#C85568'))
+reg('chlorophyte_warhammer', hammerT('#8FE06A', '#4CAF50'))
+reg('wood_fishing_rod', rodT('#8B5A2B'))
+reg('reinforced_fishing_rod', rodT('#C89858'))
+reg('soul_fishing_rod', rodT('#9A7CE8'))
+reg('mechanic_fishing_rod', rodT('#9CA4B8'))
+reg('hotline_fishing_hook', rodT('#FF9C40'))
+reg('golden_fishing_rod', rodT('#FFE98A'))
+reg('grapple', hookT('#C89858', '#A87848'))
+reg('dual_hook', hookT('#8CA8FF', '#4A6DE0'))
+reg('slime_hook', hookT('#4FA8E8', '#A8D8FF'))
+reg('bat_hook', hookT('#8A90A8', '#5A5F78'))
+reg('lunar_hook', hookT('#FFD700', '#FFF0B0'))
+
+/* ===== 盔甲套装 ===== */
+reg('cactus_armor', armor('#7CC85A', '#4CAF50', '#B8E890'))
+reg('copper_armor_set', armor('#C06B35', '#8A4820', '#F2B27E'))
+reg('iron_armor_set', armor('#8A90A8', '#5A5F78', '#D8DCE8'))
+reg('silver_armor_set', armor('#B8C4D8', '#8CA0BC', '#E8ECF4'))
+reg('gold_armor_set', armor('#E5B800', '#A88A00', '#FFE98A'))
+reg('platinum_armor_set', armor('#A8D8E8', '#78A8C0', '#D8F0F8'))
+reg('meteor_armor', armor('#8A6838', '#5A4018', '#C89858'))
+reg('necro_armor', armor('#F0EDE0', '#B8B0A0', '#FFFFFF'))
+reg('jungle_armor_set', armor('#7CC85A', '#4A8C32', '#B8E890'))
+reg('bee_armor', armor('#FFE060', '#C89010', '#FFF0A0'))
+reg('obsidian_armor_set', armor('#4A3A5C', '#2A1C3C', '#6A5A8C'))
+reg('spider_armor', armor('#4A3A5C', '#8A78E8', '#7A5AD0'))
+reg('cobalt_armor', armor('#4A6DE0', '#2E3A8C', '#8CA8FF'))
+reg('palladium_armor', armor('#E8B890', '#C07850', '#8A5030'))
+reg('orichalcum_armor', armor('#FF9C40', '#E8541E', '#FFD8A0'))
+reg('adamantite_armor', armor('#E86E6E', '#B04040', '#FFB0B0'))
+reg('titanium_armor', armor('#A8ECFF', '#4CE0E0', '#E8FFFF'))
+reg('forbidden_armor', armor('#C9A400', '#7C6A28', '#FFE98A'))
+reg('shroomite_armor', armor('#D8E8F0', '#8CA0B8', '#FFFFFF'))
+reg('spectre_armor', armor('#E8F4FF', '#B8D0E0', '#FFFFFF'))
+
+/* ===== 饰品 ===== */
+reg('terraspark_boots', boots('#FFD700', '#C9A400', '#FF9C40'))
+reg('lava_waders', boots('#4A3A5C', '#2A1C3C', '#FF9C40'))
+reg('shiny_red_balloon', balloon('#E85555'))
+reg('cloud_balloon', balloon('#D8E8F8'))
+reg('blizzard_balloon', balloon('#A8E0FF'))
+reg('sandstorm_balloon', balloon('#E8D8A8'))
+reg('sharkron_balloon', balloon('#4A7BC8'))
+reg('bundle_of_balloons', balloon('#FF6ED8'))
+reg('blizzard_in_bottle', potion('#A8E0FF', '#E8FFFF'))
+reg('sandstorm_in_bottle', potion('#E8D8A8', '#FFF0C8'))
+reg('tsunami_in_bottle', potion('#4A7BC8', '#A8C8FF'))
+reg('angel_wings', wings('#F0EBE0'))
+reg('demon_wings', wings('#5A48C8'))
+reg('fairy_wings', wings('#FF9CD8'))
+reg('bone_wings', wings('#E8D8C0'))
+reg('fin_wings', wings('#4A7BC8'))
+reg('flame_wings', wings('#FF9C40'))
+reg('beetle_wings', wings('#4A3A8C'))
+reg('fishron_wings', wings('#58A8D8'))
+reg('solar_wings', wings('#E8541E'))
+reg('stardust_wings', wings('#4CA8FF'))
+reg('ranger_emblem', emblem('#8CA8FF'))
+reg('sorcerer_emblem', emblem('#C86EE8'))
+reg('summoner_emblem', emblem('#FF9C40'))
+reg('destroyer_emblem', emblem('#E85555'))
+reg('worm_scarf', cloth('#E85555', '#FFB0B0'))
+reg('brain_of_confusion', crystal('#F27E8C', '#FFC8D0'))
+reg('master_ninja_gear', cloth('#2A2A34', '#4A4A58'))
+reg('paladin_shield', shield('#F0EDE8', '#C9A400', '#A88A00'))
+reg('frozen_turtle_shell', shield('#A8E0FF', '#58A8D8', '#3A7CA8'))
+reg('star_veil', cloth('#FFE98A', '#FFF6C8'))
+reg('charm_of_myths', amulet('#FF9C40', '#FFD8A0'))
+reg('mana_cuffs', ring('#4A6DE0', '#8CA8FF'))
+reg('celestial_cuffs', ring('#FFD700', '#FFF0B0'))
+reg('magic_quiver', cloth('#8B5A2B', '#C89858'))
+reg('molten_quiver', cloth('#FF9C40', '#FFD8A0'))
+reg('magic_mirror', mirrorT('#C8E0F0', '#FFFFFF'))
+reg('ice_mirror', mirrorT('#A8E0FF', '#E8FFFF'))
+reg('lucky_coin', coinT('#FFE98A', '#FFF6C8'))
+reg('gold_ring', ring('#FFD700', '#FFF0B0'))
+reg('compass_acc', crystal('#D8DCE8', '#FFFFFF'))
+reg('metal_detector', crystal('#FF9C40', '#FFD8A0'))
+reg('lifeform_analyzer', crystal('#58E888', '#B8E8A8'))
+
+/* ===== 材料 ===== */
+reg('tin_bar', ingot('#D8B890', '#A87848', '#7A5A30'))
+reg('lead_bar', ingot('#7A82A0', '#4A5068', '#2E3244'))
+reg('tungsten_bar', ingot('#C8C8D0', '#8A8A96', '#5A5A64'))
+reg('silver_bar', ingot('#E8ECF4', '#B8C4D8', '#8CA0BC'))
+reg('platinum_bar', ingot('#D8F0F8', '#A8D8E8', '#78A8C0'))
+reg('cobalt_bar', ingot('#4A6DE0', '#2E3A8C', '#1E2660'))
+reg('palladium_bar', ingot('#E8B890', '#C07850', '#8A5030'))
+reg('orichalcum_bar', ingot('#FF9C40', '#E8541E', '#A83010'))
+reg('adamantite_bar', ingot('#E86E6E', '#B04040', '#7A2020'))
+reg('titanium_bar', ingot('#A8ECFF', '#4CE0E0', '#2A9CA8'))
+reg('shroomite_bar', ingot('#D8E8F0', '#8CA0B8', '#5A6A7A'))
+reg('spectre_bar', ingot('#E8F4FF', '#B8D0E0', '#8AA8BC'))
+reg('solar_fragment', crystal('#FF9C40', '#FFD8A0'))
+reg('vortex_fragment', crystal('#3AE8C8', '#A8FFF0'))
+reg('nebula_fragment', crystal('#C86EE8', '#F0C0FF'))
+reg('stardust_fragment', crystal('#4CA8FF', '#C8E0FF'))
+reg('amethyst', crystal('#9A7CE8', '#D0BCFF'))
+reg('topaz', crystal('#FF9C40', '#FFD8A0'))
+reg('sapphire', crystal('#4A6DE0', '#8CA8FF'))
+reg('emerald', crystal('#4CAF50', '#A8E8A8'))
+reg('ruby', crystal('#E85555', '#FFB0B0'))
+reg('diamond', crystal('#E8F4FF', '#FFFFFF'))
+reg('amber', crystal('#FFD700', '#FFF0B0'))
+reg('life_crystal', heartT('#E85555', '#FFB0C8', '#8B0000'))
+reg('mana_crystal', heartT('#4A6DE0', '#8CA8FF', '#1E2660'))
+reg('life_fruit', heartT('#4CAF50', '#A8E8A8', '#2E7D32'))
+reg('temple_key', keyT('#FFD700'))
+reg('hallowed_key', keyT('#FFF6D0'))
+reg('corruption_key', keyT('#9A7CE8'))
+reg('crimson_key', keyT('#E85555'))
+reg('frozen_key', keyT('#A8E0FF'))
+reg('jungle_key', keyT('#7CC85A'))
+reg('desert_key', keyT('#E8D8A8'))
+reg('daybloom_herb', herb('#FFE98A'))
+reg('moonglow_herb', herb('#A8ECFF'))
+reg('blinkroot_herb', herb('#58E888'))
+reg('waterleaf_herb', herb('#8CA8FF'))
+reg('deathweed_herb', herb('#9A7CE8'))
+reg('shiverthorn_herb', herb('#D8F0FF'))
+reg('fire_blossom_herb', herb('#FF9C40'))
+reg('beetle_husk', cloth('#4A3A8C', '#8A78E8'))
+reg('ectoplasm', cloth('#E8F4FF', '#FFFFFF'))
+reg('ichor', cloth('#FFD8A0', '#FFF0C0'))
+reg('cursed_flame_item', cloth('#7CD86A', '#D8FFC8'))
+reg('glowing_mushroom', mushroom('#4CA8FF', '#A8D8FF'))
+reg('pink_gel', gel('#F08CD8', '#FFC8F0'))
+reg('fallen_star', crystal('#FFE98A', '#FFF6C8'))
+
+/* ===== 坐骑 / 宠物 ===== */
+reg('slimy_saddle', cloth('#4FA8E8', '#A8D8FF'))
+reg('fuzzy_carrot', carrotT())
+reg('honeyed_goggles', lens('#FFE060', '#C89010', '#1A0A20'))
+reg('blessed_apple', crystal('#E85555', '#FFB0B0'))
+reg('scaly_truffle', mushroom('#B8A480', '#E8D8A8'))
+reg('cosmic_car_key', keyT('#4CE0E0'))
+reg('dog_whistle', coinT('#D8DCE8', '#FFFFFF'))
+reg('lizard_egg', crystal('#7CC85A', '#B8E8A8'))
+
+/* ===== NPC 补充（已有 10 位） ===== */
+reg('npc_arms_dealer', person('#2A2A34', '#565B70', '#3A3E4C'))
+reg('npc_dye_trader', person('#3A2A1A', '#C86EE8', '#4A5068'))
+reg('npc_clothier', person('#8A6838', '#8B0000', '#2A2A34'))
+reg('npc_witch_doctor', person('#1A4A2A', '#2E7D32', '#4A3A2A'))
+reg('npc_tax_collector', person('#C8C8D0', '#2A2A34', '#1A1A24'))
+reg('npc_pirate', person('#8B0000', '#4A3A2A', '#2A2A34'))
+reg('npc_truffle', person('#4CA8FF', '#2E58A8', '#1A3A6A'))
+reg('npc_steampunker', person('#C9A400', '#B8722A', '#4A3A2A'))
+reg('npc_cyborg', person('#D8DCE8', '#565B70', '#3A3E4C'))
+reg('npc_stylist', person('#F0EDE8', '#C86EE8', '#4A5068'))
+reg('npc_golfer', person('#5A4018', '#4CAF50', '#8A90A8'))
+reg('npc_zoologist', person('#E87020', '#B85A2A', '#4A3A2A'))
+reg('npc_princess', person('#FFE98A', '#FF9CD8', '#FFF0F8'))
+reg('npc_santa', person('#F0EDE8', '#C62828', '#8B0000'))
+reg('npc_traveling_merchant', person('#5A4018', '#B8A480', '#4A3A2A'))
+reg('npc_skeleton_merchant', person('#E8E4D8', '#8A90A8', '#4A5068', '#E8E4D8'))
+
+/* ===== 种植种子（药草种子图鉴） ===== */
+reg('seed_deathweed', herb('#B05FC8'))
+reg('seed_grass', herb('#4CAF50'))
+reg('seed_jungle', herb('#3A8C3A'))
+reg('seed_mushroom', mushroom('#4CA8FF', '#A0D8FF', '#E8E4D0'))
+reg('seed_corrupt', herb('#8A5FB8'))
+reg('seed_crimson', herb('#C83850'))
+
+/* ===== 药水扩充 ===== */
+reg('obsidian_skin', potion('#4A2E6A', '#8A6FC8'))
+reg('gills', potion('#3AC8E8', '#A8F0FF'))
+reg('builder', potion('#4A78E0', '#A8C8FF'))
+reg('miner', potion('#C88848', '#F0C890'))
+reg('hunter', potion('#E05858', '#FFB0B0'))
+reg('night_owl', potion('#2A3A8C', '#6A80E8'))
+reg('shine', potion('#FFE94A', '#FFFAC8'))
+reg('invisibility', potion('#C8D4E0', '#F0F4F8'))
+reg('magic_power', potion('#8A4AE8', '#C8A0FF'))
+reg('mana_regen', potion('#C84AE8', '#E8A8FF'))
+reg('archery', potion('#E8894A', '#FFC8A0'))
+reg('ammo_reservation', potion('#4AE88A', '#A0FFC8'))
+reg('endurance', potion('#E84A9C', '#FFA0C8'))
+reg('lifeforce', potion('#E84A4A', '#FF8A8A'))
+reg('rage', potion('#E83232', '#FF8888'))
+reg('wrath', potion('#B832E8', '#E888FF'))
+reg('warmth', potion('#E8A032', '#FFD8A0'))
+reg('calm', potion('#4AC8E8', '#A0E8FF'))
+reg('heartreach', potion('#E84A6A', '#FF9CB0'))
+reg('sonar', potion('#4A8CE8', '#A0C8FF'))
+reg('crate', potion('#C8A04A', '#F0D8A0'))
+reg('gravitation', potion('#4A4AE8', '#A0A0FF'))
+reg('flipper', potion('#32C8B8', '#A0F0E8'))
+reg('water_walking', potion('#64C8FF', '#B8E8FF'))
+reg('titan', potion('#E8C84A', '#FFF0A0'))
+reg('dangersense', potion('#E86E32', '#FFB888'))
+reg('biome_sight', potion('#6AE84A', '#B0FFA0'))
+
+/* ===== 坐骑扩充 ===== */
+reg('shrimpy_truffle', mushroom('#FF8AC8', '#FFC8E8', '#F0E8D8'))
+reg('ancient_horn', A(12, 12, { c: '#C89858', l: '#F0D8A8' }, [
+  '.........cc.', '........ccc.', '.......clcc.', '......clcc..',
+  '.....clcc...', '....clcc....', '...clcc.....', '..ccc.......',
+  '..cc........', '............', '............', '............'
+]))
+reg('witch_broom', A(12, 12, { h: '#8B5A2B', b: '#C89858', l: '#F0D8A8' }, [
+  '.....hh.....', '.....hh.....', '.....hh.....', '.....hh.....',
+  '.....hh.....', '...bbbbbb...', '..bblbbbbb..', '..bbbbbbbb..',
+  '..bblbbbbb..', '..bbbbbbbb..', '..bbbbbbbb..', '............'
+]))
+reg('reindeer_bells', A(12, 12, { g: '#E5B800', l: '#FFF0A0' }, [
+  '.....gg.....', '....gggg....', '...gglggg...', '..gglggggg..',
+  '..gggggggg..', '..gggggggg..', '...gggggg...', '....gggg....',
+  '..gggggggg..', '..gggggggg..', '............', '............'
+]))
+reg('hardy_saddle', cloth('#B89058', '#E8C890'))
+reg('the_black_spot', A(12, 12, { b: '#2A2A34', l: '#565B70', r: '#E8E4D8' }, [
+  '............', '...bbb..bb..', '..bbbbbbbb..', '..bbrbbblb..',
+  '..bbbbbbbb..', '..bbbblbbb..', '..bbbbblbb..', '..bblbbbbb..',
+  '..bbbbbbbb..', '...bbbbbb...', '............', '............'
+]))
+reg('gelatinous_pillion', A(12, 12, { p: '#C86EE8', l: '#E8B0FF', w: '#8A6FC8' }, [
+  '.w........w.', 'www......www', '.wppppppppw.',
+  '..ppllllpp..', '..pppppppp..', '..plpppplp..',
+  '..pppppppp..', '..ppllllpp..', '...pppppp...',
+  '............', '............', '............'
+]))
+reg('superheated_blood', potion('#E83218', '#FF8A60'))
+reg('dusty_rawhide_saddle', cloth('#C89858', '#F0D8A8'))
+reg('royal_gilded_saddle', cloth('#E5B800', '#FFF0A0'))
+reg('black_studded_saddle', cloth('#3A3A4A', '#565B70'))
+
+/* ===== 宠物扩充 ===== */
+reg('seedling', herb('#8FE06A'))
+reg('magical_pumpkin_seed', A(12, 12, { c: '#F0E8D8', l: '#FFFFFF' }, [
+  '............', '....ccc.....', '...clccc....', '...clcccc...',
+  '....ccccc...', '....cccc....', '.....ccc....', '.....cc.....',
+  '............', '............', '............', '............'
+]))
+reg('wisp_in_bottle', potion('#8FD8FF', '#E8F8FF'))
+reg('zephyr_fish', fish('#64B8E8', '#D8F0FF', '#2A4A6A'))
+reg('dinosaur_egg', A(12, 12, { c: '#D8E8C8', s: '#8CB878' }, [
+  '....cccc....', '...cccccc...', '..ccsccccc..', '..cccccscc..',
+  '.cccccccccs.', '.cscccccccc.', '.ccccsccccc.', '..cccccccc..',
+  '...cccccc...', '............', '............', '............'
+]))
+reg('companion_cube', A(12, 12, { c: '#C8C8D0', l: '#E8E8F0', p: '#FF6ED8' }, [
+  '..cccccccc..', '.cclccccclc.', '.ccccppcccc.', '.cccppppccc.',
+  '.cccppppccc.', '.cccppppccc.', '.ccccppcccc.', '.cclccccclc.',
+  '..cccccccc..', '............', '............', '............'
+]))
+reg('unlucky_yarn', A(12, 12, { c: '#5A4A78', l: '#8A7AB0' }, [
+  '...cccccc...', '..cclccccc..', '.cccccccccc.', '.cccclccccc.',
+  '.ccccccclcc.', '.cclccccccc.', '..cccccccc..', '...cccccc...',
+  '......cc....', '.......cc...', '............', '............'
+]))
+reg('bone_key', keyT('#E8E4D8'))
+reg('nectar', potion('#FFC864', '#FFF0B0'))
+reg('tiki_totem', A(12, 12, { w: '#8B5A2B', l: '#C89858', e: '#4CE0E0' }, [
+  '..wwwwwwww..', '.wllllllllw.', '.wleellleew.', '.wwwwwwwwww.',
+  '.wllllllllw.', '.wleellleew.', '.wwwwwwwwww.', '.wllwwwwllw.',
+  '..wwwwwwww..', '...ll..ll...', '............', '............'
+]))
+reg('seaweed', A(12, 12, { g: '#3A9C5A', l: '#6AD88A' }, [
+  '...g...g....', '..glg..glg..', '...g...g..g.', '..g..g..g.g.',
+  '...g...g.g..', '..g..g..gg..', '...g..g..g..', '....g...g...',
+  '....g...g...', '.....g.g....', '.....ggg....', '............'
+]))
+reg('parrot_cracker', coinT('#D8A858', '#F0D8A0'))
+reg('eyeball_spring', A(12, 12, { s: '#C8C8D0', w: '#F0EDE8', i: '#C62828', p: '#1A1A24' }, [
+  '....wwww....', '...wwwwww...', '..wwiiiiww..', '..wwiippiww.',
+  '..wwiippiww.', '..wwiiiiww..', '...wwwwww...', '....ssss....',
+  '.....ss.....', '.....ss.....', '....ssss....', '.....ss.....'
+]))
+reg('amber_mosquito', A(12, 12, { b: '#D8A020', w: '#F0E8C8', a: '#8A6838' }, [
+  '............', '...bb..bb...', '..bbbbbbbb..', '...bwwwwb...',
+  '..bb.ww.bb..', '...b.ww.b...', '....baab....', '....a..a....',
+  '....a..a....', '............', '............', '............'
+]))
+reg('lightning_carrot', A(12, 12, { c: '#64C8FF', l: '#D8F4FF', g: '#E8F8FF', y: '#FFE98A' }, [
+  '.....gg.....', '....g..g....', '....g..g....', '.....y......',
+  '....cc......', '....cl......', '...ccc......', '...clc......',
+  '..ccc.......', '..cc........', '..c.........', '............'
+]))
+reg('royal_delight', A(12, 12, { c: '#FF8AC8', l: '#FFD8EC', w: '#F0E8D8', r: '#E85555' }, [
+  '............', '............', '....rr......', '....rr......',
+  '...wwwwww...', '..ccllllcc..', '..cccccccc..', '..ccllllcc..',
+  '..cccccccc..', '...wwwwww...', '............', '............'
+]))
+reg('moon_lord_legs', A(12, 12, { s: '#C8B8A8', h: '#E8D8C8', t: '#4A7A8A' }, [
+  '............', '...ss...ss..', '...ss...ss..', '...ss...ss..',
+  '...hh...hh..', '...ss...ss..', '...ss...ss..', '...tt...tt..',
+  '..ttt...ttt.', '............', '............', '............'
+]))
+reg('piece_of_moon_squid', A(12, 12, { h: '#C8B8A8', e: '#5AE8E8', p: '#1A1A24', g: '#FFFFFF' }, [
+  '............', '...hhhhhh...', '..hhhhhheh..', '..heeggeeh..',
+  '..hhhhhheh..', '...hhhhhh...', '....h..h....', '....h..h....',
+  '...h....h...', '...h....h...', '............', '............'
+]))
+reg('brain_in_jar', A(12, 12, { b: '#F08CD8', l: '#FFC8EC', g: '#A8D8E8', j: '#D8E8F0' }, [
+  '....jjjj....', '...jggggj...', '..jggbbggj..', '..jgbbbblj..',
+  '..jgbbbblj..', '..jggbbggj..', '...jggggj...', '....jjjj....',
+  '............', '............', '............', '............'
+]))
+reg('deerclops_eyeball', A(12, 12, { w: '#D8E8D0', i: '#C62828', p: '#1A1A24', c: '#8A6838' }, [
+  '....cccc....', '...wwwwww...', '..wwiiiiww..', '..wwiippiww.',
+  '..wwiippiww.', '..wwiiiiww..', '...wwwwww...', '....wwww....',
+  '............', '............', '............', '............'
+]))
+reg('suspicious_grinning_eye', A(12, 12, { w: '#F0EDE8', i: '#C62828', p: '#1A1A24', g: '#FFFFFF' }, [
+  '....wwww....', '...wwwwww...', '..wwiiiiww..', '..wwiippiww.',
+  '..wwwwwwww..', '..wwiwwwwww.', '..wwwwwwiw..', '..wwwiiiiw..',
+  '...wwwwww...', '....wwww....', '............', '............'
+]))
+reg('plantera_fruition', A(12, 12, { p: '#FF6ED8', l: '#FFC8EC', s: '#4CAF50' }, [
+  '.....s......', '....ss......', '..ppp.s.....', '.plpppps....',
+  '.ppppppps...', '.plpppppps..', '.ppppppp....', '..ppppp.....',
+  '...ppp......', '............', '............', '............'
+]))
+reg('strange_glowing_mushroom', mushroom('#5CB8FF', '#B8E4FF', '#D8C8A8'))
+
+module.exports = { ARTS, RARITY, A, reg, sword, pick, gel, potion, person }

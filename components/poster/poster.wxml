@@ -1,0 +1,16 @@
+<!-- 分享海报弹层：wx:if 随关闭彻底卸载 canvas，杜绝原生组件残留 -->
+<view class="pmask {{closing ? 'out' : 'on'}}" wx:if="{{show}}" catchtouchmove="noop" bindtap="close">
+  <view class="ppanel" catchtap="noop">
+    <view class="ptitle-row">
+      <view class="pline" />
+      <text class="ptitle px">分享海报</text>
+      <view class="pline flip" />
+    </view>
+    <canvas type="2d" id="posterCanvas" class="pcanvas" style="width:{{cw}}px;height:{{ch}}px;" />
+    <view class="pbtns safe-bottom">
+      <view class="pbtn main tappable" bindtap="save">{{saving ? '生成中…' : '⬇ 保存到相册'}}</view>
+      <view class="pbtn ghost tappable" bindtap="close">关闭</view>
+    </view>
+    <text class="ptip px">保存后即可发布朋友圈 / 发给好友</text>
+  </view>
+</view>

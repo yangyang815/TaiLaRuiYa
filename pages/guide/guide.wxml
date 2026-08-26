@@ -1,0 +1,84 @@
+<view class="page-root {{themeClass}} guide-root">
+
+  <!-- 顶部：返回 + 标题（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">新手指南</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头部统计 -->
+  <view class="hero">
+    <view class="hero-art floaty"><pixel-icon art-id="npc_guide" size="120" /></view>
+    <view class="col flex-1">
+      <text class="hero-t px">BEGINNER GUIDE</text>
+      <text class="hero-s">从落地第一斧到打倒月亮领主</text>
+      <text class="hero-stat px">{{total}} 篇攻略 · {{factTotal}} 条上手要点</text>
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view class="cat-scroll" scroll-x enable-flex enhanced show-scrollbar="{{false}}">
+    <view class="chip {{cat === item.k ? 'on' : ''}}" wx:for="{{cats}}" wx:key="k"
+      bindtap="onCat" data-k="{{item.k}}">{{item.n}}</view>
+  </scroll-view>
+
+  <!-- 攻略卡片列表 -->
+  <view class="sec-list">
+    <view class="s-card card tappable" wx:for="{{list}}" wx:key="id"
+      bindtap="onCard" data-id="{{item.id}}">
+      <view class="sc-top">
+        <view class="sc-art"><pixel-icon art-id="{{item.art}}" size="96" /></view>
+        <view class="col flex-1">
+          <text class="sc-title">{{item.title}}</text>
+          <view class="row sc-tags">
+            <text class="tag tag-guide">{{item.catName}}</text>
+            <text class="sc-no px">NO.{{item.no}}</text>
+          </view>
+        </view>
+      </view>
+      <text class="sc-intro">{{item.intro}}</text>
+      <view class="sc-foot">
+        <text class="sc-count px">{{item.count}} 条要点</text>
+        <text class="sc-go px">阅读 ›</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="foot safe-bottom">
+    <text class="foot-t px">EVERY LEGEND STARTS FROM DIRT</text>
+  </view>
+
+  <!-- 详情弹窗 -->
+  <view class="mask" wx:if="{{sheet}}" bindtap="closeSheet" />
+  <view class="sheet" wx:if="{{sheet}}" catchtap="noop">
+    <view class="sheet-handle" bindtap="closeSheet" />
+    <view class="sh-head">
+      <view class="sh-art">
+        <pixel-icon art-id="{{sheet.art}}" size="120" />
+      </view>
+      <view class="col flex-1">
+        <text class="sh-title">{{sheet.title}}</text>
+        <view class="row sc-tags">
+          <text class="tag tag-guide">{{sheet.catName}}</text>
+          <text class="sc-no px">{{sheet.count}} 条要点</text>
+        </view>
+      </view>
+    </view>
+
+    <scroll-view class="sh-body" scroll-y>
+      <text class="sh-intro">{{sheet.intro}}</text>
+
+      <view class="sec-title"><view class="diamond" /><text class="t">上手要点 · {{sheet.count}} 条</text></view>
+      <view class="fact card" wx:for="{{sheet.facts}}" wx:key="t">
+        <view class="f-head">
+          <text class="f-i px">{{index + 1}}</text>
+          <text class="f-t">{{item.t}}</text>
+        </view>
+        <text class="f-d">{{item.d}}</text>
+      </view>
+
+      <view class="sh-pad" />
+    </scroll-view>
+  </view>
+</view>

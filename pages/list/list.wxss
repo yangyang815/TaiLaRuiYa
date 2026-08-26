@@ -1,0 +1,29 @@
+/* 列表页 */
+.list-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text); }
+.nav-ph { width: 64rpx; }
+
+.head { padding: 6rpx 30rpx 14rpx; }
+.h-sub { display: block; text-align: center; font-size: 22rpx; color: var(--text-dim); margin-bottom: 16rpx; }
+.subs { white-space: nowrap; }
+.subs-in { display: inline-flex; }
+
+.l-list { padding: 6rpx 30rpx 0; }
+.l-item { display: flex; align-items: center; padding: 18rpx 22rpx; margin-bottom: 16rpx; }
+.l-rank { width: 56rpx; font-size: 22rpx; color: var(--text-faint); margin-right: 14rpx; flex-shrink: 0; }
+.l-rank.top { color: var(--gold); text-shadow: 0 0 12rpx rgba(255, 215, 0, 0.5); }
+.l-art { width: 88rpx; height: 88rpx; border-radius: 14rpx; background: rgba(0, 0, 0, 0.3);
+  display: flex; align-items: center; justify-content: center; margin-right: 22rpx; flex-shrink: 0; }
+.l-name { font-size: 27rpx; color: var(--text); font-weight: 700; }
+.l-en { font-size: 15rpx; color: var(--text-faint); margin-top: 6rpx; }
+.l-meta { font-size: 20rpx; color: var(--text-dim); margin-top: 6rpx; }
+.l-right { align-items: flex-end; flex-shrink: 0; }
+.l-dmg { font-size: 24rpx; color: var(--gold); font-weight: 900; }
+.l-dmg-k { font-size: 16rpx; color: var(--text-faint); margin-top: 4rpx; }
+
+.pad-bottom { height: 140rpx; }

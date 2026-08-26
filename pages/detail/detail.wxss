@@ -1,0 +1,83 @@
+/* 详情页 */
+.detail-root { min-height: 100vh; position: relative; overflow: hidden; }
+.ash-layer { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+
+.nav { position: relative; z-index: 5; display: flex; align-items: center;
+  padding: 12rpx 24rpx; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text); }
+.nav-ph { width: 64rpx; }
+
+/* 头图 */
+.hero { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;
+  padding: 10rpx 40rpx 34rpx; }
+.hero-art { filter: drop-shadow(0 8rpx 30rpx rgba(0, 0, 0, 0.6)); }
+.hero-glow { position: absolute; top: 0; width: 420rpx; height: 320rpx; border-radius: 50%;
+  background: radial-gradient(circle, var(--gold-faint) 0%, transparent 65%); opacity: 0.5; pointer-events: none; }
+.hero-meta { margin-top: 22rpx; }
+.hero-en { font-size: 16rpx; color: var(--text-faint); margin-left: 16rpx; letter-spacing: 2rpx; }
+.hero-desc { margin-top: 18rpx; font-size: 25rpx; color: var(--text-dim); line-height: 1.7; text-align: center; }
+
+/* 主体 */
+.body { position: relative; z-index: 2; padding: 0 30rpx; }
+.stat-grid { display: flex; flex-wrap: wrap; gap: 16rpx; }
+.stat { width: calc(50% - 8rpx); padding: 18rpx 24rpx; display: flex; flex-direction: column; }
+.st-k { font-size: 20rpx; color: var(--text-faint); }
+.st-v { font-size: 28rpx; color: var(--gold); font-weight: 800; margin-top: 8rpx; }
+
+.line { padding: 20rpx 26rpx; font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
+
+.drop { display: flex; align-items: center; justify-content: space-between;
+  padding: 16rpx 24rpx; margin-bottom: 14rpx; }
+.d-n { font-size: 25rpx; color: var(--text); font-weight: 600; }
+.d-r { font-size: 18rpx; color: var(--green); }
+
+/* NPC 售卖商品 */
+.shop { padding: 18rpx 24rpx; margin-bottom: 14rpx; }
+.sp-head { display: flex; align-items: center; justify-content: space-between; }
+.sp-n { font-size: 26rpx; color: var(--gold); font-weight: 800; flex: 1; padding-right: 14rpx; }
+.sp-p { font-size: 20rpx; color: var(--green); flex-shrink: 0; }
+.sp-d { display: block; font-size: 24rpx; color: var(--text-dim); line-height: 1.7; margin-top: 8rpx; }
+
+.phase { padding: 18rpx 24rpx; margin-bottom: 14rpx; }
+.p-head { display: flex; align-items: center; }
+.p-i { font-size: 18rpx; color: #3A2400; background: var(--gold); border-radius: 8rpx;
+  padding: 2rpx 12rpx; margin-right: 16rpx; }
+.p-n { font-size: 26rpx; color: var(--gold); font-weight: 800; }
+.p-d { display: block; font-size: 24rpx; color: var(--text-dim); line-height: 1.7; margin-top: 10rpx; }
+
+.tip { display: flex; align-items: flex-start; padding: 16rpx 22rpx; margin-bottom: 14rpx; }
+.tip-i { font-size: 18rpx; color: #3A2400; background: var(--gold); padding: 2rpx 10rpx;
+  border-radius: 6rpx; margin-right: 16rpx; flex-shrink: 0; }
+.tip-t { font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
+
+/* 合成入口 */
+.craft-entry { display: flex; align-items: center; padding: 20rpx 24rpx; margin: 26rpx 0 6rpx; }
+.ce-art { width: 72rpx; height: 72rpx; background: rgba(0, 0, 0, 0.3); border-radius: 12rpx;
+  display: flex; align-items: center; justify-content: center; margin-right: 20rpx; flex-shrink: 0; }
+.ce-t { font-size: 27rpx; color: var(--gold); font-weight: 800; }
+.ce-s { font-size: 20rpx; color: var(--text-faint); margin-top: 6rpx; }
+.ce-go { color: var(--gold); font-size: 36rpx; }
+
+/* 相关攻略 */
+.rel { display: flex; align-items: center; padding: 18rpx 24rpx; margin-bottom: 14rpx; }
+.rel-diamond { width: 12rpx; height: 12rpx; background: #4CE0E0; transform: rotate(45deg);
+  margin-right: 18rpx; box-shadow: 0 0 10rpx rgba(76, 224, 224, 0.6); flex-shrink: 0; }
+.rel-t { font-size: 25rpx; color: var(--text); font-weight: 600; }
+.rel-time { font-size: 18rpx; color: var(--text-faint); margin-left: 12rpx; flex-shrink: 0; }
+
+.pad-bottom { height: 200rpx; }
+
+/* 底部悬浮 */
+.float-btns { position: fixed; left: 30rpx; right: 30rpx; bottom: calc(env(safe-area-inset-bottom) + 24rpx);
+  display: flex; gap: 20rpx; z-index: 100; }
+.fb { flex: 1; display: flex; align-items: center; justify-content: center; height: 88rpx;
+  border-radius: 16rpx; font-size: 27rpx; font-weight: 800; }
+.fb.collect { background: rgba(18, 9, 37, 0.92); border: 2rpx solid var(--gold-faint);
+  color: var(--gold); }
+.fb.collect.on { background: linear-gradient(180deg, #3E2E08, #2A1F05); box-shadow: 0 0 22rpx rgba(255, 215, 0, 0.3); }
+.fb.share { background: linear-gradient(180deg, #FFE55C, #E5B800); color: #3A2400;
+  border: 2rpx solid #FFF0B0; padding: 0; line-height: 88rpx; box-shadow: 0 0 22rpx rgba(255, 215, 0, 0.35); }
+.fb.share::after { border: none; }

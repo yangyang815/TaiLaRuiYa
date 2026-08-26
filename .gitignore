@@ -1,0 +1,16 @@
+# 依赖
+node_modules/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 微信开发者工具私有配置（含个人本地路径）
+project.private.config.json
+
+# 临时脚本（数据补全过程的中间产物）
+_check_gap.js
+_dl_retry.ps1
+_dl_sprites.ps1
+_final.js
+_rebuild.js

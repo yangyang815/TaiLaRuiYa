@@ -1,0 +1,96 @@
+<view class="page-root {{themeClass}} strat-root">
+
+  <!-- 顶部 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">{{mode === 'list' ? '冒险攻略' : s.title}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- ========== 列表模式 ========== -->
+  <block wx:if="{{mode === 'list'}}">
+    <view class="head" style="background: radial-gradient(60% 80% at 50% 0%, rgba(76, 224, 224, 0.14), transparent 70%);">
+      <view class="cats">
+        <view class="chip {{cat === item.k ? 'on' : ''}}" wx:for="{{cats}}" wx:key="k"
+          bindtap="onCat" data-k="{{item.k}}">{{item.n}}</view>
+      </view>
+    </view>
+    <view class="s-list">
+      <view class="s-card card tappable fade-in" wx:for="{{list}}" wx:key="id" bindtap="open" data-id="{{item.id}}">
+        <view class="s-cover">
+          <view class="s-cover-glow" />
+          <pixel-icon art-id="{{item.artId}}" size="116" />
+        </view>
+        <view class="col flex-1">
+          <view class="row">
+            <text class="tag tag-strat">{{item.catName}}</text>
+            <text class="s-time px">{{item.time}}</text>
+          </view>
+          <text class="s-title">{{item.title}}</text>
+          <text class="s-sum">{{item.summary}}</text>
+        </view>
+        <text class="s-go">›</text>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!list.length}}">
+      <view class="e-icon">📜</view>
+      <text>该分类暂无攻略</text>
+    </view>
+  </block>
+
+  <!-- ========== 详情模式 ========== -->
+  <block wx:if="{{mode === 'detail' && s}}">
+    <!-- 头图 -->
+    <view class="d-hero">
+      <view class="d-hero-glow" />
+      <view class="d-art floaty"><pixel-icon art-id="{{s.artId}}" size="200" /></view>
+      <view class="row d-meta">
+        <text class="tag tag-strat">{{s.catName}}</text>
+        <text class="d-time px">阅读约 {{s.time}}</text>
+      </view>
+      <text class="d-title">{{s.title}}</text>
+      <text class="d-sum">{{s.summary}}</text>
+    </view>
+
+    <view class="d-body">
+      <!-- 步骤 -->
+      <view class="sec-title"><view class="diamond" /><text class="t">图文步骤</text></view>
+      <view class="step card" wx:for="{{s.steps}}" wx:key="i">
+        <view class="step-no px">{{item.i}}</view>
+        <view class="col flex-1">
+          <text class="step-t">{{item.t}}</text>
+          <text class="step-d">{{item.d}}</text>
+        </view>
+      </view>
+
+      <!-- 要诀 -->
+      <view class="sec-title"><view class="diamond" /><text class="t">老兵要诀</text></view>
+      <view class="tip card" wx:for="{{s.tips}}" wx:key="*this">
+        <text class="tip-star">★</text>
+        <text class="tip-t">{{item}}</text>
+      </view>
+
+      <!-- 相关条目 -->
+      <view class="sec-title"><view class="diamond" /><text class="t">相关条目</text></view>
+      <scroll-view class="rel-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+        <view class="rel-chip card tappable" wx:for="{{relEntries}}" wx:key="id"
+          bindtap="onRel" data-id="{{item.id}}" data-type="{{item.type}}">
+          <view class="rel-art" style="box-shadow: 0 0 14rpx {{item.glow}}55;">
+            <pixel-icon art-id="{{item.artId}}" size="80" />
+          </view>
+          <text class="rel-n">{{item.name}}</text>
+          <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : 'tag-item')}}">
+            {{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : '物品')}}</text>
+        </view>
+      </scroll-view>
+
+      <view class="pad-bottom" />
+    </view>
+
+    <!-- 悬浮按钮 -->
+    <view class="float-btns safe-bottom">
+      <view class="fb collect {{fav ? 'on' : ''}}" bindtap="toggleFav">{{fav ? '★ 已收藏' : '☆ 收藏'}}</view>
+      <button class="fb share" open-type="share">↗ 分享</button>
+    </view>
+  </block>
+</view>

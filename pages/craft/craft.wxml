@@ -1,0 +1,138 @@
+<view class="page-root {{themeClass}} craft-root">
+
+  <!-- 顶部：向导双输入 -->
+  <view class="head" style="padding-top:{{navTop}}px;">
+    <view class="guide card card-gold">
+      <view class="g-row">
+        <view class="g-avatar"><pixel-icon art-id="{{guideArtId}}" size="84" /></view>
+        <view class="col flex-1">
+          <text class="g-say">你好，我是向导！告诉我你想合成什么？</text>
+        </view>
+        <view class="poster-fab tappable" bindtap="openPoster">▣</view>
+      </view>
+
+      <!-- 目标输入 -->
+      <view class="in-box">
+        <text class="in-label">我要合成</text>
+        <input class="input-dark flex-1" placeholder="目标物品，如：天顶剑" placeholder-class="ph"
+          value="{{kw}}" bindinput="onKw" confirm-type="search" />
+        <text class="s-clear" wx:if="{{kw}}" bindtap="clearKw">✕</text>
+      </view>
+
+      <view class="suggest card pop-in" wx:if="{{targetSuggests.length}}">
+        <view class="sg-item" wx:for="{{targetSuggests}}" wx:key="id"
+          bindtap="onSuggestTap" data-id="{{item.id}}">
+          <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+          <text class="sg-name">{{item.name}}</text>
+          <text class="sg-go px">GO</text>
+        </view>
+      </view>
+
+      <!-- 无结果提示（选中目标后不显示） -->
+      <view class="sg-none fade-in" wx:if="{{kw && !targetSuggests.length && (!target || kw !== target.name)}}">
+        <text class="sg-none-icon">🔍</text>
+        <text class="sg-none-t">未找到"{{kw}}"的合成配方</text>
+        <text class="sg-none-d">该物品可能无法合成（仅掉落/购买），或试试拼音、首字母</text>
+      </view>
+
+      <!-- 材料核对开关 -->
+      <view class="in-box switch-line">
+        <text class="in-label">核对背包</text>
+        <switch checked="{{checkMode}}" bindchange="toggleCheck" color="#FFD700" />
+        <text class="switch-tip">{{checkMode ? '已开启：勾选拥有的材料，缺料将标红' : '开启后勾选已有材料，自动标出缺口'}}</text>
+      </view>
+
+      <!-- 我有什么材料 -->
+      <block wx:if="{{checkMode}}">
+        <view class="in-box">
+          <text class="in-label">我有什么</text>
+          <input class="input-dark flex-1" placeholder="输入材料名添加" placeholder-class="ph"
+            value="{{matKw}}" bindinput="onMatKw" />
+        </view>
+        <view class="suggest card" wx:if="{{matSuggests.length}}">
+          <view class="sg-item" wx:for="{{matSuggests}}" wx:key="id"
+            bindtap="addHave" data-id="{{item.id}}" data-name="{{item.name}}" data-art-id="{{item.artId}}">
+            <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+            <text class="sg-name">{{item.name}}</text>
+            <text class="sg-go px">+</text>
+          </view>
+        </view>
+        <view class="chips" wx:if="{{haveChips.length}}">
+          <view class="have-chip" wx:for="{{haveChips}}" wx:key="id" bindtap="removeHave" data-id="{{item.id}}">
+            <text>{{item.name}}</text><text class="hc-x">✕</text>
+          </view>
+          <view class="have-clear" bindtap="clearHave">清空</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 合成树 -->
+  <block wx:if="{{target}}">
+    <view class="sec-title"><view class="diamond" /><text class="t">合成路线</text>
+      <text class="more">{{target.station}} · 产出 ×{{target.count}}</text>
+    </view>
+    <view class="tree card">
+      <view class="t-row {{item.status}} fade-in" wx:for="{{rows}}" wx:key="index"
+        style="padding-left: {{20 + item.depth * 44}}rpx;"
+        bindtap="onRowTap" data-index="{{index}}">
+        <view class="t-fold {{item.kids ? '' : 'leaf'}}">
+          <text wx:if="{{item.kids}}">{{item.collapsed ? '+' : '−'}}</text>
+        </view>
+        <view class="t-art {{item.status}}">
+          <pixel-icon art-id="{{item.artId}}" size="64" />
+        </view>
+        <view class="col flex-1">
+          <view class="row">
+            <text class="t-name">{{item.name}}</text>
+            <text class="t-count px" wx:if="{{item.count > 1}}">×{{item.count}}</text>
+            <text class="t-flag px" wx:if="{{item.depth === 0}}">目标</text>
+            <text class="t-have px" wx:if="{{item.status === 'have'}}">已有</text>
+            <text class="t-lack px" wx:if="{{item.status === 'lack'}}">缺少</text>
+          </view>
+          <text class="t-sub" wx:if="{{item.craftable}}">可在 {{item.station}} 合成 · 点击节点切换为合成目标</text>
+          <text class="t-sub" wx:elif="{{item.obtain}}">{{item.obtain}}</text>
+        </view>
+        <view class="t-ops">
+          <view class="t-op" catchtap="rowToTarget" data-index="{{index}}">→</view>
+          <view class="t-op add" wx:if="{{checkMode && item.status === 'lack'}}" catchtap="rowAddHave" data-index="{{index}}">+</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 缺料清单 -->
+    <block wx:if="{{checkMode && missing.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">还缺 {{missing.length}} 种</text>
+        <text class="more">点击 + 快速标记已有</text>
+      </view>
+      <view class="miss card">
+        <view class="mi" wx:for="{{missing}}" wx:key="id">
+          <view class="mi-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+          <view class="col flex-1">
+            <text class="mi-n">{{item.name}}</text>
+            <text class="mi-o" wx:if="{{item.obtain}}">{{item.obtain}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+
+  <view class="empty" wx:else>
+    <view class="e-icon floaty">⚒️</view>
+    <text>输入目标物品，向导为你展开完整合成路线</text>
+  </view>
+
+  <!-- 常用合成 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">常用合成</text><text class="more px">QUICK</text></view>
+  <scroll-view class="quick" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="q-chip card tappable" wx:for="{{quick}}" wx:key="id" bindtap="onQuickTap" data-id="{{item.id}}">
+      <view class="q-art"><pixel-icon art-id="{{item.artId}}" size="72" /></view>
+      <text class="q-n">{{item.name}}</text>
+    </view>
+  </scroll-view>
+
+  <view class="pad-bottom" />
+
+  <!-- 分享海报 -->
+  <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
+</view>

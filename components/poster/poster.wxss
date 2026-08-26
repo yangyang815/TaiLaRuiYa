@@ -1,0 +1,36 @@
+/* 分享海报弹层（组件样式隔离，工具类需在本文件内自定义） */
+.px { letter-spacing: 2rpx; }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.tappable:active { opacity: 0.72; }
+
+.pmask { position: fixed; inset: 0; background: rgba(6, 3, 14, 0.88); z-index: 999;
+  display: flex; align-items: center; justify-content: center; opacity: 0; }
+.pmask.on { animation: pmIn 0.22s ease forwards; }
+.pmask.out { animation: pmOut 0.2s ease forwards; }
+@keyframes pmIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pmOut { from { opacity: 1; } to { opacity: 0; } }
+
+.ppanel { display: flex; flex-direction: column; align-items: center; }
+.pmask.on .ppanel { animation: pIn 0.32s cubic-bezier(0.34, 1.4, 0.64, 1) forwards; }
+.pmask.out .ppanel { animation: pOut 0.2s ease forwards; }
+@keyframes pIn { from { transform: translateY(34rpx) scale(0.92); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; } }
+@keyframes pOut { from { transform: translateY(0) scale(1); opacity: 1; }
+  to { transform: translateY(24rpx) scale(0.95); opacity: 0; } }
+
+.ptitle-row { display: flex; align-items: center; gap: 16rpx; margin-bottom: 20rpx; }
+.pline { width: 56rpx; height: 2rpx; background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6)); }
+.pline.flip { background: linear-gradient(90deg, rgba(255, 215, 0, 0.6), transparent); }
+.ptitle { font-size: 26rpx; font-weight: 800; color: #FFD700; }
+
+.pcanvas { border-radius: 12rpx; box-shadow: 0 20rpx 80rpx rgba(0, 0, 0, 0.7); display: block; }
+
+.pbtns { display: flex; gap: 18rpx; margin-top: 26rpx; padding: 0 12rpx; }
+.pbtn { height: 80rpx; padding: 0 44rpx; border-radius: 40rpx;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 27rpx; font-weight: 800; }
+.pbtn.main { background: linear-gradient(135deg, #FFD700, #FFA940); color: #2A1245;
+  box-shadow: 0 8rpx 28rpx rgba(255, 200, 60, 0.35); }
+.pbtn.ghost { background: rgba(255, 255, 255, 0.07); color: #B9A9D6; border: 2rpx solid rgba(255, 255, 255, 0.12); }
+
+.ptip { font-size: 21rpx; color: rgba(142, 127, 166, 0.8); margin-top: 16rpx; }

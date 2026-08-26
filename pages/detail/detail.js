@@ -1,0 +1,119 @@
+// 详情页：物品 / 敌怪 / Boss 通用，含专属颗粒、悬浮收藏分享
+const dex = require('../../utils/dex')
+const store = require('../../utils/store')
+
+Page({
+  data: {
+    statusBarHeight: 20,
+    capsuleRight: 100,
+    themeClass: '',
+    e: null,          // 条目
+    isBoss: false, isMon: false, isSeed: false, isNpc: false,
+    shop: [], shopNote: '',
+    stats: [],
+    drops: [], phases: [], strategy: [],
+    mechanics: [], exclusives: [],
+    ashes: [],
+    relStrats: [],
+    hasRecipe: false,
+    fav: false
+  },
+
+  onLoad (opts) {
+    const app = getApp()
+    this.setData({
+      statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
+      capsuleRight: app.globalData.capsuleRight || 100,
+      themeClass: app.globalData.theme === 'light' ? 'theme-light' : ''
+    })
+    const e = dex.byId[opts.id]
+    if (!e) { wx.showToast({ title: '条目不存在', icon: 'none' }); setTimeout(() => wx.navigateBack(), 600); return }
+
+    const r = e.raw
+
+    // Boss 专属颗粒（颜色取 boss.color）
+    const ashes = []
+    if (e.type === 'boss') {
+      for (let i = 0; i < 18; i++) {
+        ashes.push({
+          left: (Math.random() * 100).toFixed(1) + '%',
+          size: 4 + Math.floor(Math.random() * 6),
+          dur: (5 + Math.random() * 7).toFixed(1) + 's',
+          delay: -(Math.random() * 10).toFixed(1) + 's',
+          color: r.color || '#FFD700'
+        })
+      }
+    }
+
+    // 相关攻略：related 中含此 id 或同职业/类型推荐
+    const relStrats = dex.strats.filter(s =>
+      s.related.some(x => x.id === e.id) ||
+      (e.type === 'boss' && /boss/i.test(s.cat)) ||
+      (e.type === 'item' && s.cat === 'class' && s.cover === r.art)
+    ).slice(0, 3).map(s => ({ id: s.id, title: s.title, time: s.time }))
+
+    this.setData({
+      e: {
+        id: e.id, name: e.name, en: e.en, type: e.type, artId: e.artId, glow: e.glow,
+        rarity: e.rarity, color: r.color || '#FFD700', desc: r.desc || '',
+        obtain: e.type === 'seed' ? '创建世界时在"种子"栏输入代码（区分大小写）'
+          : (r.obtain || r.spawn || r.biome || ''),
+        obtainTitle: e.type === 'boss' ? '召唤方式' : (e.type === 'mon' ? '出现地点' : (e.type === 'npc' ? '入住条件' : (e.type === 'seed' ? '使用方法' : '获取方式'))),
+        use: r.use || '', tip: r.tip || '', coins: r.coins || ''
+      },
+      isBoss: e.type === 'boss',
+      isMon: e.type === 'mon',
+      isSeed: e.type === 'seed',
+      isNpc: e.type === 'npc',
+      isItem: e.type === 'item',
+      shop: e.type === 'npc' ? (r.shop || []) : [],
+      shopNote: e.type === 'npc' ? (r.shopNote || '') : '',
+      stats: e.type === 'seed'
+        ? [['种子代码', r.code], ['加入版本', r.ver], ['难度', '★★★★★'.slice(0, r.diff) + '☆☆☆☆☆'.slice(0, 5 - r.diff)], ['定位', r.tag]]
+        : (r.stats || (e.type !== 'item'
+          ? [['HP', String(r.hp)], ['伤害', String(r.dmg)], ['防御', String(r.def)], ['钱币', r.coins || '-']]
+          : dex.itemBaseStats(r))),
+      drops: (r.drops || []).map(d => ({ name: d.name, rate: d.rate })),
+      phases: (r.phases || []).map(p => ({ name: p.name, desc: p.desc })),
+      mechanics: r.mechanics || [],
+      exclusives: (r.exclusives || []).map(x => ({ name: x.name, note: x.note })),
+      strategy: e.type === 'seed' ? (r.tips || []) : (r.strategy || (r.tip ? [r.tip] : [])),
+      ashes,
+      relStrats,
+      hasRecipe: !!dex.R.byId[e.id],
+      fav: store.isFav(e.id)
+    })
+    wx.setNavigationBarTitle && wx.setNavigationBarTitle({ title: e.name })
+  },
+
+  toggleFav () {
+    const added = store.toggleFav(this.data.e.id, this.data.e.type)
+    this.setData({ fav: added })
+    wx.showToast({ title: added ? '已收藏' : '已取消收藏', icon: 'none' })
+  },
+  goCraft () {
+    getApp().globalData.pendingCraft = this.data.e.id
+    wx.switchTab({ url: '/pages/craft/craft' })
+  },
+  onStrat (e) {
+    wx.navigateTo({ url: '/pages/strategy/strategy?id=' + e.currentTarget.dataset.id })
+  },
+  shareTap () {
+    // 触发系统转发提示
+    wx.showToast({ title: '点击右上角「...」可转发', icon: 'none' })
+  },
+
+  back () { wx.navigateBack() },
+
+  onShareAppMessage () {
+    const e = this.data.e
+    return { title: '泰拉瑞亚手册 · ' + (e ? e.name : ''), path: '/pages/detail/detail?type=' + (e ? e.type : 'item') + '&id=' + (e ? e.id : '') }
+  },
+  onShareTimeline () {
+    const e = this.data.e
+    return {
+      title: e ? (e.name + ' · 泰拉瑞亚图鉴') : '泰拉瑞亚手册 · 冒险者的随身百科',
+      query: e ? ('type=' + e.type + '&id=' + e.id) : ''
+    }
+  }
+})

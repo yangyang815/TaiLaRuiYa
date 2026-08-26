@@ -1,0 +1,153 @@
+<view class="page-root {{themeClass}} detail-root" wx:if="{{e}}">
+
+  <!-- Boss 专属颗粒 -->
+  <view class="ash-layer" wx:if="{{isBoss}}">
+    <view class="ash" wx:for="{{ashes}}" wx:key="index"
+      style="left:{{item.left}};width:{{item.size}}rpx;height:{{item.size}}rpx;background:{{item.color}};box-shadow:0 0 8rpx {{item.color}};animation-duration:{{item.dur}};animation-delay:{{item.delay}};" />
+  </view>
+
+  <!-- 顶部：返回 + 标题 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">{{e.name}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头图 -->
+  <view class="hero" style="background: radial-gradient(70% 90% at 50% 0%, {{e.color}}30 0%, transparent 70%);">
+    <view class="hero-art pop-in">
+      <pixel-icon art-id="{{e.artId}}" size="240" />
+    </view>
+    <view class="hero-glow" />
+    <view class="row hero-meta">
+      <text class="tag {{e.type === 'boss' ? 'tag-boss' : (e.type === 'mon' ? 'tag-mon' : (e.type === 'seed' ? 'tag-seed' : (e.type === 'npc' ? 'tag-npc' : 'tag-item')))}}">
+        {{e.type === 'boss' ? 'BOSS' : (e.type === 'mon' ? '敌怪' : (e.type === 'seed' ? '特殊种子' : (e.type === 'npc' ? 'NPC' : '物品')))}}</text>
+      <text class="hero-en px">{{e.en}}</text>
+    </view>
+    <text class="hero-desc">{{e.desc}}</text>
+  </view>
+
+  <view class="body">
+    <!-- 关键数据 -->
+    <block wx:if="{{stats.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">关键数据</text></view>
+      <view class="stat-grid">
+      <view class="stat card" wx:for="{{stats}}" wx:key="index">
+        <text class="st-k">{{item[0]}}</text>
+        <text class="st-v">{{item[1]}}</text>
+      </view>
+      <view class="stat card" wx:if="{{isBoss}}">
+        <text class="st-k">掉落钱币</text>
+        <text class="st-v">{{e.coins || '-'}}</text>
+      </view>
+    </view>
+    </block>
+
+    <!-- 获取 / 召唤 -->
+    <view class="sec-title"><view class="diamond" /><text class="t">{{e.obtainTitle}}</text></view>
+    <view class="line card">{{e.obtain}}</view>
+
+    <!-- NPC：服务说明 -->
+    <block wx:if="{{isNpc && shopNote}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">服务说明</text></view>
+      <view class="line card">{{shopNote}}</view>
+    </block>
+
+    <!-- NPC：售卖商品 -->
+    <block wx:if="{{isNpc && shop.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">售卖商品</text></view>
+      <view class="shop card" wx:for="{{shop}}" wx:key="n">
+        <view class="sp-head">
+          <text class="sp-n">{{item.n}}</text>
+          <text class="sp-p px">{{item.p}}</text>
+        </view>
+        <text class="sp-d">{{item.d}}</text>
+      </view>
+    </block>
+
+    <!-- 掉落 -->
+    <block wx:if="{{drops.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">{{isBoss ? '掉落物' : '战利品'}}</text></view>
+      <view class="drop card" wx:for="{{drops}}" wx:key="name">
+        <text class="d-n">{{item.name}}</text>
+        <text class="d-r px">{{item.rate}}</text>
+      </view>
+    </block>
+
+    <!-- 阶段 -->
+    <block wx:if="{{phases.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">战斗阶段</text></view>
+      <view class="phase card" wx:for="{{phases}}" wx:key="name">
+        <view class="p-head">
+          <text class="p-i px">{{index + 1}}</text>
+          <text class="p-n">{{item.name}}</text>
+        </view>
+        <text class="p-d">{{item.desc}}</text>
+      </view>
+    </block>
+
+    <!-- 种子：机制差异 -->
+    <block wx:if="{{isSeed && mechanics.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">机制差异</text></view>
+      <view class="tip card" wx:for="{{mechanics}}" wx:key="*this">
+        <text class="tip-i px">{{index + 1}}</text>
+        <text class="tip-t">{{item}}</text>
+      </view>
+    </block>
+
+    <!-- 种子：专属内容 -->
+    <block wx:if="{{isSeed && exclusives.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">专属内容</text></view>
+      <view class="phase card" wx:for="{{exclusives}}" wx:key="name">
+        <view class="p-head">
+          <text class="p-i px">{{index + 1}}</text>
+          <text class="p-n">{{item.name}}</text>
+        </view>
+        <text class="p-d">{{item.note}}</text>
+      </view>
+    </block>
+
+    <!-- 用途 -->
+    <block wx:if="{{e.use}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">用途</text></view>
+      <view class="line card">{{e.use}}</view>
+    </block>
+
+    <!-- 攻略 -->
+    <block wx:if="{{strategy.length && strategy[0]}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">打法攻略</text></view>
+      <view class="tip card" wx:for="{{strategy}}" wx:key="*this">
+        <text class="tip-i px">{{index + 1}}</text>
+        <text class="tip-t">{{item}}</text>
+      </view>
+    </block>
+
+    <!-- 合成入口 -->
+    <view class="craft-entry card card-gold tappable" wx:if="{{hasRecipe}}" bindtap="goCraft">
+      <view class="ce-art"><pixel-icon art-id="{{e.artId}}" size="72" /></view>
+      <view class="col flex-1">
+        <text class="ce-t">查看「{{e.name}}」合成路线</text>
+        <text class="ce-s">在合成页展开完整材料树</text>
+      </view>
+      <text class="ce-go">›</text>
+    </view>
+
+    <!-- 相关攻略 -->
+    <block wx:if="{{relStrats.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">相关攻略</text></view>
+      <view class="rel card tappable" wx:for="{{relStrats}}" wx:key="id" bindtap="onStrat" data-id="{{item.id}}">
+        <view class="rel-diamond" />
+        <text class="rel-t flex-1">{{item.title}}</text>
+        <text class="rel-time">{{item.time}}</text>
+      </view>
+    </block>
+
+    <view class="pad-bottom" />
+  </view>
+
+  <!-- 底部悬浮 -->
+  <view class="float-btns safe-bottom">
+    <view class="fb collect {{fav ? 'on' : ''}}" bindtap="toggleFav">{{fav ? '★ 已收藏' : '☆ 收藏'}}</view>
+    <button class="fb share" open-type="share">↗ 分享</button>
+  </view>
+</view>

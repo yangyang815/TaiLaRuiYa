@@ -1,0 +1,71 @@
+/* 攻略页 */
+.strat-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10rpx; }
+.nav-ph { width: 64rpx; }
+
+/* 列表 */
+.head { padding: 10rpx 30rpx 16rpx; }
+.cats { display: flex; }
+.s-list { padding: 0 30rpx; }
+.s-card { display: flex; align-items: center; padding: 22rpx; margin-bottom: 20rpx; }
+.s-cover { position: relative; width: 132rpx; height: 132rpx; border-radius: 16rpx;
+  background: rgba(0, 0, 0, 0.28); display: flex; align-items: center; justify-content: center;
+  margin-right: 24rpx; flex-shrink: 0; overflow: hidden; }
+.s-cover-glow { position: absolute; inset: -20%; background: radial-gradient(circle, rgba(76, 224, 224, 0.18), transparent 65%); }
+.s-time { font-size: 16rpx; color: var(--text-faint); margin-left: auto; }
+.s-title { font-size: 29rpx; color: var(--text); font-weight: 800; line-height: 1.45; margin-top: 10rpx; }
+.s-sum { font-size: 22rpx; color: var(--text-faint); line-height: 1.6; margin-top: 10rpx;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.s-go { color: var(--gold); font-size: 36rpx; margin-left: 12rpx; flex-shrink: 0; }
+
+/* 详情 */
+.d-hero { position: relative; display: flex; flex-direction: column; align-items: center;
+  padding: 6rpx 40rpx 30rpx; overflow: hidden; }
+.d-hero-glow { position: absolute; top: -40rpx; width: 460rpx; height: 360rpx; border-radius: 50%;
+  background: radial-gradient(circle, rgba(76, 224, 224, 0.14), transparent 65%); }
+.d-art { position: relative; filter: drop-shadow(0 6rpx 24rpx rgba(0, 0, 0, 0.6)); }
+.d-meta { margin-top: 20rpx; position: relative; }
+.d-time { font-size: 16rpx; color: var(--text-faint); margin-left: 16rpx; }
+.d-title { position: relative; font-size: 38rpx; font-weight: 900; color: var(--text);
+  text-align: center; margin-top: 16rpx; line-height: 1.4; }
+.d-sum { position: relative; font-size: 24rpx; color: var(--text-dim); line-height: 1.7;
+  text-align: center; margin-top: 14rpx; }
+
+.d-body { padding: 0 30rpx; }
+.step { display: flex; align-items: flex-start; padding: 20rpx 24rpx; margin-bottom: 16rpx; }
+.step-no { font-size: 20rpx; color: #3A2400; background: var(--gold); border-radius: 10rpx;
+  padding: 6rpx 14rpx; margin-right: 20rpx; flex-shrink: 0; }
+.step-t { font-size: 27rpx; color: var(--gold); font-weight: 800; }
+.step-d { font-size: 24rpx; color: var(--text-dim); line-height: 1.7; margin-top: 8rpx; }
+
+.tip { display: flex; align-items: flex-start; padding: 14rpx 22rpx; margin-bottom: 12rpx; }
+.tip-star { color: var(--gold); font-size: 24rpx; margin-right: 14rpx; flex-shrink: 0; }
+.tip-t { font-size: 24rpx; color: var(--text-dim); line-height: 1.7; }
+
+.rel-scroll { white-space: nowrap; padding: 4rpx 0 10rpx; }
+.rel-chip { display: inline-flex; flex-direction: column; align-items: center;
+  width: 168rpx; padding: 20rpx 0 16rpx; margin-right: 18rpx; }
+.rel-art { width: 80rpx; height: 80rpx; border-radius: 12rpx; background: rgba(0, 0, 0, 0.3);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 12rpx; }
+.rel-n { font-size: 23rpx; color: var(--text); font-weight: 700; max-width: 144rpx;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 8rpx; }
+
+.pad-bottom { height: 200rpx; }
+
+/* 悬浮按钮 */
+.float-btns { position: fixed; left: 30rpx; right: 30rpx; bottom: calc(env(safe-area-inset-bottom) + 24rpx);
+  display: flex; gap: 20rpx; z-index: 100; }
+.fb { flex: 1; display: flex; align-items: center; justify-content: center; height: 88rpx;
+  border-radius: 16rpx; font-size: 27rpx; font-weight: 800; }
+.fb.collect { background: rgba(18, 9, 37, 0.92); border: 2rpx solid var(--gold-faint);
+  color: var(--gold); }
+.fb.collect.on { background: linear-gradient(180deg, #3E2E08, #2A1F05); box-shadow: 0 0 22rpx rgba(255, 215, 0, 0.3); }
+.fb.share { background: linear-gradient(180deg, #FFE55C, #E5B800); color: #3A2400;
+  border: 2rpx solid #FFF0B0; padding: 0; line-height: 88rpx; box-shadow: 0 0 22rpx rgba(255, 215, 0, 0.35); }
+.fb.share::after { border: none; }

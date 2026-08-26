@@ -1,0 +1,78 @@
+<view class="page-root {{themeClass}} search-root">
+
+  <!-- 顶部搜索栏 -->
+  <view class="bar" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <view class="input-wrap card">
+      <text class="s-ico">🔍</text>
+      <input class="s-input flex-1" placeholder="搜物品、Boss、配方、攻略，支持拼音/俗称" placeholder-class="ph"
+        value="{{kw}}" bindinput="onKw" bindconfirm="confirmSearch" confirm-type="search"
+        focus maxlength="20" />
+      <text class="s-clear tappable" wx:if="{{kw}}" bindtap="clearKw">✕</text>
+    </view>
+  </view>
+
+  <scroll-view class="body" scroll-y>
+    <!-- 搜索结果 -->
+    <block wx:if="{{kw}}">
+      <view class="sec-title" wx:if="{{results.length}}"><view class="diamond" /><text class="t">图鉴条目</text>
+        <text class="more px">{{results.length}} 条</text>
+      </view>
+      <view class="r-item card tappable" wx:for="{{results}}" wx:key="id" bindtap="onResult" data-id="{{item.id}}">
+        <view class="r-art" style="box-shadow: 0 0 14rpx {{item.glow}}55;">
+          <pixel-icon art-id="{{item.artId}}" size="72" />
+        </view>
+        <view class="col flex-1">
+          <view class="r-line">
+            <text class="r-name">{{item.name}}</text>
+            <text class="r-tags px" wx:if="{{item.tagsTxt}}">{{item.tagsTxt}}</text>
+          </view>
+          <text class="r-en px" wx:if="{{item.en}}">{{item.en}}</text>
+        </view>
+        <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : (item.type === 'seed' ? 'tag-seed' : (item.type === 'npc' ? 'tag-npc' : 'tag-item')))}}">
+          {{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</text>
+      </view>
+
+      <view class="sec-title" wx:if="{{recipeHits.length}}"><view class="diamond" /><text class="t">合成配方</text></view>
+      <view class="rc-item card tappable" wx:for="{{recipeHits}}" wx:key="id" bindtap="onRecipe" data-id="{{item.id}}">
+        <view class="r-art">
+          <pixel-icon art-id="{{item.artId}}" size="56" />
+        </view>
+        <text class="rc-t flex-1">{{item.name}}</text>
+        <text class="rc-go">合成树 ›</text>
+      </view>
+
+      <view class="sec-title" wx:if="{{stratHits.length}}"><view class="diamond" /><text class="t">相关攻略</text></view>
+      <view class="st-item card tappable" wx:for="{{stratHits}}" wx:key="id" bindtap="onStrat" data-id="{{item.id}}">
+        <view class="st-diamond" />
+        <text class="st-t flex-1">{{item.title}}</text>
+        <text class="st-go">›</text>
+      </view>
+
+      <view class="empty" wx:if="{{!results.length && !stratHits.length && !recipeHits.length}}">
+        <view class="e-icon">🌑</view>
+        <text>没有找到「{{kw}}」，换个关键词试试</text>
+      </view>
+    </block>
+
+    <!-- 默认：历史 + 热门 -->
+    <block wx:else>
+      <view class="sec-title" wx:if="{{hist.length}}"><view class="diamond" /><text class="t">搜索历史</text>
+        <text class="more" bindtap="clearHist">清空</text>
+      </view>
+      <view class="words" wx:if="{{hist.length}}">
+        <view class="word-chip" wx:for="{{hist}}" wx:key="*this" bindtap="onWord" data-w="{{item}}">{{item}}</view>
+      </view>
+
+      <view class="sec-title"><view class="diamond" /><text class="t">热门搜索</text>
+        <text class="more px">HOT</text>
+      </view>
+      <view class="words">
+        <view class="word-chip hot" wx:for="{{hotWords}}" wx:key="*this" bindtap="onWord" data-w="{{item}}">
+          <text class="w-fire" wx:if="{{index < 3}}">🔥</text>{{item}}
+        </view>
+      </view>
+    </block>
+    <view class="pad-bottom" />
+  </scroll-view>
+</view>

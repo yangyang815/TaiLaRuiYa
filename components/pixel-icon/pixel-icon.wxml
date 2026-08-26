@@ -1,0 +1,3 @@
+<view class="pi" style="width:{{w}}px;height:{{h}}px">
+  <image class="pi-img" src="{{src}}" mode="{{fit ? 'aspectFit' : 'scaleToFill'}}" />
+</view>

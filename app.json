@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/codex/codex",
+    "pages/craft/craft",
+    "pages/my/my",
+    "pages/list/list",
+    "pages/detail/detail",
+    "pages/strategy/strategy",
+    "pages/search/search",
+    "pages/secrets/secrets",
+    "pages/guide/guide",
+    "pages/biomes/biomes",
+    "pages/seeds/seeds",
+    "pages/prefixes/prefixes"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#120925",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#8E7FA6",
+    "selectedColor": "#FFD700",
+    "backgroundColor": "#150B26",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "首页" },
+      { "pagePath": "pages/codex/codex", "text": "图鉴" },
+      { "pagePath": "pages/craft/craft", "text": "合成" },
+      { "pagePath": "pages/my/my", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -1,0 +1,120 @@
+<view class="page-root {{themeClass}} seeds-root">
+
+  <!-- 顶部：返回 + 标题（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">种子目录</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头部统计 -->
+  <view class="hero">
+    <view class="hero-art floaty"><pixel-icon art-id="daybloom_herb" size="120" /></view>
+    <view class="col flex-1">
+      <text class="hero-t px">PLANT SEEDS</text>
+      <text class="hero-s">种下去 · 长出药水与生态</text>
+      <text class="hero-stat px">{{herbCount}} 种药草种子 · {{grassCount}} 种环境草种</text>
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view class="cat-scroll" scroll-x enable-flex enhanced show-scrollbar="{{false}}">
+    <view class="chip {{cat === item.k ? 'on' : ''}}" wx:for="{{cats}}" wx:key="k"
+      bindtap="onCat" data-k="{{item.k}}">{{item.n}}</view>
+  </scroll-view>
+
+  <!-- 种子卡片列表 -->
+  <view class="sec-list">
+    <view class="s-card card tappable" wx:for="{{list}}" wx:key="id"
+      bindtap="onCard" data-id="{{item.id}}">
+      <view class="sc-top">
+        <view class="sc-art"><pixel-icon art-id="{{item.art}}" size="96" /></view>
+        <view class="col flex-1">
+          <view class="row sc-name-row">
+            <text class="sc-title">{{item.name}}</text>
+            <text class="tag {{item.type === 'herb' ? 'tag-herb' : 'tag-grass'}}">{{item.typeName}}</text>
+          </view>
+          <view class="row sc-meta">
+            <view class="bloom-chip">
+              <text class="bloom-ico">✿</text>
+              <text class="bloom-t">{{item.bloom}}</text>
+            </view>
+            <view class="found-chip">
+              <text class="found-t">{{item.found}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="sc-foot" wx:if="{{item.potionCount}}">
+        <text class="sc-potions px">关联 {{item.potionCount}} 种药水</text>
+        <text class="sc-go px">查看 ›</text>
+      </view>
+      <view class="sc-foot" wx:else>
+        <text class="sc-potions px">{{item.factCount}} 条种植知识</text>
+        <text class="sc-go px">查看 ›</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="foot safe-bottom">
+    <text class="foot-t px">GROW YOUR OWN ALCHEMY</text>
+  </view>
+
+  <!-- 详情弹窗 -->
+  <view class="mask" wx:if="{{sheet}}" bindtap="closeSheet" />
+  <view class="sheet" wx:if="{{sheet}}" catchtap="noop">
+    <view class="sheet-handle" bindtap="closeSheet" />
+    <view class="sh-head">
+      <view class="sh-art"><pixel-icon art-id="{{sheet.art}}" size="120" /></view>
+      <view class="col flex-1">
+        <view class="row sc-name-row">
+          <text class="sh-title">{{sheet.name}}</text>
+          <text class="sh-en px">{{sheet.en}}</text>
+        </view>
+        <view class="row sc-meta">
+          <view class="bloom-chip">
+            <text class="bloom-ico">✿</text>
+            <text class="bloom-t">{{sheet.bloom}}</text>
+          </view>
+          <view class="found-chip">
+            <text class="found-t">{{sheet.found}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <scroll-view class="sh-body" scroll-y>
+      <text class="sh-intro">{{sheet.desc}}</text>
+
+      <view class="info-grid">
+        <view class="info-cell card">
+          <text class="ic-label px">开花条件</text>
+          <text class="ic-val">{{sheet.bloom}}</text>
+          <text class="ic-detail">{{sheet.bloomDetail}}</text>
+        </view>
+        <view class="info-cell card">
+          <text class="ic-label px">获取途径</text>
+          <text class="ic-val">{{sheet.found}}</text>
+          <text class="ic-detail">{{sheet.foundDetail}}</text>
+        </view>
+      </view>
+
+      <block wx:if="{{sheet.potionCount}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">关联药水 · {{sheet.potionCount}} 种</text></view>
+        <view class="potion-chips">
+          <text class="p-chip" wx:for="{{sheet.potions}}" wx:key="*this">{{item}}</text>
+        </view>
+      </block>
+
+      <view class="sec-title"><view class="diamond" /><text class="t">种植知识 · {{sheet.factCount}} 条</text></view>
+      <view class="fact card" wx:for="{{sheet.facts}}" wx:key="*this">
+        <view class="f-head">
+          <text class="f-i px">{{index + 1}}</text>
+          <text class="f-t2">{{item}}</text>
+        </view>
+      </view>
+
+      <view class="sh-pad" />
+    </scroll-view>
+  </view>
+</view>

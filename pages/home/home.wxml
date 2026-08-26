@@ -1,0 +1,101 @@
+<view class="page-root {{themeClass}} {{daytime ? 'day' : 'night'}} home-root">
+
+  <!-- 星空 / 微光粒子 -->
+  <view class="sky" wx:if="{{!daytime}}">
+    <view class="star" wx:for="{{stars}}" wx:key="index"
+      style="left:{{item.left}};width:{{item.size}}rpx;height:{{item.size}}rpx;animation-duration:{{item.dur}};animation-delay:{{item.delay}};opacity:{{item.op}};" />
+  </view>
+  <view class="sky day-glow" wx:else />
+
+  <!-- 顶部：Logo + 搜索 -->
+  <view class="nav" style="padding-top:{{navTop}}px;">
+    <view class="nav-in">
+      <view class="logo">
+        <pixel-icon art-id="terra_blade" size="72" />
+        <view class="col">
+          <text class="logo-t px">TERRA HANDBOOK</text>
+          <text class="logo-s">{{greet}}</text>
+        </view>
+      </view>
+      <view class="search-pill tappable" bindtap="goSearch">
+        <text class="s-ico">🔍</text>
+        <text class="s-ph">搜索物品、怪物、攻略...</text>
+      </view>
+      <view class="poster-fab tappable" bindtap="openPoster">▣</view>
+    </view>
+  </view>
+
+  <!-- 版本更新提示 -->
+  <view class="update card card-gold blink" wx:if="{{showUpdate}}">
+    <text class="u-badge px">1.4.5</text>
+    <text class="u-txt">版本更新！新Boss与物品数据已就绪</text>
+    <view class="u-btn" catchtap="syncUpdate">同步</view>
+    <view class="u-close" catchtap="dismissUpdate">✕</view>
+  </view>
+
+  <!-- 轮播 Banner（current 不回绑，避免 circular 环绕时动画被打断） -->
+  <swiper class="banner" autoplay circular interval="4200" duration="500"
+    bindchange="onBannerChange">
+    <swiper-item wx:for="{{banners}}" wx:key="id" bindtap="onBannerTap" data-type="{{item.type}}" data-ref="{{item.ref}}">
+      <view class="b-card" style="background: linear-gradient(120deg, {{item.grad[0]}}, {{item.grad[1]}});">
+        <view class="b-txt">
+          <text class="b-title">{{item.title}}</text>
+          <text class="b-sub">{{item.sub}}</text>
+          <view class="b-go px">VIEW →</view>
+        </view>
+        <view class="b-art floaty">
+          <pixel-icon art-id="{{item.art}}" size="180" />
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view class="dots">
+    <view class="dot {{bannerIdx === index ? 'on' : ''}}" wx:for="{{banners}}" wx:key="id" />
+  </view>
+
+  <!-- 冒险手册：标题 → 新手指南横条 → 16 卡片宫格 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">冒险手册</text><text class="more px">HANDBOOK</text></view>
+
+  <!-- 新手指南入口（紧随标题下方，唯一横条） -->
+  <view class="feature-entry entry-guide tappable" bindtap="goGuide">
+    <view class="se-art floaty"><pixel-icon art-id="npc_guide" size="104" /></view>
+    <view class="col flex-1">
+      <view class="row se-title-row">
+        <text class="fe-title ft-guide">新手指南</text>
+        <text class="fe-badge fb-guide px">NEWBIE</text>
+      </view>
+      <text class="se-sub">创建世界 · 第一天生存 · 挖矿建家 · 12 篇攻略带你从萌新到通关</text>
+    </view>
+    <text class="fe-go fg-guide px">›</text>
+  </view>
+
+  <!-- 快捷功能宫格 4×4（12 手册入口 + 4 特色入口） -->
+  <view class="grid">
+    <view class="g-cell card tappable {{item.pressed ? 'pressed' : ''}}"
+      wx:for="{{grid}}" wx:key="k"
+      bindtap="onGridTap" data-index="{{index}}"
+      bindtouchstart="pressIn" bindtouchend="pressOut" bindtouchcancel="pressOut">
+      <view class="g-art"><pixel-icon art-id="{{item.art}}" size="88" /></view>
+      <text class="g-name">{{item.n}}</text>
+    </view>
+  </view>
+
+  <!-- 今日热门 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">今日热门</text><text class="more px">HOT NOW</text></view>
+  <scroll-view class="hot-scroll" scroll-x enable-flex enhanced show-scrollbar="{{false}}">
+    <view class="h-card card tappable" wx:for="{{hot}}" wx:key="id" bindtap="onHotTap" data-id="{{item.id}}">
+      <view class="h-glow" style="background: radial-gradient(circle, {{item.glow}}44 0%, transparent 70%);" />
+      <view class="h-art"><pixel-icon art-id="{{item.artId}}" size="104" /></view>
+      <text class="h-name">{{item.name}}</text>
+      <text class="h-rank px">NO.{{index + 1}}</text>
+    </view>
+  </scroll-view>
+
+  <view class="home-foot safe-bottom">
+    <text class="foot-t px">POWERED BY TERRARIA 1.4.4</text>
+    <text class="foot-s">数据以 1.4.4 为基准 · 仅供学习参考</text>
+  </view>
+
+  <!-- 分享海报 -->
+  <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
+</view>

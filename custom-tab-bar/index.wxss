@@ -1,0 +1,50 @@
+.tabbar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  background: rgba(16, 8, 32, 0.97);
+  border-top: 3rpx solid rgba(255, 215, 0, 0.35);
+  box-shadow: 0 -6rpx 30rpx rgba(0, 0, 0, 0.55), 0 -2rpx 24rpx rgba(255, 215, 0, 0.08);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 999;
+}
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14rpx 0 10rpx;
+}
+.tab-icon {
+  padding: 6rpx;
+  border-radius: 10rpx;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tab-icon.on {
+  filter: drop-shadow(0 0 12rpx rgba(255, 215, 0, 0.65));
+  transform: translateY(-6rpx) scale(1.08);
+}
+.tab-text {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #8E7FA6;
+  letter-spacing: 2rpx;
+  transition: color 0.2s;
+}
+.tab-text.on {
+  color: #FFD700;
+  font-weight: 800;
+  text-shadow: 0 0 12rpx rgba(255, 215, 0, 0.5);
+}
+
+/* 白天模式 */
+.tabbar.theme-light {
+  background: rgba(248, 243, 228, 0.97);
+  border-top-color: rgba(168, 121, 10, 0.35);
+  box-shadow: 0 -6rpx 30rpx rgba(120, 96, 40, 0.18);
+}
+.tabbar.theme-light .tab-text { color: #A79B84; }
+.tabbar.theme-light .tab-text.on {
+  color: #A8790A;
+  text-shadow: none;
+}

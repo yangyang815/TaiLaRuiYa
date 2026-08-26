@@ -1,0 +1,16 @@
+<view class="tabbar {{light ? 'theme-light' : ''}}">
+  <view
+    wx:for="{{list}}"
+    wx:key="pagePath"
+    class="tab-item tappable"
+    hover-class="pressed"
+    hover-stay-time="80"
+    data-index="{{index}}"
+    bindtap="switchTab"
+  >
+    <view class="tab-icon {{selected === index ? 'on' : ''}}">
+      <pixel-icon art-id="{{selected === index ? item.artIdOn : item.artId}}" size="{{52}}" />
+    </view>
+    <view class="tab-text {{selected === index ? 'on' : ''}}">{{item.text}}</view>
+  </view>
+</view>

@@ -1,0 +1,570 @@
+// Boss 图鉴：18 位 BOSS，含属性 / 掉落 / 召唤 / 阶段 / 攻略
+// tier: pre(困难模式前) mech(机械三王) post(世纪之花后) lunar(月亮事件)
+module.exports = [
+  { id: 'king_slime', name: '史莱姆王', en: 'King Slime', tier: 'pre', hp: 2800, dmg: 40, def: 10, coins: '1 金',
+    art: 'boss_king_slime', color: '#4A6DE0',
+    spawn: '史莱姆雨事件（击杀 150 只史莱姆后）/ 稀有自然生成 / 合成"史莱姆王冠"（凝胶×99 + 金冠/铂金冠）主动召唤',
+    drops: [
+      { id: 'slime_mount', name: '粘鞍（坐骑）', rate: '25%（专家 50%）' },
+      { id: 'slime_staff', name: '史莱姆法杖', rate: '0.01%~1%' },
+      { id: 'gel_blue', name: '凝胶×25', rate: '100%' }
+    ],
+    phases: [
+      { name: '第一阶段', desc: '原地大跳 + 传送，从体内不断吐出小史莱姆。' },
+      { name: '残血（<50%）', desc: '跳得更远更高，落地召唤更多史莱姆骑士。' }
+    ],
+    strategy: [
+      '搭一个两层平台，他传送不到平台上层时你基本无伤。',
+      '走位躲跳劈即可，近战站脸输出，远程放风筝。',
+      '史莱姆雨事件是他最简单的触发方式，白天刷史莱姆即可。'
+    ] },
+
+  { id: 'eye_of_cthulhu', name: '克苏鲁之眼', en: 'Eye of Cthulhu', tier: 'pre', hp: 2800, dmg: 15, def: 12, coins: '3 金',
+    art: 'boss_eye_cthulhu', color: '#C43030',
+    spawn: '夜晚 19.5% 概率自然生成（HP≥200 且防御≥10）/ 合成"可疑眼球"（晶状体×6 @恶魔祭坛）主动召唤',
+    drops: [
+      { id: 'shield_cthulhu', name: '克苏鲁护盾', rate: '专家 100%' },
+      { id: 'demonite', name: '魔矿/猩红矿×30~87', rate: '100%' },
+      { id: 'unholy_arrow', name: '邪箭×20~50（腐化）', rate: '100%' },
+      { id: 'rotten_chunk', name: '腐肉/椎骨×1~3', rate: '33%' }
+    ],
+    phases: [
+      { name: '第一阶段（眼球形态）', desc: '悬浮冲撞三次 + 召唤克苏鲁小仆（小眼球）。' },
+      { name: '第二阶段（血喉形态，<50% HP）', desc: '翻转为长着血盆大口的形态，移动更快，冲撞更凶，但不再召唤小怪。' }
+    ],
+    strategy: [
+      '搭一条长平台（200 格以上），第一阶段横着跑躲冲撞。',
+      '第二阶段他加速，用盾牌类饰品或靠二段跳垂直躲避。',
+      '金弓/火枪+小丑之箭即可轻松击杀，是最友好的第一个 BOSS。'
+    ] },
+
+  { id: 'eater_of_worlds', name: '世界吞噬怪', en: 'Eater of Worlds', tier: 'pre', hp: '7486（67 节）', dmg: 22, def: '头部 0 / 节 12', coins: '5 金',
+    art: 'boss_eater_worlds', color: '#7A5AD0',
+    spawn: '在腐化之地裂谷敲碎 3 颗暗影珠 / 合成"蠕虫诱饵"（魔粉×15 + 腐肉×30）召唤（仅腐化世界）',
+    drops: [
+      { id: 'demonite_bar', name: '魔矿×30~65', rate: '100%' },
+      { id: 'shadow_scale', name: '暗影鳞片×30~65', rate: '100%' },
+      { id: 'eaters_bone', name: '吞噬怪骨头（宠物）', rate: '33%' }
+    ],
+    phases: [
+      { name: '多节蠕虫', desc: '由 67 节组成的多体节蠕虫，节节独立，斩断再生。' },
+      { name: '分割机制', desc: '把虫身斩断会分裂成两条小虫；杀死头部即全灭，杀死尾部不掉落。' }
+    ],
+    strategy: [
+      '腐化裂谷铺一条竖井+底部小屋，把虫子引到封闭空间用穿透武器打。',
+      '链刃/流星弹一穿一串，是他的天敌。',
+      '掉落魔矿+暗影鳞片可合成暗影套装，直接起飞。'
+    ] },
+
+  { id: 'brain_of_cthulhu', name: '克苏鲁之脑', en: 'Brain of Cthulhu', tier: 'pre', hp: 1000 + 1250, dmg: 20, def: '一阶段 ∞ / 二阶段 14', coins: '5 金',
+    art: 'boss_brain_cthulhu', color: '#F27E8C',
+    spawn: '在猩红之地敲碎 3 颗猩红之心 / 合成"血腥脊椎"（椎骨×15 + 毒粉×30）召唤（仅猩红世界）',
+    drops: [
+      { id: 'tissue_sample', name: '组织样本×20~49', rate: '100%' },
+      { id: 'crimtane', name: '猩红矿×20~49', rate: '100%' },
+      { id: 'brain_confusion', name: '混乱之脑（专家）', rate: '专家 100%' }
+    ],
+    phases: [
+      { name: '第一阶段（无敌）', desc: '本体无敌并瞬移，周围环绕 20 只"爬行者"，清空后进入二阶段。' },
+      { name: '第二阶段（本体）', desc: '冲撞+制造幻象分身，真身被击中会短暂变色。' }
+    ],
+    strategy: [
+      '第一阶段用穿透弹幕清爬行者，别贪刀本体。',
+      '二阶段盯紧真身（受击变色），幻象不打人。',
+      '猩红矛/荆鞭在封闭房间表现极佳。'
+    ] },
+
+  { id: 'queen_bee', name: '蜂王', en: 'Queen Bee', tier: 'pre', hp: 3400, dmg: 26, def: 8, coins: '1 金',
+    art: 'boss_queen_bee', color: '#F2C94C',
+    spawn: '在地下丛林的蜂巢中破坏蜂王幼虫 / 合成"憎恶之蜂"（蜂蜜块+毒刺+瓶装蜂蜜 @铁砧）召唤',
+    drops: [
+      { id: 'bee_keeper', name: '养蜂人', rate: '33%' },
+      { id: 'bee_gun', name: '蜜蜂枪', rate: '33%' },
+      { id: 'bee_wax', name: '蜂蜡×10~25', rate: '100%' },
+      { id: 'hive_pack', name: '蜂巢背包（专家）', rate: '专家 100%' }
+    ],
+    phases: [
+      { name: '常规循环', desc: '三连冲撞 → 悬停发射毒刺弹幕 → 召唤小蜜蜂 → 再冲撞。' },
+      { name: '残血', desc: '冲撞频率提升，弹幕更密。' }
+    ],
+    strategy: [
+      '在蜂巢里就地搭平台，蜂蜜池里缓慢移动记得躲。',
+      '毒刺弹幕有固定节奏，左右横移就能全躲。',
+      '养蜂人是丛林期神武，值得刷。'
+    ] },
+
+  { id: 'skeletron', name: '骷髅王', en: 'Skeletron', tier: 'pre', hp: 4400, dmg: 32, def: '头部 10', coins: '4 金',
+    art: 'boss_skeletron', color: '#E8E4D8',
+    spawn: '夜晚与地牢门口的被诅咒的"老人"对话召唤；必须在他存活期间击败，否则黎明即死',
+    drops: [
+      { id: 'book_of_skulls', name: '骷髅头法书', rate: '10.5%' },
+      { id: 'bone_glove', name: '骨头手套（专家）', rate: '专家 100%' }
+    ],
+    phases: [
+      { name: '头 + 双手', desc: '两手交替旋转锤击，头部偶尔发起头锤冲刺。' },
+      { name: '头部狂暴', desc: '双手被斩后头部开始旋转追踪，防御骤降（旋转时 def=0）——输出的黄金窗口。' }
+    ],
+    strategy: [
+      '先拆两只手（分离的仇恨更好躲），再打头。',
+      '头部旋转时虽然吓人，但防御归零，站桩输出最快。',
+      '击败后地牢正式开放，村正/钴护盾在等你。'
+    ] },
+
+  { id: 'deerclops', name: '独眼巨鹿', en: 'Deerclops', tier: 'pre', hp: 7000, dmg: 45, def: 14, coins: '5 金',
+    art: 'boss_deerclops', color: '#4CE0E0',
+    spawn: '雪原极端寒冷天气自然生成 / 合成"鹿华"召唤',
+    drops: [
+      { id: 'eyebrella', name: '眼球伞', rate: '25%' },
+      { id: 'pewmatic_horn', name: '气喇叭', rate: '25%' },
+      { id: 'weather_pain', name: '天候棒', rate: '25%' },
+      { id: 'lucy_the_axe', name: '露西斧', rate: '25%' },
+      { id: 'bone_dagger', name: '骨刀', rate: '25%' },
+      { id: 'monster_meat', name: '怪物肉', rate: '低' }
+    ],
+    phases: [
+      { name: '地面碾压', desc: '挥爪+跳砸，制造暗影之手从地面抓你。' },
+      { name: '咆哮', desc: '周期性咆哮制造弹幕与冰雪碎块。' }
+    ],
+    strategy: [
+      '保持中距离横向走位，暗影之手出现前脚下会有阴影提示。',
+      '肉前后期强度，建议在骷髅王之后再挑战。',
+      '1.4.3 追加的BOSS，独眼很有辨识度。'
+    ] },
+
+  { id: 'wall_of_flesh', name: '血肉墙', en: 'Wall of Flesh', tier: 'pre', hp: 8000, dmg: 50, def: 12, coins: '10 金',
+    art: 'boss_wall_flesh', color: '#A03838',
+    spawn: '在地狱将"向导巫毒娃娃"丢入岩浆召唤（会直接杀死向导！）',
+    drops: [
+      { id: 'warrior_emblem', name: '战士/游侠/巫士/召唤师徽章（四选一）', rate: '16.7%×4' },
+      { id: 'laser_rifle', name: '激光步枪', rate: '16.7%' },
+      { id: 'pwnhammer', name: '神锤', rate: '100%' }
+    ],
+    phases: [
+      { name: '全屏推进', desc: '从地狱一侧推向另一侧，你被"饿鬼"触手与激光扫射追赶，被推到世界边缘即死。' },
+      { name: '血量越低越快', desc: '随血量下降移动加速，同时"饿鬼"发射更密的激光。' }
+    ],
+    strategy: [
+      '先修一条横贯地狱的长平台路（星星炮/发条枪很好用）。',
+      '向导娃娃丢进岩浆前，把向导安排进地狱附近的安全房间，方便肉后再战。',
+      '击败后世界进入困难模式，敲祭坛刷新新三矿——新世界的大门就此打开！'
+    ] },
+
+  { id: 'queen_slime', name: '史莱姆皇后', en: 'Queen Slime', tier: 'mech', hp: 17000, dmg: 60, def: 20, coins: '10 金',
+    art: 'boss_queen_slime', color: '#F08CD8',
+    spawn: '在神圣之地地下找到"明胶水晶"（天然生成）后使用召唤',
+    drops: [
+      { id: 'crystal_serpent', name: '水晶蛇', rate: '25%' },
+      { id: 'blade_staff', name: '刃杖', rate: '25%' },
+      { id: 'regal_delicacy', name: '王室美食（宠物）', rate: '25%' }
+    ],
+    phases: [
+      { name: '地面弹跳', desc: '大跳小跳+召唤水晶弹幕，偶尔飞空俯冲。' },
+      { name: '二阶段', desc: '化茧后获得飞行能力，弹幕更加华丽。' }
+    ],
+    strategy: [
+      '比机械三王简单，适合作为肉后第一个BOSS。',
+      '神圣之地搭三层平台，弹幕节奏感强，横向走位轻松。',
+      '掉落的水晶蛇/刃杖都是肉后前期主力。'
+    ] },
+
+  { id: 'twins', name: '双子魔眼', en: 'The Twins', tier: 'mech', hp: '24000（2×12000）', dmg: 50, def: '一阶 10 / 二阶 20', coins: '12 金',
+    art: 'boss_twins', color: '#E85555',
+    spawn: '合成"机械魔眼"（晶状体×3 + 铁锭×5 + 光明之魂×6 + 暗影之魂×6）于夜晚召唤',
+    drops: [
+      { id: 'soul_of_sight', name: '视域之魂×20~40', rate: '100%' },
+      { id: 'hallowed_bar', name: '神圣锭×15~30', rate: '100%' }
+    ],
+    phases: [
+      { name: '雷蒂纳泽（红眼）', desc: '激光眼：发射红色激光，血量低于 40% 变形为机枪形态。' },
+      { name: '斯帕兹马蒂姆（绿眼）', desc: '火焰眼：喷射诅咒焰，血量低于 40% 变形为喷火形态。' }
+    ],
+    strategy: [
+      '两只眼分开走位节奏：一阶段轻松，变形后压力倍增，优先集火一只。',
+      '长时间直线跑道（神圣沙漠/雪原）是标配战场。',
+      '巨兽鲨+圣箭能在变形前秒掉一只，大幅降低难度。'
+    ] },
+
+  { id: 'destroyer', name: '毁灭者', en: 'The Destroyer', tier: 'mech', hp: 80000, dmg: 60, def: 20, coins: '12 金',
+    art: 'boss_destroyer', color: '#7A82A0',
+    spawn: '合成"机械蠕虫"（腐肉×6 / 椎骨×6 + 暗影之魂×6 + 光明之魂×6 + 铁锭×5）于夜晚召唤',
+    drops: [
+      { id: 'soul_of_might', name: '力量之魂×20~40', rate: '100%' },
+      { id: 'hallowed_bar', name: '神圣锭×15~30', rate: '100%' }
+    ],
+    phases: [
+      { name: '巨型蠕虫', desc: '全身体节带红光探针，飞行冲撞并释放激光弹幕。' },
+      { name: '探针分裂', desc: '体节受创脱落成"探针"小怪，越打越多。' }
+    ],
+    strategy: [
+      '血量最厚但最"老实"，站高空平台用穿透武器收割。',
+      '穿透武器是他的克星：水晶碎块法书/恶魔之镰一发一串。',
+      '小探针会掉红心，是他的"补给线"。'
+    ] },
+
+  { id: 'skeletron_prime', name: '机械骷髅王', en: 'Skeletron Prime', tier: 'mech', hp: 28000, dmg: 62, def: 24, coins: '12 金',
+    art: 'boss_skeletron_prime', color: '#9CA4B8',
+    spawn: '合成"机械骷髅头"（骨头×30 + 铁锭×5 + 光明之魂×3 + 暗影之魂×3）于夜晚召唤',
+    drops: [
+      { id: 'soul_of_fright', name: '恐惧之魂×20~40', rate: '100%' },
+      { id: 'hallowed_bar', name: '神圣锭×15~30', rate: '100%' }
+    ],
+    phases: [
+      { name: '头 + 四臂', desc: '四条手臂：锯、钳、炮、激光，各司其职轮番上阵。' },
+      { name: '头部狂暴', desc: '血量<10% 时头部持续旋转追踪（防御归零）。' }
+    ],
+    strategy: [
+      '四条手不必强拆，专心躲技能打头。',
+      '激光臂最烦，优先打断它的节奏。',
+      '旋转冲刺时贴近站撸——防御为零就是机会。'
+    ] },
+
+  { id: 'plantera', name: '世纪之花', en: 'Plantera', tier: 'post', hp: 30000, dmg: 70, def: 20, coins: '15 金',
+    art: 'boss_plantera', color: '#F26EA8',
+    spawn: '击败机械三王后，在地下丛林破坏"世纪之花球茎"召唤',
+    drops: [
+      { id: 'seedler', name: '种子弯刀', rate: '14.3%' },
+      { id: 'grenade_launcher', name: '榴弹发射器', rate: '14.3%' },
+      { id: 'venus_magnum', name: '维纳斯万能枪', rate: '14.3%' },
+      { id: 'leaf_blower', name: '吹叶机', rate: '14.3%' },
+      { id: 'flower_pow', name: '花之力', rate: '14.3%' },
+      { id: 'wasp_gun', name: '胡蜂枪', rate: '14.3%' },
+      { id: 'the_axe', name: '吉他斧', rate: '5%' },
+      { id: 'pygmy_staff', name: '矮人法杖', rate: '50%' },
+      { id: 'temple_key', name: '神庙钥匙', rate: '100%' }
+    ],
+    phases: [
+      { name: '第一阶段（花苞）', desc: '挂在藤蔓上缓慢追击，发射尖刺弹幕 + 释放孢子小球。' },
+      { name: '第二阶段（食人花，<50%）', desc: '花瓣凋落露出獠牙，加速贴脸，触须横扫。' }
+    ],
+    strategy: [
+      '在地下丛林挖一个大竞技场（30×30），铺两层平台。',
+      '千万别把战场拉到地表：离开丛林他会狂暴秒人。',
+      '打完开神庙钥匙→石巨人，就到了装备收割期。'
+    ] },
+
+  { id: 'golem', name: '石巨人', en: 'Golem', tier: 'post', hp: 34000, dmg: 80, def: '体 30 / 头 40', coins: '15 金',
+    art: 'boss_golem', color: '#B86B32',
+    spawn: '在神庙最深处房间用"丛林蜥蜴电池"激活"丛林蜥蜴祭坛"召唤（电池由神庙敌怪掉落）',
+    drops: [
+      { id: 'picksaw', name: '锯刃镐', rate: '12.5%' },
+      { id: 'sun_stone', name: '太阳石', rate: '12.5%' },
+      { id: 'golem_fist', name: '石巨人之拳', rate: '12.5%' },
+      { id: 'possessed_hatchet', name: '疯狂飞斧', rate: '12.5%' }
+    ],
+    phases: [
+      { name: '第一阶段', desc: '跳跃砸地 + 双拳发射（拳头可被打断）。' },
+      { name: '第二阶段（<50%）', desc: '头部飞出继续发射激光弹幕，身体缓慢跟随践踏。' }
+    ],
+    strategy: [
+      '祭坛房搭高台，他跳不上去就变成了活靶子。',
+      '头部飞出后打身体即可，弹幕节奏固定很好躲。',
+      '太阳石可合成天界石，值得刷。'
+    ] },
+
+  { id: 'duke_fishron', name: '猪龙鱼公爵', en: 'Duke Fishron', tier: 'post', hp: 50000, dmg: 100, def: 50, coins: '20 金',
+    art: 'boss_duke_fishron', color: '#4A7BC8',
+    spawn: '在雪原/海洋洞穴用"松露虫"（地下雪原稀有鱼饵）钓鱼召唤',
+    drops: [
+      { id: 'tsunami', name: '海啸弓', rate: '20%' },
+      { id: 'razorblade_typhoon', name: '利刃台风', rate: '20%' },
+      { id: 'flairon', name: '猪鲨链球', rate: '20%' },
+      { id: 'fishron_wings', name: '猪龙鱼之翼', rate: '低' }
+    ],
+    phases: [
+      { name: '第一阶段', desc: '冲刺撞击 + 发射爆破泡泡与龙卷鲨鱼弹幕。' },
+      { name: '第二阶段（<50%）', desc: '眼睛发光进入暴怒，召唤龙卷风与密集鲨鱼弹幕。' },
+      { name: '水中狂暴', desc: '离开水域或下雨天他会狂暴，速度翻倍——别在雨中打！' }
+    ],
+    strategy: [
+      '搭一个超大双层平台竞技场（海洋上方），备足治疗药水。',
+      '二阶段的龙卷风贴地生成，保持空中机动。',
+      '掉落全是版本毕业级：海啸/台风/三叉戟，含金量极高。'
+    ] },
+
+  { id: 'empress_of_light', name: '光之女皇', en: 'Empress of Light', tier: 'post', hp: 70000, dmg: 90, def: 50, coins: '25 金',
+    art: 'boss_empress_light', color: '#FFD700',
+    spawn: '在神圣之地地表击杀"七彩草蛉"（1.4 困难模式神圣地表，午后刷新）召唤',
+    drops: [
+      { id: 'starlight', name: '星光', rate: '25%' },
+      { id: 'nightglow', name: '夜光', rate: '25%' },
+      { id: 'kaleidoscope', name: '万花筒（鞭）', rate: '25%' },
+      { id: 'soaring_insignia', name: '翱翔徽章（专家）', rate: '专家 100%' },
+      { id: 'terraprisma', name: '泰拉棱镜（白天无伤击杀 100%）', rate: '白天 100%' }
+    ],
+    phases: [
+      { name: '光之弹幕', desc: '五种元素光弹幕轮转：剑雨/光矢/十字光棱/追光/彩虹风暴。' },
+      { name: '终焉之舞', desc: '血量越低弹幕越密，夜晚击杀是"正常难度"。' },
+      { name: '白天挑战', desc: '白天存活时她伤害翻倍且你被秒——白天无伤击败才掉泰拉棱镜。' }
+    ],
+    strategy: [
+      '夜晚先打一遍熟悉五种弹幕，再挑战白天。',
+      '白天挑战建议悠悠球/星光贴脸 + 充足走位，挨一下就重来。',
+      '泰拉棱镜是召唤毕业，值得为它反复练习。'
+    ] },
+
+  { id: 'lunatic_cultist', name: '拜月教邪教徒', en: 'Lunatic Cultist', tier: 'lunar', hp: 32000, dmg: 50, def: 30, coins: '15 金',
+    art: 'boss_lunatic_cultist', color: '#6A80E0',
+    spawn: '击败石巨人后，前往地牢入口触发"教徒仪式"事件',
+    drops: [
+      { id: 'manipulator', name: '远古操纵机（制作站，掉落于战斗结束位置）', rate: '100%' },
+      { id: 'lunar_event', name: '触发月亮事件（四座天界塔降临）', rate: '100%' },
+      { id: 'treasure_bag', name: '拜月教宝藏袋（专家+：幽魂套装材料相关战利品）', rate: '专家模式 100%' },
+      { id: 'cultist_mask', name: '邪教徒面具（装饰）', rate: '14.3%（大师模式）' }
+    ],
+    phases: [
+      { name: '第一阶段', desc: '发射火球/冰霜弹/暗影弹/闪电弹，召唤幻象与龙图腾。' },
+      { name: '幻象考验', desc: '召唤 4 个幻象，打错真身会被惩罚——真身戴金色面具。' },
+      { name: '第二阶段', desc: '血量降低后进入仪式圈，龙卷与五连光矢齐发。' }
+    ],
+    strategy: [
+      '打幻象认准"金面具真身"，其他都是假货。',
+      '留好位移饰品（盾冲/闪避），五连光矢是最大减员点。',
+      '击败后开启月亮事件——四塔降临，最终决战开始。'
+    ] },
+
+  { id: 'moon_lord', name: '月亮领主', en: 'Moon Lord', tier: 'lunar', hp: 145000, dmg: 120, def: 50, coins: '50 金',
+    art: 'boss_moon_lord', color: '#4CE8E8',
+    spawn: '击破四座天界塔后 60 秒降临；或使用"天界符"直接召唤',
+    drops: [
+      { id: 'meowmere', name: '彩虹猫之刃', rate: '22.2%' },
+      { id: 'star_wrath', name: '狂星之怒', rate: '22.2%' },
+      { id: 'terrarian', name: '泰拉悠悠球', rate: '22.2%' },
+      { id: 'last_prism', name: '终极棱镜', rate: '12.5%' },
+      { id: 'sdmg', name: '太空海豚机枪', rate: '12.5%' },
+      { id: 'luminite', name: '夜明矿×90~110', rate: '100%' }
+    ],
+    phases: [
+      { name: '三眼齐开', desc: '额头真眼 + 双目：真眼发射死亡激光，双目发射幻影球与噬神之焰。' },
+      { name: '心脏暴露', desc: '三只眼睛依次被打爆后，心脏从额眼洞穴升起——真正的决战开始。' },
+      { name: '终极弹幕', desc: '心脏阶段月触扫射 + 月阵弹幕，弹幕密度全游戏之最。' }
+    ],
+    strategy: [
+      '先打两只手掌眼（HP最低），节奏是"打一眼躲一波"。',
+      '月亮事件期间铺好跑道，四塔Buff期间多备药剂。',
+      '夜明矿+毕业武器全从他身上来——通关的最后一战，也是毕业的开始。'
+    ] },
+
+  { id: 'flying_dutchman', name: '荷兰人号', en: 'Flying Dutchman', tier: 'event', hp: 6000, dmg: 70, def: 20, coins: '10 金',
+    art: 'boss_dutchman', color: '#8B6BB0',
+    spawn: '海盗入侵事件进行到中后期刷新（普通模式即可出现），一次入侵可能刷新多艘',
+    drops: [
+      { id: 'gold_ring', name: '金戒指', rate: '0.2%' },
+      { id: 'lucky_coin', name: '好运币', rate: '0.025%' },
+      { id: 'discount_card', name: '折扣卡', rate: '0.05%' },
+      { id: 'pirate_staff', name: '海盗法杖', rate: '0.05%' }
+    ],
+    phases: [
+      { name: '飞行炮舰', desc: '船体带四门炮台，交替发射炮弹与弹链，血量下降后附加俯冲撞击。' },
+      { name: '炮台破坏', desc: '四座炮台可单独摧毁，全部拆掉后它只能冲撞——威胁大减。' }
+    ],
+    strategy: [
+      '优先拆四座炮台，拆完的荷兰人号就是活靶子。',
+      '海盗入侵前在场地铺两层平台，方便清理小怪。',
+      '掉率虽低但每次入侵刷多艘，是刷海盗四件套的主要途径。'
+    ] },
+
+  { id: 'dreadnautilus', name: '恐惧鹦鹉螺', en: 'Dreadnautilus', tier: 'event', hp: 3500, dmg: 60, def: 18, coins: '2 金',
+    art: 'boss_dreadnautilus', color: '#D04A5A',
+    spawn: '血月期间在任意水域钓鱼，约 10% 概率钓出（难度越高概率越高）',
+    drops: [
+      { id: 'sanguine_staff', name: '血腥法杖', rate: '50%' },
+      { id: 'chum_bucket', name: '血腥鱼饵桶', rate: '100%' }
+    ],
+    phases: [
+      { name: '漂浮炮台', desc: '悬浮冲撞 + 发射环形血弹幕，还会召唤小血乌贼。' },
+      { name: '残血加速', desc: '血量越低冲撞越频繁，弹幕呈螺旋扩散。' }
+    ],
+    strategy: [
+      '血月钓鱼前先搭好水边小平台，钓出后立刻进入战斗状态。',
+      '血腥法杖是召唤师肉后前期最强，值得专门钓一场。',
+      '螺旋弹幕有缝隙，贴身绕圈反而好躲。'
+    ] },
+
+  { id: 'dark_mage', name: '黑暗魔法师', en: 'Dark Mage', tier: 'event', hp: 6000, dmg: 40, def: 0, coins: '3 金',
+    art: 'boss_dark_mage', color: '#7A5AD0',
+    spawn: '撒旦军队（永恒水晶事件）T1 最终波出现；T3 也会作为小 Boss 登场',
+    drops: [
+      { id: 'dragon_egg', name: '龙蛋（宠物）', rate: '约 5%' },
+      { id: 'defender_medal', name: '守护者勋章', rate: '100%' }
+    ],
+    phases: [
+      { name: '传送施法', desc: '瞬移后施放大火球 / 召唤骷髅军团，还会治疗场上友军。' },
+      { name: '围城压力', desc: '本体威胁不大，麻烦的是他一直在奶小怪——优先击杀。' }
+    ],
+    strategy: [
+      '他奶小怪的频率很高，出场就优先集火秒掉。',
+      '大火球飞行慢，横向走位即可躲开。',
+      '撒旦军队用酒馆老板的哨兵塔配合自身输出，容错更高。'
+    ] },
+
+  { id: 'ogre', name: '食人魔', en: 'Ogre', tier: 'event', hp: 8000, dmg: 80, def: 10, coins: '5 金',
+    art: 'boss_ogre', color: '#9B7B4A',
+    spawn: '撒旦军队 T2 最终波出现；T3 也会作为小 Boss 登场',
+    drops: [
+      { id: 'ogre_mask', name: '食人魔面具', rate: '14.3%' },
+      { id: 'defender_medal', name: '守护者勋章', rate: '100%' }
+    ],
+    phases: [
+      { name: '地面重击', desc: '挥舞大棒横扫 + 跳跃砸地，震波范围大。' },
+      { name: '呕吐弹幕', desc: '喷吐污秽球，命中减速——被黏住后极易吃满连招。' }
+    ],
+    strategy: [
+      '保持空中机动，跳跃砸地的震波贴地才有效。',
+      '呕吐物会大幅减速，饰品栏常备"十字章护身符"可免疫。',
+      '他体型大动作慢，远程武器站高台抽血很稳。'
+    ] },
+
+  { id: 'betsy', name: '双足翼龙贝茜', en: 'Betsy', tier: 'event', hp: 32000, dmg: 100, def: 30, coins: '10 金',
+    art: 'boss_betsy', color: '#E06A3C',
+    spawn: '撒旦军队 T3（击败石巨人后）最终波压轴登场',
+    drops: [
+      { id: 'betsys_wrath', name: '贝茜之怒（魔法书）', rate: '25%' },
+      { id: 'aerial_bane', name: '空中祸根（弓）', rate: '25%' },
+      { id: 'ghastly_glaive', name: '可怕骑枪', rate: '25%' },
+      { id: 'flying_dragon', name: '飞龙（剑）', rate: '25%' },
+      { id: 'sky_dragons_fury', name: '天龙之怒', rate: '25%' },
+      { id: 'defender_medal', name: '守护者勋章', rate: '100%' }
+    ],
+    phases: [
+      { name: '空中压制', desc: '盘旋喷吐大范围火焰吐息 + 投掷火球弹幕。' },
+      { name: '俯冲连击', desc: '血量降低后频繁俯冲撞击，落地掀起火焰冲击波。' }
+    ],
+    strategy: [
+      '火焰吐息呈扇形铺开，往她身后绕位最安全。',
+      'T3 掉落五件专属武器全职业覆盖，是酒馆副本的核心奖励。',
+      '她只会出现在最终波，守好水晶别被小怪偷家。'
+    ] },
+
+  { id: 'mourning_wood', name: '哀木', en: 'Mourning Wood', tier: 'event', hp: 9000, dmg: 70, def: 20, coins: '5 金',
+    art: 'boss_mourning_wood', color: '#B85A2A',
+    spawn: '南瓜月（夜间使用"南瓜月勋章"召唤）中后期波次刷新',
+    drops: [
+      { id: 'spooky_wood', name: '诡异木×100+', rate: '100%' },
+      { id: 'necromantic_scroll', name: '死灵卷轴（召唤饰品）', rate: '1%~5%（随波次提升）' },
+      { id: 'stake_launcher', name: '木桩发射器', rate: '1%~5%（随波次提升）' }
+    ],
+    phases: [
+      { name: '喷火树妖', desc: '喷射希腊火弹幕（落地炸开）+ 召唤小怪空降。' },
+      { name: '弹幕加密', desc: '血量越低火焰弹越密，弹道呈抛物线需要预判落点。' }
+    ],
+    strategy: [
+      '火焰弹落地才炸，空中平台是安全区。',
+      '诡异木是召唤师毕业套装材料，多刷几场囤货。',
+      '冲波次时优先打哀木，波次分数涨得最快。'
+    ] },
+
+  { id: 'pumpking', name: '南瓜王', en: 'Pumpking', tier: 'event', hp: 14000, dmg: 90, def: 24, coins: '7 金',
+    art: 'boss_pumpking', color: '#E07020',
+    spawn: '南瓜月最终波（约第 15 波）刷新的小 Boss 之王',
+    drops: [
+      { id: 'horseman', name: '骑士之刃', rate: '1%~7%（随波次提升）' },
+      { id: 'cursed_sapling', name: '受诅咒的树苗（宠物）', rate: '约 5%' },
+      { id: 'pumpking_mask', name: '南瓜王面具', rate: '14.3%' }
+    ],
+    phases: [
+      { name: '双镰挥砍', desc: '两把镰刀交替挥出巨型剑气 + 发射南瓜火焰弹。' },
+      { name: '镰刀狂舞', desc: '残血后镰刀转速加快，剑气连发三道。' }
+    ],
+    strategy: [
+      '剑气是主要伤害来源，垂直位移比横跳更好躲。',
+      '骑士之刃的追踪南瓜是清场神技，值得刷到第 15 波以上。',
+      '南瓜月勋章：南瓜×30 + 灵气×10 + 神圣锭×5 @秘银砧。'
+    ] },
+
+  { id: 'everscream', name: '常绿尖叫怪', en: 'Everscream', tier: 'event', hp: 8000, dmg: 80, def: 20, coins: '5 金',
+    art: 'boss_everscream', color: '#3C9B5A',
+    spawn: '霜月（夜间使用"顽皮礼物"召唤）中后期波次刷新',
+    drops: [
+      { id: 'christmas_tree_sword', name: '圣诞树剑', rate: '1%~7%（随波次提升）' },
+      { id: 'everscream_mask', name: '常绿尖叫怪面具', rate: '14.3%' }
+    ],
+    phases: [
+      { name: '松针弹幕', desc: '发射成排松针 + 召唤玩具挂饰弹幕，弹速快。' },
+      { name: '尖叫冲击', desc: '周期性尖叫释放环形冲击波，近战需要及时后撤。' }
+    ],
+    strategy: [
+      '松针弹幕直线飞行，找缝隙斜向切入。',
+      '他是霜月三个小 Boss 里最脆的，优先击杀冲波次。',
+      '玩具挂饰会追踪，别站桩输出。'
+    ] },
+
+  { id: 'santa_nk1', name: '圣诞坦克NK1', en: 'Santa-NK1', tier: 'event', hp: 8000, dmg: 70, def: 20, coins: '5 金',
+    art: 'boss_santa_nk1', color: '#4A9BD0',
+    spawn: '霜月中后期波次刷新',
+    drops: [
+      { id: 'chain_gun', name: '链枪', rate: '1%~7%（随波次提升）' },
+      { id: 'elf_melter', name: '精灵熔化器', rate: '1%~7%（随波次提升）' },
+      { id: 'santa_nk1_mask', name: '圣诞坦克面具', rate: '14.3%' }
+    ],
+    phases: [
+      { name: '火力全开', desc: '弹链扫射 + 追踪导弹 + 礼物炸弹三套弹幕轮转。' },
+      { name: '过载模式', desc: '残血后更换弹药类型，弹幕密度明显提升。' }
+    ],
+    strategy: [
+      '导弹会追踪，用环绕走位慢慢磨掉。',
+      '链枪是肉后射手顶级机枪，多刷几场值得。',
+      '礼物炸弹落地有爆炸范围，保持空中。'
+    ] },
+
+  { id: 'ice_queen', name: '冰雪女王', en: 'Ice Queen', tier: 'event', hp: 17000, dmg: 90, def: 26, coins: '7 金',
+    art: 'boss_ice_queen', color: '#5AC8E8',
+    spawn: '霜月最终波（约第 15 波+）刷新的最终 Boss',
+    drops: [
+      { id: 'blizzard_staff', name: '暴雪法杖', rate: '1%~7%（随波次提升）' },
+      { id: 'snowman_cannon', name: '雪人炮', rate: '1%~7%（随波次提升）' },
+      { id: 'ice_queen_mask', name: '冰雪女王面具', rate: '14.3%' }
+    ],
+    phases: [
+      { name: '旋转冰弹', desc: '悬浮旋转喷射冰锥弹幕 + 冰霜冲击波。' },
+      { name: '暴风冲刺', desc: '血量降低后高频俯冲，冰弹呈扇形连发。' }
+    ],
+    strategy: [
+      '她悬浮高处，用高平台或翅膀保持同高度输出。',
+      '暴雪法杖是法师顶级清场武器，冲到 15 波以上掉率更高。',
+      '霜月与南瓜月机制相同：波次越高掉率越高，冲波是核心。'
+    ] },
+
+  { id: 'martian_saucer', name: '火星飞碟', en: 'Martian Saucer', tier: 'event', hp: '15000（+四炮塔）', dmg: 90, def: 30, coins: '12 金',
+    art: 'boss_martian_saucer', color: '#5AB05A',
+    spawn: '火星暴乱事件（火星探测器发现你并逃走后触发）后期波次刷新',
+    drops: [
+      { id: 'xeno_staff', name: '异星法杖', rate: '1/9' },
+      { id: 'laser_machinegun', name: '激光机枪', rate: '1/9' },
+      { id: 'electrosphere_launcher', name: '电球发射器', rate: '1/9' },
+      { id: 'charged_blaster_cannon', name: '充能爆破炮', rate: '1/9' },
+      { id: 'anti_gravity_hook', name: '反重力钩爪', rate: '1/9' },
+      { id: 'cosmic_car_key', name: '宇宙车钥匙（UFO 坐骑）', rate: '1/9' }
+    ],
+    phases: [
+      { name: '炮塔阶段', desc: '四座炮塔分别发射激光与导弹，本体无敌。' },
+      { name: '本体阶段', desc: '炮塔全毁后暴露核心，死亡激光扫射 + 高速冲撞。' }
+    ],
+    strategy: [
+      '先集中拆四座炮塔，核心阶段才是输出窗口。',
+      '死亡激光伤害极高，保持垂直机动别贪输出。',
+      'UFO 坐骑是无限飞行的毕业坐骑，必刷。'
+    ] },
+
+  { id: 'mechdusa', name: '机械美杜莎', en: 'Mechdusa', tier: 'mech', hp: '159,000+（三王合计）', dmg: 90, def: 34, coins: '36 金',
+    art: 'boss_mechdusa', color: '#9B59D0',
+    spawn: '仅"终极世界"（getfixedboi）种子：夜间使用"奥库瑞姆剃刀"召唤（机械骷髅头+机械魔眼+机械蠕虫 @秘银/山铜砧合成）；砸祭坛后黄昏有 5% 概率自然生成（三王未全灭时）',
+    drops: [
+      { id: 'waffle_iron', name: '华夫饼烘烤模（专属武器）', rate: '100%' },
+      { id: 'hallowed_bar', name: '神圣锭×41~165（三份合计）', rate: '100%' },
+      { id: 'soul_fright', name: '恐惧之魂（机械骷髅袋）', rate: '100%' },
+      { id: 'soul_sight', name: '视域之魂（双子袋）', rate: '100%' },
+      { id: 'soul_might', name: '力量之魂（毁灭者袋）', rate: '100%' },
+      { id: 'treasure_bag', name: '机械三王宝袋×3（含矿车组件，可合成机械矿车）', rate: '100%' }
+    ],
+    phases: [
+      { name: '三位一体', desc: '机械骷髅王的头 + 毁灭者的蠕虫身体 + 双子魔眼作为"眼睛"同时出场，各部位保留独立血条与攻击模式。' },
+      { name: '部位分离', desc: '若先击毁机械骷髅头，双子眼会脱离躯体独立飞行，战场瞬间变成"一条巨蠕虫+两只暴走眼球"。' },
+      { name: '终局', desc: '三个部位全部消灭才算胜利，掉落三份完整战利品。' }
+    ],
+    strategy: [
+      '击杀顺序是关键：先打毁灭者身体和双子魔眼，最后处理机械骷髅头，避免眼球分离暴走。',
+      '毁灭者身体是穿透武器提款机：链条枪/磁球一发一串伤害。',
+      '在开阔高空搭大型三层平台，弹幕密度是三场战斗同时进行，别在窄洞里打。',
+      '一场战斗=三份机械三王掉落，效率党直接用它跳过三场单独战斗。'
+    ] }
+]

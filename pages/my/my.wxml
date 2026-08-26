@@ -1,0 +1,161 @@
+<view class="page-root {{themeClass}} my-root">
+
+  <!-- 顶部：头像 + 昵称 + 等级 -->
+  <view class="hero" style="padding-top:{{navTop}}px;">
+    <view class="hero-in">
+      <view class="ava card card-gold" bindtap="openAvas">
+        <pixel-icon art-id="{{avatarArtId}}" size="132" />
+        <view class="ava-edit px">改</view>
+      </view>
+      <view class="col flex-1">
+        <view class="row" wx:if="{{!editingNick}}" bindtap="startEditNick">
+          <text class="nick">{{profile.nick}}</text>
+          <text class="nick-edit">✎</text>
+        </view>
+        <view class="row" wx:else>
+          <input class="nick-input" value="{{nickDraft}}" bindinput="onNick" focus maxlength="12" />
+          <view class="btn-gold nick-save" bindtap="saveNick">保存</view>
+        </view>
+        <view class="lv-line">
+          <text class="lv px">Lv.{{level.lv}}</text>
+          <text class="lv-title">{{level.title}}</text>
+        </view>
+        <view class="lv-bar">
+          <view class="lv-fill" style="width: {{level.cur / level.need * 100}}%;" />
+        </view>
+        <text class="lv-tip">冒险值 {{level.cur}}/{{level.need}} · 启动/收藏/笔记都能成长</text>
+        <view class="card-share tappable" bindtap="openPoster">▣ 生成冒险者名片</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 我的收藏 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">我的收藏</text>
+    <text class="more px">{{favCount}} 项</text>
+  </view>
+  <view class="fav-tabs">
+    <view class="chip {{favTab === 'all' ? 'on' : ''}}" bindtap="onFavTab" data-k="all">全部</view>
+    <view class="chip {{favTab === 'item' ? 'on' : ''}}" bindtap="onFavTab" data-k="item">物品</view>
+    <view class="chip {{favTab === 'mon' ? 'on' : ''}}" bindtap="onFavTab" data-k="mon">敌怪</view>
+    <view class="chip {{favTab === 'boss' ? 'on' : ''}}" bindtap="onFavTab" data-k="boss">Boss</view>
+    <view class="chip {{favTab === 'strategy' ? 'on' : ''}}" bindtap="onFavTab" data-k="strategy">攻略</view>
+    <view class="chip {{favTab === 'npc' ? 'on' : ''}}" bindtap="onFavTab" data-k="npc">NPC</view>
+  </view>
+  <view class="fav-list" wx:if="{{favs.length}}">
+    <view class="fav-item card tappable" wx:for="{{favs}}" wx:key="id"
+      wx:if="{{favTab === 'all' || item.type === favTab}}"
+      bindtap="onFavTap" data-id="{{item.id}}">
+      <view class="f-art" style="box-shadow: 0 0 14rpx {{item.glow}}55;">
+        <pixel-icon art-id="{{item.artId}}" size="64" />
+      </view>
+      <text class="f-name flex-1">{{item.name}}</text>
+      <text class="tag {{item.tagCls}}">{{item.label}}</text>
+      <text class="f-del" catchtap="onFavRemove" data-id="{{item.id}}">✕</text>
+    </view>
+  </view>
+  <view class="empty" wx:else>
+    <view class="e-icon">📦</view>
+    <text>还没有收藏，去图鉴或攻略页点击收藏吧</text>
+  </view>
+
+  <!-- 我的笔记 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">我的笔记</text>
+    <text class="more" bindtap="newNote">＋ 新笔记</text>
+  </view>
+  <view class="note-list" wx:if="{{notes.length}}">
+    <view class="note card" wx:for="{{notes}}" wx:key="id">
+      <view class="row">
+        <text class="n-title flex-1" bindtap="editNote" data-id="{{item.id}}">{{item.title}}</text>
+        <text class="n-del" catchtap="delNote" data-id="{{item.id}}">🗑</text>
+      </view>
+      <text class="n-content" bindtap="editNote" data-id="{{item.id}}">{{item.content}}</text>
+      <text class="n-time px">{{item.time}}</text>
+    </view>
+  </view>
+  <view class="empty" wx:else>
+    <view class="e-icon">📓</view>
+    <text>记录你的开荒心得、Boss 打法</text>
+  </view>
+
+  <!-- 设置 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">设置</text></view>
+  <view class="set card">
+    <view class="set-row">
+      <view class="col">
+        <text class="s-n">游戏版本</text>
+        <text class="s-d">切换数据基准版本</text>
+      </view>
+      <view class="ver px">
+        <text class="{{version === '1.4.4' ? 'on' : ''}}" bindtap="onVersion" data-v="1.4.4">1.4.4</text>
+        <text class="sep">/</text>
+        <text class="{{version === '1.4.5' ? 'on' : ''}}" bindtap="onVersion" data-v="1.4.5">1.4.5</text>
+      </view>
+    </view>
+    <view class="hr" />
+    <view class="set-row">
+      <view class="col">
+        <text class="s-n">夜间模式</text>
+        <text class="s-d">暗黑奇幻 / 白昼卷轴</text>
+      </view>
+      <switch checked="{{dark}}" bindchange="onTheme" color="#FFD700" />
+    </view>
+    <view class="hr" />
+    <view class="set-row" bindtap="openAbout">
+      <view class="col">
+        <text class="s-n">关于与反馈</text>
+        <text class="s-d">版本说明 · 数据来源</text>
+      </view>
+      <text class="s-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="foot px">TERRA HANDBOOK · v1.0</view>
+  <view class="pad-bottom" />
+
+  <!-- 头像选择 -->
+  <view class="mask" wx:if="{{showAvas}}" bindtap="closeAvas" />
+  <view class="sheet" wx:if="{{showAvas}}" catchtap="noop">
+    <view class="sheet-handle" />
+    <view class="ava-grid">
+      <view class="ava-cell card tappable {{profile.avatar === item.k ? 'on' : ''}}"
+        wx:for="{{avatars}}" wx:key="k" bindtap="pickAva" data-k="{{item.k}}">
+        <pixel-icon art-id="{{item.k}}" size="100" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 笔记编辑 -->
+  <view class="mask" wx:if="{{noteDraft}}" bindtap="closeNote" />
+  <view class="sheet" wx:if="{{noteDraft}}" catchtap="noop">
+    <view class="sheet-handle" />
+    <view class="note-edit">
+      <input class="input-dark ne-title" placeholder="笔记标题" placeholder-class="ph"
+        value="{{noteTitle}}" bindinput="onNoteTitle" maxlength="30" />
+      <textarea class="input-dark ne-content" placeholder="写下你的冒险心得..." placeholder-class="ph"
+        value="{{noteContent}}" bindinput="onNoteContent" maxlength="500" auto-height />
+      <view class="row ne-btns">
+        <view class="btn-ghost flex-1 ne-btn" bindtap="closeNote">取消</view>
+        <view class="btn-gold flex-1 ne-btn" style="margin-left: 20rpx;" bindtap="saveNote">保存</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="mask" wx:if="{{showAbout}}" bindtap="closeAbout" />
+  <view class="sheet" wx:if="{{showAbout}}" catchtap="noop">
+    <view class="sheet-handle" />
+    <view class="about">
+      <view class="ab-logo"><pixel-icon art-id="{{avatarArtId}}" size="120" /></view>
+      <text class="ab-t px">TERRA HANDBOOK</text>
+      <text class="ab-v">v1.0 · 数据基准 Terraria {{version}}</text>
+      <view class="hr" />
+      <text class="ab-line">· 图鉴 / 合成 / 攻略数据参考泰拉瑞亚 Wiki（1.4.4 基准）</text>
+      <text class="ab-line">· 本小程序为玩家自制学习作品，与 Re-Logic 无关</text>
+      <text class="ab-line">· 反馈建议：在各大应用市场或微信"关于"中留言</text>
+      <view class="btn-gold ab-btn" bindtap="closeAbout">继续冒险</view>
+    </view>
+  </view>
+
+  <!-- 分享海报（冒险者名片） -->
+  <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
+</view>

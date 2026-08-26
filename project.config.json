@@ -1,0 +1,29 @@
+{
+  "setting": {
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "uglifyFileName": false,
+    "enhance": true,
+    "packNpmRelationList": [],
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useCompilerPlugins": false,
+    "minifyWXML": true
+  },
+  "compileType": "miniprogram",
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [
+      { "type": "regexp", "value": "guide_avatar.*\\.png" },
+      { "type": "regexp", "value": "^(debug-deflate|test-png|_pycheck)\\.js$" },
+      { "type": "folder", "value": "泰拉瑞亚_设计素材" }
+    ],
+    "include": []
+  },
+  "appid": "wx5a9042fd5b6c1e66",
+  "editorSetting": {}
+}

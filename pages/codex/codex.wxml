@@ -1,0 +1,202 @@
+<view class="page-root {{themeClass}} codex-root">
+
+  <!-- 顶部：搜索 + 过滤标签 -->
+  <view class="head" style="padding-top:{{navTop}}px;">
+    <view class="search-row">
+      <view class="search-bar">
+        <text class="s-ico">🔍</text>
+        <input class="s-input" placeholder="搜索名称（中/英文）" placeholder-class="ph"
+          value="{{kw}}" bindinput="onKw" confirm-type="search" />
+        <text class="s-clear" wx:if="{{kw}}" bindtap="clearKw">✕</text>
+      </view>
+      <view class="poster-fab tappable" bindtap="openPoster">▣</view>
+    </view>
+
+    <view class="tabs">
+      <view class="chip {{tab === item.k ? 'on' : ''}}" wx:for="{{tabs}}" wx:key="k"
+        bindtap="onTab" data-k="{{item.k}}">{{item.n}}</view>
+    </view>
+
+    <!-- 联想下拉 -->
+    <view class="suggest card pop-in" wx:if="{{suggests.length}}">
+      <view class="sg-item" wx:for="{{suggests}}" wx:key="id" bindtap="onSuggestTap" data-id="{{item.id}}">
+        <view class="sg-art" style="box-shadow: 0 0 14rpx {{item.glow}}55;">
+          <pixel-icon art-id="{{item.artId}}" size="64" />
+        </view>
+        <view class="col flex-1">
+          <view class="r-line">
+            <text class="sg-name">{{item.name}}</text>
+            <text class="sg-tags px" wx:if="{{item.tagsTxt}}">{{item.tagsTxt}}</text>
+          </view>
+          <text class="sg-en px">{{item.en}}</text>
+        </view>
+        <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : (item.type === 'seed' ? 'tag-seed' : (item.type === 'npc' ? 'tag-npc' : 'tag-item')))}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</text>
+      </view>
+    </view>
+
+    <!-- 二级分类筛选栏（随头部固定） -->
+    <scroll-view class="cats" scroll-x enhanced show-scrollbar="{{false}}" wx:if="{{cats.length > 1}}">
+      <view class="cats-in">
+        <view class="chip {{cat === item.k ? 'on' : ''}}" wx:for="{{cats}}" wx:key="n"
+          bindtap="onCat" data-k="{{item.k}}">{{item.n}}</view>
+      </view>
+    </scroll-view>
+
+    <!-- 头部底缘渐隐，衔接下方内容 -->
+    <view class="head-fade" />
+  </view>
+
+  <!-- 主体：两列瀑布流 + 右侧字母索引 -->
+  <view class="body">
+    <view class="masonry fade-in">
+      <view class="m-col">
+        <block wx:for="{{list}}" wx:key="id">
+          <view class="card m-card tappable" wx:if="{{index % 2 === 0}}"
+            bindtap="onCardTap" bindlongpress="onCardLong" data-id="{{item.id}}">
+            <view class="m-glow" style="background: radial-gradient(circle at 50% 38%, {{item.glow}}3D 0%, transparent 68%);" />
+            <view class="m-art"><pixel-icon art-id="{{item.artId}}" size="112" /></view>
+            <view class="col">
+              <text class="m-name">{{item.name}}</text>
+              <text class="m-en px" wx:if="{{item.en}}">{{item.en}}</text>
+            </view>
+            <view class="m-type {{item.type}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</view>
+          </view>
+        </block>
+      </view>
+      <view class="m-col">
+        <block wx:for="{{list}}" wx:key="id">
+          <view class="card m-card tappable" wx:if="{{index % 2 === 1}}"
+            bindtap="onCardTap" bindlongpress="onCardLong" data-id="{{item.id}}">
+            <view class="m-glow" style="background: radial-gradient(circle at 50% 38%, {{item.glow}}3D 0%, transparent 68%);" />
+            <view class="m-art"><pixel-icon art-id="{{item.artId}}" size="112" /></view>
+            <view class="col">
+              <text class="m-name">{{item.name}}</text>
+              <text class="m-en px" wx:if="{{item.en}}">{{item.en}}</text>
+            </view>
+            <view class="m-type {{item.type}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{!list.length}}">
+      <view class="e-icon">🕳️</view>
+      <text>没有匹配的条目，换个关键词试试</text>
+    </view>
+
+    <!-- 字母索引 -->
+    <view class="abc">
+      <view class="abc-i {{letter === l ? 'on' : ''}}" wx:for="{{letters}}" wx:for-item="l" wx:key="*this"
+        bindtap="onLetter" data-l="{{l}}">{{l === '#' ? '·' : l}}</view>
+    </view>
+  </view>
+
+  <view class="count px">TOTAL {{total}}</view>
+  <view class="pad-bottom" />
+
+  <!-- 半屏详情弹窗 -->
+  <view class="mask" wx:if="{{sheet}}" bindtap="closeSheet" />
+  <view class="sheet" wx:if="{{sheet}}" catchtap="noop">
+    <view class="sheet-handle" bindtap="closeSheet" />
+    <view class="sh-head">
+      <view class="sh-art" style="box-shadow: 0 0 30rpx {{sheet.glow}}66;">
+        <pixel-icon art-id="{{sheet.artId}}" size="140" />
+      </view>
+      <view class="col flex-1">
+        <view class="row">
+          <text class="sh-name">{{sheet.name}}</text>
+          <text class="tag {{sheet.type === 'boss' ? 'tag-boss' : (sheet.type === 'mon' ? 'tag-mon' : (sheet.type === 'seed' ? 'tag-seed' : (sheet.type === 'npc' ? 'tag-npc' : 'tag-item')))}} sh-tag">
+            {{sheet.type === 'boss' ? 'BOSS' : (sheet.type === 'mon' ? '敌怪' : (sheet.type === 'seed' ? '种子' : (sheet.type === 'npc' ? 'NPC' : '物品')))}}</text>
+        </view>
+        <text class="sh-en px">{{sheet.en}}</text>
+      </view>
+    </view>
+
+    <scroll-view class="sh-body" scroll-y>
+      <view class="sh-desc" wx:if="{{sheet.desc}}">{{sheet.desc}}</view>
+
+      <view class="stat-grid" wx:if="{{sheet.stats.length}}">
+        <view class="stat card" wx:for="{{sheet.stats}}" wx:key="index">
+          <text class="st-k">{{item[0]}}</text>
+          <text class="st-v">{{item[1]}}</text>
+        </view>
+      </view>
+
+      <view class="sh-sec" wx:if="{{sheet.obtain}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">{{sheet.obtainTitle}}</text></view>
+        <text class="sh-line">{{sheet.obtain}}</text>
+      </view>
+
+      <!-- NPC：服务说明 -->
+      <view class="sh-sec" wx:if="{{sheet.shopNote}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">服务说明</text></view>
+        <text class="sh-line">{{sheet.shopNote}}</text>
+      </view>
+
+      <!-- NPC：售卖商品 -->
+      <block wx:if="{{sheet.shop.length}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">售卖商品</text></view>
+        <view class="shop card" wx:for="{{sheet.shop}}" wx:key="n">
+          <view class="sp-head">
+            <text class="sp-n">{{item.n}}</text>
+            <text class="sp-p px">{{item.p}}</text>
+          </view>
+          <text class="sp-d">{{item.d}}</text>
+        </view>
+      </block>
+
+      <block wx:if="{{sheet.drops.length}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">掉落物</text></view>
+        <view class="drop card" wx:for="{{sheet.drops}}" wx:key="name">
+          <text class="d-n">{{item.name}}</text>
+          <text class="d-r px">{{item.rate}}</text>
+        </view>
+      </block>
+
+      <block wx:if="{{sheet.phases.length}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">阶段</text></view>
+        <view class="phase card" wx:for="{{sheet.phases}}" wx:key="name">
+          <text class="p-n">{{item.name}}</text>
+          <text class="p-d">{{item.desc}}</text>
+        </view>
+      </block>
+
+      <block wx:if="{{sheet.mechanics.length}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">机制差异</text></view>
+        <view class="tip card" wx:for="{{sheet.mechanics}}" wx:key="*this">
+          <text class="tip-i px">{{index + 1}}</text>
+          <text class="tip-t">{{item}}</text>
+        </view>
+      </block>
+
+      <block wx:if="{{sheet.exclusives.length}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">专属内容</text></view>
+        <view class="phase card" wx:for="{{sheet.exclusives}}" wx:key="name">
+          <text class="p-n">{{item.name}}</text>
+          <text class="p-d">{{item.note}}</text>
+        </view>
+      </block>
+
+      <block wx:if="{{sheet.use}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">用途</text></view>
+        <text class="sh-line">{{sheet.use}}</text>
+      </block>
+
+      <block wx:if="{{sheet.strategy.length && sheet.strategy[0]}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">冒险要诀</text></view>
+        <view class="tip card" wx:for="{{sheet.strategy}}" wx:key="*this" wx:if="{{item}}">
+          <text class="tip-i px">{{index + 1}}</text>
+          <text class="tip-t">{{item}}</text>
+        </view>
+      </block>
+    </scroll-view>
+
+    <view class="sh-btns safe-bottom">
+      <view class="btn-ghost sh-btn" bindtap="sheetFavToggle">{{sheetFav ? '★ 已收藏' : '☆ 收藏'}}</view>
+      <view class="btn-gold sh-btn" bindtap="sheetFull">查看完整详情</view>
+    </view>
+  </view>
+
+  <!-- 分享海报 -->
+  <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
+</view>

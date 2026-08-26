@@ -1,0 +1,121 @@
+<view class="page-root {{themeClass}} prefixes-root">
+
+  <!-- 顶部：返回 + 标题（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">词条图鉴</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头部统计 -->
+  <view class="hero">
+    <view class="hero-art floaty"><pixel-icon art-id="tab_anvil_on" size="120" /></view>
+    <view class="col flex-1">
+      <text class="hero-t px">REFORGE PREFIX</text>
+      <text class="hero-s">传说 · 虚幻 · 神话 · 凶残 · 庇护</text>
+      <text class="hero-stat px">{{wTotal}} 个武器词条 · 4 系 16 档饰品词条</text>
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view class="cat-scroll" scroll-x enable-flex enhanced show-scrollbar="{{false}}">
+    <view class="chip {{cat === item.k ? 'on' : ''}}" wx:for="{{cats}}" wx:key="k"
+      bindtap="onCat" data-k="{{item.k}}">{{item.n}}</view>
+  </scroll-view>
+
+  <!-- 武器词条卡片 -->
+  <view class="sec-list">
+    <view class="p-card card tappable {{item.bad ? 'bad' : ''}}" wx:for="{{list}}" wx:key="id"
+      bindtap="onCard" data-id="{{item.id}}">
+      <view class="pc-top">
+        <view class="pc-art"><pixel-icon art-id="{{item.art}}" size="88" /></view>
+        <view class="col flex-1">
+          <view class="row pc-name-row">
+            <text class="pc-name">{{item.name}}</text>
+            <text class="pc-en px">{{item.en}}</text>
+            <text class="tag {{item.cat === 'best' ? 'tag-best' : (item.cat === 'bad' ? 'tag-bad' : 'tag-common')}}">{{item.catName}}</text>
+          </view>
+          <text class="pc-cls">{{item.clsName}}适用</text>
+        </view>
+      </view>
+      <view class="row pc-stats">
+        <view class="stat {{item.bad ? 'down' : 'up'}}" wx:for="{{item.stats}}" wx:for-item="st" wx:key="index">
+          <text class="stat-l">{{st[0]}}</text>
+          <text class="stat-v">{{st[1]}}</text>
+        </view>
+      </view>
+      <text class="pc-note">{{item.note}}</text>
+    </view>
+  </view>
+
+  <!-- 饰品词条 -->
+  <block wx:if="{{showAcc}}">
+    <view class="sec-title"><view class="diamond" /><text class="t">饰品词条 · 四系成长</text></view>
+    <view class="acc-card card" wx:for="{{accLines}}" wx:key="key" wx:for-item="line">
+      <view class="row acc-head">
+        <view class="acc-ico"><pixel-icon art-id="{{line.icon}}" size="72" /></view>
+        <view class="col flex-1">
+          <view class="row acc-title-row">
+            <text class="acc-name">{{line.name}}</text>
+            <text class="acc-best px">毕业 · {{line.best}}</text>
+          </view>
+          <text class="acc-desc">{{line.desc}}</text>
+        </view>
+      </view>
+      <view class="row acc-tiers">
+        <view class="tier {{t.best ? 'top' : ''}}" wx:for="{{line.tiers}}" wx:for-item="t" wx:key="en">
+          <text class="tier-name">{{t.name}}</text>
+          <text class="tier-en px">{{t.en}}</text>
+          <text class="tier-val">{{t.val}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 重铸指南 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">重铸指南</text></view>
+  <view class="tip card" wx:for="{{tips}}" wx:key="t">
+    <view class="tip-head">
+      <text class="tip-i px">?</text>
+      <text class="tip-t">{{item.t}}</text>
+    </view>
+    <text class="tip-d">{{item.d}}</text>
+  </view>
+
+  <view class="foot safe-bottom">
+    <text class="foot-t px">REROLL UNTIL LEGENDARY</text>
+  </view>
+
+  <!-- 详情弹窗 -->
+  <view class="mask" wx:if="{{sheet}}" bindtap="closeSheet" />
+  <view class="sheet" wx:if="{{sheet}}" catchtap="noop">
+    <view class="sheet-handle" bindtap="closeSheet" />
+    <view class="sh-head">
+      <view class="sh-art"><pixel-icon art-id="{{sheet.art}}" size="120" /></view>
+      <view class="col flex-1">
+        <view class="row pc-name-row">
+          <text class="sh-title">{{sheet.name}}</text>
+          <text class="pc-en px">{{sheet.en}}</text>
+        </view>
+        <view class="row sh-tags">
+          <text class="tag {{sheet.bad ? 'tag-bad' : 'tag-best'}}">{{sheet.catName}}</text>
+          <text class="sh-cls">{{sheet.clsName}}适用</text>
+        </view>
+      </view>
+    </view>
+
+    <scroll-view class="sh-body" scroll-y>
+      <view class="row pc-stats sh-stats">
+        <view class="stat {{sheet.bad ? 'down' : 'up'}}" wx:for="{{sheet.stats}}" wx:for-item="st" wx:key="index">
+          <text class="stat-l">{{st[0]}}</text>
+          <text class="stat-v">{{st[1]}}</text>
+        </view>
+      </view>
+      <text class="sh-note">{{sheet.note}}</text>
+      <view class="sh-detail card">
+        <text class="sh-d-t">{{sheet.detail}}</text>
+      </view>
+      <view class="sh-pad" />
+    </scroll-view>
+  </view>
+</view>

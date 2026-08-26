@@ -1,0 +1,483 @@
+// Boss 像素立绘（16×16）、Tab 图标与头像
+const { A, reg } = require('./pixelart')
+
+/* ===== 史莱姆王 ===== */
+reg('boss_king_slime', A(16, 16, {
+  G: '#FFD700', b: '#4A6DE0', L: '#8CA8FF', k: '#1A1040', d: '#2E48A8'
+}, [
+  '......G.G.G.....',
+  '.....GGGGG......',
+  '.....GGGGG......',
+  '....bbbbbbbb....',
+  '...bbbbbbbbbb...',
+  '..bbbbbbbbbbbb..',
+  '..bbLbbbbbbbb...',
+  '.bbbLbbbbbbbbd..',
+  '.bbkkbbbbbbkkb..',
+  '.bbkkbbbbbbkkb..',
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbLbbbbbbdbb.',
+  '.bbbbbbbbbbbbb..',
+  '..bbbbbbbbbbbb..',
+  '....bbbbbbbb....',
+  '................'
+]))
+
+/* ===== 克苏鲁之眼 ===== */
+reg('boss_eye_cthulhu', A(16, 16, {
+  w: '#F0EDE8', v: '#D86060', R: '#C43030', g: '#58E888', k: '#0E4020'
+}, [
+  '.....wwwwww.....',
+  '...wwwwwwwwww...',
+  '..wwvwwwwwwvww..',
+  '..wvvwwwwwwvvw..',
+  '.wwvvwwwwwwvvww.',
+  '.wwvRRRRRRRRvww.',
+  'wwwvRRRggRRRvwww',
+  'wwwvRRggkgRRvwww',
+  'wwwvRRggkgRRvwww',
+  '.wwvRRRggRRRvww.',
+  '.wwvvRRRRRRvvww.',
+  '..wvvwwwwwwvvw..',
+  '..wwvwwwwwwvww..',
+  '...wwwwwwwwww...',
+  '.....wwwwww.....',
+  '................'
+]))
+
+/* ===== 世界吞噬者 ===== */
+reg('boss_eater_worlds', A(16, 16, {
+  p: '#7A5AD0', d: '#4A3898', k: '#2A1850', t: '#F0EDE8', L: '#A88CE8'
+}, [
+  '....pppppppp....',
+  '...pppppppppp...',
+  '..ppLpppppplpp..',
+  '..pppppppppppp..',
+  '..ppkkppppkkpp..',
+  '..ppkkppppkkpp..',
+  '.pppppppppppppp.',
+  '.ppLppppppppLpp.',
+  '.pptptptptptpp..',
+  '.pppppppppppppp.',
+  '..pppppddppppp..',
+  '...pppppppppp...',
+  '..pppppppppppp..',
+  '..pppppddppppp..',
+  '...pppppppppp...',
+  '....dddddddd....'
+]))
+
+/* ===== 克苏鲁之脑 ===== */
+reg('boss_brain_cthulhu', A(16, 16, {
+  p: '#F27E8C', C: '#C85568', w: '#FFE4E8', v: '#FFFFFF'
+}, [
+  '...ppp....ppp...',
+  '..pppppppppppp..',
+  '.pppppppppppppp.',
+  '.pppCCppppCCppp.',
+  'pppppCppppCppppp',
+  'ppCppppppppppCpp',
+  'ppppppCwwCpppppp',
+  'ppppppwvvwpppppp',
+  'ppppppCwwCpppppp',
+  '.ppppppCwwCpppp.',
+  '.pppCCppppCCppp.',
+  '..pppppppppppp..',
+  '...pppppppppp...',
+  '....pppppppp....',
+  '.....pppppp.....',
+  '................'
+]))
+
+/* ===== 蜂王 ===== */
+reg('boss_queen_bee', A(16, 16, {
+  G: '#FFD700', y: '#F2C94C', B: '#2A2A1A', w: 'rgba(255,255,255,0.65)',
+  k: '#1A0A20', t: '#4A3A18'
+}, [
+  '......GGGG......',
+  '.....GGGGGG.....',
+  '.....yyyyyy.....',
+  '....ykkyykky....',
+  '..wwyyyyyyyyww..',
+  '.wwwyyBBBByywww.',
+  '.wwwyBBBBBBywww.',
+  '.wwyyBBBByyywww.',
+  '..wwyyBBBByyww..',
+  '...yyyyyyyyyy...',
+  '....yyBByyBB....',
+  '....yyyyyyyy....',
+  '.....tttt.......',
+  '......tt........',
+  '................',
+  '................'
+]))
+
+/* ===== 骷髅王 ===== */
+reg('boss_skeletron', A(16, 16, {
+  w: '#E8E4D8', k: '#1A0A20', r: '#E85555', d: '#B8B0A0'
+}, [
+  '....wwwwwwww....',
+  '...wwwwwwwwww...',
+  '..wwwwwwwwwwww..',
+  '..wkkwwwwwwkkw..',
+  '..wkrwwwwwwrkw..',
+  '..wkkwwwwwwkkw..',
+  '..wwwwwkkwwwww..',
+  '..wwwwwwwwwwww..',
+  '...wwwwwwwwww...',
+  '...wkwkwwkwkw...',
+  '...wwwwwwwwww...',
+  '....w.w..w.w....',
+  '...wd.w..w.dw...',
+  '................',
+  '................',
+  '................'
+]))
+
+/* ===== 独眼巨鹿 ===== */
+reg('boss_deerclops', A(16, 16, {
+  a: '#D8C8A8', A: '#B8A480', d: '#5A4A3A', D: '#3A2E24',
+  c: '#4CE0E0', k: '#0A2A2A', t: '#E8E4D8'
+}, [
+  '..a...a..a...a..',
+  '..aa.aa.aa.aa...',
+  '...aa.aAAa.aa...',
+  '....aAAAAAAa....',
+  '...dddddddddd...',
+  '..dddddddddddd..',
+  '..ddkkddddkkdd..',
+  '.dddkcccccKddd..'.replace('K', 'k'),
+  '.dddkcCccckddd..'.replace('C', 'c'),
+  '.ddddkkkkkdddd..',
+  '.ddddddddddddd..',
+  '..dddDtDtDddd...',
+  '..dddddddddd....',
+  '...dddddddd.....',
+  '................',
+  '................'
+]))
+
+/* ===== 血肉墙 ===== */
+reg('boss_wall_flesh', A(16, 16, {
+  f: '#A03838', F: '#C86060', w: '#F0EDE8', R: '#8B0000',
+  k: '#3A0E0E', t: '#E8D8C8'
+}, [
+  'ffffffffffffffff',
+  'fFffffFfffFfffFf',
+  'fFffwwwfffwwwffF',
+  'fffwwRwfffwwRwff',
+  'fffwkRwfffwkRwff',
+  'fFffwwwfffwwwffF',
+  'ffffffffffFfffff',
+  'fFffffffffffffFf',
+  'ffffffkkkkffffff',
+  'ffftkttkttkttkff',
+  'fftkttkttkttktff',
+  'fffffkkkkkffffFf',
+  'ffffffffffffffff',
+  'fFffffFfffFfffff',
+  'ffffffffffffffff',
+  'ffffffffffffffff'
+]))
+
+/* ===== 史莱姆皇后 ===== */
+reg('boss_queen_slime', A(16, 16, {
+  G: '#FFD700', b: '#F08CD8', L: '#FFC8F0', k: '#3A1040', d: '#C860B0', s: '#FFFFFF'
+}, [
+  '......G.G.G.....',
+  '.....GGGGG......',
+  '.....GGGGG......',
+  '....bbbbbbbb....',
+  '...bbbbbbbbbb...',
+  '..bsbbbbbbbbbb..',
+  '..bbLbbbbbbsb...',
+  '.bbbLbbbbbbbbb..',
+  '.bbkkbbbbbbkkb..',
+  '.bbkkbbbbbbkkb..',
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbLbbbbbbdbb.',
+  '.bbbbbbbbbbbbb..',
+  '..bbbbbbbbbbbb..',
+  '....bbbbbbbb....',
+  '................'
+]))
+
+/* ===== 双子魔眼 ===== */
+reg('boss_twins', A(16, 16, {
+  m: '#8A90A8', w: '#F0EDE8', R: '#E85555', r: '#8B0000',
+  G: '#58E888', g: '#0E4020', d: '#565B70'
+}, [
+  '..mmmm..mmmm....',
+  '.mmmmm..mmmmm...',
+  '.mwwwm..mwwwm...',
+  'mwwwwwmmwwwwwm..',
+  'mwRRRwmwwGGGwm..',
+  'mwRrRRwwwGgGwm..',
+  'mwRrRRwwwGgGwm..',
+  'mwRRRwmwwGGGwm..',
+  'mwwwwwmmwwwwwm..',
+  '.mwwwm..mwwwm...',
+  '.mmddd..mmddm...',
+  '..ddd....ddd....',
+  '................',
+  '................',
+  '................',
+  '................'
+]))
+
+/* ===== 毁灭者 ===== */
+reg('boss_destroyer', A(16, 16, {
+  m: '#7A82A0', d: '#4A5068', r: '#FF4040', l: '#FFB0B0', s: '#B8BEC8'
+}, [
+  '......ssss......',
+  '.....smmmms.....',
+  '....mmmmmmmm....',
+  '....mrmmmrmm....',
+  '....mmmmmmmm....',
+  '...mmmmmmmmmm...',
+  '...mlmmmmmmmm...',
+  '...mmmmmmmmmm...',
+  '..mmmmddddmmmm..',
+  '..mmmmmmmmmmmm..',
+  '..mrmmmmmmmmrm..',
+  '..mmmmmmmmmmmm..',
+  '...mmmmddddmm...',
+  '...mmmmmmmmmm...',
+  '....mmmmmmmm....',
+  '.....mmmmmm.....'
+]))
+
+/* ===== 机械骷髅王 ===== */
+reg('boss_skeletron_prime', A(16, 16, {
+  m: '#9CA4B8', k: '#2A2A34', r: '#FF4040', d: '#565B70', b: '#B8BEC8'
+}, [
+  '....mmmmmmmm....',
+  '...mmmmmmmmmm...',
+  '..mmmmmmmmmmmm..',
+  '..mkkmmmmmmkkm..',
+  '..mkrmmmmmmrkm..',
+  '..mkkmmmmmmkkm..',
+  '..mmmmmkkmmmmm..',
+  '..mmmmmmmmmmmm..',
+  '...mbmmmmmmmb...',
+  '...mkbmmddmbkm..',
+  '...mmmmmmmmmm...',
+  '....b.m..m.b....',
+  '...db.m..m.bd...',
+  '................',
+  '................',
+  '................'
+]))
+
+/* ===== 世纪之花 ===== */
+reg('boss_plantera', A(16, 16, {
+  p: '#F26EA8', g: '#3E9B4F', k: '#4A1030', t: '#F0EDE8', v: '#2E7D32'
+}, [
+  '....gg.gg.gg....',
+  '...gggggggggg...',
+  '..g.pppppppp.g..',
+  '.g.pppppppppp.g.',
+  '.gppkpppppkpppg.',
+  'g.pppppppppppp.g',
+  '.gpptptptptpppg.',
+  '.g.pppppppppp.g.',
+  '..g.pppppppp.g..',
+  '...ggg.vv.ggg...',
+  '.....g.vv.g.....',
+  '.......vv.......',
+  '......vv........',
+  '.......vv.......',
+  '................',
+  '................'
+]))
+
+/* ===== 石巨人 ===== */
+reg('boss_golem', A(16, 16, {
+  G: '#FFD700', g: '#B86B32', n: '#8A4A1E', y: '#FFE98A', d: '#7A3E14'
+}, [
+  '..GGGGGGGGGGGG..',
+  '.gggggggggggggg.',
+  '.gggggggggggggg.',
+  '.ggyyygggyyyggg.',
+  '.ggyyygggyyyggg.',
+  '.ggggggnggggggg.',
+  '.ggggggnggggggg.',
+  '.gggggggggggggg.',
+  '.ggdggggggggdgg.',
+  '..gggggggggggg..',
+  '...gggggggggg...',
+  '....gggggggg....',
+  '................',
+  '................',
+  '................',
+  '................'
+]))
+
+/* ===== 猪鲨公爵 ===== */
+reg('boss_duke_fishron', A(16, 16, {
+  b: '#4A7BC8', B: '#2E58A8', p: '#F2A0B8', P: '#D87898', k: '#1A0A20',
+  w: '#E8E4D8', f: '#6A9CE8'
+}, [
+  '.........ff.....',
+  '....bbbbbfbbbb..',
+  '..bbbbbbbbbbbb..',
+  '.pppkkbbbbbbbbB.',
+  'pPppkkbbbbbbbbBF',
+  'pPppbbbbbbbwwwBF',
+  'pppbbbbbbbwwwwB.',
+  '.ppbbbbbbbwww...',
+  '..bbbbbbbbwww...',
+  '...bbbbbbbb.....',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................'
+]))
+
+/* ===== 光之女皇 ===== */
+reg('boss_empress_light', A(16, 16, {
+  w: '#FFF6E0', f: '#FFE9C8', G: '#FFD700', r: '#E86E6E', o: '#FF9C40',
+  y: '#FFE066', g: '#7CD86A', c: '#4CE0E0', b: '#6A9CF0'
+}, [
+  '.......GG.......',
+  '......ffff......',
+  '..www..ff..www..',
+  '.wwwww.rr.wwwww.',
+  'owwwwwrrrrwwwwwo',
+  'ywwwww.rr.wwwwwy',
+  'gwwww..ww..wwwwg',
+  'cwwww..ww..wwwwc',
+  'b.www..ww..www.b',
+  '.......ww.......',
+  '.......ww.......',
+  '......wwww......',
+  '................',
+  '................',
+  '................',
+  '................'
+]))
+
+/* ===== 拜月教邪教徒 ===== */
+reg('boss_lunatic_cultist', A(16, 16, {
+  m: '#4656B0', M: '#2E3A8C', w: '#E8E4D8', k: '#1A0A20', c: '#6A80E0', G: '#FFD700'
+}, [
+  '......mmmm......',
+  '.....mmmmmm.....',
+  '....mmmmmmmm....',
+  '...mmwwwwwwmm...',
+  '...mmwkwkwkmm...',
+  '...mmwwwwwwmm...',
+  '..mmmmmmmmmmmm..',
+  '..mmccmmmmccmm..',
+  '.mmmmmmmmmmmmmm.',
+  '.mmmmmGGGGmmmmm.',
+  'mmmmmmmmmmmmmmmm',
+  'mmmmmmmmmmmmmmmm',
+  '.mmmmmmmmmmmmmm.',
+  '..mmmmmmmmmmmm..',
+  '...mmmmmmmmmm...',
+  '................'
+]))
+
+/* ===== 月亮领主 ===== */
+reg('boss_moon_lord', A(16, 16, {
+  g: '#B8C4B4', k: '#2A3A2A', c: '#4CE8E8', I: '#FFFFFF',
+  h: '#3A4A3A', t: '#8A968A', d: '#6A7A6A'
+}, [
+  '..gggggggggggg..',
+  '.gggggggggggggg.',
+  '.ggkkggggggkkgg.',
+  '.gkkkkgggkkkkgg.',
+  '.ggkkggggggkkgg.',
+  '.gggggccccggggg.',
+  '.gggggcIIcggggg.',
+  '.ggggggccgggggg.',
+  '.gggghhhhhggggg.',
+  '.ggghhhhhhggggt.',
+  '.gghhhhhhhhgg...',
+  '.ggh.hhh.h.gg...',
+  '.gh..hhh..h.g...',
+  '.g...hhh...g....',
+  '.....h.h.h......',
+  '................'
+]))
+
+/* ===== Tab 图标 ===== */
+const TINT = p => p
+// 首页-小屋
+function houseArt (roof, wall, door, glow) {
+  return A(12, 12, { r: roof, w: wall, d: door, g: glow || roof }, [
+    '.....rr.....', '....rrrr....', '...rrrrrr...', '..rrrrrrrr..',
+    '.rrrrrrrrrr.', 'rrrrrrrrrrrr', '..wwwwwwww..', '..wwddwwww..',
+    '..wwddwwww..', '..wwwwwwww..', '..wwwwwwww..', '............'
+  ])
+}
+reg('tab_home', houseArt('#8E7FA6', '#4A3A6C', '#2A2048'))
+reg('tab_home_on', houseArt('#FFD700', '#6A5A2A', '#4A3A10'))
+// 图鉴-魔法书
+reg('tab_book', A(12, 12, { d: '#3A2A5C', c: '#5A4890', w: '#B8A8D8', G: '#8E7FA6' }, [
+  '............', '..dddddddd..', '.dccccccccd.', '.dcwwwwwwcd.',
+  '.dcwwwwwwcd.', '.dccccccccd.', '.dGddddddGd.', '..dddddddd..',
+  '............', '............', '............', '............'
+]))
+reg('tab_book_on', A(12, 12, { d: '#8A6408', c: '#C9A400', w: '#FFF0B0', G: '#FFD700' }, [
+  '............', '..dddddddd..', '.dccccccccd.', '.dcwwwwwwcd.',
+  '.dcwwwwwwcd.', '.dccccccccd.', '.dGddddddGd.', '..dddddddd..',
+  '............', '............', '............', '............'
+]))
+// 合成-铁砧
+function anvilTab (a, b) {
+  return A(12, 12, { a, b }, [
+    '............', '............', '.bbbbbbbbbb.', '.baaaaaaaab.',
+    '....bbbb....', '....b..b....', '...bbbbbb...', '..bbbbbbbb..',
+    '............', '............', '............', '............'
+  ])
+}
+reg('tab_anvil', anvilTab('#8E93A8', '#565B70'))
+reg('tab_anvil_on', anvilTab('#FFE98A', '#C9A400'))
+// 我的-冒险家
+function personTab (cloth0, hair) {
+  return A(12, 12, { h: hair, s: '#F0C8A0', k: '#2A1A34', c: cloth0, p: '#4A5068', d: '#2A2A34' }, [
+    '....hhhh....', '...hhhhhh...', '...hssssh...', '...skssks...',
+    '...ssssss...', '....ssss....', '..cccccccc..', '.cscccccsc..',
+    '.cccccccccc.', '..cc....cc..', '..pp....pp..', '..dd....dd..'
+  ])
+}
+reg('tab_me', personTab('#5A4890', '#4A3A2A'))
+reg('tab_me_on', personTab('#C9A400', '#FFD700'))
+
+/* ===== 头像 ===== */
+reg('ava_knight', A(12, 12, { r: '#E85555', a: '#D8DCE8', b: '#8A90A8', k: '#4CE0E0' }, [
+  '.....rr.....', '....rrrr....', '...bbbbbb...', '..baaaaaab..',
+  '..baaaaaab..', '..bakkkaab..', '..baaaaaab..', '..bbbbbbbb..',
+  '............', '............', '............', '............'
+]))
+reg('ava_wizard', A(12, 12, { m: '#4656B0', w: '#E8E4D8', k: '#1A0A20', G: '#FFD700' }, [
+  '.....mm.....', '....mmmm....', '...mmmmmm...', '.mmmmmmmmmm.',
+  '...wwwwww...', '...wkwwkw...', '...wwwwww...', '....wGGw....',
+  '............', '............', '............', '............'
+]))
+reg('ava_slime', A(12, 12, { g: '#4FA8E8', l: '#A8D8FF', k: '#1A1040' }, [
+  '............', '....gggg....', '..gggggggg..', '..glgggggg..',
+  '.gggggggggg.', '.ggkkggkkgg.', '.ggkkggkkgg.', '.gggggggggg.',
+  '..gggggggg..', '............', '............', '............'
+]))
+reg('ava_eye', A(12, 12, { w: '#F0EDE8', v: '#D86060', R: '#C43030', g: '#58E888', k: '#0E4020' }, [
+  '...wwwwww...', '..wwwwwwww..', '..wvwwwwvw..', '.wwRRRRRRww.',
+  '.wwRRggRRww.', '.wwRgkkgRww.', '.wwRRggRRww.', '..wvwwwwvw..',
+  '..wwwwwwww..', '...wwwwww...', '............', '............'
+]))
+reg('ava_bunny', A(12, 12, { p: '#F2A0B8', w: '#FFF6E0', k: '#1A0A20', n: '#FF6ED8' }, [
+  '..pp....pp..', '..pp....pp..', '..wwwwwwww..', '.wwwwwwwwww.',
+  '.wwkwwwwkww.', '.wwkwwwwkww.', '.wwwwwnwwww.', '.wwwwwwwwww.',
+  '..wwwwwwww..', '...wwwwww...', '............', '............'
+]))
+reg('ava_moon', A(12, 12, { g: '#B8C4B4', c: '#4CE8E8', k: '#2A3A2A', t: '#8A968A' }, [
+  '..gggggggg..', '.gggggggggg.', '.gkkggggkkg.', '.gkggggggkg.',
+  '.ggggccgggg.', '.ggggccgggg.', '.gggggggggg.', '..tt.tt.tt..',
+  '............', '............', '............', '............'
+]))
+
+module.exports = { TINT }
