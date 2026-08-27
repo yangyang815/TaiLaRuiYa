@@ -28,6 +28,8 @@ Page({
     })
     const e = dex.byId[opts.id]
     if (!e) { wx.showToast({ title: '条目不存在', icon: 'none' }); setTimeout(() => wx.navigateBack(), 600); return }
+    // 记录最近浏览（图鉴页展示）
+    store.pushRecent(e.id, e.type)
 
     const r = e.raw
 
@@ -81,7 +83,8 @@ Page({
       ashes,
       relStrats,
       hasRecipe: !!dex.R.byId[e.id],
-      fav: store.isFav(e.id)
+      fav: store.isFav(e.id),
+      defeated: e.type === 'boss' ? store.isDefeated(e.id) : false
     })
     wx.setNavigationBarTitle && wx.setNavigationBarTitle({ title: e.name })
   },
@@ -90,6 +93,13 @@ Page({
     const added = store.toggleFav(this.data.e.id, this.data.e.type)
     this.setData({ fav: added })
     wx.showToast({ title: added ? '已收藏' : '已取消收藏', icon: 'none' })
+  },
+  // Boss 击败标记
+  toggleDefeated () {
+    const added = store.toggleDefeated(this.data.e.id)
+    this.setData({ defeated: added })
+    wx.vibrateShort({ type: 'medium' })
+    wx.showToast({ title: added ? '已记录击败！' : '已取消标记', icon: 'none' })
   },
   goCraft () {
     getApp().globalData.pendingCraft = this.data.e.id

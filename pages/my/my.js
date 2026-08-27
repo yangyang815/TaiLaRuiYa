@@ -1,35 +1,53 @@
-// 我的页：头像昵称 / 冒险等级 / 收藏 / 笔记 / 版本 / 夜间模式
+// 我的页：品牌区 / 用户信息卡 / 数据统计 / 功能列表
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
+const achv = require('../../utils/achievements')
 
 const AVATARS = ['ava_knight', 'ava_wizard', 'ava_slime', 'ava_eye', 'ava_bunny', 'ava_moon']
+const VERSIONS = ['1.4.4', '1.4.5', '1.4.6']
+
+function fmtClock (d) {
+  const h = String(d.getHours()).padStart(2, '0')
+  const m = String(d.getMinutes()).padStart(2, '0')
+  return h + ':' + m
+}
 
 Page({
   data: {
     statusBarHeight: 20,
+    navTop: 64,
     themeClass: '',
+    clock: '',
     profile: { avatar: 'ava_knight', nick: '无名冒险家' },
-    avatarArt: null,
+    avatarArtId: 'ava_knight',
     level: { lv: 1, title: '见习冒险家', cur: 0, need: 60 },
-    // 收藏
-    favTab: 'all', favs: [], favCount: 0,
-    // 笔记
-    notes: [], noteDraft: null, noteTitle: '', noteContent: '',
+    signature: '',
+    // 统计
+    bossN: 0, bossTotal: 0,
+    favCount: 0, noteCount: 0,
+    achvUnlocked: 0, achvTotal: 0,
     // 设置
-    version: '1.4.4', dark: true,
-    // 头像弹窗
+    versions: VERSIONS, version: '1.4.4', versionIndex: 0, dark: true,
+    // 弹窗
     showAvas: false, avatars: [],
     showAbout: false,
     editingNick: false, nickDraft: ''
   },
+  _timer: null,
 
   onLoad () {
     const app = getApp()
     this.setData({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
       navTop: app.globalData.navTop || 64,
-      avatars: AVATARS.map(a => ({ k: a }))
+      avatars: AVATARS.map(a => ({ k: a })),
+      clock: fmtClock(new Date())
     })
+    this._timer = setInterval(() => this.setData({ clock: fmtClock(new Date()) }), 30000)
+  },
+
+  onUnload () {
+    if (this._timer) { clearInterval(this._timer); this._timer = null }
   },
 
   onShow () {
@@ -41,21 +59,23 @@ Page({
 
   refresh () {
     const p = store.getProfile()
+    const bossN = Object.keys(store.getDefeated()).length
+    const bossTotal = dex.ALL.filter(e => e.type === 'boss').length
+    const sum = achv.summary()
+    const v = store.getVersion()
     this.setData({
       profile: p,
       avatarArtId: p.avatar || 'ava_knight',
       level: store.getLevel(),
-      version: store.getVersion(),
-      dark: store.getTheme() !== 'light',
-      notes: store.getNotes().map(n => ({ ...n, time: this.fmt(n.ts) }))
+      signature: achv.signature(),
+      bossN, bossTotal,
+      favCount: store.getFavs().length,
+      noteCount: store.getNotes().length,
+      achvUnlocked: sum.unlocked, achvTotal: sum.total,
+      version: v,
+      versionIndex: Math.max(0, VERSIONS.indexOf(v)),
+      dark: store.getTheme() !== 'light'
     })
-    this.loadFavs()
-  },
-
-  fmt (ts) {
-    const d = new Date(ts)
-    const p = n => (n < 10 ? '0' + n : n)
-    return d.getFullYear() + '/' + p(d.getMonth() + 1) + '/' + p(d.getDate())
   },
 
   /* ---------- 头像 / 昵称 ---------- */
@@ -74,96 +94,50 @@ Page({
     this.setData({ editingNick: false })
     this.refresh()
   },
-
-  /* ---------- 收藏 ---------- */
-  loadFavs () {
-    const TAGS = {
-      boss: ['BOSS', 'tag-boss'], mon: ['敌怪', 'tag-mon'], seed: ['种子', 'tag-seed'],
-      npc: ['NPC', 'tag-npc'], strategy: ['攻略', 'tag-strat'], item: ['物品', 'tag-item']
-    }
-    const favs = store.getFavs().map(f => {
-      let base = null
-      // 攻略收藏：id 形如 strat_xxx，需从攻略数据解析
-      if (f.type === 'strategy' || f.id.indexOf('strat_') === 0) {
-        const s = dex.strats.find(x => 'strat_' + x.id === f.id)
-        if (s) base = { id: f.id, name: s.title, type: 'strategy', artId: s.cover || 'stone', glow: '#4CE0E0' }
-      } else {
-        const e = dex.byId[f.id]
-        if (e) base = { id: f.id, name: e.name, type: e.type, artId: e.artId, glow: e.glow }
-      }
-      if (!base) return null
-      const tag = TAGS[base.type] || TAGS.item
-      return Object.assign(base, { label: tag[0], tagCls: tag[1] })
-    }).filter(Boolean)
-    this.setData({ favs, favCount: favs.length })
-  },
-  onFavTab (e) {
-    const k = e.currentTarget.dataset.k
-    this.setData({ favTab: k })
-    this.loadFavs()
-  },
-
-  onFavTap (e) {
-    const id = e.currentTarget.dataset.id
-    if (id.indexOf('strat_') === 0) {
-      wx.navigateTo({ url: '/pages/strategy/strategy?id=' + id.slice(6) })
-      return
-    }
-    dex.go(id)
-  },
-  onFavRemove (e) {
-    store.toggleFav(e.currentTarget.dataset.id)
-    this.loadFavs()
-    this.refresh()
-  },
-
-  /* ---------- 笔记 ---------- */
-  newNote () { this.setData({ noteDraft: { id: '' }, noteTitle: '', noteContent: '' }) },
-  editNote (e) {
-    const n = this.data.notes.find(x => x.id === e.currentTarget.dataset.id)
-    if (n) this.setData({ noteDraft: { id: n.id }, noteTitle: n.title, noteContent: n.content })
-  },
-  onNoteTitle (e) { this.setData({ noteTitle: e.detail.value }) },
-  onNoteContent (e) { this.setData({ noteContent: e.detail.value }) },
-  saveNote () {
-    const t = (this.data.noteTitle || '').trim()
-    const c = (this.data.noteContent || '').trim()
-    if (!t && !c) { wx.showToast({ title: '写点什么吧', icon: 'none' }); return }
-    store.saveNote({ id: this.data.noteDraft.id, title: t || '未命名笔记', content: c })
-    this.setData({ noteDraft: null })
-    this.refresh()
-    wx.showToast({ title: '已保存', icon: 'success' })
-  },
-  delNote (e) {
-    const id = e.currentTarget.dataset.id
-    wx.showModal({
-      title: '删除笔记',
-      content: '确定要撕掉这一页吗？',
-      confirmColor: '#E85555',
-      success: r => {
-        if (r.confirm) { store.delNote(id); this.refresh() }
-      }
-    })
-  },
-  closeNote () { this.setData({ noteDraft: null }) },
   noop () {},
+
+  /* ---------- 跳转 ---------- */
+  goFavs () { wx.navigateTo({ url: '/pages/favs/favs' }) },
+  goNotes () { wx.navigateTo({ url: '/pages/notes/notes' }) },
+  goAchv () { wx.navigateTo({ url: '/pages/achv/achv' }) },
+  goBosses () {
+    const app = getApp()
+    app.globalData.pendingCodex = { tab: 'boss' }
+    wx.switchTab({ url: '/pages/codex/codex' })
+  },
 
   /* ---------- 设置 ---------- */
   onVersion (e) {
-    const v = e.currentTarget.dataset.v
-    if (!v || v === this.data.version) return
+    const v = VERSIONS[Number(e.detail.value)] || '1.4.4'
+    if (v === this.data.version) return
+    store.markFlag('versionSwitched')
     getApp().setVersion(v)
-    this.setData({ version: v })
+    this.refresh()
     wx.showToast({ title: '数据版本：' + v, icon: 'none' })
   },
   onTheme (e) {
     const light = !e.detail.value
+    store.markFlag('themeSwitched')
     getApp().setTheme(light ? 'light' : 'dark')
     this.setData({ themeClass: light ? 'theme-light' : '', dark: !light })
     // 底部导航栏同步换肤
     if (typeof this.getTabBar === 'function' && this.getTabBar() && this.getTabBar().syncTheme) {
       this.getTabBar().syncTheme()
     }
+  },
+  resetData () {
+    wx.showModal({
+      title: '重置数据',
+      content: '将清除收藏、笔记、成就、Boss击败记录等全部本地数据，确定继续吗？',
+      confirmText: '清除',
+      confirmColor: '#E85555',
+      success: r => {
+        if (!r.confirm) return
+        try { wx.clearStorageSync() } catch (err) { /* 忽略 */ }
+        this.refresh()
+        wx.showToast({ title: '已重置', icon: 'success' })
+      }
+    })
   },
   openAbout () { this.setData({ showAbout: true }) },
   closeAbout () { this.setData({ showAbout: false }) },

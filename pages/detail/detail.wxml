@@ -148,6 +148,7 @@
   <!-- 底部悬浮 -->
   <view class="float-btns safe-bottom">
     <view class="fb collect {{fav ? 'on' : ''}}" bindtap="toggleFav">{{fav ? '★ 已收藏' : '☆ 收藏'}}</view>
+    <view class="fb defeated {{defeated ? 'on' : ''}}" wx:if="{{isBoss}}" bindtap="toggleDefeated">{{defeated ? '⚔ 已击败' : '⚔ 标记击败'}}</view>
     <button class="fb share" open-type="share">↗ 分享</button>
   </view>
 </view>

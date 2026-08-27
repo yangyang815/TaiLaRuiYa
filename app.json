@@ -12,7 +12,10 @@
     "pages/guide/guide",
     "pages/biomes/biomes",
     "pages/seeds/seeds",
-    "pages/prefixes/prefixes"
+    "pages/prefixes/prefixes",
+    "pages/favs/favs",
+    "pages/notes/notes",
+    "pages/achv/achv"
   ],
   "window": {
     "navigationStyle": "custom",

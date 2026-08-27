@@ -1,11 +1,23 @@
 <view class="page-root {{themeClass}} codex-root">
 
-  <!-- 顶部：搜索 + 过滤标签 -->
+  <!-- 顶部：品牌区 + 搜索 + 过滤标签 -->
   <view class="head" style="padding-top:{{navTop}}px;">
+    <!-- 品牌区 -->
+    <view class="brand-row">
+      <view class="logo">
+        <pixel-icon art-id="tab_book_on" size="64" />
+        <view class="col">
+          <text class="logo-t px">TERRA HANDBOOK</text>
+          <text class="logo-s">冒険の図鑑</text>
+        </view>
+      </view>
+      <view class="clock px">{{clock}}</view>
+    </view>
+
     <view class="search-row">
       <view class="search-bar">
         <text class="s-ico">🔍</text>
-        <input class="s-input" placeholder="搜索名称（中/英文）" placeholder-class="ph"
+        <input class="s-input" placeholder="搜索物品、怪物、Boss..." placeholder-class="ph"
           value="{{kw}}" bindinput="onKw" confirm-type="search" />
         <text class="s-clear" wx:if="{{kw}}" bindtap="clearKw">✕</text>
       </view>
@@ -13,7 +25,7 @@
     </view>
 
     <view class="tabs">
-      <view class="chip {{tab === item.k ? 'on' : ''}}" wx:for="{{tabs}}" wx:key="k"
+      <view class="tab {{tab === item.k ? 'on' : ''}}" wx:for="{{tabs}}" wx:key="k"
         bindtap="onTab" data-k="{{item.k}}">{{item.n}}</view>
     </view>
 
@@ -46,8 +58,32 @@
     <view class="head-fade" />
   </view>
 
-  <!-- 主体：两列瀑布流 + 右侧字母索引 -->
+  <!-- 主体：最近浏览 + 两列瀑布流 + 右侧字母索引 -->
   <view class="body">
+    <!-- 最近浏览 -->
+    <view class="recent-sec" wx:if="{{recents.length}}">
+      <view class="sec-head">
+        <text class="sec-t">最近浏览</text>
+        <text class="sec-sub px">RECENT</text>
+        <view class="sec-more tappable" bindtap="toggleRecentsAll">{{recentsAll ? '收起' : '查看全部'}} ›</view>
+      </view>
+      <view class="recent-row">
+        <view class="rc-item card tappable" wx:for="{{recents}}" wx:key="id"
+          bindtap="onCardTap" data-id="{{item.id}}">
+          <view class="rc-art" style="box-shadow: 0 0 12rpx {{item.glow}}44;">
+            <pixel-icon art-id="{{item.artId}}" size="72" />
+          </view>
+          <text class="rc-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 全部图鉴 -->
+    <view class="sec-head">
+      <text class="sec-t">{{tab === 'all' ? '全部图鉴' : (tab === 'item' ? '物品' : (tab === 'mon' ? '敌怪' : 'Boss'))}}</text>
+      <text class="sec-sub px">ALL</text>
+    </view>
+
     <view class="masonry fade-in">
       <view class="m-col">
         <block wx:for="{{list}}" wx:key="id">
@@ -58,6 +94,7 @@
             <view class="col">
               <text class="m-name">{{item.name}}</text>
               <text class="m-en px" wx:if="{{item.en}}">{{item.en}}</text>
+              <view class="m-stars"><text class="m-stars-on">{{item.starsOn}}</text><text class="m-stars-off">{{item.starsOff}}</text></view>
             </view>
             <view class="m-type {{item.type}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</view>
           </view>
@@ -72,6 +109,7 @@
             <view class="col">
               <text class="m-name">{{item.name}}</text>
               <text class="m-en px" wx:if="{{item.en}}">{{item.en}}</text>
+              <view class="m-stars"><text class="m-stars-on">{{item.starsOn}}</text><text class="m-stars-off">{{item.starsOff}}</text></view>
             </view>
             <view class="m-type {{item.type}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</view>
           </view>
@@ -81,7 +119,7 @@
 
     <view class="empty" wx:if="{{!list.length}}">
       <view class="e-icon">🕳️</view>
-      <text>没有匹配的条目，换个关键词试试</text>
+      <text>未找到相关条目，试试其他关键词</text>
     </view>
 
     <!-- 字母索引 -->

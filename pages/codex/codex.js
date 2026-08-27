@@ -4,34 +4,59 @@ const dex = require('../../utils/dex')
 const store = require('../../utils/store')
 
 const TABS = [
-  { k: 'all', n: '全部' }, { k: 'item', n: '物品' }, { k: 'mon', n: '敌怪' }, { k: 'boss', n: 'Boss' }, { k: 'seed', n: '种子' }, { k: 'npc', n: 'NPC' }
+  { k: 'all', n: '全部' }, { k: 'item', n: '物品' }, { k: 'mon', n: '敌怪' }, { k: 'boss', n: 'Boss' }
 ]
 const NGRP = { svc: '服务型', shop: '肉前入住', post: '肉后入住', evt: '特殊到访' }
 const LET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 const PAGE = 40 // 每页条数
+const RECENT_PAGE = 4 // 最近浏览默认展示数
+
+// 稀有度 → 星级（1~5）：亮星 + 暗星
+function starsOf (e) {
+  const r = e.type === 'boss' ? 9 : (e.rarity || 0)
+  const n = Math.min(5, Math.max(1, Math.ceil((r + 1) / 2)))
+  return { n, on: '★★★★★'.slice(0, n), off: '★★★★★'.slice(0, 5 - n) }
+}
+
+function fmtClock (d) {
+  const h = String(d.getHours()).padStart(2, '0')
+  const m = String(d.getMinutes()).padStart(2, '0')
+  return h + ':' + m
+}
 
 Page({
   data: {
     statusBarHeight: 20,
     navTop: 64,
     themeClass: '',
+    clock: '',
     tabs: TABS, tab: 'all',
     cats: [], cat: '',
     kw: '', suggests: [],
     list: [], total: 0,
     letters: LET, letter: '',
+    recents: [], recentsAll: false,
     sheet: null, sheetFav: false
   },
   _all: [],    // 当前筛选全量（内存）
   _sig: '',    // 筛选签名（onShow 脏检查）
+  _timer: null, // 时钟定时器
 
   onLoad () {
     const app = getApp()
     this.setData({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
       navTop: app.globalData.navTop || 64,
-      themeClass: app.globalData.theme === 'light' ? 'theme-light' : ''
+      themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
+      clock: fmtClock(new Date())
     })
+    // 每分钟刷新右上角时钟
+    this._timer = setInterval(() => this.setData({ clock: fmtClock(new Date()) }), 30000)
+    this.loadRecents()
+  },
+
+  onUnload () {
+    if (this._timer) { clearInterval(this._timer); this._timer = null }
   },
 
   onShow () {
@@ -39,20 +64,39 @@ Page({
     const app = getApp()
     this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
     if (app.globalData.pendingCodex) {
-      const { tab } = app.globalData.pendingCodex
+      let { tab } = app.globalData.pendingCodex
       app.globalData.pendingCodex = null
-      this.setData({ tab: tab || 'all' })
+      // 兼容旧入口：种子/NPC 归入物品标签下的二级筛选
+      let cat = ''
+      if (tab === 'seed' || tab === 'npc') { cat = tab; tab = 'item' }
+      this.setData({ tab: tab || 'all', cat, letter: '' })
     }
     // 数据未变化时跳过重复刷新（从详情页返回等场景）
     const sig = this.data.tab + '|' + this.data.cat + '|' + this.data.letter
     if (sig !== this._sig) this.refresh()
+    this.loadRecents()
     if (this.data.sheet) this.setData({ sheetFav: store.isFav(this.data.sheet.id) })
   },
 
+  /* ---------- 最近浏览 ---------- */
+  loadRecents () {
+    const rs = store.getRecents()
+      .map(r => dex.byId[r.id])
+      .filter(Boolean)
+      .map(e => ({ id: e.id, name: e.name, type: e.type, artId: e.artId, glow: e.glow }))
+    this.setData({ recents: rs.slice(0, this.data.recentsAll ? 12 : RECENT_PAGE) })
+  },
+  toggleRecentsAll () {
+    this.setData({ recentsAll: !this.data.recentsAll })
+    this.loadRecents()
+  },
+
   fmt (e) {
+    const st = starsOf(e)
     return {
       id: e.id, name: e.name, en: e.en, type: e.type,
       artId: e.artId, glow: e.glow, rarity: e.rarity,
+      starsOn: st.on, starsOff: st.off,
       subName: e.type === 'mon' ? (e.raw.biome || '')
         : (e.type === 'seed' ? ('种子 ' + (e.raw.code || ''))
         : (e.type === 'npc' ? (NGRP[e.raw.ngrp] || '城镇NPC')
@@ -63,8 +107,11 @@ Page({
   refresh () {
     const { tab, cat, letter } = this.data
     let list = dex.ALL
-    if (tab !== 'all') list = list.filter(e => e.type === tab)
-    if (cat) list = list.filter(e => e.raw.cat === cat || ((tab === 'boss' || tab === 'mon') && e.raw.tier === cat) || (tab === 'seed' && e.raw.group === cat) || (tab === 'npc' && e.raw.ngrp === cat))
+    // 物品标签下的 NPC / 种子 二级筛选项
+    if (tab === 'item' && cat === 'npc') list = list.filter(e => e.type === 'npc')
+    else if (tab === 'item' && cat === 'seed') list = list.filter(e => e.type === 'seed')
+    else if (tab !== 'all') list = list.filter(e => e.type === tab)
+    if (cat) list = list.filter(e => e.raw.cat === cat || e.type === cat || ((tab === 'boss' || tab === 'mon') && e.raw.tier === cat) || (cat === 'seed' && e.raw.group === cat) || (cat === 'npc' && e.raw.ngrp === cat))
     if (letter) {
       if (letter === '#') list = list.filter(e => !/^[a-z]/i.test((e.en || '')[0] || ''))
       else list = list.filter(e => (e.en || '').toLowerCase().startsWith(letter.toLowerCase()))
@@ -115,6 +162,7 @@ Page({
     const id = e.currentTarget.dataset.id
     const entry = dex.byId[id]
     if (!entry) return
+    store.pushRecent(id, entry.type)
     const r = entry.raw
     const isBoss = entry.type === 'boss'
     const isMon = entry.type === 'mon'
@@ -144,7 +192,7 @@ Page({
       sheetFav: store.isFav(id)
     })
   },
-  closeSheet () { this.setData({ sheet: null }) },
+  closeSheet () { this.setData({ sheet: null }); this.loadRecents() },
   noop () {},
 
   onCardLong (e) {

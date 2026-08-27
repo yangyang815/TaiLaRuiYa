@@ -1,0 +1,33 @@
+<view class="page-root {{themeClass}} achv-root">
+
+  <!-- 返回栏（右留胶囊宽度） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="goBack">‹</view>
+    <text class="nav-t">冒险成就</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 进度摘要 -->
+  <view class="sum card">
+    <view class="sum-glow" />
+    <text class="sum-num">{{unlocked}}<text class="sum-total"> / {{total}}</text></text>
+    <text class="sum-t">已解锁成就</text>
+    <view class="sum-bar">
+      <view class="sum-fill" style="width: {{unlocked / total * 100}}%;" />
+    </view>
+  </view>
+
+  <!-- 成就网格 -->
+  <view class="grid">
+    <view class="acell card {{item.unlocked ? 'on' : ''}}" wx:for="{{list}}" wx:key="id">
+      <view class="a-icon">{{item.icon}}</view>
+      <view class="col flex-1">
+        <text class="a-n">{{item.n}}</text>
+        <text class="a-d">{{item.d}}</text>
+      </view>
+      <view class="a-state {{item.unlocked ? 'ok' : ''}}">{{item.unlocked ? '✓' : '未解锁'}}</view>
+    </view>
+  </view>
+
+  <view class="pad-bottom" />
+</view>

@@ -83,7 +83,8 @@ const CATS = {
   item: [
     { k: '', n: '全部' }, { k: 'weapon', n: '武器' }, { k: 'tool', n: '工具' },
     { k: 'armor', n: '盔甲' }, { k: 'accessory', n: '饰品' }, { k: 'material', n: '材料' },
-    { k: 'potion', n: '药水' }, { k: 'mount', n: '坐骑' }, { k: 'pet', n: '宠物' }
+    { k: 'potion', n: '药水' }, { k: 'mount', n: '坐骑' }, { k: 'pet', n: '宠物' },
+    { k: 'npc', n: 'NPC' }, { k: 'seed', n: '种子' }
   ],
   mon: [{ k: '', n: '全部' }, { k: 'pre', n: '困难前' }, { k: 'post', n: '困难模式' }, { k: 'event', n: '事件' }],
   boss: [
@@ -300,6 +301,14 @@ function hotToday (count) {
   return picked
 }
 
+// id → 玩家俗称（取别名表第一条，无则返回空）
+function aliasOf (id) {
+  for (let i = 0; i < ALIAS.length; i++) {
+    if (ALIAS[i][1] === id) return ALIAS[i][0]
+  }
+  return ''
+}
+
 const HOT_WORDS = ['天顶剑', '肉山', '月亮领主', '猪鲨', '泰拉刃', '战士', '翅膀', '机械三王', '十字章护盾', '毕业', '永夜刃', '法师']
 
 /* ---------- 武器排行（取 stats 首格数字排序） ---------- */
@@ -408,7 +417,7 @@ function recipeSearch (kw) {
 
 module.exports = {
   ALL, byId, CATS, strats, BANNERS: strats.BANNERS,
-  search, searchStrats, hotToday, hotDate, HOT_WORDS, weaponRank,
+  search, searchStrats, hotToday, hotDate, HOT_WORDS, weaponRank, aliasOf,
   go, lookup, buildTree, missingList, recipeSearch,
   RARITY, ARTS, R, itemBaseStats, SUB_TAGS
 }

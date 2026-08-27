@@ -21,18 +21,22 @@
 
 /* 顶部导航 */
 .nav { position: relative; z-index: 5; padding: 16rpx 30rpx 6rpx; }
-.nav-in { display: flex; align-items: center; }
-.logo { display: flex; align-items: center; margin-right: 20rpx; }
+.nav-in { display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; }
 .logo-t { font-size: 20rpx; color: var(--gold); text-shadow: 0 0 14rpx rgba(255, 215, 0, 0.5); }
 .logo-s { font-size: 20rpx; color: var(--text-dim); margin-top: 4rpx; letter-spacing: 2rpx; }
-.search-pill {
+.clock { font-size: 26rpx; color: var(--text-dim); font-weight: 700; letter-spacing: 2rpx; }
+
+/* 搜索行 */
+.search-row { display: flex; align-items: center; padding: 12rpx 30rpx 4rpx; position: relative; z-index: 5; }
+.search-bar {
   flex: 1; display: flex; align-items: center;
   padding: 14rpx 24rpx; border-radius: 999rpx;
-  background: rgba(10, 5, 24, 0.72);
+  background: rgba(255, 255, 255, 0.08);
   border: 2rpx solid var(--line);
 }
 .s-ico { font-size: 24rpx; margin-right: 12rpx; }
-.s-ph { font-size: 24rpx; color: var(--text-faint); }
+.s-ph { font-size: 24rpx; color: #C8B8A8; }
 
 /* 海报入口按钮 */
 .poster-fab {
@@ -49,34 +53,29 @@
   position: relative; margin: 16rpx 30rpx 0; padding: 16rpx 96rpx 16rpx 20rpx;
   display: flex; align-items: center; overflow: hidden;
 }
-.u-badge {
-  font-size: 18rpx; color: #3A2400; background: linear-gradient(180deg, #FFE55C, #E5B800);
-  padding: 6rpx 12rpx; border-radius: 6rpx; margin-right: 16rpx; flex-shrink: 0;
-}
+.u-ico { font-size: 26rpx; margin-right: 14rpx; flex-shrink: 0; }
 .u-txt { font-size: 24rpx; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .u-btn {
-  position: absolute; right: 64rpx; font-size: 22rpx; color: var(--gold);
-  border: 2rpx solid var(--gold-faint); border-radius: 8rpx; padding: 4rpx 14rpx;
+  position: absolute; right: 64rpx; font-size: 22rpx; font-weight: 800; color: #B8F5C0;
+  background: rgba(76, 175, 80, 0.18); border: 2rpx solid rgba(124, 216, 106, 0.5);
+  border-radius: 999rpx; padding: 4rpx 18rpx;
 }
 .u-close { position: absolute; right: 20rpx; color: var(--text-faint); font-size: 24rpx; padding: 4rpx; }
 
-/* 轮播 */
-.banner { height: 300rpx; margin: 20rpx 30rpx 12rpx; border-radius: 20rpx; overflow: hidden; position: relative; z-index: 2; }
-swiper-item { border-radius: 20rpx; }
-.b-card {
-  height: 100%; border-radius: 20rpx; border: 2rpx solid var(--gold-soft);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 44rpx 0 36rpx; box-sizing: border-box; overflow: hidden;
-  box-shadow: 0 10rpx 36rpx rgba(0, 0, 0, 0.45);
+/* 本周挑战 */
+.weekly {
+  position: relative; margin: 20rpx 30rpx 6rpx; padding: 26rpx 28rpx;
+  display: flex; align-items: center; overflow: hidden; z-index: 2;
 }
-.b-txt { display: flex; flex-direction: column; max-width: 62%; }
-.b-title { font-size: 40rpx; font-weight: 900; color: #FFF6D0; text-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.5); }
-.b-sub { font-size: 24rpx; color: rgba(224, 214, 200, 0.85); margin: 10rpx 0 18rpx; }
-.b-go { font-size: 18rpx; color: var(--gold); letter-spacing: 2rpx; }
-.b-art { filter: drop-shadow(0 0 18rpx rgba(255, 215, 0, 0.35)); }
-.dots { display: flex; justify-content: center; margin: 4rpx 0 8rpx; position: relative; z-index: 2; }
-.dot { width: 12rpx; height: 12rpx; margin: 0 8rpx; border-radius: 4rpx; background: var(--gold-faint); transition: all 0.3s; }
-.dot.on { width: 36rpx; background: var(--gold); box-shadow: 0 0 10rpx rgba(255, 215, 0, 0.6); }
+.wk-glow { position: absolute; inset: -40rpx; pointer-events: none; }
+.wk-label-row { display: flex; align-items: baseline; }
+.wk-label { font-size: 26rpx; font-weight: 900; color: var(--gold);
+  text-shadow: 0 0 12rpx rgba(255, 215, 0, 0.4); }
+.wk-name { font-size: 26rpx; font-weight: 800; color: var(--text); margin-left: 4rpx; }
+.wk-desc { font-size: 22rpx; color: var(--text-dim); margin-top: 10rpx; }
+.wk-art { margin: 0 10rpx 0 16rpx; flex-shrink: 0;
+  filter: drop-shadow(0 0 18rpx rgba(255, 215, 0, 0.3)); }
+.wk-go { font-size: 18rpx; color: var(--gold); letter-spacing: 2rpx; flex-shrink: 0; }
 
 /* 宫格 */
 .grid { display: flex; flex-wrap: wrap; padding: 0 30rpx; gap: 20rpx; position: relative; z-index: 2; }
@@ -88,16 +87,18 @@ swiper-item { border-radius: 20rpx; }
 .g-art { height: 88rpx; display: flex; align-items: center; margin-bottom: 12rpx; }
 .g-name { font-size: 24rpx; color: var(--text); font-weight: 700; }
 
-/* 今日热门 */
-.hot-scroll { white-space: nowrap; padding: 4rpx 30rpx 10rpx; position: relative; z-index: 2; }
-.h-card {
-  position: relative; display: inline-flex; flex-direction: column; align-items: center;
-  width: 176rpx; padding: 22rpx 0 16rpx; margin-right: 20rpx; overflow: hidden;
-}
-.h-glow { position: absolute; top: -20rpx; width: 100%; height: 140rpx; }
-.h-art { position: relative; height: 104rpx; display: flex; align-items: center; margin-bottom: 10rpx; }
-.h-name { font-size: 24rpx; font-weight: 700; color: var(--text); max-width: 150rpx; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.h-rank { font-size: 16rpx; color: var(--gold); margin-top: 6rpx; opacity: 0.85; }
+/* 今日热门（列表行） */
+.hot-list { margin: 4rpx 30rpx 10rpx; padding: 6rpx 24rpx; position: relative; z-index: 2; }
+.hot-row { display: flex; align-items: center; padding: 16rpx 0; }
+.hot-row + .hot-row { border-top: 2rpx solid var(--line); }
+.h-no { font-size: 22rpx; color: var(--gold); font-weight: 900; width: 88rpx; flex-shrink: 0;
+  text-shadow: 0 0 8rpx rgba(255, 215, 0, 0.4); }
+.h-art { width: 64rpx; height: 64rpx; display: flex; align-items: center; justify-content: center;
+  margin-right: 18rpx; flex-shrink: 0; }
+.h-name { font-size: 27rpx; font-weight: 700; color: var(--text); overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.h-tag { font-size: 22rpx; color: #8A7A6A; margin-left: 12rpx; flex-shrink: 0; }
+.h-arrow { color: var(--gold); font-size: 30rpx; margin-left: 8rpx; flex-shrink: 0; }
 
 /* 底部 */
 .home-foot { display: flex; flex-direction: column; align-items: center; margin-top: 46rpx; position: relative; z-index: 2; }

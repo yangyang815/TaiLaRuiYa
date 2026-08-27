@@ -7,7 +7,10 @@ const K = {
   hist: 'terr_hist',      // 搜索历史
   cmts: 'terr_cmts',      // {pageId: [{name, avatar, ts, text}]}
   stats: 'terr_stats',    // {opens, firstTs}
-  profile: 'terr_profile' // {avatar, nick}
+  profile: 'terr_profile', // {avatar, nick}
+  recent: 'terr_recent',  // 最近浏览 [{id, type, ts}]
+  boss: 'terr_boss',      // Boss 击败记录 {bossId: ts}
+  flags: 'terr_flags'     // 行为标志 {themeSwitched, versionSwitched, craftUsed}
 }
 
 function get (key, def) {
@@ -63,6 +66,17 @@ function setTheme (t) { set(K.theme, t) }
 function getVersion () { return get(K.ver, '1.4.4') }
 function setVersion (v) { set(K.ver, v) }
 
+/* ---------- 最近浏览 ---------- */
+function getRecents () {
+  return get(K.recent, []).filter(r => r && r.id)
+}
+function pushRecent (id, type) {
+  if (!id) return
+  let list = getRecents().filter(r => r.id !== id)
+  list.unshift({ id, type: type || 'item', ts: Date.now() })
+  set(K.recent, list.slice(0, 30))
+}
+
 /* ---------- 搜索历史 ---------- */
 function getHist () { return get(K.hist, []) }
 function pushHist (kw) {
@@ -105,6 +119,33 @@ function setProfile (p) {
   set(K.profile, Object.assign(getProfile(), p))
 }
 
+/* ---------- Boss 击败追踪 ---------- */
+function getDefeated () {
+  return get(K.boss, {}) // { bossId: ts }
+}
+function isDefeated (id) {
+  return !!getDefeated()[id]
+}
+function toggleDefeated (id) {
+  const all = getDefeated()
+  const added = !all[id]
+  if (added) all[id] = Date.now()
+  else delete all[id]
+  set(K.boss, all)
+  return added
+}
+
+/* ---------- 行为标志（成就判定用） ---------- */
+function getFlags () {
+  return get(K.flags, {}) // { themeSwitched, versionSwitched, craftUsed, ... }
+}
+function markFlag (key) {
+  const f = getFlags()
+  if (f[key]) return
+  f[key] = Date.now()
+  set(K.flags, f)
+}
+
 /* ---------- 冒险等级 ---------- */
 const LEVELS = ['见习冒险家', '铜镐矿工', '银甲剑士', '金冠勇士', '暗影猎手', '神圣骑士', '丛林之主', '月主终结者', '泰拉传奇', '天顶大师']
 function getStats () {
@@ -130,6 +171,9 @@ module.exports = {
   getNotes, saveNote, delNote,
   getTheme, setTheme, getVersion, setVersion,
   getHist, pushHist, clearHist,
+  getRecents, pushRecent,
+  getDefeated, isDefeated, toggleDefeated,
+  getFlags, markFlag,
   getCmts, addCmt, delCmt,
   getProfile, setProfile,
   getStats, trackOpen, getLevel

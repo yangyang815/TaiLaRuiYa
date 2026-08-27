@@ -1,76 +1,150 @@
 <view class="page-root {{themeClass}} craft-root">
 
-  <!-- 顶部：向导双输入 -->
+  <!-- 顶部：品牌区 + 搜索 + 双输入 -->
   <view class="head" style="padding-top:{{navTop}}px;">
-    <view class="guide card card-gold">
-      <view class="g-row">
-        <view class="g-avatar"><pixel-icon art-id="{{guideArtId}}" size="84" /></view>
-        <view class="col flex-1">
-          <text class="g-say">你好，我是向导！告诉我你想合成什么？</text>
-        </view>
-        <view class="poster-fab tappable" bindtap="openPoster">▣</view>
-      </view>
-
-      <!-- 目标输入 -->
-      <view class="in-box">
-        <text class="in-label">我要合成</text>
-        <input class="input-dark flex-1" placeholder="目标物品，如：天顶剑" placeholder-class="ph"
-          value="{{kw}}" bindinput="onKw" confirm-type="search" />
-        <text class="s-clear" wx:if="{{kw}}" bindtap="clearKw">✕</text>
-      </view>
-
-      <view class="suggest card pop-in" wx:if="{{targetSuggests.length}}">
-        <view class="sg-item" wx:for="{{targetSuggests}}" wx:key="id"
-          bindtap="onSuggestTap" data-id="{{item.id}}">
-          <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
-          <text class="sg-name">{{item.name}}</text>
-          <text class="sg-go px">GO</text>
+    <!-- 品牌区 -->
+    <view class="brand-row">
+      <view class="logo">
+        <pixel-icon art-id="tab_anvil_on" size="64" />
+        <view class="col">
+          <text class="logo-t px">TERRA HANDBOOK</text>
+          <text class="logo-s">合成の錬金術</text>
         </view>
       </view>
-
-      <!-- 无结果提示（选中目标后不显示） -->
-      <view class="sg-none fade-in" wx:if="{{kw && !targetSuggests.length && (!target || kw !== target.name)}}">
-        <text class="sg-none-icon">🔍</text>
-        <text class="sg-none-t">未找到"{{kw}}"的合成配方</text>
-        <text class="sg-none-d">该物品可能无法合成（仅掉落/购买），或试试拼音、首字母</text>
-      </view>
-
-      <!-- 材料核对开关 -->
-      <view class="in-box switch-line">
-        <text class="in-label">核对背包</text>
-        <switch checked="{{checkMode}}" bindchange="toggleCheck" color="#FFD700" />
-        <text class="switch-tip">{{checkMode ? '已开启：勾选拥有的材料，缺料将标红' : '开启后勾选已有材料，自动标出缺口'}}</text>
-      </view>
-
-      <!-- 我有什么材料 -->
-      <block wx:if="{{checkMode}}">
-        <view class="in-box">
-          <text class="in-label">我有什么</text>
-          <input class="input-dark flex-1" placeholder="输入材料名添加" placeholder-class="ph"
-            value="{{matKw}}" bindinput="onMatKw" />
-        </view>
-        <view class="suggest card" wx:if="{{matSuggests.length}}">
-          <view class="sg-item" wx:for="{{matSuggests}}" wx:key="id"
-            bindtap="addHave" data-id="{{item.id}}" data-name="{{item.name}}" data-art-id="{{item.artId}}">
-            <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
-            <text class="sg-name">{{item.name}}</text>
-            <text class="sg-go px">+</text>
-          </view>
-        </view>
-        <view class="chips" wx:if="{{haveChips.length}}">
-          <view class="have-chip" wx:for="{{haveChips}}" wx:key="id" bindtap="removeHave" data-id="{{item.id}}">
-            <text>{{item.name}}</text><text class="hc-x">✕</text>
-          </view>
-          <view class="have-clear" bindtap="clearHave">清空</view>
-        </view>
-      </block>
+      <view class="clock px">{{clock}}</view>
     </view>
+
+    <!-- 全局搜索 -->
+    <view class="search-row">
+      <view class="search-bar">
+        <text class="s-ico">🔍</text>
+        <input class="s-input" placeholder="搜索物品..." placeholder-class="ph"
+          value="{{searchKw}}" bindinput="onSearchKw" confirm-type="search" />
+        <text class="s-clear" wx:if="{{searchKw}}" bindtap="clearSearchKw">✕</text>
+      </view>
+      <view class="poster-fab tappable" bindtap="openPoster">▣</view>
+    </view>
+
+    <!-- 搜索联想（跳详情） -->
+    <view class="suggest card pop-in" wx:if="{{searchSuggests.length}}">
+      <view class="sg-item" wx:for="{{searchSuggests}}" wx:key="id"
+        bindtap="onSearchTap" data-id="{{item.id}}">
+        <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+        <view class="col flex-1">
+          <text class="sg-name">{{item.name}}</text>
+          <text class="sg-en px" wx:if="{{item.en}}">{{item.en}}</text>
+        </view>
+        <text class="sg-go px">详情 ›</text>
+      </view>
+    </view>
+
+    <!-- 目标 + 材料输入 -->
+    <view class="in-box">
+      <text class="in-label">我要合成</text>
+      <input class="input-dark flex-1" placeholder="目标物品，如：天顶剑" placeholder-class="ph"
+        value="{{kw}}" bindinput="onKw" confirm-type="search" />
+      <text class="s-clear" wx:if="{{kw}}" bindtap="clearKw">✕</text>
+    </view>
+
+    <view class="suggest card pop-in" wx:if="{{targetSuggests.length}}">
+      <view class="sg-item" wx:for="{{targetSuggests}}" wx:key="id"
+        bindtap="onSuggestTap" data-id="{{item.id}}">
+        <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+        <text class="sg-name">{{item.name}}</text>
+        <text class="sg-go px">GO</text>
+      </view>
+    </view>
+
+    <!-- 无结果提示 -->
+    <view class="sg-none fade-in" wx:if="{{kw && !targetSuggests.length && (!target || kw !== target.name)}}">
+      <text class="sg-none-icon">🔍</text>
+      <text class="sg-none-t">未找到"{{kw}}"的合成配方</text>
+      <text class="sg-none-d">该物品可能无法合成（仅掉落/购买），或试试拼音、首字母</text>
+    </view>
+
+    <view class="in-box">
+      <text class="in-label">我的材料</text>
+      <input class="input-dark flex-1" placeholder="选填，标记已有材料" placeholder-class="ph"
+        value="{{matKw}}" bindinput="onMatKw" />
+    </view>
+
+    <view class="suggest card" wx:if="{{matSuggests.length}}">
+      <view class="sg-item" wx:for="{{matSuggests}}" wx:key="id"
+        bindtap="addHave" data-id="{{item.id}}" data-name="{{item.name}}" data-art-id="{{item.artId}}">
+        <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+        <text class="sg-name">{{item.name}}</text>
+        <text class="sg-go px">+</text>
+      </view>
+    </view>
+
+    <view class="chips" wx:if="{{haveChips.length}}">
+      <view class="have-chip" wx:for="{{haveChips}}" wx:key="id" bindtap="removeHave" data-id="{{item.id}}">
+        <text>{{item.name}}</text><text class="hc-x">✕</text>
+      </view>
+      <view class="have-clear" bindtap="clearHave">清空</view>
+    </view>
+
+    <view class="head-fade" />
   </view>
 
-  <!-- 合成树 -->
+  <!-- 合成配方 -->
   <block wx:if="{{target}}">
-    <view class="sec-title"><view class="diamond" /><text class="t">合成路线</text>
-      <text class="more">{{target.station}} · 产出 ×{{target.count}}</text>
+    <view class="sec-title"><view class="diamond" /><text class="t">合成配方</text>
+      <text class="more px">RECIPE</text>
+    </view>
+
+    <!-- 目标物品卡 -->
+    <view class="target-card card">
+      <view class="tc-glow" style="background: radial-gradient(circle at 50% 40%, {{target.glow}}30 0%, transparent 70%);" />
+      <view class="tc-row">
+        <view class="tc-art" style="box-shadow: 0 0 24rpx {{target.glow}}55;">
+          <pixel-icon art-id="{{target.artId}}" size="112" />
+        </view>
+        <view class="col flex-1">
+          <view class="row">
+            <text class="tc-name">{{target.name}}</text>
+            <view class="tc-fav tappable {{target.fav ? 'on' : ''}}" catchtap="toggleTargetFav">{{target.fav ? '★' : '☆'}}</view>
+          </view>
+          <text class="tc-en px" wx:if="{{target.en}}">{{target.en}}</text>
+          <text class="tc-station">⚒ {{target.station}} · 产出 ×{{target.count}}</text>
+        </view>
+      </view>
+      <view class="tc-stats" wx:if="{{target.stats.length}}">
+        <view class="tc-stat" wx:for="{{target.stats}}" wx:key="index">
+          <text class="tc-k">{{item[0]}}</text>
+          <text class="tc-v">{{item[1]}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 所需材料 -->
+    <view class="sec-title"><view class="diamond" /><text class="t">所需材料</text>
+      <text class="more" wx:if="{{haveChips.length}}">已备 {{matsOwned}}/{{mats.length}}（点✅/❌切换）</text>
+      <text class="more" wx:else>点击行查看获取方式</text>
+    </view>
+    <view class="mats card">
+      <view class="mat-row {{item.own ? 'own' : ''}}" wx:for="{{mats}}" wx:key="id"
+        bindtap="matTap" data-id="{{item.id}}">
+        <view class="mat-art" style="box-shadow: 0 0 10rpx {{item.own ? 'rgba(124,216,106,0.45)' : 'rgba(255,255,255,0.08)' }};">
+          <pixel-icon art-id="{{item.artId}}" size="64" />
+        </view>
+        <view class="col flex-1">
+          <view class="row">
+            <text class="mat-name">{{item.name}}</text>
+            <text class="mat-count px" wx:if="{{item.count > 1}}">×{{item.count}}</text>
+            <text class="mat-craft px" wx:if="{{item.craftable}}">可合成</text>
+          </view>
+        </view>
+        <view class="mat-status tappable {{item.own ? 'ok' : 'no'}}" catchtap="matToggleHave" data-id="{{item.id}}">
+          {{item.own ? '✅ 已拥有' : '❌ 缺少'}}
+        </view>
+        <view class="mat-get tappable" wx:if="{{!item.own}}" catchtap="matObtain" data-id="{{item.id}}">获取方式</view>
+      </view>
+    </view>
+
+    <!-- 合成树 -->
+    <view class="sec-title"><view class="diamond" /><text class="t">合成树</text>
+      <text class="more">点击节点展开 / 折叠</text>
     </view>
     <view class="tree card">
       <view class="t-row {{item.status}} fade-in" wx:for="{{rows}}" wx:key="index"
@@ -88,20 +162,20 @@
             <text class="t-count px" wx:if="{{item.count > 1}}">×{{item.count}}</text>
             <text class="t-flag px" wx:if="{{item.depth === 0}}">目标</text>
             <text class="t-have px" wx:if="{{item.status === 'have'}}">已有</text>
-            <text class="t-lack px" wx:if="{{item.status === 'lack'}}">缺少</text>
+            <text class="t-lack px" wx:if="{{haveChips.length && item.status === 'lack'}}">缺少</text>
           </view>
           <text class="t-sub" wx:if="{{item.craftable}}">可在 {{item.station}} 合成 · 点击节点切换为合成目标</text>
           <text class="t-sub" wx:elif="{{item.obtain}}">{{item.obtain}}</text>
         </view>
         <view class="t-ops">
           <view class="t-op" catchtap="rowToTarget" data-index="{{index}}">→</view>
-          <view class="t-op add" wx:if="{{checkMode && item.status === 'lack'}}" catchtap="rowAddHave" data-index="{{index}}">+</view>
+          <view class="t-op add" wx:if="{{item.status === 'lack'}}" catchtap="rowAddHave" data-index="{{index}}">+</view>
         </view>
       </view>
     </view>
 
-    <!-- 缺料清单 -->
-    <block wx:if="{{checkMode && missing.length}}">
+    <!-- 缺料清单（已标记材料时才有意义） -->
+    <block wx:if="{{haveChips.length && missing.length}}">
       <view class="sec-title"><view class="diamond" /><text class="t">还缺 {{missing.length}} 种</text>
         <text class="more">点击 + 快速标记已有</text>
       </view>

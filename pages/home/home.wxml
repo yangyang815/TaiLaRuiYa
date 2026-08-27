@@ -7,7 +7,7 @@
   </view>
   <view class="sky day-glow" wx:else />
 
-  <!-- 顶部：Logo + 搜索 -->
+  <!-- 顶部：品牌区（Logo + 时钟） -->
   <view class="nav" style="padding-top:{{navTop}}px;">
     <view class="nav-in">
       <view class="logo">
@@ -17,40 +17,39 @@
           <text class="logo-s">{{greet}}</text>
         </view>
       </view>
-      <view class="search-pill tappable" bindtap="goSearch">
-        <text class="s-ico">🔍</text>
-        <text class="s-ph">搜索物品、怪物、攻略...</text>
-      </view>
-      <view class="poster-fab tappable" bindtap="openPoster">▣</view>
+      <view class="clock px">{{clock}}</view>
     </view>
+  </view>
+
+  <!-- 搜索框（点击进入全屏搜索页） -->
+  <view class="search-row">
+    <view class="search-bar tappable" bindtap="goSearch">
+      <text class="s-ico">🔍</text>
+      <text class="s-ph">搜索物品、怪物、攻略...</text>
+    </view>
+    <view class="poster-fab tappable" bindtap="openPoster">▣</view>
   </view>
 
   <!-- 版本更新提示 -->
   <view class="update card card-gold blink" wx:if="{{showUpdate}}">
-    <text class="u-badge px">1.4.5</text>
+    <text class="u-ico">📢</text>
     <text class="u-txt">版本更新！新Boss与物品数据已就绪</text>
     <view class="u-btn" catchtap="syncUpdate">同步</view>
     <view class="u-close" catchtap="dismissUpdate">✕</view>
   </view>
 
-  <!-- 轮播 Banner（current 不回绑，避免 circular 环绕时动画被打断） -->
-  <swiper class="banner" autoplay circular interval="4200" duration="500"
-    bindchange="onBannerChange">
-    <swiper-item wx:for="{{banners}}" wx:key="id" bindtap="onBannerTap" data-type="{{item.type}}" data-ref="{{item.ref}}">
-      <view class="b-card" style="background: linear-gradient(120deg, {{item.grad[0]}}, {{item.grad[1]}});">
-        <view class="b-txt">
-          <text class="b-title">{{item.title}}</text>
-          <text class="b-sub">{{item.sub}}</text>
-          <view class="b-go px">VIEW →</view>
-        </view>
-        <view class="b-art floaty">
-          <pixel-icon art-id="{{item.art}}" size="180" />
-        </view>
+  <!-- 本周挑战 -->
+  <view class="weekly card tappable" wx:if="{{weekly}}" bindtap="onWeeklyTap">
+    <view class="wk-glow" style="background: radial-gradient(circle at 85% 30%, {{weekly.glow}}30 0%, transparent 65%);" />
+    <view class="col flex-1">
+      <view class="wk-label-row">
+        <text class="wk-label">本周挑战</text>
+        <text class="wk-name">· {{weekly.name}}</text>
       </view>
-    </swiper-item>
-  </swiper>
-  <view class="dots">
-    <view class="dot {{bannerIdx === index ? 'on' : ''}}" wx:for="{{banners}}" wx:key="id" />
+      <text class="wk-desc">{{weekly.desc}}</text>
+    </view>
+    <view class="wk-art floaty"><pixel-icon art-id="{{weekly.artId}}" size="150" /></view>
+    <view class="wk-go px">VIEW →</view>
   </view>
 
   <!-- 冒险手册：标题 → 新手指南横条 → 16 卡片宫格 -->
@@ -82,14 +81,15 @@
 
   <!-- 今日热门 -->
   <view class="sec-title"><view class="diamond" /><text class="t">今日热门</text><text class="more px">HOT NOW</text></view>
-  <scroll-view class="hot-scroll" scroll-x enable-flex enhanced show-scrollbar="{{false}}">
-    <view class="h-card card tappable" wx:for="{{hot}}" wx:key="id" bindtap="onHotTap" data-id="{{item.id}}">
-      <view class="h-glow" style="background: radial-gradient(circle, {{item.glow}}44 0%, transparent 70%);" />
-      <view class="h-art"><pixel-icon art-id="{{item.artId}}" size="104" /></view>
-      <text class="h-name">{{item.name}}</text>
-      <text class="h-rank px">NO.{{index + 1}}</text>
+  <view class="hot-list card">
+    <view class="hot-row tappable" wx:for="{{hot}}" wx:key="id" bindtap="onHotTap" data-id="{{item.id}}">
+      <text class="h-no px">NO.{{index + 1}}</text>
+      <view class="h-art"><pixel-icon art-id="{{item.artId}}" size="64" /></view>
+      <text class="h-name flex-1">{{item.name}}</text>
+      <text class="h-tag">{{item.tag}}</text>
+      <text class="h-arrow">›</text>
     </view>
-  </scroll-view>
+  </view>
 
   <view class="home-foot safe-bottom">
     <text class="foot-t px">POWERED BY TERRARIA 1.4.4</text>

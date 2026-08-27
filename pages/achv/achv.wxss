@@ -1,0 +1,39 @@
+/* 冒险成就页 */
+.achv-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10rpx; }
+.nav-ph { width: 64rpx; }
+
+/* 进度摘要卡 */
+.sum { position: relative; margin: 20rpx 30rpx; padding: 36rpx 30rpx; display: flex;
+  flex-direction: column; align-items: center; overflow: hidden; }
+.sum-glow { position: absolute; inset: -60rpx;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.12) 0%, transparent 60%); }
+.sum-num { font-size: 64rpx; font-weight: 900; color: var(--gold);
+  text-shadow: 0 0 24rpx rgba(255, 215, 0, 0.5); position: relative; }
+.sum-total { font-size: 30rpx; color: var(--text-faint); font-weight: 700; }
+.sum-t { font-size: 24rpx; color: var(--text-dim); margin-top: 6rpx; position: relative; }
+.sum-bar { width: 100%; height: 12rpx; border-radius: 999rpx; background: rgba(0, 0, 0, 0.3);
+  margin-top: 24rpx; overflow: hidden; position: relative; }
+.sum-fill { height: 100%; border-radius: 999rpx; background: linear-gradient(90deg, #FFE55C, #E5B800);
+  box-shadow: 0 0 12rpx rgba(255, 215, 0, 0.6); transition: width 0.4s ease; }
+
+/* 成就网格 */
+.grid { padding: 0 30rpx; }
+.acell { display: flex; align-items: center; padding: 20rpx 22rpx; margin-bottom: 16rpx;
+  opacity: 0.55; }
+.acell.on { opacity: 1; border-color: rgba(255, 215, 0, 0.35);
+  box-shadow: 0 0 18rpx rgba(255, 215, 0, 0.08); }
+.a-icon { width: 72rpx; height: 72rpx; border-radius: 14rpx; background: rgba(0, 0, 0, 0.25);
+  display: flex; align-items: center; justify-content: center; font-size: 38rpx;
+  margin-right: 20rpx; flex-shrink: 0; }
+.acell.on .a-icon { background: rgba(255, 215, 0, 0.12); box-shadow: 0 0 12rpx rgba(255, 215, 0, 0.25); }
+.a-n { font-size: 26rpx; color: var(--text); font-weight: 800; }
+.a-d { font-size: 20rpx; color: var(--text-faint); margin-top: 6rpx; }
+.a-state { font-size: 18rpx; color: var(--text-faint); margin-left: 12rpx; flex-shrink: 0; }
+.a-state.ok { color: var(--gold); font-size: 28rpx; font-weight: 900; }

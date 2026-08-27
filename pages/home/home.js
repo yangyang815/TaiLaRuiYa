@@ -25,6 +25,49 @@ const ENTRIES = [
   { k: 'prefixes', n: '词条图鉴', art: 'npc_goblin', url: '/pages/prefixes/prefixes' }
 ]
 
+// 本周挑战：标志性 Boss 一句话介绍（未命中时用通用文案）
+const CHALLENGE_DESC = {
+  duke_fishron: '水里来火里去的猪形飞龙',
+  moon_lord: '月球领主，泰拉世界的最终考验',
+  empress_of_light: '迅捷如光的精灵女王',
+  wall_of_flesh: '地狱深处的血肉巨墙，肉前终点',
+  plantera: '丛林深处暴走的食人花',
+  golem: '神庙石像守卫，力量与雷电的化身',
+  eye_of_cthulhu: '夜间袭来的克苏鲁之眼',
+  skeletron: '地牢门口的诅咒骷髅老人',
+  queen_bee: '丛林蜂巢中的蜂群女王',
+  king_slime: '史莱姆之雨召唤的黏液之王',
+  the_twins: '一对机械魔眼，注视即毁灭',
+  destroyer: '钢铁长蛇，贯穿大地',
+  lunatic_cultist: '拜月教首领，月光事件的开端',
+  deerclops: '独眼巨鹿，寒冬的噩梦'
+}
+
+// 按周确定性轮换的本周挑战 Boss
+function weeklyChallenge () {
+  const bosses = dex.ALL.filter(e => e.type === 'boss')
+  const week = Math.floor(Date.now() / (7 * 86400000))
+  const e = bosses[week % bosses.length]
+  if (!e) return null
+  return {
+    id: e.id, name: e.name, artId: e.artId, glow: e.glow,
+    desc: CHALLENGE_DESC[e.id] || '本周的挑战目标，去会一会这位强敌吧'
+  }
+}
+
+function fmtClock (d) {
+  const h = String(d.getHours()).padStart(2, '0')
+  const m = String(d.getMinutes()).padStart(2, '0')
+  return h + ':' + m
+}
+
+// 热门条目短标签：优先玩家俗称，否则用类型名
+function hotTag (e) {
+  const alias = dex.aliasOf(e.id)
+  if (alias && alias !== e.name) return alias
+  return { boss: 'Boss', mon: '敌怪', item: '物品', npc: 'NPC', seed: '种子' }[e.type] || '热门'
+}
+
 Page({
   data: {
     statusBarHeight: 20,
@@ -32,9 +75,9 @@ Page({
     themeClass: '',
     daytime: false,
     greet: '',
+    clock: '',
     stars: [],
-    banners: [],
-    bannerIdx: 0,
+    weekly: null,
     grid: [],
     hot: [],
     version: '1.4.4',
@@ -42,6 +85,7 @@ Page({
     // 分享海报
     posterShow: false, posterData: null
   },
+  _timer: null,
 
   onLoad () {
     const app = getApp()
@@ -66,13 +110,23 @@ Page({
       themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
       daytime,
       greet: daytime ? '白昼の泰拉' : '夜幕の泰拉',
+      clock: fmtClock(new Date()),
       stars,
-      banners: dex.BANNERS.map(b => ({ ...b })),
+      weekly: weeklyChallenge(),
       grid: GRID.concat(ENTRIES).map(g => ({ ...g })),
       hotDate: dex.hotDate(),
-      hot: dex.hotToday().map(h => ({ id: h.id, name: h.name, type: h.type, artId: h.artId, glow: h.glow })),
+      hot: dex.hotToday(4).map(h => ({
+        id: h.id, name: h.name, type: h.type, artId: h.artId, glow: h.glow,
+        tag: hotTag(h)
+      })),
       version: store.getVersion()
     })
+    // 每分钟刷新时钟
+    this._timer = setInterval(() => this.setData({ clock: fmtClock(new Date()) }), 30000)
+  },
+
+  onUnload () {
+    if (this._timer) { clearInterval(this._timer); this._timer = null }
   },
 
   onShow () {
@@ -90,18 +144,16 @@ Page({
     if (today !== this.data.hotDate) {
       this.setData({
         hotDate: today,
-        hot: dex.hotToday().map(h => ({ id: h.id, name: h.name, type: h.type, artId: h.artId, glow: h.glow }))
+        hot: dex.hotToday(4).map(h => ({
+          id: h.id, name: h.name, type: h.type, artId: h.artId, glow: h.glow,
+          tag: hotTag(h)
+        }))
       })
     }
   },
 
-  onBannerChange (e) {
-    const cur = e.detail.current
-    if (cur !== this.data.bannerIdx) this.setData({ bannerIdx: cur })
-  },
-  onBannerTap (e) {
-    const { type, ref } = e.currentTarget.dataset
-    dex.go(ref, type)
+  onWeeklyTap () {
+    if (this.data.weekly) dex.go(this.data.weekly.id, 'boss')
   },
   onGridTap (e) {
     const item = this.data.grid[e.currentTarget.dataset.index]

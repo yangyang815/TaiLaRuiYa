@@ -78,6 +78,9 @@
 .fb.collect { background: rgba(18, 9, 37, 0.92); border: 2rpx solid var(--gold-faint);
   color: var(--gold); }
 .fb.collect.on { background: linear-gradient(180deg, #3E2E08, #2A1F05); box-shadow: 0 0 22rpx rgba(255, 215, 0, 0.3); }
+.fb.defeated { background: rgba(18, 9, 37, 0.92); border: 2rpx solid rgba(232, 85, 85, 0.5); color: #E85555; }
+.fb.defeated.on { background: linear-gradient(180deg, #3E1515, #2A0E0E); color: #FF8787;
+  box-shadow: 0 0 22rpx rgba(232, 85, 85, 0.35); }
 .fb.share { background: linear-gradient(180deg, #FFE55C, #E5B800); color: #3A2400;
   border: 2rpx solid #FFF0B0; padding: 0; line-height: 88rpx; box-shadow: 0 0 22rpx rgba(255, 215, 0, 0.35); }
 .fb.share::after { border: none; }

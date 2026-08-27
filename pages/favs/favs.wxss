@@ -1,0 +1,25 @@
+/* 我的收藏页 */
+.favs-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10rpx; }
+.nav-ph { width: 64rpx; }
+
+/* 分类标签 */
+.tabs { display: flex; padding: 8rpx 30rpx 0; }
+.tab { padding: 12rpx 24rpx; margin-right: 8rpx; font-size: 24rpx; color: var(--text-dim);
+  border: 2rpx solid var(--line); border-radius: 999rpx; }
+.tab.on { color: #3A2400; background: linear-gradient(180deg, #FFE55C, #E5B800);
+  border-color: #FFF0B0; font-weight: 800; }
+
+/* 收藏列表 */
+.fav-list { padding: 16rpx 30rpx 0; }
+.fav-item { display: flex; align-items: center; padding: 14rpx 20rpx; margin-bottom: 16rpx; }
+.f-art { width: 64rpx; height: 64rpx; border-radius: 10rpx; background: rgba(0, 0, 0, 0.25);
+  display: flex; align-items: center; justify-content: center; margin-right: 20rpx; flex-shrink: 0; }
+.f-name { font-size: 26rpx; color: var(--text); font-weight: 700; }
+.f-del { color: var(--text-faint); font-size: 24rpx; padding: 10rpx 4rpx 10rpx 20rpx; }

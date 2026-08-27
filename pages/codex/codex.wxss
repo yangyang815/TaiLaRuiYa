@@ -8,7 +8,15 @@
   background: linear-gradient(180deg, rgba(18, 9, 37, 0.98), rgba(18, 9, 37, 0)); }
 .page-root.theme-light .head-fade { background: linear-gradient(180deg, rgba(231, 221, 198, 0.97), rgba(231, 221, 198, 0)); }
 
-.search-row { display: flex; align-items: center; }
+/* 品牌区 */
+.brand-row { display: flex; align-items: center; justify-content: space-between; padding: 4rpx 0 16rpx; }
+.logo { display: flex; align-items: center; }
+.logo-t { font-size: 22rpx; color: var(--gold); font-weight: 800; letter-spacing: 2rpx;
+  text-shadow: 0 0 14rpx rgba(255, 215, 0, 0.5); }
+.logo-s { font-size: 20rpx; color: var(--text-dim); margin-top: 4rpx; letter-spacing: 3rpx; }
+.clock { font-size: 26rpx; color: var(--gold); font-weight: 700; letter-spacing: 2rpx; }
+
+.search-row { display: flex; align-items: center; margin-top: 4rpx; }
 .search-bar { flex: 1; display: flex; align-items: center; border: 2rpx solid var(--line);
   background: rgba(10, 5, 24, 0.55); border-radius: 999rpx; padding: 12rpx 26rpx; }
 
@@ -26,7 +34,15 @@
 .ph { color: var(--text-faint); }
 .s-clear { padding: 4rpx 8rpx; color: var(--text-faint); font-size: 24rpx; }
 
-.tabs { display: flex; margin-top: 18rpx; }
+/* 一级标签：金色下划线风格 */
+.tabs { display: flex; margin-top: 20rpx; }
+.tab { position: relative; flex: 1; text-align: center; padding: 12rpx 0 16rpx;
+  font-size: 28rpx; color: var(--text-dim); transition: color 0.2s ease; }
+.tab.on { color: var(--gold); font-weight: 800; }
+.tab.on::after { content: ''; position: absolute; left: 50%; bottom: 2rpx;
+  transform: translateX(-50%); width: 44rpx; height: 6rpx; border-radius: 6rpx;
+  background: linear-gradient(90deg, #FFE55C, #E5B800);
+  box-shadow: 0 2rpx 10rpx rgba(255, 215, 0, 0.6); }
 
 /* 联想 */
 .suggest { position: absolute; left: 30rpx; right: 30rpx; margin-top: 10rpx; padding: 10rpx 0; z-index: 60; }
@@ -45,6 +61,22 @@
 
 /* 主体 + 索引 */
 .body { position: relative; padding: 10rpx 30rpx 0; }
+
+/* 区块标题（最近浏览 / 全部图鉴） */
+.sec-head { display: flex; align-items: baseline; padding: 16rpx 2rpx 14rpx; }
+.sec-t { font-size: 30rpx; font-weight: 900; color: var(--text); letter-spacing: 1rpx; }
+.sec-sub { font-size: 16rpx; color: var(--text-faint); margin-left: 12rpx; letter-spacing: 3rpx; }
+.sec-more { margin-left: auto; font-size: 22rpx; color: var(--gold); padding: 4rpx 8rpx; }
+
+/* 最近浏览横排 */
+.recent-row { display: flex; flex-wrap: wrap; gap: 16rpx; padding-bottom: 8rpx; }
+.rc-item { width: calc((100% - 48rpx) / 4); display: flex; flex-direction: column;
+  align-items: center; padding: 18rpx 8rpx 16rpx; box-sizing: border-box; }
+.rc-art { width: 88rpx; height: 88rpx; border-radius: 14rpx; background: rgba(0, 0, 0, 0.28);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 10rpx; }
+.rc-name { font-size: 21rpx; color: var(--text); max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
 .masonry { display: flex; gap: 20rpx; }
 .m-col { flex: 1; display: flex; flex-direction: column; }
 .m-card { position: relative; margin-bottom: 20rpx; padding: 26rpx 20rpx 18rpx;
@@ -55,6 +87,12 @@
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; }
 .m-en { font-size: 14rpx; color: var(--text-faint); margin-top: 6rpx; max-width: 300rpx;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 稀有度星标 */
+.m-stars { margin-top: 8rpx; font-size: 18rpx; line-height: 1; letter-spacing: 2rpx; }
+.m-stars-on { color: var(--gold); text-shadow: 0 0 8rpx rgba(255, 215, 0, 0.5); }
+.m-stars-off { color: rgba(255, 255, 255, 0.14); }
+.page-root.theme-light .m-stars-off { color: rgba(0, 0, 0, 0.14); }
 .m-type { position: absolute; top: 10rpx; right: 10rpx; font-size: 17rpx; padding: 2rpx 10rpx;
   border-radius: 6rpx; border: 1rpx solid; }
 .m-type.boss { color: #E85555; border-color: rgba(232, 85, 85, 0.5); background: rgba(139, 0, 0, 0.3); }

@@ -1,0 +1,35 @@
+<view class="page-root {{themeClass}} favs-root">
+
+  <!-- 返回栏（右留胶囊宽度） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="goBack">‹</view>
+    <text class="nav-t">我的收藏</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="tabs">
+    <view class="tab {{tab === item.k ? 'on' : ''}}" wx:for="{{tabs}}" wx:key="k"
+      bindtap="onTab" data-k="{{item.k}}">{{item.n}}</view>
+  </view>
+
+  <!-- 收藏列表 -->
+  <view class="fav-list" wx:if="{{favs.length}}">
+    <view class="fav-item card tappable" wx:for="{{favs}}" wx:key="id"
+      wx:if="{{tab === 'all' || item.type === tab}}"
+      bindtap="onFavTap" data-id="{{item.id}}">
+      <view class="f-art" style="box-shadow: 0 0 14rpx {{item.glow}}55;">
+        <pixel-icon art-id="{{item.artId}}" size="64" />
+      </view>
+      <text class="f-name flex-1">{{item.name}}</text>
+      <text class="tag {{item.tagCls}}">{{item.label}}</text>
+      <text class="f-del" catchtap="onFavRemove" data-id="{{item.id}}">✕</text>
+    </view>
+  </view>
+  <view class="empty" wx:else>
+    <view class="e-icon">📦</view>
+    <text>还没有收藏，去图鉴或攻略页点击收藏吧</text>
+  </view>
+
+  <view class="pad-bottom" />
+</view>
