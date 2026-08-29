@@ -1,0 +1,50 @@
+/* Boss 攻略清单：列表页 */
+.bgl-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text); }
+.nav-ph { width: 64rpx; }
+
+.head { padding: 6rpx 30rpx 4rpx; }
+.h-sub { display: block; text-align: center; font-size: 22rpx; color: var(--text-dim); margin-bottom: 16rpx; }
+
+/* 总进度卡 */
+.sum { padding: 24rpx 28rpx; }
+.sum-row { display: flex; align-items: center; justify-content: space-between; }
+.sum-k { font-size: 26rpx; font-weight: 800; color: var(--text); }
+.sum-v { font-size: 24rpx; color: var(--gold); font-weight: 700; }
+.sum-tip { display: block; font-size: 20rpx; color: var(--text-dim); margin-top: 14rpx; }
+
+/* 进度条 */
+.bar { height: 12rpx; border-radius: 999rpx; background: rgba(0, 0, 0, 0.35); overflow: hidden; margin-top: 16rpx; }
+.bar-in { height: 100%; border-radius: 999rpx;
+  background: linear-gradient(90deg, #7CC46A, #B8F5C0);
+  box-shadow: 0 0 10rpx rgba(124, 216, 106, 0.5);
+  transition: width 0.3s ease; }
+.bar.mini { height: 8rpx; margin-top: 12rpx; }
+
+/* 分组标题间距 */
+.sect { padding: 10rpx 30rpx 0; }
+
+/* 条目 */
+.g-list { padding: 12rpx 30rpx 0; }
+.g-item { display: flex; align-items: center; padding: 18rpx 22rpx; margin-bottom: 16rpx; }
+.g-order { width: 52rpx; font-size: 24rpx; color: var(--gold); font-weight: 900; margin-right: 12rpx;
+  flex-shrink: 0; text-shadow: 0 0 12rpx rgba(255, 215, 0, 0.4); }
+.g-order.ok { color: #7CC46A; text-shadow: 0 0 12rpx rgba(124, 196, 106, 0.5); }
+.g-order.evt { text-align: center; }
+.g-art { width: 88rpx; height: 88rpx; border-radius: 14rpx; background: rgba(0, 0, 0, 0.3);
+  display: flex; align-items: center; justify-content: center; margin-right: 22rpx; flex-shrink: 0; }
+.g-name-row { display: flex; align-items: center; }
+.g-name { font-size: 27rpx; color: var(--text); font-weight: 700; }
+.g-flag { font-size: 18rpx; color: #7CC46A; background: rgba(76, 175, 80, 0.15);
+  border: 2rpx solid rgba(124, 216, 106, 0.4); border-radius: 999rpx;
+  padding: 2rpx 14rpx; margin-left: 12rpx; }
+.g-en { font-size: 15rpx; color: var(--text-faint); margin-top: 6rpx; }
+.g-pct { font-size: 18rpx; color: var(--text-dim); margin-top: 8rpx; }
+.g-go { font-size: 32rpx; color: var(--text-faint); margin-left: 10rpx; flex-shrink: 0; }
+
+.pad-bottom { height: 140rpx; }

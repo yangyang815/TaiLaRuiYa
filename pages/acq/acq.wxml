@@ -1,0 +1,147 @@
+<view class="page-root {{themeClass}} acq-root">
+
+  <!-- 顶部 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">获取方式速查</text>
+    <view class="nav-fav tappable {{fav ? 'on' : ''}}" wx:if="{{id}}" bindtap="toggleFav">{{fav ? '★' : '☆'}}</view>
+  </view>
+
+  <!-- 搜索框：模糊匹配中文名/英文/拼音/俗称 -->
+  <view class="acq-search">
+    <view class="as-bar">
+      <text class="as-ico">🔍</text>
+      <input class="as-input flex-1" placeholder="输入物品名：凝胶 / 天顶 / zen / 月总掉落…"
+        placeholder-class="as-ph" value="{{kw}}" bindinput="onKw" confirm-type="search" />
+      <text class="as-clear tappable" wx:if="{{kw}}" bindtap="clearKw">✕</text>
+    </view>
+  </view>
+
+  <!-- 搜索结果面板 -->
+  <view class="acq-body" wx:if="{{searching}}">
+    <view class="as-none card" wx:if="{{!results.length}}">
+      <text class="as-none-t">没有匹配的物品</text>
+      <text class="as-none-s">试试更短的关键词，或用拼音首字母搜索（如"sdj"→ 史莱姆法杖）</text>
+    </view>
+    <view class="as-it card tappable" wx:for="{{results}}" wx:key="id"
+      bindtap="onResult" data-id="{{item.id}}">
+      <view class="as-art" wx:if="{{item.artId}}"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+      <view class="col flex-1">
+        <text class="as-n">{{item.name}}<text class="as-en px" wx:if="{{item.en}}"> {{item.en}}</text></text>
+        <text class="as-acq" wx:if="{{item.acqTxt}}">📦 {{item.acqTxt}}</text>
+      </view>
+      <text class="as-go">›</text>
+    </view>
+  </view>
+
+  <!-- 空状态提示（无 id 且未搜索） -->
+  <view class="acq-body" wx:if="{{!id && !searching}}">
+    <view class="as-none card">
+      <text class="as-none-t">🔍 查一查：这东西从哪来？</text>
+      <text class="as-none-s">支持模糊搜索：中文名（凝胶）、拼音首字母（sdj→深度计）、英文（zenith）、无序匹配（zj→天顶剑）</text>
+    </view>
+  </view>
+
+  <!-- 物品详情（搜索时隐藏） -->
+  <block wx:if="{{id && !searching}}">
+  <!-- 物品头图卡 -->
+  <view class="hero card">
+    <view class="hero-art" bindtap="goItem">
+      <pixel-icon art-id="{{artId}}" size="128" />
+    </view>
+    <view class="col flex-1">
+      <view class="h-name-row">
+        <text class="h-name">{{name}}</text>
+        <text class="h-rarity">{{rarityTxt}}</text>
+      </view>
+      <text class="h-en px">{{en}}</text>
+      <text class="h-cat">{{catN}}<text wx:if="{{stats.length}}"> · {{stats[0][0]}} {{stats[0][1]}}</text></text>
+      <view class="h-btn tappable" bindtap="goItem">查看完整图鉴 ›</view>
+    </view>
+  </view>
+
+  <view class="body">
+    <!-- 获取方式 -->
+    <view class="sec-title">
+      <view class="diamond" /><text class="t">获取方式（共 {{count}} 种）</text>
+    </view>
+
+    <view class="mth card fade-in" wx:for="{{methods}}" wx:key="t" wx:for-item="m">
+      <view class="mth-h">
+        <text class="mth-icon">{{m.icon}}</text>
+        <text class="mth-type">{{m.typeN}}</text>
+        <text class="mth-sub px" wx:if="{{m.t === 'craft' && m.station}}">@ {{m.station}}</text>
+        <text class="mth-sub px" wx:elif="{{m.t === 'buy'}}">{{m.npc}}</text>
+        <text class="mth-sub px" wx:elif="{{m.where}}">{{m.where}}</text>
+      </view>
+
+      <!-- 合成：材料列表 -->
+      <block wx:if="{{m.t === 'craft'}}">
+        <view class="cnt-tip" wx:if="{{m.count > 1}}">产物 ×{{m.count}}</view>
+        <view class="mat tappable" wx:for="{{m.mats}}" wx:key="id" wx:for-item="mat"
+          bindtap="onMat" data-id="{{mat.id}}">
+          <view class="mat-art" wx:if="{{mat.artId}}">
+            <pixel-icon art-id="{{mat.artId}}" size="56" />
+          </view>
+          <text class="mat-n flex-1">{{mat.name}}</text>
+          <text class="mat-c px">×{{mat.count}}</text>
+          <text class="mat-go">›</text>
+        </view>
+        <view class="mth-desc" wx:if="{{m.desc}}">{{m.desc}}</view>
+      </block>
+
+      <!-- 掉落：来源列表 -->
+      <block wx:elif="{{m.t === 'drop'}}">
+        <view class="src {{src.isBoss ? 'boss' : ''}} {{src.monId ? 'tappable' : ''}}"
+          wx:for="{{m.sources}}" wx:key="from" wx:for-item="src"
+          bindtap="onMon" data-mon="{{src.monId}}">
+          <text class="src-b" wx:if="{{src.isBoss}}">BOSS</text>
+          <text class="src-n flex-1">{{src.from}}</text>
+          <text class="src-r px" wx:if="{{src.rate}}">{{src.rate}}</text>
+        </view>
+      </block>
+
+      <!-- 购买 -->
+      <block wx:elif="{{m.t === 'buy'}}">
+        <view class="mth-desc">从 <text class="hl">{{m.npc}}</text> 处购买<text wx:if="{{m.price}}">（{{m.price}}）</text></view>
+      </block>
+
+      <!-- 钓鱼 / 开宝箱 -->
+      <block wx:elif="{{m.t === 'fish' || m.t === 'chest'}}">
+        <view class="mth-desc" wx:if="{{m.d}}">{{m.d}}</view>
+      </block>
+
+      <!-- 采集 / 特殊 -->
+      <block wx:else>
+        <view class="mth-desc">{{m.d}}</view>
+      </block>
+    </view>
+
+    <!-- 无结构化数据时的文本兜底 -->
+    <view class="mth card" wx:if="{{!count}}">
+      <view class="mth-h"><text class="mth-icon">📋</text><text class="mth-type">概述</text></view>
+      <view class="mth-desc">{{obtainTxt}}</view>
+    </view>
+
+    <!-- 合成入口 -->
+    <view class="craft-go card card-gold tappable" bindtap="goCraft" wx:if="{{count}}">
+      <text class="cg-t flex-1">查看合成树与材料清单 →</text>
+      <text class="cg-go">›</text>
+    </view>
+
+    <!-- 相关物品 -->
+    <block wx:if="{{related.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">相关物品</text></view>
+      <view class="rel">
+        <view class="rel-it card tappable" wx:for="{{related}}" wx:key="id"
+          bindtap="onMat" data-id="{{item.id}}">
+          <pixel-icon art-id="{{item.artId}}" size="72" />
+          <text class="rel-n">{{item.name}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view class="pad-bottom" />
+  </view>
+  </block>
+</view>

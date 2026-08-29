@@ -85,6 +85,18 @@
       <text class="m-v">已解锁 {{achvUnlocked}}/{{achvTotal}}</text>
       <text class="m-arrow">›</text>
     </view>
+    <view class="m-row tappable" bindtap="goGameAchv">
+      <text class="m-icon">🥇</text>
+      <text class="m-n flex-1">泰拉成就</text>
+      <text class="m-v">已达成 {{gAchvDone}}/{{gAchvTotal}}</text>
+      <text class="m-arrow">›</text>
+    </view>
+    <view class="m-row tappable" bindtap="goFishing">
+      <text class="m-icon">🎣</text>
+      <text class="m-n flex-1">钓鱼图鉴</text>
+      <text class="m-v">已收集 {{fishDone}}/{{fishTotal}}</text>
+      <text class="m-arrow">›</text>
+    </view>
   </view>
 
   <view class="menu card">

@@ -1,0 +1,137 @@
+// 获取方式速查：物品从哪里来、怎么拿到
+const dex = require('../../utils/dex')
+const acq = require('../../utils/acq')
+const store = require('../../utils/store')
+
+const CAT_N = {
+  weapon: '武器', tool: '工具', armor: '盔甲', accessory: '饰品', material: '材料',
+  potion: '药水', mount: '坐骑', pet: '宠物', npc: 'NPC'
+}
+
+Page({
+  data: {
+    statusBarHeight: 20,
+    capsuleRight: 100,
+    themeClass: '',
+    // 搜索
+    kw: '', searching: false, results: [],
+    id: '', name: '', en: '', artId: '', catN: '',
+    rarity: 0, rarityTxt: '', stats: [],
+    obtainTxt: '',
+    methods: [],       // [{t,icon,typeN,station,count,desc,mats,sources,npc,price,where,d}]
+    related: [],       // [{id,name,artId}]
+    count: 0,
+    fav: false
+  },
+
+  onLoad (opts) {
+    const app = getApp()
+    const id = opts.id || ''
+    const info = acq.itemInfo(id)
+    // 无 id 或物品不存在：停留在搜索态（支持直接搜索进入）
+    if (!info) {
+      this.setData({ id: '', methods: [], related: [], count: 0 })
+      wx.setNavigationBarTitle && wx.setNavigationBarTitle({ title: '获取方式速查' })
+      return
+    }
+    const methods = acq.get(id).map(m => {
+      const base = {
+        t: m.t, icon: acq.TYPES[m.t].icon, typeN: acq.TYPES[m.t].n,
+        station: m.station || '', count: m.count || 1, desc: m.desc || '',
+        mats: m.mats || [], sources: m.sources || [],
+        npc: m.npc || '', price: m.price || '', where: m.where || '', d: m.d || ''
+      }
+      return base
+    })
+    // 相关物品：合成材料（去重，排除自身）
+    const craft = methods.find(m => m.t === 'craft')
+    const related = craft && craft.mats.length
+      ? craft.mats.filter(m => m.id && m.id !== id).slice(0, 8)
+      : []
+    this.setData({
+      statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
+      capsuleRight: app.globalData.capsuleRight || 100,
+      themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
+      id,
+      name: info.name, en: info.en || '',
+      artId: info.art || '',
+      catN: CAT_N[info.cat] || '物品',
+      rarity: info.rarity || 0,
+      rarityTxt: info.rarity >= 5 ? '★'.repeat(Math.min(5, info.rarity - 4)) : '★★★',
+      stats: (info.stats || []).slice(0, 3),
+      obtainTxt: info.obtain || '',
+      methods, related,
+      count: methods.length,
+      fav: store.isFav(id)
+    })
+    wx.setNavigationBarTitle && wx.setNavigationBarTitle({ title: info.name + ' · 获取方式' })
+  },
+
+  onShow () {
+    const app = getApp()
+    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
+  },
+
+  // ===== 模糊搜索（防抖300ms，中文/拼音/英文/俗称） =====
+  onKw (e) {
+    const kw = (e.detail.value || '').trim()
+    this.setData({ kw })
+    if (this._kwTimer) clearTimeout(this._kwTimer)
+    if (!kw) { this.setData({ searching: false, results: [] }); return }
+    this._kwTimer = setTimeout(() => this.doSearch(kw), 300)
+  },
+  doSearch (kw) {
+    // 只搜有获取方式数据的物品，复用全局模糊搜索（前缀/包含/拼音首字母/全拼/别名/子序列）
+    const results = dex.search(kw)
+      .filter(x => x.type === 'item' && acq.has(x.id))
+      .slice(0, 10)
+      .map(x => ({
+        id: x.id, name: x.name, en: x.en, artId: x.artId, glow: x.glow,
+        acqTxt: acq.summary(x.id)
+      }))
+    this.setData({ searching: true, results })
+  },
+  clearKw () {
+    this.setData({ kw: '', searching: false, results: [] })
+  },
+  onResult (e) {
+    const id = e.currentTarget.dataset.id
+    if (!id) return
+    this.clearKw()
+    this.onLoad({ id })
+  },
+
+  // 材料/掉落来源跳转
+  onMat (e) {
+    const id = e.currentTarget.dataset.id
+    if (!id) return
+    if (acq.has(id)) wx.navigateTo({ url: '/pages/acq/acq?id=' + id })
+    else dex.go(id)
+  },
+  onMon (e) {
+    const id = e.currentTarget.dataset.mon
+    if (id) dex.go(id)
+  },
+  // 查看物品图鉴
+  goItem () { dex.go(this.data.id) },
+  goCraft () {
+    getApp().globalData.pendingCraft = this.data.id
+    wx.switchTab({ url: '/pages/craft/craft' })
+  },
+  toggleFav () {
+    const added = store.toggleFav(this.data.id, 'item')
+    this.setData({ fav: added })
+    wx.showToast({ title: added ? '已收藏' : '已取消收藏', icon: 'none' })
+  },
+  back () { wx.navigateBack() },
+
+  onShareAppMessage () {
+    return {
+      title: this.data.name + ' 怎么获得？看这里',
+      path: '/pages/acq/acq?id=' + this.data.id
+    }
+  },
+  onShareTimeline () {
+    return { title: this.data.name + ' · 获取方式速查', query: 'id=' + this.data.id }
+  }
+})

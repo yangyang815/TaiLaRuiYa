@@ -1,5 +1,6 @@
 // 合成页：品牌区 + 搜索 + 目标输入 + 材料标记 + 目标物品卡 + 所需材料 + 合成树
 const dex = require('../../utils/dex')
+const acq = require('../../utils/acq')
 const store = require('../../utils/store')
 const R = require('../../data/recipes')
 
@@ -149,6 +150,8 @@ Page({
   },
   matObtain (e) {
     const id = e.currentTarget.dataset.id
+    // 获取方式速查页优先
+    if (acq.has(id)) { wx.navigateTo({ url: '/pages/acq/acq?id=' + id }); return }
     const entry = dex.byId[id]
     if (entry) { dex.go(id); return }
     const info = dex.lookup(id)

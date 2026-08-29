@@ -2,6 +2,7 @@
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
 const achv = require('../../utils/achievements')
+const { LIST: GACHV_LIST } = require('../../data/gameAchievements')
 
 const AVATARS = ['ava_knight', 'ava_wizard', 'ava_slime', 'ava_eye', 'ava_bunny', 'ava_moon']
 const VERSIONS = ['1.4.4', '1.4.5', '1.4.6']
@@ -26,6 +27,7 @@ Page({
     bossN: 0, bossTotal: 0,
     favCount: 0, noteCount: 0,
     achvUnlocked: 0, achvTotal: 0,
+    gAchvDone: 0, gAchvTotal: 0,
     // 设置
     versions: VERSIONS, version: '1.4.4', versionIndex: 0, dark: true,
     // 弹窗
@@ -62,6 +64,8 @@ Page({
     const bossN = Object.keys(store.getDefeated()).length
     const bossTotal = dex.ALL.filter(e => e.type === 'boss').length
     const sum = achv.summary()
+    const doneAchv = store.getGameAchv()
+    const gAchvDone = GACHV_LIST.filter(a => doneAchv[a.id]).length
     const v = store.getVersion()
     this.setData({
       profile: p,
@@ -72,6 +76,7 @@ Page({
       favCount: store.getFavs().length,
       noteCount: store.getNotes().length,
       achvUnlocked: sum.unlocked, achvTotal: sum.total,
+      gAchvDone, gAchvTotal: GACHV_LIST.length,
       version: v,
       versionIndex: Math.max(0, VERSIONS.indexOf(v)),
       dark: store.getTheme() !== 'light'
@@ -100,6 +105,8 @@ Page({
   goFavs () { wx.navigateTo({ url: '/pages/favs/favs' }) },
   goNotes () { wx.navigateTo({ url: '/pages/notes/notes' }) },
   goAchv () { wx.navigateTo({ url: '/pages/achv/achv' }) },
+  goGameAchv () { wx.navigateTo({ url: '/pages/gameachv/gameachv' }) },
+  goFishing () { wx.navigateTo({ url: '/pages/fishing/fishing' }) },
   goBosses () {
     const app = getApp()
     app.globalData.pendingCodex = { tab: 'boss' }

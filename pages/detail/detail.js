@@ -1,6 +1,8 @@
 // 详情页：物品 / 敌怪 / Boss 通用，含专属颗粒、悬浮收藏分享
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
+const acq = require('../../utils/acq')
+const { GUIDES } = require('../../data/bossGuides')
 
 Page({
   data: {
@@ -75,7 +77,7 @@ Page({
         : (r.stats || (e.type !== 'item'
           ? [['HP', String(r.hp)], ['伤害', String(r.dmg)], ['防御', String(r.def)], ['钱币', r.coins || '-']]
           : dex.itemBaseStats(r))),
-      drops: (r.drops || []).map(d => ({ name: d.name, rate: d.rate })),
+      drops: (r.drops || []).map(d => ({ id: d.id || '', name: d.name, rate: d.rate })),
       phases: (r.phases || []).map(p => ({ name: p.name, desc: p.desc })),
       mechanics: r.mechanics || [],
       exclusives: (r.exclusives || []).map(x => ({ name: x.name, note: x.note })),
@@ -83,12 +85,27 @@ Page({
       ashes,
       relStrats,
       hasRecipe: !!dex.R.byId[e.id],
+      hasAcq: e.type === 'item' && acq.has(e.id),
+      hasGuide: e.type === 'boss' && !!GUIDES[e.id],
       fav: store.isFav(e.id),
       defeated: e.type === 'boss' ? store.isDefeated(e.id) : false
     })
     wx.setNavigationBarTitle && wx.setNavigationBarTitle({ title: e.name })
   },
 
+  // Boss 攻略清单入口
+  goGuide () {
+    wx.navigateTo({ url: '/pages/bossguide/detail?id=' + this.data.e.id })
+  },
+  // 获取方式速查入口
+  goAcq () {
+    wx.navigateTo({ url: '/pages/acq/acq?id=' + this.data.e.id })
+  },
+  // 掉落物 → 获取方式速查
+  onDrop (e) {
+    const id = e.currentTarget.dataset.id
+    if (id && acq.has(id)) wx.navigateTo({ url: '/pages/acq/acq?id=' + id })
+  },
   toggleFav () {
     const added = store.toggleFav(this.data.e.id, this.data.e.type)
     this.setData({ fav: added })

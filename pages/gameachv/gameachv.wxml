@@ -1,0 +1,78 @@
+<view class="page-root {{themeClass}} ga-root">
+
+  <!-- 顶部 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">泰拉成就</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="head">
+    <text class="h-sub">游戏官方成就 · 手动记录你的达成进度</text>
+
+    <!-- 总进度 -->
+    <view class="sum card">
+      <view class="sum-row">
+        <text class="sum-k">成就完成度</text>
+        <text class="sum-v px">{{done}}/{{total}}（{{pct}}%）</text>
+      </view>
+      <view class="bar"><view class="bar-in" style="width:{{pct}}%;" /></view>
+      <view class="sum-recent" wx:if="{{recent.length}}">
+        <text class="sr-k">最近达成：</text>
+        <text class="sr-item" wx:for="{{recent}}" wx:key="n">{{item.n}} <text class="sr-d">{{item.date}}</text></text>
+      </view>
+    </view>
+
+    <!-- 分类统计 -->
+    <view class="cats">
+      <view class="cstat card tappable {{cat === item.k ? 'on' : ''}}" wx:for="{{catStats}}" wx:key="k"
+        bindtap="onCat" data-k="{{item.k}}">
+        <text class="cs-icon">{{item.icon}}</text>
+        <text class="cs-n">{{item.n}}</text>
+        <text class="cs-v px">{{item.done}}/{{item.total}}</text>
+        <view class="cs-bar"><view class="cs-fill" style="width:{{item.pct}}%;" /></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选行 -->
+  <view class="filters">
+    <scroll-view class="subs" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="subs-in">
+        <view class="chip {{state === '' ? 'on' : ''}}" bindtap="onState" data-k="">全部</view>
+        <view class="chip {{state === 'done' ? 'on' : ''}}" bindtap="onState" data-k="done">已完成</view>
+        <view class="chip {{state === 'todo' ? 'on' : ''}}" bindtap="onState" data-k="todo">未完成</view>
+      </view>
+    </scroll-view>
+    <text class="f-count px" wx:if="{{cat}}">{{list.length}} 项</text>
+  </view>
+
+  <!-- 成就列表 -->
+  <view class="ga-list">
+    <view class="ga-item card tappable fade-in {{item.done ? 'on' : ''}}"
+      wx:for="{{list}}" wx:key="id" bindtap="onToggle" data-id="{{item.id}}">
+      <view class="ga-medal {{item.done ? 'ok' : ''}}">
+        <text class="gm-icon">{{item.catIcon}}</text>
+      </view>
+      <view class="col flex-1">
+        <view class="ga-name-row">
+          <text class="ga-n {{item.done ? 'done' : ''}}">{{item.n}}</text>
+          <text class="ga-ver px" wx:if="{{item.ver !== '1.3'}}">{{item.ver}}</text>
+        </view>
+        <text class="ga-en px">{{item.en}}</text>
+        <text class="ga-d">{{item.d}}</text>
+        <text class="ga-tip" wx:if="{{item.tip}}">💡 {{item.tip}}</text>
+      </view>
+      <view class="col ga-right">
+        <view class="ga-check {{item.done ? 'ok' : ''}}">{{item.done ? '✓' : ''}}</view>
+        <text class="ga-date px" wx:if="{{item.done}}">{{item.date}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!list.length}}">
+    <view class="e-icon">🏆</view>
+    <text>该分类下暂无成就</text>
+  </view>
+  <view class="pad-bottom" />
+</view>

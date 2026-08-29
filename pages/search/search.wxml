@@ -28,6 +28,7 @@
             <text class="r-tags px" wx:if="{{item.tagsTxt}}">{{item.tagsTxt}}</text>
           </view>
           <text class="r-en px" wx:if="{{item.en}}">{{item.en}}</text>
+          <text class="r-acq" wx:if="{{item.acqTxt}}">📦 {{item.acqTxt}}</text>
         </view>
         <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : (item.type === 'seed' ? 'tag-seed' : (item.type === 'npc' ? 'tag-npc' : 'tag-item')))}}">
           {{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</text>

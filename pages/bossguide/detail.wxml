@@ -1,0 +1,99 @@
+<view class="page-root {{themeClass}} bgd-root" wx:if="{{id}}">
+
+  <!-- 顶部 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">{{name}} · 攻略</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头部 -->
+  <view class="hero" style="background: radial-gradient(70% 90% at 50% 0%, {{color}}30 0%, transparent 70%);">
+    <view class="hero-art tappable" bindtap="goBoss">
+      <pixel-icon art-id="{{artId}}" size="200" />
+    </view>
+    <text class="hero-en px">{{en}}</text>
+    <view class="prog card">
+      <view class="prog-row">
+        <text class="prog-k">备战进度</text>
+        <text class="prog-v px">{{done}}/{{total}}（{{pct}}%）</text>
+      </view>
+      <view class="bar"><view class="bar-in" style="width:{{pct}}%;" /></view>
+    </view>
+  </view>
+
+  <view class="body">
+
+    <!-- 召唤方式 -->
+    <view class="sec-title"><view class="diamond" /><text class="t">召唤方式</text></view>
+    <view class="sm card" wx:if="{{summon}}">
+      <view class="sm-line">
+        <text class="sm-k">出现条件</text>
+        <text class="sm-v flex-1">{{summon.condition}}</text>
+      </view>
+      <view class="sm-line">
+        <text class="sm-k">召唤物品</text>
+        <text class="sm-v flex-1">{{summon.material}}</text>
+      </view>
+      <view class="sm-tip" wx:if="{{summon.tip}}">💡 {{summon.tip}}</view>
+    </view>
+
+    <!-- 准备清单 -->
+    <view class="sec-title">
+      <view class="diamond" /><text class="t">准备清单</text>
+      <text class="cnt px">{{done}}/{{total}}</text>
+    </view>
+
+    <!-- 职业切换器 -->
+    <view class="cls-bar card" wx:if="{{hasClassCats}}">
+      <text class="cls-label">👤 职业</text>
+      <scroll-view class="cls-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+        <view class="cls-chips">
+          <view class="chip cls-chip {{cls === item.k ? 'on' : ''}}" wx:for="{{classes}}" wx:key="k"
+            bindtap="onCls" data-k="{{item.k}}">{{item.n}}</view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="grp" wx:for="{{groups}}" wx:key="cat" wx:for-index="gi" wx:for-item="grp">
+      <view class="grp-h">
+        <text class="grp-cat">{{grp.icon}} {{grp.cat}}</text>
+        <text class="grp-cnt px" wx:if="{{grp.done}}">已完成 {{grp.done}}/{{grp.items.length}}</text>
+      </view>
+      <view class="chk card tappable {{item.checked ? 'on' : ''}}"
+        wx:for="{{grp.items}}" wx:key="id" wx:for-index="ii"
+        bindtap="onToggle" data-g="{{gi}}" data-i="{{ii}}">
+        <view class="box {{item.checked ? 'on' : ''}}">{{item.checked ? '✓' : ''}}</view>
+        <view class="col flex-1">
+          <text class="c-name {{item.checked ? 'done' : ''}}">{{item.name}}</text>
+          <text class="c-desc">{{item.desc}}</text>
+        </view>
+        <view class="c-link tappable" wx:if="{{item.link}}" catchtap="onLink" data-link="{{item.link}}">图鉴›</view>
+      </view>
+    </view>
+
+    <!-- 战后收获 -->
+    <view class="sec-title"><view class="diamond" /><text class="t">战后收获</text></view>
+    <view class="unl card" wx:for="{{unlocks}}" wx:key="*this">
+      <text class="unl-i">🎁</text>
+      <text class="unl-t flex-1">{{item}}</text>
+    </view>
+
+    <!-- 下一步 -->
+    <view class="next card tappable" wx:if="{{next}}" bindtap="goNext">
+      <view class="col flex-1">
+        <text class="nx-k">下一步</text>
+        <text class="nx-t">{{next}}</text>
+        <text class="nx-go" wx:if="{{nextName}}">前往「{{nextName}}」攻略 ›</text>
+      </view>
+    </view>
+
+    <view class="pad-bottom" />
+  </view>
+
+  <!-- 底部悬浮 -->
+  <view class="float-btns safe-bottom">
+    <view class="fb defeated {{defeated ? 'on' : ''}}" bindtap="toggleDefeated">{{defeated ? '⚔ 已击败' : '⚔ 标记击败'}}</view>
+    <button class="fb share" open-type="share">↗ 分享</button>
+  </view>
+</view>

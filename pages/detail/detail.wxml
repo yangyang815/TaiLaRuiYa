@@ -67,8 +67,11 @@
 
     <!-- 掉落 -->
     <block wx:if="{{drops.length}}">
-      <view class="sec-title"><view class="diamond" /><text class="t">{{isBoss ? '掉落物' : '战利品'}}</text></view>
-      <view class="drop card" wx:for="{{drops}}" wx:key="name">
+      <view class="sec-title"><view class="diamond" /><text class="t">{{isBoss ? '掉落物' : '战利品'}}</text>
+        <text class="more">点击查看获取方式</text>
+      </view>
+      <view class="drop card tappable" wx:for="{{drops}}" wx:key="name"
+        bindtap="onDrop" data-id="{{item.id}}">
         <text class="d-n">{{item.name}}</text>
         <text class="d-r px">{{item.rate}}</text>
       </view>
@@ -121,6 +124,26 @@
         <text class="tip-t">{{item}}</text>
       </view>
     </block>
+
+    <!-- Boss 攻略清单入口 -->
+    <view class="craft-entry card card-gold tappable" wx:if="{{isBoss && hasGuide}}" bindtap="goGuide">
+      <view class="ce-art"><pixel-icon art-id="{{e.artId}}" size="72" /></view>
+      <view class="col flex-1">
+        <text class="ce-t">查看「{{e.name}}」攻略清单</text>
+        <text class="ce-s">召唤方式 · 准备清单 · 战后收获</text>
+      </view>
+      <text class="ce-go">›</text>
+    </view>
+
+    <!-- 获取方式速查入口 -->
+    <view class="craft-entry card card-gold tappable" wx:if="{{isItem && hasAcq}}" bindtap="goAcq">
+      <view class="ce-art"><pixel-icon art-id="{{e.artId}}" size="72" /></view>
+      <view class="col flex-1">
+        <text class="ce-t">「{{e.name}}」怎么获得？</text>
+        <text class="ce-s">掉落 / 购买 / 钓鱼 / 开宝箱 · 一查便知</text>
+      </view>
+      <text class="ce-go">›</text>
+    </view>
 
     <!-- 合成入口 -->
     <view class="craft-entry card card-gold tappable" wx:if="{{hasRecipe}}" bindtap="goCraft">

@@ -26,6 +26,8 @@
 .r-tags { font-size: 16rpx; color: var(--gold); background: rgba(255, 215, 0, 0.1);
   border: 2rpx solid var(--gold-faint); border-radius: 6rpx; padding: 2rpx 10rpx; margin-left: 12rpx; }
 .r-en { font-size: 16rpx; color: var(--text-faint); margin-top: 6rpx; }
+.r-acq { font-size: 18rpx; color: #FFD98A; margin-top: 6rpx;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .rc-item { display: flex; align-items: center; padding: 12rpx 20rpx; margin-bottom: 14rpx; }
 .rc-item .r-art { width: 56rpx; height: 56rpx; }

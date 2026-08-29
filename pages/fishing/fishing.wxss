@@ -1,0 +1,101 @@
+/* 钓鱼助手 */
+.fishing-root { min-height: 100vh; padding: 0 24rpx 40rpx; box-sizing: border-box; }
+
+/* 顶部导航 */
+.nav { display: flex; align-items: center; height: 88rpx; margin-bottom: 12rpx; }
+.back { width: 64rpx; height: 64rpx; line-height: 60rpx; text-align: center;
+  font-size: 44rpx; color: var(--text); border: 2rpx solid var(--line);
+  border-radius: 14rpx; background: var(--card); }
+.nav-t { flex: 1; text-align: center; font-size: 32rpx; font-weight: 800; color: var(--text); }
+.nav-ph { width: 64rpx; }
+
+/* 搜索框 */
+.fs-bar { display: flex; align-items: center; padding: 16rpx 22rpx; margin-bottom: 20rpx;
+  border-radius: 16rpx; }
+.fs-ico { font-size: 28rpx; margin-right: 14rpx; }
+.fs-input { font-size: 26rpx; color: var(--text); }
+.fs-ph { color: var(--text-dim); }
+.fs-clear { font-size: 28rpx; color: var(--text-dim); padding: 0 8rpx; }
+
+/* 通用卡片头 */
+.rec-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16rpx; }
+.rec-t { font-size: 29rpx; font-weight: 800; color: var(--text); }
+.rec-clock { font-size: 20rpx; color: var(--text-dim); }
+
+/* 今日推荐 */
+.rec { padding: 22rpx; margin-bottom: 20rpx;
+  border: 2rpx solid rgba(76, 224, 224, 0.35);
+  background: linear-gradient(120deg, rgba(76, 224, 224, 0.10), rgba(91, 155, 255, 0.10)); }
+.rec-ctrl { display: flex; justify-content: space-between; }
+.seg { display: flex; border: 2rpx solid var(--line); border-radius: 12rpx; overflow: hidden; }
+.seg-i { padding: 8rpx 18rpx; font-size: 22rpx; color: var(--text-dim); background: var(--card); }
+.seg-i.on { color: #0E2A33; background: #4CE0E0; font-weight: 700; }
+.rec-tip { margin-top: 16rpx; font-size: 21rpx; color: var(--text-dim); line-height: 1.6;
+  padding: 12rpx 16rpx; border-radius: 12rpx; background: rgba(76, 224, 224, 0.08); }
+.rec-tip.rain { color: #7EC8FF; background: rgba(91, 155, 255, 0.12); }
+
+/* 可钓鱼种两列 */
+.rec-list { margin-top: 16rpx; display: flex; flex-wrap: wrap; }
+.rec-fish { display: flex; align-items: center; width: 50%; box-sizing: border-box;
+  padding: 8rpx 10rpx 8rpx 0; overflow: hidden; }
+.rf-emoji { font-size: 26rpx; margin-right: 10rpx; flex-shrink: 0; }
+.rf-n { font-size: 24rpx; color: var(--text); white-space: nowrap; }
+.rf-n.quest { color: #B57BFF; }
+.rf-b { font-size: 19rpx; color: var(--text-dim); margin-left: 10rpx; white-space: nowrap; }
+.rec-count { display: block; margin-top: 12rpx; font-size: 20rpx; color: var(--green); line-height: 1.6; }
+
+/* 渔夫任务 */
+.quest { padding: 22rpx; margin-bottom: 20rpx;
+  border: 2rpx solid rgba(255, 215, 0, 0.35);
+  background: linear-gradient(120deg, rgba(255, 215, 0, 0.10), rgba(255, 156, 64, 0.08)); }
+.q-done-tag { font-size: 20rpx; color: var(--text-dim); border: 2rpx solid var(--line);
+  border-radius: 8rpx; padding: 2rpx 12rpx; }
+.q-done-tag.on { color: var(--green); border-color: rgba(60, 200, 90, 0.5); }
+.q-body { display: flex; align-items: flex-start; }
+.q-emoji { font-size: 56rpx; line-height: 1.1; margin-right: 20rpx; }
+.q-name { font-size: 30rpx; font-weight: 800; color: var(--text); }
+.q-en { font-size: 20rpx; }
+.q-line { font-size: 23rpx; color: #FFD700; margin-top: 8rpx; }
+.q-note { font-size: 21rpx; color: var(--text-dim); margin-top: 6rpx; line-height: 1.6; }
+.q-reward { font-size: 22rpx; color: #FF9C40; margin-top: 8rpx; }
+.q-btn { margin-top: 16rpx; text-align: center; padding: 16rpx 0; border-radius: 14rpx;
+  font-size: 25rpx; font-weight: 700; color: #0E2A33; background: #4CE0E0; }
+.q-btn.on { color: var(--green); background: rgba(60, 200, 90, 0.14); }
+
+/* 收集进度 */
+.prog { padding: 22rpx; margin-bottom: 24rpx; }
+.prog-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14rpx; }
+.prog-pct { font-size: 28rpx; font-weight: 800; color: #4CE0E0; }
+.prog-bar { height: 14rpx; border-radius: 7rpx; background: var(--line); overflow: hidden; }
+.prog-in { height: 100%; border-radius: 7rpx;
+  background: linear-gradient(90deg, #4CE0E0, #5B9BFF); transition: width 0.3s; }
+.prog-row { display: flex; justify-content: space-between; margin-top: 12rpx; }
+.prog-i { font-size: 20rpx; color: var(--text-dim); }
+
+/* 分类筛选 */
+.cat-scroll { white-space: nowrap; margin-bottom: 20rpx; }
+.cat-scroll .chip { display: inline-block; margin-right: 14rpx; }
+
+/* 图鉴列表 */
+.g-none { padding: 40rpx 24rpx; text-align: center; }
+.g-none-t { display: block; font-size: 26rpx; font-weight: 800; color: var(--text); }
+.g-none-s { display: block; font-size: 22rpx; color: var(--text-dim); margin-top: 10rpx; line-height: 1.6; }
+
+.g-list { display: flex; flex-direction: column; }
+.g-item { display: flex; align-items: flex-start; padding: 20rpx 22rpx; margin-bottom: 16rpx; }
+.g-emoji { font-size: 44rpx; line-height: 1.2; margin-right: 18rpx; flex-shrink: 0; }
+.g-name-row { flex-wrap: wrap; }
+.g-name { font-size: 27rpx; font-weight: 800; color: var(--text); margin-right: 12rpx; }
+.g-name.done { color: var(--text-dim); text-decoration: line-through; }
+.g-en { font-size: 19rpx; color: var(--text-dim); margin-top: 2rpx; }
+.g-line { font-size: 22rpx; color: #4CE0E0; margin-top: 6rpx; line-height: 1.5; }
+.g-line.dim { color: var(--text-dim); font-size: 21rpx; }
+.g-extra { font-size: 21rpx; color: #FF9C40; margin-top: 6rpx; }
+.g-check { width: 48rpx; height: 48rpx; line-height: 44rpx; text-align: center; flex-shrink: 0;
+  margin-left: 12rpx; border: 2rpx solid var(--line); border-radius: 12rpx;
+  font-size: 26rpx; color: transparent; }
+.g-check.on { color: #0E2A33; background: #4CE0E0; border-color: #4CE0E0; font-weight: 800; }
+
+/* 底部 */
+.foot { text-align: center; padding: 30rpx 0 10rpx; }
+.foot-t { font-size: 20rpx; color: var(--text-dim); letter-spacing: 4rpx; }

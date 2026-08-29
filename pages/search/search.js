@@ -1,6 +1,7 @@
 // 全屏搜索页：实时联想 + 历史 + 热门
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
+const acq = require('../../utils/acq')
 
 Page({
   data: {
@@ -29,7 +30,8 @@ Page({
     if (!kw.trim()) { this.setData({ results: [], stratHits: [], recipeHits: [] }); return }
     const results = dex.search(kw).slice(0, 12).map(x => ({
       id: x.id, name: x.name, en: x.en, type: x.type, artId: x.artId, glow: x.glow,
-      tagsTxt: (x.tags || []).slice(0, 2).join(' · ')
+      tagsTxt: (x.tags || []).slice(0, 2).join(' · '),
+      acqTxt: x.type === 'item' ? acq.summary(x.id) : ''
     }))
     const stratHits = dex.searchStrats(kw).map(s => ({ id: s.id, title: s.title }))
     const recipeHits = dex.recipeSearch(kw).slice(0, 4).map(r => ({ id: r.id, name: r.name, artId: r.artId }))

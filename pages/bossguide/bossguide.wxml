@@ -1,0 +1,73 @@
+<view class="page-root {{themeClass}} bgl-root">
+
+  <!-- 顶部 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">Boss 攻略清单</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="head">
+    <text class="h-sub">召唤方式 · 准备清单 · 战后收获</text>
+
+    <!-- 总进度 -->
+    <view class="sum card">
+      <view class="sum-row">
+        <text class="sum-k">备战总进度</text>
+        <text class="sum-v px">{{sumDone}}/{{sumTotal}}（{{sumPct}}%）</text>
+      </view>
+      <view class="bar"><view class="bar-in" style="width:{{sumPct}}%;" /></view>
+      <text class="sum-tip">主线已击败 {{defeatedN}}/{{mainN}} 位 Boss，点击条目查看清单</text>
+    </view>
+  </view>
+
+  <!-- 主线流程 -->
+  <view class="sec-title sect"><view class="diamond" /><text class="t">主线流程</text></view>
+  <view class="g-list">
+    <view class="g-item card tappable fade-in" wx:for="{{main}}" wx:key="id"
+      bindtap="onItem" data-id="{{item.id}}">
+      <view class="g-order px {{item.defeated ? 'ok' : ''}}">{{item.order < 10 ? '0' + item.order : item.order}}</view>
+      <view class="g-art">
+        <pixel-icon art-id="{{item.artId}}" size="84" />
+      </view>
+      <view class="col flex-1">
+        <view class="g-name-row">
+          <text class="g-name">{{item.name}}</text>
+          <text class="g-flag" wx:if="{{item.defeated}}">⚔ 已击败</text>
+        </view>
+        <text class="g-en px">{{item.en}} · {{item.tierN}}</text>
+        <view class="bar mini"><view class="bar-in" style="width:{{item.pct}}%;" /></view>
+        <text class="g-pct px">已备齐 {{item.done}}/{{item.total}} 项</text>
+      </view>
+      <text class="g-go">›</text>
+    </view>
+  </view>
+
+  <!-- 事件与特殊 -->
+  <view class="sec-title sect"><view class="diamond" /><text class="t">事件与特殊 Boss</text></view>
+  <view class="g-list">
+    <view class="g-item card tappable fade-in" wx:for="{{event}}" wx:key="id"
+      bindtap="onItem" data-id="{{item.id}}">
+      <view class="g-order px evt">★</view>
+      <view class="g-art">
+        <pixel-icon art-id="{{item.artId}}" size="84" />
+      </view>
+      <view class="col flex-1">
+        <view class="g-name-row">
+          <text class="g-name">{{item.name}}</text>
+          <text class="g-flag" wx:if="{{item.defeated}}">⚔ 已击败</text>
+        </view>
+        <text class="g-en px">{{item.en}} · {{item.tierN}}</text>
+        <view class="bar mini"><view class="bar-in" style="width:{{item.pct}}%;" /></view>
+        <text class="g-pct px">已备齐 {{item.done}}/{{item.total}} 项</text>
+      </view>
+      <text class="g-go">›</text>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!main.length && !event.length}}">
+    <view class="e-icon">🗺️</view>
+    <text>暂无攻略数据</text>
+  </view>
+  <view class="pad-bottom" />
+</view>

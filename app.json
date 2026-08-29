@@ -15,7 +15,12 @@
     "pages/prefixes/prefixes",
     "pages/favs/favs",
     "pages/notes/notes",
-    "pages/achv/achv"
+    "pages/achv/achv",
+    "pages/bossguide/bossguide",
+    "pages/bossguide/detail",
+    "pages/gameachv/gameachv",
+    "pages/acq/acq",
+    "pages/fishing/fishing"
   ],
   "window": {
     "navigationStyle": "custom",

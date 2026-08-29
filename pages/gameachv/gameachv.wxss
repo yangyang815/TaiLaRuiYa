@@ -1,0 +1,80 @@
+/* 泰拉成就页 */
+.ga-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text); }
+.nav-ph { width: 64rpx; }
+
+.head { padding: 6rpx 30rpx 4rpx; }
+.h-sub { display: block; text-align: center; font-size: 22rpx; color: var(--text-dim); margin-bottom: 16rpx; }
+
+/* 总进度卡 */
+.sum { padding: 24rpx 28rpx; }
+.sum-row { display: flex; align-items: center; justify-content: space-between; }
+.sum-k { font-size: 26rpx; font-weight: 800; color: var(--text); }
+.sum-v { font-size: 24rpx; color: var(--gold); font-weight: 700; }
+.sum-recent { display: flex; flex-wrap: wrap; align-items: center; margin-top: 16rpx; }
+.sr-k { font-size: 20rpx; color: var(--text-dim); margin-right: 8rpx; }
+.sr-item { font-size: 20rpx; color: #B8F5C0; background: rgba(76, 175, 80, 0.13);
+  border: 2rpx solid rgba(124, 216, 106, 0.35); border-radius: 999rpx;
+  padding: 4rpx 16rpx; margin: 4rpx 8rpx 4rpx 0; }
+.sr-d { color: var(--text-faint); font-size: 18rpx; margin-left: 6rpx; }
+
+/* 进度条 */
+.bar { height: 12rpx; border-radius: 999rpx; background: rgba(0, 0, 0, 0.35); overflow: hidden; margin-top: 16rpx; }
+.bar-in { height: 100%; border-radius: 999rpx;
+  background: linear-gradient(90deg, #7CC46A, #B8F5C0);
+  box-shadow: 0 0 10rpx rgba(124, 216, 106, 0.5);
+  transition: width 0.3s ease; }
+
+/* 分类统计卡 */
+.cats { display: flex; gap: 16rpx; margin-top: 16rpx; }
+.cstat { flex: 1; padding: 18rpx 14rpx; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; }
+.cstat.on { border-color: var(--gold); box-shadow: 0 0 16rpx rgba(255, 215, 0, 0.25); }
+.cs-icon { font-size: 34rpx; }
+.cs-n { font-size: 20rpx; color: var(--text-dim); margin-top: 8rpx; }
+.cs-v { font-size: 22rpx; color: var(--gold); font-weight: 700; margin-top: 6rpx; }
+.cs-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 6rpx; background: rgba(0, 0, 0, 0.35); }
+.cs-fill { height: 100%; background: linear-gradient(90deg, #7CC46A, #B8F5C0); transition: width 0.3s ease; }
+
+/* 筛选行 */
+.filters { display: flex; align-items: center; padding: 20rpx 30rpx 8rpx; overflow: hidden; }
+.subs { white-space: nowrap; flex: 1; width: auto; min-width: 0; overflow: hidden; }
+.subs-in { display: inline-flex; }
+.filters .chip { margin-right: 14rpx; flex-shrink: 0; }
+.f-count { font-size: 20rpx; color: var(--text-faint); flex-shrink: 0; }
+
+/* 成就条目 */
+.ga-list { padding: 12rpx 30rpx 0; }
+.ga-item { display: flex; align-items: flex-start; padding: 22rpx 22rpx; margin-bottom: 16rpx; }
+.ga-item.on { border-color: rgba(124, 216, 106, 0.45); }
+.ga-medal { width: 76rpx; height: 76rpx; border-radius: 50%; flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.3); border: 2rpx solid var(--line);
+  display: flex; align-items: center; justify-content: center; margin-right: 20rpx; }
+.ga-medal.ok { border-color: rgba(255, 215, 0, 0.6);
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.22), rgba(0, 0, 0, 0.3));
+  box-shadow: 0 0 14rpx rgba(255, 215, 0, 0.3); }
+.gm-icon { font-size: 34rpx; }
+.ga-name-row { display: flex; align-items: center; }
+.ga-n { font-size: 26rpx; color: var(--text); font-weight: 800; }
+.ga-n.done { color: var(--gold); text-shadow: 0 0 12rpx rgba(255, 215, 0, 0.35); }
+.ga-ver { font-size: 16rpx; color: var(--text-faint); background: rgba(255, 255, 255, 0.07);
+  border-radius: 6rpx; padding: 2rpx 10rpx; margin-left: 12rpx; }
+.ga-en { font-size: 15rpx; color: var(--text-faint); margin-top: 4rpx; }
+.ga-d { font-size: 22rpx; color: var(--text-dim); margin-top: 8rpx; line-height: 1.6; }
+.ga-tip { font-size: 20rpx; color: #FFD98A; background: rgba(255, 200, 60, 0.08);
+  border-radius: 10rpx; padding: 8rpx 14rpx; margin-top: 10rpx; line-height: 1.5; }
+.ga-right { align-items: center; flex-shrink: 0; margin-left: 14rpx; }
+.ga-check { width: 52rpx; height: 52rpx; border-radius: 50%;
+  border: 3rpx solid var(--line); background: rgba(0, 0, 0, 0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: #10240C; font-size: 28rpx; font-weight: 900; }
+.ga-check.ok { border-color: #FFD700;
+  background: linear-gradient(180deg, #FFE55C, #E5B800);
+  box-shadow: 0 0 14rpx rgba(255, 215, 0, 0.45); }
+.ga-date { font-size: 16rpx; color: var(--text-faint); margin-top: 8rpx; }
+
+.pad-bottom { height: 140rpx; }

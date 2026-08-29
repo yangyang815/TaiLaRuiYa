@@ -10,6 +10,9 @@ const K = {
   profile: 'terr_profile', // {avatar, nick}
   recent: 'terr_recent',  // 最近浏览 [{id, type, ts}]
   boss: 'terr_boss',      // Boss 击败记录 {bossId: ts}
+  checks: 'terr_checks',  // 攻略清单打勾 {bossId: {itemId: 1}}
+  gachv: 'terr_gachv',    // 泰拉成就完成标记 {achvId: ts}
+  fish: 'terr_fish',      // 钓鱼图鉴收集标记 [fishId]
   flags: 'terr_flags'     // 行为标志 {themeSwitched, versionSwitched, craftUsed}
 }
 
@@ -135,6 +138,56 @@ function toggleDefeated (id) {
   return added
 }
 
+/* ---------- 攻略清单打勾 ---------- */
+function getChecks () {
+  return get(K.checks, {}) // {bossId: {itemId: 1}}
+}
+function getBossChecks (bossId) {
+  return getChecks()[bossId] || {}
+}
+function toggleCheck (bossId, itemId) {
+  const all = getChecks()
+  const m = all[bossId] || {}
+  const added = !m[itemId]
+  if (added) m[itemId] = 1
+  else delete m[itemId]
+  all[bossId] = m
+  set(K.checks, all)
+  return added
+}
+
+/* ---------- 泰拉成就（游戏成就手动打勾） ---------- */
+function getGameAchv () {
+  return get(K.gachv, {}) // {achvId: ts}
+}
+function isGameAchvDone (id) {
+  return !!getGameAchv()[id]
+}
+function toggleGameAchv (id) {
+  const all = getGameAchv()
+  const added = !all[id]
+  if (added) all[id] = Date.now()
+  else delete all[id]
+  set(K.gachv, all)
+  return added
+}
+
+/* ---------- 钓鱼图鉴收集 ---------- */
+function getFishDone () {
+  return get(K.fish, []) // [fishId]
+}
+function isFishDone (id) {
+  return getFishDone().indexOf(id) >= 0
+}
+function toggleFish (id) {
+  const all = getFishDone()
+  const i = all.indexOf(id)
+  if (i >= 0) all.splice(i, 1)
+  else all.push(id)
+  set(K.fish, all)
+  return i < 0
+}
+
 /* ---------- 行为标志（成就判定用） ---------- */
 function getFlags () {
   return get(K.flags, {}) // { themeSwitched, versionSwitched, craftUsed, ... }
@@ -173,6 +226,9 @@ module.exports = {
   getHist, pushHist, clearHist,
   getRecents, pushRecent,
   getDefeated, isDefeated, toggleDefeated,
+  getChecks, getBossChecks, toggleCheck,
+  getGameAchv, isGameAchvDone, toggleGameAchv,
+  getFishDone, isFishDone, toggleFish,
   getFlags, markFlag,
   getCmts, addCmt, delCmt,
   getProfile, setProfile,

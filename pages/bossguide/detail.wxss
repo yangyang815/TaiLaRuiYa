@@ -1,0 +1,99 @@
+/* Boss 攻略详情页 */
+.bgd-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text); }
+.nav-ph { width: 64rpx; }
+
+/* 头部 */
+.hero { display: flex; flex-direction: column; align-items: center; padding: 10rpx 30rpx 0; }
+.hero-art { filter: drop-shadow(0 0 20rpx rgba(255, 215, 0, 0.25)); }
+.hero-en { font-size: 20rpx; color: var(--text-faint); margin-top: 8rpx; letter-spacing: 2rpx; }
+.prog { width: 100%; padding: 22rpx 28rpx; margin-top: 20rpx; }
+.prog-row { display: flex; align-items: center; justify-content: space-between; }
+.prog-k { font-size: 26rpx; font-weight: 800; color: var(--text); }
+.prog-v { font-size: 24rpx; color: var(--gold); font-weight: 700; }
+
+.bar { height: 12rpx; border-radius: 999rpx; background: rgba(0, 0, 0, 0.35); overflow: hidden; margin-top: 16rpx; }
+.bar-in { height: 100%; border-radius: 999rpx;
+  background: linear-gradient(90deg, #7CC46A, #B8F5C0);
+  box-shadow: 0 0 10rpx rgba(124, 216, 106, 0.5);
+  transition: width 0.3s ease; }
+
+.body { padding: 0 30rpx; }
+
+/* 标题右侧计数 */
+.sec-title .cnt { margin-left: auto; font-size: 20rpx; color: var(--gold); }
+
+/* 召唤方式 */
+.sm { padding: 22rpx 26rpx; }
+.sm-line { display: flex; margin-bottom: 18rpx; }
+.sm-line:last-of-type { margin-bottom: 0; }
+.sm-k { width: 130rpx; flex-shrink: 0; font-size: 22rpx; color: var(--gold); font-weight: 700; }
+.sm-v { font-size: 23rpx; color: var(--text); line-height: 1.6; }
+.sm-tip { font-size: 21rpx; color: #FFD98A; background: rgba(255, 200, 60, 0.1);
+  border: 2rpx solid rgba(255, 215, 0, 0.25); border-radius: 12rpx;
+  padding: 14rpx 18rpx; margin-top: 18rpx; line-height: 1.6; }
+
+/* 职业切换器 */
+.cls-bar { display: flex; align-items: center; padding: 16rpx 20rpx; overflow: hidden; }
+.cls-label { font-size: 22rpx; color: var(--gold); font-weight: 800; flex-shrink: 0; margin-right: 16rpx; }
+.cls-scroll { flex: 1; width: auto; min-width: 0; white-space: nowrap; overflow: hidden; }
+.cls-chips { display: inline-flex; }
+.cls-chip { margin-right: 12rpx; flex-shrink: 0; }
+.cls-chip.on { color: #3A2400; font-weight: 800;
+  background: linear-gradient(180deg, #FFE55C, #E5B800);
+  border-color: #FFF0B0;
+  box-shadow: 0 0 12rpx rgba(255, 215, 0, 0.35); }
+
+/* 清单分组 */
+.grp { margin-bottom: 10rpx; }
+.grp-h { display: flex; align-items: center; padding: 18rpx 6rpx 12rpx; }
+.grp-cat { font-size: 24rpx; font-weight: 800; color: var(--text-dim); letter-spacing: 2rpx; }
+.grp-cnt { font-size: 18rpx; color: #7CC46A; margin-left: 14rpx; }
+
+/* 打勾条目 */
+.chk { display: flex; align-items: center; padding: 20rpx 22rpx; margin-bottom: 12rpx; }
+.chk.on { border-color: rgba(124, 216, 106, 0.45); }
+.box { width: 44rpx; height: 44rpx; border-radius: 10rpx; flex-shrink: 0;
+  border: 3rpx solid var(--line); background: rgba(0, 0, 0, 0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: #10240C; font-size: 26rpx; font-weight: 900; margin-right: 20rpx; }
+.box.on { border-color: #7CC46A; background: linear-gradient(180deg, #B8F5C0, #7CC46A);
+  box-shadow: 0 0 12rpx rgba(124, 216, 106, 0.4); }
+.c-name { font-size: 25rpx; color: var(--text); font-weight: 700; }
+.c-name.done { color: var(--text-dim); text-decoration: line-through; }
+.c-desc { font-size: 20rpx; color: var(--text-dim); margin-top: 6rpx; line-height: 1.5; }
+.c-link { flex-shrink: 0; font-size: 20rpx; color: var(--gold);
+  background: rgba(255, 215, 0, 0.1); border: 2rpx solid rgba(255, 215, 0, 0.35);
+  border-radius: 999rpx; padding: 6rpx 18rpx; margin-left: 14rpx; }
+
+/* 战后收获 */
+.unl { display: flex; align-items: center; padding: 18rpx 22rpx; margin-bottom: 12rpx; }
+.unl-i { font-size: 26rpx; margin-right: 16rpx; flex-shrink: 0; }
+.unl-t { font-size: 23rpx; color: var(--text); line-height: 1.6; }
+
+/* 下一步 */
+.next { padding: 24rpx 28rpx; margin-top: 8rpx; border-color: rgba(255, 215, 0, 0.35); }
+.nx-k { font-size: 20rpx; color: var(--gold); font-weight: 800; letter-spacing: 2rpx; }
+.nx-t { font-size: 23rpx; color: var(--text); margin-top: 10rpx; line-height: 1.6; }
+.nx-go { font-size: 20rpx; color: var(--gold); margin-top: 12rpx; }
+
+.pad-bottom { height: 160rpx; }
+
+/* 底部悬浮 */
+.float-btns { position: fixed; left: 30rpx; right: 30rpx; bottom: 24rpx;
+  display: flex; align-items: center; z-index: 100; }
+.fb { flex: 1; height: 84rpx; border-radius: 999rpx; margin-right: 16rpx;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26rpx; font-weight: 800; color: var(--text);
+  background: rgba(20, 12, 38, 0.92); border: 2rpx solid var(--line);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.4); }
+.fb.defeated.on { color: #B8F5C0; border-color: rgba(124, 216, 106, 0.5);
+  background: rgba(30, 60, 24, 0.92); }
+.fb.share { margin-right: 0; color: #3A2400; background: linear-gradient(180deg, #FFE55C, #E5B800);
+  border-color: #FFF0B0; }
+.fb.share::after { border: none; }

@@ -1,0 +1,126 @@
+<view class="page-root {{themeClass}} fishing-root">
+
+  <!-- 顶部：返回 + 标题（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">钓鱼助手</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 搜索框：搜索时隐藏推荐区，只出结果 -->
+  <view class="fs-bar card">
+    <text class="fs-ico">🔍</text>
+    <input class="fs-input flex-1" placeholder="搜索鱼种、鱼饵、宝匣…" placeholder-class="fs-ph"
+      value="{{kw}}" bindinput="onKw" confirm-type="search" />
+    <text class="fs-clear tappable" wx:if="{{kw}}" bindtap="clearKw">✕</text>
+  </view>
+
+  <block wx:if="{{!kw}}">
+
+    <!-- 今日钓鱼推荐 -->
+    <view class="rec card">
+      <view class="rec-head">
+        <text class="rec-t">📅 今日钓鱼推荐</text>
+        <text class="rec-clock px">{{clock}} · {{timeN}}</text>
+      </view>
+
+      <!-- 时间 / 天气切换（模拟游戏内条件） -->
+      <view class="rec-ctrl">
+        <view class="seg">
+          <view class="seg-i tappable {{!timeNight ? 'on' : ''}}" bindtap="onTime" data-n="0">☀️ 白天</view>
+          <view class="seg-i tappable {{timeNight ? 'on' : ''}}" bindtap="onTime" data-n="1">🌙 夜晚</view>
+        </view>
+        <view class="seg">
+          <view class="seg-i tappable {{!rain ? 'on' : ''}}" bindtap="onRain" data-r="0">☀️ 晴天</view>
+          <view class="seg-i tappable {{rain ? 'on' : ''}}" bindtap="onRain" data-r="1">🌧️ 下雨</view>
+        </view>
+      </view>
+
+      <view class="rec-tip {{rain ? 'rain' : ''}}">
+        {{rain ? '🌧️ 雨天：上钩频率更高，还能钓到雨天限定鱼（黄金锦鲤、鲶鱼）' : '🌤️ 晴天：正常垂钓，切到雨天可查看雨天限定鱼种'}}
+      </view>
+
+      <!-- 可钓鱼种（两列） -->
+      <view class="rec-list">
+        <view class="rec-fish" wx:for="{{avail}}" wx:key="id">
+          <text class="rf-emoji">{{item.kind === 'quest' ? '🎣' : '🐟'}}</text>
+          <text class="rf-n {{item.kind === 'quest' ? 'quest' : ''}}">{{item.name}}</text>
+          <text class="rf-b px">{{item.biomeN}}</text>
+        </view>
+      </view>
+      <text class="rec-count px">当前条件可钓 {{availTotal}} 种（🎣 标记为任务鱼，需先找渔夫接任务）</text>
+    </view>
+
+    <!-- 渔夫今日任务 -->
+    <view class="quest card" wx:if="{{quest}}">
+      <view class="rec-head">
+        <text class="rec-t">🎣 渔夫今日任务</text>
+        <text class="q-done-tag px {{quest.done ? 'on' : ''}}">{{quest.done ? '✓ 已钓到' : '待完成'}}</text>
+      </view>
+      <view class="q-body">
+        <view class="q-emoji">🐟</view>
+        <view class="col flex-1">
+          <text class="q-name">{{quest.name}}<text class="q-en px"> {{quest.en}}</text></text>
+          <text class="q-line">📍 {{quest.biomeN}} · {{quest.timeN}} · {{quest.weatherN}}</text>
+          <text class="q-note px">{{quest.note}}</text>
+          <text class="q-reward">🎁 任务奖励：{{quest.reward}}</text>
+        </view>
+      </view>
+      <view class="q-btn tappable {{quest.done ? 'on' : ''}}" bindtap="onQuestDone">
+        {{quest.done ? '✓ 已钓到（点按取消）' : '钓到了，打卡 ›'}}
+      </view>
+    </view>
+
+    <!-- 收集进度 -->
+    <view class="prog card" wx:if="{{prog}}">
+      <view class="prog-head">
+        <text class="rec-t">🏆 钓鱼收集进度</text>
+        <text class="prog-pct">{{prog.pct}}%</text>
+      </view>
+      <view class="prog-bar"><view class="prog-in" style="width:{{prog.pct}}%" /></view>
+      <view class="prog-row">
+        <text class="prog-i px">全部 {{prog.done}}/{{prog.total}}</text>
+        <text class="prog-i px">任务鱼 {{prog.questDone}}/{{prog.questTotal}}</text>
+        <text class="prog-i px">可钓获 {{prog.foodDone}}/{{prog.foodTotal}}</text>
+      </view>
+    </view>
+
+    <!-- 图鉴标题 + 分类筛选 -->
+    <view class="sec-title"><view class="diamond" /><text class="t">钓鱼图鉴</text>
+      <text class="more px">{{shown.length}} 条</text>
+    </view>
+  </block>
+
+  <scroll-view class="cat-scroll" scroll-x enable-flex enhanced show-scrollbar="{{false}}">
+    <view class="chip {{cat === item.k ? 'on' : ''}}" wx:for="{{cats}}" wx:key="k"
+      bindtap="onCat" data-k="{{item.k}}">{{item.n}}</view>
+  </scroll-view>
+
+  <!-- 图鉴列表 / 搜索结果 -->
+  <view class="g-none card" wx:if="{{kw && !shown.length}}">
+    <text class="g-none-t">没有匹配的内容</text>
+    <text class="g-none-s">试试更短的关键词：鲈鱼 / cod / 丛林 / 鱼饵…</text>
+  </view>
+
+  <view class="g-list">
+    <view class="g-item card tappable" wx:for="{{shown}}" wx:key="id"
+      bindtap="onCheck" data-id="{{item.id}}">
+      <view class="g-emoji">{{item.emoji}}</view>
+      <view class="col flex-1">
+        <view class="row g-name-row">
+          <text class="g-name {{item.done ? 'done' : ''}}">{{item.name}}</text>
+          <text class="tag {{item.kind === 'quest' ? 'tag-strat' : (item.kind === 'food' ? 'tag-npc' : (item.kind === 'bait' ? 'tag-item' : 'tag-mon'))}}">{{item.kindN}}</text>
+        </view>
+        <text class="g-en px" wx:if="{{item.en}}">{{item.en}}</text>
+        <text class="g-line">{{item.line1}}</text>
+        <text class="g-line dim" wx:if="{{item.line2}}">{{item.line2}}</text>
+        <text class="g-extra" wx:if="{{item.extra}}">{{item.extra}}</text>
+      </view>
+      <view class="g-check {{item.done ? 'on' : ''}}" wx:if="{{item.checkable}}">{{item.done ? '✓' : ''}}</view>
+    </view>
+  </view>
+
+  <view class="foot safe-bottom">
+    <text class="foot-t px">GONE FISHIN'</text>
+  </view>
+</view>

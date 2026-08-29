@@ -1,0 +1,91 @@
+/* 获取方式速查页 */
+.acq-root { min-height: 100vh; }
+
+/* 搜索框 */
+.acq-search { padding: 4rpx 30rpx 12rpx; }
+.as-bar { display: flex; align-items: center; padding: 14rpx 24rpx; border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.08); border: 2rpx solid var(--line); }
+.as-ico { font-size: 24rpx; margin-right: 12rpx; }
+.as-input { font-size: 24rpx; color: var(--text); }
+.as-ph { color: #C8B8A8; }
+.as-clear { font-size: 26rpx; color: var(--text-faint); padding: 4rpx 8rpx; }
+
+/* 搜索结果 */
+.acq-body { padding: 0 30rpx 20rpx; }
+.as-it { display: flex; align-items: center; padding: 16rpx 20rpx; margin-bottom: 14rpx; }
+.as-art { width: 64rpx; height: 64rpx; display: flex; align-items: center; justify-content: center;
+  margin-right: 16rpx; flex-shrink: 0; }
+.as-n { font-size: 25rpx; color: var(--text); font-weight: 700; }
+.as-en { font-size: 17rpx; color: var(--text-faint); }
+.as-acq { font-size: 19rpx; color: #FFD98A; margin-top: 6rpx;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.as-go { font-size: 28rpx; color: var(--text-faint); margin-left: 12rpx; }
+.as-none { padding: 40rpx 30rpx; display: flex; flex-direction: column; align-items: center; }
+.as-none-t { font-size: 26rpx; color: var(--text); font-weight: 800; }
+.as-none-s { font-size: 21rpx; color: var(--text-dim); margin-top: 14rpx; text-align: center; line-height: 1.7; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text); }
+.nav-fav { width: 64rpx; height: 64rpx; display: flex; align-items: center; justify-content: center;
+  font-size: 36rpx; color: var(--text-dim); }
+.nav-fav.on { color: var(--gold); text-shadow: 0 0 14rpx rgba(255, 215, 0, 0.5); }
+
+/* 头图卡 */
+.acq-root .hero { display: flex; align-items: center; margin: 12rpx 30rpx 0; padding: 24rpx 26rpx; }
+.hero-art { width: 140rpx; height: 140rpx; border-radius: 16rpx; background: rgba(0, 0, 0, 0.3);
+  display: flex; align-items: center; justify-content: center; margin-right: 24rpx; flex-shrink: 0; }
+.h-name-row { display: flex; align-items: center; }
+.h-name { font-size: 32rpx; font-weight: 900; color: var(--text); }
+.h-rarity { font-size: 22rpx; color: var(--gold); margin-left: 12rpx; }
+.h-en { font-size: 18rpx; color: var(--text-faint); margin-top: 4rpx; }
+.h-cat { font-size: 21rpx; color: var(--text-dim); margin-top: 8rpx; }
+.h-btn { display: inline-block; font-size: 20rpx; color: var(--gold);
+  background: rgba(255, 215, 0, 0.1); border: 2rpx solid rgba(255, 215, 0, 0.35);
+  border-radius: 999rpx; padding: 6rpx 20rpx; margin-top: 14rpx; }
+
+.body { padding: 0 30rpx; }
+
+/* 方式卡 */
+.mth { padding: 22rpx 24rpx; margin-bottom: 16rpx; }
+.mth-h { display: flex; align-items: center; }
+.mth-icon { font-size: 30rpx; margin-right: 12rpx; }
+.mth-type { font-size: 26rpx; font-weight: 900; color: var(--text); }
+.mth-sub { font-size: 20rpx; color: var(--gold); margin-left: 12rpx; }
+.cnt-tip { font-size: 20rpx; color: var(--text-dim); margin-top: 12rpx; }
+
+/* 材料行 */
+.mat { display: flex; align-items: center; padding: 12rpx 12rpx 12rpx 0; margin-top: 12rpx;
+  background: rgba(0, 0, 0, 0.22); border-radius: 12rpx; padding-right: 16rpx; }
+.mat-art { width: 64rpx; height: 64rpx; display: flex; align-items: center; justify-content: center;
+  margin: 0 14rpx; flex-shrink: 0; }
+.mat-n { font-size: 23rpx; color: var(--text); }
+.mat-c { font-size: 21rpx; color: var(--gold); font-weight: 700; }
+.mat-go { font-size: 26rpx; color: var(--text-faint); margin-left: 10rpx; }
+
+/* 掉落来源行 */
+.src { display: flex; align-items: center; padding: 14rpx 16rpx; margin-top: 12rpx;
+  background: rgba(0, 0, 0, 0.22); border-radius: 12rpx; }
+.src.boss { border: 2rpx solid rgba(255, 215, 0, 0.3); }
+.src-b { font-size: 16rpx; color: #3A2400; font-weight: 900; background: linear-gradient(180deg, #FFE55C, #E5B800);
+  border-radius: 6rpx; padding: 2rpx 10rpx; margin-right: 12rpx; flex-shrink: 0; }
+.src-n { font-size: 23rpx; color: var(--text); }
+.src-r { font-size: 20rpx; color: var(--text-dim); }
+
+.mth-desc { font-size: 23rpx; color: var(--text-dim); line-height: 1.7; margin-top: 12rpx; }
+.mth-desc .hl { color: var(--gold); font-weight: 700; }
+
+/* 合成入口 */
+.craft-go { display: flex; align-items: center; padding: 20rpx 26rpx; margin-bottom: 16rpx; }
+.cg-t { font-size: 24rpx; color: var(--text); font-weight: 700; }
+.cg-go { font-size: 30rpx; color: var(--gold); }
+
+/* 相关物品 */
+.rel { display: flex; flex-wrap: wrap; gap: 16rpx; padding-bottom: 8rpx; }
+.rel-it { width: calc(25% - 12rpx); padding: 16rpx 8rpx; display: flex; flex-direction: column; align-items: center; }
+.rel-n { font-size: 18rpx; color: var(--text-dim); margin-top: 8rpx; text-align: center;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+
+.pad-bottom { height: 140rpx; }
