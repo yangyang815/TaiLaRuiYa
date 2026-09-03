@@ -2,6 +2,7 @@
 const F = require('../../data/fishing')
 const U = require('../../utils/fishing')
 const store = require('../../utils/store')
+const { py } = require('../../utils/pinyin-mini')
 
 const CATS = [
   { k: '', n: '全部' },
@@ -13,6 +14,19 @@ const CATS = [
 ]
 const KIND_N = { quest: '任务鱼', food: '可钓获', gear: '钓具', bait: '鱼饵', crate: '宝匣' }
 
+// 分组板块定义（顺序即页面展示顺序）
+const GROUP_META = [
+  { k: 'quest', n: '任务鱼', icon: '🎣', desc: '需先向渔夫接任务才会上钩', checkable: true },
+  { k: 'food', n: '可钓获', icon: '🐟', desc: '随时可钓，用于料理与药水材料', checkable: true },
+  { k: 'gear', n: '钓具与药水', icon: '🧪', desc: '提升渔力与钓获品质', checkable: false },
+  { k: 'bait', n: '鱼饵', icon: '🐛', desc: '饵力越高，上钩越快', checkable: false },
+  { k: 'crate', n: '宝匣', icon: '📦', desc: '钓上后开启可获取物资', checkable: false }
+]
+
+// 地形排序（组内按此顺序归拢，相近水域的鱼挨在一起）
+const BIOME_ORDER = ['forest', 'snow', 'desert', 'jungle', 'ocean', 'sky', 'cavern', 'mushroom', 'honey', 'hallowed', 'corrupt', 'crimson', 'tundra', 'hell', 'any']
+const biomeRank = b => { const i = BIOME_ORDER.indexOf(b); return i < 0 ? 99 : i }
+
 // 精灵图缺鱼类贴图，用鱼系 emoji 稳定替代（按 id 哈希固定）
 const FISH_EMOJI = ['🐟', '🐠', '🐡', '🦈', '🦐', '🦀', '🐋', '🐙']
 function emojiOf (id) {
@@ -21,10 +35,13 @@ function emojiOf (id) {
   return FISH_EMOJI[h % FISH_EMOJI.length]
 }
 
-// 全量图鉴条目（任务鱼 + 可钓获 + 钓具 + 鱼饵 + 宝匣）
+// 全量图鉴条目（任务鱼 + 可钓获 + 钓具 + 鱼饵 + 宝匣，组内已排序）
 function buildAll () {
   const list = []
-  F.QUEST_FISH.forEach(f => list.push({
+  // 任务鱼：按地形归拢（森林→雪原→沙漠→丛林→海洋→天空→地下…）
+  F.QUEST_FISH.slice()
+    .sort((a, b) => biomeRank(a.biome) - biomeRank(b.biome) || a.name.localeCompare(b.name, 'zh'))
+    .forEach(f => list.push({
     id: f.id, kind: 'quest', kindN: KIND_N.quest, name: f.name, en: f.en || '',
     emoji: emojiOf(f.id),
     line1: (F.BIOME_N[f.biome] || f.biome) + ' · ' + (F.TIME_N[f.time] || f.time) + (f.weather === 'rain' ? ' · 雨天限定' : ''),
@@ -32,7 +49,10 @@ function buildAll () {
     extra: f.reward ? '🎁 奖励：' + f.reward : '',
     checkable: true
   }))
-  F.FOOD_FISH.forEach(f => list.push({
+  // 可钓获：按地形归拢，同地形渔力高的在前
+  F.FOOD_FISH.slice()
+    .sort((a, b) => biomeRank(a.biome) - biomeRank(b.biome) || b.power - a.power)
+    .forEach(f => list.push({
     id: f.id, kind: 'food', kindN: KIND_N.food, name: f.name, en: f.en || '',
     emoji: emojiOf(f.id),
     line1: (F.BIOME_N[f.biome] || f.biome) + ' · ' + (F.TIME_N[f.time] || f.time),
@@ -40,7 +60,10 @@ function buildAll () {
     extra: f.power ? '渔力 +' + f.power : '',
     checkable: true
   }))
-  F.GEAR.forEach(g => list.push({
+  // 钓具：按渔力从高到低
+  F.GEAR.slice()
+    .sort((a, b) => (b.power || 0) - (a.power || 0))
+    .forEach(g => list.push({
     id: g.id, kind: 'gear', kindN: KIND_N.gear, name: g.name, en: g.en || '',
     emoji: '🎣',
     line1: (g.power ? '渔力 +' + g.power + ' · ' : '') + (g.tier || ''),
@@ -48,7 +71,10 @@ function buildAll () {
     extra: '',
     checkable: false
   }))
-  F.BAITS.forEach(b => list.push({
+  // 鱼饵：饵力从高到低
+  F.BAITS.slice()
+    .sort((a, b) => (b.power || 0) - (a.power || 0))
+    .forEach(b => list.push({
     id: b.id, kind: 'bait', kindN: KIND_N.bait, name: b.name, en: b.en || '',
     emoji: '🐛',
     line1: '饵力 ' + b.power,
@@ -56,7 +82,10 @@ function buildAll () {
     extra: '',
     checkable: false
   }))
-  F.CRATES.forEach(c => list.push({
+  // 宝匣：困难模式前在前，困难模式在后
+  F.CRATES.slice()
+    .sort((a, b) => (a.tier === 'post' ? 1 : 0) - (b.tier === 'post' ? 1 : 0))
+    .forEach(c => list.push({
     id: c.id, kind: 'crate', kindN: KIND_N.crate, name: c.name, en: c.en || '',
     emoji: '📦',
     line1: c.tier === 'post' ? '困难模式' : '困难模式前',
@@ -67,6 +96,56 @@ function buildAll () {
   return list
 }
 const ALL = buildAll()
+
+/* ---------- 模糊搜索（拼音 / 英文 / 子序列 / 无序匹配，同图鉴页打分规则） ---------- */
+// 子序列：kw 各字符按顺序出现在 s 中
+function isSubseq (kw, s) {
+  let i = 0
+  for (const c of s) { if (c === kw[i]) { i++; if (i === kw.length) return true } }
+  return false
+}
+// 无序包含：kw 每个字符都在 s 中出现
+function hasAll (kw, s) {
+  for (const c of kw) if (!s.includes(c)) return false
+  return true
+}
+
+// 拼音索引（懒加载，减少启动开销）
+let _pyIdx = null
+function pyIndex () {
+  if (_pyIdx) return _pyIdx
+  _pyIdx = new Map()
+  ALL.forEach(x => {
+    const p = py(x.name)
+    _pyIdx.set(x.id, { full: p.full, init: p.init, en: (x.en || '').toLowerCase() })
+  })
+  return _pyIdx
+}
+
+// 单条打分：0 为不命中
+function scoreItem (x, kw) {
+  const p = pyIndex().get(x.id)
+  let sc = 0
+  if (x.name.startsWith(kw)) sc = 100
+  else if (x.name.includes(kw)) sc = 88
+  else if (p.en === kw) sc = 84
+  else if (p.en.startsWith(kw)) sc = 82
+  else if (p.en.includes(kw)) sc = 72
+  else if (p.full === kw) sc = 80
+  else if (p.full.startsWith(kw)) sc = 74
+  else if (p.full.includes(kw)) sc = 62
+  else if (p.init === kw) sc = 70
+  else if (kw.length >= 2 && p.init.startsWith(kw)) sc = 56
+  else if (kw.length >= 2 && isSubseq(kw, x.name)) sc = 38
+  else if (kw.length >= 3 && isSubseq(kw, p.en)) sc = 32
+  else if (kw.length >= 2 && kw.length <= 6 && hasAll(kw, x.name)) sc = 25
+  // 详情字段包含（地形 / 时间 / 来源等中文直搜）
+  if (!sc) {
+    if ((x.line1 || '').includes(kw)) sc = 40
+    else if ((x.line2 || '').includes(kw)) sc = 30
+  }
+  return sc
+}
 
 Page({
   data: {
@@ -86,7 +165,8 @@ Page({
     cats: CATS,
     cat: '',
     kw: '',
-    shown: [],
+    groups: [],
+    shownTotal: 0,
     // 进度
     prog: null
   },
@@ -124,9 +204,9 @@ Page({
       avail: t.fishes,
       availTotal: t.total,
       quest: Object.assign({}, quest, { done: done.indexOf(quest.id) >= 0 }),
-      prog: U.progress(done),
-      shown: this.filterList()
+      prog: U.progress(done)
     })
+    this.setData(this.filterList())
   },
 
   /* ---------- 今日推荐：时间 / 天气切换 ---------- */
@@ -151,32 +231,43 @@ Page({
   /* ---------- 图鉴筛选 / 搜索 ---------- */
   onCat (e) {
     this.setData({ cat: e.currentTarget.dataset.k })
-    this.setData({ shown: this.filterList() })
+    this.setData(this.filterList())
   },
   onKw (e) {
     this.setData({ kw: e.detail.value })
-    this.setData({ shown: this.filterList() })
+    this.setData(this.filterList())
   },
   clearKw () {
     this.setData({ kw: '' })
-    this.setData({ shown: this.filterList() })
+    this.setData(this.filterList())
   },
 
+  /* 生成分组列表：每个类别一个板块，带收集进度；搜索时按相关度排序 */
   filterList () {
     const { cat, kw } = this.data
     const done = new Set(store.getFishDone())
-    let list = ALL
-    if (cat) list = list.filter(x => x.kind === cat)
-    if (kw) {
-      const k = kw.toLowerCase()
-      list = list.filter(x =>
-        x.name.indexOf(kw) >= 0 ||
-        (x.en || '').toLowerCase().indexOf(k) >= 0 ||
-        (x.line1 || '').indexOf(kw) >= 0 ||
-        (x.line2 || '').indexOf(kw) >= 0
-      )
-    }
-    return list.map(x => Object.assign({}, x, { done: done.has(x.id) }))
+    const k = (kw || '').trim().toLowerCase()
+    const groups = GROUP_META
+      .filter(m => !cat || cat === m.k)
+      .map(m => {
+        let items = ALL.filter(x => x.kind === m.k)
+        if (k) {
+          items = items
+            .map(x => ({ x, sc: scoreItem(x, k) }))
+            .filter(t => t.sc > 0)
+            .sort((a, b) => b.sc - a.sc)
+            .map(t => t.x)
+        }
+        items = items.map(x => Object.assign({}, x, { done: done.has(x.id) }))
+        return Object.assign({}, m, {
+          items,
+          total: items.length,
+          doneN: items.filter(x => x.done).length
+        })
+      })
+      .filter(g => g.items.length)
+    const shownTotal = groups.reduce((s, g) => s + g.total, 0)
+    return { groups, shownTotal }
   },
 
   /* ---------- 收集打勾 ---------- */

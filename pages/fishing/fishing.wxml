@@ -10,7 +10,7 @@
   <!-- 搜索框：搜索时隐藏推荐区，只出结果 -->
   <view class="fs-bar card">
     <text class="fs-ico">🔍</text>
-    <input class="fs-input flex-1" placeholder="搜索鱼种、鱼饵、宝匣…" placeholder-class="fs-ph"
+    <input class="fs-input flex-1" placeholder="搜索鱼种、鱼饵、宝匣…支持拼音（ny → 鲶鱼）" placeholder-class="fs-ph"
       value="{{kw}}" bindinput="onKw" confirm-type="search" />
     <text class="fs-clear tappable" wx:if="{{kw}}" bindtap="clearKw">✕</text>
   </view>
@@ -87,7 +87,7 @@
 
     <!-- 图鉴标题 + 分类筛选 -->
     <view class="sec-title"><view class="diamond" /><text class="t">钓鱼图鉴</text>
-      <text class="more px">{{shown.length}} 条</text>
+      <text class="more px">{{shownTotal}} 条</text>
     </view>
   </block>
 
@@ -96,29 +96,38 @@
       bindtap="onCat" data-k="{{item.k}}">{{item.n}}</view>
   </scroll-view>
 
-  <!-- 图鉴列表 / 搜索结果 -->
-  <view class="g-none card" wx:if="{{kw && !shown.length}}">
+  <!-- 搜索无结果 -->
+  <view class="g-none card" wx:if="{{kw && !groups.length}}">
     <text class="g-none-t">没有匹配的内容</text>
-    <text class="g-none-s">试试更短的关键词：鲈鱼 / cod / 丛林 / 鱼饵…</text>
+    <text class="g-none-s">试试：鲈鱼 / ny（拼音首字母）/ cod / 丛林 / 雨天…</text>
   </view>
 
-  <view class="g-list">
-    <view class="g-item card tappable" wx:for="{{shown}}" wx:key="id"
-      bindtap="onCheck" data-id="{{item.id}}">
-      <view class="g-emoji">{{item.emoji}}</view>
-      <view class="col flex-1">
-        <view class="row g-name-row">
-          <text class="g-name {{item.done ? 'done' : ''}}">{{item.name}}</text>
-          <text class="tag {{item.kind === 'quest' ? 'tag-strat' : (item.kind === 'food' ? 'tag-npc' : (item.kind === 'bait' ? 'tag-item' : 'tag-mon'))}}">{{item.kindN}}</text>
-        </view>
-        <text class="g-en px" wx:if="{{item.en}}">{{item.en}}</text>
-        <text class="g-line">{{item.line1}}</text>
-        <text class="g-line dim" wx:if="{{item.line2}}">{{item.line2}}</text>
-        <text class="g-extra" wx:if="{{item.extra}}">{{item.extra}}</text>
-      </view>
-      <view class="g-check {{item.done ? 'on' : ''}}" wx:if="{{item.checkable}}">{{item.done ? '✓' : ''}}</view>
+  <!-- 分组图鉴：每个类别独立板块 -->
+  <block wx:for="{{groups}}" wx:for-item="grp" wx:for-index="gi" wx:key="k">
+    <view class="grp-head">
+      <view class="diamond" />
+      <text class="grp-t">{{grp.icon}} {{grp.n}}</text>
+      <text class="grp-meta px" wx:if="{{grp.checkable}}">已收集 {{grp.doneN}}/{{grp.total}}</text>
+      <text class="grp-meta px" wx:else>{{grp.total}} 种</text>
     </view>
-  </view>
+    <text class="grp-desc px" wx:if="{{!kw && !cat}}">{{grp.desc}}</text>
+    <view class="g-list">
+      <view class="g-item card tappable" wx:for="{{grp.items}}" wx:key="id"
+        bindtap="onCheck" data-id="{{item.id}}">
+        <view class="g-emoji">{{item.emoji}}</view>
+        <view class="col flex-1">
+          <view class="row g-name-row">
+            <text class="g-name {{item.done ? 'done' : ''}}">{{item.name}}</text>
+          </view>
+          <text class="g-en px" wx:if="{{item.en}}">{{item.en}}</text>
+          <text class="g-line">{{item.line1}}</text>
+          <text class="g-line dim" wx:if="{{item.line2}}">{{item.line2}}</text>
+          <text class="g-extra" wx:if="{{item.extra}}">{{item.extra}}</text>
+        </view>
+        <view class="g-check {{item.done ? 'on' : ''}}" wx:if="{{item.checkable}}">{{item.done ? '✓' : ''}}</view>
+      </view>
+    </view>
+  </block>
 
   <view class="foot safe-bottom">
     <text class="foot-t px">GONE FISHIN'</text>

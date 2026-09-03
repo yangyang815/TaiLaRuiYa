@@ -58,11 +58,6 @@
       <text class="st-t">收藏</text>
       <text class="st-v">{{favCount}} <text class="st-sub">个</text></text>
     </view>
-    <view class="stat card tappable" bindtap="goNotes">
-      <text class="st-icon">📝</text>
-      <text class="st-t">笔记</text>
-      <text class="st-v">{{noteCount}} <text class="st-sub">篇</text></text>
-    </view>
   </view>
 
   <!-- 功能列表 -->
@@ -71,12 +66,6 @@
       <text class="m-icon">❤️</text>
       <text class="m-n flex-1">我的收藏</text>
       <text class="m-v">{{favCount}} 个</text>
-      <text class="m-arrow">›</text>
-    </view>
-    <view class="m-row tappable" bindtap="goNotes">
-      <text class="m-icon">📝</text>
-      <text class="m-n flex-1">我的笔记</text>
-      <text class="m-v">{{noteCount}} 篇</text>
       <text class="m-arrow">›</text>
     </view>
     <view class="m-row tappable" bindtap="goAchv">
@@ -95,6 +84,24 @@
       <text class="m-icon">🎣</text>
       <text class="m-n flex-1">钓鱼图鉴</text>
       <text class="m-v">已收集 {{fishDone}}/{{fishTotal}}</text>
+      <text class="m-arrow">›</text>
+    </view>
+    <view class="m-row tappable" bindtap="goBuild">
+      <text class="m-icon">🏠</text>
+      <text class="m-n flex-1">建造指南</text>
+      <text class="m-v">已建成 {{buildDone}}/{{buildTotal}}</text>
+      <text class="m-arrow">›</text>
+    </view>
+    <view class="m-row tappable" bindtap="goDps">
+      <text class="m-icon">⚔️</text>
+      <text class="m-n flex-1">DPS 计算器</text>
+      <text class="m-v">配装模拟</text>
+      <text class="m-arrow">›</text>
+    </view>
+    <view class="m-row tappable" bindtap="goNpcPlan">
+      <text class="m-icon">🏘️</text>
+      <text class="m-n flex-1">NPC 规划器</text>
+      <text class="m-v">晶塔规划</text>
       <text class="m-arrow">›</text>
     </view>
   </view>

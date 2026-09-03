@@ -39,7 +39,7 @@ module.exports = [
     tips: ['护士 NPC 战斗中付费回血是平民外挂。', '月亮事件前搭一格宽"月亮掩体"可挡日耀柱烈焰。'],
     related: [{ id: 'moon_lord', type: 'boss' }, { id: 'zenith', type: 'item' }, { id: 'megashark', type: 'item' }] },
 
-  { id: 's_class_melee', title: '战士养成：从铜短剑到天顶剑', cat: 'class', cover: 'terra_blade', time: '6 分钟',
+  { id: 's_class_melee', title: '战士养成：从铜短剑到天顶剑', cat: 'class', cls: 'melee', topic: 'guide', cover: 'terra_blade', time: '6 分钟',
     summary: '近战是最"泰拉瑞亚"的职业：堆防御、贴脸输出、剑气纵横。本篇梳理全流程战士构筑。',
     steps: [
       { t: '前期', d: '金/铂金宽剑 + 熔岩套过渡，永夜刃是肉前毕业武器。' },
@@ -50,7 +50,7 @@ module.exports = [
     tips: ['甲虫套装"力量"叠满 +15% 近战伤害与攻速。', '天顶剑十把材料剑里最难凑的是星光（光之女皇掉落）。'],
     related: [{ id: 'zenith', type: 'item' }, { id: 'solar_armor', type: 'item' }, { id: 'warrior_emblem', type: 'item' }] },
 
-  { id: 's_class_ranger', title: '射手养成：子弹经济学', cat: 'class', cover: 'megashark', time: '6 分钟',
+  { id: 's_class_ranger', title: '射手养成：子弹经济学', cat: 'class', cls: 'ranger', topic: 'guide', cover: 'megashark', time: '6 分钟',
     summary: '远程安全但烧钱：武器、弹药、走位三位一体。巨兽鲨贯穿整个中期，是射手的浪漫。',
     steps: [
       { t: '前期', d: '金弓 + 小丑之箭/烈焰箭；地狱换凤凰爆破枪。' },
@@ -61,7 +61,7 @@ module.exports = [
     tips: ['弹药箱（军火商出售）放家里能省不少钱。', '高速弹药打机械毁灭者有奇效。'],
     related: [{ id: 'megashark', type: 'item' }, { id: 'sdmg', type: 'item' }] },
 
-  { id: 's_class_mage', title: '法师养成：蓝条管理艺术', cat: 'class', cover: 'nebula_blaze', time: '6 分钟',
+  { id: 's_class_mage', title: '法师养成：蓝条管理艺术', cat: 'class', cls: 'mage', topic: 'guide', cover: 'nebula_blaze', time: '6 分钟',
     summary: '法师输出高但脆皮：陨石套开始，星云套毕业，魔力花与魔能药水是续命根本。',
     steps: [
       { t: '前期', d: '陨石套 + 太空枪/恶魔镰刀，魔力水晶吃到 200 上限。' },
@@ -72,7 +72,7 @@ module.exports = [
     tips: ['魔力花自动喝蓝药，法师必做。', '幽灵套"面具"提供吸血，打持久战最强。'],
     related: [{ id: 'nebula_blaze', type: 'item' }, { id: 'nebula_armor', type: 'item' }] },
 
-  { id: 's_class_summon', title: '召唤师养成：挂机流大军阀', cat: 'class', cover: 'stardust_dragon', time: '6 分钟',
+  { id: 's_class_summon', title: '召唤师养成：挂机流大军阀', cat: 'class', cls: 'summon', topic: 'guide', cover: 'stardust_dragon', time: '6 分钟',
     summary: '最冷门也最轻松的职业：鞭子+仆从双修，蜘蛛套→扭曲套→星尘套，召满宝宝看戏。',
     steps: [
       { t: '前期', d: '史莱姆法杖看脸，蜂王掉落的蜂巢法杖是稳定起点。' },
@@ -82,6 +82,179 @@ module.exports = [
     ],
     tips: ['鞭子命中会给仆从加增益，记得切换使用。', '召唤栏上限通过套装与饰品叠加，最多 11 格。'],
     related: [{ id: 'terraprisma', type: 'item' }, { id: 'stardust_dragon', type: 'item' }, { id: 'empress_of_light', type: 'boss' }] },
+
+  /* ---------- 职业资料库细分文章 ---------- */
+  { id: 's_class_melee_weapon', title: '【战士】全阶段武器选择指南', cat: 'class', cls: 'melee', topic: 'weapon', cover: 'nights_edge', time: '7 分钟', isNew: true,
+    summary: '从铜短剑到天顶剑，战士武器完全盘点：每个阶段该拿什么剑、去哪里拿、为什么拿。',
+    steps: [
+      { t: '开局（铜→金）', d: '铜短剑只是仪式感，尽快换黄金阔剑/铂金宽剑。附魔剑冢的附魔剑与空岛星怒是开局最大惊喜。' },
+      { t: '腐化/猩红期', d: '光之驱逐（魔金）或血脉断裂（猩红）都是过渡；真正的目标是集齐永夜之刃四材料：村正、草薙、火山、光之驱逐/血脉断裂。' },
+      { t: '肉前毕业', d: '永夜之刃就是答案。地狱顺手捡恶魔镰刀书备着，熔岩套+永夜刃打肉山稳过。' },
+      { t: '肉后（机械三王期）', d: '神圣锭做断钢剑；光束剑、钥匙剑都是可用过渡。日食刷勇者断剑是真剑材料，优先级最高。' },
+      { t: '世纪之花后', d: '真永夜+真断钢合成泰拉刃，从此近战进入光剑时代；死神镰刀穿墙光刃是室内清屏神器。' },
+      { t: '毕业', d: '十剑合一的天顶剑 + 月主掉落的喵刃/泰拉悠悠球，近战武器树到此圆满。' }
+    ],
+    tips: ['日食的勇者断剑掉率在世纪之花后大幅提升，别在机械期死磕。', '天顶剑十把材料剑最难凑的是星光（光之女皇掉落）。'],
+    related: [{ id: 'zenith', type: 'item' }, { id: 'terra_blade', type: 'item' }, { id: 'nights_edge', type: 'item' }] },
+
+  { id: 's_class_ranger_hard', title: '【射手】肉后装备搭配推荐', cat: 'class', cls: 'ranger', topic: 'armor', cover: 'shroomite_armor', time: '5 分钟', isNew: true,
+    summary: '射手在困难模式初期如何快速成型？从死神套到蘑菇矿套，配装思路一篇讲清。',
+    steps: [
+      { t: '刚进肉后', d: '别急着换甲：死神套+代达罗斯风暴弓+圣箭可以先拆掉毁灭者。砸祭坛后优先做秘银/山铜砧。' },
+      { t: '机械期', d: '巨兽鲨（迷你鲨+鲨鱼鳍+力量之魂+械骨）是机械三王标准答案；甲用神圣套或钛金套（远程头）过渡。' },
+      { t: '世纪之花后', d: '蘑菇矿套成型：静止隐身+50%弹药伤害，配合叶绿连弩或战术霰弹枪，输出质变。' },
+      { t: '饰品思路', d: '射手徽章→复仇者徽章→毁灭者徽章逐步升级；魔法箭袋（箭矢+10%伤害+无限回收）是弓系必带。' },
+      { t: '毕业', d: '星旋套+太空海豚机枪（SDMG）+雪人炮，弹药箱减耗 20%，弹幕风暴撕裂月亮领主。' }
+    ],
+    tips: ['蘑菇矿套隐身时移动会破隐，搭"打一下退一步"节奏。', '高速弹药打毁灭者有奇效，圣弹清小怪自愈。'],
+    related: [{ id: 'megashark', type: 'item' }, { id: 'shroomite_armor', type: 'item' }, { id: 'sdmg', type: 'item' }] },
+
+  { id: 's_class_mage_mana', title: '【法师】魔力管理技巧', cat: 'class', cls: 'mage', topic: 'skill', cover: 'mana_flower', time: '5 分钟', isNew: true,
+    summary: '魔力药剂、魔力花、星力的正确使用方式：让蓝条永远见不了底的回蓝体系。',
+    steps: [
+      { t: '魔力上限', d: '坠落星合成魔力水晶，把上限从 20 吃到 200（每颗+20）。肉前就该吃满，后期输出全靠蓝池深度。' },
+      { t: '自动喝药', d: '魔力花（自然馈赠+魔力药水）是法师生命线：蓝量见底自动喝药，从此不用手动按。' },
+      { t: '药水策略', d: '大魔力药水回 300 蓝，但喝药有"药水病"冷却（60秒）；回蓝间隔期靠星力护身符、幽魂魂灵装备补足。' },
+      { t: '装备回蓝', d: '幽灵套（头冠）击杀回蓝、星云套增益球连续拾取蓝球，两套毕业甲都自带回蓝体系。' },
+      { t: '省蓝打法', d: '低耗弹幕（水晶风暴 5 蓝/发）清杂，高耗爆发（幽灵法杖 18 蓝/发）只打 Boss 窗口期，蓝耗管理就是输出节奏管理。' }
+    ],
+    tips: ['月光事件掉落的星云烈焰耗蓝不低，配魔力花+大蓝药双保险。', '水晶球"预知"Buff +5% 魔法伤害还+蓝上限，家门口放一个。'],
+    related: [{ id: 'mana_flower', type: 'item' }, { id: 'nebula_armor', type: 'item' }, { id: 'spectre_armor', type: 'item' }] },
+
+  { id: 's_class_summon_minion', title: '【召唤师】召唤物优先级解析', cat: 'class', cls: 'summon', topic: 'skill', cover: 'terraprisma', time: '5 分钟', isNew: true,
+    summary: '什么情况下用哪个召唤物？从蜂巢法杖到泰拉棱镜，仆从强度与场景适配全解析。',
+    steps: [
+      { t: '肉前：蜂王军', d: '蜂巢法杖（蜂王掉落）+ 黄蜂法杖组成双召唤；刃杖（冰雪巨人掉）是肉前最强单体仆从。' },
+      { t: '机械期：蜘蛛流', d: '蜘蛛套+蜘蛛法杖，小蜘蛛数量碾压质量；沙漠的大象法杖范围清场打事件最强。' },
+      { t: '世纪之花后：扭曲科技', d: '扭曲套大幅提升仆从伤害；刃杖MAX或乌鸦法杖对单，矮人法杖（石巨人掉）对群。' },
+      { t: '毕业：星尘与棱镜', d: '星尘之龙越长伤害越高（吃召唤栏），星尘细胞持续输出；泰拉棱镜（白天无伤光女100%掉）是仆从天花板。' },
+      { t: '鞭子哲学', d: '仆从只打鞭子最后命中的目标：用挥击"指挥"集火，刀锋鞭加暴击、黑鞭加攻速，切换使用收益最大。' }
+    ],
+    tips: ['召唤栏上限=基础1+套装+饰品，最多11格，龙每多1栏+125伤害。', '白天无伤击败光之女皇=泰拉棱镜，夜晚击杀则掉夜光。'],
+    related: [{ id: 'terraprisma', type: 'item' }, { id: 'stardust_dragon', type: 'item' }, { id: 'empress_of_light', type: 'boss' }] },
+
+  /* ---------- 各职业阶段攻略（第二阶段） ---------- */
+  { id: 's_class_melee_pre', title: '【战士】肉前构筑：暗影套到熔岩套', cat: 'class', cls: 'melee', topic: 'armor', cover: 'molten_armor', time: '5 分钟', isNew: true,
+    summary: '战士肉前盔甲三步走：暗影套过渡、死神套补输出、熔岩套毕业，一套比一套能打。',
+    steps: [
+      { t: '暗影套（腐化/猩红期）', d: '魔金锭+暗影鳞片（或猩红锭+组织样本）合成。头盔+近战攻速，胸甲+近战伤害，是打蜂王/骷髅王的主力甲。' },
+      { t: '死神套（可选）', d: '骨头×150+蛛网×50。死神套偏远程加成，战士可跳过——把骨头省下来做其他装备。' },
+      { t: '熔岩套（地狱毕业）', d: '狱石锭×36 合成，近战伤害+17%，肉前近战天花板。挖狱石记得带黑曜石头颅药水防烫。' },
+      { t: '饰品搭配', d: '闪电靴（移速）+ 黑曜石护盾（击退免疫）+ 猛虎爪（丛林神庙材料，近战攻速）是肉前铁三角，克眼/世吞掉的徽章别忘装上。' }
+    ],
+    tips: ['挖狱石前喝水下呼吸药水+黑曜石头颅药水，地狱岩浆池上挖最安全。', '暗影套的头盔加攻速，打骷髅王时贴脸绕后输出。'],
+    related: [{ id: 'molten_armor', type: 'item' }, { id: 'nights_edge', type: 'item' }, { id: 'wall_of_flesh', type: 'boss' }] },
+
+  { id: 's_class_melee_hard', title: '【战士】肉后饰品毕业路线', cat: 'class', cls: 'melee', topic: 'acc', cover: 'avenger_emblem', time: '5 分钟', isNew: true,
+    summary: '从战士徽章到天界壳：肉后近战饰品的升级顺序与合成树，五槽位最优解。',
+    steps: [
+      { t: '第一阶段（机械期）', d: '战士徽章 + 复仇者徽章（任意徽章+力量之魂×5+视野之魂×5+恐惧之魂×5）+ 闪电靴升级版：雷电靴。' },
+      { t: '第二阶段（世纪之花后）', d: '机械手套（强力手套+机械Boss材料）取代攻速手套；毁灭者徽章（复仇者+眼睛）补暴击。' },
+      { t: '第三阶段（毕业期）', d: '天界石/天界壳（日月石合成线）+ 甲虫配件；悠悠球玩家必带悠悠球袋（悠悠球+白绳+计数器）。' },
+      { t: '词条选择', d: '全输出选"威逼"（+4%伤害）；容错不足时"守护"（+4防御）。毕业武器一律"传说"词条。' }
+    ],
+    tips: ['复仇者徽章是万金油，任何职业过渡期都能带。', '天界壳白天/夜晚形态属性相同，选哪个看外观喜好。'],
+    related: [{ id: 'avenger_emblem', type: 'item' }, { id: 'mechanical_glove', type: 'item' }, { id: 'celestial_shell', type: 'item' }] },
+
+  { id: 's_class_melee_late', title: '【战士】后期输出手法进阶', cat: 'class', cls: 'melee', topic: 'end', cover: 'beetle_armor', time: '6 分钟', isNew: true,
+    summary: '甲虫叠层、泰拉刃剑气、天顶剑走位：世纪之花后到毕业的近战输出细节。',
+    steps: [
+      { t: '甲虫套叠层', d: '进攻甲虫甲持续输出叠"力量"层数（最多+30%伤害+攻速），换目标或受伤会掉层——保持连击是输出核心。' },
+      { t: '泰拉刃使用', d: '剑气是独立弹幕，贴身打 Boss 时本体+剑气双命中，伤害翻倍。对月主核心贴脸绕圈输出。' },
+      { t: '天顶剑走位', d: '天顶剑攻击范围是身周圆形区域，输出时围着 Boss 转圈比站桩 DPS 高 30%。配耀斑套冲撞反击打四柱。' },
+      { t: 'Boss专精', d: '猪龙鱼公爵用悠悠球（泰拉悠悠球）垂直拉扯；光女用喵刃贴地横跳；月主开眼后天顶剑站头上一轮带走。' }
+    ],
+    tips: ['甲虫套"持久"头盔牺牲输出换回血，手残党打石巨人可以换上。', '天顶剑对多体节Boss（毁灭者）有奇效，一段挥击全屏命中。'],
+    related: [{ id: 'beetle_armor', type: 'item' }, { id: 'terra_blade', type: 'item' }, { id: 'zenith', type: 'item' }] },
+
+  { id: 's_class_ranger_pre', title: '【射手】肉前弓枪双修路线', cat: 'class', cls: 'ranger', topic: 'weapon', cover: 'phoenix_blaster', time: '6 分钟', isNew: true,
+    summary: '弓与枪各有所长：肉前射手武器全盘点，什么时候用弓、什么时候掏枪。',
+    steps: [
+      { t: '弓系线', d: '木弓→金/铂金弓→蜂膝弓（蜂王）→熔火之怒（地狱）。弓的优势是箭矢易得、火焰箭持续伤害，蜂膝弓的蜜蜂还能追踪。' },
+      { t: '枪系线', d: '火枪/掠夺者（腐化/猩红）→手枪（地牢）→凤凰爆破枪（手枪+黑曜石）。枪系DPS稳定，迷你鲨保底，陨石弹性价比最高。' },
+      { t: '弹药经济学', d: '小丑之箭（克眼后商人）打Boss、陨石弹清杂、火焰箭过渡。钱紧时普通箭+弓也能打，省下的钱买迷你鲨。' },
+      { t: 'Boss适配', d: '克眼/世吞用弓+小丑箭；骷髅王用凤凰爆破枪贴脸爆发；肉山沿平台跑动用熔火之怒回头箭。' }
+    ],
+    tips: ['凤凰爆破枪是肉前DPS之王，手枪务必去地牢拿。', '打肉山前多备两组弹药，弹药耗尽是最惨的死法。'],
+    related: [{ id: 'phoenix_blaster', type: 'item' }, { id: 'molten_fury', type: 'item' }, { id: 'minishark', type: 'item' }] },
+
+  { id: 's_class_ranger_late', title: '【射手】毕业配装与弹药选择', cat: 'class', cls: 'ranger', topic: 'end', cover: 'vortex_beater', time: '6 分钟', isNew: true,
+    summary: '星旋套之后怎么配？SDMG、雪人炮、脉冲弓的弹药搭配，毕业射手的最后一块拼图。',
+    steps: [
+      { t: '武器选择', d: 'SDMG（月主掉落）泛用最强；雪人炮（霜月）自带追踪打四柱；脉冲弓（旅商）能量矢穿透清杂；海啸+圣灵箭对单体爆发最高。' },
+      { t: '弹药矩阵', d: '高速弹（SDMG清杂）/ 叶绿弹（追踪省操作）/ 圣灵箭（海啸爆发）/ 爆破弹（雪人炮范围）。弹药箱减耗20%必放家里。' },
+      { t: '毕业饰品', d: '射手徽章→毁灭者徽章 + 复仇者 + 天界壳 + 无限箭袋（四种基础箭各3996支合成）/ 弹药宝盒 + 魔法箭袋（弓系）。' },
+      { t: '星旋套用法', d: '隐身状态弹药伤害+但移速降：清四柱开隐身站桩，打月主关隐身保持走位，按场景切换是毕业射手的基本功。' }
+    ],
+    tips: ['无限箭袋/弹药宝盒解决弹药焦虑，刷材料期间挂机不掉DPS。', '叶绿弹追踪+穿墙，月亮事件闭眼输出。'],
+    related: [{ id: 'vortex_beater', type: 'item' }, { id: 'sdmg', type: 'item' }, { id: 'snowman_cannon', type: 'item' }] },
+
+  { id: 's_class_mage_pre', title: '【法师】肉前法术武器盘点', cat: 'class', cls: 'mage', topic: 'weapon', cover: 'water_bolt', time: '5 分钟', isNew: true,
+    summary: '水矢、恶魔镰刀到水晶蛇：肉前法师从地牢书架到神圣合成的法术全流程。',
+    steps: [
+      { t: '起步法术', d: '地牢书架拆水矢（弹幕折射），魔镜法杖/火焰激光棒开荒。堕落法师帽+丛林套起步，蓝量靠坠落星魔力水晶拉满。' },
+      { t: '中期法术', d: '恶魔镰刀（地狱恶魔掉落）：蓄力穿透，肉前法术DPS标杆；恶魔之锆（魔金世界宝箱）弹跳光球清杂。' },
+      { t: '肉前毕业', d: '水晶蛇（水晶碎块+光明之魂合成）发射追踪水晶，配陨石套或丛林套打肉山最稳。' },
+      { t: '蓝量管理', d: '魔力水晶吃到200上限+大魔力药水常备；星力手环/魔力再生药水持续回蓝，别让蓝条断了输出节奏。' }
+    ],
+    tips: ['水矢在封闭空间弹射，地牢速刷神器。', '恶魔镰刀蓄满力穿透多段，打世吞一梭清屏。'],
+    related: [{ id: 'water_bolt', type: 'item' }, { id: 'demon_scythe', type: 'item' }, { id: 'crystal_serpent', type: 'item' }] },
+
+  { id: 's_class_summon_pre', title: '【召唤师】肉前入门：黑曜石甲与蜂群', cat: 'class', cls: 'summon', topic: 'armor', cover: 'obsidian_armor_set', time: '5 分钟', isNew: true,
+    summary: '肉前召唤的最优解：黑曜石甲鞭子流+蜂群仆从，手把手带你组建第一支宝宝大军。',
+    steps: [
+      { t: '第一只仆从', d: '史莱姆法杖看脸（史莱姆雨/雕像），稳定来源是蜂王掉落的蜂巢法杖+黄蜂法杖（丛林黄蜂掉蜂蜡合成）。' },
+      { t: '黑曜石甲', d: '丝绸线（蛛网+骨头织布机合成）+黑曜石+暗影鳞片合成。鞭子攻速+肉前顶级，是1.4肉前召唤真毕业甲。' },
+      { t: '鞭子入门', d: '皮鞭（皮革×10，皮匠NPC出售）起步→荆棘鞭（蜂王材料）。鞭子命中给仆从上"标记"，让宝宝集火你打的目标。' },
+      { t: 'Boss打法', d: '召满仆从后专心走位+挥鞭：打克眼绕圈、骷髅王垂直拉扯、肉山沿平台跑，宝宝全程自动输出。' }
+    ],
+    tips: ['黑曜石甲的鞭子加成是肉前召唤核心，优先级高于蜂王套。', '仆从不会过期死亡，进Boss房前召满再喝召唤药水。'],
+    related: [{ id: 'hornet_staff', type: 'item' }, { id: 'snapthorn', type: 'item' }, { id: 'obsidian_armor_set', type: 'item' }] },
+
+  { id: 's_class_summon_hard', title: '【召唤师】肉后蜘蛛流构筑', cat: 'class', cls: 'summon', topic: 'skill', cover: 'spider_staff', time: '5 分钟', isNew: true,
+    summary: '蜘蛛套+蜘蛛法杖的数量碾压：刚进肉后的召唤师如何用蛛网大军拆掉机械三王。',
+    steps: [
+      { t: '蜘蛛套获取', d: '肉后地下蜘蛛巢刷蜘蛛（黑色墙区域），蛛牙×36+蛛网×216 合成蜘蛛盔甲：+28%仆从伤害+3召唤栏。' },
+      { t: '仆从选择', d: '蜘蛛法杖（蛛牙合成）一次召唤多只小蜘蛛，数量碾压质量；刃杖（冰雪巨人掉落物合成）对单体最强，打双子魔眼首选。' },
+      { t: '鞭子升级', d: '火鞭（地狱石+暗影材料）给仆从上火伤debuff；血月刷DD2商店的黑暗丰收鞭。鞭子攻速词条优先。' },
+      { t: '机械三王打法', d: '蜘蛛大军+刃杖对单：毁灭者铺满蜘蛛自动啃，双子用刃杖集火眼睛，骷髅王绕臂走位。全程只需躲弹幕。' }
+    ],
+    tips: ['蜘蛛巢在肉后地下雪原/普通洞穴都有，带把好镐挖黑色墙区域。', '刃杖的"穿透无视5点防御"特性打高防Boss血赚。'],
+    related: [{ id: 'spider_staff', type: 'item' }, { id: 'blade_staff', type: 'item' }, { id: 'imp_staff', type: 'item' }] },
+
+  /* ---------- 法师/召唤师阶段攻略（第三阶段） ---------- */
+  { id: 's_class_mage_hard', title: '【法师】肉后配装与法术选择', cat: 'class', cls: 'mage', topic: 'armor', cover: 'golden_shower', time: '6 分钟', isNew: true,
+    summary: '水晶蛇、黄金雨、暗影束：肉后法师从机械三王到世纪之花的装备与法术体系。',
+    steps: [
+      { t: '盔甲选择', d: '钛金套（魔法头）闪避容错优先；神圣套（魔法头）暴击加成更凶。禁忌套（沙岩+暗影材料）是副产物，魔法+召唤双修可做。' },
+      { t: '法术矩阵', d: '水晶蛇（追踪）清杂打Boss两用；黄金雨/诅咒之焰削弱Boss防御是团队级增益；暗影束法杖（地牢幽魂）在墙壁间弹射爆发。' },
+      { t: '回蓝体系', d: '魔力花自动喝药打底，星星辉盾/天界手环提蓝量；幽灵套（面具）击杀回蓝成型前，大蓝药+魔力再生药水双开。' },
+      { t: 'Boss打法', d: '机械三王用水晶蛇+黄金雨先手减防；世纪之花用暗影束在洞穴墙壁弹射，或泡泡枪贴脸爆发。' }
+    ],
+    tips: ['黄金雨的减防debuff可刷新，保持Boss身上常驻。', '暗影束在1格宽竖井里伤害指数级弹射，地牢速刷神技。'],
+    related: [{ id: 'golden_shower', type: 'item' }, { id: 'crystal_serpent', type: 'item' }, { id: 'shadowbeam_staff', type: 'item' }] },
+
+  { id: 's_class_mage_late', title: '【法师】毕业构筑：星云体系', cat: 'class', cls: 'mage', topic: 'end', cover: 'nebula_armor', time: '6 分钟', isNew: true,
+    summary: '星云套增益球叠层机制详解 + 最后棱镜的正确打开方式，法师毕业的最后一步。',
+    steps: [
+      { t: '星云套装机制', d: '击杀敌怪掉落三种增益球：紫=魔法伤害、蓝=回蓝、粉=回血。同色最多叠3层，持续8秒，输出时优先吃紫球。' },
+      { t: '武器选择', d: '最后棱镜（月主）聚焦后伤害爆炸但吃蓝如喝水；星云烈焰（星云碎片）追踪+高DPS省心；月耀（月主）天降光柱对地敌人。' },
+      { t: '饰品毕业', d: '法师徽章→毁灭者徽章 + 复仇者 + 天界壳 + 星星辉盾/天界手环 + 磁花（魔力花+天界磁石，自动拾取蓝球）。' },
+      { t: '棱镜使用技巧', d: '棱镜前摇1.5秒聚焦，适合Boss硬直窗口；配星云蓝球+磁花+大蓝药三重回蓝，才能让彩虹射线不断流。' }
+    ],
+    tips: ['星云套头冠（输出）与面具（生存）按Boss强度切换。', '磁花的蓝球吸附范围翻倍，棱镜流派必合成。'],
+    related: [{ id: 'nebula_armor', type: 'item' }, { id: 'last_prism', type: 'item' }, { id: 'nebula_blaze', type: 'item' }] },
+
+  { id: 's_class_summon_late', title: '【召唤师】毕业构筑：龙与棱镜', cat: 'class', cls: 'summon', topic: 'end', cover: 'stardust_armor', time: '6 分钟', isNew: true,
+    summary: '星尘之龙的养成逻辑、泰拉棱镜的获取姿势，以及毕业召唤师的鞭子哲学。',
+    steps: [
+      { t: '星尘套机制', d: '星尘碎片合成，+5召唤栏+66%仆从伤害；套装特效"星尘守护者"可主动召出挡刀，冷却90秒。' },
+      { t: '龙养成逻辑', d: '星尘之龙吃掉全部召唤栏：栏越多体节越长、单次咬合伤害越高。11栏满配龙的爆发碾压一切仆从，但攻速慢——对Boss用龙，清杂换星尘细胞。' },
+      { t: '泰拉棱镜', d: '白天（4:30-19:30）无伤击败光之女皇100%掉落。棱镜小剑自带超高攻速与命中标记，堪称"第七个玩家"。打光女用万花筒+侏儒远遁流。' },
+      { t: '鞭子哲学', d: '毕业鞭万花筒（光女）：+20%召唤标记伤害；黑鞭（月亮事件）攻速加成。挥鞭即指挥：想让宝宝打谁，鞭子最后抽谁。' }
+    ],
+    tips: ['龙的体节穿过方块攻击，打月主核心无脑穿墙。', '星尘守护者在Boss狂暴档能挡一次致命伤，别浪费。'],
+    related: [{ id: 'stardust_armor', type: 'item' }, { id: 'stardust_dragon', type: 'item' }, { id: 'terraprisma', type: 'item' }] },
 
   { id: 's_farm_coin', title: '刷钱农场：躺着一分钟 10 金', cat: 'build', cover: 'gold_bar', time: '4 分钟',
     summary: '凝胶史莱姆农场 + 钱币吉利物，睡觉挂机也能日进斗金，从此军火商账单不眨眼。',

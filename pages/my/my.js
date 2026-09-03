@@ -2,6 +2,8 @@
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
 const achv = require('../../utils/achievements')
+const fishing = require('../../utils/fishing')
+const { CASES: BUILD_CASES } = require('../../data/building')
 const { LIST: GACHV_LIST } = require('../../data/gameAchievements')
 
 const AVATARS = ['ava_knight', 'ava_wizard', 'ava_slime', 'ava_eye', 'ava_bunny', 'ava_moon']
@@ -25,7 +27,7 @@ Page({
     signature: '',
     // 统计
     bossN: 0, bossTotal: 0,
-    favCount: 0, noteCount: 0,
+    favCount: 0,
     achvUnlocked: 0, achvTotal: 0,
     gAchvDone: 0, gAchvTotal: 0,
     // 设置
@@ -67,14 +69,16 @@ Page({
     const doneAchv = store.getGameAchv()
     const gAchvDone = GACHV_LIST.filter(a => doneAchv[a.id]).length
     const v = store.getVersion()
+    const fprog = fishing.progress(store.getFishDone())
     this.setData({
+      fishDone: fprog.done, fishTotal: fprog.total,
+      buildDone: store.getBuildDone().length, buildTotal: BUILD_CASES.length,
       profile: p,
       avatarArtId: p.avatar || 'ava_knight',
       level: store.getLevel(),
       signature: achv.signature(),
       bossN, bossTotal,
       favCount: store.getFavs().length,
-      noteCount: store.getNotes().length,
       achvUnlocked: sum.unlocked, achvTotal: sum.total,
       gAchvDone, gAchvTotal: GACHV_LIST.length,
       version: v,
@@ -103,10 +107,12 @@ Page({
 
   /* ---------- 跳转 ---------- */
   goFavs () { wx.navigateTo({ url: '/pages/favs/favs' }) },
-  goNotes () { wx.navigateTo({ url: '/pages/notes/notes' }) },
   goAchv () { wx.navigateTo({ url: '/pages/achv/achv' }) },
   goGameAchv () { wx.navigateTo({ url: '/pages/gameachv/gameachv' }) },
   goFishing () { wx.navigateTo({ url: '/pages/fishing/fishing' }) },
+  goBuild () { wx.navigateTo({ url: '/pages/build/build' }) },
+  goDps () { wx.navigateTo({ url: '/pages/dps/dps' }) },
+  goNpcPlan () { wx.navigateTo({ url: '/pages/npcplan/npcplan' }) },
   goBosses () {
     const app = getApp()
     app.globalData.pendingCodex = { tab: 'boss' }

@@ -53,11 +53,14 @@ Page({
   openDetail (id) {
     const s = dex.strats.find(x => x.id === id)
     if (!s) return
+    const CAREER = require('../../data/career')
+    const clsInfo = s.cls ? CAREER.CLASSES.find(c => c.id === s.cls) : null
     this.setData({
       mode: 'detail',
       s: {
         id: s.id, title: s.title, summary: s.summary, time: s.time,
         catName: CAT_NAME[s.cat], artId: s.cover || 'stone',
+        cls: s.cls || '', clsName: clsInfo ? clsInfo.name : '', clsIcon: clsInfo ? clsInfo.icon : '',
         steps: s.steps.map((x, i) => ({ i: i + 1, t: x.t, d: x.d })),
         tips: s.tips
       },
@@ -68,6 +71,13 @@ Page({
       }).filter(Boolean),
       fav: store.isFav('strat_' + id)
     })
+  },
+
+  /* 双向联动：跳转该职业的路线规划 */
+  goCareerPath () {
+    const store = require('../../utils/store')
+    store.setCareerCls(this.data.s.cls)
+    wx.navigateTo({ url: '/pages/careerpath/careerpath' })
   },
 
   back () {

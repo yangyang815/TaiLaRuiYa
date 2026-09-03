@@ -13,6 +13,8 @@ const K = {
   checks: 'terr_checks',  // 攻略清单打勾 {bossId: {itemId: 1}}
   gachv: 'terr_gachv',    // 泰拉成就完成标记 {achvId: ts}
   fish: 'terr_fish',      // 钓鱼图鉴收集标记 [fishId]
+  build: 'terr_build',    // 建造案例已建成打卡 [caseId]
+  career: 'terr_career',  // 职业养成进度 {cls: 'melee', done: {stageId: ts}}
   flags: 'terr_flags'     // 行为标志 {themeSwitched, versionSwitched, craftUsed}
 }
 
@@ -188,6 +190,40 @@ function toggleFish (id) {
   return i < 0
 }
 
+/* ---------- 建造案例打卡（已建成） ---------- */
+function getBuildDone () {
+  return get(K.build, []) // [caseId]
+}
+function isBuildDone (id) {
+  return getBuildDone().indexOf(id) >= 0
+}
+function toggleBuild (id) {
+  const all = getBuildDone()
+  const i = all.indexOf(id)
+  if (i >= 0) all.splice(i, 1)
+  else all.push(id)
+  set(K.build, all)
+  return i < 0
+}
+
+/* ---------- 职业养成进度 ---------- */
+function getCareer () {
+  return get(K.career, { cls: 'melee', done: {} }) // {cls, done:{stageId: ts}}
+}
+function setCareerCls (cls) {
+  const c = getCareer()
+  c.cls = cls
+  set(K.career, c)
+}
+function toggleCareerStage (stageId) {
+  const c = getCareer()
+  const added = !c.done[stageId]
+  if (added) c.done[stageId] = Date.now()
+  else delete c.done[stageId]
+  set(K.career, c)
+  return added
+}
+
 /* ---------- 行为标志（成就判定用） ---------- */
 function getFlags () {
   return get(K.flags, {}) // { themeSwitched, versionSwitched, craftUsed, ... }
@@ -229,6 +265,8 @@ module.exports = {
   getChecks, getBossChecks, toggleCheck,
   getGameAchv, isGameAchvDone, toggleGameAchv,
   getFishDone, isFishDone, toggleFish,
+  getBuildDone, isBuildDone, toggleBuild,
+  getCareer, setCareerCls, toggleCareerStage,
   getFlags, markFlag,
   getCmts, addCmt, delCmt,
   getProfile, setProfile,

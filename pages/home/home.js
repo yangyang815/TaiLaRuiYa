@@ -13,8 +13,8 @@ const GRID = [
   { k: 'potion', n: '药水指南', art: 'healing_potion', go: 'list?type=potion' },
   { k: 'progress', n: '流程攻略', art: 'copper_pick', go: 'strategy:progress' },
   { k: 'event', n: '事件大全', art: 'boss_skeletron_prime', go: 'strategy:event' },
-  { k: 'class', n: '职业养成', art: 'solar_armor', go: 'strategy:class' },
-  { k: 'build', n: '建造教程', art: 'workbench', go: 'strategy:build' }
+  { k: 'class', n: '职业养成', art: 'solar_armor', url: '/pages/career/career' },
+  { k: 'build', n: '建造指南', art: 'workbench', url: '/pages/build/build' }
 ]
 
 // 特色入口：与手册入口同款卡片结构，合并进宫格（共 16 个）
@@ -43,10 +43,17 @@ const CHALLENGE_DESC = {
   deerclops: '独眼巨鹿，寒冬的噩梦'
 }
 
-// 按周确定性轮换的本周挑战 Boss
+// 按周确定性轮换的本周挑战 Boss（以本地时区周一为一周起点）
+function weekNumber () {
+  const now = new Date()
+  const day = (now.getDay() + 6) % 7 // 周一=0 … 周日=6
+  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - day)
+  return Math.floor(monday.getTime() / (7 * 86400000))
+}
+
 function weeklyChallenge () {
   const bosses = dex.ALL.filter(e => e.type === 'boss')
-  const week = Math.floor(Date.now() / (7 * 86400000))
+  const week = weekNumber()
   const e = bosses[week % bosses.length]
   if (!e) return null
   return {
@@ -133,6 +140,11 @@ Page({
     if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().init(0)
     const app = getApp()
     this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
+    // 跨周自动刷新本周挑战（页面缓存期间周一轮换）
+    const weekly = weeklyChallenge()
+    if (weekly && (!this.data.weekly || this.data.weekly.id !== weekly.id)) {
+      this.setData({ weekly })
+    }
     // 图鉴页跳转意图（宫格直达）
     const pending = app.globalData.pendingCodex
     if (pending) {

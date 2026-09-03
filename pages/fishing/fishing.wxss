@@ -76,6 +76,13 @@
 .cat-scroll { white-space: nowrap; margin-bottom: 20rpx; }
 .cat-scroll .chip { display: inline-block; margin-right: 14rpx; }
 
+/* 分组板块标题 */
+.grp-head { display: flex; align-items: center; margin: 26rpx 0 6rpx; }
+.grp-head .diamond { width: 14rpx; height: 14rpx; margin-right: 12rpx; }
+.grp-t { font-size: 29rpx; font-weight: 800; color: var(--text); }
+.grp-meta { font-size: 20rpx; color: var(--text-dim); margin-left: auto; }
+.grp-desc { display: block; font-size: 20rpx; color: var(--text-dim); opacity: 0.85; margin: 4rpx 0 14rpx 26rpx; }
+
 /* 图鉴列表 */
 .g-none { padding: 40rpx 24rpx; text-align: center; }
 .g-none-t { display: block; font-size: 26rpx; font-weight: 800; color: var(--text); }

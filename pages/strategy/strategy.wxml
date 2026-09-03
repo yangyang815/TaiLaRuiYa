@@ -70,6 +70,16 @@
         <text class="tip-t">{{item}}</text>
       </view>
 
+      <!-- 职业路线联动入口 -->
+      <view class="career-link card tappable" wx:if="{{s.cls}}" bindtap="goCareerPath">
+        <view class="cl-icon"><pixel-icon art-id="terra_blade" size="72" /></view>
+        <view class="col flex-1">
+          <text class="cl-t">查看{{s.clsName}}完整路线规划</text>
+          <text class="cl-s">从开局到毕业的 8 阶段养成路线 →</text>
+        </view>
+        <text class="cl-arrow">›</text>
+      </view>
+
       <!-- 相关条目 -->
       <view class="sec-title"><view class="diamond" /><text class="t">相关条目</text></view>
       <scroll-view class="rel-scroll" scroll-x enhanced show-scrollbar="{{false}}">

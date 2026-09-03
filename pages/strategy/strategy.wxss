@@ -1,6 +1,17 @@
 /* 攻略页 */
 .strat-root { min-height: 100vh; }
 
+/* 职业路线联动入口 */
+.career-link { display: flex; align-items: center; gap: 20rpx; padding: 22rpx 24rpx; margin-bottom: 26rpx;
+  border: 2rpx solid rgba(255, 215, 0, 0.4);
+  background: linear-gradient(150deg, rgba(255, 215, 0, 0.10), rgba(26, 14, 46, 0.3)); }
+.career-link:active { transform: scale(0.98); }
+.cl-icon { width: 96rpx; height: 96rpx; border-radius: 16rpx; background: rgba(0, 0, 0, 0.28);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cl-t { font-size: 27rpx; font-weight: 800; color: #FFD700; }
+.cl-s { font-size: 21rpx; color: var(--sub, #8a8a94); margin-top: 8rpx; }
+.cl-arrow { font-size: 36rpx; color: #FFD700; font-weight: 700; }
+
 .nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
 .back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
   background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
