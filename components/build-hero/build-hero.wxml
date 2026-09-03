@@ -1,0 +1,14 @@
+<view class="bh" style="width:{{width}}rpx;height:{{height}}rpx;">
+  <view class="bh-sky" />
+  <view class="bh-cloud c1" />
+  <view class="bh-cloud c2" />
+  <view class="bh-grid">
+    <view class="bh-row" wx:for="{{rows}}" wx:key="index" wx:for-item="row">
+      <block wx:for="{{row}}" wx:key="index" wx:for-item="cell">
+        <image wx:if="{{cell.img}}" class="bh-c" src="{{cell.img}}" mode="{{cell.fit ? 'aspectFit' : 'aspectFill'}}" />
+        <view wx:elif="{{cell.c}}" class="bh-c" style="background:{{cell.c}};" />
+        <view wx:else class="bh-c bh-air" />
+      </block>
+    </view>
+  </view>
+</view>

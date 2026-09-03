@@ -1,0 +1,109 @@
+<view class="page-root {{themeClass}} cb-root">
+
+  <!-- 顶部导航（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">职业养成</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 当前职业 + 进度 -->
+  <view class="hero card">
+    <view class="hero-top row">
+      <text class="hero-icon">{{clsIcon}}</text>
+      <view class="col flex-1">
+        <view class="row hero-name-row">
+          <text class="hero-name">当前职业：{{clsName}}</text>
+          <text class="hero-desc px">{{clsDesc}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 职业切换 -->
+    <view class="cls-row row">
+      <view class="cls-chip tappable {{cls === c.id ? 'on' : ''}}"
+        wx:for="{{classes}}" wx:key="id" wx:for-item="c"
+        bindtap="onCls" data-id="{{c.id}}">
+        <text class="cls-chip-icon">{{c.icon}}</text>
+        <text class="cls-chip-n">{{c.name}}</text>
+      </view>
+    </view>
+    <!-- 总进度 -->
+    <view class="prog-wrap" wx:if="{{prog}}">
+      <view class="prog-bar">
+        <view class="prog-fill" style="width:{{prog.pct}}%" />
+      </view>
+      <view class="row prog-text-row">
+        <text class="prog-t px">总进度 {{prog.doneCount}}/{{prog.total}} 阶段</text>
+        <text class="prog-pct">{{prog.pct}}%</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 当前推荐阶段 -->
+  <view class="cur-stage card" wx:if="{{prog && prog.current}}">
+    <view class="cs-head row">
+      <text class="cs-pin">📌</text>
+      <text class="cs-title">当前推荐：阶段 {{prog.current.no}} · {{prog.current.name}}</text>
+    </view>
+    <text class="cs-goal">目标：{{prog.current.goal}}</text>
+    <view class="cs-link tappable row" bindtap="goPath">
+      <text class="cs-link-t">查看完整路线</text>
+      <text class="cs-arrow">→</text>
+    </view>
+  </view>
+  <view class="cur-stage card" wx:if="{{prog && prog.ready && !prog.current}}">
+    <view class="cs-head row">
+      <text class="cs-pin">🏆</text>
+      <text class="cs-title">全部阶段已完成！</text>
+    </view>
+    <text class="cs-goal">{{clsName}}之旅圆满结束，试试换个职业再战一轮吧。</text>
+  </view>
+  <view class="cur-stage card" wx:if="{{prog && !prog.ready}}">
+    <view class="cs-head row">
+      <text class="cs-pin">🚧</text>
+      <text class="cs-title">{{clsName}}路线规划制作中</text>
+    </view>
+    <text class="cs-goal">第一阶段先实装战士路线，{{clsName}}路线将在后续版本更新。资料库中的{{clsName}}攻略现已可以查阅。</text>
+  </view>
+
+  <!-- 双入口卡片 -->
+  <view class="entries row">
+    <view class="entry card tappable" bindtap="goPath">
+      <text class="entry-icon">🗺️</text>
+      <text class="entry-name">路线规划</text>
+      <text class="entry-sub px">从开局到毕业</text>
+      <text class="entry-go">进入 →</text>
+    </view>
+    <view class="entry card tappable" bindtap="goLib">
+      <text class="entry-icon">📖</text>
+      <text class="entry-name">职业资料库</text>
+      <text class="entry-sub px">攻略技巧汇总</text>
+      <text class="entry-go">进入 →</text>
+    </view>
+  </view>
+
+  <!-- 最近更新的职业攻略 -->
+  <view class="sec-title row">
+    <view class="diamond" />
+    <text class="t">最近更新的职业攻略</text>
+  </view>
+  <view class="art card tappable" wx:for="{{recents}}" wx:key="id" wx:for-item="a"
+    bindtap="openStrat" data-id="{{a.id}}">
+    <view class="art-cover">
+      <pixel-icon art-id="{{a.artId}}" size="72" />
+    </view>
+    <view class="col flex-1">
+      <view class="row art-title-row">
+        <text class="art-flag" wx:if="{{a.isNew}}">🆕</text>
+        <text class="art-flag" wx:else>📌</text>
+        <text class="art-title flex-1">{{a.title}}</text>
+      </view>
+      <text class="art-summary px">{{a.summary}}</text>
+      <view class="row art-meta-row">
+        <text class="art-cls px">{{a.clsIcon}} {{a.clsName}} · {{a.topicName}}</text>
+        <text class="art-time px">{{a.time}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>

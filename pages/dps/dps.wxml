@@ -1,0 +1,183 @@
+<view class="page-root {{themeClass}} dps-root">
+
+  <!-- 顶部：返回 + 标题（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">DPS 计算器</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 预设方案 -->
+  <scroll-view class="preset-row" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="preset-chip card tappable" wx:for="{{presets}}" wx:key="id"
+      bindtap="onPreset" data-id="{{item.id}}">
+      <text class="pc-icon">{{item.icon}}</text>
+      <view class="col">
+        <text class="pc-name">{{item.name}}</text>
+        <text class="pc-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 职业切换 -->
+  <view class="cls-row card">
+    <view class="cls-item tappable {{cls === item.id ? 'on' : ''}}" wx:for="{{classes}}" wx:key="id"
+      bindtap="onCls" data-id="{{item.id}}">
+      <text class="cls-icon">{{item.icon}}</text>
+      <text class="cls-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 武器选择：横滑卡片 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">选择武器</text><text class="more px">{{weapons.length}} 把</text></view>
+  <scroll-view class="wp-row" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="wp-card card tappable {{weaponId === item.id ? 'on' : ''}}" wx:for="{{weapons}}" wx:key="id"
+      bindtap="onWeapon" data-id="{{item.id}}">
+      <view class="wp-art"><pixel-icon art-id="{{item.art}}" size="80" /></view>
+      <text class="wp-name">{{item.name}}</text>
+      <view class="row wp-nums">
+        <text class="wp-dmg px">{{item.dmg}}</text>
+        <text class="wp-use px">速{{item.use}}</text>
+      </view>
+      <text class="wp-stage px">{{stageN[item.stage]}}</text>
+    </view>
+  </scroll-view>
+  <view class="wp-note card" wx:if="{{result.weapon.note}}">
+    <text class="wn-t">💡 {{result.weapon.note}}</text>
+  </view>
+
+  <!-- 配装区 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">配装</text><text class="more px">GEAR</text></view>
+
+  <view class="cfg-card card">
+    <!-- 武器词条 -->
+    <picker class="cfg-row" mode="selector" range="{{wprefixes}}" range-key="name" value="{{prefixIdx}}" bindchange="onPrefix">
+      <view class="row">
+        <text class="cfg-k">武器词条</text>
+        <text class="cfg-v flex-1">{{wprefixes[prefixIdx] ? wprefixes[prefixIdx].name : '无'}}</text>
+        <text class="cfg-go">›</text>
+      </view>
+    </picker>
+    <!-- 盔甲 -->
+    <picker class="cfg-row" mode="selector" range="{{armors}}" range-key="name" value="{{armorIdx}}" bindchange="onArmor">
+      <view class="row">
+        <text class="cfg-k">盔甲套装</text>
+        <text class="cfg-v flex-1">{{armors.length ? (armors[armorIdx] ? armors[armorIdx].name : '无护甲') : ''}}</text>
+        <text class="cfg-go">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 饰品 5 槽 -->
+  <view class="acc-wrap card">
+    <view class="acc-head row">
+      <text class="cfg-k">饰品（5 槽）</text>
+      <text class="acc-tip px">点词条切换：无→威逼→幸运</text>
+    </view>
+    <view class="acc-grid">
+      <view class="acc-slot" wx:for="{{accs}}" wx:key="index">
+        <picker class="acc-pick" mode="selector" range="{{accNames}}" value="{{accSel[index]}}" data-i="{{index}}" bindchange="onAcc">
+          <view class="acc-card tappable {{item.id ? 'has' : ''}}">
+            <view class="acc-art" wx:if="{{item.art}}"><pixel-icon art-id="{{item.art}}" size="56" /></view>
+            <text class="acc-empty" wx:else>＋</text>
+            <text class="acc-name">{{item.name || '空槽位 ' + (index + 1)}}</text>
+          </view>
+        </picker>
+        <view class="acc-ap tappable {{item.ap !== 'none' ? 'on' : ''}}" bindtap="onAccAp" data-i="{{index}}">
+          {{item.apName}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 增益 -->
+  <view class="buff-wrap card">
+    <text class="cfg-k">增益 Buff</text>
+    <view class="buff-row">
+      <view class="buff-chip tappable {{buffsSel.indexOf(item.id) >= 0 ? 'on' : ''}}"
+        wx:for="{{buffs}}" wx:key="id" bindtap="onBuff" data-id="{{item.id}}">
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 目标与难度 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">目标</text><text class="more px">TARGET</text></view>
+  <view class="cfg-card card">
+    <picker class="cfg-row" mode="selector" range="{{targetNames}}" value="{{targetIdx}}" bindchange="onTarget">
+      <view class="row">
+        <text class="cfg-k">目标 Boss</text>
+        <text class="cfg-v flex-1">{{targetNames[targetIdx] || '木桩'}}</text>
+        <text class="cfg-go">›</text>
+      </view>
+    </picker>
+    <view class="cfg-row" wx:if="{{targetId === 'custom'}}">
+      <text class="cfg-k">自定义防御</text>
+      <slider class="flex-1 def-slider" min="0" max="100" step="5" value="{{customDef}}" activeColor="#FFD700" bindchange="onDef" />
+      <text class="cfg-v def-v">{{customDef}}</text>
+    </view>
+    <view class="mode-row">
+      <view class="mode-chip tappable {{mode === item.id ? 'on' : ''}}" wx:for="{{modes}}" wx:key="id"
+        bindtap="onMode" data-id="{{item.id}}">{{item.name}}</view>
+    </view>
+    <view class="mode-tip px">防御减伤系数：经典 ×0.5 · 专家 ×0.75 · 大师 ×1.0</view>
+  </view>
+
+  <!-- 结果 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">计算结果</text><text class="more px">RESULT</text></view>
+  <view class="res-card card" wx:if="{{result}}">
+    <view class="res-hero row">
+      <view class="col flex-1">
+        <text class="res-label px">理论 DPS（含暴击期望）</text>
+        <view class="row res-main-row">
+          <text class="res-dps">{{result.dps}}</text>
+          <view class="col">
+            <text class="res-range">{{result.dpsMin}} ~ {{result.dpsMax}}</text>
+            <text class="res-range-s px">±15% 伤害浮动</text>
+          </view>
+        </view>
+      </view>
+      <view class="res-art"><pixel-icon art-id="{{result.weapon.art}}" size="120" /></view>
+    </view>
+
+    <!-- 快捷指标 -->
+    <view class="res-grid">
+      <view class="res-cell">
+        <text class="rc-v">{{result.hit}}</text>
+        <text class="rc-k px">单发伤害</text>
+      </view>
+      <view class="res-cell">
+        <text class="rc-v">{{result.crit}}%</text>
+        <text class="rc-k px">暴击率</text>
+      </view>
+      <view class="res-cell">
+        <text class="rc-v">{{result.aps}}</text>
+        <text class="rc-k px">次/秒</text>
+      </view>
+      <view class="res-cell">
+        <text class="rc-v">{{result.dmgPct}}%</text>
+        <text class="rc-k px">伤害加成</text>
+      </view>
+    </view>
+
+    <!-- 伤害分解 -->
+    <view class="bd-title px">伤害分解</view>
+    <view class="bd-row row" wx:for="{{result.breakdown}}" wx:key="label">
+      <text class="bd-k flex-1">{{item.label}}</text>
+      <text class="bd-v {{item.val < 0 ? 'neg' : ''}}">{{item.val}}{{item.suf}}</text>
+    </view>
+    <view class="bd-row row">
+      <text class="bd-k flex-1">使用时间（原始 → 实际）</text>
+      <text class="bd-v">{{result.rawUse}} → {{result.useTime}} 帧</text>
+    </view>
+    <view class="bd-row row" wx:if="{{result.pen > 0}}">
+      <text class="bd-k flex-1">护甲穿透</text>
+      <text class="bd-v">+{{result.pen}}</text>
+    </view>
+    <view class="bd-note px">防御 {{result.effDef}}{{result.pen > 0 ? '（已扣穿透 ' + result.pen + '）' : ''}} · 单次减伤 {{result.dr}} 点</view>
+  </view>
+
+  <view class="foot">
+    <text class="foot-t px">数据基于 1.4.4 · 期望 DPS = 单发 × (1+暴击率) × 每秒次数</text>
+  </view>
+</view>

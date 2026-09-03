@@ -1,0 +1,38 @@
+/* 建造基础页 */
+.basics-root { min-height: 100vh; padding: 0 24rpx 40rpx; box-sizing: border-box; }
+
+.nav { display: flex; align-items: center; height: 88rpx; margin-bottom: 12rpx; }
+.back { width: 64rpx; height: 64rpx; line-height: 60rpx; text-align: center;
+  font-size: 44rpx; color: var(--text); border: 2rpx solid var(--line);
+  border-radius: 14rpx; background: var(--card); }
+.nav-t { flex: 1; text-align: center; font-size: 32rpx; font-weight: 800; color: var(--text); }
+.nav-ph { width: 64rpx; }
+
+/* 五要素速查 */
+.quick { padding: 22rpx; margin-bottom: 24rpx;
+  border: 2rpx solid rgba(76, 224, 224, 0.35);
+  background: linear-gradient(120deg, rgba(76, 224, 224, 0.10), rgba(91, 155, 255, 0.10)); }
+.qk-t { display: block; font-size: 27rpx; font-weight: 800; color: #4CE0E0; margin-bottom: 14rpx; }
+.qk-chips { display: flex; flex-wrap: wrap; }
+.qk-chip { font-size: 21rpx; color: var(--text); background: rgba(76, 224, 224, 0.10);
+  border: 2rpx solid rgba(76, 224, 224, 0.22); border-radius: 10rpx;
+  padding: 6rpx 14rpx; margin: 0 10rpx 10rpx 0; line-height: 1.5; }
+
+/* 六讲手风琴 */
+.bs-sec { padding: 24rpx; margin-bottom: 18rpx; }
+.bs-sec.open { border-color: rgba(255, 215, 0, 0.4); }
+.bs-head { align-items: center; }
+.bs-icon { font-size: 40rpx; margin-right: 18rpx; }
+.bs-title { font-size: 27rpx; font-weight: 800; color: var(--text); }
+.bs-sub { font-size: 20rpx; color: var(--text-dim); margin-top: 4rpx; }
+.bs-no { font-size: 30rpx; font-weight: 800; color: rgba(76, 224, 224, 0.4); margin-right: 12rpx; }
+.bs-arrow { font-size: 24rpx; color: var(--text-dim); }
+.bs-body { margin-top: 18rpx; padding-top: 18rpx; border-top: 2rpx solid var(--line); }
+.bs-point { display: flex; align-items: flex-start; margin-bottom: 14rpx; }
+.bs-point:last-child { margin-bottom: 0; }
+.bs-dot { width: 10rpx; height: 10rpx; border-radius: 50%; background: #FFD700;
+  margin: 13rpx 14rpx 0 4rpx; flex-shrink: 0; }
+.bs-p { flex: 1; font-size: 22rpx; color: var(--text); line-height: 1.7; }
+
+.foot { text-align: center; padding: 30rpx 0 10rpx; }
+.foot-t { font-size: 20rpx; color: var(--text-dim); letter-spacing: 4rpx; }

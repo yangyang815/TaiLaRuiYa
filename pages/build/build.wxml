@@ -1,0 +1,130 @@
+<view class="page-root {{themeClass}} build-root">
+
+  <!-- 顶部：返回 + 标题（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">建造指南</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="bd-search card">
+    <text class="bd-ico">🔍</text>
+    <input class="bd-input flex-1" placeholder="搜索教程、案例、材料…" placeholder-class="bd-ph"
+      value="{{kw}}" bindinput="onKw" confirm-type="search" />
+    <text class="bd-clear tappable" wx:if="{{kw}}" bindtap="clearKw">✕</text>
+  </view>
+
+  <!-- 搜索结果面板 -->
+  <block wx:if="{{kw}}">
+    <view class="bd-none card" wx:if="{{!results.cases.length && !results.tips.length && !results.basics.length}}">
+      <text class="bd-none-t">没有匹配的内容</text>
+      <text class="bd-none-s">试试：木屋 / 城堡 / 背景 / 屋顶 / NPC…</text>
+    </view>
+
+    <block wx:if="{{results.cases.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">案例</text><text class="more px">{{results.cases.length}} 条</text></view>
+      <view class="rc-item card tappable" wx:for="{{results.cases}}" wx:key="id" bindtap="goCaseByKw" data-id="{{item.id}}">
+        <view class="rc-art" wx:if="{{item.pic}}">
+          <image class="rc-pic" src="{{item.pic}}" mode="aspectFill" />
+        </view>
+        <view class="rc-art" wx:else><build-hero case-id="{{item.id}}" width="200" /></view>
+        <view class="col flex-1">
+          <view class="row rc-line">
+            <text class="rc-name">{{item.name}}</text>
+            <text class="tag tag-strat px">{{item.stageN}}</text>
+          </view>
+          <text class="rc-style px">{{item.style}} · {{item.stars}}</text>
+        </view>
+        <text class="rc-go">›</text>
+      </view>
+    </block>
+
+    <block wx:if="{{results.basics.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">建造基础</text></view>
+      <view class="rb-row card" wx:for="{{results.basics}}" wx:key="id" bindtap="goBasics">
+        <text class="rb-icon">{{item.icon}}</text>
+        <text class="rb-name flex-1">{{item.title}}</text>
+        <text class="rb-go">›</text>
+      </view>
+    </block>
+
+    <block wx:if="{{results.tips.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="t">建筑技巧</text></view>
+      <view class="rb-row card" wx:for="{{results.tips}}" wx:key="id">
+        <text class="rb-icon">{{item.icon}}</text>
+        <text class="rb-name flex-1">{{item.title}}</text>
+      </view>
+    </block>
+  </block>
+
+  <!-- 默认内容 -->
+  <block wx:if="{{!kw}}">
+
+    <!-- 建造基础大卡片入口 -->
+    <view class="basics-entry card tappable" bindtap="goBasics">
+      <view class="be-icon">🏠</view>
+      <view class="col flex-1">
+        <view class="row be-title-row">
+          <text class="be-title">建造基础</text>
+          <text class="be-badge px">BASIC</text>
+        </view>
+        <text class="be-sub">给新手的建造入门课：入住条件 · 材料 · 背景墙 · 防怪 · NPC 分区</text>
+      </view>
+      <text class="be-go px">›</text>
+    </view>
+
+    <!-- 实用案例 -->
+    <view class="sec-title"><view class="diamond" /><text class="t">实用案例</text>
+      <text class="more px">已建成 {{doneCount}}/{{total}}</text>
+    </view>
+    <view class="case-grid">
+      <view class="case-card card tappable" wx:for="{{cases}}" wx:key="id" bindtap="goCase" data-id="{{item.id}}">
+        <view class="cc-done px" wx:if="{{item.done}}">✓ 已建成</view>
+        <view class="cc-video px" wx:if="{{item.video}}">▶ 视频</view>
+        <view class="cc-art" wx:if="{{item.pic}}">
+          <image class="cc-pic" src="{{item.pic}}" mode="aspectFill" />
+        </view>
+        <view class="cc-art" wx:else><build-hero case-id="{{item.id}}" width="300" /></view>
+        <text class="cc-name">{{item.name}}</text>
+        <view class="row cc-meta">
+          <text class="tag tag-strat px">{{item.stageN}}</text>
+          <text class="cc-stars px">{{item.stars}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 建筑小技巧 -->
+    <view class="sec-title"><view class="diamond" /><text class="t">建筑小技巧</text><text class="more px">TIPS</text></view>
+    <view class="tip card tappable {{expandedTip === item.id ? 'open' : ''}}"
+      wx:for="{{tips}}" wx:key="id" bindtap="onTip" data-id="{{item.id}}">
+      <view class="row tip-head">
+        <text class="tip-icon">{{item.icon}}</text>
+        <text class="tip-t flex-1">{{item.title}}</text>
+        <text class="tip-arrow px">{{expandedTip === item.id ? '▾' : '▸'}}</text>
+      </view>
+      <block wx:if="{{expandedTip === item.id}}">
+        <view class="tip-body">
+          <view class="tip-point" wx:for="{{item.points}}" wx:key="*this" wx:for-item="p">
+            <view class="tip-dot" /><text class="tip-p">{{p}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <!-- 灵感画廊（静态精选） -->
+    <view class="sec-title"><view class="diamond" /><text class="t">灵感画廊</text><text class="more px">IDEAS</text></view>
+    <view class="gal-grid">
+      <view class="gal-card card" wx:for="{{gallery}}" wx:key="id">
+        <text class="gal-emoji">{{item.emoji}}</text>
+        <text class="gal-name">{{item.name}}</text>
+        <text class="gal-desc px">{{item.desc}}</text>
+        <text class="gal-stars px">{{item.diff >= 4 ? '⭐⭐⭐⭐' : '⭐⭐⭐'}}</text>
+      </view>
+    </view>
+  </block>
+
+  <view class="foot safe-bottom">
+    <text class="foot-t px">BUILD IT YOURSELF</text>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "pixel-icon": "/components/pixel-icon/pixel-icon",
+    "build-hero": "/components/build-hero/build-hero"
+  }
+}

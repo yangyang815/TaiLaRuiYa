@@ -1,0 +1,102 @@
+<view class="page-root {{themeClass}} cp-root">
+
+  <!-- 顶部导航（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">路线规划 · {{clsName}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 总进度 -->
+  <view class="prog-card card" wx:if="{{prog}}">
+    <view class="prog-bar">
+      <view class="prog-fill" style="width:{{prog.pct}}%" />
+    </view>
+    <view class="row prog-text-row">
+      <text class="prog-t px">总进度 {{prog.doneCount}}/{{prog.total}} 阶段</text>
+      <text class="prog-pct">{{prog.pct}}%</text>
+    </view>
+  </view>
+
+  <!-- 阶段列表 -->
+  <view class="stage card tappable {{s.status}} {{expanded === s.id ? 'open' : ''}}"
+    wx:for="{{stages}}" wx:key="id" wx:for-item="s"
+    bindtap="onStage" data-id="{{s.id}}">
+    <view class="st-head row">
+      <view class="st-no {{s.status}}">{{s.no}}</view>
+      <view class="col flex-1">
+        <view class="row st-name-row">
+          <text class="st-name">{{s.name}}</text>
+          <text class="st-status px {{s.status}}">{{s.statusText}}</text>
+        </view>
+        <text class="st-brief px">{{s.brief}}</text>
+      </view>
+      <text class="st-arrow {{expanded === s.id ? 'flip' : ''}}" wx:if="{{s.status !== 'locked'}}">›</text>
+      <text class="st-lock" wx:else>🔒</text>
+    </view>
+
+    <!-- 锁定提示 -->
+    <view class="st-locked-hint" wx:if="{{s.status === 'locked'}}">
+      <text class="px">{{s.unlockHint}}</text>
+    </view>
+
+    <!-- 阶段详情 -->
+    <view class="st-detail" wx:if="{{expanded === s.id}}">
+      <view class="sd-block">
+        <text class="sd-k px">🎯 目标</text>
+        <text class="sd-goal">{{s.goal}}</text>
+      </view>
+      <view class="sd-block">
+        <text class="sd-k px">📋 要点</text>
+        <view class="sd-task row" wx:for="{{s.tasks}}" wx:key="*this" wx:for-item="t">
+          <text class="sd-dot">·</text>
+          <text class="sd-task-t flex-1">{{t}}</text>
+        </view>
+      </view>
+      <view class="sd-block">
+        <text class="sd-k px">⚔️ 推荐装备</text>
+        <view class="gear-row row">
+          <view class="gear col" wx:for="{{s.gear}}" wx:key="name" wx:for-item="g">
+            <view class="gear-art">
+              <pixel-icon art-id="{{g.art}}" size="64" />
+            </view>
+            <text class="gear-name">{{g.name}}</text>
+            <text class="gear-why px">{{g.why}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- 关联跳转 -->
+      <view class="sd-links row" wx:if="{{s.bossName || s.strat}}">
+        <view class="sd-link tappable row" wx:if="{{s.bossName}}" catchtap="onBoss" data-id="{{s.boss}}">
+          <text class="sd-link-icon">{{s.bossArt ? '' : '👹'}}</text>
+          <view class="gear-art sm" wx:if="{{s.bossArt}}">
+            <pixel-icon art-id="{{s.bossArt}}" size="40" />
+          </view>
+          <text class="sd-link-t">{{s.bossName}}攻略</text>
+          <text class="sd-link-arrow">→</text>
+        </view>
+        <view class="sd-link tappable row" wx:if="{{s.strat}}" catchtap="onStrat" data-id="{{s.strat}}">
+          <text class="sd-link-icon">📖</text>
+          <text class="sd-link-t">相关攻略</text>
+          <text class="sd-link-arrow">→</text>
+        </view>
+      </view>
+      <!-- 完成按钮 -->
+      <view class="sd-done tappable {{s.status === 'done' ? 'undo' : ''}}"
+        catchtap="onToggleDone" data-id="{{s.id}}">
+        {{s.status === 'done' ? '↩ 取消完成' : '✓ 标记本阶段完成'}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 资料库联动入口 -->
+  <view class="lib-link card tappable" bindtap="goLib">
+    <text class="ll-icon">📖</text>
+    <view class="col flex-1">
+      <text class="ll-t">浏览{{clsName}}全部攻略</text>
+      <text class="ll-s">武器 / 盔甲 / 饰品 / 技巧 · 资料库汇总 →</text>
+    </view>
+    <text class="ll-arrow">›</text>
+  </view>
+
+</view>

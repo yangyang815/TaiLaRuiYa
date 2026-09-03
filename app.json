@@ -20,7 +20,15 @@
     "pages/bossguide/detail",
     "pages/gameachv/gameachv",
     "pages/acq/acq",
-    "pages/fishing/fishing"
+    "pages/fishing/fishing",
+    "pages/build/build",
+    "pages/build/basics",
+    "pages/build/detail",
+    "pages/dps/dps",
+    "pages/npcplan/npcplan",
+    "pages/career/career",
+    "pages/careerpath/careerpath",
+    "pages/careerlib/careerlib"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -42,5 +50,8 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "navigateToMiniProgramAppIdList": [
+    "wx7564fd5313d24844"
+  ]
 }

@@ -1,0 +1,45 @@
+<view class="page-root {{themeClass}} basics-root">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">建造基础</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 合格房屋五要素速查 -->
+  <view class="quick card">
+    <text class="qk-t">⚡ 合格房屋五要素</text>
+    <view class="qk-chips">
+      <text class="qk-chip">① 封闭空间 ≥60格</text>
+      <text class="qk-chip">② 背景墙铺满</text>
+      <text class="qk-chip">③ 至少 1 个入口</text>
+      <text class="qk-chip">④ 光源 + 椅子 + 桌子</text>
+      <text class="qk-chip">⑤ 远离腐化/猩红</text>
+    </view>
+  </view>
+
+  <!-- 六讲手风琴 -->
+  <view class="bs-sec card tappable {{expanded === item.id ? 'open' : ''}}"
+    wx:for="{{basics}}" wx:key="id" bindtap="onToggle" data-id="{{item.id}}">
+    <view class="row bs-head">
+      <text class="bs-icon">{{item.icon}}</text>
+      <view class="col flex-1">
+        <text class="bs-title">{{item.title}}</text>
+        <text class="bs-sub px">{{item.sub}}</text>
+      </view>
+      <text class="bs-no px">0{{index + 1}}</text>
+      <text class="bs-arrow px">{{expanded === item.id ? '▾' : '▸'}}</text>
+    </view>
+    <block wx:if="{{expanded === item.id}}">
+      <view class="bs-body">
+        <view class="bs-point" wx:for="{{item.points}}" wx:key="*this" wx:for-item="p">
+          <view class="bs-dot" /><text class="bs-p">{{p}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="foot safe-bottom">
+    <text class="foot-t px">HOUSING 101</text>
+  </view>
+</view>

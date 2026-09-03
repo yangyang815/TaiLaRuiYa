@@ -1,0 +1,91 @@
+/* 建造指南主页 */
+.build-root { min-height: 100vh; padding: 0 24rpx 40rpx; box-sizing: border-box; }
+
+/* 顶部导航 */
+.nav { display: flex; align-items: center; height: 88rpx; margin-bottom: 12rpx; }
+.back { width: 64rpx; height: 64rpx; line-height: 60rpx; text-align: center;
+  font-size: 44rpx; color: var(--text); border: 2rpx solid var(--line);
+  border-radius: 14rpx; background: var(--card); }
+.nav-t { flex: 1; text-align: center; font-size: 32rpx; font-weight: 800; color: var(--text); }
+.nav-ph { width: 64rpx; }
+
+/* 搜索框 */
+.bd-search { display: flex; align-items: center; padding: 16rpx 22rpx; margin-bottom: 20rpx; }
+.bd-ico { font-size: 28rpx; margin-right: 14rpx; }
+.bd-input { font-size: 26rpx; color: var(--text); }
+.bd-ph { color: var(--text-dim); }
+.bd-clear { font-size: 28rpx; color: var(--text-dim); padding: 0 8rpx; }
+
+/* 空结果 */
+.bd-none { padding: 40rpx 24rpx; text-align: center; }
+.bd-none-t { display: block; font-size: 26rpx; font-weight: 800; color: var(--text); }
+.bd-none-s { display: block; font-size: 22rpx; color: var(--text-dim); margin-top: 10rpx; }
+
+/* 搜索结果：案例行 */
+.rc-item { display: flex; align-items: center; padding: 18rpx 22rpx; margin-bottom: 16rpx; }
+.rc-art { flex-shrink: 0; margin-right: 18rpx; }
+.rc-line { flex-wrap: wrap; }
+.rc-name { font-size: 27rpx; font-weight: 800; color: var(--text); margin-right: 12rpx; }
+.rc-style { font-size: 21rpx; color: var(--text-dim); margin-top: 6rpx; }
+.rc-go { font-size: 32rpx; color: var(--text-dim); }
+
+/* 搜索结果：基础/技巧行 */
+.rb-row { display: flex; align-items: center; padding: 20rpx 22rpx; margin-bottom: 14rpx; }
+.rb-icon { font-size: 30rpx; margin-right: 16rpx; }
+.rb-name { font-size: 25rpx; color: var(--text); font-weight: 600; }
+.rb-go { font-size: 30rpx; color: var(--text-dim); }
+
+/* 建造基础大卡片入口 */
+.basics-entry { display: flex; align-items: center; padding: 26rpx 24rpx; margin-bottom: 26rpx;
+  border: 2rpx solid rgba(255, 215, 0, 0.35);
+  background: linear-gradient(120deg, rgba(255, 215, 0, 0.10), rgba(255, 156, 64, 0.08)); }
+.be-icon { font-size: 60rpx; line-height: 1.1; margin-right: 22rpx; }
+.be-title-row { flex-wrap: wrap; }
+.be-title { font-size: 32rpx; font-weight: 800; color: #FFD700; margin-right: 14rpx; }
+.be-badge { font-size: 20rpx; color: #FF9C40; border: 2rpx solid rgba(255, 156, 64, 0.4);
+  border-radius: 8rpx; padding: 2rpx 12rpx; }
+.be-sub { font-size: 21rpx; color: var(--text-dim); margin-top: 10rpx; line-height: 1.6; }
+.be-go { font-size: 36rpx; color: #FF9C40; margin-left: 10rpx; }
+
+/* 案例宫格（2列） */
+.case-grid { display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 10rpx; }
+.case-card { position: relative; width: 48.4%; padding: 18rpx 18rpx 16rpx; margin-bottom: 18rpx;
+  box-sizing: border-box; }
+.cc-done { position: absolute; top: 12rpx; right: 12rpx; font-size: 18rpx; color: var(--green);
+  background: rgba(60, 200, 90, 0.14); border-radius: 8rpx; padding: 2rpx 10rpx; z-index: 2; }
+.cc-art { display: flex; justify-content: center; margin-bottom: 10rpx; }
+.cc-pic { width: 100%; height: 240rpx; border-radius: 14rpx; background: rgba(0, 0, 0, 0.25); }
+.cc-video { position: absolute; top: 12rpx; left: 12rpx; font-size: 19rpx; color: #FF8FBE;
+  background: rgba(255, 107, 168, 0.16); border: 2rpx solid rgba(255, 107, 168, 0.45);
+  border-radius: 8rpx; padding: 3rpx 10rpx; z-index: 2; }
+.rc-pic { width: 140rpx; height: 100rpx; border-radius: 12rpx; background: rgba(0, 0, 0, 0.25); display: block; }
+.cc-name { display: block; font-size: 25rpx; font-weight: 800; color: var(--text); margin-bottom: 8rpx; }
+.cc-meta { justify-content: space-between; align-items: center; }
+
+/* 建筑技巧手风琴 */
+.tip { padding: 22rpx; margin-bottom: 16rpx; }
+.tip-head { align-items: center; }
+.tip-icon { font-size: 30rpx; margin-right: 16rpx; }
+.tip-t { font-size: 26rpx; font-weight: 700; color: var(--text); }
+.tip-arrow { font-size: 24rpx; color: var(--text-dim); }
+.tip.open { border-color: rgba(76, 224, 224, 0.4); }
+.tip-body { margin-top: 16rpx; padding-top: 16rpx; border-top: 2rpx solid var(--line); }
+.tip-point { display: flex; align-items: flex-start; margin-bottom: 12rpx; }
+.tip-point:last-child { margin-bottom: 0; }
+.tip-dot { width: 10rpx; height: 10rpx; border-radius: 50%; background: #4CE0E0;
+  margin: 12rpx 14rpx 0 4rpx; flex-shrink: 0; }
+.tip-p { flex: 1; font-size: 22rpx; color: var(--text); line-height: 1.7; }
+
+/* 灵感画廊 */
+.gal-grid { display: flex; flex-wrap: wrap; justify-content: space-between; }
+.gal-card { width: 48.4%; padding: 22rpx 20rpx; margin-bottom: 18rpx; box-sizing: border-box;
+  border: 2rpx solid rgba(181, 123, 255, 0.25);
+  background: linear-gradient(140deg, rgba(181, 123, 255, 0.08), rgba(91, 155, 255, 0.08)); }
+.gal-emoji { display: block; font-size: 44rpx; line-height: 1.2; margin-bottom: 10rpx; }
+.gal-name { display: block; font-size: 24rpx; font-weight: 800; color: #B57BFF; margin-bottom: 8rpx; }
+.gal-desc { display: block; font-size: 20rpx; color: var(--text-dim); line-height: 1.6; margin-bottom: 8rpx; }
+.gal-stars { font-size: 18rpx; color: var(--text-dim); }
+
+/* 底部 */
+.foot { text-align: center; padding: 30rpx 0 10rpx; }
+.foot-t { font-size: 20rpx; color: var(--text-dim); letter-spacing: 4rpx; }

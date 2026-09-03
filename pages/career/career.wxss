@@ -1,0 +1,81 @@
+/* 职业养成聚合页 */
+.cb-root { padding: 0 26rpx 60rpx; }
+
+/* 导航 */
+.nav { display: flex; align-items: center; padding: 16rpx 0 12rpx; }
+.nav-t { font-size: 36rpx; font-weight: 800; color: var(--text); flex: 1; text-align: center; }
+.back { width: 64rpx; height: 64rpx; display: flex; align-items: center; justify-content: center;
+  font-size: 48rpx; color: var(--gold, #FFD700); font-weight: 700; }
+.nav-ph { width: 64rpx; }
+
+/* 职业卡 */
+.hero { padding: 26rpx 24rpx; margin-bottom: 20rpx;
+  border: 2rpx solid rgba(255, 215, 0, 0.35);
+  background: linear-gradient(150deg, rgba(255, 215, 0, 0.09), rgba(26, 14, 46, 0.4)); }
+.hero-top { gap: 18rpx; }
+.hero-icon { font-size: 56rpx; }
+.hero-name-row { gap: 14rpx; flex-wrap: wrap; }
+.hero-name { font-size: 32rpx; font-weight: 800; color: var(--text); }
+.hero-desc { font-size: 20rpx; color: var(--sub, #8a8a94); }
+
+.cls-row { gap: 14rpx; margin-top: 22rpx; }
+.cls-chip { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8rpx;
+  padding: 14rpx 0; border-radius: 14rpx; background: rgba(255, 255, 255, 0.05);
+  border: 2rpx solid rgba(255, 255, 255, 0.08); }
+.cls-chip.on { background: rgba(255, 215, 0, 0.14); border-color: rgba(255, 215, 0, 0.5); }
+.cls-chip-icon { font-size: 26rpx; }
+.cls-chip-n { font-size: 24rpx; font-weight: 700; color: var(--sub, #8a8a94); }
+.cls-chip.on .cls-chip-n { color: #FFD700; }
+
+.prog-wrap { margin-top: 22rpx; }
+.prog-bar { height: 18rpx; border-radius: 10rpx; background: rgba(0, 0, 0, 0.35); overflow: hidden;
+  border: 2rpx solid rgba(255, 255, 255, 0.07); }
+.prog-fill { height: 100%; border-radius: 10rpx;
+  background: linear-gradient(90deg, #FFD700, #6de88a);
+  box-shadow: 0 0 16rpx rgba(255, 215, 0, 0.4); transition: width 0.3s; }
+.prog-text-row { margin-top: 12rpx; }
+.prog-t { font-size: 22rpx; color: var(--sub, #8a8a94); }
+.prog-pct { margin-left: auto; font-size: 26rpx; font-weight: 800; color: #FFD700; }
+
+/* 推荐阶段卡 */
+.cur-stage { padding: 24rpx; margin-bottom: 22rpx;
+  border: 2rpx solid rgba(127, 208, 255, 0.3);
+  background: rgba(127, 208, 255, 0.06); }
+.cs-head { gap: 12rpx; }
+.cs-pin { font-size: 30rpx; }
+.cs-title { font-size: 28rpx; font-weight: 800; color: var(--text); }
+.cs-goal { display: block; margin-top: 14rpx; font-size: 24rpx; color: var(--sub, #8a8a94); line-height: 1.6; }
+.cs-link { margin-top: 18rpx; padding-top: 16rpx; border-top: 2rpx dashed rgba(255, 255, 255, 0.1);
+  justify-content: center; gap: 8rpx; }
+.cs-link-t { font-size: 26rpx; font-weight: 700; color: #FFD700; }
+.cs-arrow { font-size: 26rpx; color: #FFD700; }
+
+/* 双入口 */
+.entries { gap: 20rpx; margin-bottom: 28rpx; }
+.entry { flex: 1; padding: 30rpx 24rpx; display: flex; flex-direction: column; align-items: center;
+  border: 2rpx solid rgba(255, 215, 0, 0.45);
+  background: linear-gradient(160deg, rgba(255, 215, 0, 0.10), rgba(26, 14, 46, 0.3)); }
+.entry:active { transform: scale(0.98); }
+.entry-icon { font-size: 64rpx; margin-bottom: 14rpx; }
+.entry-name { font-size: 30rpx; font-weight: 800; color: var(--text); }
+.entry-sub { font-size: 21rpx; color: var(--sub, #8a8a94); margin-top: 8rpx; }
+.entry-go { font-size: 22rpx; font-weight: 700; color: #FFD700; margin-top: 18rpx; }
+
+/* 区块标题 */
+.sec-title { gap: 12rpx; margin-bottom: 18rpx; }
+.sec-title .diamond { width: 14rpx; height: 14rpx; background: #FFD700; transform: rotate(45deg);
+  box-shadow: 0 0 12rpx rgba(255, 215, 0, 0.5); }
+.sec-title .t { font-size: 28rpx; font-weight: 800; color: var(--text); }
+
+/* 文章卡 */
+.art { display: flex; align-items: center; padding: 20rpx 22rpx; margin-bottom: 18rpx; gap: 20rpx; }
+.art-cover { width: 96rpx; height: 96rpx; border-radius: 16rpx; background: rgba(0, 0, 0, 0.28);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.art-title-row { gap: 10rpx; }
+.art-flag { font-size: 24rpx; }
+.art-title { font-size: 26rpx; font-weight: 700; color: var(--text); line-height: 1.4; }
+.art-summary { margin-top: 8rpx; font-size: 22rpx; color: var(--sub, #8a8a94); line-height: 1.5;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.art-meta-row { margin-top: 10rpx; }
+.art-cls { font-size: 20rpx; color: #7fd0ff; }
+.art-time { margin-left: auto; font-size: 20rpx; color: var(--sub, #8a8a94); }

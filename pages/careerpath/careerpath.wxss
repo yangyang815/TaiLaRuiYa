@@ -1,0 +1,95 @@
+/* 路线规划器 */
+.cp-root { padding: 0 26rpx 60rpx; }
+
+/* 资料库联动入口 */
+.lib-link { display: flex; align-items: center; gap: 18rpx; padding: 22rpx 24rpx;
+  border: 2rpx solid rgba(255, 215, 0, 0.4);
+  background: linear-gradient(150deg, rgba(255, 215, 0, 0.10), rgba(26, 14, 46, 0.3)); }
+.lib-link:active { transform: scale(0.98); }
+.ll-icon { font-size: 48rpx; }
+.ll-t { font-size: 27rpx; font-weight: 800; color: #FFD700; }
+.ll-s { font-size: 21rpx; color: var(--sub, #8a8a94); margin-top: 6rpx; }
+.ll-arrow { font-size: 36rpx; color: #FFD700; font-weight: 700; }
+
+/* 导航 */
+.nav { display: flex; align-items: center; padding: 16rpx 0 12rpx; }
+.nav-t { font-size: 36rpx; font-weight: 800; color: var(--text); flex: 1; text-align: center; }
+.back { width: 64rpx; height: 64rpx; display: flex; align-items: center; justify-content: center;
+  font-size: 48rpx; color: var(--gold, #FFD700); font-weight: 700; }
+.nav-ph { width: 64rpx; }
+
+/* 总进度 */
+.prog-card { padding: 24rpx; margin-bottom: 22rpx;
+  border: 2rpx solid rgba(255, 215, 0, 0.35);
+  background: linear-gradient(150deg, rgba(255, 215, 0, 0.08), rgba(26, 14, 46, 0.35)); }
+.prog-bar { height: 18rpx; border-radius: 10rpx; background: rgba(0, 0, 0, 0.35); overflow: hidden;
+  border: 2rpx solid rgba(255, 255, 255, 0.07); }
+.prog-fill { height: 100%; border-radius: 10rpx;
+  background: linear-gradient(90deg, #FFD700, #6de88a);
+  box-shadow: 0 0 16rpx rgba(255, 215, 0, 0.4); transition: width 0.3s; }
+.prog-text-row { margin-top: 14rpx; }
+.prog-t { font-size: 22rpx; color: var(--sub, #8a8a94); }
+.prog-pct { margin-left: auto; font-size: 28rpx; font-weight: 800; color: #FFD700; }
+
+/* 阶段卡 */
+.stage { padding: 24rpx; margin-bottom: 20rpx; transition: opacity 0.2s; }
+.stage.locked { opacity: 0.55; }
+.stage.done { border: 2rpx solid rgba(109, 232, 138, 0.35); }
+.stage.current { border: 2rpx solid rgba(255, 159, 67, 0.5);
+  box-shadow: 0 0 20rpx rgba(255, 159, 67, 0.12); }
+.stage.open { background: rgba(255, 255, 255, 0.03); }
+
+.st-head { gap: 18rpx; }
+.st-no { width: 64rpx; height: 64rpx; border-radius: 16rpx; display: flex; align-items: center;
+  justify-content: center; font-size: 30rpx; font-weight: 800; flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.06); color: var(--sub, #8a8a94);
+  border: 2rpx solid rgba(255, 255, 255, 0.1); }
+.st-no.done { color: #6de88a; background: rgba(109, 232, 138, 0.12); border-color: rgba(109, 232, 138, 0.4); }
+.st-no.current { color: #FF9F43; background: rgba(255, 159, 67, 0.12); border-color: rgba(255, 159, 67, 0.5); }
+.st-name-row { gap: 14rpx; }
+.st-name { font-size: 29rpx; font-weight: 800; color: var(--text); }
+.st-status { font-size: 20rpx; padding: 2rpx 12rpx; border-radius: 14rpx; }
+.st-status.done { color: #6de88a; background: rgba(109, 232, 138, 0.12); }
+.st-status.current { color: #FF9F43; background: rgba(255, 159, 67, 0.12); }
+.st-status.locked { color: var(--sub, #8a8a94); background: rgba(184, 184, 194, 0.1); }
+.st-brief { font-size: 22rpx; color: var(--sub, #8a8a94); margin-top: 6rpx; }
+.st-arrow { font-size: 34rpx; color: var(--sub, #8a8a94); transition: transform 0.2s; }
+.st-arrow.flip { transform: rotate(90deg); }
+.st-lock { font-size: 30rpx; }
+
+.st-locked-hint { margin-top: 14rpx; padding: 12rpx 18rpx; border-radius: 12rpx;
+  background: rgba(0, 0, 0, 0.24); }
+.st-locked-hint .px { font-size: 21rpx; color: var(--sub, #8a8a94); }
+
+/* 详情 */
+.st-detail { margin-top: 18rpx; padding-top: 18rpx; border-top: 2rpx dashed rgba(255, 255, 255, 0.12); }
+.sd-block { margin-bottom: 20rpx; }
+.sd-k { font-size: 22rpx; font-weight: 700; color: #7fd0ff; display: block; margin-bottom: 10rpx; }
+.sd-goal { font-size: 25rpx; font-weight: 700; color: var(--text); line-height: 1.6; }
+.sd-task { gap: 10rpx; padding: 6rpx 0; }
+.sd-dot { color: #FFD700; font-weight: 800; font-size: 26rpx; }
+.sd-task-t { font-size: 23rpx; color: var(--sub, #b8b8c2); line-height: 1.55; }
+
+/* 装备行 */
+.gear-row { gap: 16rpx; }
+.gear { flex: 1; align-items: center; text-align: center; padding: 16rpx 10rpx; border-radius: 14rpx;
+  background: rgba(0, 0, 0, 0.24); }
+.gear-art { width: 80rpx; height: 80rpx; border-radius: 12rpx; background: rgba(255, 255, 255, 0.04);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 10rpx; }
+.gear-art.sm { width: 52rpx; height: 52rpx; margin-bottom: 0; margin-right: 10rpx; }
+.gear-name { font-size: 22rpx; font-weight: 700; color: var(--text); }
+.gear-why { font-size: 19rpx; color: var(--sub, #8a8a94); margin-top: 6rpx; line-height: 1.4; }
+
+/* 关联跳转 */
+.sd-links { gap: 16rpx; margin-bottom: 20rpx; }
+.sd-link { flex: 1; align-items: center; justify-content: center; padding: 16rpx 0; border-radius: 14rpx;
+  background: rgba(127, 208, 255, 0.08); border: 2rpx solid rgba(127, 208, 255, 0.3); }
+.sd-link-icon { font-size: 26rpx; }
+.sd-link-t { font-size: 23rpx; font-weight: 700; color: #7fd0ff; }
+.sd-link-arrow { font-size: 23rpx; color: #7fd0ff; }
+
+/* 完成按钮 */
+.sd-done { text-align: center; padding: 20rpx 0; border-radius: 14rpx; font-size: 26rpx; font-weight: 800;
+  color: #1a0e2e; background: linear-gradient(90deg, #FFD700, #6de88a); }
+.sd-done.undo { color: var(--sub, #8a8a94); background: rgba(255, 255, 255, 0.06);
+  border: 2rpx solid rgba(255, 255, 255, 0.12); }

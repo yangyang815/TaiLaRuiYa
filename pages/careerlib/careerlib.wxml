@@ -1,0 +1,67 @@
+<view class="page-root {{themeClass}} cl-root">
+
+  <!-- 顶部导航（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">职业资料库</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 职业路线联动入口（选中职业时显示） -->
+  <view class="path-link card tappable" wx:if="{{cls}}" bindtap="goPath">
+    <text class="pl-icon">🗺️</text>
+    <view class="col flex-1">
+      <text class="pl-t">查看{{cls === 'melee' ? '战士' : cls === 'ranger' ? '射手' : cls === 'mage' ? '法师' : '召唤师'}}完整路线</text>
+      <text class="pl-s">从开局到毕业的 8 阶段养成规划 →</text>
+    </view>
+    <text class="pl-arrow">›</text>
+  </view>
+
+  <!-- 职业筛选 -->
+  <view class="filter-row row">
+    <view class="f-chip tappable {{cls === '' ? 'on' : ''}}" bindtap="onCls" data-id="">
+      <text class="f-chip-n">全部职业</text>
+    </view>
+    <view class="f-chip tappable {{cls === c.id ? 'on' : ''}}"
+      wx:for="{{classes}}" wx:key="id" wx:for-item="c"
+      bindtap="onCls" data-id="{{c.id}}">
+      <text class="f-chip-icon">{{c.icon}}</text>
+      <text class="f-chip-n">{{c.name}}</text>
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <view class="filter-row row wrap">
+    <view class="f-chip sm tappable {{topic === t.k ? 'on' : ''}}"
+      wx:for="{{topics}}" wx:key="k" wx:for-item="t"
+      bindtap="onTopic" data-k="{{t.k}}">
+      <text class="f-chip-n">{{t.n}}</text>
+    </view>
+  </view>
+
+  <!-- 文章列表 -->
+  <view class="art card tappable" wx:for="{{list}}" wx:key="id" wx:for-item="a"
+    bindtap="openStrat" data-id="{{a.id}}">
+    <view class="art-cover">
+      <pixel-icon art-id="{{a.artId}}" size="80" />
+    </view>
+    <view class="col flex-1">
+      <view class="row art-title-row">
+        <text class="art-flag" wx:if="{{a.isNew}}">🆕</text>
+        <text class="art-title flex-1">{{a.title}}</text>
+      </view>
+      <text class="art-summary px">{{a.summary}}</text>
+      <view class="row art-meta-row">
+        <text class="art-cls px">{{a.clsIcon}} {{a.clsName}} · {{a.topicName}}</text>
+        <text class="art-time px">{{a.time}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty card" wx:if="{{!list.length}}">
+    <text class="empty-t">📚 该筛选条件下暂无攻略</text>
+    <text class="empty-s px">换个职业或分类试试</text>
+  </view>
+
+</view>

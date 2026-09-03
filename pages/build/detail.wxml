@@ -1,0 +1,110 @@
+<view class="page-root {{themeClass}} bdetail-root" wx:if="{{info}}">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">{{info.name}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 成品展示卡 -->
+  <view class="hero card">
+    <view class="hero-done px" wx:if="{{info.done}}">✓ 已建成</view>
+    <view class="hero-art" wx:if="{{info.pic}}">
+      <image class="hero-pic" src="{{info.pic}}" mode="widthFix" bindtap="onPreview" />
+    </view>
+    <view class="hero-art" wx:else><build-hero case-id="{{info.id}}" width="620" /></view>
+    <view class="hero-meta">
+      <text class="tag tag-item px">{{info.style}}</text>
+      <text class="tag tag-strat px">{{info.stageN}}</text>
+      <text class="tag tag-mon px">{{info.stars}}</text>
+    </view>
+    <view class="hero-spec">
+      <view class="col spec-i">
+        <text class="spec-v">{{info.size}}</text>
+        <text class="spec-k px">占地尺寸</text>
+      </view>
+      <view class="spec-div" />
+      <view class="col spec-i">
+        <text class="spec-v">{{info.npc}}</text>
+        <text class="spec-k px">NPC 容量</text>
+      </view>
+    </view>
+    <!-- 建造视频链接 -->
+    <block wx:if="{{info.video}}">
+      <view class="video-btn tappable" bindtap="onVideo">
+        <text class="vb-play">▶</text>
+        <view class="col flex-1">
+          <text class="vb-t">观看建造视频（B站）</text>
+          <text class="vb-s px">点击直接跳转哔哩哔哩小程序播放</text>
+        </view>
+        <text class="vb-go">›</text>
+      </view>
+      <view class="video-src px">视频来源：B站UP主 [{{info.author}}]</view>
+      <view class="video-disc px">本站仅提供链接跳转服务，视频版权归原作者所有</view>
+    </block>
+    <view class="done-btn tappable {{info.done ? 'on' : ''}}" bindtap="onDone">
+      {{info.done ? '✓ 已建成（点按取消）' : '建成了，打卡 ›'}}
+    </view>
+  </view>
+
+  <!-- 视频二维码弹窗 -->
+  <view class="vm-mask" wx:if="{{videoModal}}" bindtap="closeVideo">
+    <view class="vm-card" catchtap="noop">
+      <text class="vm-title">建造视频 · {{info.name}}</text>
+      <view class="vm-qr-box">
+        <image wx:if="{{qrImg}}" class="vm-qr" src="{{qrImg}}" mode="aspectFit"
+          show-menu-by-longpress="{{true}}" />
+        <view wx:else class="vm-loading px">二维码生成中…</view>
+      </view>
+      <text class="vm-hint">长按上方二维码 → 选择「识别二维码」</text>
+      <text class="vm-hint sub">即可跳转B站，观看完整建造过程</text>
+      <view class="vm-copy tappable px" bindtap="onCopyLink">复制链接（备用）</view>
+      <view class="vm-close tappable" bindtap="closeVideo">关闭</view>
+    </view>
+    <!-- 离屏画布：生成二维码图片用 -->
+    <canvas type="2d" id="qrCanvas" class="vm-canvas"></canvas>
+  </view>
+
+  <!-- 所需材料 -->
+  <block wx:if="{{info.mats.length}}">
+    <view class="sec-title"><view class="diamond" /><text class="t">所需材料</text>
+      <text class="more px">共 {{info.mats.length}} 类</text>
+    </view>
+    <view class="mats card">
+      <view class="mat-row" wx:for="{{info.mats}}" wx:key="n">
+        <text class="mat-ic">{{item.ic}}</text>
+        <view class="col flex-1">
+          <text class="mat-n">{{item.n}} <text class="mat-q px">{{item.q}}</text></text>
+          <text class="mat-src px">获取：{{item.src}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 建造步骤（分步图解） -->
+  <block wx:if="{{info.steps.length}}">
+    <view class="sec-title"><view class="diamond" /><text class="t">建造步骤</text>
+      <text class="more px">共 {{info.steps.length}} 步</text>
+    </view>
+    <view class="step card fade-in" wx:for="{{info.steps}}" wx:key="no">
+      <view class="step-head">
+        <view class="step-no">STEP {{item.no}}</view>
+        <text class="step-t">{{item.t}}</text>
+      </view>
+      <text class="step-d">{{item.d}}</text>
+      <view class="step-art"><build-hero case-id="{{info.id}}" tpl="{{item.tpl}}" width="560" /></view>
+    </view>
+  </block>
+
+  <!-- 内部布局 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">内部布局与 NPC</text></view>
+  <view class="layout card">
+    <view class="lay-point">
+      <view class="lay-dot" /><text class="lay-p">{{info.layout}}</text>
+    </view>
+  </view>
+
+  <view class="foot safe-bottom">
+    <text class="foot-t px">GOOD LUCK, BUILDER</text>
+  </view>
+</view>
