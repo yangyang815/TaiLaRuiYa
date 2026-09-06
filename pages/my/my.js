@@ -3,6 +3,7 @@ const dex = require('../../utils/dex')
 const store = require('../../utils/store')
 const achv = require('../../utils/achievements')
 const fishing = require('../../utils/fishing')
+const { startClock } = require('../../utils/clock')
 const { CASES: BUILD_CASES } = require('../../data/building')
 const { LIST: GACHV_LIST } = require('../../data/gameAchievements')
 
@@ -47,17 +48,18 @@ Page({
       avatars: AVATARS.map(a => ({ k: a })),
       clock: fmtClock(new Date())
     })
-    this._timer = setInterval(() => this.setData({ clock: fmtClock(new Date()) }), 30000)
+    // 整分钟对齐刷新右上角时钟（与其它 Tab 页同相位，跨分钟即跳变）
+    this._timer = startClock(() => this.setData({ clock: fmtClock(new Date()) }))
   },
 
   onUnload () {
-    if (this._timer) { clearInterval(this._timer); this._timer = null }
+    if (this._timer) { this._timer.stop(); this._timer = null }
   },
 
   onShow () {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().init(3)
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
+    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '', clock: fmtClock(new Date()) })
     this.refresh()
   },
 
@@ -141,7 +143,7 @@ Page({
   resetData () {
     wx.showModal({
       title: '重置数据',
-      content: '将清除收藏、笔记、成就、Boss击败记录等全部本地数据，确定继续吗？',
+      content: '将清除收藏、成就、Boss击败记录等全部本地数据，确定继续吗？',
       confirmText: '清除',
       confirmColor: '#E85555',
       success: r => {
@@ -173,7 +175,7 @@ Page({
         nick: p.nick || '无名冒险家',
         color: '#FFD700',
         lv: lv.lv, lvTitle: lv.title, cur: lv.cur, need: lv.need, pts: lv.pts,
-        stats: [['收藏', store.getFavs().length + ' 项'], ['笔记', store.getNotes().length + ' 篇'], ['冒险值', lv.pts + ' 分']],
+        stats: [['收藏', store.getFavs().length + ' 项'], ['击败Boss', Object.keys(store.getDefeated()).length + ' 只'], ['冒险值', lv.pts + ' 分']],
         desc: '在泰拉瑞亚手册查询图鉴 · 追踪合成 · 攻略全流程'
       },
       posterShow: true

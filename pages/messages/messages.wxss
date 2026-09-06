@@ -1,0 +1,43 @@
+/* 消息中心页 */
+.msgs-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10rpx; }
+.nav-ph { width: 64rpx; }
+
+/* 未读统计条 */
+.sum { display: flex; align-items: center; margin: 8rpx 30rpx 0; padding: 14rpx 22rpx;
+  border-radius: 12rpx; background: rgba(255, 215, 0, 0.08); border: 2rpx solid var(--gold-faint); }
+.sum-ico { font-size: 26rpx; margin-right: 12rpx; }
+.sum-t { font-size: 24rpx; color: var(--gold); font-weight: 700; }
+
+/* 消息列表 */
+.msg-list { padding: 16rpx 30rpx 0; }
+.msg-item { display: flex; align-items: flex-start; padding: 22rpx 22rpx; margin-bottom: 18rpx; }
+/* 未读：金色边框 + 微光 */
+.msg-item.unread { border-color: rgba(255, 215, 0, 0.55); box-shadow: 0 0 16rpx rgba(255, 215, 0, 0.18), 0 6rpx 24rpx var(--shadow); }
+.m-ico {
+  width: 72rpx; height: 72rpx; flex-shrink: 0; margin-right: 20rpx;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36rpx; border-radius: 14rpx;
+  background: rgba(0, 0, 0, 0.25); border: 2rpx solid var(--line);
+}
+.m-head { margin-bottom: 10rpx; }
+.m-title { font-size: 28rpx; font-weight: 800; color: var(--text); }
+.m-body { font-size: 24rpx; color: var(--text-dim); line-height: 1.65; }
+.m-foot { margin-top: 14rpx; }
+.m-date { font-size: 20rpx; color: var(--text-faint); letter-spacing: 1rpx; }
+.m-dot { width: 12rpx; height: 12rpx; border-radius: 50%; background: #E85555;
+  box-shadow: 0 0 8rpx rgba(232, 85, 85, 0.7); margin-left: 14rpx; }
+.m-new { font-size: 20rpx; color: #E85555; font-weight: 700; margin-left: 8rpx; }
+
+/* 标签配色（沿用全局 tag 体系） */
+.tg-update  { color: #FFD700; background: rgba(255, 215, 0, 0.12); }
+.tg-notice  { color: #4CE0E0; background: rgba(76, 224, 224, 0.12); }
+.tg-feature { color: #7CE87C; background: rgba(60, 200, 90, 0.14); }
+
+.pad-bottom { height: calc(env(safe-area-inset-bottom) + 40rpx); }

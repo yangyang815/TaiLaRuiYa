@@ -66,6 +66,16 @@
         </view>
       </view>
       <!-- 关联跳转 -->
+      <view class="sd-block" wx:if="{{s.articles.length}}">
+        <text class="sd-k px">📖 本阶段攻略</text>
+        <view class="sd-art row tappable" wx:for="{{s.articles}}" wx:key="id" wx:for-item="a"
+          catchtap="onStrat" data-id="{{a.id}}">
+          <text class="sd-dot">·</text>
+          <text class="sd-art-t flex-1">{{a.title}}</text>
+          <text class="sd-art-meta px">{{a.topicName}}</text>
+          <text class="sd-link-arrow">→</text>
+        </view>
+      </view>
       <view class="sd-links row" wx:if="{{s.bossName || s.strat}}">
         <view class="sd-link tappable row" wx:if="{{s.bossName}}" catchtap="onBoss" data-id="{{s.boss}}">
           <text class="sd-link-icon">{{s.bossArt ? '' : '👹'}}</text>

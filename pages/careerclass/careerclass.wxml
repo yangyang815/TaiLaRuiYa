@@ -1,0 +1,87 @@
+<view class="page-root {{themeClass}} cc-root">
+
+  <!-- 顶部导航（避让胶囊） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">职业专题 · {{clsName}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 职业切换 -->
+  <view class="cls-tabs">
+    <view class="cls-tab tappable {{cls === item.id ? 'on' : ''}}" wx:for="{{classes}}" wx:key="id"
+      bindtap="onCls" data-id="{{item.id}}">{{item.icon}} {{item.name}}</view>
+  </view>
+
+  <!-- 职业头区 -->
+  <view class="hero card">
+    <view class="hero-glow" style="background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.16) 0%, transparent 70%);" />
+    <view class="hero-row">
+      <pixel-icon art-id="{{art}}" size="120" />
+      <view class="col flex-1">
+        <text class="hero-name">{{clsIcon}} {{clsName}}</text>
+        <text class="hero-desc px">{{clsDesc}}</text>
+        <view class="hero-prog" wx:if="{{prog.ready}}">
+          <view class="hp-bar"><view class="hp-fill" style="width:{{prog.pct}}%" /></view>
+          <text class="hp-t px">路线进度 {{prog.doneCount}}/{{prog.total}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="hero-btn tappable" bindtap="goPath">🗺️ 进入路线规划（8 阶段打卡） ›</view>
+  </view>
+
+  <!-- 攻略合集 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">📚 攻略合集</text>
+    <text class="more px">{{articles.length}} 篇</text>
+  </view>
+  <view class="art-list card">
+    <view class="art-row tappable" wx:for="{{articles}}" wx:key="id"
+      bindtap="onStrat" data-id="{{item.id}}">
+      <view class="ar-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+      <view class="col flex-1">
+        <text class="ar-t">{{item.title}}</text>
+        <text class="ar-s px">{{item.topicName}} · {{item.time}}</text>
+      </view>
+      <text class="ar-go px">阅读 ›</text>
+    </view>
+  </view>
+
+  <!-- 配装推荐（按阶段） -->
+  <view class="sec-title"><view class="diamond" /><text class="t">🛡 配装推荐</text>
+    <text class="more px">按阶段</text>
+  </view>
+  <view class="gs card" wx:for="{{gearStages}}" wx:for-item="gs" wx:for-index="gi" wx:key="id">
+    <view class="gs-head">
+      <text class="gs-no px">{{gi + 1}}</text>
+      <view class="col flex-1">
+        <text class="gs-name">{{gs.name}}</text>
+        <text class="gs-brief px">{{gs.brief}}</text>
+      </view>
+    </view>
+    <view class="gear-row row">
+      <view class="gear col" wx:for="{{gs.gear}}" wx:key="name" wx:for-item="g">
+        <view class="gear-art"><pixel-icon art-id="{{g.art}}" size="64" /></view>
+        <text class="gear-name">{{g.name}}</text>
+        <text class="gear-why px">{{g.why}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Boss 打法 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">👹 Boss 打法</text>
+    <text class="more px">{{bosses.length}} 个</text>
+  </view>
+  <view class="boss-list card">
+    <view class="boss-row tappable" wx:for="{{bosses}}" wx:key="id"
+      bindtap="onBoss" data-id="{{item.id}}">
+      <view class="boss-art"><pixel-icon art-id="{{item.artId}}" size="64" /></view>
+      <view class="col flex-1">
+        <text class="boss-n">{{item.name}}</text>
+        <text class="boss-stage px">{{item.stageName}}</text>
+      </view>
+      <text class="boss-go px">打法 ›</text>
+    </view>
+  </view>
+
+  <view class="foot px safe-bottom">CLASS GUIDE · {{clsName}}</view>
+</view>

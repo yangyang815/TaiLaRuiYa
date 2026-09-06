@@ -46,11 +46,15 @@
       <text class="s-clear" wx:if="{{kw}}" bindtap="clearKw">✕</text>
     </view>
 
+    <!-- 目标联想（显示工作台与分类，点击展开合成路径） -->
     <view class="suggest card pop-in" wx:if="{{targetSuggests.length}}">
       <view class="sg-item" wx:for="{{targetSuggests}}" wx:key="id"
         bindtap="onSuggestTap" data-id="{{item.id}}">
         <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
-        <text class="sg-name">{{item.name}}</text>
+        <view class="col flex-1">
+          <text class="sg-name">{{item.name}}</text>
+          <text class="sg-sub" wx:if="{{item.stationName || item.catLabel}}">⚒ {{item.stationName}}<block wx:if="{{item.catLabel}}"> · {{item.catLabel}}</block></text>
+        </view>
         <text class="sg-go px">GO</text>
       </view>
     </view>
@@ -194,6 +198,35 @@
   <view class="empty" wx:else>
     <view class="e-icon floaty">⚒️</view>
     <text>输入目标物品，向导为你展开完整合成路线</text>
+  </view>
+
+  <!-- 配方筛选：分类 + 工作台 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">配方筛选</text>
+    <text class="more">{{fCount}} 条配方 · 点击直达</text>
+  </view>
+  <scroll-view class="f-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="f-chip tappable {{fCat === item.k ? 'on' : ''}}" wx:for="{{catChips}}" wx:key="k"
+      bindtap="onCatChip" data-k="{{item.k}}">{{item.n}}</view>
+  </scroll-view>
+  <scroll-view class="f-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="f-chip st tappable {{fStation === item.k ? 'on' : ''}}" wx:for="{{stationChips}}" wx:key="k"
+      bindtap="onStationChip" data-k="{{item.k}}">⚒ {{item.n}}</view>
+  </scroll-view>
+  <view class="fr-list card" wx:if="{{fRecipes.length}}">
+    <view class="fr-row tappable" wx:for="{{fRecipes}}" wx:key="rid"
+      bindtap="onRecipeTap" data-id="{{item.rid}}">
+      <view class="fr-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+      <view class="col flex-1">
+        <text class="fr-n">{{item.name}}</text>
+        <text class="fr-s">⚒ {{item.stationName}}</text>
+      </view>
+      <text class="fr-cat" wx:if="{{item.catLabel}}">{{item.catLabel}}</text>
+      <text class="fr-go px">GO</text>
+    </view>
+  </view>
+  <view class="empty" wx:else>
+    <view class="e-icon">⚒️</view>
+    <text>该筛选组合下暂无配方，换个条件试试</text>
   </view>
 
   <!-- 常用合成 -->

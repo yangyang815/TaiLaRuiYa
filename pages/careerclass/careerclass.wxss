@@ -1,0 +1,74 @@
+/* 职业专属专题页 */
+.cc-root { min-height: 100vh; padding-bottom: 60rpx; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10rpx; }
+.nav-ph { width: 64rpx; }
+
+/* 职业切换 tabs */
+.cls-tabs { display: flex; gap: 12rpx; padding: 12rpx 30rpx 4rpx; }
+.cls-tab { flex: 1; text-align: center; padding: 14rpx 0; font-size: 24rpx; font-weight: 700;
+  color: var(--text-dim); border: 2rpx solid var(--line); border-radius: 12rpx; background: var(--card);
+  transition: all 0.2s ease; }
+.cls-tab.on { color: #3A2400; background: linear-gradient(180deg, #FFE55C, #E5B800);
+  border-color: #FFF0B0; box-shadow: 0 0 16rpx rgba(255, 215, 0, 0.35); }
+
+/* 职业头区 */
+.hero { position: relative; margin: 16rpx 30rpx 0; padding: 26rpx; overflow: hidden; }
+.hero-glow { position: absolute; inset: -40rpx; pointer-events: none; }
+.hero-row { display: flex; align-items: center; position: relative; }
+.hero-name { font-size: 34rpx; font-weight: 900; color: var(--text); }
+.hero-desc { font-size: 22rpx; color: var(--text-dim); margin-top: 8rpx; }
+.hero-prog { margin-top: 14rpx; }
+.hp-bar { height: 12rpx; border-radius: 6rpx; background: var(--line); overflow: hidden; }
+.hp-fill { height: 100%; border-radius: 6rpx;
+  background: linear-gradient(90deg, #FFD700, #FF9C40); transition: width 0.3s; }
+.hp-t { font-size: 19rpx; color: var(--text-dim); margin-top: 6rpx; }
+.hero-btn { position: relative; margin-top: 20rpx; text-align: center; padding: 16rpx 0;
+  border-radius: 12rpx; font-size: 24rpx; font-weight: 800; color: #4A2B00;
+  background: linear-gradient(180deg, #FFE55C, #E5B800);
+  box-shadow: 0 4rpx 0 #8A6D00, 0 0 18rpx rgba(255, 215, 0, 0.3); }
+
+/* 攻略合集 */
+.art-list { margin: 4rpx 30rpx 0; padding: 6rpx 20rpx; }
+.art-row { display: flex; align-items: center; padding: 16rpx 4rpx; }
+.art-row + .art-row { border-top: 2rpx solid var(--line); }
+.ar-art { width: 60rpx; height: 60rpx; display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.25); border-radius: 10rpx; margin-right: 18rpx; flex-shrink: 0; }
+.ar-t { font-size: 25rpx; font-weight: 700; color: var(--text); }
+.ar-s { font-size: 20rpx; color: var(--text-faint); margin-top: 4rpx; }
+.ar-go { font-size: 20rpx; color: var(--gold); flex-shrink: 0; }
+
+/* 配装推荐（按阶段） */
+.gs { margin: 12rpx 30rpx 0; padding: 20rpx 22rpx; }
+.gs-head { display: flex; align-items: center; margin-bottom: 16rpx; }
+.gs-no { width: 44rpx; height: 44rpx; display: flex; align-items: center; justify-content: center;
+  border-radius: 10rpx; background: rgba(255, 215, 0, 0.15); border: 2rpx solid var(--gold-faint);
+  color: var(--gold); font-weight: 800; font-size: 22rpx; margin-right: 16rpx; flex-shrink: 0; }
+.gs-name { font-size: 26rpx; font-weight: 800; color: var(--text); }
+.gs-brief { font-size: 20rpx; color: var(--text-faint); margin-top: 4rpx; }
+.gear-row { display: flex; flex-wrap: wrap; gap: 14rpx; }
+.gear { width: calc((100% - 28rpx) / 3); align-items: center; }
+.gear-art { width: 72rpx; height: 72rpx; display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.25); border-radius: 12rpx; margin-bottom: 8rpx;
+  border: 2rpx solid var(--line); }
+.gear-name { font-size: 21rpx; font-weight: 700; color: var(--text); text-align: center; }
+.gear-why { font-size: 18rpx; color: var(--text-faint); text-align: center; margin-top: 4rpx; line-height: 1.4; }
+
+/* Boss 打法 */
+.boss-list { margin: 4rpx 30rpx 0; padding: 6rpx 20rpx; }
+.boss-row { display: flex; align-items: center; padding: 16rpx 4rpx; }
+.boss-row + .boss-row { border-top: 2rpx solid var(--line); }
+.boss-art { width: 68rpx; height: 68rpx; display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.25); border-radius: 12rpx; margin-right: 18rpx; flex-shrink: 0;
+  border: 2rpx solid rgba(232, 85, 85, 0.3); }
+.boss-n { font-size: 26rpx; font-weight: 800; color: var(--text); }
+.boss-stage { font-size: 20rpx; color: var(--text-faint); margin-top: 4rpx; }
+.boss-go { font-size: 20rpx; color: var(--gold); flex-shrink: 0; }
+
+.foot { text-align: center; font-size: 18rpx; color: var(--text-faint); letter-spacing: 2rpx;
+  margin-top: 40rpx; }

@@ -3,12 +3,24 @@ const dex = require('../../utils/dex')
 const acq = require('../../utils/acq')
 const store = require('../../utils/store')
 const R = require('../../data/recipes')
+const { startClock } = require('../../utils/clock')
 
 function fmtClock (d) {
   const h = String(d.getHours()).padStart(2, '0')
   const m = String(d.getMinutes()).padStart(2, '0')
   return h + ':' + m
 }
+
+// 物品分类 → 中文标签（配方筛选用）
+const CAT_LABEL = {
+  weapon: '武器', tool: '工具', armor: '盔甲', accessory: '饰品',
+  potion: '药水', material: '材料', mount: '坐骑', pet: '宠物'
+}
+const CAT_CHIPS = [
+  { k: '', n: '全部' }, { k: 'weapon', n: '武器' }, { k: 'tool', n: '工具' },
+  { k: 'armor', n: '盔甲' }, { k: 'accessory', n: '饰品' }, { k: 'potion', n: '药水' },
+  { k: 'material', n: '材料' }
+]
 
 Page({
   data: {
@@ -28,11 +40,17 @@ Page({
     matsOwned: 0,       // 已拥有的材料数
     rows: [],           // 扁平化树行
     missing: [],        // 缺失基础材料清单
-    quick: []
+    quick: [],
+    // 配方筛选（分类 + 工作台）
+    catChips: CAT_CHIPS,
+    stationChips: [],
+    fCat: '', fStation: '',
+    fRecipes: [], fCount: 0
   },
   _tree: null,
   _have: {},
   _matPool: [],         // 材料候选池
+  _recipes: [],         // 全部配方的展示元数据
   _timer: null,
 
   onLoad () {
@@ -45,27 +63,48 @@ Page({
       return { id, name: info.name, artId: info.artId }
     })
 
+    // 配方元数据 + 站点筛选 chips
+    this._recipes = R.RECIPES.map(r => {
+      const e = dex.byId[r.result]
+      const cat = (e && e.raw.cat) || ''
+      return {
+        rid: r.result,
+        name: r.name || (e && e.name) || r.result,
+        artId: r.art || (e && e.artId) || 'stone',
+        station: r.station,
+        stationName: R.STATIONS[r.station] || r.station,
+        cat,
+        catLabel: CAT_LABEL[cat] || ''
+      }
+    })
+    const stationChips = [{ k: '', n: '全部工作台' }].concat(
+      Object.keys(R.STATIONS).map(k => ({ k, n: R.STATIONS[k] }))
+    )
+
     this.setData({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
       navTop: app.globalData.navTop || 64,
       themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
       clock: fmtClock(new Date()),
+      stationChips,
       quick: R.QUICK.map(q => ({
         id: q.id, name: q.name,
         artId: (R.byId[q.id] && R.byId[q.id].art) || 'stone'
       }))
     })
-    this._timer = setInterval(() => this.setData({ clock: fmtClock(new Date()) }), 30000)
+    this.applyFilterRecipes()
+    // 整分钟对齐刷新右上角时钟（与其它 Tab 页同相位，跨分钟即跳变）
+    this._timer = startClock(() => this.setData({ clock: fmtClock(new Date()) }))
   },
 
   onUnload () {
-    if (this._timer) { clearInterval(this._timer); this._timer = null }
+    if (this._timer) { this._timer.stop(); this._timer = null }
   },
 
   onShow () {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().init(2)
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
+    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '', clock: fmtClock(new Date()) })
     if (app.globalData.pendingCraft) {
       this.setTarget(app.globalData.pendingCraft)
       app.globalData.pendingCraft = null
@@ -90,13 +129,55 @@ Page({
   /* ---------- 目标 ---------- */
   onKw (e) {
     const kw = e.detail.value
-    this.setData({ kw, targetSuggests: kw ? dex.recipeSearch(kw).slice(0, 8) : [] })
+    // 联想：模糊命中配方 → 附上工作台/分类信息 → 应用当前筛选维度
+    let sug = kw ? dex.recipeSearch(kw).slice(0, 10) : []
+    sug = sug.map(s => {
+      const r = R.byId[s.id]
+      const cat = r ? ((dex.byId[r.result] && dex.byId[r.result].raw.cat) || '') : ''
+      return {
+        ...s,
+        stationName: r ? (R.STATIONS[r.station] || '') : '',
+        catLabel: CAT_LABEL[cat] || ''
+      }
+    })
+    if (this.data.fCat) sug = sug.filter(s => {
+      const r = R.byId[s.id]
+      const entry = r && dex.byId[r.result]
+      return (entry && entry.raw.cat) === this.data.fCat
+    })
+    if (this.data.fStation) sug = sug.filter(s => {
+      const r = R.byId[s.id]
+      return r && r.station === this.data.fStation
+    })
+    this.setData({ kw, targetSuggests: sug })
   },
   clearKw () { this.setData({ kw: '', targetSuggests: [] }) },
   onSuggestTap (e) {
     this.setTarget(e.currentTarget.dataset.id)
   },
   onQuickTap (e) { this.setTarget(e.currentTarget.dataset.id) },
+
+  /* ---------- 配方筛选（分类 + 工作台） ---------- */
+  onCatChip (e) {
+    this.setData({ fCat: e.currentTarget.dataset.k })
+    this.applyFilterRecipes()
+    if (this.data.kw) this.onKw({ detail: { value: this.data.kw } })
+  },
+  onStationChip (e) {
+    this.setData({ fStation: e.currentTarget.dataset.k })
+    this.applyFilterRecipes()
+    if (this.data.kw) this.onKw({ detail: { value: this.data.kw } })
+  },
+  applyFilterRecipes () {
+    const list = this._recipes.filter(r =>
+      (!this.data.fCat || r.cat === this.data.fCat) &&
+      (!this.data.fStation || r.station === this.data.fStation))
+    this.setData({ fRecipes: list, fCount: list.length })
+  },
+  onRecipeTap (e) {
+    this.setTarget(e.currentTarget.dataset.id)
+    wx.pageScrollTo({ scrollTop: 0, duration: 250 })
+  },
 
   setTarget (id) {
     const rec = R.byId[id]

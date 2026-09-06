@@ -1,0 +1,59 @@
+<view class="page-root {{themeClass}} ws-root">
+
+  <!-- 返回栏（右留胶囊宽度） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="goBack">‹</view>
+    <text class="nav-t">特殊种子</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头部说明 -->
+  <view class="head card card-gold">
+    <view class="row h-row">
+      <pixel-icon art-id="seed_zenith" size="72" />
+      <view class="col flex-1">
+        <text class="h-t">秘密种子大全</text>
+        <text class="h-s">创建世界时在"种子"栏输入代码（不区分大小写）{{verNote ? ' · ' + verNote : ''}}</text>
+      </view>
+      <text class="h-count px">{{total}}</text>
+    </view>
+  </view>
+
+  <!-- 分组筛选 -->
+  <view class="chips">
+    <view class="chip tappable {{chip === item.k ? 'on' : ''}}" wx:for="{{chips}}" wx:key="k"
+      bindtap="onChip" data-k="{{item.k}}">{{item.n}}</view>
+  </view>
+
+  <!-- 种子列表 -->
+  <view class="ws-list" wx:if="{{list.length}}">
+    <view class="ws-item card tappable" wx:for="{{list}}" wx:key="id"
+      bindtap="onSeedTap" data-id="{{item.id}}">
+      <view class="ws-art" style="box-shadow: 0 0 16rpx {{item.glow}}55;">
+        <pixel-icon art-id="{{item.artId}}" size="76" />
+      </view>
+      <view class="col flex-1 ws-info">
+        <view class="row ws-name-row">
+          <text class="ws-name">{{item.name}}</text>
+          <text class="ws-group {{item.groupCls}}">{{item.groupName}}</text>
+        </view>
+        <view class="row ws-code-row" catchtap="onCodeCopy" data-code="{{item.code}}">
+          <text class="ws-code px flex-1">{{item.code}}</text>
+          <text class="ws-copy">复制</text>
+        </view>
+        <view class="row ws-meta-row">
+          <text class="ws-stars">{{item.starsOn}}<text class="ws-stars-off">{{item.starsOff}}</text></text>
+          <text class="ws-ver px">{{item.ver}}</text>
+        </view>
+      </view>
+      <text class="ws-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <view class="e-icon">🌱</view>
+    <text>该分组下暂无种子</text>
+  </view>
+
+  <view class="pad-bottom" />
+</view>

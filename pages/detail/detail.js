@@ -56,12 +56,16 @@ Page({
       (e.type === 'item' && s.cat === 'class' && s.cover === r.art)
     ).slice(0, 3).map(s => ({ id: s.id, title: s.title, time: s.time }))
 
+    // 获取方式文本 → 可跳转片段（提及的条目名/俗称自动变超链接）
+    const obtainText = e.type === 'seed' ? '创建世界时在"种子"栏输入代码（区分大小写）'
+      : (r.obtain || r.spawn || r.biome || '')
+    const obtainLinks = dex.linkify(obtainText, e.id)
+
     this.setData({
       e: {
         id: e.id, name: e.name, en: e.en, type: e.type, artId: e.artId, glow: e.glow,
         rarity: e.rarity, color: r.color || '#FFD700', desc: r.desc || '',
-        obtain: e.type === 'seed' ? '创建世界时在"种子"栏输入代码（区分大小写）'
-          : (r.obtain || r.spawn || r.biome || ''),
+        obtain: obtainText,
         obtainTitle: e.type === 'boss' ? '召唤方式' : (e.type === 'mon' ? '出现地点' : (e.type === 'npc' ? '入住条件' : (e.type === 'seed' ? '使用方法' : '获取方式'))),
         use: r.use || '', tip: r.tip || '', coins: r.coins || ''
       },
@@ -82,6 +86,8 @@ Page({
       mechanics: r.mechanics || [],
       exclusives: (r.exclusives || []).map(x => ({ name: x.name, note: x.note })),
       strategy: e.type === 'seed' ? (r.tips || []) : (r.strategy || (r.tip ? [r.tip] : [])),
+      obtainLinks,
+      hasLnk: obtainLinks.some(s => s.ref),
       ashes,
       relStrats,
       hasRecipe: !!dex.R.byId[e.id],
@@ -101,10 +107,20 @@ Page({
   goAcq () {
     wx.navigateTo({ url: '/pages/acq/acq?id=' + this.data.e.id })
   },
-  // 掉落物 → 获取方式速查
+  // 掉落物 → 获取方式速查 / 条目详情（功能闭环）
   onDrop (e) {
     const id = e.currentTarget.dataset.id
-    if (id && acq.has(id)) wx.navigateTo({ url: '/pages/acq/acq?id=' + id })
+    if (!id) return
+    if (acq.has(id)) wx.navigateTo({ url: '/pages/acq/acq?id=' + id })
+    else if (dex.byId[id]) dex.go(id)
+  },
+  // 获取方式/出现地点中的实体链接 → 对应条目详情
+  onLinkTap (e) {
+    const id = e.currentTarget.dataset.id
+    const entry = id && dex.byId[id]
+    if (!entry) return
+    store.pushRecent(entry.id, entry.type)
+    dex.go(entry.id, entry.type)
   },
   toggleFav () {
     const added = store.toggleFav(this.data.e.id, this.data.e.type)

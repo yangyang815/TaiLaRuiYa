@@ -2,6 +2,7 @@
 // 性能：分页渲染（滚动增量加载）、图标传 artId 字符串、onShow 脏检查
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
+const { startClock } = require('../../utils/clock')
 
 const TABS = [
   { k: 'all', n: '全部' }, { k: 'item', n: '物品' }, { k: 'mon', n: '敌怪' }, { k: 'boss', n: 'Boss' }
@@ -50,19 +51,19 @@ Page({
       themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
       clock: fmtClock(new Date())
     })
-    // 每分钟刷新右上角时钟
-    this._timer = setInterval(() => this.setData({ clock: fmtClock(new Date()) }), 30000)
+    // 整分钟对齐刷新右上角时钟（与其它 Tab 页同相位，跨分钟即跳变）
+    this._timer = startClock(() => this.setData({ clock: fmtClock(new Date()) }))
     this.loadRecents()
   },
 
   onUnload () {
-    if (this._timer) { clearInterval(this._timer); this._timer = null }
+    if (this._timer) { this._timer.stop(); this._timer = null }
   },
 
   onShow () {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().init(1)
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
+    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '', clock: fmtClock(new Date()) })
     if (app.globalData.pendingCodex) {
       let { tab } = app.globalData.pendingCodex
       app.globalData.pendingCodex = null
@@ -168,6 +169,8 @@ Page({
     const isMon = entry.type === 'mon'
     const isSeed = entry.type === 'seed'
     const isNpc = entry.type === 'npc'
+    // 获取方式文本 → 可跳转片段（提及的条目名/俗称自动变超链接）
+    const obtainText = isBoss ? r.spawn : (isMon ? r.biome : (isSeed ? '创建世界时在"种子"栏输入上述代码（区分大小写）' : r.obtain))
     this.setData({
       sheet: {
         id: entry.id, name: entry.name, en: entry.en, type: entry.type,
@@ -179,7 +182,8 @@ Page({
             ? [['HP', String(r.hp)], ['伤害', String(r.dmg)], ['防御', String(r.def)], ['出现', r.biome || r.tier || '']]
             : dex.itemBaseStats(r))),
         obtainTitle: isBoss ? '召唤方式' : (isMon ? '出现地点' : (isNpc ? '入住条件' : (isSeed ? '使用方法' : '获取方式'))),
-        obtain: isBoss ? r.spawn : (isMon ? r.biome : (isSeed ? '创建世界时在"种子"栏输入上述代码（区分大小写）' : r.obtain)),
+        obtain: obtainText,
+        obtainLinks: dex.linkify(obtainText, entry.id),
         use: r.use || '',
         shop: isNpc ? (r.shop || []) : [],
         shopNote: isNpc ? (r.shopNote || '') : '',
@@ -191,6 +195,16 @@ Page({
       },
       sheetFav: store.isFav(id)
     })
+  },
+  // 半屏弹窗中的实体链接：关闭弹窗后跳转对应条目
+  onSheetLink (e) {
+    const id = e.currentTarget.dataset.id
+    const entry = id && dex.byId[id]
+    if (!entry) return
+    this.setData({ sheet: null })
+    this.loadRecents()
+    store.pushRecent(entry.id, entry.type)
+    dex.go(entry.id, entry.type)
   },
   closeSheet () { this.setData({ sheet: null }); this.loadRecents() },
   noop () {},

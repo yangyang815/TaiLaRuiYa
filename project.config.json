@@ -20,7 +20,9 @@
     "ignore": [
       { "type": "regexp", "value": "guide_avatar.*\\.png" },
       { "type": "regexp", "value": "^(debug-deflate|test-png|_pycheck)\\.js$" },
-      { "type": "folder", "value": "泰拉瑞亚_设计素材" }
+      { "type": "folder", "value": "泰拉瑞亚_设计素材" },
+      { "type": "folder", "value": "scripts" },
+      { "type": "folder", "value": ".workbuddy" }
     ],
     "include": []
   },

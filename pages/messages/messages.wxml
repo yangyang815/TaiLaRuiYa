@@ -1,0 +1,41 @@
+<view class="page-root {{themeClass}} msgs-root">
+
+  <!-- 返回栏（右留胶囊宽度） -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="goBack">‹</view>
+    <text class="nav-t">消息中心</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 未读统计 -->
+  <view class="sum" wx:if="{{list.length}}">
+    <text class="sum-ico">📨</text>
+    <text class="sum-t">{{unread > 0 ? '有 ' + unread + ' 条未读消息' : '全部消息已读'}}</text>
+  </view>
+
+  <!-- 消息列表 -->
+  <view class="msg-list" wx:if="{{list.length}}">
+    <view class="msg-item card {{item.unread ? 'unread' : ''}}" wx:for="{{list}}" wx:key="id">
+      <view class="m-ico">{{item.icon}}</view>
+      <view class="col flex-1">
+        <view class="row m-head">
+          <text class="m-title flex-1">{{item.title}}</text>
+          <text class="tag {{item.tagInfo.cls}}">{{item.tagInfo.n}}</text>
+        </view>
+        <text class="m-body">{{item.body}}</text>
+        <view class="row m-foot">
+          <text class="m-date px">{{item.date}}</text>
+          <view class="m-dot" wx:if="{{item.unread}}" />
+          <text class="m-new" wx:if="{{item.unread}}">未读</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <view class="e-icon">📭</view>
+    <text>暂无系统消息</text>
+  </view>
+
+  <view class="pad-bottom" />
+</view>

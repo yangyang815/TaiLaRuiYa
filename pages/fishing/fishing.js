@@ -36,6 +36,7 @@ function emojiOf (id) {
 }
 
 // 全量图鉴条目（任务鱼 + 可钓获 + 钓具 + 鱼饵 + 宝匣，组内已排序）
+// biome 统一归并（tundra→雪原snow），并保留结构化 biome/time/weather 供筛选
 function buildAll () {
   const list = []
   // 任务鱼：按地形归拢（森林→雪原→沙漠→丛林→海洋→天空→地下…）
@@ -44,6 +45,8 @@ function buildAll () {
     .forEach(f => list.push({
     id: f.id, kind: 'quest', kindN: KIND_N.quest, name: f.name, en: f.en || '',
     emoji: emojiOf(f.id),
+    biome: f.biome === 'tundra' ? 'snow' : (f.biome || ''),
+    time: f.time || 'any', weather: f.weather || 'any',
     line1: (F.BIOME_N[f.biome] || f.biome) + ' · ' + (F.TIME_N[f.time] || f.time) + (f.weather === 'rain' ? ' · 雨天限定' : ''),
     line2: f.note || '',
     extra: f.reward ? '🎁 奖励：' + f.reward : '',
@@ -55,6 +58,8 @@ function buildAll () {
     .forEach(f => list.push({
     id: f.id, kind: 'food', kindN: KIND_N.food, name: f.name, en: f.en || '',
     emoji: emojiOf(f.id),
+    biome: f.biome === 'tundra' ? 'snow' : (f.biome || ''),
+    time: f.time || 'any', weather: f.weather || 'any',
     line1: (F.BIOME_N[f.biome] || f.biome) + ' · ' + (F.TIME_N[f.time] || f.time),
     line2: f.note || '',
     extra: f.power ? '渔力 +' + f.power : '',
@@ -66,6 +71,7 @@ function buildAll () {
     .forEach(g => list.push({
     id: g.id, kind: 'gear', kindN: KIND_N.gear, name: g.name, en: g.en || '',
     emoji: '🎣',
+    biome: '', time: 'any', weather: 'any',
     line1: (g.power ? '渔力 +' + g.power + ' · ' : '') + (g.tier || ''),
     line2: g.source || '',
     extra: '',
@@ -77,6 +83,7 @@ function buildAll () {
     .forEach(b => list.push({
     id: b.id, kind: 'bait', kindN: KIND_N.bait, name: b.name, en: b.en || '',
     emoji: '🐛',
+    biome: '', time: 'any', weather: 'any',
     line1: '饵力 ' + b.power,
     line2: b.source || '',
     extra: '',
@@ -88,6 +95,7 @@ function buildAll () {
     .forEach(c => list.push({
     id: c.id, kind: 'crate', kindN: KIND_N.crate, name: c.name, en: c.en || '',
     emoji: '📦',
+    biome: '', time: 'any', weather: 'any',
     line1: c.tier === 'post' ? '困难模式' : '困难模式前',
     line2: c.loot || '',
     extra: '',
@@ -96,6 +104,16 @@ function buildAll () {
   return list
 }
 const ALL = buildAll()
+
+// 地形筛选 chips（按 BIOME_ORDER 归并后的出现顺序）
+const BIOME_CHIPS = [{ k: '', n: '全部地形' }].concat(
+  BIOME_ORDER.filter(b => b !== 'tundra' && b !== 'any' && ALL.some(x => x.biome === b))
+    .map(b => ({ k: b, n: F.BIOME_N[b] || b }))
+)
+const TIME_CHIPS = [{ k: '', n: '全部时间' }, { k: 'day', n: '白天' }, { k: 'night', n: '夜晚' }]
+const WEATHER_CHIPS = [{ k: '', n: '全部天气' }, { k: 'rain', n: '雨天限定' }]
+// 推荐分组的地形展示顺序（中文）
+const REC_BIOME_ORDER = ['森林', '雪原', '沙漠', '丛林', '海洋', '天空', '地下', '蘑菇', '蜂蜜', '神圣', '腐化', '猩红', '地狱', '任意']
 
 /* ---------- 模糊搜索（拼音 / 英文 / 子序列 / 无序匹配，同图鉴页打分规则） ---------- */
 // 子序列：kw 各字符按顺序出现在 s 中
@@ -157,19 +175,23 @@ Page({
     timeNight: false, // 当前选择（初始跟随现实时间）
     rain: false,
     timeN: '白天',
-    avail: [],
+    recGroups: [],      // 推荐按地形分组
     availTotal: 0,
     // 渔夫任务
     quest: null,
     // 图鉴
     cats: CATS,
     cat: '',
+    biomeChips: BIOME_CHIPS, fBiome: '',
+    timeChips: TIME_CHIPS, fTime: '',
+    weatherChips: WEATHER_CHIPS, fRain: '',
     kw: '',
     groups: [],
     shownTotal: 0,
     // 进度
     prog: null
   },
+  _clockTimer: null,
 
   onLoad () {
     const app = getApp()
@@ -183,6 +205,16 @@ Page({
       timeNight: hour >= 19 || hour < 5
     })
     this.refresh()
+    // 每分钟校准时钟（推荐区的时间提示保持准确）
+    this._clockTimer = setInterval(() => {
+      const d = new Date()
+      const h = d.getHours()
+      this.setData({ clock: (h < 10 ? '0' + h : '' + h) + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes() })
+    }, 60000)
+  },
+
+  onUnload () {
+    if (this._clockTimer) { clearInterval(this._clockTimer); this._clockTimer = null }
   },
 
   onShow () {
@@ -193,15 +225,20 @@ Page({
 
   refresh () {
     const { timeNight, rain } = this.data
-    // 今日推荐（夜选 20 点、昼选 12 点代入）
+    // 今日推荐（夜选 20 点、昼选 12 点代入），并按地形分组展示
     const t = U.today(timeNight ? 20 : 12, rain)
+    const byBiome = {}
+    t.fishes.forEach(f => { (byBiome[f.biomeN] = byBiome[f.biomeN] || []).push(f) })
+    const recGroups = REC_BIOME_ORDER
+      .filter(b => byBiome[b])
+      .map(b => ({ biome: b, fishes: byBiome[b] }))
     // 渔夫任务（按日期轮换）
     const d = new Date()
     const quest = U.dailyQuest(d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate())
     const done = store.getFishDone()
     this.setData({
       timeN: t.timeN,
-      avail: t.fishes,
+      recGroups,
       availTotal: t.total,
       quest: Object.assign({}, quest, { done: done.indexOf(quest.id) >= 0 }),
       prog: U.progress(done)
@@ -233,6 +270,24 @@ Page({
     this.setData({ cat: e.currentTarget.dataset.k })
     this.setData(this.filterList())
   },
+  // 地形 / 时间 / 天气 三维筛选
+  onBiome (e) {
+    this.setData({ fBiome: e.currentTarget.dataset.k })
+    this.setData(this.filterList())
+  },
+  onTimeF (e) {
+    this.setData({ fTime: e.currentTarget.dataset.k })
+    this.setData(this.filterList())
+  },
+  onRainF (e) {
+    this.setData({ fRain: e.currentTarget.dataset.k })
+    this.setData(this.filterList())
+  },
+  // 任务卡 → 图鉴中定位该鱼
+  onQuestLocate () {
+    this.setData({ kw: this.data.quest.name, cat: '' })
+    this.setData(this.filterList())
+  },
   onKw (e) {
     this.setData({ kw: e.detail.value })
     this.setData(this.filterList())
@@ -241,16 +296,27 @@ Page({
     this.setData({ kw: '' })
     this.setData(this.filterList())
   },
+  // 清除地形/时间/天气筛选
+  resetFilters () {
+    this.setData({ fBiome: '', fTime: '', fRain: '' })
+    this.setData(this.filterList())
+  },
 
   /* 生成分组列表：每个类别一个板块，带收集进度；搜索时按相关度排序 */
   filterList () {
-    const { cat, kw } = this.data
+    const { cat, kw, fBiome, fTime, fRain } = this.data
     const done = new Set(store.getFishDone())
     const k = (kw || '').trim().toLowerCase()
     const groups = GROUP_META
       .filter(m => !cat || cat === m.k)
       .map(m => {
         let items = ALL.filter(x => x.kind === m.k)
+        // 三维筛选：地形 / 时间（any 视为全天可钓）/ 天气
+        items = items.filter(x =>
+          (!fBiome || x.biome === fBiome || x.biome === 'any') &&
+          (!fTime || x.time === 'any' || x.time === fTime) &&
+          (!fRain || x.weather === 'rain')
+        )
         if (k) {
           items = items
             .map(x => ({ x, sc: scoreItem(x, k) }))

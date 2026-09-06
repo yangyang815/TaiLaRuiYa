@@ -1,7 +1,6 @@
-// 本地存储封装：收藏 / 笔记 / 设置 / 评论 / 冒险等级
+// 本地存储封装：收藏 / 设置 / 评论 / 冒险等级
 const K = {
   fav: 'terr_favs',       // [{id, type}]
-  notes: 'terr_notes',    // [{id, ts, title, content}]
   theme: 'terr_theme',
   ver: 'terr_ver',
   hist: 'terr_hist',      // 搜索历史
@@ -15,7 +14,9 @@ const K = {
   fish: 'terr_fish',      // 钓鱼图鉴收集标记 [fishId]
   build: 'terr_build',    // 建造案例已建成打卡 [caseId]
   career: 'terr_career',  // 职业养成进度 {cls: 'melee', done: {stageId: ts}}
-  flags: 'terr_flags'     // 行为标志 {themeSwitched, versionSwitched, craftUsed}
+  flags: 'terr_flags',    // 行为标志 {themeSwitched, versionSwitched, craftUsed}
+  grid: 'terr_grid',      // 首页宫格 {use:{k:n}, recent:[k], order:[k]|null, open:bool}
+  msgRead: 'terr_msg_read' // 系统消息已读时间戳（晚于该时间的消息视为未读）
 }
 
 function get (key, def) {
@@ -39,30 +40,6 @@ function toggleFav (id, type) {
   else { favs.unshift({ id, type, ts: Date.now() }); added = true }
   set(K.fav, favs)
   return added
-}
-
-/* ---------- 笔记 ---------- */
-function getNotes () {
-  // 兜底修复：过滤脏数据、补齐缺失的时间戳
-  return get(K.notes, [])
-    .filter(n => n && n.id && (n.title || n.content))
-    .map(n => ({ ...n, ts: n.ts || Date.now() }))
-}
-function saveNote (note) {
-  const notes = getNotes()
-  if (note.id) {
-    const i = notes.findIndex(n => n.id === note.id)
-    // 合并保留原记录字段（ts 等），避免编辑后丢失时间
-    if (i >= 0) notes[i] = Object.assign({}, notes[i], note)
-  } else {
-    note.id = 'n' + Date.now()
-    note.ts = Date.now()
-    notes.unshift(note)
-  }
-  set(K.notes, notes)
-}
-function delNote (id) {
-  set(K.notes, getNotes().filter(n => n.id !== id))
 }
 
 /* ---------- 设置 ---------- */
@@ -246,18 +223,54 @@ function trackOpen () {
   s.opens += 1
   set(K.stats, s)
 }
-// 积分 = 启动×5 + 收藏×15 + 笔记×10，每 60 分升一级
+// 积分 = 启动×5 + 收藏×15，每 60 分升一级
 function getLevel () {
   const stats = getStats()
-  const pts = stats.opens * 5 + getFavs().length * 15 + getNotes().length * 10
+  const pts = stats.opens * 5 + getFavs().length * 15
   const lv = Math.min(LEVELS.length, Math.floor(pts / 60) + 1)
   const cur = pts - (lv - 1) * 60
   return { lv, title: LEVELS[lv - 1], pts, cur, need: 60 }
 }
 
+/* ---------- 首页宫格（使用频率 / 最近使用 / 自定义排序 / 展开状态） ---------- */
+function getGrid () {
+  const g = get(K.grid, null)
+  if (!g || typeof g !== 'object') return { use: {}, recent: [], order: null, open: false }
+  return { use: g.use || {}, recent: g.recent || [], order: Array.isArray(g.order) ? g.order : null, open: !!g.open }
+}
+// 点击入口：计数 + 记录最近使用（最多 3 个）
+function tapGrid (k) {
+  const g = getGrid()
+  g.use[k] = (g.use[k] || 0) + 1
+  g.recent = [k].concat(g.recent.filter(x => x !== k)).slice(0, 3)
+  set(K.grid, g)
+}
+function saveGridOrder (order) {
+  const g = getGrid()
+  g.order = order
+  set(K.grid, g)
+}
+function resetGridOrder () {
+  const g = getGrid()
+  g.order = null
+  set(K.grid, g)
+}
+function toggleGridOpen (open) {
+  const g = getGrid()
+  g.open = !!open
+  set(K.grid, g)
+}
+
+/* ---------- 系统消息已读标记 ---------- */
+function getMsgRead () {
+  return get(K.msgRead, 0)
+}
+function setMsgRead (ts) {
+  set(K.msgRead, ts || Date.now())
+}
+
 module.exports = {
   getFavs, isFav, toggleFav,
-  getNotes, saveNote, delNote,
   getTheme, setTheme, getVersion, setVersion,
   getHist, pushHist, clearHist,
   getRecents, pushRecent,
@@ -268,7 +281,9 @@ module.exports = {
   getBuildDone, isBuildDone, toggleBuild,
   getCareer, setCareerCls, toggleCareerStage,
   getFlags, markFlag,
+  getGrid, tapGrid, saveGridOrder, resetGridOrder, toggleGridOpen,
   getCmts, addCmt, delCmt,
   getProfile, setProfile,
-  getStats, trackOpen, getLevel
+  getStats, trackOpen, getLevel,
+  getMsgRead, setMsgRead
 }

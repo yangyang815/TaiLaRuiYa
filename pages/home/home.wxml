@@ -1,3 +1,4 @@
+<page-meta page-style="overflow: {{dragging ? 'hidden' : ''}}" />
 <view class="page-root {{themeClass}} {{daytime ? 'day' : 'night'}} home-root">
 
   <!-- 星空 / 微光粒子 -->
@@ -7,8 +8,9 @@
   </view>
   <view class="sky day-glow" wx:else />
 
-  <!-- 顶部：品牌区（Logo + 时钟） -->
-  <view class="nav" style="padding-top:{{navTop}}px;">
+  <!-- 顶部：品牌区（两行式——第一行 Logo + 快捷按钮，第二行问候语 + 时间，整行铺满避免挤压）
+       padding 在胶囊按钮下沿(navTop)基础上再下移 14px，避免与右上角胶囊重叠 -->
+  <view class="nav" style="padding-top:{{navTop + 14}}px;">
     <view class="nav-in">
       <view class="logo">
         <pixel-icon art-id="terra_blade" size="72" />
@@ -17,45 +19,139 @@
           <text class="logo-s">{{greet}}</text>
         </view>
       </view>
-      <view class="clock px">{{clock}}</view>
+      <view class="quick-btns">
+        <view class="q-btn tappable" bindtap="goMsgs" aria-label="消息中心">
+          <text class="q-ico">🔔</text>
+          <view class="q-dot" wx:if="{{hasMsgs}}" />
+        </view>
+        <view class="q-btn tappable" bindtap="goAchv" aria-label="冒险成就">
+          <text class="q-ico">📊</text>
+          <view class="q-badge px" wx:if="{{achvN > 0}}">{{achvN}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="nav-sub">
+      <text class="hello">{{hello}}</text>
+      <view class="clock-line">
+        <text class="clock px">{{clock}}</text>
+        <text class="clock-date">{{dateStr}}</text>
+      </view>
     </view>
   </view>
 
   <!-- 搜索框（点击进入全屏搜索页） -->
+  <!-- 全局搜索（首页内联：实时结果 / 历史 / 热门） -->
   <view class="search-row">
-    <view class="search-bar tappable" bindtap="goSearch">
+    <view class="search-bar">
       <text class="s-ico">🔍</text>
-      <text class="s-ph">搜索物品、怪物、攻略...</text>
+      <input class="s-input" placeholder="全局搜索：物品、Boss、配方、攻略" placeholder-class="s-ph"
+        value="{{searchKw}}" bindinput="onSearchKw" bindfocus="onSearchFocus" bindblur="onSearchBlur"
+        confirm-type="search" bindconfirm="goSearch" />
+      <text class="s-clear" wx:if="{{searchKw}}" catchtap="clearSearchKw">✕</text>
     </view>
     <view class="poster-fab tappable" bindtap="openPoster">▣</view>
   </view>
 
-  <!-- 版本更新提示 -->
-  <view class="update card card-gold blink" wx:if="{{showUpdate}}">
-    <text class="u-ico">📢</text>
-    <text class="u-txt">版本更新！新Boss与物品数据已就绪</text>
-    <view class="u-btn" catchtap="syncUpdate">同步</view>
-    <view class="u-close" catchtap="dismissUpdate">✕</view>
-  </view>
-
-  <!-- 本周挑战 -->
-  <view class="weekly card tappable" wx:if="{{weekly}}" bindtap="onWeeklyTap">
-    <view class="wk-glow" style="background: radial-gradient(circle at 85% 30%, {{weekly.glow}}30 0%, transparent 65%);" />
-    <view class="col flex-1">
-      <view class="wk-label-row">
-        <text class="wk-label">本周挑战</text>
-        <text class="wk-name">· {{weekly.name}}</text>
+  <!-- 搜索面板：关键词命中（图鉴 / 配方 / 攻略） -->
+  <view class="search-panel card pop-in" wx:if="{{searchKw && searchPanel}}">
+    <block wx:if="{{searchPanel.items.length}}">
+      <view class="sp-label">图鉴条目</view>
+      <view class="sp-row tappable" wx:for="{{searchPanel.items}}" wx:key="id"
+        bindtap="onPanelItem" data-id="{{item.id}}">
+        <view class="sp-art" style="box-shadow: 0 0 10rpx {{item.glow}}55;">
+          <pixel-icon art-id="{{item.artId}}" size="52" />
+        </view>
+        <text class="sp-name flex-1">{{item.name}}</text>
+        <text class="sp-tag">{{item.tag}}</text>
+        <text class="sp-go">›</text>
       </view>
-      <text class="wk-desc">{{weekly.desc}}</text>
+    </block>
+    <block wx:if="{{searchPanel.recipes.length}}">
+      <view class="sp-label">合成配方</view>
+      <view class="sp-row tappable" wx:for="{{searchPanel.recipes}}" wx:key="id"
+        bindtap="onPanelRecipe" data-id="{{item.id}}">
+        <view class="sp-art"><pixel-icon art-id="{{item.artId}}" size="52" /></view>
+        <text class="sp-name flex-1">{{item.name}}</text>
+        <text class="sp-tag">配方</text>
+        <text class="sp-go">›</text>
+      </view>
+    </block>
+    <block wx:if="{{searchPanel.strats.length}}">
+      <view class="sp-label">相关攻略</view>
+      <view class="sp-row tappable" wx:for="{{searchPanel.strats}}" wx:key="id"
+        bindtap="onPanelStrat" data-id="{{item.id}}">
+        <view class="sp-diamond" />
+        <text class="sp-name flex-1">{{item.title}}</text>
+        <text class="sp-tag">攻略</text>
+        <text class="sp-go">›</text>
+      </view>
+    </block>
+    <view class="sp-none" wx:if="{{!searchPanel.items.length && !searchPanel.recipes.length && !searchPanel.strats.length}}">
+      没有找到「{{searchKw}}」相关内容
     </view>
-    <view class="wk-art floaty"><pixel-icon art-id="{{weekly.artId}}" size="150" /></view>
-    <view class="wk-go px">VIEW →</view>
+    <view class="sp-more tappable" bindtap="goSearch">查看全部结果（{{searchPanel.total}} 条） ›</view>
   </view>
 
-  <!-- 冒险手册：标题 → 新手指南横条 → 16 卡片宫格 -->
-  <view class="sec-title"><view class="diamond" /><text class="t">冒险手册</text><text class="more px">HANDBOOK</text></view>
+  <!-- 搜索面板：聚焦空关键词（历史 / 热门） -->
+  <view class="search-panel card pop-in" wx:if="{{searchFocus && !searchKw}}">
+    <block wx:if="{{hist.length}}">
+      <view class="sp-label">搜索历史 <text class="sp-clear tappable" bindtap="onHistClear">清空</text></view>
+      <view class="sp-chips">
+        <view class="sp-chip tappable" wx:for="{{hist}}" wx:key="*this"
+          catchtap="onPanelWord" data-w="{{item}}">{{item}}</view>
+      </view>
+    </block>
+    <view class="sp-label">🔥 热门搜索</view>
+    <view class="sp-chips">
+      <view class="sp-chip hot tappable" wx:for="{{hotWords}}" wx:key="*this"
+        catchtap="onPanelWord" data-w="{{item}}">{{item}}</view>
+    </view>
+    <view class="sp-more tappable" bindtap="goSearch">进入全屏搜索 ›</view>
+  </view>
 
-  <!-- 新手指南入口（紧随标题下方，唯一横条） -->
+  <!-- 轮播 Banner：版本更新 / 本周挑战 / 新手指南
+       注意：current 不做受控绑定（受控 + autoplay 在部分基础库会互相冲突导致卡顿），
+       dots 高亮仅由 bindchange 单向驱动 -->
+  <view class="banner">
+    <swiper class="banner-swiper" autoplay circular interval="4200" duration="450"
+      bindchange="onSlideChange">
+      <swiper-item wx:for="{{slides}}" wx:key="k">
+        <view class="slide card card-gold tappable" bindtap="onSlideTap" data-k="{{index}}"
+          style="background: radial-gradient(circle at 88% 50%, {{item.glow}}40 0%, transparent 62%), var(--card);">
+          <text class="sl-ico">{{item.ico}}</text>
+          <view class="col flex-1">
+            <text class="sl-tag">{{item.tag}}</text>
+            <text class="sl-title">{{item.title}}</text>
+            <text class="sl-sub">{{item.sub}}</text>
+          </view>
+          <view class="sl-art"><pixel-icon art-id="{{item.artId}}" size="120" /></view>
+        </view>
+      </swiper-item>
+    </swiper>
+    <view class="banner-dots">
+      <view class="dot {{slideCur === index ? 'on' : ''}}" wx:for="{{slides}}" wx:key="k" />
+    </view>
+  </view>
+
+  <!-- 最近浏览（横向滚动） -->
+  <view class="sec-title"><view class="diamond" /><text class="t">⏱️ 最近浏览</text><text class="recent-more tappable" wx:if="{{recents.length}}" bindtap="onRecentsMore">查看全部 ›</text></view>
+  <scroll-view class="recent-scroll" scroll-x show-scrollbar="{{false}}" enhanced wx:if="{{recents.length}}">
+    <view class="r-chip card tappable" wx:for="{{recents}}" wx:key="id"
+      bindtap="onRecentTap" data-id="{{item.id}}" data-type="{{item.type}}">
+      <text class="r-ico">{{item.ico}}</text>
+      <view class="r-art" style="box-shadow: 0 0 12rpx {{item.glow}}55;">
+        <pixel-icon art-id="{{item.artId}}" size="52" />
+      </view>
+      <view class="col">
+        <text class="r-name">{{item.name}}</text>
+        <text class="r-label">{{item.label}}</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="recent-empty" wx:else>还没有浏览记录，去图鉴逛逛吧</view>
+
+  <!-- 推荐内容：新手指南 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">📌 推荐内容</text><text class="more px">RECOMMEND</text></view>
   <view class="feature-entry entry-guide tappable" bindtap="goGuide">
     <view class="se-art floaty"><pixel-icon art-id="npc_guide" size="104" /></view>
     <view class="col flex-1">
@@ -68,24 +164,45 @@
     <text class="fe-go fg-guide px">›</text>
   </view>
 
-  <!-- 快捷功能宫格 4×4（12 手册入口 + 4 特色入口） -->
-  <view class="grid">
-    <view class="g-cell card tappable {{item.pressed ? 'pressed' : ''}}"
-      wx:for="{{grid}}" wx:key="k"
-      bindtap="onGridTap" data-index="{{index}}"
-      bindtouchstart="pressIn" bindtouchend="pressOut" bindtouchcancel="pressOut">
-      <view class="g-art"><pixel-icon art-id="{{item.art}}" size="88" /></view>
-      <text class="g-name">{{item.n}}</text>
-    </view>
+  <!-- 冒险手册：16 卡片宫格 -->
+  <view class="sec-title"><view class="diamond" /><text class="t">冒险手册</text><text class="more px">HANDBOOK</text></view>
+
+  <!-- 快捷功能宫格 4×4（频率自动排序 · 最近使用高亮 · 长按拖动自定义 · 可折叠） -->
+  <view class="grid {{snapping ? 'snapping' : ''}}">
+    <block wx:for="{{grid}}" wx:key="k">
+      <view class="g-cell card tappable {{item.pressed ? 'pressed' : ''}} {{item.recent ? 'recent' : ''}} {{item.dragging ? 'dragging' : ''}}"
+        wx:if="{{gridOpen || index < 8}}"
+        style="{{item._dx || item._dy ? 'transform:translate(' + item._dx + 'px,' + item._dy + 'px);' : ''}}"
+        bindtap="onGridTap" data-index="{{index}}"
+        bindtouchstart="onCellTouchStart" bindtouchend="onCellTouchEnd" bindtouchcancel="onCellTouchEnd"
+        bindlongpress="onDragStart" bindtouchmove="onDragMove">
+        <view class="g-art"><pixel-icon art-id="{{item.art}}" size="88" /></view>
+        <text class="g-name">{{item.n}}</text>
+        <text class="g-star" wx:if="{{item.recent}}">★</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 展开 / 收起 -->
+  <view class="grid-more tappable" bindtap="toggleGrid">
+    <text class="gm-t">{{gridOpen ? '收起 ∧' : '展开全部 16 项 ∨'}}</text>
+  </view>
+  <view class="grid-tools">
+    <text class="gt-hint px" wx:if="{{gridOpen}}">长按卡片可拖动排序</text>
+    <text class="gt-reset tappable" wx:if="{{gridOpen && hasCustom}}" bindtap="resetOrder">恢复自动排序</text>
   </view>
 
   <!-- 今日热门 -->
-  <view class="sec-title"><view class="diamond" /><text class="t">今日热门</text><text class="more px">HOT NOW</text></view>
+  <view class="sec-title"><view class="diamond" /><text class="t">今日热门</text><text class="more px">HOT NOW</text><text class="hot-more tappable" bindtap="onHotMore">更多 ›</text></view>
+  <view class="hot-cats">
+    <view class="hot-cat tappable {{hotCat === item.k ? 'on' : ''}}" wx:for="{{hotCats}}" wx:key="k" bindtap="onHotCat" data-cat="{{item.k}}">{{item.n}}</view>
+  </view>
   <view class="hot-list card">
-    <view class="hot-row tappable" wx:for="{{hot}}" wx:key="id" bindtap="onHotTap" data-id="{{item.id}}">
+    <view class="hot-row tappable" wx:for="{{hot}}" wx:key="id" bindtap="onHotTap" data-id="{{item.id}}" data-type="{{item.type}}">
       <text class="h-no px">NO.{{index + 1}}</text>
       <view class="h-art"><pixel-icon art-id="{{item.artId}}" size="64" /></view>
       <text class="h-name flex-1">{{item.name}}</text>
+      <text class="h-trend px {{item.trendCls}}">{{item.trendIco}}</text>
       <text class="h-tag">{{item.tag}}</text>
       <text class="h-arrow">›</text>
     </view>

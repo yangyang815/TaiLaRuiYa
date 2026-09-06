@@ -16,7 +16,6 @@ const FIXED = {
 const S = '................'
 const GRD = 'GGGGGGGGGGGGGGGG'
 const EAR = 'EEEEEEEEEEEEEEEE'
-const UGTOP = 'EEEE' + 'PPPPPPPP' + 'EEEE' // 上下边框：石框房间顶/底
 
 const TPL = {
   // 通用：平地
@@ -63,26 +62,6 @@ const TPL = {
   castle_full: ['.P.P........P.P.', '.PPP........PPP.', '.PVP........PVP.', '.PPP.RRRRRR.PPP.',
     '.PPPPPPPPPPPPPP.', '.PPPVVBBBBBBPPP.', '.PPPBBBBDBBBPPP.', '.PPPBBAADBBBPPP.',
     '.PPPPPPPPPPPPPP.', GRD, EAR],
-  // 地下：挖出空间
-  ug_carve: [EAR, EAR,
-    'EEEE........EEEE', 'EEEE........EEEE', 'EEEE........EEEE', 'EEEE........EEEE', 'EEEE........EEEE', 'EEEE........EEEE',
-    EAR, EAR, EAR],
-  // 地下：框架加固
-  ug_frame: [EAR, EAR,
-    UGTOP, 'EEEEP......PEEEE', 'EEEEP......PEEEE', 'EEEEP......PEEEE', 'EEEEP......PEEEE',
-    UGTOP, EAR, EAR, EAR],
-  // 地下：铺背景墙
-  ug_backwall: [EAR, EAR,
-    UGTOP, 'EEEEPBBBBBBPEEEE', 'EEEEPBBBBBBPEEEE', 'EEEEPBBBBBBPEEEE', 'EEEEPBBBBBBPEEEE',
-    UGTOP, EAR, EAR, EAR],
-  // 地下：装门封闭
-  ug_door: [EAR, EAR,
-    UGTOP, 'EEEEPBBBBBBPEEEE', 'EEEEPBBBBBBPEEEE', 'EEEEPBBBBBBDEEEE', 'EEEEPBBBBBBDEEEE',
-    UGTOP, EAR, EAR, EAR],
-  // 成品：地下安全屋
-  ug_full: [EAR, EAR,
-    UGTOP, 'EEEEPBBBBBBPEEEE', 'EEEEPBTBBBBPEEEE', 'EEEEPBAACBBDEEEE', 'EEEEPBBBBBBDEEEE',
-    UGTOP, EAR, EAR, EAR],
   // 树屋：大树
   tree_grow: ['....XXXXXXXX....', '..XXXXXXXXXXXX..', '.XXXXXXXXXXXXXX.', '.XXXXXXXXXXXXXX.', '..XXXXXXXXXXXX..',
     '.....WWWWWW.....', '.....WWWWWW.....', '.....WWWWWW.....', '.....WWWWWW.....', GRD, EAR],
@@ -135,16 +114,16 @@ const CASES = [
     layout: '进门左手边放工作台当桌子，配一把椅子，墙上插火把；剩余空间以后放床或箱子。推荐入住：向导（开局第一位），攒够 50 银币后商人入住第二间。'
   },
   {
-    id: 'ug_bunker', name: '向导小屋', style: '地下风格', stage: 'start', diff: 1,
-    size: '宽 8 × 高 6', npc: '1-2 名',
-    pic: '/assets/picture/guide_hut.jpg',
-    video: 'https://www.bilibili.com/video/BV1aeohBSEt4/',
-    author: 'O嘟嘟噜嘟嘟O',
-    pal: { P: '#8a8a94', Q: '#a5a5b0', B: '#62626e', R: '#75757f', G: '#5d9c46', E: '#5a5a64', X: '#ffd447' },
-    tiles: { P: 'stone' },
-    thumb: 'ug_full',
-    tags: '地下,安全屋,向导小屋,开局,挖矿',
-    layout: '向导小屋适合做探险中继站：放一张床设出生点，旁边配箱子囤矿石。推荐入住：爆破专家（喜欢洞穴，商店打折）。'
+    id: 'forest_hut', name: '森林小屋', style: '森林风格', stage: 'start', diff: 1,
+    size: '宽 10 × 高 8', npc: '1-2 名',
+    pic: '/assets/picture/forest_hut.jpg',
+    video: 'https://www.bilibili.com/video/BV18rrsBdEGU/',
+    author: 'YOKIG',
+    pal: { P: '#a9744e', Q: '#5d9c46', B: '#6b4a2f', R: '#4a8f3a', G: '#8fce6e', E: '#3a6e2a', X: '#ffd447' },
+    tiles: { P: 'wood' },
+    thumb: 'full',
+    tags: '森林,小屋,开局,木质,自然',
+    layout: '森林小屋适合开局安家：选一片平坦林地，木材就地取材。放一张床设出生点，旁边配箱子囤物资。推荐入住：向导（开局第一位），攒够 50 银币后商人入住第二间。'
   },
   {
     id: 'two_story', name: '海边小屋', style: '海边风格', stage: 'pre', diff: 2,

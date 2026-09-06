@@ -28,6 +28,10 @@
 .st-v { font-size: 28rpx; color: var(--gold); font-weight: 800; margin-top: 8rpx; }
 
 .line { padding: 20rpx 26rpx; font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
+/* 获取方式中的实体超链接：金色 + 下划线，点击直达对应条目 */
+.lnk { color: var(--gold); font-weight: 700; border-bottom: 2rpx solid var(--gold-faint);
+  padding-bottom: 2rpx; }
+.page-root.theme-light .lnk { border-bottom-color: rgba(168, 121, 10, 0.5); }
 
 .drop { display: flex; align-items: center; justify-content: space-between;
   padding: 16rpx 24rpx; margin-bottom: 14rpx; }

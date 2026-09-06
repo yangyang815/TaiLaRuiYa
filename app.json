@@ -14,7 +14,8 @@
     "pages/seeds/seeds",
     "pages/prefixes/prefixes",
     "pages/favs/favs",
-    "pages/notes/notes",
+    "pages/messages/messages",
+    "pages/worldseeds/worldseeds",
     "pages/achv/achv",
     "pages/bossguide/bossguide",
     "pages/bossguide/detail",
@@ -27,6 +28,7 @@
     "pages/dps/dps",
     "pages/npcplan/npcplan",
     "pages/career/career",
+    "pages/careerclass/careerclass",
     "pages/careerpath/careerpath",
     "pages/careerlib/careerlib"
   ],
@@ -42,16 +44,25 @@
     "backgroundColor": "#150B26",
     "borderStyle": "black",
     "list": [
-      { "pagePath": "pages/home/home", "text": "首页" },
-      { "pagePath": "pages/codex/codex", "text": "图鉴" },
-      { "pagePath": "pages/craft/craft", "text": "合成" },
-      { "pagePath": "pages/my/my", "text": "我的" }
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/codex/codex",
+        "text": "图鉴"
+      },
+      {
+        "pagePath": "pages/craft/craft",
+        "text": "合成"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的"
+      }
     ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents",
-  "navigateToMiniProgramAppIdList": [
-    "wx7564fd5313d24844"
-  ]
+  "lazyCodeLoading": "requiredComponents"
 }

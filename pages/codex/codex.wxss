@@ -127,6 +127,10 @@
 
 .sh-sec .sec-title { padding: 20rpx 0 12rpx; }
 .sh-line { font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
+/* 获取方式中的实体超链接：金色 + 下划线，点击直达对应条目 */
+.lnk { color: var(--gold); font-weight: 700; border-bottom: 2rpx solid var(--gold-faint);
+  padding-bottom: 2rpx; }
+.page-root.theme-light .lnk { border-bottom-color: rgba(168, 121, 10, 0.5); }
 
 .drop { display: flex; align-items: center; justify-content: space-between; padding: 14rpx 20rpx; margin-bottom: 12rpx; }
 .d-n { font-size: 24rpx; color: var(--text); }

@@ -92,7 +92,8 @@ const CATS = {
     { k: 'post', n: '世纪之花后' }, { k: 'lunar', n: '月亮事件' }, { k: 'event', n: '事件' }
   ],
   seed: [
-    { k: '', n: '全部' }, { k: 'hard', n: '挑战向' }, { k: 'casual', n: '休闲向' }
+    { k: '', n: '全部' }, { k: 'hard', n: '挑战向' }, { k: 'casual', n: '休闲向' },
+    { k: 'visual', n: '趣味视觉' }
   ],
   npc: [
     { k: '', n: '全部' }, { k: 'svc', n: '服务型' }, { k: 'shop', n: '肉前入住' },
@@ -301,12 +302,123 @@ function hotToday (count) {
   return picked
 }
 
+/* 今日热门：按分类过滤（all | item | boss | strategy） */
+// 热门搜索词：编辑推荐 + 今日热榜条目名/攻略名（每日轮换，两处搜索入口共用）
+function hotWords (n) {
+  const out = HOT_WORDS.slice()
+  hotByCat(6).forEach(h => { if (out.indexOf(h.name) < 0) out.push(h.name) })
+  hotStrats(3).forEach(s => { if (out.indexOf(s.title) < 0) out.push(s.title) })
+  return out.slice(0, n || 14)
+}
+
+function hotByCat (count, cat) {
+  if (!cat || cat === 'all') return hotToday(count)
+  if (cat === 'strategy') return [] // 攻略类走 hotStrats
+  return hotToday(999).filter(e => e.type === cat).slice(0, count)
+}
+
+/* 攻略热门：从攻略池按日确定性抽取 */
+function hotStrats (count) {
+  const pool = strats.filter(s => s.id && s.title).map(s => ({ id: s.id, title: s.title, cover: s.cover, cat: s.cat }))
+  let seed = hotDate()
+  const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280 }
+  const picked = []
+  while (picked.length < count && pool.length) {
+    picked.push(pool.splice(Math.floor(rand() * pool.length), 1)[0])
+  }
+  return picked
+}
+
+/* 热度趋势：昨日排名 vs 今日排名 → up / down / flat（当日抽取顺序即名次） */
+function hotTrend (id) {
+  const today = hotToday(999).findIndex(e => e.id === id)
+  if (today < 0) return 'new'
+  const ySeed = (hotDate() - 1) * 0 + yesterdaySeed()
+  const pool = HOT_POOL.slice()
+  let seed = ySeed
+  const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280 }
+  const order = []
+  while (pool.length) {
+    order.push(pool.splice(Math.floor(rand() * pool.length), 1)[0])
+  }
+  const yest = order.findIndex(e => e.id === id)
+  if (yest < 0) return 'new'
+  if (yest > today) return 'up'
+  if (yest < today) return 'down'
+  return 'flat'
+}
+// 昨日种子：日期回退一天再取 yyyyMMdd
+function yesterdaySeed () {
+  const d = new Date()
+  d.setDate(d.getDate() - 1)
+  return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate()
+}
+
+/* 攻略热度趋势：昨日攻略榜 vs 今日攻略榜 → up / down / flat / new */
+function hotStratTrend (id) {
+  const today = hotStrats(999).findIndex(e => e.id === id)
+  if (today < 0) return 'new'
+  const pool = strats.filter(s => s.id && s.title).map(s => s.id)
+  let seed = yesterdaySeed()
+  const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280 }
+  const order = []
+  while (pool.length) {
+    order.push(pool.splice(Math.floor(rand() * pool.length), 1)[0])
+  }
+  const yest = order.indexOf(id)
+  if (yest < 0) return 'new'
+  if (yest > today) return 'up'
+  if (yest < today) return 'down'
+  return 'flat'
+}
+
 // id → 玩家俗称（取别名表第一条，无则返回空）
 function aliasOf (id) {
   for (let i = 0; i < ALIAS.length; i++) {
     if (ALIAS[i][1] === id) return ALIAS[i][0]
   }
   return ''
+}
+
+/* ---------- 文本实体链接化（获取方式/出现地点等描述 → 可跳转片段） ---------- */
+// 首次调用时构建"名称 → id"匹配表（条目名 + 玩家俗称，长名优先），缓存正则
+let _linkIdx = null
+function linkIndex () {
+  if (_linkIdx) return _linkIdx
+  const names = []
+  ALL.forEach(e => { if (e.name && e.name.length >= 2) names.push([e.name, e.id]) })
+  ALIAS.forEach(p => { if (p[0].length >= 2 && byId[p[1]]) names.push([p[0], p[1]]) })
+  const seen = {}
+  const uniq = []
+  names.forEach(p => { if (!seen[p[0]]) { seen[p[0]] = 1; uniq.push(p) } })
+  // 长名优先：保证"克苏鲁之眼"优先于"眼球"等短别名命中
+  uniq.sort((a, b) => b[0].length - a[0].length)
+  const map = {}
+  uniq.forEach(p => { map[p[0]] = p[1] })
+  const re = new RegExp('(' + uniq.map(p => p[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')', 'g')
+  _linkIdx = { re, map }
+  return _linkIdx
+}
+
+// 文本 → 片段数组：[{ref:false, s:'纯文本'}, {ref:true, s:'克苏鲁之眼', id:'eye_of_cthulhu'}]
+// selfId：当前条目自身，命中时按纯文本渲染（避免自我跳转）
+function linkify (text, selfId) {
+  const out = []
+  if (!text) return out
+  const s = String(text)
+  const { re, map } = linkIndex()
+  let last = 0
+  let m
+  re.lastIndex = 0
+  while ((m = re.exec(s)) !== null) {
+    if (m.index > last) out.push({ ref: false, s: s.slice(last, m.index) })
+    const id = map[m[0]]
+    if (!id || id === selfId) out.push({ ref: false, s: m[0] })
+    else out.push({ ref: true, s: m[0], id })
+    last = m.index + m[0].length
+  }
+  if (last < s.length) out.push({ ref: false, s: s.slice(last) })
+  return out
 }
 
 const HOT_WORDS = ['天顶剑', '肉山', '月亮领主', '猪鲨', '泰拉刃', '战士', '翅膀', '机械三王', '十字章护盾', '毕业', '永夜刃', '法师']
@@ -417,7 +529,8 @@ function recipeSearch (kw) {
 
 module.exports = {
   ALL, byId, CATS, strats, BANNERS: strats.BANNERS,
-  search, searchStrats, hotToday, hotDate, HOT_WORDS, weaponRank, aliasOf,
+  search, searchStrats, hotToday, hotDate, hotByCat, hotStrats, hotTrend, hotStratTrend,
+  HOT_WORDS, weaponRank, aliasOf, linkify, hotWords,
   go, lookup, buildTree, missingList, recipeSearch,
   RARITY, ARTS, R, itemBaseStats, SUB_TAGS
 }

@@ -33,6 +33,7 @@ function stages (clsId) {
     return Object.assign({}, s, {
       no: i + 1,
       status,
+      articles: stageArticles(clsId, i),
       statusText: status === 'done' ? '✅ 已完成' : status === 'current' ? '🔥 进行中' : '🔒 未解锁',
       unlockHint: status === 'locked' ? '完成阶段 ' + i + ' 后解锁' : '',
       bossName: (dex.byId[s.boss] && dex.byId[s.boss].name) || '',
@@ -74,6 +75,52 @@ function libArticles (clsId, topic) {
     }))
 }
 
+/* 职业专属专题页：该职业全部攻略（按资料库顺序） */
+function classArticles (clsId) {
+  return libArticles(clsId, '')
+}
+
+/* 阶段攻略映射：路线第 idx 阶段（0-based）关联的职业文章
+   0-2 肉前构筑 → 3 肉前毕业+总纲 → 4-6 肉后配装 → 7 毕业构筑+总纲 */
+function stageArticles (clsId, idx) {
+  const arts = libArticles(clsId, '')
+  const out = []
+  const pushById = suffix => arts.forEach(a => { if (a.id.endsWith(suffix) && out.indexOf(a) < 0) out.push(a) })
+  if (idx <= 2) {
+    pushById('_pre')
+  } else if (idx === 3) {
+    pushById('_pre')
+    if (arts[0]) out.push(arts[0])
+  } else if (idx <= 6) {
+    pushById('_hard')
+  } else {
+    pushById('_late')
+    if (arts[0]) out.push(arts[0])
+  }
+  return out
+}
+
+/* 职业专题页：路线涉及的 Boss 汇总（去重，带阶段名） */
+function classBosses (clsId) {
+  const path = D.PATHS[clsId]
+  if (!path) return []
+  const seen = {}
+  const out = []
+  path.forEach((s, i) => {
+    if (s.boss && !seen[s.boss]) {
+      seen[s.boss] = 1
+      const e = dex.byId[s.boss]
+      out.push({
+        id: s.boss,
+        name: (e && e.name) || s.boss,
+        artId: (e && e.artId) || 'stone',
+        stageName: '第' + (i + 1) + '阶段 · ' + s.name
+      })
+    }
+  })
+  return out
+}
+
 /* 最近更新（聚合页展示）：新文章优先，最多 n 条 */
 function recentArticles (n) {
   return libArticles('', '')
@@ -81,4 +128,4 @@ function recentArticles (n) {
     .slice(0, n || 4)
 }
 
-module.exports = { curCls, clsInfo, stages, progress, libArticles, recentArticles }
+module.exports = { curCls, clsInfo, stages, progress, libArticles, recentArticles, classArticles, stageArticles, classBosses }

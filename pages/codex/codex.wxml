@@ -162,7 +162,7 @@
 
       <view class="sh-sec" wx:if="{{sheet.obtain}}">
         <view class="sec-title"><view class="diamond" /><text class="t">{{sheet.obtainTitle}}</text></view>
-        <text class="sh-line">{{sheet.obtain}}</text>
+        <view class="sh-line"><block wx:for="{{sheet.obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}">{{item.s}}</text></block></view>
       </view>
 
       <!-- NPC：服务说明 -->

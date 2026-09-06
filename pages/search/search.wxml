@@ -1,7 +1,7 @@
 <view class="page-root {{themeClass}} search-root">
 
-  <!-- 顶部搜索栏 -->
-  <view class="bar" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+  <!-- 顶部搜索栏（padding-top 取胶囊按钮下沿，确保输入框不被胶囊遮挡） -->
+  <view class="bar" style="padding-top:{{navTop}}px;padding-right:{{capsuleRight}}px;">
     <view class="back tappable" bindtap="back">‹</view>
     <view class="input-wrap card">
       <text class="s-ico">🔍</text>

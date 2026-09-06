@@ -40,12 +40,17 @@
         {{rain ? '🌧️ 雨天：上钩频率更高，还能钓到雨天限定鱼（黄金锦鲤、鲶鱼）' : '🌤️ 晴天：正常垂钓，切到雨天可查看雨天限定鱼种'}}
       </view>
 
-      <!-- 可钓鱼种（两列） -->
-      <view class="rec-list">
-        <view class="rec-fish" wx:for="{{avail}}" wx:key="id">
-          <text class="rf-emoji">{{item.kind === 'quest' ? '🎣' : '🐟'}}</text>
-          <text class="rf-n {{item.kind === 'quest' ? 'quest' : ''}}">{{item.name}}</text>
-          <text class="rf-b px">{{item.biomeN}}</text>
+      <!-- 可钓鱼种（按地形分组） -->
+      <view class="rec-group" wx:for="{{recGroups}}" wx:for-item="grp" wx:key="biome">
+        <view class="rg-head">
+          <text class="rg-biome">📍 {{grp.biome}}</text>
+          <text class="rg-count px">{{grp.fishes.length}} 种</text>
+        </view>
+        <view class="rec-list">
+          <view class="rec-fish" wx:for="{{grp.fishes}}" wx:key="id">
+            <text class="rf-emoji">{{item.kind === 'quest' ? '🎣' : '🐟'}}</text>
+            <text class="rf-n {{item.kind === 'quest' ? 'quest' : ''}}">{{item.name}}</text>
+          </view>
         </view>
       </view>
       <text class="rec-count px">当前条件可钓 {{availTotal}} 种（🎣 标记为任务鱼，需先找渔夫接任务）</text>
@@ -66,8 +71,12 @@
           <text class="q-reward">🎁 任务奖励：{{quest.reward}}</text>
         </view>
       </view>
-      <view class="q-btn tappable {{quest.done ? 'on' : ''}}" bindtap="onQuestDone">
-        {{quest.done ? '✓ 已钓到（点按取消）' : '钓到了，打卡 ›'}}
+      <view class="q-tip" wx:if="{{!quest.done}}">💡 提示：先找渔夫 NPC 接任务，任务鱼才会上钩</view>
+      <view class="q-ops">
+        <view class="q-locate tappable" bindtap="onQuestLocate">📖 在图鉴中查看 ›</view>
+        <view class="q-btn tappable {{quest.done ? 'on' : ''}}" bindtap="onQuestDone">
+          {{quest.done ? '✓ 已钓到（点按取消）' : '钓到了，打卡 ›'}}
+        </view>
       </view>
     </view>
 
@@ -95,6 +104,25 @@
     <view class="chip {{cat === item.k ? 'on' : ''}}" wx:for="{{cats}}" wx:key="k"
       bindtap="onCat" data-k="{{item.k}}">{{item.n}}</view>
   </scroll-view>
+
+  <!-- 三维筛选：地形 / 时间 / 天气 -->
+  <scroll-view class="cat-scroll" scroll-x enable-flex enhanced show-scrollbar="{{false}}">
+    <view class="chip dim {{fBiome === item.k ? 'on' : ''}}" wx:for="{{biomeChips}}" wx:key="k"
+      bindtap="onBiome" data-k="{{item.k}}">📍 {{item.n}}</view>
+  </scroll-view>
+  <view class="fs-row">
+    <view class="fs-seg">
+      <view class="chip dim sm {{fTime === item.k ? 'on' : ''}}" wx:for="{{timeChips}}" wx:key="k"
+        bindtap="onTimeF" data-k="{{item.k}}">{{item.n}}</view>
+    </view>
+    <view class="fs-divider" />
+    <view class="fs-seg">
+      <view class="chip dim sm {{fRain === item.k ? 'on' : ''}}" wx:for="{{weatherChips}}" wx:key="k"
+        bindtap="onRainF" data-k="{{item.k}}">{{item.n}}</view>
+    </view>
+    <view class="fs-reset tappable" wx:if="{{fBiome || fTime || fRain}}"
+      bindtap="resetFilters">重置</view>
+  </view>
 
   <!-- 搜索无结果 -->
   <view class="g-none card" wx:if="{{kw && !groups.length}}">

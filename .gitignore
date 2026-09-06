@@ -14,3 +14,6 @@ _dl_retry.ps1
 _dl_sprites.ps1
 _final.js
 _rebuild.js
+
+# 本地助手工作目录（备份/记忆，不入库）
+.workbuddy/

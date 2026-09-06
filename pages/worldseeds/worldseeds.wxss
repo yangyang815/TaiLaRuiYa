@@ -1,0 +1,48 @@
+/* 特殊种子页 */
+.ws-root { min-height: 100vh; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10rpx; }
+.nav-ph { width: 64rpx; }
+
+/* 头部说明卡 */
+.head { margin: 8rpx 30rpx 0; padding: 20rpx 24rpx; }
+.h-row { gap: 18rpx; }
+.h-t { font-size: 28rpx; font-weight: 800; color: var(--text); }
+.h-s { font-size: 21rpx; color: var(--text-dim); margin-top: 6rpx; line-height: 1.5; }
+.h-count { font-size: 40rpx; color: var(--gold); font-weight: 800;
+  text-shadow: 0 0 14rpx rgba(255, 215, 0, 0.45); }
+
+/* 分组筛选 chips */
+.chips { display: flex; flex-wrap: wrap; gap: 12rpx; padding: 20rpx 30rpx 4rpx; }
+.chip { margin-right: 0; }
+
+/* 种子列表 */
+.ws-list { padding: 12rpx 30rpx 0; }
+.ws-item { display: flex; align-items: center; padding: 18rpx 20rpx; margin-bottom: 16rpx; }
+.ws-art { width: 84rpx; height: 84rpx; border-radius: 14rpx; background: rgba(0, 0, 0, 0.25);
+  border: 2rpx solid var(--line); display: flex; align-items: center; justify-content: center;
+  margin-right: 20rpx; flex-shrink: 0; }
+.ws-info { min-width: 0; }
+.ws-name-row { gap: 12rpx; }
+.ws-name { font-size: 27rpx; font-weight: 800; color: var(--text); flex-shrink: 0; }
+.ws-group { font-size: 19rpx; padding: 2rpx 12rpx; border-radius: 999rpx; flex-shrink: 0; }
+.g-hard   { color: #E85555; background: rgba(139, 0, 0, 0.25); border: 1rpx solid rgba(232, 85, 85, 0.4); }
+.g-casual { color: #7CE87C; background: rgba(60, 200, 90, 0.14); border: 1rpx solid rgba(124, 232, 124, 0.35); }
+.g-visual { color: #B57BFF; background: rgba(122, 66, 204, 0.18); border: 1rpx solid rgba(181, 123, 255, 0.4); }
+.ws-code-row { margin-top: 8rpx; min-width: 0; }
+.ws-code { font-size: 20rpx; color: var(--gold); letter-spacing: 1rpx;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ws-copy { font-size: 19rpx; color: var(--text-faint); border: 2rpx solid var(--line);
+  border-radius: 8rpx; padding: 2rpx 12rpx; flex-shrink: 0; margin-left: 12rpx; }
+.ws-meta-row { margin-top: 8rpx; justify-content: space-between; }
+.ws-stars { font-size: 21rpx; color: var(--gold); }
+.ws-stars-off { color: var(--text-faint); }
+.ws-ver { font-size: 19rpx; color: var(--text-faint); }
+.ws-arrow { color: var(--gold); font-size: 32rpx; margin-left: 10rpx; flex-shrink: 0; }
+
+.pad-bottom { height: calc(env(safe-area-inset-bottom) + 40rpx); }

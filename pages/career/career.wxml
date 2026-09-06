@@ -82,6 +82,14 @@
     </view>
   </view>
 
+  <!-- 职业专题入口：汇总攻略 / 配装 / Boss 打法 -->
+  <view class="entry card tappable" bindtap="goCls">
+    <text class="entry-icon">📊</text>
+    <text class="entry-name">{{clsName}}职业专题</text>
+    <text class="entry-sub px">攻略 · 配装 · Boss 一页通</text>
+    <text class="entry-go">进入 →</text>
+  </view>
+
   <!-- 最近更新的职业攻略 -->
   <view class="sec-title row">
     <view class="diamond" />

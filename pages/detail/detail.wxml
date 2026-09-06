@@ -43,9 +43,9 @@
     </view>
     </block>
 
-    <!-- 获取 / 召唤 -->
-    <view class="sec-title"><view class="diamond" /><text class="t">{{e.obtainTitle}}</text></view>
-    <view class="line card">{{e.obtain}}</view>
+    <!-- 获取 / 召唤（提及的条目名自动变超链接，点击直达对应详情） -->
+    <view class="sec-title"><view class="diamond" /><text class="t">{{e.obtainTitle}}</text><text class="more" wx:if="{{hasLnk}}">点击名称可跳转</text></view>
+    <view class="line card"><block wx:for="{{obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onLinkTap" data-id="{{item.id}}">{{item.s}}</text></block></view>
 
     <!-- NPC：服务说明 -->
     <block wx:if="{{isNpc && shopNote}}">

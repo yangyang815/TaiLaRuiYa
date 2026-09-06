@@ -3,9 +3,15 @@ const dex = require('../../utils/dex')
 const store = require('../../utils/store')
 const acq = require('../../utils/acq')
 
+// 热门词安全获取：开发者工具编译缓存未更新（旧 dex.js 无 hotWords）时回退静态热词
+function hotWordsSafe () {
+  return dex.hotWords ? dex.hotWords() : dex.HOT_WORDS.slice(0, 14)
+}
+
 Page({
   data: {
     statusBarHeight: 20,
+    navTop: 70,        // 胶囊按钮下沿（搜索栏定位基准，避免被胶囊遮挡）
     capsuleRight: 100,
     themeClass: '',
     kw: '',
@@ -13,15 +19,22 @@ Page({
     hist: [], hotWords: []
   },
 
-  onLoad () {
+  onLoad (opts) {
     const app = getApp()
     this.setData({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
+      navTop: (app.globalData.navTop || 64) + 6,
       capsuleRight: app.globalData.capsuleRight || 100,
       themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
       hist: store.getHist(),
-      hotWords: dex.HOT_WORDS
+      hotWords: hotWordsSafe()
     })
+    // 首页搜索面板"查看全部"带入关键词，直接出结果
+    if (opts && opts.kw) {
+      const kw = decodeURIComponent(opts.kw)
+      this.setData({ kw })
+      this.onKw({ detail: { value: kw } })
+    }
   },
 
   onKw (e) {
