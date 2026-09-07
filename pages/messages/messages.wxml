@@ -11,6 +11,7 @@
   <view class="sum" wx:if="{{list.length}}">
     <text class="sum-ico">📨</text>
     <text class="sum-t">{{unread > 0 ? '有 ' + unread + ' 条未读消息' : '全部消息已读'}}</text>
+    <text class="sum-src" wx:if="{{msgSrc === 'remote'}}">☁ 已同步云端</text>
   </view>
 
   <!-- 消息列表 -->

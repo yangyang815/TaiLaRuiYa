@@ -41,3 +41,5 @@
 .tg-feature { color: #7CE87C; background: rgba(60, 200, 90, 0.14); }
 
 .pad-bottom { height: calc(env(safe-area-inset-bottom) + 40rpx); }
+
+.sum-src { margin-left: auto; font-size: 19rpx; color: #4CE0E0; font-weight: 700; }

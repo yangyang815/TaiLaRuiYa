@@ -2,7 +2,7 @@
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
 const achv = require('../../utils/achievements')
-const msgData = require('../../data/messages')
+const remoteMsg = require('../../utils/remote-msg')
 const { startClock } = require('../../utils/clock')
 const fishUtil = require('../../utils/fishing')
 const bossGuides = require('../../data/bossGuides')
@@ -256,8 +256,13 @@ Page({
   // 刷新顶部入口角标：消息未读红点 + 已解锁成就数
   loadTopBadges () {
     this.setData({
-      hasMsgs: msgData.unreadCount(store.getMsgRead()) > 0,
+      hasMsgs: remoteMsg.unreadCount(store.getMsgRead()) > 0,
       achvN: achv.summary().unlocked
+    })
+    // 远程公告异步到达后，若带来新未读则即时亮起红点
+    remoteMsg.refresh(list => {
+      const n = list.filter(m => m.ts > store.getMsgRead()).length
+      if ((n > 0) !== this.data.hasMsgs) this.setData({ hasMsgs: n > 0 })
     })
   },
 

@@ -1,6 +1,6 @@
 // 消息中心：系统消息 / 更新公告列表（进入即标记已读）
-const msgs = require('../../data/messages')
 const store = require('../../utils/store')
+const remoteMsg = require('../../utils/remote-msg')
 
 function fmtDate (ts) {
   const d = new Date(ts)
@@ -32,12 +32,15 @@ Page({
   },
 
   loadMsgs () {
-    const lastRead = store.getMsgRead()
-    const list = msgs.all().map(m => ({ ...m, date: fmtDate(m.ts), unread: m.ts > lastRead }))
-    const unread = list.filter(m => m.unread).length
-    this.setData({ list, unread })
-    // 标记全部已读（晚于当前时间的新消息到来时会重新出现红点）
-    store.setMsgRead(Date.now())
+    const render = list => {
+      const lastRead = store.getMsgRead()
+      const rows = list.map(m => ({ ...m, date: fmtDate(m.ts), unread: m.ts > lastRead }))
+      this.setData({ list: rows, unread: rows.filter(r => r.unread).length, msgSrc: list.src || 'builtin' })
+      // 标记全部已读（晚于当前时间的新消息到来时会重新出现红点）
+      store.setMsgRead(Date.now())
+    }
+    render(remoteMsg.currentList())      // 立即渲染（缓存/内置兜底）
+    remoteMsg.refresh(list => render(list))  // 远程到达后覆盖显示
   },
 
   goBack () { wx.navigateBack() }
