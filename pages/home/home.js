@@ -170,7 +170,7 @@ Page({
     hot: [],
     hotCats: HOT_CATS,
     hotCat: 'all',   // 当前热门分类：all | item | boss | strategy
-    version: '1.4.4',
+    version: '1.4.5',
     // 轮播 Banner
     slides: [], slideCur: 0,
     // 最近浏览（横向滚动区）

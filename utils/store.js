@@ -45,7 +45,16 @@ function toggleFav (id, type) {
 /* ---------- 设置 ---------- */
 function getTheme () { return get(K.theme, 'dark') }
 function setTheme (t) { set(K.theme, t) }
-function getVersion () { return get(K.ver, '1.4.4') }
+function getVersion () {
+  let v = get(K.ver, '')
+  if (!v) v = '1.4.5'
+  if (v === '1.4.4') {
+    // 一次性迁移：口径统一为 1.4.5（用户手动切换过版本则尊重其选择）
+    const f = get(K.flags, {})
+    if (!f.versionSwitched) { v = '1.4.5'; set(K.ver, v) }
+  }
+  return v
+}
 function setVersion (v) { set(K.ver, v) }
 
 /* ---------- 最近浏览 ---------- */

@@ -32,7 +32,7 @@ Page({
     achvUnlocked: 0, achvTotal: 0,
     gAchvDone: 0, gAchvTotal: 0,
     // 设置
-    versions: VERSIONS, version: '1.4.4', versionIndex: 0, dark: true,
+    versions: VERSIONS, version: '1.4.5', versionIndex: 1, dark: true,
     // 弹窗
     showAvas: false, avatars: [],
     showAbout: false,
@@ -125,7 +125,7 @@ Page({
 
   /* ---------- 设置 ---------- */
   onVersion (e) {
-    const v = VERSIONS[Number(e.detail.value)] || '1.4.4'
+    const v = VERSIONS[Number(e.detail.value)] || '1.4.5'
     if (v === this.data.version) return
     store.markFlag('versionSwitched')
     getApp().setVersion(v)
