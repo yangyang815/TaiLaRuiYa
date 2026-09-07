@@ -1,0 +1,1325 @@
+{
+  "generated": "2026-09-07T07:03:26.949Z",
+  "mismatch": [
+    {
+      "file": "data/items.js",
+      "id": "slime_hook",
+      "en": "Slime Hook",
+      "now": "史莱姆钩",
+      "official": "钩爪"
+    },
+    {
+      "file": "data/items.js",
+      "id": "clentaminator",
+      "en": "Clentaminator",
+      "now": "环境改造机",
+      "official": "环境改造枪"
+    },
+    {
+      "file": "data/items.js",
+      "id": "green_solution",
+      "en": "Green Solution",
+      "now": "绿溶液",
+      "official": "溶液"
+    },
+    {
+      "file": "data/items.js",
+      "id": "empty_bucket",
+      "en": "Empty Bucket",
+      "now": "空桶",
+      "official": "提桶"
+    },
+    {
+      "file": "data/items.js",
+      "id": "music_box",
+      "en": "Music Box",
+      "now": "音乐盒",
+      "official": "八音盒"
+    },
+    {
+      "file": "data/items.js",
+      "id": "celestial_magnet",
+      "en": "Celestial Magnet",
+      "now": "天云磁石",
+      "official": "天界磁石"
+    },
+    {
+      "file": "data/items.js",
+      "id": "fledgling_wings",
+      "en": "Fledgling Wings",
+      "now": "幼雏之翼",
+      "official": "雏翼"
+    },
+    {
+      "file": "data/items.js",
+      "id": "ice_skates",
+      "en": "Ice Skates",
+      "now": "冰鞋",
+      "official": "溜冰鞋"
+    },
+    {
+      "file": "data/items.js",
+      "id": "ice_mirror",
+      "en": "Ice Mirror",
+      "now": "冰雪镜",
+      "official": "魔镜"
+    },
+    {
+      "file": "data/items.js",
+      "id": "anklet_of_wind",
+      "en": "Anklet of the Wind",
+      "now": "风之脚镯",
+      "official": "疾风脚镯"
+    },
+    {
+      "file": "data/items.js",
+      "id": "aglet",
+      "en": "Aglet",
+      "now": "金属鞋尖",
+      "official": "鞋带束头"
+    },
+    {
+      "file": "data/items.js",
+      "id": "amphibian_boots",
+      "en": "Amphibian Boots",
+      "now": "航鱼靴",
+      "official": "水陆两用靴"
+    },
+    {
+      "file": "data/items.js",
+      "id": "lava_charm",
+      "en": "Lava Charm",
+      "now": "熔岩护符",
+      "official": "熔岩护身符"
+    },
+    {
+      "file": "data/items.js",
+      "id": "fire_gauntlet",
+      "en": "Fire Gauntlet",
+      "now": "火焰护手",
+      "official": "烈火手套"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flesh_knuckles",
+      "en": "Flesh Knuckles",
+      "now": "肉指虎",
+      "official": "血肉指虎"
+    },
+    {
+      "file": "data/items.js",
+      "id": "tabi",
+      "en": "Tabi",
+      "now": "分趾袜",
+      "official": "分趾厚底袜"
+    },
+    {
+      "file": "data/items.js",
+      "id": "tiger_climbing_gear",
+      "en": "Tiger Climbing Gear",
+      "now": "虎爪装备",
+      "official": "猛虎攀爬装备"
+    },
+    {
+      "file": "data/items.js",
+      "id": "honey_comb",
+      "en": "Honey Comb",
+      "now": "蜂蜜梳",
+      "official": "蜂窝"
+    },
+    {
+      "file": "data/items.js",
+      "id": "bone_glove",
+      "en": "Bone Glove",
+      "now": "骨手套",
+      "official": "骨头手套"
+    },
+    {
+      "file": "data/items.js",
+      "id": "endless_quiver",
+      "en": "Endless Quiver",
+      "now": "无底箭袋",
+      "official": "无尽箭袋"
+    },
+    {
+      "file": "data/items.js",
+      "id": "endless_musket_pouch",
+      "en": "Endless Musket Pouch",
+      "now": "无底火药袋",
+      "official": "无尽火枪袋"
+    },
+    {
+      "file": "data/items.js",
+      "id": "fishermans_pocket_guide",
+      "en": "Fisherman's Pocket Guide",
+      "now": "渔民袖珍指南",
+      "official": "渔民袖珍宝典"
+    },
+    {
+      "file": "data/items.js",
+      "id": "dps_meter",
+      "en": "DPS Meter",
+      "now": "DPS 计",
+      "official": "每秒伤害计数器"
+    },
+    {
+      "file": "data/items.js",
+      "id": "gps",
+      "en": "GPS",
+      "now": "GPS",
+      "official": "全球定位系统"
+    },
+    {
+      "file": "data/items.js",
+      "id": "turtle_shell",
+      "en": "Turtle Shell",
+      "now": "乌龟壳",
+      "official": "海龟壳"
+    },
+    {
+      "file": "data/items.js",
+      "id": "rotten_chunk",
+      "en": "Rotten Chunk",
+      "now": "腐烂块",
+      "official": "腐肉"
+    },
+    {
+      "file": "data/items.js",
+      "id": "hallowed_key",
+      "en": "Hallowed Key",
+      "now": "神圣钥匙",
+      "official": "生物群系钥匙"
+    },
+    {
+      "file": "data/items.js",
+      "id": "dirt_block",
+      "en": "Dirt Block",
+      "now": "泥土块",
+      "official": "土块"
+    },
+    {
+      "file": "data/items.js",
+      "id": "ice_block",
+      "en": "Ice Block",
+      "now": "冰块",
+      "official": "冰雪块"
+    },
+    {
+      "file": "data/items.js",
+      "id": "clay_block",
+      "en": "Clay Block",
+      "now": "黏土块",
+      "official": "粘土块"
+    },
+    {
+      "file": "data/items.js",
+      "id": "silt_block",
+      "en": "Silt Block",
+      "now": "淤泥块",
+      "official": "泥沙块"
+    },
+    {
+      "file": "data/items.js",
+      "id": "rope",
+      "en": "Rope",
+      "now": "绳索",
+      "official": "绳"
+    },
+    {
+      "file": "data/items.js",
+      "id": "chain",
+      "en": "Chain",
+      "now": "锁链",
+      "official": "链条"
+    },
+    {
+      "file": "data/items.js",
+      "id": "cloud",
+      "en": "Cloud",
+      "now": "云朵",
+      "official": "云"
+    },
+    {
+      "file": "data/items.js",
+      "id": "copper_ore",
+      "en": "Copper Ore",
+      "now": "铜矿石",
+      "official": "铜矿"
+    },
+    {
+      "file": "data/items.js",
+      "id": "tin_ore",
+      "en": "Tin Ore",
+      "now": "锡矿石",
+      "official": "锡矿"
+    },
+    {
+      "file": "data/items.js",
+      "id": "iron_ore",
+      "en": "Iron Ore",
+      "now": "铁矿石",
+      "official": "铁矿"
+    },
+    {
+      "file": "data/items.js",
+      "id": "lead_ore",
+      "en": "Lead Ore",
+      "now": "铅矿石",
+      "official": "铅矿"
+    },
+    {
+      "file": "data/items.js",
+      "id": "silver_ore",
+      "en": "Silver Ore",
+      "now": "银矿石",
+      "official": "银矿"
+    },
+    {
+      "file": "data/items.js",
+      "id": "tungsten_ore",
+      "en": "Tungsten Ore",
+      "now": "钨矿石",
+      "official": "钨矿"
+    },
+    {
+      "file": "data/items.js",
+      "id": "gold_ore",
+      "en": "Gold Ore",
+      "now": "金矿石",
+      "official": "金矿"
+    },
+    {
+      "file": "data/items.js",
+      "id": "platinum_ore",
+      "en": "Platinum Ore",
+      "now": "铂金矿石",
+      "official": "铂金矿"
+    },
+    {
+      "file": "data/items.js",
+      "id": "obsidian_skin",
+      "en": "Obsidian Skin Potion",
+      "now": "黑曜石皮肤药水",
+      "official": "黑曜石皮药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "hunter",
+      "en": "Hunter Potion",
+      "now": "猎手药水",
+      "official": "狩猎药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "shine",
+      "en": "Shine Potion",
+      "now": "发光药水",
+      "official": "光芒药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "invisibility",
+      "en": "Invisibility Potion",
+      "now": "隐形药水",
+      "official": "隐身药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "magic_power",
+      "en": "Magic Power Potion",
+      "now": "魔力药水",
+      "official": "魔能药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "rage",
+      "en": "Rage Potion",
+      "now": "狂暴药水",
+      "official": "暴怒药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "wrath",
+      "en": "Wrath Potion",
+      "now": "愤怒药水",
+      "official": "怒气药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "warmth",
+      "en": "Warmth Potion",
+      "now": "温暖药水",
+      "official": "保暖药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "heartreach",
+      "en": "Heartreach Potion",
+      "now": "心脏抵达药水",
+      "official": "拾心药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "crate",
+      "en": "Crate Potion",
+      "now": "板条箱药水",
+      "official": "宝匣药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "dangersense",
+      "en": "Dangersense Potion",
+      "now": "危险感知药水",
+      "official": "危险感药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "biome_sight",
+      "en": "Biome Sight Potion",
+      "now": "生物群系视域药水",
+      "official": "生物群系视觉药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "inferno",
+      "en": "Inferno Potion",
+      "now": "烈火药水",
+      "official": "狱火药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "gender_change",
+      "en": "Gender Change Potion",
+      "now": "性别转换药水",
+      "official": "变性药水"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flask_fire",
+      "en": "Flask of Fire",
+      "now": "火焰瓶",
+      "official": "烈火药剂"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flask_poison",
+      "en": "Flask of Poison",
+      "now": "毒素瓶",
+      "official": "毒药剂"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flask_gold",
+      "en": "Flask of Gold",
+      "now": "金瓶",
+      "official": "金药剂"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flask_party",
+      "en": "Flask of Party",
+      "now": "派对瓶",
+      "official": "派对药剂"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flask_cursed",
+      "en": "Flask of Cursed Flames",
+      "now": "诅咒火焰瓶",
+      "official": "诅咒焰药剂"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flask_ichor",
+      "en": "Flask of Ichor",
+      "now": "灵液瓶",
+      "official": "灵液药剂"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flask_venom",
+      "en": "Flask of Venom",
+      "now": "毒液瓶",
+      "official": "毒液药剂"
+    },
+    {
+      "file": "data/items.js",
+      "id": "gelatinous_pillion",
+      "en": "Gelatinous Pillion",
+      "now": "凝胶鞍座",
+      "official": "明胶女式鞍"
+    },
+    {
+      "file": "data/items.js",
+      "id": "superheated_blood",
+      "en": "Superheated Blood",
+      "now": "过热血液",
+      "official": "过热的血"
+    },
+    {
+      "file": "data/items.js",
+      "id": "royal_gilded_saddle",
+      "en": "Royal Gilded Saddle",
+      "now": "皇家镀金鞍",
+      "official": "马鞍"
+    },
+    {
+      "file": "data/items.js",
+      "id": "unlucky_yarn",
+      "en": "Unlucky Yarn",
+      "now": "不幸毛线",
+      "official": "霉运纱线"
+    },
+    {
+      "file": "data/items.js",
+      "id": "amber_mosquito",
+      "en": "Amber Mosquito",
+      "now": "琥珀蚊子",
+      "official": "蚊子琥珀"
+    },
+    {
+      "file": "data/items.js",
+      "id": "royal_delight",
+      "en": "Royal Delight",
+      "now": "皇家甜点",
+      "official": "皇家美味"
+    },
+    {
+      "file": "data/items.js",
+      "id": "piece_of_moon_squid",
+      "en": "Piece of Moon Squid",
+      "now": "月亮鱿鱼块",
+      "official": "月亮乌贼"
+    },
+    {
+      "file": "data/items.js",
+      "id": "deerclops_eyeball",
+      "en": "Deerclops Eyeball",
+      "now": "鹿角怪眼球",
+      "official": "独眼巨鹿眼球"
+    },
+    {
+      "file": "data/items.js",
+      "id": "blowpipe",
+      "en": "Blowpipe",
+      "now": "吹箭筒",
+      "official": "吹管"
+    },
+    {
+      "file": "data/items.js",
+      "id": "cutlass",
+      "en": "Cutlass",
+      "now": "弯刀",
+      "official": "短弯刀"
+    },
+    {
+      "file": "data/items.js",
+      "id": "blood_butcherer",
+      "en": "Blood Butcherer",
+      "now": "血屠刀",
+      "official": "血腥屠刀"
+    },
+    {
+      "file": "data/items.js",
+      "id": "yelets",
+      "en": "Yelets",
+      "now": "叶列特",
+      "official": "叶列茨球"
+    },
+    {
+      "file": "data/items.js",
+      "id": "scourge_corruptor",
+      "en": "Scourge of the Corruptor",
+      "now": "腐化之灾",
+      "official": "腐化者之戟"
+    },
+    {
+      "file": "data/items.js",
+      "id": "stake_launcher",
+      "en": "Stake Launcher",
+      "now": "木桩发射器",
+      "official": "尖桩发射器"
+    },
+    {
+      "file": "data/items.js",
+      "id": "shadowbeam_staff",
+      "en": "Shadowbeam Staff",
+      "now": "暗影光束法书",
+      "official": "暗影束法杖"
+    },
+    {
+      "file": "data/items.js",
+      "id": "betsys_wrath",
+      "en": "Betsy's Wrath",
+      "now": "贝茜之怒",
+      "official": "双足翼龙怒气"
+    },
+    {
+      "file": "data/items.js",
+      "id": "tempest_staff",
+      "en": "Tempest Staff",
+      "now": "风暴法杖",
+      "official": "暴风雨法杖"
+    },
+    {
+      "file": "data/items.js",
+      "id": "xeno_staff",
+      "en": "Xeno Staff",
+      "now": "异星法杖",
+      "official": "外星法杖"
+    },
+    {
+      "file": "data/items.js",
+      "id": "drippler_crippler",
+      "en": "Drippler Crippler",
+      "now": "滴血压制者",
+      "official": "滴滴怪致残者"
+    },
+    {
+      "file": "data/items.js",
+      "id": "flameburst_staff",
+      "en": "Flameburst Staff",
+      "now": "烈焰爆发法杖",
+      "official": "爆炸烈焰哨兵召唤物"
+    },
+    {
+      "file": "data/items.js",
+      "id": "queen_spider_staff",
+      "en": "Queen Spider Staff",
+      "now": "蜘蛛皇后法杖",
+      "official": "蜘蛛女王法杖"
+    },
+    {
+      "file": "data/items.js",
+      "id": "rainbow_crystal_staff",
+      "en": "Rainbow Crystal Staff",
+      "now": "彩虹水晶法杖",
+      "official": "七彩水晶法杖"
+    },
+    {
+      "file": "data/items.js",
+      "id": "discount_card",
+      "en": "Discount Card",
+      "now": "折扣卡",
+      "official": "优惠卡"
+    },
+    {
+      "file": "data/items.js",
+      "id": "anti_gravity_hook",
+      "en": "Anti-Gravity Hook",
+      "now": "反重力钩爪",
+      "official": "反重力钩"
+    },
+    {
+      "file": "data/items.js",
+      "id": "nimbus_rod",
+      "en": "Nimbus Rod",
+      "now": "雨云法杖",
+      "official": "雨云魔杖"
+    },
+    {
+      "file": "data/items.js",
+      "id": "frost_staff",
+      "en": "Frost Staff",
+      "now": "冰雪法杖",
+      "official": "寒霜法杖"
+    },
+    {
+      "file": "data/items.js",
+      "id": "inferno_fork",
+      "en": "Inferno Fork",
+      "now": "炼狱叉",
+      "official": "狱火叉"
+    },
+    {
+      "file": "data/items.js",
+      "id": "venom_staff",
+      "en": "Venom Staff",
+      "now": "剧毒法杖",
+      "official": "毒液法杖"
+    },
+    {
+      "file": "data/items.js",
+      "id": "sky_fracture",
+      "en": "Sky Fracture",
+      "now": "天空裂痕",
+      "official": "裂天剑"
+    },
+    {
+      "file": "data/items.js",
+      "id": "dark_harvest",
+      "en": "Dark Harvest",
+      "now": "黑暗收割",
+      "official": "暗黑收割"
+    },
+    {
+      "file": "data/items.js",
+      "id": "eventide",
+      "en": "Eventide",
+      "now": "薄暮弓",
+      "official": "日暮"
+    },
+    {
+      "file": "data/items.js",
+      "id": "onyx_blaster",
+      "en": "Onyx Blaster",
+      "now": "黑曜石爆破枪",
+      "official": "玛瑙爆破枪"
+    },
+    {
+      "file": "data/items.js",
+      "id": "falcon_blade",
+      "en": "Falcon Blade",
+      "now": "猎鹰之刃",
+      "official": "猎鹰刃"
+    },
+    {
+      "file": "data/items.js",
+      "id": "feral_claws",
+      "en": "Feral Claws",
+      "now": "野性之爪",
+      "official": "猛爪手套"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_pink_jellyfish",
+      "en": "Pink Jellyfish",
+      "now": "粉水母",
+      "official": "水母"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_wall_creeper",
+      "en": "Wall Creeper",
+      "now": "爬墙蛛",
+      "official": "爬墙蜘蛛"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_herpling",
+      "en": "Herpling",
+      "now": "跳跳兽",
+      "official": "蹦蹦兽"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_dark_mummy",
+      "en": "Dark Mummy",
+      "now": "暗黑木乃伊",
+      "official": "木乃伊"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_goblin_summoner",
+      "en": "Goblin Summoner",
+      "now": "哥布林召唤师",
+      "official": "哥布林术士"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_possessed",
+      "en": "Possessed",
+      "now": "被附身者",
+      "official": "附灵"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_blood_eel",
+      "en": "Blood Eel",
+      "now": "血鳗",
+      "official": "血鳗鱼"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_nailhead",
+      "en": "Nailhead",
+      "now": "钉子头",
+      "official": "钉头"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_creature_deep",
+      "en": "Creature from the Deep",
+      "now": "深渊生物",
+      "official": "水月怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_pirate_deckhand",
+      "en": "Pirate Deckhand",
+      "now": "海盗甲板水手",
+      "official": "海盗水手"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_pirate_corsair",
+      "en": "Pirate Corsair",
+      "now": "海盗私掠者",
+      "official": "私船海盗"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_pirate_deadeye",
+      "en": "Pirate Deadeye",
+      "now": "海盗神枪手",
+      "official": "海盗神射手"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_martian_drone",
+      "en": "Martian Drone",
+      "now": "火星无人机",
+      "official": "火星飞船"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_ray_gunner",
+      "en": "Ray Gunner",
+      "now": "射线枪手",
+      "official": "激光枪手"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_gigazapper",
+      "en": "Gigazapper",
+      "now": "千兆电击怪",
+      "official": "电击怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_etherian_goblin",
+      "en": "Etherian Goblin",
+      "now": "以太哥布林",
+      "official": "埃特尼亚哥布林"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_etherian_javelin",
+      "en": "Etherian Javelin Thrower",
+      "now": "以太标枪手",
+      "official": "埃特尼亚标枪投掷怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_kobold",
+      "en": "Kobold",
+      "now": "狗头人",
+      "official": "小妖魔"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_kobold_glider",
+      "en": "Kobold Glider",
+      "now": "滑翔狗头人",
+      "official": "小妖魔滑翔怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_drakin",
+      "en": "Drakin",
+      "now": "德拉金",
+      "official": "德拉克龙"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_selenian",
+      "en": "Selenian",
+      "now": "塞勒尼安",
+      "official": "火月怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_corite",
+      "en": "Corite",
+      "now": "科里特",
+      "official": "流星火怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_drakomire",
+      "en": "Drakomire",
+      "now": "德拉科迈尔",
+      "official": "火龙怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_drakomire_rider",
+      "en": "Drakomire Rider",
+      "now": "德拉科迈尔骑手",
+      "official": "火龙怪骑士"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_drakanian",
+      "en": "Drakanian",
+      "now": "德拉卡尼亚",
+      "official": "火龙战士"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_vortexian",
+      "en": "Vortexian",
+      "now": "旋涡人",
+      "official": "星旋怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_storm_diver",
+      "en": "Storm Diver",
+      "now": "风暴潜水员",
+      "official": "漩泥怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_alien_hornet",
+      "en": "Alien Hornet",
+      "now": "异形黄蜂",
+      "official": "异星黄蜂"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_predictor",
+      "en": "Predictor",
+      "now": "预言者",
+      "official": "预言怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_brain_suckler",
+      "en": "Brain Suckler",
+      "now": "吸脑者",
+      "official": "吮脑怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_evolution_beast",
+      "en": "Evolution Beast",
+      "now": "进化野兽",
+      "official": "进化兽"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_star_cell",
+      "en": "Star Cell",
+      "now": "星星细胞",
+      "official": "星细胞"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_twinkle_popper",
+      "en": "Twinkle Popper",
+      "now": "闪耀扑翼怪",
+      "official": "闪耀炮手"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_flow_invader",
+      "en": "Flow Invader",
+      "now": "流动入侵者",
+      "official": "流体入侵怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_stargazer",
+      "en": "Stargazer",
+      "now": "观星者",
+      "official": "观星怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_splinterling",
+      "en": "Splinterling",
+      "now": "碎木怪",
+      "official": "树精"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_poltergeist",
+      "en": "Poltergeist",
+      "now": "恶作剧鬼",
+      "official": "胡闹鬼"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_nutcracker",
+      "en": "Nutcracker",
+      "now": "胡桃夹子",
+      "official": "胡桃夹士"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_flocko",
+      "en": "Flocko",
+      "now": "弗洛科",
+      "official": "雪花怪"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_yeti",
+      "en": "Yeti",
+      "now": "雪怪",
+      "official": "雪兽"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_gnome",
+      "en": "Gnome",
+      "now": "地精",
+      "official": "侏儒"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_granite_elemental",
+      "en": "Granite Elemental",
+      "now": "花岗岩元素",
+      "official": "花岗精"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_black_recluse",
+      "en": "Black Recluse",
+      "now": "黑寡妇",
+      "official": "黑隐士"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_rune_wizard",
+      "en": "Rune Wizard",
+      "now": "符文法师",
+      "official": "符文巫师"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_ice_golem",
+      "en": "Ice Golem",
+      "now": "冰雪傀儡",
+      "official": "冰雪巨人"
+    },
+    {
+      "file": "data/monsters.js",
+      "id": "m_sand_elemental",
+      "en": "Sand Elemental",
+      "now": "沙元素",
+      "official": "沙尘精"
+    },
+    {
+      "file": "data/bosses.js",
+      "id": "flying_dutchman",
+      "en": "Flying Dutchman",
+      "now": "荷兰人号",
+      "official": "荷兰飞盗船"
+    },
+    {
+      "file": "data/bosses.js",
+      "id": "betsy",
+      "en": "Betsy",
+      "now": "双足翼龙贝茜",
+      "official": "双足翼龙"
+    },
+    {
+      "file": "data/bosses.js",
+      "id": "santa_nk1",
+      "en": "Santa-NK1",
+      "now": "圣诞坦克NK1",
+      "official": "圣诞坦克"
+    },
+    {
+      "file": "utils/fishing.js",
+      "id": "f_frost_minnow",
+      "en": "Frost Minnow",
+      "now": "霜米诺鱼",
+      "official": "寒霜鲦鱼"
+    },
+    {
+      "file": "utils/fishing.js",
+      "id": "f_green_jellyfish",
+      "en": "Green Jellyfish (bait)",
+      "now": "绿水母",
+      "official": "水母"
+    },
+    {
+      "file": "utils/fishing.js",
+      "id": "f_neon_tetra",
+      "en": "Neon Tetra",
+      "now": "霓虹灯鱼",
+      "official": "霓虹脂鲤"
+    },
+    {
+      "file": "utils/fishing.js",
+      "id": "f_salmon",
+      "en": "Salmon",
+      "now": "鲑鱼",
+      "official": "三文鱼"
+    },
+    {
+      "file": "utils/fishing.js",
+      "id": "f_variegated_lardfish",
+      "en": "Variegated Lardfish",
+      "now": "杂色猪油鱼",
+      "official": "斑驳油鱼"
+    },
+    {
+      "file": "utils/fishing.js",
+      "id": "b_apprentice_bait",
+      "en": "Apprentice Bait",
+      "now": "新手鱼饵",
+      "official": "鱼饵"
+    }
+  ],
+  "skipped": [
+    {
+      "id": "cursed_flames_staff",
+      "en": "Cursed Flames",
+      "official": "诅咒焰（武器）",
+      "now": "诅咒焰"
+    },
+    {
+      "id": "morningstar_whip",
+      "en": "Morning Star",
+      "official": "晨星",
+      "now": "晨星"
+    },
+    {
+      "id": "mechanic_fishing_rod",
+      "en": "Mechanic's Rod",
+      "official": "钓竿",
+      "now": "机械师钓竿"
+    },
+    {
+      "id": "golden_fishing_rod",
+      "en": "Golden Fishing Rod",
+      "official": "钓竿",
+      "now": "金钓竿"
+    },
+    {
+      "id": "leaf_wings",
+      "en": "Leaf Wings",
+      "official": "翅膀",
+      "now": "叶之翼"
+    },
+    {
+      "id": "solar_wings",
+      "en": "Solar Wings",
+      "official": "翅膀",
+      "now": "日耀之翼"
+    },
+    {
+      "id": "shark_fin",
+      "en": "Shark Fin",
+      "official": "鲨鱼鳍",
+      "now": "鲨鱼鳍"
+    },
+    {
+      "id": "ichor",
+      "en": "Ichor",
+      "official": "灵液",
+      "now": "灵液"
+    },
+    {
+      "id": "cursed_flame_item",
+      "en": "Cursed Flame",
+      "official": "诅咒焰",
+      "now": "诅咒焰"
+    },
+    {
+      "id": "iron_skin",
+      "en": "Ironskin Potion",
+      "official": "铁皮药水",
+      "now": "铁皮药水"
+    },
+    {
+      "id": "greater_healing",
+      "en": "Greater Healing Potion",
+      "official": "强效治疗药水",
+      "now": "强效治疗药水"
+    },
+    {
+      "id": "greater_mana",
+      "en": "Greater Mana Potion",
+      "official": "强效魔力药水",
+      "now": "强效魔力药水"
+    },
+    {
+      "id": "zephyr_fish",
+      "en": "Zephyr Fish",
+      "official": "和风鱼",
+      "now": "和风鱼"
+    },
+    {
+      "id": "candy_corn_rifle",
+      "en": "Candy Corn Rifle",
+      "official": "玉米糖步枪",
+      "now": "糖果玉米步枪"
+    },
+    {
+      "id": "desert_tiger",
+      "en": "Desert Tiger Staff",
+      "official": "沙漠虎杖",
+      "now": "沙漠虎法杖"
+    },
+    {
+      "id": "frost_hydra",
+      "en": "Frost Hydra Staff",
+      "official": "寒霜九头蛇法杖",
+      "now": "冰霜九头蛇法杖"
+    },
+    {
+      "id": "candy_corn",
+      "en": "Candy Corn",
+      "official": "玉米糖步枪",
+      "now": "糖果玉米"
+    },
+    {
+      "id": "cursed_flames",
+      "en": "Cursed Flames",
+      "official": "诅咒焰（武器）",
+      "now": "诅咒之火"
+    },
+    {
+      "id": "desert_tiger_staff",
+      "en": "Desert Tiger Staff",
+      "official": "沙漠虎杖",
+      "now": "沙漠猛虎法杖"
+    },
+    {
+      "id": "frost_hydra_staff",
+      "en": "Staff of the Frost Hydra",
+      "official": "寒霜九头蛇法杖",
+      "now": "冰霜九头蛇法杖"
+    },
+    {
+      "id": "morning_star",
+      "en": "Morning Star",
+      "official": "晨星",
+      "now": "晨星鞭"
+    },
+    {
+      "id": "ichor_mat",
+      "en": "Ichor",
+      "official": "灵液",
+      "now": "灵液"
+    },
+    {
+      "id": "cursed_flame_mat",
+      "en": "Cursed Flame",
+      "official": "诅咒焰",
+      "now": "诅咒火焰"
+    },
+    {
+      "id": "iron_skin_potion",
+      "en": "Ironskin Potion",
+      "official": "铁皮药水",
+      "now": "铁皮药水"
+    },
+    {
+      "id": "greater_healing_potion",
+      "en": "Greater Healing Potion",
+      "official": "强效治疗药水",
+      "now": "强效治疗药水"
+    },
+    {
+      "id": "greater_mana_potion",
+      "en": "Greater Mana Potion",
+      "official": "强效魔力药水",
+      "now": "强效魔力药水"
+    },
+    {
+      "id": "q_catfish",
+      "en": "Catfish",
+      "official": "渔夫/任务",
+      "now": "鲶鱼"
+    },
+    {
+      "id": "q_damselfish",
+      "en": "Damselfish",
+      "official": "雀鲷",
+      "now": "小丑鱼"
+    },
+    {
+      "id": "q_sharkfin",
+      "en": "Sharkfin",
+      "official": "鲨鱼鳍",
+      "now": "鲨鱼鳍"
+    },
+    {
+      "id": "q_tropical_barracuda",
+      "en": "Tropical Barracuda",
+      "official": "渔夫/任务",
+      "now": "热带梭鱼"
+    },
+    {
+      "id": "f_damselfish_food",
+      "en": "Damselfish",
+      "official": "雀鲷",
+      "now": "小丑鱼（食用）"
+    },
+    {
+      "id": "f_zephyr_fish_food",
+      "en": "Zephyr Fish",
+      "official": "和风鱼",
+      "now": "微风鱼（宠物）"
+    },
+    {
+      "id": "mechanic_fishing_rod",
+      "en": "Scarab Fishing Rod",
+      "official": "钓竿",
+      "now": "机械钓竿"
+    }
+  ],
+  "notFound": [
+    "Wood Fishing Rod",
+    "Reinforced Fishing Rod",
+    "Molten Armor",
+    "Chlorophyte Armor",
+    "Hallowed Armor",
+    "Beetle Armor",
+    "Solar Flare Armor",
+    "Vortex Armor",
+    "Nebula Armor",
+    "Stardust Armor",
+    "Cactus Armor",
+    "Copper Armor",
+    "Iron Armor",
+    "Silver Armor",
+    "Gold Armor",
+    "Platinum Armor",
+    "Meteor Armor",
+    "Necro Armor",
+    "Jungle Armor",
+    "Bee Armor",
+    "Obsidian Armor",
+    "Spider Armor",
+    "Cobalt Armor",
+    "Palladium Armor",
+    "Orichalcum Armor",
+    "Adamantite Armor",
+    "Titanium Armor",
+    "Shroomite Armor",
+    "Spectre Armor",
+    "Cloud Balloon",
+    "Blizzard Balloon",
+    "Sandstorm Balloon",
+    "Miner Potion",
+    "Calm Potion",
+    "Scutli Gunner",
+    "Nebula Floaty",
+    "Eyefish",
+    "Fox Fish",
+    "Mutant Flish",
+    "Penumbra Fish",
+    "Royal Goldfish",
+    "Scaly Trout",
+    "Vulture Fish",
+    "Fish (quest)",
+    "Wyvernkin",
+    "Armored Carp",
+    "Cod",
+    "Honeyfish",
+    "Luminfish",
+    "Mountain Bass",
+    "Snail Fish",
+    "Lava Crate",
+    "Celestial Crate"
+  ],
+  "okCount": 587
+}

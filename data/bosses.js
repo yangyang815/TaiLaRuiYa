@@ -344,7 +344,7 @@ module.exports = [
       '夜明矿+毕业武器全从他身上来——通关的最后一战，也是毕业的开始。'
     ] },
 
-  { id: 'flying_dutchman', name: '荷兰人号', en: 'Flying Dutchman', tier: 'event', hp: 6000, dmg: 70, def: 20, coins: '10 金',
+  { id: 'flying_dutchman', name: '荷兰飞盗船', en: 'Flying Dutchman', tier: 'event', hp: 6000, dmg: 70, def: 20, coins: '10 金',
     art: 'boss_dutchman', color: '#8B6BB0',
     spawn: '海盗入侵事件进行到中后期刷新（普通模式即可出现），一次入侵可能刷新多艘',
     drops: [
@@ -414,7 +414,7 @@ module.exports = [
       '他体型大动作慢，远程武器站高台抽血很稳。'
     ] },
 
-  { id: 'betsy', name: '双足翼龙贝茜', en: 'Betsy', tier: 'event', hp: 32000, dmg: 100, def: 30, coins: '10 金',
+  { id: 'betsy', name: '双足翼龙', en: 'Betsy', tier: 'event', hp: 32000, dmg: 100, def: 30, coins: '10 金',
     art: 'boss_betsy', color: '#E06A3C',
     spawn: '撒旦军队 T3（击败石巨人后）最终波压轴登场',
     drops: [
@@ -488,7 +488,7 @@ module.exports = [
       '玩具挂饰会追踪，别站桩输出。'
     ] },
 
-  { id: 'santa_nk1', name: '圣诞坦克NK1', en: 'Santa-NK1', tier: 'event', hp: 8000, dmg: 70, def: 20, coins: '5 金',
+  { id: 'santa_nk1', name: '圣诞坦克', en: 'Santa-NK1', tier: 'event', hp: 8000, dmg: 70, def: 20, coins: '5 金',
     art: 'boss_santa_nk1', color: '#4A9BD0',
     spawn: '霜月中后期波次刷新',
     drops: [
