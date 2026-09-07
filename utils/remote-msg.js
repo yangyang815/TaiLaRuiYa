@@ -18,6 +18,16 @@ const MIRRORS = [
 const CACHE_KEY = 'terr_msg_remote'
 const MAX_AGE = 24 * 3600 * 1000 // 缓存 24 小时，过期后仍可用但会尝试刷新
 
+// 合并策略：内置兜底为基础，远程同 id 覆盖、新 id 透出（内置新增公告不被远程旧缓存挡住）
+function merged (remoteRaw, src) {
+  const base = {}
+  msgs.all().forEach(m => { base[m.id] = { ...m, src: 'builtin' } })
+  ;(Array.isArray(remoteRaw) ? remoteRaw : []).forEach(m => {
+    if (m && m.id && m.title && m.ts) base[m.id] = { ...m, src }
+  })
+  return normalize(Object.keys(base).map(k => base[k]), src)
+}
+
 // 规范化：过滤非法项 + 倒序 + 标签元信息 + 来源标记
 function normalize (list, src) {
   return (Array.isArray(list) ? list : [])
@@ -31,10 +41,10 @@ function currentList () {
   try {
     const c = wx.getStorageSync(CACHE_KEY)
     if (c && Date.now() - c.ts < MAX_AGE && Array.isArray(c.list) && c.list.length) {
-      return normalize(c.list, 'cache')
+      return merged(c.list, 'cache')
     }
   } catch (e) { /* 存储异常走兜底 */ }
-  return normalize(msgs.all(), 'builtin')
+  return merged(null, 'builtin')
 }
 
 // 未读数（基于当前可用列表）
@@ -51,7 +61,7 @@ function refresh (onUpdate) {
     if (settled) return
     settled = true
     try { wx.setStorageSync(CACHE_KEY, { ts: Date.now(), list }) } catch (e) { /* 忽略 */ }
-    onUpdate && onUpdate(normalize(list, 'remote'))
+    onUpdate && onUpdate(merged(list, 'remote'))
   }
 
   // ---- 主通道：云开发数据库 ----
