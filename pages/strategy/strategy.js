@@ -77,7 +77,7 @@ Page({
   goCareerPath () {
     const store = require('../../utils/store')
     store.setCareerCls(this.data.s.cls)
-    wx.navigateTo({ url: '/pages/careerpath/careerpath' })
+    wx.navigateTo({ url: '/pkgA-tool/pages/careerpath/careerpath' })
   },
 
   back () {

@@ -79,7 +79,7 @@ Page({
   },
   onFish (e) {
     this.confirmSearch()
-    wx.navigateTo({ url: '/pages/fishing/fishing?kw=' + encodeURIComponent(e.currentTarget.dataset.kw) })
+    wx.navigateTo({ url: '/pkgA-tool/pages/fishing/fishing?kw=' + encodeURIComponent(e.currentTarget.dataset.kw) })
   },
   onGuide (e) {
     this.confirmSearch()

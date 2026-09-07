@@ -8,29 +8,12 @@
     "pages/detail/detail",
     "pages/strategy/strategy",
     "pages/search/search",
-    "pages/secrets/secrets",
-    "pages/guide/guide",
-    "pages/biomes/biomes",
     "pages/seeds/seeds",
-    "pages/prefixes/prefixes",
     "pages/favs/favs",
     "pages/messages/messages",
-    "pages/worldseeds/worldseeds",
-    "pages/achv/achv",
     "pages/bossguide/bossguide",
     "pages/bossguide/detail",
-    "pages/gameachv/gameachv",
-    "pages/acq/acq",
-    "pages/fishing/fishing",
-    "pages/build/build",
-    "pages/build/basics",
-    "pages/build/detail",
-    "pages/dps/dps",
-    "pages/npcplan/npcplan",
-    "pages/career/career",
-    "pages/careerclass/careerclass",
-    "pages/careerpath/careerpath",
-    "pages/careerlib/careerlib"
+    "pages/acq/acq"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -64,5 +47,50 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "subpackages": [
+    {
+      "root": "pkgA-tool",
+      "name": "tool",
+      "pages": [
+        "pages/build/build",
+        "pages/build/basics",
+        "pages/build/detail",
+        "pages/dps/dps",
+        "pages/npcplan/npcplan",
+        "pages/fishing/fishing",
+        "pages/career/career",
+        "pages/careerclass/careerclass",
+        "pages/careerpath/careerpath",
+        "pages/careerlib/careerlib"
+      ]
+    },
+    {
+      "root": "pkgB-guide",
+      "name": "guide",
+      "pages": [
+        "pages/guide/guide",
+        "pages/achv/achv",
+        "pages/gameachv/gameachv",
+        "pages/secrets/secrets",
+        "pages/worldseeds/worldseeds",
+        "pages/biomes/biomes",
+        "pages/prefixes/prefixes"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/my/my": {
+      "network": "all",
+      "packages": [
+        "tool"
+      ]
+    },
+    "pages/codex/codex": {
+      "network": "all",
+      "packages": [
+        "guide"
+      ]
+    }
+  }
 }

@@ -107,16 +107,23 @@ try {
   fail('app.json 解析失败: ' + e.message)
 }
 if (appJson) {
-  const pages = appJson.pages || []
+  const pageSet = new Set()
+  // 主包 + 分包页面统一校验
+  const pkgList = [{ root: '', pages: appJson.pages || [] }].concat(appJson.subpackages || [])
   let pageFail = 0
-  pages.forEach(p => {
-    ;['.js', '.wxml', '.json'].forEach(ext => {
-      if (!fs.existsSync(p + ext)) { pageFail++; console.log('  [缺文件]', p + ext) }
+  let pageTotal = 0
+  pkgList.forEach(pkg => {
+    (pkg.pages || []).forEach(pg => {
+      pageTotal++
+      const full = pkg.root ? pkg.root + '/' + pg : pg
+      pageSet.add(full)
+      ;['.js', '.wxml', '.json'].forEach(ext => {
+        if (!fs.existsSync(full + ext)) { pageFail++; console.log('  [缺文件]', full + ext) }
+      })
+      if (!fs.existsSync(full + '.wxss')) warn('页面无样式文件: ' + full + '.wxss')
     })
-    if (!fs.existsSync(p + '.wxss')) warn('页面无样式文件: ' + p + '.wxss')
   })
-  pageFail === 0 ? ok('全部 ' + pages.length + ' 个页面文件齐全') : fail(pageFail + ' 个页面文件缺失')
-  const pageSet = new Set(pages)
+  pageFail === 0 ? ok('全部 ' + pageTotal + ' 个页面文件齐全（主包 ' + (appJson.pages || []).length + ' + 分包 ' + (pageTotal - (appJson.pages || []).length) + '）') : fail(pageFail + ' 个页面文件缺失')
   const tb = (appJson.tabBar && appJson.tabBar.list) || []
   const tbFail = tb.filter(t => !pageSet.has(t.pagePath))
   tbFail.length === 0 ? ok('tabBar ' + tb.length + ' 个页面均在路由表内') : fail('tabBar 引用未注册页面: ' + tbFail.map(t => t.pagePath).join(', '))
@@ -125,6 +132,26 @@ if (appJson) {
     const cbOk = ['js', 'json', 'wxml', 'wxss'].every(ext => fs.existsSync('custom-tab-bar/index.' + ext))
     cbOk ? ok('custom-tab-bar 文件齐全') : fail('custom-tab-bar 文件缺失')
   }
+  // 分包页面相对引用可解析（../ 深度校验）
+  let reqFail = 0
+  pkgList.forEach(pkg => {
+    (pkg.pages || []).forEach(pg => {
+      const full = (pkg.root ? pkg.root + '/' + pg : pg) + '.js'
+      if (!fs.existsSync(full)) return
+      const s = fs.readFileSync(full, 'utf8')
+      const re = /require\('((?:\.+\/)[^']+)'\)/g
+      let m
+      const dir = path.posix.dirname(full)
+      while ((m = re.exec(s))) {
+        const resolved = path.posix.normalize(path.posix.join(dir, m[1]))
+        // require 可省略 .js 后缀，三种形态任一存在即可
+        if (!fs.existsSync(resolved) && !fs.existsSync(resolved + '.js') && !fs.existsSync(path.posix.join(resolved, 'index.js'))) {
+          reqFail++; console.log('  [引用失效]', full + ' -> ' + m[1])
+        }
+      }
+    })
+  })
+  reqFail === 0 ? ok('分包页面相对 require 全部可解析') : fail(reqFail + ' 处相对引用失效（分包层级变化未适配）')
 }
 
 /* ========== 5. 存储 key 合法性 ========== */
@@ -156,6 +183,7 @@ rogue.length === 0 ? ok('页面/组件无绕过 store 的直接存储访问') : 
 sec('6. 包体积红线')
 let total = 0
 const skipDirs = new Set(['.git', '.workbuddy', 'node_modules', 'scripts'])
+;((appJson && appJson.subpackages) || []).forEach(sp => skipDirs.add(sp.root))
 let packIgnore = []
 try {
   const pc = JSON.parse(fs.readFileSync('project.config.json', 'utf8'))
@@ -176,9 +204,23 @@ try {
     })
   })('.')
 const kb = Math.round(total / 1024)
-if (kb > 2048) fail('包体积 ' + kb + 'KB，超过 2048KB 上限，无法上传！')
-else if (kb > 1900) warn('包体积 ' + kb + 'KB，接近 2048KB 上限（余量 ' + (2048 - kb) + 'KB），暂缓新增大资源')
-else ok('包体积 ' + kb + 'KB / 2048KB，余量 ' + (2048 - kb) + 'KB')
+if (kb > 2048) fail('主包体积 ' + kb + 'KB，超过 2048KB 上限，无法上传！')
+else if (kb > 1900) warn('主包体积 ' + kb + 'KB，接近 2048KB 上限（余量 ' + (2048 - kb) + 'KB），暂缓新增大资源')
+else ok('主包体积 ' + kb + 'KB / 2048KB，余量 ' + (2048 - kb) + 'KB')
+// 分包体积（独立 2MB 额度）
+const pkgSizes = {}
+;((appJson && appJson.subpackages) || []).forEach(sp => {
+  let sz = 0
+  ;(function w (d) {
+    fs.readdirSync(d).forEach(f => {
+      const fp = path.join(d, f)
+      fs.statSync(fp).isDirectory() ? w(fp) : sz += fs.statSync(fp).size
+    })
+  })(sp.root)
+  pkgSizes[sp.root] = Math.round(sz / 1024)
+  if (Math.round(sz / 1024) > 2048) fail('分包 ' + sp.root + ' 体积 ' + Math.round(sz / 1024) + 'KB 超 2048KB')
+})
+Object.keys(pkgSizes).forEach(k => ok('分包 ' + k + ': ' + pkgSizes[k] + 'KB / 2048KB'))
 
 /* ========== 汇总 ========== */
 console.log('\n========== 检查结果 ==========')

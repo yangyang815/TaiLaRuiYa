@@ -111,12 +111,12 @@ Page({
 
   /* ---------- 跳转 ---------- */
   goFavs () { wx.navigateTo({ url: '/pages/favs/favs' }) },
-  goAchv () { wx.navigateTo({ url: '/pages/achv/achv' }) },
-  goGameAchv () { wx.navigateTo({ url: '/pages/gameachv/gameachv' }) },
-  goFishing () { wx.navigateTo({ url: '/pages/fishing/fishing' }) },
-  goBuild () { wx.navigateTo({ url: '/pages/build/build' }) },
-  goDps () { wx.navigateTo({ url: '/pages/dps/dps' }) },
-  goNpcPlan () { wx.navigateTo({ url: '/pages/npcplan/npcplan' }) },
+  goAchv () { wx.navigateTo({ url: '/pkgB-guide/pages/achv/achv' }) },
+  goGameAchv () { wx.navigateTo({ url: '/pkgB-guide/pages/gameachv/gameachv' }) },
+  goFishing () { wx.navigateTo({ url: '/pkgA-tool/pages/fishing/fishing' }) },
+  goBuild () { wx.navigateTo({ url: '/pkgA-tool/pages/build/build' }) },
+  goDps () { wx.navigateTo({ url: '/pkgA-tool/pages/dps/dps' }) },
+  goNpcPlan () { wx.navigateTo({ url: '/pkgA-tool/pages/npcplan/npcplan' }) },
   goBosses () {
     const app = getApp()
     app.globalData.pendingCodex = { tab: 'boss' }

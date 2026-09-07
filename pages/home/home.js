@@ -11,23 +11,23 @@ const GRID = [
   { k: 'boss', n: 'Boss大全', art: 'boss_eye_cthulhu', go: 'list?type=boss' },
   { k: 'mon', n: '怪物图鉴', art: 'm_zombie', go: 'codex:mon' },
   { k: 'item', n: '物品百科', art: 'tab_book_on', go: 'codex:item' },
-  { k: 'seed', n: '特殊种子', art: 'seed_zenith', url: '/pages/worldseeds/worldseeds' },
+  { k: 'seed', n: '特殊种子', art: 'seed_zenith', url: '/pkgB-guide/pages/worldseeds/worldseeds' },
   { k: 'craft', n: '合成表', art: 'tab_anvil_on', go: 'tab:craft' },
   { k: 'weapon-rank', n: '武器排行', art: 'terra_blade', go: 'list?type=weapon-rank' },
   { k: 'accessory', n: '饰品推荐', art: 'ankh_shield', go: 'list?type=accessory' },
   { k: 'potion', n: '药水指南', art: 'healing_potion', go: 'list?type=potion' },
   { k: 'progress', n: '流程攻略', art: 'copper_pick', go: 'strategy:progress' },
   { k: 'event', n: '事件大全', art: 'boss_skeletron_prime', go: 'strategy:event' },
-  { k: 'class', n: '职业养成', art: 'solar_armor', url: '/pages/career/career' },
-  { k: 'build', n: '建造指南', art: 'workbench', url: '/pages/build/build' }
+  { k: 'class', n: '职业养成', art: 'solar_armor', url: '/pkgA-tool/pages/career/career' },
+  { k: 'build', n: '建造指南', art: 'workbench', url: '/pkgA-tool/pages/build/build' }
 ]
 
 // 特色入口：与手册入口同款卡片结构，合并进宫格（共 16 个）
 const ENTRIES = [
-  { k: 'secrets', n: '隐藏知识库', art: 'gel_blue', url: '/pages/secrets/secrets' },
-  { k: 'biomes', n: '生物群系', art: 'jungle_spore', url: '/pages/biomes/biomes' },
+  { k: 'secrets', n: '隐藏知识库', art: 'gel_blue', url: '/pkgB-guide/pages/secrets/secrets' },
+  { k: 'biomes', n: '生物群系', art: 'jungle_spore', url: '/pkgB-guide/pages/biomes/biomes' },
   { k: 'seeds', n: '种子目录', art: 'daybloom_herb', url: '/pages/seeds/seeds' },
-  { k: 'prefixes', n: '词条图鉴', art: 'npc_goblin', url: '/pages/prefixes/prefixes' }
+  { k: 'prefixes', n: '词条图鉴', art: 'npc_goblin', url: '/pkgB-guide/pages/prefixes/prefixes' }
 ]
 
 // 本周挑战：标志性 Boss 一句话介绍（未命中时用通用文案）
@@ -393,7 +393,7 @@ Page({
     if (this.data.searchKw.trim()) store.pushHist(this.data.searchKw.trim())
     const kw = e.currentTarget.dataset.kw
     this._closePanel()
-    wx.navigateTo({ url: '/pages/fishing/fishing?kw=' + encodeURIComponent(kw) })
+    wx.navigateTo({ url: '/pkgA-tool/pages/fishing/fishing?kw=' + encodeURIComponent(kw) })
   },
   // Boss 攻略清单 → 深度攻略页
   onPanelGuide (e) {
@@ -419,7 +419,7 @@ Page({
   // 消息入口 → 消息中心
   goMsgs () { wx.navigateTo({ url: '/pages/messages/messages' }) },
   // 成就入口 → 冒险成就
-  goAchv () { wx.navigateTo({ url: '/pages/achv/achv' }) },
+  goAchv () { wx.navigateTo({ url: '/pkgB-guide/pages/achv/achv' }) },
 
   /* ---------- 轮播 Banner ---------- */
   onSlideChange (e) {
@@ -462,7 +462,7 @@ Page({
   onHotTap (e) { dex.go(e.currentTarget.dataset.id, e.currentTarget.dataset.type) },
   // 热门"更多"入口 → 搜索页（含热门搜索词）
   onHotMore () { wx.navigateTo({ url: '/pages/search/search' }) },
-  goGuide () { wx.navigateTo({ url: '/pages/guide/guide' }) },
+  goGuide () { wx.navigateTo({ url: '/pkgB-guide/pages/guide/guide' }) },
 
   /* ---------- 宫格：展开 / 收起 / 重置排序 ---------- */
   toggleGrid () {
