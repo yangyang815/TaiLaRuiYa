@@ -6,7 +6,7 @@
 //   4. 将环境 ID 填到下方 CLOUD_ENV（只有一个环境可留空）
 const msgs = require('../data/messages')
 
-const CLOUD_ENV = '' // ← 云开发环境 ID 填这里（留空 = 默认环境）
+const CLOUD_ENV = 'cloud1-d7g0njk142e43e907' // 云开发环境 ID
 const COLLECTION = 'messages'
 
 // jsDelivr / raw 镜像：真机受白名单限制（未备案域名加不进合法域名），
