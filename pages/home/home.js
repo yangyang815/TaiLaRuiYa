@@ -1,5 +1,6 @@
 // 首页：Banner / 功能宫格 / 今日热门 / 星空粒子 / 昼夜切换
 const dex = require('../../utils/dex')
+const fmt = require('../../utils/fmt')
 const store = require('../../utils/store')
 const achv = require('../../utils/achievements')
 const remoteMsg = require('../../utils/remote-msg')
@@ -67,16 +68,6 @@ function weeklyChallenge () {
   }
 }
 
-// 热门词安全获取：开发者工具编译缓存未更新（旧 dex.js 无 hotWords）时回退静态热词
-function hotWordsSafe () {
-  return dex.hotWords ? dex.hotWords() : dex.HOT_WORDS.slice(0, 14)
-}
-
-function fmtClock (d) {
-  const h = String(d.getHours()).padStart(2, '0')
-  const m = String(d.getMinutes()).padStart(2, '0')
-  return h + ':' + m
-}
 
 // 动态时段问候：6-12 早上好 / 12-18 下午好 / 其余 晚上好
 function helloOf (h) {
@@ -86,11 +77,6 @@ function helloOf (h) {
 }
 
 // 日期行：M月d日 · 周X
-function fmtDate (d) {
-  const wk = ['日', '一', '二', '三', '四', '五', '六'][d.getDay()]
-  return (d.getMonth() + 1) + '月' + d.getDate() + '日 · 周' + wk
-}
-
 /* ---------- 宫格构建：自定义排序优先，否则按使用频率降序，最近使用的加高亮 ---------- */
 function buildGrid () {
   const g = store.getGrid()
@@ -211,8 +197,8 @@ Page({
       daytime,
       greet: daytime ? '白昼の泰拉' : '夜幕の泰拉',
       hello: helloOf(hour) + '，冒险者！',
-      clock: fmtClock(new Date()),
-      dateStr: fmtDate(new Date()),
+      clock: fmt.fmtClock(new Date()),
+      dateStr: fmt.fmtDateCn(new Date()),
       stars,
       weekly,
       grid: buildGrid(),
@@ -223,14 +209,14 @@ Page({
       slides: buildSlides(weekly),
       recents: this.buildRecents(),
       hist: store.getHist(),
-      hotWords: hotWordsSafe()
+      hotWords: dex.hotWordsSafe()
     })
     // 整分钟对齐刷新时钟 + 日期 + 时段问候（与其它 Tab 页同相位，跨分钟即跳变）
     this._timer = startClock(() => {
       const now = new Date()
       this.setData({
-        clock: fmtClock(now),
-        dateStr: fmtDate(now),
+        clock: fmt.fmtClock(now),
+        dateStr: fmt.fmtDateCn(now),
         hello: helloOf(now.getHours()) + '，冒险者！'
       })
     })
@@ -321,15 +307,15 @@ Page({
     // 跨天自动刷新今日热门 + 热门搜索词
     const today = dex.hotDate()
     if (today !== this.data.hotDate) {
-      this.setData({ hotDate: today, hotWords: hotWordsSafe() })
+      this.setData({ hotDate: today, hotWords: dex.hotWordsSafe() })
       this.loadHot()
     }
     // 问候语跨时段刷新 + 时钟校准 + 顶部角标 + 最近浏览（从详情页返回后同步）
     const now = new Date()
     this.setData({
       hello: helloOf(now.getHours()) + '，冒险者！',
-      clock: fmtClock(now),
-      dateStr: fmtDate(now),
+      clock: fmt.fmtClock(now),
+      dateStr: fmt.fmtDateCn(now),
       hist: store.getHist()
     })
     this.loadTopBadges()

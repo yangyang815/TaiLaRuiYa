@@ -1,5 +1,6 @@
 // 钓鱼助手：今日推荐 / 渔夫任务 / 图鉴收集 / 搜索
 const F = require('../../../data/fishing')
+const fmt = require('../../../utils/fmt')
 const U = require('../../../utils/fishing')
 const store = require('../../../utils/store')
 const { py } = require('../../../utils/pinyin-mini')
@@ -27,14 +28,6 @@ const GROUP_META = [
 const BIOME_ORDER = ['forest', 'snow', 'desert', 'jungle', 'ocean', 'sky', 'cavern', 'mushroom', 'honey', 'hallowed', 'corrupt', 'crimson', 'tundra', 'hell', 'any']
 const biomeRank = b => { const i = BIOME_ORDER.indexOf(b); return i < 0 ? 99 : i }
 
-// 精灵图缺鱼类贴图，用鱼系 emoji 稳定替代（按 id 哈希固定）
-const FISH_EMOJI = ['🐟', '🐠', '🐡', '🦈', '🦐', '🦀', '🐋', '🐙']
-function emojiOf (id) {
-  let h = 0
-  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0
-  return FISH_EMOJI[h % FISH_EMOJI.length]
-}
-
 // 全量图鉴条目（任务鱼 + 可钓获 + 钓具 + 鱼饵 + 宝匣，组内已排序）
 // biome 统一归并（tundra→雪原snow），并保留结构化 biome/time/weather 供筛选
 function buildAll () {
@@ -44,7 +37,7 @@ function buildAll () {
     .sort((a, b) => biomeRank(a.biome) - biomeRank(b.biome) || a.name.localeCompare(b.name, 'zh'))
     .forEach(f => list.push({
     id: f.id, kind: 'quest', kindN: KIND_N.quest, name: f.name, en: f.en || '',
-    emoji: emojiOf(f.id),
+    emoji: fmt.emojiOf(f.id),
     biome: f.biome === 'tundra' ? 'snow' : (f.biome || ''),
     time: f.time || 'any', weather: f.weather || 'any',
     line1: (F.BIOME_N[f.biome] || f.biome) + ' · ' + (F.TIME_N[f.time] || f.time) + (f.weather === 'rain' ? ' · 雨天限定' : ''),
@@ -57,7 +50,7 @@ function buildAll () {
     .sort((a, b) => biomeRank(a.biome) - biomeRank(b.biome) || b.power - a.power)
     .forEach(f => list.push({
     id: f.id, kind: 'food', kindN: KIND_N.food, name: f.name, en: f.en || '',
-    emoji: emojiOf(f.id),
+    emoji: fmt.emojiOf(f.id),
     biome: f.biome === 'tundra' ? 'snow' : (f.biome || ''),
     time: f.time || 'any', weather: f.weather || 'any',
     line1: (F.BIOME_N[f.biome] || f.biome) + ' · ' + (F.TIME_N[f.time] || f.time),

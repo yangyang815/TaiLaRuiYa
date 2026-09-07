@@ -1,5 +1,6 @@
 // 我的页：品牌区 / 用户信息卡 / 数据统计 / 功能列表
 const dex = require('../../utils/dex')
+const fmt = require('../../utils/fmt')
 const store = require('../../utils/store')
 const achv = require('../../utils/achievements')
 const fishing = require('../../utils/fishing')
@@ -9,12 +10,6 @@ const { LIST: GACHV_LIST } = require('../../data/gameAchievements')
 
 const AVATARS = ['ava_knight', 'ava_wizard', 'ava_slime', 'ava_eye', 'ava_bunny', 'ava_moon']
 const VERSIONS = ['1.4.4', '1.4.5', '1.4.6']
-
-function fmtClock (d) {
-  const h = String(d.getHours()).padStart(2, '0')
-  const m = String(d.getMinutes()).padStart(2, '0')
-  return h + ':' + m
-}
 
 Page({
   data: {
@@ -48,10 +43,10 @@ Page({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
       navTop: app.globalData.navTop || 64,
       avatars: AVATARS.map(a => ({ k: a })),
-      clock: fmtClock(new Date())
+      clock: fmt.fmtClock(new Date())
     })
     // 整分钟对齐刷新右上角时钟（与其它 Tab 页同相位，跨分钟即跳变）
-    this._timer = startClock(() => this.setData({ clock: fmtClock(new Date()) }))
+    this._timer = startClock(() => this.setData({ clock: fmt.fmtClock(new Date()) }))
   },
 
   onUnload () {
@@ -61,7 +56,7 @@ Page({
   onShow () {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().init(3)
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '', clock: fmtClock(new Date()) })
+    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '', clock: fmt.fmtClock(new Date()) })
     this.refresh()
   },
 

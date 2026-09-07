@@ -1,5 +1,6 @@
 // 钓鱼助手逻辑：今日推荐 / 渔夫任务 / 图鉴搜索 / 收集进度
 const F = require('../data/fishing')
+const fmt = require('./fmt')
 const store = require('./store')
 
 // 鱼分类清单（打勾进度用）
@@ -38,7 +39,7 @@ function today (hour, rain) {
  */
 function dailyQuest (dateKey) {
   const list = F.QUEST_FISH
-  const seed = hash(dateKey)
+  const seed = fmt.hash(dateKey)
   const fish = list[seed % list.length]
   return {
     ...fish,
@@ -49,12 +50,6 @@ function dailyQuest (dateKey) {
 }
 
 // 简单字符串哈希
-function hash (s) {
-  let h = 0
-  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0
-  return h
-}
-
 /**
  * 图鉴列表（含打勾状态）
  */

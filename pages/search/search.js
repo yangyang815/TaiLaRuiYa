@@ -5,10 +5,6 @@ const acq = require('../../utils/acq')
 const fishUtil = require('../../utils/fishing')
 const bossGuides = require('../../data/bossGuides')
 
-// 热门词安全获取：开发者工具编译缓存未更新（旧 dex.js 无 hotWords）时回退静态热词
-function hotWordsSafe () {
-  return dex.hotWords ? dex.hotWords() : dex.HOT_WORDS.slice(0, 14)
-}
 
 Page({
   data: {
@@ -29,7 +25,7 @@ Page({
       capsuleRight: app.globalData.capsuleRight || 100,
       themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
       hist: store.getHist(),
-      hotWords: hotWordsSafe()
+      hotWords: dex.hotWordsSafe()
     })
     // 首页搜索面板"查看全部"带入关键词，直接出结果
     if (opts && opts.kw) {

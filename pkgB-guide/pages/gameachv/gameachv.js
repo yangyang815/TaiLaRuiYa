@@ -1,5 +1,6 @@
 // 泰拉成就：游戏官方 115 个成就，手动打勾 + 分类筛选 + 数据统计
 const store = require('../../../utils/store')
+const fmt = require('../../../utils/fmt')
 const { CATS, LIST } = require('../../../data/gameAchievements')
 
 const SUBS = [
@@ -14,11 +15,6 @@ const STATES = [
   { k: 'done', n: '已完成' },
   { k: 'todo', n: '未完成' }
 ]
-
-function fmtDate (ts) {
-  const d = new Date(ts)
-  return (d.getMonth() + 1) + '/' + d.getDate()
-}
 
 Page({
   data: {
@@ -55,7 +51,7 @@ Page({
     const doneN = LIST.filter(a => done[a.id]).length
     // 最近达成（按时间倒序取 3）
     const recent = LIST
-      .map(a => a.id && done[a.id] ? { n: a.n, date: fmtDate(done[a.id]), ts: done[a.id] } : null)
+      .map(a => a.id && done[a.id] ? { n: a.n, date: fmt.fmtDateShort(done[a.id]), ts: done[a.id] } : null)
       .filter(Boolean)
       .sort((x, y) => y.ts - x.ts)
       .slice(0, 3)
@@ -79,7 +75,7 @@ Page({
       list: list.map(a => ({
         id: a.id, n: a.n, en: a.en, d: a.d, tip: a.tip || '',
         catN: CATS[a.cat].n, catIcon: CATS[a.cat].icon, ver: a.ver,
-        done: !!done[a.id], date: done[a.id] ? fmtDate(done[a.id]) : ''
+        done: !!done[a.id], date: done[a.id] ? fmt.fmtDateShort(done[a.id]) : ''
       })),
       done: doneN,
       pct: Math.round(doneN / LIST.length * 100),

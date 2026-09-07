@@ -1,6 +1,7 @@
 // 图鉴页：搜索联想 + 筛选 + 瀑布流卡片 + 半屏详情弹窗 + 收藏
 // 性能：分页渲染（滚动增量加载）、图标传 artId 字符串、onShow 脏检查
 const dex = require('../../utils/dex')
+const fmt = require('../../utils/fmt')
 const store = require('../../utils/store')
 const { startClock } = require('../../utils/clock')
 
@@ -17,12 +18,6 @@ function starsOf (e) {
   const r = e.type === 'boss' ? 9 : (e.rarity || 0)
   const n = Math.min(5, Math.max(1, Math.ceil((r + 1) / 2)))
   return { n, on: '★★★★★'.slice(0, n), off: '★★★★★'.slice(0, 5 - n) }
-}
-
-function fmtClock (d) {
-  const h = String(d.getHours()).padStart(2, '0')
-  const m = String(d.getMinutes()).padStart(2, '0')
-  return h + ':' + m
 }
 
 Page({
@@ -49,10 +44,10 @@ Page({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
       navTop: app.globalData.navTop || 64,
       themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
-      clock: fmtClock(new Date())
+      clock: fmt.fmtClock(new Date())
     })
     // 整分钟对齐刷新右上角时钟（与其它 Tab 页同相位，跨分钟即跳变）
-    this._timer = startClock(() => this.setData({ clock: fmtClock(new Date()) }))
+    this._timer = startClock(() => this.setData({ clock: fmt.fmtClock(new Date()) }))
     this.loadRecents()
   },
 
@@ -63,7 +58,7 @@ Page({
   onShow () {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().init(1)
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '', clock: fmtClock(new Date()) })
+    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '', clock: fmt.fmtClock(new Date()) })
     if (app.globalData.pendingCodex) {
       let { tab } = app.globalData.pendingCodex
       app.globalData.pendingCodex = null

@@ -1,11 +1,7 @@
 // 消息中心：系统消息 / 更新公告列表（进入即标记已读）
 const store = require('../../utils/store')
+const fmt = require('../../utils/fmt')
 const remoteMsg = require('../../utils/remote-msg')
-
-function fmtDate (ts) {
-  const d = new Date(ts)
-  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0')
-}
 
 Page({
   data: {
@@ -34,7 +30,7 @@ Page({
   loadMsgs () {
     const render = list => {
       const lastRead = store.getMsgRead()
-      const rows = list.map(m => ({ ...m, date: fmtDate(m.ts), unread: m.ts > lastRead }))
+      const rows = list.map(m => ({ ...m, date: fmt.fmtDateIso(m.ts), unread: m.ts > lastRead }))
       this.setData({ list: rows, unread: rows.filter(r => r.unread).length, msgSrc: list.src || 'builtin' })
       // 标记全部已读（晚于当前时间的新消息到来时会重新出现红点）
       store.setMsgRead(Date.now())

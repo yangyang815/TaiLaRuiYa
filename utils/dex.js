@@ -456,6 +456,12 @@ function hotToday (count) {
 
 /* 今日热门：按分类过滤（all | item | boss | strategy） */
 // 热门搜索词：编辑推荐 + 今日热榜条目名/攻略名（每日轮换，两处搜索入口共用）
+// 安全获取：hotWords 异常/未定义时回退静态热词（防基础库/缓存差异导致页面崩溃）
+function hotWordsSafe () {
+  try { return typeof hotWords === 'function' ? hotWords() : HOT_WORDS.slice(0, 14) }
+  catch (e) { return HOT_WORDS.slice(0, 14) }
+}
+
 function hotWords (n) {
   const out = HOT_WORDS.slice()
   hotByCat(6).forEach(h => { if (out.indexOf(h.name) < 0) out.push(h.name) })
@@ -682,7 +688,7 @@ function recipeSearch (kw) {
 module.exports = {
   ALL, byId, CATS, strats, BANNERS: strats.BANNERS,
   search, searchStrats, hotToday, hotDate, hotByCat, hotStrats, hotTrend, hotStratTrend,
-  HOT_WORDS, weaponRank, aliasOf, linkify, hotWords,
+  HOT_WORDS, weaponRank, aliasOf, linkify, hotWords, hotWordsSafe,
   go, lookup, buildTree, missingList, recipeSearch,
   RARITY, ARTS, R, itemBaseStats, SUB_TAGS
 }
