@@ -76,6 +76,29 @@
         <text class="sp-go">›</text>
       </view>
     </block>
+    <block wx:if="{{searchPanel.fishingHits.length}}">
+      <view class="sp-label">钓鱼图鉴</view>
+      <view class="sp-row tappable" wx:for="{{searchPanel.fishingHits}}" wx:key="id"
+        bindtap="onPanelFish" data-kw="{{item.name}}">
+        <text class="sp-emoji">{{item.kind === 'quest' ? '🎣' : (item.kind === 'food' ? '🐟' : (item.kind === 'gear' ? '🧪' : (item.kind === 'bait' ? '🐛' : '📦')))}}</text>
+        <view class="col flex-1">
+          <text class="sp-name">{{item.name}}</text>
+          <text class="sp-sub px" wx:if="{{item.info}}">{{item.info}}</text>
+        </view>
+        <text class="sp-tag">{{item.kindN}}</text>
+        <text class="sp-go">›</text>
+      </view>
+    </block>
+    <block wx:if="{{searchPanel.guideHits.length}}">
+      <view class="sp-label">Boss 攻略清单</view>
+      <view class="sp-row tappable" wx:for="{{searchPanel.guideHits}}" wx:key="id"
+        bindtap="onPanelGuide" data-id="{{item.id}}">
+        <text class="sp-emoji">👹</text>
+        <text class="sp-name flex-1">{{item.name}}</text>
+        <text class="sp-tag">攻略</text>
+        <text class="sp-go">›</text>
+      </view>
+    </block>
     <block wx:if="{{searchPanel.strats.length}}">
       <view class="sp-label">相关攻略</view>
       <view class="sp-row tappable" wx:for="{{searchPanel.strats}}" wx:key="id"

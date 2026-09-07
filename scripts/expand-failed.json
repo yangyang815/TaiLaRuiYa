@@ -1,0 +1,17 @@
+[
+  {
+    "id": "iron_skin_potion",
+    "name": "铁皮药水",
+    "en": "Iron Skin Potion",
+    "cat": "potion",
+    "sub": "",
+    "rarity": 1,
+    "stats": [
+      [
+        "效果",
+        "防御 +8（5 分钟）"
+      ]
+    ],
+    "obtain": "摆放的瓶子：瓶装水 + 太阳花 + 铁/铅矿"
+  }
+]

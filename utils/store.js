@@ -269,6 +269,47 @@ function setMsgRead (ts) {
   set(K.msgRead, ts || Date.now())
 }
 
+/* ---------- 存档导出 / 导入（跨设备迁移） ---------- */
+// 纳入存档的键（主题与数据版本也在内，导入后自动应用）
+const SAVE_KEYS = ['fav', 'recent', 'boss', 'checks', 'gachv', 'fish', 'build',
+  'career', 'grid', 'profile', 'flags', 'msgRead', 'ver', 'theme', 'stats', 'hist']
+const SAVE_TAG = 'terra-handbook-save'
+const SAVE_VER = 1
+
+// 导出全部进度为可序列化对象（空值跳过）
+function exportAll () {
+  const data = {}
+  SAVE_KEYS.forEach(k => {
+    let v
+    try { v = wx.getStorageSync(K[k]) } catch (e) { return }
+    if (v !== '' && v !== undefined && v !== null) data[k] = v
+  })
+  return {
+    app: SAVE_TAG,
+    ver: SAVE_VER,
+    time: new Date().toLocaleString('zh-CN', { hour12: false }),
+    data
+  }
+}
+
+// 校验导入内容（不写入）：{ok, err, keys, time}
+function checkSave (obj) {
+  if (!obj || typeof obj !== 'object' || obj.app !== SAVE_TAG || !obj.data) {
+    return { ok: false, err: '不是本小程序的存档' }
+  }
+  const keys = SAVE_KEYS.filter(k => obj.data[k] !== undefined)
+  if (!keys.length) return { ok: false, err: '存档内容为空' }
+  return { ok: true, keys, time: obj.time || '' }
+}
+
+// 应用导入（覆盖写入；仅写入存档中存在的键）
+function applySave (obj) {
+  const chk = checkSave(obj)
+  if (!chk.ok) return chk
+  chk.keys.forEach(k => set(K[k], obj.data[k]))
+  return chk
+}
+
 module.exports = {
   getFavs, isFav, toggleFav,
   getTheme, setTheme, getVersion, setVersion,
@@ -282,6 +323,7 @@ module.exports = {
   getCareer, setCareerCls, toggleCareerStage,
   getFlags, markFlag,
   getGrid, tapGrid, saveGridOrder, resetGridOrder, toggleGridOpen,
+  exportAll, checkSave, applySave,
   getCmts, addCmt, delCmt,
   getProfile, setProfile,
   getStats, trackOpen, getLevel,

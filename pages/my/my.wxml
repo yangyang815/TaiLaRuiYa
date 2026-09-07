@@ -122,6 +122,17 @@
   </view>
 
   <view class="menu card">
+    <view class="m-row tappable" bindtap="onExportSave">
+      <text class="m-icon">📤</text>
+      <text class="m-n flex-1">导出存档</text>
+      <text class="m-v">复制 / 二维码</text>
+    </view>
+    <view class="m-row tappable" bindtap="toggleImport">
+      <text class="m-icon">📥</text>
+      <text class="m-n flex-1">导入存档</text>
+      <text class="m-v">粘贴 / 扫码</text>
+      <text class="m-arrow">›</text>
+    </view>
     <view class="m-row tappable" bindtap="resetData">
       <text class="m-icon">📊</text>
       <text class="m-n flex-1">重置数据</text>
@@ -132,6 +143,17 @@
       <text class="m-n flex-1">关于与反馈</text>
       <text class="m-v">v1.0.0</text>
       <text class="m-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 导入面板 -->
+  <view class="import-panel card" wx:if="{{showImport}}">
+    <text class="ip-t">粘贴另一台设备导出的存档 JSON，或扫描其上的存档二维码</text>
+    <textarea class="ip-area" value="{{importText}}" bindinput="onImportText"
+      maxlength="-1" placeholder="在此粘贴存档内容…" placeholder-class="ip-ph" />
+    <view class="ip-btns">
+      <view class="ip-btn tappable" bindtap="onScanImport">📷 扫码导入</view>
+      <view class="ip-btn primary tappable" bindtap="onImportConfirm">✓ 确认导入</view>
     </view>
   </view>
 
@@ -164,6 +186,16 @@
       <text class="ab-line">· 反馈建议：在各大应用市场或微信"关于"中留言</text>
       <view class="btn-gold ab-btn" bindtap="closeAbout">继续冒险</view>
     </view>
+  </view>
+
+  <!-- 存档二维码 -->
+  <view class="mask" wx:if="{{qrShow}}" bindtap="closeQr" />
+  <view class="sheet" wx:if="{{qrShow}}" catchtap="noop">
+    <view class="sheet-handle" />
+    <text class="qr-t px">SAVE QR · 存档二维码</text>
+    <canvas type="2d" id="saveQr" class="qr-canvas"></canvas>
+    <text class="qr-hint">新设备登录本小程序 → 我的 → 导入存档 → 扫码导入</text>
+    <view class="btn-gold qr-btn" bindtap="closeQr">完成</view>
   </view>
 
   <!-- 分享海报（冒险者名片） -->

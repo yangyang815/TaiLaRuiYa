@@ -87,6 +87,30 @@ function search (kw) {
   }))
 }
 
+/* 全局搜索：钓鱼全内容检索（任务鱼 / 可钓获 / 钓具药水 / 鱼饵 / 宝匣） */
+function searchAll (kw) {
+  if (!kw) return []
+  const k = kw.toLowerCase()
+  const pools = [
+    { items: F.QUEST_FISH, kind: 'quest', kindN: '任务鱼' },
+    { items: F.FOOD_FISH, kind: 'food', kindN: '可钓获' },
+    { items: F.GEAR, kind: 'gear', kindN: '钓具药水' },
+    { items: F.BAITS, kind: 'bait', kindN: '鱼饵' },
+    { items: F.CRATES, kind: 'crate', kindN: '宝匣' }
+  ]
+  const out = []
+  pools.forEach(p => p.items.forEach(x => {
+    const hay = (x.name + ' ' + (x.en || '') + ' ' + (x.note || x.source || x.loot || '')).toLowerCase()
+    if (x.name.indexOf(kw) >= 0 || hay.indexOf(k) >= 0) {
+      out.push({
+        id: x.id, kind: p.kind, kindN: p.kindN, name: x.name, en: x.en || '',
+        info: (F.BIOME_N[x.biome] ? F.BIOME_N[x.biome] + ' · ' : '') + (x.note || x.source || x.loot || '')
+      })
+    }
+  }))
+  return out
+}
+
 /**
  * 收集进度统计
  */
@@ -102,4 +126,4 @@ function progress (done) {
   }
 }
 
-module.exports = { today, dailyQuest, guide, search, progress, KIND_N, ALL_FISH }
+module.exports = { today, dailyQuest, guide, search, searchAll, progress, KIND_N, ALL_FISH }

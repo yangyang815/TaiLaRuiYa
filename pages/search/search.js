@@ -2,6 +2,8 @@
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
 const acq = require('../../utils/acq')
+const fishUtil = require('../../utils/fishing')
+const bossGuides = require('../../data/bossGuides')
 
 // 热门词安全获取：开发者工具编译缓存未更新（旧 dex.js 无 hotWords）时回退静态热词
 function hotWordsSafe () {
@@ -40,7 +42,7 @@ Page({
   onKw (e) {
     const kw = e.detail.value
     this.setData({ kw })
-    if (!kw.trim()) { this.setData({ results: [], stratHits: [], recipeHits: [] }); return }
+    if (!kw.trim()) { this.setData({ results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [] }); return }
     const results = dex.search(kw).slice(0, 12).map(x => ({
       id: x.id, name: x.name, en: x.en, type: x.type, artId: x.artId, glow: x.glow,
       tagsTxt: (x.tags || []).slice(0, 2).join(' · '),
@@ -48,7 +50,11 @@ Page({
     }))
     const stratHits = dex.searchStrats(kw).map(s => ({ id: s.id, title: s.title }))
     const recipeHits = dex.recipeSearch(kw).slice(0, 4).map(r => ({ id: r.id, name: r.name, artId: r.artId }))
-    this.setData({ results, stratHits, recipeHits })
+    const fishingHits = fishUtil.searchAll(kw).slice(0, 5).map(x => ({
+      id: x.id, kind: x.kind, kindN: x.kindN, name: x.name, info: x.info || ''
+    }))
+    const guideHits = bossGuides.searchGuides(kw).slice(0, 4)
+    this.setData({ results, stratHits, recipeHits, fishingHits, guideHits })
   },
 
   confirmSearch () {
@@ -71,13 +77,21 @@ Page({
     this.confirmSearch()
     wx.navigateTo({ url: '/pages/strategy/strategy?id=' + e.currentTarget.dataset.id })
   },
+  onFish (e) {
+    this.confirmSearch()
+    wx.navigateTo({ url: '/pages/fishing/fishing?kw=' + encodeURIComponent(e.currentTarget.dataset.kw) })
+  },
+  onGuide (e) {
+    this.confirmSearch()
+    wx.navigateTo({ url: '/pages/bossguide/detail?id=' + e.currentTarget.dataset.id })
+  },
   onWord (e) {
     const w = e.currentTarget.dataset.w
     this.setData({ kw: w })
     this.onKw({ detail: { value: w } })
   },
   clearKw () {
-    this.setData({ kw: '', results: [], stratHits: [], recipeHits: [] })
+    this.setData({ kw: '', results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [] })
   },
   clearHist () {
     store.clearHist()

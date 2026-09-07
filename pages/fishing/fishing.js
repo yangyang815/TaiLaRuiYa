@@ -193,7 +193,7 @@ Page({
   },
   _clockTimer: null,
 
-  onLoad () {
+  onLoad (opts) {
     const app = getApp()
     const now = new Date()
     const hour = now.getHours()
@@ -204,6 +204,8 @@ Page({
       clock: (hour < 10 ? '0' + hour : '' + hour) + ':00',
       timeNight: hour >= 19 || hour < 5
     })
+    // 全局搜索"钓鱼图鉴"结果直达：带关键词进入即出筛选结果
+    if (opts && opts.kw) this.setData({ kw: decodeURIComponent(opts.kw) })
     this.refresh()
     // 每分钟校准时钟（推荐区的时间提示保持准确）
     this._clockTimer = setInterval(() => {

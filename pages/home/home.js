@@ -4,6 +4,8 @@ const store = require('../../utils/store')
 const achv = require('../../utils/achievements')
 const msgData = require('../../data/messages')
 const { startClock } = require('../../utils/clock')
+const fishUtil = require('../../utils/fishing')
+const bossGuides = require('../../data/bossGuides')
 
 const GRID = [
   { k: 'boss', n: 'Boss大全', art: 'boss_eye_cthulhu', go: 'list?type=boss' },
@@ -341,7 +343,9 @@ Page({
     }))
     const strats = dex.searchStrats(kw).slice(0, 3).map(s => ({ id: s.id, title: s.title }))
     const recipes = dex.recipeSearch(kw).slice(0, 3).map(r => ({ id: r.id, name: r.name, artId: r.artId }))
-    this.setData({ searchPanel: { items, strats, recipes, total: hits.length } })
+    const fishingHits = fishUtil.searchAll(kw).slice(0, 3)
+    const guideHits = bossGuides.searchGuides(kw).slice(0, 3)
+    this.setData({ searchPanel: { items, strats, recipes, fishingHits, guideHits, total: hits.length } })
   },
   onSearchFocus () {
     if (this._blurTimer) { clearTimeout(this._blurTimer); this._blurTimer = null }
@@ -378,6 +382,20 @@ Page({
     const app = getApp()
     app.globalData.pendingCraft = id
     wx.switchTab({ url: '/pages/craft/craft' })
+  },
+  // 钓鱼结果 → 钓鱼助手（带关键词直达筛选结果）
+  onPanelFish (e) {
+    if (this.data.searchKw.trim()) store.pushHist(this.data.searchKw.trim())
+    const kw = e.currentTarget.dataset.kw
+    this._closePanel()
+    wx.navigateTo({ url: '/pages/fishing/fishing?kw=' + encodeURIComponent(kw) })
+  },
+  // Boss 攻略清单 → 深度攻略页
+  onPanelGuide (e) {
+    if (this.data.searchKw.trim()) store.pushHist(this.data.searchKw.trim())
+    const id = e.currentTarget.dataset.id
+    this._closePanel()
+    wx.navigateTo({ url: '/pages/bossguide/detail?id=' + id })
   },
   // 面板中的历史/热门词：填入关键词即时搜索
   onPanelWord (e) {

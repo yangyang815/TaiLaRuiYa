@@ -3,8 +3,33 @@
 // prep 条目: { id, cat(分类), icon, name, desc, link(可选，跳图鉴) }
 const CATS = { '场地': '🛠', '战士': '⚔️', '射手': '🏹', '法师': '🔮', '召唤师': '🪄', '盔甲': '🛡', '饰品': '💍', '药水': '🧪', '技巧': '📌' }
 
+/* 全局搜索：Boss 攻略清单检索（匹配 Boss 名 / 召唤方式 / 准备与战利品条目） */
+function searchGuides (kw) {
+  if (!kw) return []
+  const dex = require('../utils/dex') // 懒加载，避免数据层循环依赖
+  const GUIDES = module.exports.GUIDES
+  const k = kw.toLowerCase()
+  const out = []
+  Object.keys(GUIDES).forEach(id => {
+    const g = GUIDES[id]
+    const e = dex.byId[id]
+    const name = (e && e.name) || id
+    let hay = name + ' ' + (g.summon ? (g.summon.condition + ' ' + (g.summon.material || '')) : '')
+    ;[].concat(g.prep || [], g.post || []).forEach(it => { hay += ' ' + (it.name || '') + ' ' + (it.desc || '') })
+    hay = hay.toLowerCase()
+    if (hay.indexOf(kw) >= 0 || hay.indexOf(k) >= 0) {
+      out.push({
+        id, name, order: g.order,
+        tip: (g.summon && (g.summon.tip || g.summon.condition)) || ''
+      })
+    }
+  })
+  return out.sort((a, b) => a.order - b.order)
+}
+
 module.exports = {
   CATS,
+  searchGuides,
   GUIDES: {
     /* ================= 困难模式前 ================= */
     king_slime: {

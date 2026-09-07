@@ -50,7 +50,27 @@
         <text class="st-go">›</text>
       </view>
 
-      <view class="empty" wx:if="{{!results.length && !stratHits.length && !recipeHits.length}}">
+      <view class="sec-title" wx:if="{{fishingHits.length}}"><view class="diamond" /><text class="t">钓鱼图鉴</text></view>
+      <view class="r-item card tappable" wx:for="{{fishingHits}}" wx:key="id" bindtap="onFish" data-kw="{{item.name}}">
+        <view class="r-art">{{item.kind === 'quest' ? '🎣' : (item.kind === 'food' ? '🐟' : (item.kind === 'gear' ? '🧪' : (item.kind === 'bait' ? '🐛' : '📦')))}}</view>
+        <view class="col flex-1">
+          <view class="r-line">
+            <text class="r-name">{{item.name}}</text>
+            <text class="r-tags px">{{item.kindN}}</text>
+          </view>
+          <text class="r-acq" wx:if="{{item.info}}">{{item.info}}</text>
+        </view>
+        <text class="tag tag-item">钓鱼</text>
+      </view>
+
+      <view class="sec-title" wx:if="{{guideHits.length}}"><view class="diamond" /><text class="t">Boss 攻略清单</text></view>
+      <view class="st-item card tappable" wx:for="{{guideHits}}" wx:key="id" bindtap="onGuide" data-id="{{item.id}}">
+        <view class="st-diamond" />
+        <text class="st-t flex-1">👹 {{item.name}} · 攻略清单</text>
+        <text class="st-go">›</text>
+      </view>
+
+      <view class="empty" wx:if="{{!results.length && !stratHits.length && !recipeHits.length && !fishingHits.length && !guideHits.length}}">
         <view class="e-icon">🌑</view>
         <text>没有找到「{{kw}}」，换个关键词试试</text>
       </view>
