@@ -71,11 +71,18 @@ function refresh (onUpdate) {
             id: d.id || d._id, tag: d.tag, icon: d.icon || '📢',
             title: d.title, body: d.body || '', ts: Number(d.ts) || 0
           })).filter(x => x.title)
-          if (list.length) settle(list)
-          else tryMirror(0)
+          if (list.length) {
+            console.log('[remote-msg] 云通道成功:', list.length, '条')
+            settle(list)
+          } else {
+            // 空结果多半是集合权限不足（默认"仅创建者可读写"读不到导入数据）或未导入
+            console.warn('[remote-msg] 云集合为空：请检查集合权限是否"所有用户可读"、数据是否已导入')
+            tryMirror(0)
+          }
         })
-        .catch(() => {
+        .catch(err => {
           clearTimeout(deadline)
+          console.warn('[remote-msg] 云通道失败:', (err && (err.errMsg || err.errCode || err.message)) || err)
           settled || tryMirror(0)
         })
       return
