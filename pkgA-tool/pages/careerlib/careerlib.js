@@ -60,5 +60,11 @@ Page({
     wx.navigateTo({ url: '/pages/strategy/strategy?id=' + id })
   },
 
-  back () { wx.navigateBack() }
+  back () { wx.navigateBack() },
+  onShareAppMessage () {
+    return { title: '泰拉瑞亚 · 职业资料库（攻略技巧一页通）', path: '/pkgA-tool/pages/careerlib/careerlib' }
+  },
+  onShareTimeline () {
+    return { title: '泰拉瑞亚 · 职业资料库（攻略技巧一页通）' }
+  }
 })

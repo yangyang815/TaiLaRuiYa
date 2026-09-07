@@ -66,5 +66,11 @@ Page({
     wx.navigateTo({ url: '/pages/strategy/strategy?id=' + id })
   },
 
-  back () { wx.navigateBack() }
+  back () { wx.navigateBack() },
+  onShareAppMessage () {
+    return { title: '泰拉瑞亚 · 职业养成路线（四职业全阶段打卡）', path: '/pkgA-tool/pages/career/career' }
+  },
+  onShareTimeline () {
+    return { title: '泰拉瑞亚 · 职业养成路线（四职业全阶段打卡）' }
+  }
 })

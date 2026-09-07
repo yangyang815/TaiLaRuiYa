@@ -43,5 +43,11 @@ Page({
     remoteMsg.refresh(list => render(list))  // 远程到达后覆盖显示
   },
 
-  goBack () { wx.navigateBack() }
+  goBack () { wx.navigateBack() },
+  onShareAppMessage () {
+    return { title: '泰拉瑞亚手册 · 最新动态与更新公告', path: '/pages/messages/messages' }
+  },
+  onShareTimeline () {
+    return { title: '泰拉瑞亚手册 · 最新动态与更新公告' }
+  }
 })

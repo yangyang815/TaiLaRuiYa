@@ -74,6 +74,6 @@ Page({
   back () { wx.navigateBack() },
 
   onShareAppMessage () {
-    return { title: '泰拉瑞亚 · ' + this.data.clsName + '职业专题', path: '/pkgA-tool/pages/career/career' }
+    return { title: '泰拉瑞亚 · ' + this.data.clsName + '职业专题', path: '/pkgA-tool/pages/careerclass/careerclass?cls=' + this.data.cls }
   }
 })

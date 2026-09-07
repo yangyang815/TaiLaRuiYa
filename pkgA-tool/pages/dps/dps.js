@@ -202,5 +202,11 @@ Page({
       accSel, buffsSel: s.buffs, targetId: s.targetId, targetIdx,
       mode: s.mode, customDef: s.customDef || 0
     })
+  },
+  onShareAppMessage () {
+    return { title: '泰拉瑞亚 · DPS 计算器（配装伤害一目了然）', path: '/pkgA-tool/pages/dps/dps' }
+  },
+  onShareTimeline () {
+    return { title: '泰拉瑞亚 · DPS 计算器（配装伤害一目了然）' }
   }
 })

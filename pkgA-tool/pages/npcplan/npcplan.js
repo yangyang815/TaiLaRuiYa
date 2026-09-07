@@ -46,5 +46,11 @@ Page({
     const kw = (e.detail.value || '').trim()
     const prefs = kw ? this._prefs.filter(p => p.name.indexOf(kw) >= 0) : this._prefs
     this.setData({ prefKw: kw, prefs })
+  },
+  onShareAppMessage () {
+    return { title: '泰拉瑞亚 · NPC 规划器（晶塔摆放一步到位）', path: '/pkgA-tool/pages/npcplan/npcplan' }
+  },
+  onShareTimeline () {
+    return { title: '泰拉瑞亚 · NPC 规划器（晶塔摆放一步到位）' }
   }
 })

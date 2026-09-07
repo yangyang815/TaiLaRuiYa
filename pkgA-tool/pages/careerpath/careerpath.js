@@ -81,5 +81,11 @@ Page({
     wx.navigateTo({ url: '/pkgA-tool/pages/careerlib/careerlib' })
   },
 
-  back () { wx.navigateBack() }
+  back () { wx.navigateBack() },
+  onShareAppMessage () {
+    return { title: '泰拉瑞亚 · ' + this.data.clsName + '养成路线（8 阶段打卡）', path: '/pkgA-tool/pages/careerpath/careerpath' }
+  },
+  onShareTimeline () {
+    return { title: '泰拉瑞亚 · ' + this.data.clsName + '养成路线（8 阶段打卡）' }
+  }
 })
