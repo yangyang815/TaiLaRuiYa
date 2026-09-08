@@ -1,0 +1,62 @@
+<view class="page-root {{themeClass}} cat-root">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">全物品图鉴 · 卷{{vol}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 分卷导航 -->
+  <scroll-view scroll-x class="vol-nav">
+    <view class="v-chip tappable {{item.root === '__ROOT__' ? 'on' : ''}}" wx:for="{{nav}}" wx:key="root"
+      bindtap="goVol" data-root="{{item.root}}">卷{{item.vol}} · {{item.cats}}</view>
+  </scroll-view>
+
+  <!-- 搜索 -->
+  <view class="search-bar">
+    <text class="s-ico">🔍</text>
+    <input class="s-input" value="{{kw}}" bindinput="onKw" placeholder="搜索本卷中文名 / 英文名" placeholder-class="s-ph" confirm-type="search" />
+  </view>
+  <view class="stat px">本卷 {{total}} 条（{{cats}}） · {{kw ? '命中 ' + hitCount : '显示 ' + shown + ' / ' + hitCount}}</view>
+
+  <!-- 列表 -->
+  <view class="rows" wx:if="{{rows.length}}">
+    <view class="row card tappable" wx:for="{{rows}}" wx:key="index" bindtap="onRow" data-i="{{index}}">
+      <image class="r-img" src="{{item.sprite}}" mode="aspectFit" lazy-load />
+      <view class="col flex-1">
+        <view class="r-line">
+          <text class="r-n">{{item.n}}</text>
+          <text class="r-c px">{{item.c}}</text>
+        </view>
+        <text class="r-en px">{{item.en}}</text>
+      </view>
+      <text class="r-go">›</text>
+    </view>
+    <view class="more tappable" wx:if="{{shown < hitCount}}" bindtap="more">加载更多（{{hitCount - shown}} 条未显示）</view>
+  </view>
+  <view class="empty" wx:else><text class="px">本卷没有匹配「{{kw}}」的条目</text></view>
+
+  <!-- 详情 -->
+  <view class="mask" wx:if="{{detail}}" bindtap="closeDetail" />
+  <view class="sheet" wx:if="{{detail}}" catchtap="noop">
+    <view class="sheet-handle" />
+    <view class="d-head">
+      <image class="d-img" src="{{detail.sprite}}" mode="aspectFit" />
+      <view class="col flex-1">
+        <text class="d-n">{{detail.n}}</text>
+        <text class="d-en px">{{detail.en}}</text>
+        <text class="d-c px">{{detail.c}} · 稀有度 {{detail.r || '-'}}</text>
+      </view>
+    </view>
+    <view class="d-body">
+      <view class="d-row" wx:if="{{detail.d}}"><text class="d-k">伤害</text><text class="flex-1">{{detail.d}}{{detail.dt ? '（' + detail.dt + '）' : ''}}</text></view>
+      <view class="d-row" wx:if="{{detail.df}}"><text class="d-k">防御</text><text class="flex-1">{{detail.df}}</text></view>
+      <view class="d-row" wx:if="{{detail.t}}"><text class="d-k">说明</text><text class="flex-1">{{detail.t}}</text></view>
+      <view class="d-row" wx:if="{{detail.s}}"><text class="d-k">工具/特殊</text><text class="flex-1">{{detail.s}}</text></view>
+      <view class="d-row" wx:if="{{detail.hm}}"><text class="d-k">阶段</text><text class="flex-1">困难模式</text></view>
+      <view class="d-row"><text class="d-k">英文名</text><text class="flex-1">{{detail.en}}</text></view>
+    </view>
+    <view class="btn-gold d-btn" bindtap="closeDetail">关闭</view>
+  </view>
+
+</view>

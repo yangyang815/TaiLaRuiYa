@@ -77,6 +77,20 @@
         "pages/biomes/biomes",
         "pages/prefixes/prefixes"
       ]
+    },
+    {
+      "root": "pkg-cat-1",
+      "name": "cat1",
+      "pages": [
+        "pages/index/index"
+      ]
+    },
+    {
+      "root": "pkg-cat-2",
+      "name": "cat2",
+      "pages": [
+        "pages/index/index"
+      ]
     }
   ],
   "preloadRule": {

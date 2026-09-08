@@ -23,8 +23,9 @@ const GRID = [
   { k: 'build', n: '建造指南', art: 'workbench', url: '/pkgA-tool/pages/build/build' }
 ]
 
-// 特色入口：与手册入口同款卡片结构，合并进宫格（共 16 个）
+// 特色入口：与手册入口同款卡片结构，合并进宫格（共 17 个）
 const ENTRIES = [
+  { k: 'catalog', n: '全物品图鉴', art: 'stone', url: '/pkg-cat-1/pages/index/index' },
   { k: 'secrets', n: '隐藏知识库', art: 'gel_blue', url: '/pkgB-guide/pages/secrets/secrets' },
   { k: 'biomes', n: '生物群系', art: 'jungle_spore', url: '/pkgB-guide/pages/biomes/biomes' },
   { k: 'seeds', n: '种子目录', art: 'daybloom_herb', url: '/pages/seeds/seeds' },
