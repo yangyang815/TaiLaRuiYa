@@ -83,7 +83,7 @@ const CATS = {
   item: [
     { k: '', n: '全部' }, { k: 'weapon', n: '武器' }, { k: 'tool', n: '工具' },
     { k: 'armor', n: '盔甲' }, { k: 'accessory', n: '饰品' }, { k: 'material', n: '材料' },
-    { k: 'potion', n: '药水' }, { k: 'mount', n: '坐骑' }, { k: 'pet', n: '宠物' },
+    { k: 'potion', n: '药水' }, { k: 'mount', n: '坐骑' }, { k: 'pet', n: '宠物' }, { k: 'seed', n: '种子' }
   ],
   mon: [{ k: '', n: '全部' }, { k: 'pre', n: '困难前' }, { k: 'post', n: '困难模式' }, { k: 'event', n: '事件' }],
   boss: [

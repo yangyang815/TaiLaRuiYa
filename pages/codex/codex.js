@@ -4,6 +4,17 @@ const dex = require('../../utils/dex')
 const fmt = require('../../utils/fmt')
 const store = require('../../utils/store')
 const { startClock } = require('../../utils/clock')
+const plantseeds = require('../../data/plantseeds')
+
+// 种植种子 → 图鉴行伪条目（type: plantseed，点击走站内详情卡）
+const PS_ENTRIES = plantseeds.map(p => ({
+  id: p.id, name: p.name, en: p.en, type: 'plantseed',
+  artId: p.art, glow: p.color, rarity: 0,
+  raw: { cat: p.type, herbName: p.herbName, bloom: p.bloom, found: p.found,
+    desc: p.desc, bloomDetail: p.bloomDetail, potions: p.potions || [] }
+}))
+const PS_BY_ID = {}
+PS_ENTRIES.forEach(e => { PS_BY_ID[e.id] = e })
 
 const TABS = [
   { k: 'all', n: '全部' }, { k: 'item', n: '物品' }, { k: 'mon', n: '敌怪' }, { k: 'boss', n: 'Boss' }, { k: 'npc', n: 'NPC' }
@@ -95,16 +106,24 @@ Page({
       starsOn: st.on, starsOff: st.off,
       subName: e.type === 'mon' ? (e.raw.biome || '')
         : (e.type === 'seed' ? ('种子 ' + (e.raw.code || ''))
+        : (e.type === 'plantseed' ? (e.raw.cat === 'herb' ? '药草种子' : '环境草种')
         : (e.type === 'npc' ? (NGRP[e.raw.ngrp] || '城镇NPC')
-        : (e.raw.cat === 'weapon' ? '武器 · ' + (e.raw.sub || '') : '')))
+        : (e.raw.cat === 'weapon' ? '武器 · ' + (e.raw.sub || '') : ''))))
     }
   },
 
   refresh () {
     const { tab, cat, letter } = this.data
-    let list = dex.ALL.filter(e => e.type !== 'seed') // 世界种子已独立成"特殊种子"页，图鉴不重复收录
-    if (tab !== 'all') list = list.filter(e => e.type === tab)
-    if (cat) list = list.filter(e => e.raw.cat === cat || e.type === cat || ((tab === 'boss' || tab === 'mon') && e.raw.tier === cat) || (tab === 'npc' && e.raw.ngrp === cat))
+    // 种子 = 种植种子（药草/环境草种），与其他分类一样在图鉴页内筛选展示
+    const seedMode = tab === 'item' && cat === 'seed'
+    let list
+    if (seedMode) {
+      list = PS_ENTRIES.slice()
+    } else {
+      list = dex.ALL.filter(e => e.type !== 'seed') // 世界种子有独立"特殊种子"页，不进图览
+      if (tab !== 'all') list = list.filter(e => e.type === tab)
+      if (cat) list = list.filter(e => e.raw.cat === cat || e.type === cat || ((tab === 'boss' || tab === 'mon') && e.raw.tier === cat) || (tab === 'npc' && e.raw.ngrp === cat))
+    }
     if (letter) {
       if (letter === '#') list = list.filter(e => !/^[a-z]/i.test((e.en || '')[0] || ''))
       else list = list.filter(e => (e.en || '').toLowerCase().startsWith(letter.toLowerCase()))
@@ -112,7 +131,6 @@ Page({
     this._all = list
     this._sig = tab + '|' + cat + '|' + letter
     const cats = (dex.CATS[tab] || [{ k: '', n: '全部' }]).slice()
-    if (tab === 'item') cats.push({ k: 'seedbook', n: '🌱 种子目录' }) // 导航项：点击直达种子目录页
     this.setData({
       cats,
       list: list.slice(0, PAGE).map(e => this.fmt(e)),
@@ -133,7 +151,6 @@ Page({
   },
   onCat (e) {
     const k = e.currentTarget.dataset.k
-    if (k === 'seedbook') { wx.navigateTo({ url: '/pages/seeds/seeds' }); return } // 导航项：直达种子目录
     this.setData({ cat: this.data.cat === k ? '' : k })
     this.refresh()
   },
@@ -156,8 +173,26 @@ Page({
 
   onCardTap (e) {
     const id = e.currentTarget.dataset.id
-    const entry = dex.byId[id]
+    const entry = dex.byId[id] || PS_BY_ID[id]
     if (!entry) return
+    if (entry.type === 'plantseed') {
+      const r = entry.raw
+      this.setData({
+        sheet: {
+          id: entry.id, name: entry.name, en: entry.en, type: 'plantseed',
+          artId: entry.artId, glow: entry.glow, rarity: entry.rarity,
+          desc: r.desc,
+          stats: [['所属药草', r.herbName], ['开花时间', r.bloom], ['生长地点', r.found]],
+          obtainTitle: '种植要点',
+          obtain: r.bloomDetail || r.found,
+          obtainLinks: [],
+          use: r.potions && r.potions.length ? '可制作：' + r.potions.join('、') : '',
+          shop: [], shopNote: '', drops: [], phases: [], mechanics: [], exclusives: [], strategy: []
+        },
+        sheetFav: store.isFav(id)
+      })
+      return
+    }
     store.pushRecent(id, entry.type)
     const r = entry.raw
     const isBoss = entry.type === 'boss'
@@ -215,6 +250,7 @@ Page({
   sheetFavToggle () { this.onCardLong({ currentTarget: { dataset: { id: this.data.sheet.id } } }) },
   sheetFull () {
     const s = this.data.sheet
+    if (s.type === 'plantseed') return // 种植种子详情已完整展示在卡内
     wx.navigateTo({ url: '/pages/detail/detail?type=' + s.type + '&id=' + s.id })
   },
 

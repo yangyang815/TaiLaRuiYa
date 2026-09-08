@@ -42,7 +42,7 @@
           </view>
           <text class="sg-en px">{{item.en}}</text>
         </view>
-        <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : (item.type === 'seed' ? 'tag-seed' : (item.type === 'npc' ? 'tag-npc' : 'tag-item')))}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</text>
+        <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : (item.type === 'seed' ? 'tag-seed' : (item.type === 'npc' ? 'tag-npc' : 'tag-item')))}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' || item.type === 'plantseed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</text>
       </view>
     </view>
 
@@ -80,7 +80,7 @@
 
     <!-- 全部图鉴 -->
     <view class="sec-head">
-      <text class="sec-t">{{tab === 'all' ? '全部图鉴' : (tab === 'item' ? '物品' : (tab === 'mon' ? '敌怪' : 'Boss'))}}</text>
+      <text class="sec-t">{{tab === 'all' ? '全部图鉴' : (tab === 'item' ? '物品' : (tab === 'mon' ? '敌怪' : (tab === 'npc' ? 'NPC 图鉴' : 'Boss')))}}</text>
       <text class="sec-sub px">ALL</text>
     </view>
 
@@ -96,7 +96,7 @@
               <text class="m-en px" wx:if="{{item.en}}">{{item.en}}</text>
               <view class="m-stars"><text class="m-stars-on">{{item.starsOn}}</text><text class="m-stars-off">{{item.starsOff}}</text></view>
             </view>
-            <view class="m-type {{item.type}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</view>
+            <view class="m-type {{item.type}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' || item.type === 'plantseed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</view>
           </view>
         </block>
       </view>
@@ -111,7 +111,7 @@
               <text class="m-en px" wx:if="{{item.en}}">{{item.en}}</text>
               <view class="m-stars"><text class="m-stars-on">{{item.starsOn}}</text><text class="m-stars-off">{{item.starsOff}}</text></view>
             </view>
-            <view class="m-type {{item.type}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</view>
+            <view class="m-type {{item.type}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' || item.type === 'plantseed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</view>
           </view>
         </block>
       </view>
@@ -143,8 +143,8 @@
       <view class="col flex-1">
         <view class="row">
           <text class="sh-name">{{sheet.name}}</text>
-          <text class="tag {{sheet.type === 'boss' ? 'tag-boss' : (sheet.type === 'mon' ? 'tag-mon' : (sheet.type === 'seed' ? 'tag-seed' : (sheet.type === 'npc' ? 'tag-npc' : 'tag-item')))}} sh-tag">
-            {{sheet.type === 'boss' ? 'BOSS' : (sheet.type === 'mon' ? '敌怪' : (sheet.type === 'seed' ? '种子' : (sheet.type === 'npc' ? 'NPC' : '物品')))}}</text>
+          <text class="tag {{sheet.type === 'boss' ? 'tag-boss' : (sheet.type === 'mon' ? 'tag-mon' : (sheet.type === 'seed' || sheet.type === 'plantseed' ? 'tag-seed' : (sheet.type === 'npc' ? 'tag-npc' : 'tag-item')))}} sh-tag">
+            {{sheet.type === 'boss' ? 'BOSS' : (sheet.type === 'mon' ? '敌怪' : (sheet.type === 'seed' ? '种子' : (sheet.type === 'plantseed' ? '种子' : (sheet.type === 'npc' ? 'NPC' : '物品'))))}}</text>
         </view>
         <text class="sh-en px">{{sheet.en}}</text>
       </view>
@@ -231,7 +231,7 @@
 
     <view class="sh-btns safe-bottom">
       <view class="btn-ghost sh-btn" bindtap="sheetFavToggle">{{sheetFav ? '★ 已收藏' : '☆ 收藏'}}</view>
-      <view class="btn-gold sh-btn" bindtap="sheetFull">查看完整详情</view>
+      <view class="btn-gold sh-btn" wx:if="{{sheet.type !== 'plantseed'}}" bindtap="sheetFull">查看完整详情</view>
     </view>
   </view>
 
