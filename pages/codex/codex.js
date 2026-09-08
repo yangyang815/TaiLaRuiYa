@@ -219,6 +219,7 @@ Page({
   },
 
   goSearch () { wx.navigateTo({ url: '/pages/search/search' }) },
+  goSeedBook () { wx.navigateTo({ url: '/pages/seeds/seeds' }) },
 
   onShareAppMessage () {
     return { title: '泰拉瑞亚图鉴 · ' + this.data.total + ' 条条目一网打尽', path: '/pages/codex/codex' }

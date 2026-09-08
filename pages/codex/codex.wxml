@@ -122,6 +122,16 @@
       <text>未找到相关条目，试试其他关键词</text>
     </view>
 
+    <!-- 种子目录入口 -->
+    <view class="seed-entry card tappable" bindtap="goSeedBook">
+      <view class="se-art"><pixel-icon art-id="daybloom_herb" size="72" /></view>
+      <view class="col flex-1">
+        <text class="se-name">种子目录</text>
+        <text class="se-sub px">种植种子图鉴 · 作物与生长条件一览</text>
+      </view>
+      <text class="se-go">›</text>
+    </view>
+
     <!-- 字母索引 -->
     <view class="abc">
       <view class="abc-i {{letter === l ? 'on' : ''}}" wx:for="{{letters}}" wx:for-item="l" wx:key="*this"

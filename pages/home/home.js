@@ -28,7 +28,6 @@ const ENTRIES = [
   { k: 'catalog', n: '全物品图鉴', art: 'stone', url: '/pkg-cat-1/pages/index/index' },
   { k: 'secrets', n: '隐藏知识库', art: 'gel_blue', url: '/pkgB-guide/pages/secrets/secrets' },
   { k: 'biomes', n: '生物群系', art: 'jungle_spore', url: '/pkgB-guide/pages/biomes/biomes' },
-  { k: 'seeds', n: '种子目录', art: 'daybloom_herb', url: '/pages/seeds/seeds' },
   { k: 'prefixes', n: '词条图鉴', art: 'npc_goblin', url: '/pkgB-guide/pages/prefixes/prefixes' }
 ]
 
