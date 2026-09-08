@@ -113,8 +113,10 @@ Page({
     }
     this._all = list
     this._sig = tab + '|' + cat + '|' + letter
+    const cats = (dex.CATS[tab] || [{ k: '', n: '全部' }]).slice()
+    if (tab === 'item') cats.push({ k: 'seedbook', n: '🌱 种子目录' }) // 导航项：点击直达种子目录页
     this.setData({
-      cats: dex.CATS[tab] || [{ k: '', n: '全部' }],
+      cats,
       list: list.slice(0, PAGE).map(e => this.fmt(e)),
       total: list.length
     })
@@ -133,6 +135,7 @@ Page({
   },
   onCat (e) {
     const k = e.currentTarget.dataset.k
+    if (k === 'seedbook') { wx.navigateTo({ url: '/pages/seeds/seeds' }); return } // 导航项：直达种子目录
     this.setData({ cat: this.data.cat === k ? '' : k })
     this.refresh()
   },
@@ -218,7 +221,6 @@ Page({
   },
 
   goSearch () { wx.navigateTo({ url: '/pages/search/search' }) },
-  goSeedBook () { wx.navigateTo({ url: '/pages/seeds/seeds' }) },
 
   onShareAppMessage () {
     return { title: '泰拉瑞亚图鉴 · ' + this.data.total + ' 条条目一网打尽', path: '/pages/codex/codex' }
