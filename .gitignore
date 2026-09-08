@@ -17,3 +17,6 @@ _rebuild.js
 
 # 本地助手工作目录（备份/记忆，不入库）
 .workbuddy/
+
+# 全物品图鉴流水线中间缓存
+scripts/catalog-stage/
