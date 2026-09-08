@@ -13,11 +13,13 @@ const UA = { headers: { 'User-Agent': 'Mozilla/5.0 TerraHandbook/1.0', 'Accept':
 
 function fetchJson (url) {
   return new Promise((resolve, reject) => {
-    https.get(url, UA, res => {
+    const req = https.get(url, UA, res => {
       let d = ''
       res.on('data', c => { d += c })
       res.on('end', () => { try { resolve(JSON.parse(d)) } catch (e) { reject(new Error('非JSON: ' + d.slice(0, 60))) } })
-    }).on('error', reject)
+    })
+    req.on('error', reject)
+    req.setTimeout(20000, () => { req.destroy(); reject(new Error('请求超时')) })
   }).then(d => new Promise(r => setTimeout(() => r(d), 120)))
 }
 function sleep (ms) { return new Promise(r => setTimeout(r, ms)) }
@@ -289,6 +291,7 @@ async function build () {
 
   // 合并中文详情/获得/用途
   const zhdetail = readStage('zhdetail.json', { items: {}, byResult: {}, byIng: {} })
+  const zhExtract = readStage('zhextract.json', {})
   entries.forEach(r => {
     const zi = zhdetail.items[r.internal] || zhdetail.items[r.en] || null
     const zhName = zh[r.page] || r.en
@@ -296,6 +299,8 @@ async function build () {
     const zName = en => zh[en] || en
     if (zi) {
       if (zi.t) r.tooltip = zi.t
+      else if (zhExtract[zhName]) r.tooltip = zhExtract[zhName]
+      if (zi.b) r._bonus = zi.b
       if (zi.lc) r.listcat = zi.lc
       if (zi.dt) r.damagetype = zi.dt
       const rec = zhdetail.byResult[r.en]
@@ -311,6 +316,7 @@ async function build () {
       const use2 = zhdetail.byIng[zhName]
       if (use2) r._use = '用于合成：' + use2.map(zName).slice(0, 4).join('、') + (use2.length > 4 ? ' 等 ' + use2.length + ' 项' : '')
     }
+    if (!zh[r.page]) r._zhmiss = true
   })
 
   const { volumes, volCatCount } = packVolumes(entries)
@@ -333,7 +339,7 @@ async function build () {
 
   const topCats = vi => {
     const cc = volCatCount[vi] || {}
-    return Object.entries(cc).sort((a, b) => b[1] - a[1]).slice(0, 2).map(x => x[0]).join(' / ') || '综合'
+    return Object.entries(cc).sort((a, b) => b[1] - a[1]).filter(x => x[1] >= 2).slice(0, 2).map(x => x[0]).join(' / ') || '综合物品'
   }
   const navList = volumes.map((v, i) => ({ root: 'pkg-cat-' + (i + 1), vol: i + 1, cats: topCats(i) }))
   volumes.forEach((vol, vi) => {
@@ -347,7 +353,7 @@ async function build () {
       c: (() => { const raw = (r.listcat.split('^').find(Boolean) || '其他').trim(); return CATZH[raw] || raw })(),
       d: r.damage, dt: DTZH[r.damagetype] || r.damagetype, df: r.defense, r: normRare(r.rare),
       u: r.usetime, k: r.knockback,
-      t: r.tooltip, s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus].filter(Boolean).join('；'),
+      t: String(r.tooltip || '').slice(0, 160), b: r._bonus || '', s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus].filter(Boolean).join('；'),
       ob: r._ob || '', use: r._use || '', hm: r.hardmode ? 1 : 0
     }))
     fs.writeFileSync(path.join(dataDir, 'batch.js'),
@@ -432,6 +438,40 @@ async function zhdata () {
 }
 
 const stage = process.argv[2] || ''
-const runners = { '--harvest': harvest, '--zh': zh, '--zhdata': zhdata, '--sprites': sprites, '--build': build }
+async function zhextract () {
+  console.log('== 阶段 2.7：中文页面摘要提取 ==')
+  const cached = readStage('zhextract.json', {})
+  // 目标：有中文名的条目（zh langlinks 映射的 zh 页标题）
+  const raw = readStage('raw.json', [])
+  const zh = readStage('zh.json', {})
+  const titles = [...new Set(raw.map(r => zh[r.page]).filter(Boolean))]
+  const todo = titles.filter(t => !(t in cached))
+  console.log('有中文页的条目:', titles.length, '| 已提取:', titles.length - todo.length, '| 待提取:', todo.length)
+  // TextExtracts 每请求最多 20 页
+  for (let i = 0; i < todo.length; i += 20) {
+    const batch = todo.slice(i, i + 20)
+    let d
+    try {
+      d = await fetchJson('https://terraria.wiki.gg/zh/api.php?action=query&format=json&prop=extracts&exintro=1&explaintext=1&exlimit=20&titles=' + encodeURIComponent(batch.join('|')) + '&redirects=1')
+    } catch (e) { console.log('  批次失败(' + i + '):', e.message); continue }
+    const redirects = (d.query && d.query.redirects) || []
+    const titleMap = {}
+    batch.forEach(t => { titleMap[t] = t })
+    redirects.forEach(r => { if (titleMap[r.from]) titleMap[r.to] = titleMap[r.from] })
+    Object.values(d.query.pages || {}).forEach(p => {
+      const mapped = titleMap[p.title]
+      if (!mapped) return
+      const ext = (p.extract || '').replace(/\s+/g, ' ').trim()
+      cached[mapped] = ext.slice(0, 200)
+    })
+    if ((i / 20) % 20 === 0) console.log('  进度:', Math.min(i + 20, todo.length), '/', todo.length)
+    writeStage('zhextract.json', cached)
+  }
+  writeStage('zhextract.json', cached)
+  const got = Object.values(cached).filter(Boolean).length
+  console.log('中文摘要提取完成:', got, '/', titles.length)
+}
+
+const runners = { '--harvest': harvest, '--zh': zh, '--zhdata': zhdata, '--zhextract': zhextract, '--sprites': sprites, '--build': build }
 if (runners[stage]) runners[stage]().catch(e => { console.error(e); process.exit(1) })
 else console.log('用法: node scripts/build-catalog.js --harvest|--zh|--sprites|--build')
