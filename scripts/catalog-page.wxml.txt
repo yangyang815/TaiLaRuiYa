@@ -70,6 +70,8 @@
       <view class="d-row" wx:if="{{detail.u}}"><text class="d-k">使用时间</text><text class="flex-1">{{detail.u}}</text></view>
       <view class="d-row" wx:if="{{detail.k}}"><text class="d-k">击退</text><text class="flex-1">{{detail.k}}</text></view>
       <view class="d-row" wx:if="{{detail.t}}"><text class="d-k">说明</text><text class="flex-1">{{detail.t}}</text></view>
+      <view class="d-row" wx:if="{{detail.ob}}"><text class="d-k">获得方式</text><text class="flex-1">{{detail.ob}}</text></view>
+      <view class="d-row" wx:if="{{detail.use}}"><text class="d-k">用途</text><text class="flex-1">{{detail.use}}</text></view>
       <view class="d-row" wx:if="{{detail.s}}"><text class="d-k">工具/特殊</text><text class="flex-1">{{detail.s}}</text></view>
       <view class="d-row"><text class="d-k">英文名</text><text class="flex-1">{{detail.en}}</text></view>
     </view>

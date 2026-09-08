@@ -1,5 +1,5 @@
 // 全物品图鉴 · 卷 1（自动生成页面）
-const NAV = [{"root":"pkg-cat-1","vol":1,"cats":"craftable items / drop items"},{"root":"pkg-cat-2","vol":2,"cats":"plunder items / furniture"}]
+const NAV = [{"root":"pkg-cat-1","vol":1,"cats":"可合成物品 / 战利品"},{"root":"pkg-cat-2","vol":2,"cats":"掉落物品 / 家具"}]
 const ROOT = 'pkg-cat-1'
 // 官方稀有度配色（游戏内同款）
 const RCOL = { '-13': '#B57BFF', '-12': '#FF4CE0', '-1': '#B4B4B4', 0: '#FFFFFF', 1: '#9696FF', 2: '#96FF96', 3: '#FFC896', 4: '#FF9696', 5: '#FF96FF', 6: '#D2A0FF', 7: '#96FF0A', 8: '#FFFF32', 9: '#32FFFF', 10: '#FF3232' }
@@ -10,8 +10,8 @@ Page({
     capsuleRight: 100,
     themeClass: '',
     vol: 1,
-    cats: 'craftable items / drop items',
-    total: 2688,
+    cats: '可合成物品 / 战利品',
+    total: 2963,
     kw: '',
     rows: [],
     shown: 0,
@@ -77,9 +77,9 @@ Page({
   },
   back () { wx.navigateBack() },
   onShareAppMessage () {
-    return { title: '泰拉瑞亚全物品图鉴 · 卷1（craftable items / drop items）', path: '/' + ROOT + '/pages/index/index' }
+    return { title: '泰拉瑞亚全物品图鉴 · 卷1（可合成物品 / 战利品）', path: '/' + ROOT + '/pages/index/index' }
   },
   onShareTimeline () {
-    return { title: '泰拉瑞亚全物品图鉴 · 卷1（craftable items / drop items）' }
+    return { title: '泰拉瑞亚全物品图鉴 · 卷1（可合成物品 / 战利品）' }
   }
 })

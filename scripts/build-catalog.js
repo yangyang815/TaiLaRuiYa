@@ -43,6 +43,52 @@ function writeStage (name, data) {
   fs.mkdirSync(STAGE_DIR, { recursive: true })
   fs.writeFileSync(path.join(STAGE_DIR, name), JSON.stringify(data))
 }
+// 中文映射词典（分类 / 伤害类型 / 制作站）
+const CATZH = {
+  'craftable items': '可合成物品', 'drop items': '掉落物品', 'Drop items': '掉落物品',
+  'plunder items': '战利品', 'Plunder items': '战利品', 'loot items': '战利品', 'Loot items': '战利品',
+  'bag loot items': '袋装战利品', 'Bag loot items': '袋装战利品', 'grab bag': '袋装奖励',
+  furniture: '家具', vanity: '时装', armor: '盔甲', accessory: '饰品',
+  'crafting material': '合成材料', 'storage items': '存储物品', 'Storage items': '存储物品',
+  buffs: '增益物品', 'fished items': '钓获物品', 'Fished items': '钓获物品',
+  'quest rewards': '任务奖励', 'Quest rewards': '任务奖励', 'developer items': '开发者物品',
+  'Developer items': '开发者物品', 'unobtainable items': '未实装物品',
+  paints: '涂料', dye: '染料', dyes: '染料', 'hair dye': '染发剂',
+  seeds: '种子', tool: '工具', tools: '工具', walls: '墙', wall: '墙', block: '方块', brick: '砖',
+  ammunition: '弹药', arrows: '箭', bullets: '子弹', rockets: '火箭', darts: '飞镖', flares: '照明弹',
+  'Potion items': '药水', 'Potion ingredients': '药水配料', potions: '药水',
+  'minion summon items': '召唤武器', 'sentry summon items': '哨塔召唤物',
+  'mount summon': '坐骑召唤', 'item summon': '事件召唤物', 'boss summon': 'Boss 召唤物',
+  'event summon': '事件召唤物', 'permanent booster': '永久增益',
+  whips: '鞭', Yoyos: '悠悠球', yoyos: '悠悠球', Broadswords: '宽剑', broadswords: '宽剑',
+  Shortswords: '短剑', shortswords: '短剑', Bows: '弓', bows: '弓', Repeaters: '连弩',
+  Explosives: '爆炸物', explosives: '爆炸物', wands: '魔杖', Wands: '魔杖',
+  'magic guns': '魔法枪', 'magic weapons': '魔法武器', 'Magic weapons': '魔法武器',
+  spears: '矛', Spears: '矛', flails: '连枷', Flails: '连枷', chainsaws: '电锯', drills: '钻头',
+  hammers: '锤', axes: '斧', hamaxes: '斧槌', pickaxes: '镐', 'projectile melee|+': '投射近战',
+  'Projectile melee': '投射近战', 'Projectile melee|+': '投射近战',
+  instruments: '乐器', Instruments: '乐器', 'minecart track items': '矿车轨道',
+  'informational items': '信息物品', 'Informational items': '信息物品',
+  'light source': '光源', 'light source items': '光源物品', 'Light source items': '光源物品',
+  boots: '鞋', 'Crafting stations': '制作站', 'Crafting station items': '制作站',
+  mechanism: '机械', 'Mechanism items': '机械物品', 'spell books': '法书',
+  'weapon items': '武器', weapon: '武器', 'wall-piercing weapons': '穿墙武器',
+  'Wall-piercing weapons': '穿墙武器', debuffs: '减益物品', 'Treasure Bag loot items': '宝藏袋战利品',
+  '其他': '其他'
+}
+const DTZH = { melee: '近战', ranged: '远程', magic: '魔法', summon: '召唤', 'summon|+': '召唤', thrown: '投掷' }
+const STATION = {
+  'Work Bench': '工作台', Furnace: '熔炉', Anvil: '铁砧', 'Mythril Anvil': '秘银砧',
+  'Adamantite Forge': '精金熔炉', Hellforge: '地狱熔炉', 'Demon Altar': '恶魔祭坛',
+  'Crimson Altar': '猩红祭坛', Altar: '祭坛', 'Heavy Work Bench': '重型工作台',
+  'Heavy Assembler': '重型装配器', 'Book Case': '书架', 'Crystal Ball': '水晶球',
+  Loom: '织布机', 'Cooking Pot': '烹饪锅', Keg: '酒桶', Sawmill: '锯木机',
+  'Imbuing Station': '灌注站', 'Dye Vat': '染缸', DyeVat: '染缸',
+  "Tinkerer's Workshop": '工匠作坊', 'Water Source': '水源', Sink: '水槽', Honey: '蜂蜜',
+  'Ice Machine': '冰雪机', 'Living Loom': '生命织布机', 'Sky Mill': '天空磨坊',
+  'Ancient Manipulator': '远古操纵机', 'Blend-o-matic': '搅拌机', 'Meat Grinder': '绞肉机',
+  'Solidifier': '固化机', SteampunkerBoiler: '蒸汽锅炉', ByHand: '徒手', 'By Hand': '徒手'
+}
 function normRare (raw) {
   const str = String(raw == null ? '' : raw)
   if (/quest/i.test(str)) return -1
@@ -167,7 +213,10 @@ async function sprites () {
 
 function packVolumes (entries) {
   // 按主分类聚合 → 贪心装箱（每卷 ≤1.6MB，含数据估算 + 精灵图实测）
-  const cat = r => (r.listcat.split('^').find(Boolean) || r.type.split('^').find(Boolean) || '其他').trim()
+  const cat = r => {
+    const raw = (r.listcat.split('^').find(Boolean) || r.type.split('^').find(Boolean) || '其他').trim()
+    return CATZH[raw] || raw
+  }
   const groups = {}
   entries.forEach(r => {
     const c = cat(r)
@@ -238,6 +287,32 @@ async function build () {
   })
   console.log('可用条目:', entries.length)
 
+  // 合并中文详情/获得/用途
+  const zhdetail = readStage('zhdetail.json', { items: {}, byResult: {}, byIng: {} })
+  entries.forEach(r => {
+    const zi = zhdetail.items[r.internal] || zhdetail.items[r.en] || null
+    const zhName = zh[r.page] || r.en
+    const zhByName = zhdetail.items && Object.keys(zhdetail.items).length ? null : null
+    const zName = en => zh[en] || en
+    if (zi) {
+      if (zi.t) r.tooltip = zi.t
+      if (zi.lc) r.listcat = zi.lc
+      if (zi.dt) r.damagetype = zi.dt
+      const rec = zhdetail.byResult[r.en]
+      if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(zName).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
+      const use = zhdetail.byIng[r.en]
+      if (use) r._use = '用于合成：' + use.map(zName).slice(0, 4).join('、') + (use.length > 4 ? ' 等 ' + use.length + ' 项' : '')
+    }
+    if (!r._ob) {
+      const rec2 = zhdetail.byResult[zhName]
+      if (rec2) r._ob = '合成：' + rec2.map(rc => rc.i.map(zName).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
+    }
+    if (!r._use) {
+      const use2 = zhdetail.byIng[zhName]
+      if (use2) r._use = '用于合成：' + use2.map(zName).slice(0, 4).join('、') + (use2.length > 4 ? ' 等 ' + use2.length + ' 项' : '')
+    }
+  })
+
   const { volumes, volCatCount } = packVolumes(entries)
   console.log('分卷数:', volumes.length)
 
@@ -269,11 +344,11 @@ async function build () {
     fs.mkdirSync(dataDir, { recursive: true })
     const compact = vol.items.map(r => ({
       n: zh[r.page] || r.en, en: r.en, f: r._safeId,
-      c: (r.listcat.split('^').find(Boolean) || '其他').trim(),
-      d: r.damage, dt: r.damagetype, df: r.defense, r: normRare(r.rare),
+      c: (() => { const raw = (r.listcat.split('^').find(Boolean) || '其他').trim(); return CATZH[raw] || raw })(),
+      d: r.damage, dt: DTZH[r.damagetype] || r.damagetype, df: r.defense, r: normRare(r.rare),
       u: r.usetime, k: r.knockback,
       t: r.tooltip, s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus].filter(Boolean).join('；'),
-      hm: r.hardmode ? 1 : 0
+      ob: r._ob || '', use: r._use || '', hm: r.hardmode ? 1 : 0
     }))
     fs.writeFileSync(path.join(dataDir, 'batch.js'),
       '// 自动生成：全物品图鉴数据卷 ' + (vi + 1) + '（勿手改）\nmodule.exports = ' + JSON.stringify(compact) + '\n')
@@ -300,7 +375,63 @@ async function build () {
   console.log('app.json 已注册 ' + volumes.length + ' 个数据分包')
 }
 
+async function zhdata () {
+  console.log('== 阶段 2.5：中文 Items 全表 + 配方双向索引 ==')
+  // 1) 中文 Items 全表（中文名/中文说明/中文分类/中文伤害类型）
+  let zitems = []
+  let offset = 0
+  while (true) {
+    const url = 'https://terraria.wiki.gg/zh/api.php?action=cargoquery&tables=Items&format=json&limit=500&offset=' + offset +
+      '&fields=name,internalname,tooltip,bonus,listcat,damagetype'
+    let d
+    try { d = await fetchJson(url) } catch (e) { console.log('重试 offset=' + offset); d = await fetchJson(url) }
+    const rows = (d.cargoquery || []).map(x => x.title)
+    zitems = zitems.concat(rows)
+    if (rows.length < 500) break
+    offset += 500
+  }
+  const items = {}
+  zitems.forEach(r => {
+    if (r.internalname) items[r.internalname] = {
+      n: cleanWiki(r.name), t: cleanWiki(r.tooltip), b: cleanWiki(r.bonus),
+      lc: cleanWiki(r.listcat), dt: cleanWiki(r.damagetype)
+    }
+  })
+  // 2) 中文配方全表 → 双向索引
+  let recs = []
+  offset = 0
+  while (true) {
+    const url = 'https://terraria.wiki.gg/zh/api.php?action=cargoquery&tables=Recipes&format=json&limit=500&offset=' + offset +
+      '&fields=result,ingredients,station'
+    let d
+    try { d = await fetchJson(url) } catch (e) { console.log('重试 offset=' + offset); d = await fetchJson(url) }
+    const rows = (d.cargoquery || []).map(x => x.title)
+    recs = recs.concat(rows)
+    if (rows.length < 500) break
+    offset += 500
+  }
+  const byResult = {}
+  const byIng = {}
+  recs.forEach(r => {
+    const res = cleanWiki(r.result)
+    const st = cleanWiki(r.station)
+    // 配方可能含多个变体（^ 分隔），每个变体内配料用 ¦ 分隔
+    String(r.ingredients || '').split('^').forEach(variant => {
+      const ings = variant.split('¦').map(x => x.trim()).filter(Boolean)
+      if (!res || !ings.length) return
+      byResult[res] = byResult[res] || []
+      if (byResult[res].length < 3) byResult[res].push({ i: ings, st })
+      ings.forEach(ing => {
+        byIng[ing] = byIng[ing] || []
+        if (byIng[ing].length < 6 && byIng[ing].indexOf(res) < 0) byIng[ing].push(res)
+      })
+    })
+  })
+  writeStage('zhdetail.json', { items, byResult, byIng })
+  console.log('中文条目:', Object.keys(items).length, '| 配方:', recs.length, '行')
+}
+
 const stage = process.argv[2] || ''
-const runners = { '--harvest': harvest, '--zh': zh, '--sprites': sprites, '--build': build }
+const runners = { '--harvest': harvest, '--zh': zh, '--zhdata': zhdata, '--sprites': sprites, '--build': build }
 if (runners[stage]) runners[stage]().catch(e => { console.error(e); process.exit(1) })
 else console.log('用法: node scripts/build-catalog.js --harvest|--zh|--sprites|--build')
