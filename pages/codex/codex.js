@@ -6,7 +6,7 @@ const store = require('../../utils/store')
 const { startClock } = require('../../utils/clock')
 
 const TABS = [
-  { k: 'all', n: '全部' }, { k: 'item', n: '物品' }, { k: 'mon', n: '敌怪' }, { k: 'boss', n: 'Boss' }
+  { k: 'all', n: '全部' }, { k: 'item', n: '物品' }, { k: 'mon', n: '敌怪' }, { k: 'boss', n: 'Boss' }, { k: 'npc', n: 'NPC' }
 ]
 const NGRP = { svc: '服务型', shop: '肉前入住', post: '肉后入住', evt: '特殊到访' }
 const LET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
@@ -103,10 +103,8 @@ Page({
   refresh () {
     const { tab, cat, letter } = this.data
     let list = dex.ALL.filter(e => e.type !== 'seed') // 世界种子已独立成"特殊种子"页，图鉴不重复收录
-    // 物品标签下的 NPC 二级筛选项
-    if (tab === 'item' && cat === 'npc') list = list.filter(e => e.type === 'npc')
-    else if (tab !== 'all') list = list.filter(e => e.type === tab)
-    if (cat) list = list.filter(e => e.raw.cat === cat || e.type === cat || ((tab === 'boss' || tab === 'mon') && e.raw.tier === cat) || (cat === 'npc' && e.raw.ngrp === cat))
+    if (tab !== 'all') list = list.filter(e => e.type === tab)
+    if (cat) list = list.filter(e => e.raw.cat === cat || e.type === cat || ((tab === 'boss' || tab === 'mon') && e.raw.tier === cat) || (tab === 'npc' && e.raw.ngrp === cat))
     if (letter) {
       if (letter === '#') list = list.filter(e => !/^[a-z]/i.test((e.en || '')[0] || ''))
       else list = list.filter(e => (e.en || '').toLowerCase().startsWith(letter.toLowerCase()))
