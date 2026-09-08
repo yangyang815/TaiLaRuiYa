@@ -43,6 +43,12 @@ function writeStage (name, data) {
   fs.mkdirSync(STAGE_DIR, { recursive: true })
   fs.writeFileSync(path.join(STAGE_DIR, name), JSON.stringify(data))
 }
+function normRare (raw) {
+  const str = String(raw == null ? '' : raw)
+  if (/quest/i.test(str)) return -1
+  const m = str.match(/(-?\d+)/)
+  return m ? Number(m[1]) : null
+}
 const cleanWiki = s => String(s || '')
   .replace(/<[^>]+>/g, '')
   .replace(/\[\[([^|\]]*\|)?([^\]]*)\]\]/g, '$2')
@@ -264,7 +270,8 @@ async function build () {
     const compact = vol.items.map(r => ({
       n: zh[r.page] || r.en, en: r.en, f: r._safeId,
       c: (r.listcat.split('^').find(Boolean) || '其他').trim(),
-      d: r.damage, dt: r.damagetype, df: r.defense, r: r.rare,
+      d: r.damage, dt: r.damagetype, df: r.defense, r: normRare(r.rare),
+      u: r.usetime, k: r.knockback,
       t: r.tooltip, s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus].filter(Boolean).join('；'),
       hm: r.hardmode ? 1 : 0
     }))

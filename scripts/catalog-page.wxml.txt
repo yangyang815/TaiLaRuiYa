@@ -19,18 +19,28 @@
   </view>
   <view class="stat px">本卷 {{total}} 条（{{cats}}） · {{kw ? '命中 ' + hitCount : '显示 ' + shown + ' / ' + hitCount}}</view>
 
-  <!-- 列表 -->
+  <!-- 列表（与图鉴页同款行布局） -->
   <view class="rows" wx:if="{{rows.length}}">
     <view class="row card tappable" wx:for="{{rows}}" wx:key="index" bindtap="onRow" data-i="{{index}}">
-      <image class="r-img" src="{{item.sprite}}" mode="aspectFit" lazy-load />
-      <view class="col flex-1">
-        <view class="r-line">
-          <text class="r-n">{{item.n}}</text>
-          <text class="r-c px">{{item.c}}</text>
-        </view>
-        <text class="r-en px">{{item.en}}</text>
+      <view class="r-art" style="box-shadow: 0 0 16rpx {{item.rcol}}55;">
+        <image class="r-img" src="{{item.sprite}}" mode="aspectFit" lazy-load />
       </view>
-      <text class="r-go">›</text>
+      <view class="col flex-1">
+        <text class="r-n">{{item.n}}</text>
+        <text class="r-en px">{{item.en}}</text>
+        <text class="r-meta" wx:if="{{item.meta}}">{{item.meta}}</text>
+      </view>
+      <view class="col r-right">
+        <block wx:if="{{item.d}}">
+          <text class="r-dmg px">{{item.d}}</text>
+          <text class="r-dmg-k">伤害</text>
+        </block>
+        <block wx:elif="{{item.df}}">
+          <text class="r-dmg px">{{item.df}}</text>
+          <text class="r-dmg-k">防御</text>
+        </block>
+        <view class="r-rare" wx:else style="color: {{item.rcol}}; border-color: {{item.rcol}}66;">{{item.rlab}}</view>
+      </view>
     </view>
     <view class="more tappable" wx:if="{{shown < hitCount}}" bindtap="more">加载更多（{{hitCount - shown}} 条未显示）</view>
   </view>
@@ -41,19 +51,26 @@
   <view class="sheet" wx:if="{{detail}}" catchtap="noop">
     <view class="sheet-handle" />
     <view class="d-head">
-      <image class="d-img" src="{{detail.sprite}}" mode="aspectFit" />
+      <view class="d-imgbox" style="box-shadow: 0 0 20rpx {{detail.rcol}}55;">
+        <image class="d-img" src="{{detail.sprite}}" mode="aspectFit" />
+      </view>
       <view class="col flex-1">
         <text class="d-n">{{detail.n}}</text>
         <text class="d-en px">{{detail.en}}</text>
-        <text class="d-c px">{{detail.c}} · 稀有度 {{detail.r || '-'}}</text>
+        <view class="d-chips">
+          <text class="d-chip">{{detail.c}}</text>
+          <text class="d-chip" style="color: {{detail.rcol}}; border-color: {{detail.rcol}}66;">{{detail.rlab2}}稀有度</text>
+          <text class="d-chip" wx:if="{{detail.hm}}">困难模式</text>
+        </view>
       </view>
     </view>
     <view class="d-body">
       <view class="d-row" wx:if="{{detail.d}}"><text class="d-k">伤害</text><text class="flex-1">{{detail.d}}{{detail.dt ? '（' + detail.dt + '）' : ''}}</text></view>
       <view class="d-row" wx:if="{{detail.df}}"><text class="d-k">防御</text><text class="flex-1">{{detail.df}}</text></view>
+      <view class="d-row" wx:if="{{detail.u}}"><text class="d-k">使用时间</text><text class="flex-1">{{detail.u}}</text></view>
+      <view class="d-row" wx:if="{{detail.k}}"><text class="d-k">击退</text><text class="flex-1">{{detail.k}}</text></view>
       <view class="d-row" wx:if="{{detail.t}}"><text class="d-k">说明</text><text class="flex-1">{{detail.t}}</text></view>
       <view class="d-row" wx:if="{{detail.s}}"><text class="d-k">工具/特殊</text><text class="flex-1">{{detail.s}}</text></view>
-      <view class="d-row" wx:if="{{detail.hm}}"><text class="d-k">阶段</text><text class="flex-1">困难模式</text></view>
       <view class="d-row"><text class="d-k">英文名</text><text class="flex-1">{{detail.en}}</text></view>
     </view>
     <view class="btn-gold d-btn" bindtap="closeDetail">关闭</view>

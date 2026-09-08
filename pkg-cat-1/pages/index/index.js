@@ -1,6 +1,9 @@
 // 全物品图鉴 · 卷 1（自动生成页面）
 const NAV = [{"root":"pkg-cat-1","vol":1,"cats":"craftable items / drop items"},{"root":"pkg-cat-2","vol":2,"cats":"plunder items / furniture"}]
 const ROOT = 'pkg-cat-1'
+// 官方稀有度配色（游戏内同款）
+const RCOL = { '-13': '#B57BFF', '-12': '#FF4CE0', '-1': '#B4B4B4', 0: '#FFFFFF', 1: '#9696FF', 2: '#96FF96', 3: '#FFC896', 4: '#FF9696', 5: '#FF96FF', 6: '#D2A0FF', 7: '#96FF0A', 8: '#FFFF32', 9: '#32FFFF', 10: '#FF3232' }
+const RLAB = { '-13': '大师', '-12': '专家', '-1': '任务', 0: '白色', 1: '蓝色', 2: '绿色', 3: '橙色', 4: '浅红', 5: '粉色', 6: '浅紫', 7: '青柠', 8: '黄色', 9: '青色', 10: '红色' }
 Page({
   data: {
     statusBarHeight: 20,
@@ -28,7 +31,16 @@ Page({
     })
     const batch = require('../../data/batch.js')
     this._all = batch
-      .map(x => ({ ...x, sprite: ROOT + '/assets/' + x.f + '.png' }))
+      .map(x => {
+        const r = Number(x.r)
+        return {
+          ...x,
+          sprite: ROOT + '/assets/' + x.f + '.png',
+          rcol: RCOL[r] || '#FFFFFF',
+          rlab: RLAB[r] || '',
+          meta: (x.t ? x.t.slice(0, 50) : '')
+        }
+      })
       .sort((a, b) => (a.n < b.n ? -1 : 1))
     this.setData({ total: this._all.length })
     this.applyFilter('')
@@ -53,7 +65,8 @@ Page({
     this.setData({ rows: this._hit.slice(0, next), shown: next })
   },
   onRow (e) {
-    this.setData({ detail: this._hit[Number(e.currentTarget.dataset.i)] })
+    const it = this._hit[Number(e.currentTarget.dataset.i)]
+    this.setData({ detail: it ? { ...it, rcol2: it.rcol, rlab2: it.rlab } : null })
   },
   closeDetail () { this.setData({ detail: null }) },
   noop () {},
