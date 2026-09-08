@@ -35,7 +35,7 @@ Page({
         const r = Number(x.r)
         return {
           ...x,
-          sprite: ROOT + '/assets/' + x.f + '.png',
+          sprite: '/' + ROOT + '/assets/' + x.f + '.png',
           rcol: RCOL[r] || '#FFFFFF',
           rlab: RLAB[r] || '',
           meta: (x.t ? x.t.slice(0, 50) : '')
