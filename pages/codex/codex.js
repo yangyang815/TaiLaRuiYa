@@ -102,12 +102,11 @@ Page({
 
   refresh () {
     const { tab, cat, letter } = this.data
-    let list = dex.ALL
-    // 物品标签下的 NPC / 种子 二级筛选项
+    let list = dex.ALL.filter(e => e.type !== 'seed') // 世界种子已独立成"特殊种子"页，图鉴不重复收录
+    // 物品标签下的 NPC 二级筛选项
     if (tab === 'item' && cat === 'npc') list = list.filter(e => e.type === 'npc')
-    else if (tab === 'item' && cat === 'seed') list = list.filter(e => e.type === 'seed')
     else if (tab !== 'all') list = list.filter(e => e.type === tab)
-    if (cat) list = list.filter(e => e.raw.cat === cat || e.type === cat || ((tab === 'boss' || tab === 'mon') && e.raw.tier === cat) || (cat === 'seed' && e.raw.group === cat) || (cat === 'npc' && e.raw.ngrp === cat))
+    if (cat) list = list.filter(e => e.raw.cat === cat || e.type === cat || ((tab === 'boss' || tab === 'mon') && e.raw.tier === cat) || (cat === 'npc' && e.raw.ngrp === cat))
     if (letter) {
       if (letter === '#') list = list.filter(e => !/^[a-z]/i.test((e.en || '')[0] || ''))
       else list = list.filter(e => (e.en || '').toLowerCase().startsWith(letter.toLowerCase()))
