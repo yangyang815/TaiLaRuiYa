@@ -331,6 +331,8 @@ async function build () {
     if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
     if (use) r._use = '用于合成：' + use.map(zName).slice(0, 4).join('、') + (use.length > 4 ? ' 等 ' + use.length + ' 项' : '')
     if (!zh[r.page]) r._zhmiss = true
+    // 用户要求除英文名外全中文：无中文说明 → 置空（隐藏行，不展示英文）
+    if (r.tooltip && !/[\u4e00-\u9fa5]/.test(r.tooltip)) r.tooltip = ''
   })
 
   const { volumes, volCatCount } = packVolumes(entries)
