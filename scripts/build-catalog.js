@@ -91,6 +91,22 @@ const STATION = {
   'Ancient Manipulator': '远古操纵机', 'Blend-o-matic': '搅拌机', 'Meat Grinder': '绞肉机',
   'Solidifier': '固化机', SteampunkerBoiler: '蒸汽锅炉', ByHand: '徒手', 'By Hand': '徒手'
 }
+// 泛型桶（分类筛选时跳过，取更具体的分类）
+const GENERIC_CAT = {
+  'craftable items': 1, 'drop items': 1, 'Drop items': 1, 'plunder items': 1, 'Plunder items': 1,
+  'loot items': 1, 'Loot items': 1, 'bag loot items': 1, 'Bag loot items': 1,
+  'grab bag': 1, 'Treasure Bag loot items': 1, 'quest rewards': 1, 'Quest rewards': 1
+}
+// 细分类：listcat 链中第一个非泛型分类（全链皆泛型则回退首值）
+function fineCat (r) {
+  const chain = String(r.listcat || '').split('^').map(x => x.trim()).filter(Boolean)
+    .concat(String(r.type || '').split('^').map(x => x.trim()).filter(Boolean))
+  if (!chain.length) return '其他'
+  for (let i = 0; i < chain.length; i++) {
+    if (!GENERIC_CAT[chain[i]]) return CATZH[chain[i]] || chain[i]
+  }
+  return CATZH[chain[0]] || chain[0]
+}
 function normRare (raw) {
   const str = String(raw == null ? '' : raw)
   if (/quest/i.test(str)) return -1
@@ -216,10 +232,7 @@ async function sprites () {
 
 function packVolumes (entries) {
   // 按主分类聚合 → 贪心装箱（每卷 ≤1.6MB，含数据估算 + 精灵图实测）
-  const cat = r => {
-    const raw = (r.listcat.split('^').find(Boolean) || r.type.split('^').find(Boolean) || '其他').trim()
-    return CATZH[raw] || raw
-  }
+  const cat = r => fineCat(r)
   const groups = {}
   entries.forEach(r => {
     const c = cat(r)
@@ -351,7 +364,7 @@ async function build () {
     fs.mkdirSync(dataDir, { recursive: true })
     const compact = vol.items.map(r => ({
       n: zh[r.page] || r.en, en: r.en, f: r._safeId,
-      c: (() => { const raw = (r.listcat.split('^').find(Boolean) || '其他').trim(); return CATZH[raw] || raw })(),
+      c: fineCat(r),
       d: r.damage, dt: DTZH[r.damagetype] || r.damagetype, df: r.defense, r: normRare(r.rare),
       u: r.usetime, k: r.knockback,
       t: String(r.tooltip || '').slice(0, 160), b: r._bonus || '', s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus].filter(Boolean).join('；'),

@@ -17,7 +17,13 @@
     <text class="s-ico">🔍</text>
     <input class="s-input" value="{{kw}}" bindinput="onKw" placeholder="搜索本卷中文名 / 英文名" placeholder-class="s-ph" confirm-type="search" />
   </view>
-  <view class="stat px">本卷 {{total}} 条（{{cats}}） · {{kw ? '命中 ' + hitCount : '显示 ' + shown + ' / ' + hitCount}}</view>
+  <!-- 分类筛选 -->
+  <scroll-view scroll-x class="cat-chips" enhanced show-scrollbar="{{false}}">
+    <view class="cc-chip tappable {{cat === item.k ? 'on' : ''}}" wx:for="{{catChips}}" wx:key="k"
+      bindtap="onCat" data-k="{{item.k}}">{{item.n}}<text class="cc-n px">{{item.cnt}}</text></view>
+  </scroll-view>
+
+  <view class="stat px">本卷 {{total}} 条（{{cats}}） · {{kw || cat ? '命中 ' + hitCount : '显示 ' + shown + ' / ' + hitCount}}</view>
 
   <!-- 列表（与图鉴页同款行布局） -->
   <view class="rows" wx:if="{{rows.length}}">
