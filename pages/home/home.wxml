@@ -249,6 +249,9 @@
     <text class="foot-s">数据以 1.4.4 为基准 · 仅供学习参考</text>
   </view>
 
+  <!-- 全物品图鉴详情弹窗 -->
+  <cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" />
+
   <!-- 分享海报 -->
   <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
 </view>

@@ -111,3 +111,5 @@
     <view class="pad-bottom" />
   </scroll-view>
 </view>
+
+<cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" />

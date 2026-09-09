@@ -90,9 +90,11 @@ Page({
   },
   onCatalog (e) {
     this.confirmSearch()
-    const { vol, f } = e.currentTarget.dataset
-    wx.navigateTo({ url: '/pkg-cat-' + vol + '/pages/index/index?id=' + f })
+    catSearch.getById(e.currentTarget.dataset.f).then(entry => {
+      if (entry) this.setData({ catDetail: entry })
+    })
   },
+  onCatDetailClose () { this.setData({ catDetail: null }) },
   onWord (e) {
     const w = e.currentTarget.dataset.w
     this.setData({ kw: w })

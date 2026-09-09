@@ -390,13 +390,16 @@ Page({
     this._closePanel()
     wx.navigateTo({ url: '/pkgA-tool/pages/fishing/fishing?kw=' + encodeURIComponent(kw) })
   },
-  // 全物品图鉴结果 → 对应分卷页并直接弹出详情卡
+  // 全物品图鉴结果 → 当前页直接弹出详情卡
   onPanelCatalog (e) {
     if (this.data.searchKw.trim()) store.pushHist(this.data.searchKw.trim())
-    const { vol, f } = e.currentTarget.dataset
+    const f = e.currentTarget.dataset.f
     this._closePanel()
-    wx.navigateTo({ url: '/pkg-cat-' + vol + '/pages/index/index?id=' + f })
+    catSearch.getById(f).then(entry => {
+      if (entry) this.setData({ catDetail: entry })
+    })
   },
+  onCatDetailClose () { this.setData({ catDetail: null }) },
   // Boss 攻略清单 → 深度攻略页
   onPanelGuide (e) {
     if (this.data.searchKw.trim()) store.pushHist(this.data.searchKw.trim())
