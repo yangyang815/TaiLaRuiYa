@@ -152,6 +152,11 @@ Page({
   /* ---------- 目标 ---------- */
   onKw (e) {
     const kw = e.detail.value
+    // 关键词清空或改写后不再匹配当前目标 → 下方配方区一并收起
+    const t = this.data.target
+    if (t && kw !== t.name) {
+      this.setData({ target: null, wikiRows: [], mats: [], rows: [] })
+    }
     // 联想：模糊命中配方 → 附上工作台/分类信息 → 应用当前筛选维度
     let sug = kw ? dex.recipeSearch(kw).slice(0, 10) : []
     sug = sug.map(s => {
@@ -178,7 +183,7 @@ Page({
     if (kw.trim()) {
       const k = kw.trim().toLowerCase()
       wikiRecipes().then(data => {
-        if (reqId !== this._wReqId) return
+        if (reqId !== this._wReqId || !this.data.kw.trim()) return
         const idx = wikiCraft.buildIndex(data)
         const localNames = {}
         ;(this.data.targetSuggests || []).forEach(x => { localNames[x.name] = 1 })
@@ -197,7 +202,10 @@ Page({
       })
     }
   },
-  clearKw () { this.setData({ kw: '', targetSuggests: [] }) },
+  clearKw () {
+    this._wReqId = (this._wReqId || 0) + 1 // 使未决的 wiki 联想回填失效
+    this.setData({ kw: '', targetSuggests: [], target: null, wikiRows: [], mats: [], rows: [] })
+  },
   onSuggestTap (e) {
     if (e.currentTarget.dataset.wiki) { this.setWikiTarget(e.currentTarget.dataset.name, e.currentTarget.dataset.en); return }
     this.setTarget(e.currentTarget.dataset.id)
