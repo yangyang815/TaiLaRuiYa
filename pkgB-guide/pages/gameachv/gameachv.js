@@ -1,3 +1,4 @@
+const BT = require('../../../utils/back-top-behavior')
 // 泰拉成就：游戏官方 115 个成就，手动打勾 + 分类筛选 + 数据统计
 const store = require('../../../utils/store')
 const fmt = require('../../../utils/fmt')
@@ -17,6 +18,7 @@ const STATES = [
 ]
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

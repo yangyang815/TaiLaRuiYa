@@ -1,3 +1,4 @@
+const BT = require('../../../utils/back-top-behavior')
 // 新手指南：新玩家的完整上手路线
 const guide = require('../../../data/guide')
 
@@ -8,6 +9,7 @@ const CATS = [
 const CAT_NAME = { start: '初见泰拉', live: '生存发展', fight: '战斗进阶', grow: '成长之路' }
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

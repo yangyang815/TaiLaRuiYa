@@ -161,3 +161,5 @@
     <text class="foot-t px">GONE FISHIN'</text>
   </view>
 </view>
+
+<back-top show="{{showBackTop}}" />

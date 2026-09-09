@@ -1,3 +1,4 @@
+const BT = require('../../utils/back-top-behavior')
 // 全屏搜索页：实时联想 + 历史 + 热门
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
@@ -9,6 +10,7 @@ const catSearch = require('../../utils/catalog-search')
 
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     navTop: 70,        // 胶囊按钮下沿（搜索栏定位基准，避免被胶囊遮挡）

@@ -238,3 +238,5 @@
   <!-- 分享海报 -->
   <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
 </view>
+
+<back-top show="{{showBackTop}}" />

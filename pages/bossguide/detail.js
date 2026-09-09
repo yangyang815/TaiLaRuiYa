@@ -1,3 +1,4 @@
+const BT = require('../../utils/back-top-behavior')
 // Boss 攻略详情：召唤方式 / 准备清单（可打勾）/ 战后收获
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
@@ -14,6 +15,7 @@ const CLASSES = [
 ]
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

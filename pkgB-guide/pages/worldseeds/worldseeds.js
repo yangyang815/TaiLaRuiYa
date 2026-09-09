@@ -1,3 +1,4 @@
+const BT = require('../../../utils/back-top-behavior')
 // 特殊种子页：秘密种子大全（分组筛选 + 列表 + 跳转详情）
 const dex = require('../../../utils/dex')
 const store = require('../../../utils/store')
@@ -12,6 +13,7 @@ const GROUP_META = {
 }
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

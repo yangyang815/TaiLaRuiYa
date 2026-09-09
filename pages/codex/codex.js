@@ -1,3 +1,4 @@
+const BT = require('../../utils/back-top-behavior')
 // 图鉴页：搜索联想 + 筛选 + 瀑布流卡片 + 半屏详情弹窗 + 收藏
 // 性能：分页渲染（滚动增量加载）、图标传 artId 字符串、onShow 脏检查
 const dex = require('../../utils/dex')
@@ -32,6 +33,7 @@ function starsOf (e) {
 }
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     navTop: 64,

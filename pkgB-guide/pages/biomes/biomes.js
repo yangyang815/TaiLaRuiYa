@@ -1,3 +1,4 @@
+const BT = require('../../../utils/back-top-behavior')
 // 生物群系：地图各大环境分区速查
 const biomes = require('../../../data/biomes')
 
@@ -13,6 +14,7 @@ function dotsOf (danger) {
 }
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

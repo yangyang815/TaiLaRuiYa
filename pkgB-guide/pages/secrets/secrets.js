@@ -1,3 +1,4 @@
+const BT = require('../../../utils/back-top-behavior')
 // 隐藏知识库：冷知识/隐藏机制/彩蛋玩法
 const secrets = require('../../../data/secrets')
 
@@ -10,6 +11,7 @@ const CAT_NAME = { mech: '隐藏机制', event: '隐藏事件', easter: '彩蛋�
 const RARE_NAME = ['', '入门', '进阶', '稀有', '传说']
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

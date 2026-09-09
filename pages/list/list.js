@@ -1,3 +1,4 @@
+const BT = require('../../utils/back-top-behavior')
 // 列表页：Boss 大全 / 敌怪 / 武器排行 / 饰品 / 药水 / 材料
 const dex = require('../../utils/dex')
 const { RARITY } = require('../../utils/arts')
@@ -18,6 +19,7 @@ const CONF = {
 }
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

@@ -1,3 +1,4 @@
+const BT = require('../../../utils/back-top-behavior')
 // 词条图鉴：武器与饰品重铸前缀
 const { PREFIXES, ACCESSORY_LINES, TIPS } = require('../../../data/prefixes')
 
@@ -9,6 +10,7 @@ const CAT_NAME = { best: '毕业词条', common: '通用词条', bad: '负面词
 const CLS_NAME = { melee: '近战', ranged: '远程', magic: '魔法', summon: '召唤', all: '通用' }
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

@@ -1,0 +1,10 @@
+/* 返回顶部悬浮按钮 */
+.btt { position: fixed; right: 30rpx; bottom: 230rpx; z-index: 85;
+  width: 88rpx; height: 88rpx; border-radius: 50%;
+  background: var(--card); border: 2rpx solid var(--gold-faint);
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.35);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  animation: btt-in 0.25s ease-out; }
+@keyframes btt-in { from { opacity: 0; transform: translateY(20rpx); } to { opacity: 1; transform: none; } }
+.btt-arrow { font-size: 32rpx; font-weight: 800; color: var(--gold); line-height: 1; }
+.btt-t { font-size: 17rpx; color: var(--gold); margin-top: 2rpx; }

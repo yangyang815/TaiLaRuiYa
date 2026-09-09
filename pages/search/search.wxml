@@ -113,3 +113,5 @@
 </view>
 
 <cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" bind:craft="onCatDetailCraft" />
+
+<back-top show="{{showBackTop}}" />

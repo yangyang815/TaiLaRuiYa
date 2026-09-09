@@ -1,7 +1,9 @@
+const BT = require('../../../utils/back-top-behavior')
 // 冒险成就页：网格展示全部成就 + 解锁状态
 const achv = require('../../../utils/achievements')
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     navTop: 64,

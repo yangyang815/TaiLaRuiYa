@@ -57,3 +57,5 @@
 
   <view class="pad-bottom" />
 </view>
+
+<back-top show="{{showBackTop}}" />

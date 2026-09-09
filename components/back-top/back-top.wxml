@@ -1,0 +1,4 @@
+<view wx:if="{{show}}" class="btt tappable" bindtap="go">
+  <text class="btt-arrow">↑</text>
+  <text class="btt-t">顶部</text>
+</view>

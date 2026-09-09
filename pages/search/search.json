@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "pixel-icon": "/components/pixel-icon/pixel-icon",
-    "cat-detail": "/components/cat-detail/cat-detail"
+    "cat-detail": "/components/cat-detail/cat-detail",
+    "back-top": "/components/back-top/back-top"
   }
 }

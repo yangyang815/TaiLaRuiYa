@@ -108,3 +108,5 @@
     <text class="foot-t px">GOOD LUCK, BUILDER</text>
   </view>
 </view>
+
+<back-top show="{{showBackTop}}" />

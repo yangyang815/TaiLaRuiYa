@@ -1,8 +1,10 @@
+const BT = require('../../../utils/back-top-behavior')
 // 职业养成聚合页：当前职业 + 总进度 + 推荐阶段 + 双入口 + 最近更新
 const X = require('../../../utils/career')
 const D = require('../../../data/career')
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

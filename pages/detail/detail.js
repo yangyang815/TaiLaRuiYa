@@ -1,3 +1,4 @@
+const BT = require('../../utils/back-top-behavior')
 // 详情页：物品 / 敌怪 / Boss 通用，含专属颗粒、悬浮收藏分享
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
@@ -5,6 +6,7 @@ const acq = require('../../utils/acq')
 const { GUIDES } = require('../../data/bossGuides')
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

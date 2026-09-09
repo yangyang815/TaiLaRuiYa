@@ -175,3 +175,5 @@
     <button class="fb share" open-type="share">↗ 分享</button>
   </view>
 </view>
+
+<back-top show="{{showBackTop}}" />

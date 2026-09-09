@@ -1,3 +1,4 @@
+const BT = require('../../utils/back-top-behavior')
 // 合成页：品牌区 + 搜索 + 目标输入 + 材料标记 + 目标物品卡 + 所需材料 + 合成树
 const dex = require('../../utils/dex')
 const fmt = require('../../utils/fmt')
@@ -45,6 +46,7 @@ const CAT_CHIPS = [
 ]
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     navTop: 64,

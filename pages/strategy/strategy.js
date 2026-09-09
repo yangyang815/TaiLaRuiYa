@@ -1,3 +1,4 @@
+const BT = require('../../utils/back-top-behavior')
 // 攻略页：无 id 显示列表，有 id 显示攻略详情
 const dex = require('../../utils/dex')
 const store = require('../../utils/store')
@@ -9,6 +10,7 @@ const CATS = [
 const CAT_NAME = { progress: '流程', class: '职业', build: '建造', event: '事件' }
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     themeClass: '',

@@ -1,3 +1,4 @@
+const BT = require('../../../utils/back-top-behavior')
 // 钓鱼助手：今日推荐 / 渔夫任务 / 图鉴收集 / 搜索
 const F = require('../../../data/fishing')
 const fmt = require('../../../utils/fmt')
@@ -159,6 +160,7 @@ function scoreItem (x, kw) {
 }
 
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

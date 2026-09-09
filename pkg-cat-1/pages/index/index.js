@@ -1,3 +1,4 @@
+const BT = require('../../../utils/back-top-behavior')
 // 全物品图鉴 · 卷 1（自动生成页面）
 const NAV = [{"root":"pkg-cat-1","vol":1,"cats":"家具 / 时装"},{"root":"pkg-cat-2","vol":2,"cats":"墙 / 饰品"}]
 const ROOT = 'pkg-cat-1'
@@ -5,6 +6,7 @@ const ROOT = 'pkg-cat-1'
 const RCOL = { '-13': '#B57BFF', '-12': '#FF4CE0', '-1': '#B4B4B4', 0: '#FFFFFF', 1: '#9696FF', 2: '#96FF96', 3: '#FFC896', 4: '#FF9696', 5: '#FF96FF', 6: '#D2A0FF', 7: '#96FF0A', 8: '#FFFF32', 9: '#32FFFF', 10: '#FF3232' }
 const RLAB = { '-13': '大师', '-12': '专家', '-1': '任务', 0: '白色', 1: '蓝色', 2: '绿色', 3: '橙色', 4: '浅红', 5: '粉色', 6: '浅紫', 7: '青柠', 8: '黄色', 9: '青色', 10: '红色' }
 Page({
+  behaviors: [BT],
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,
