@@ -15,6 +15,10 @@ function dotsOf (danger) {
 
 Page({
   behaviors: [BT],
+  onPageScroll (e) {
+    const show = e && e.scrollTop > 600
+    if (show !== this.data.showBackTop) this.setData({ showBackTop: show })
+  },
   data: {
     statusBarHeight: 20,
     capsuleRight: 100,

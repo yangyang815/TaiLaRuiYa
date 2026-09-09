@@ -11,6 +11,10 @@ const CAT_NAME = { progress: '流程', class: '职业', build: '建造', event: 
 
 Page({
   behaviors: [BT],
+  onPageScroll (e) {
+    const show = e && e.scrollTop > 600
+    if (show !== this.data.showBackTop) this.setData({ showBackTop: show })
+  },
   data: {
     statusBarHeight: 20,
     themeClass: '',

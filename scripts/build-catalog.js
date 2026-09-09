@@ -351,7 +351,7 @@ async function build () {
   const PAGE_JS = fs.readFileSync(path.join(__dirname, 'catalog-page.js.txt'), 'utf8')
   const PAGE_WXML = fs.readFileSync(path.join(__dirname, 'catalog-page.wxml.txt'), 'utf8')
   const PAGE_WXSS = fs.readFileSync(path.join(__dirname, 'catalog-page.wxss.txt'), 'utf8')
-  const PAGE_JSON = JSON.stringify({ usingComponents: {}, navigationBarTitleText: '全物品图鉴' })
+  const PAGE_JSON = JSON.stringify({ usingComponents: { 'back-top': '/components/back-top/back-top' }, navigationBarTitleText: '全物品图鉴' })
 
   const topCats = vi => {
     const cc = volCatCount[vi] || {}

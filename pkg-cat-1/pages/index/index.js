@@ -1,5 +1,5 @@
-const BT = require('../../../utils/back-top-behavior')
 // 全物品图鉴 · 卷 1（自动生成页面）
+const BT = require('../../../utils/back-top-behavior')
 const NAV = [{"root":"pkg-cat-1","vol":1,"cats":"家具 / 时装"},{"root":"pkg-cat-2","vol":2,"cats":"墙 / 饰品"}]
 const ROOT = 'pkg-cat-1'
 // 官方稀有度配色（游戏内同款）
@@ -84,6 +84,10 @@ Page({
     })
   },
 
+  onPageScroll (e) {
+    const show = e && e.scrollTop > 600
+    if (show !== this.data.showBackTop) this.setData({ showBackTop: show })
+  },
   onKw (e) { this.applyFilter(e.detail.value) },
   onCat (e) {
     this._cat = e.currentTarget.dataset.k || ''

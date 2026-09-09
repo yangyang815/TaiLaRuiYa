@@ -11,6 +11,10 @@ const catSearch = require('../../utils/catalog-search')
 
 Page({
   behaviors: [BT],
+  onPageScroll (e) {
+    const show = e && e.scrollTop > 600
+    if (show !== this.data.showBackTop) this.setData({ showBackTop: show })
+  },
   data: {
     statusBarHeight: 20,
     navTop: 70,        // 胶囊按钮下沿（搜索栏定位基准，避免被胶囊遮挡）
