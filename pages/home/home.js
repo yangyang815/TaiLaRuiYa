@@ -8,6 +8,7 @@ const { startClock } = require('../../utils/clock')
 const fishUtil = require('../../utils/fishing')
 const bossGuides = require('../../data/bossGuides')
 const catSearch = require('../../utils/catalog-search')
+const wikiCraft = require('../../utils/wiki-craft')
 
 const GRID = [
   { k: 'boss', n: 'Boss大全', art: 'boss_eye_cthulhu', go: 'list?type=boss' },
@@ -396,10 +397,25 @@ Page({
     const f = e.currentTarget.dataset.f
     this._closePanel()
     catSearch.getById(f).then(entry => {
-      if (entry) this.setData({ catDetail: entry })
+      if (!entry) return
+      this.setData({ catDetail: entry })
+      // 有 wiki 配方时点亮「如何合成」入口（闭环：详情 → 合成页）
+      wikiCraft.hasCraft(entry.en).then(v => {
+        if (v && this.data.catDetail && this.data.catDetail.en === entry.en) {
+          this.setData({ 'catDetail.hasCraft': v })
+        }
+      })
     })
   },
   onCatDetailClose () { this.setData({ catDetail: null }) },
+  // 详情卡「如何合成」→ 跳转合成页（pendingCraft 传 EN 名，合成页按 wiki 配方打开）
+  onCatDetailCraft () {
+    const t = this.data.catDetail
+    if (!t || !t.en) return
+    this.setData({ catDetail: null })
+    getApp().globalData.pendingCraft = t.en
+    wx.switchTab({ url: '/pages/craft/craft' })
+  },
   // Boss 攻略清单 → 深度攻略页
   onPanelGuide (e) {
     if (this.data.searchKw.trim()) store.pushHist(this.data.searchKw.trim())

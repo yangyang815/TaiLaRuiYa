@@ -111,4 +111,18 @@ function leafObt (idx, en) {
   return idx.obt[en] || '非合成物品 · 通过掉落 / 购买 / 采集获得'
 }
 
-module.exports = { buildIndex, rows, rootInfo, iconOf, obtOf, leafObt, slotLabel }
+// 懒加载配方索引（供首页/搜索页判断物品是否有 wiki 配方）
+let _dataP = null
+function dataPromise () {
+  if (!_dataP) {
+    try { _dataP = require.async('../pkg-recipe/data/recipes-wiki.js').catch(() => null) }
+    catch (e) { _dataP = Promise.resolve(null) }
+  }
+  return _dataP
+}
+function hasCraft (en) {
+  if (!en) return Promise.resolve(false)
+  return dataPromise().then(d => !!(d && d.rec && d.rec[en]))
+}
+
+module.exports = { buildIndex, rows, rootInfo, iconOf, obtOf, leafObt, slotLabel, hasCraft }

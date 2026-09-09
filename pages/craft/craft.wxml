@@ -49,7 +49,7 @@
     <!-- 目标联想（显示工作台与分类，点击展开合成路径） -->
     <view class="suggest card pop-in" wx:if="{{targetSuggests.length}}">
       <view class="sg-item" wx:for="{{targetSuggests}}" wx:key="id"
-        bindtap="onSuggestTap" data-id="{{item.id}}" data-wiki="{{item.wiki}}" data-name="{{item.name}}">
+        bindtap="onSuggestTap" data-id="{{item.id}}" data-wiki="{{item.wiki}}" data-name="{{item.name}}" data-en="{{item.en}}">
         <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
         <view class="col flex-1">
           <text class="sg-name">{{item.name}}<text class="sg-wiki px" wx:if="{{item.wiki}}"> WIKI</text></text>

@@ -16,5 +16,7 @@
 .cd-row { display: flex; padding: 12rpx 0; border-bottom: 2rpx solid var(--line); font-size: 24rpx; }
 .cd-row > .flex-1 { color: var(--text); line-height: 1.6; }
 .cd-k { width: 150rpx; color: var(--text-faint); flex-shrink: 0; }
-.cd-btn { margin-top: 24rpx; text-align: center; padding: 16rpx 0; border-radius: 12rpx;
+.cd-btns { display: flex; gap: 16rpx; margin-top: 24rpx; }
+.cd-btn { flex: 1; text-align: center; padding: 16rpx 0; border-radius: 12rpx;
   font-size: 26rpx; font-weight: 700; color: #0E2A33; background: #4CE0E0; }
+.cd-btn.ghost { color: var(--gold); background: transparent; border: 2rpx solid var(--gold-faint); }

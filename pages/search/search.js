@@ -4,6 +4,7 @@ const store = require('../../utils/store')
 const acq = require('../../utils/acq')
 const fishUtil = require('../../utils/fishing')
 const bossGuides = require('../../data/bossGuides')
+const wikiCraft = require('../../utils/wiki-craft')
 const catSearch = require('../../utils/catalog-search')
 
 
@@ -91,10 +92,23 @@ Page({
   onCatalog (e) {
     this.confirmSearch()
     catSearch.getById(e.currentTarget.dataset.f).then(entry => {
-      if (entry) this.setData({ catDetail: entry })
+      if (!entry) return
+      this.setData({ catDetail: entry })
+      wikiCraft.hasCraft(entry.en).then(v => {
+        if (v && this.data.catDetail && this.data.catDetail.en === entry.en) {
+          this.setData({ 'catDetail.hasCraft': v })
+        }
+      })
     })
   },
   onCatDetailClose () { this.setData({ catDetail: null }) },
+  onCatDetailCraft () {
+    const t = this.data.catDetail
+    if (!t || !t.en) return
+    this.setData({ catDetail: null })
+    getApp().globalData.pendingCraft = t.en
+    wx.switchTab({ url: '/pages/craft/craft' })
+  },
   onWord (e) {
     const w = e.currentTarget.dataset.w
     this.setData({ kw: w })

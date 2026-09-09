@@ -26,5 +26,8 @@
     <view class="cd-row" wx:if="{{item.s}}"><text class="cd-k">工具/特殊</text><text class="flex-1">{{item.s}}</text></view>
     <view class="cd-row"><text class="cd-k">英文名</text><text class="flex-1">{{item.en}}</text></view>
   </scroll-view>
-  <view class="cd-btn" bindtap="onClose">关闭</view>
+  <view class="cd-btns">
+    <view class="cd-btn ghost" wx:if="{{item.hasCraft}}" bindtap="onCraft">⚒ 如何合成</view>
+    <view class="cd-btn" bindtap="onClose">关闭</view>
+  </view>
 </view>

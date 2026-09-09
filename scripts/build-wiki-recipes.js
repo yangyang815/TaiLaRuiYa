@@ -46,6 +46,18 @@ const WILD = {
   'Any Snail': '任意蜗牛', 'Any Firefly': '任意萤火虫', 'Any Fruit': '任意水果', 'Any Pylon': '任意晶塔'
 }
 
+const STATION = {
+  'Work Bench': '工作台', Furnace: '熔炉', Anvil: '铁砧', 'Mythril Anvil': '秘银砧',
+  'Adamantite Forge': '精金熔炉', Hellforge: '地狱熔炉', 'Demon Altar': '恶魔祭坛',
+  'Crimson Altar': '猩红祭坛', Altar: '祭坛', 'Heavy Work Bench': '重型工作台',
+  'Heavy Assembler': '重型装配器', 'Book Case': '书架', 'Crystal Ball': '水晶球',
+  Loom: '织布机', 'Cooking Pot': '烹饪锅', Keg: '酒桶', Sawmill: '锯木机',
+  'Imbuing Station': '灌注站', 'Dye Vat': '染缸', DyeVat: '染缸',
+  "Tinkerer's Workshop": '工匠作坊', 'Water Source': '水源', Sink: '水槽', Honey: '蜂蜜',
+  'Ice Machine': '冰雪机', 'Living Loom': '生命织布机', 'Sky Mill': '天空磨坊',
+  'Ancient Manipulator': '远古操纵机', 'Blend-o-matic': '搅拌机', 'Meat Grinder': '绞肉机',
+  'Solidifier': '固化机', SteampunkerBoiler: '蒸汽锅炉', ByHand: '徒手', 'By Hand': '徒手'
+}
 function zhName (en) {
   if (WILD[en]) return WILD[en]
   if (batchZh[en]) return batchZh[en]
@@ -60,7 +72,7 @@ Object.keys(byResult).forEach(en => {
   zh[en] = zhName(en)
   // 槽内保留 EN 名（递归键），显示时经 zh 映射翻译
   rec[en] = byResult[en].map(rc => ({
-    s: rc.st || '徒手',
+    s: STATION[rc.st] || rc.st || '徒手',
     i: (rc.i || []).map(slot => [...new Set(slot)])
   }))
 })

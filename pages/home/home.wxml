@@ -250,7 +250,7 @@
   </view>
 
   <!-- 全物品图鉴详情弹窗 -->
-  <cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" />
+  <cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" bind:craft="onCatDetailCraft" />
 
   <!-- 分享海报 -->
   <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />

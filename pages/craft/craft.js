@@ -17,6 +17,21 @@ function wikiRecipes () {
   }
   return _wikiP
 }
+// 判断字符串本身是否为 wiki 配方的 EN 键（全量物品详情跳转闭环用）
+function idxRecEn (en) {
+  return typeof en === 'string' && /^[A-Za-z]/.test(en)
+}
+// v2 数据（{zh, rec,...}）→ 扁平列表 [{en, name}]（缓存）
+let _wikiList = null
+function wikiList () {
+  return wikiRecipes().then(d => {
+    if (_wikiList) return _wikiList
+    _wikiList = (d && d.rec)
+      ? Object.keys(d.rec).map(en => ({ en, name: d.zh[en] || en }))
+      : []
+    return _wikiList
+  })
+}
 
 // 物品分类 → 中文标签（配方筛选用）
 const CAT_LABEL = {
@@ -61,6 +76,7 @@ Page({
   _timer: null,
 
   onLoad () {
+    wikiRecipes() // 预载 wiki 全量配方（我要合成联想即时可用）
     const app = getApp()
     const pool = {}
     R.RECIPES.forEach(r => r.ingredients.forEach(g => { pool[g.id] = 1 }))
@@ -161,14 +177,14 @@ Page({
     const reqId = (this._wReqId = (this._wReqId || 0) + 1)
     if (kw.trim()) {
       const k = kw.trim().toLowerCase()
-      wikiRecipes().then(list => {
+      wikiList().then(list => {
         if (reqId !== this._wReqId) return
         const localNames = {}
         ;(this.data.targetSuggests || []).forEach(x => { localNames[x.name] = 1 })
-        const wikiSug = (list || [])
-          .filter(r => (r.n || '').toLowerCase().includes(k) || (r.en || '').toLowerCase().includes(k))
+        const wikiSug = list
+          .filter(r => r.name.toLowerCase().includes(k) || r.en.toLowerCase().includes(k))
           .slice(0, 6)
-          .map(r => ({ id: 'w_' + r.en, name: r.n, en: r.en, wiki: true, artId: 'stone' }))
+          .map(r => ({ id: 'w_' + r.en, name: r.name, en: r.en, wiki: true, artId: 'stone' }))
           .filter(x => !localNames[x.name])
         if (!wikiSug.length) return
         this.setData({ targetSuggests: (this.data.targetSuggests || []).concat(wikiSug) })
@@ -177,7 +193,7 @@ Page({
   },
   clearKw () { this.setData({ kw: '', targetSuggests: [] }) },
   onSuggestTap (e) {
-    if (e.currentTarget.dataset.wiki) { this.setWikiTarget(e.currentTarget.dataset.name); return }
+    if (e.currentTarget.dataset.wiki) { this.setWikiTarget(e.currentTarget.dataset.name, e.currentTarget.dataset.en); return }
     this.setTarget(e.currentTarget.dataset.id)
   },
   onQuickTap (e) { this.setTarget(e.currentTarget.dataset.id) },
@@ -257,7 +273,18 @@ Page({
 
   setTarget (id) {
     const rec = R.byId[id]
-    if (!rec) return
+    if (!rec) {
+      // 闭环回退：精品/全量物品没有手造配方时，按 EN 名查 wiki 全量配方
+      const entry = dex.byId[id]
+      const en = (entry && entry.en) || (idxRecEn(id) ? id : '')
+      if (!en) { wx.showToast({ title: '暂未收录该物品的合成配方', icon: 'none' }); return }
+      wikiList().then(list => {
+        const hit = list.some(r => r.en === en)
+        if (hit) this.setWikiTarget(entry ? entry.name : en, en)
+        else wx.showToast({ title: '暂未收录该物品的合成配方', icon: 'none' })
+      })
+      return
+    }
     store.markFlag('craftUsed')
     this._tree = dex.buildTree(id, this._haveSet())
     const entry = dex.byId[rec.result]

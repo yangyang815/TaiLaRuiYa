@@ -112,4 +112,4 @@
   </scroll-view>
 </view>
 
-<cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" />
+<cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" bind:craft="onCatDetailCraft" />
