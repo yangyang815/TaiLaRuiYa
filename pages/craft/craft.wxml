@@ -49,11 +49,12 @@
     <!-- 目标联想（显示工作台与分类，点击展开合成路径） -->
     <view class="suggest card pop-in" wx:if="{{targetSuggests.length}}">
       <view class="sg-item" wx:for="{{targetSuggests}}" wx:key="id"
-        bindtap="onSuggestTap" data-id="{{item.id}}">
+        bindtap="onSuggestTap" data-id="{{item.id}}" data-wiki="{{item.wiki}}" data-name="{{item.name}}">
         <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
         <view class="col flex-1">
-          <text class="sg-name">{{item.name}}</text>
-          <text class="sg-sub" wx:if="{{item.stationName || item.catLabel}}">⚒ {{item.stationName}}<block wx:if="{{item.catLabel}}"> · {{item.catLabel}}</block></text>
+          <text class="sg-name">{{item.name}}<text class="sg-wiki px" wx:if="{{item.wiki}}"> WIKI</text></text>
+          <text class="sg-sub" wx:if="{{item.wiki}}">{{item.en}}</text>
+          <text class="sg-sub" wx:elif="{{item.stationName || item.catLabel}}">⚒ {{item.stationName}}<block wx:if="{{item.catLabel}}"> · {{item.catLabel}}</block></text>
         </view>
         <text class="sg-go px">GO</text>
       </view>
@@ -92,7 +93,7 @@
   </view>
 
   <!-- 合成配方 -->
-  <block wx:if="{{target}}">
+  <block wx:if="{{target && !target.wiki}}">
     <view class="sec-title"><view class="diamond" /><text class="t">合成配方</text>
       <text class="more px">RECIPE</text>
     </view>
@@ -195,10 +196,48 @@
     </block>
   </block>
 
-  <view class="empty" wx:else>
+  <view class="empty" wx:elif="{{!target}}">
     <view class="e-icon floaty">⚒️</view>
     <text>输入目标物品，向导为你展开完整合成路线</text>
   </view>
+
+  <!-- wiki 全量配方目标：标准配方卡 -->
+  <block wx:if="{{target && target.wiki}}">
+    <view class="sec-title"><view class="diamond" /><text class="t">合成配方</text>
+      <text class="more px">WIKI RECIPE</text>
+    </view>
+
+    <view class="target-card card">
+      <view class="tc-glow" style="background: radial-gradient(circle at 50% 40%, {{target.glow}}30 0%, transparent 70%);" />
+      <view class="tc-row">
+        <view class="tc-art" style="box-shadow: 0 0 24rpx {{target.glow}}55;">
+          <image wx:if="{{target.sprite}}" class="tc-sprite" src="{{target.sprite}}" mode="aspectFit" />
+          <text wx:else class="tc-ph px">…</text>
+        </view>
+        <view class="col flex-1">
+          <text class="tc-name">{{target.name}}</text>
+          <text class="tc-en px" wx:if="{{target.en}}">{{target.en}}</text>
+          <text class="tc-station">⚒ {{target.station}} · 产出 ×1</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="sec-title"><view class="diamond" /><text class="t">所需材料</text>
+      <text class="more" wx:if="{{wikiVarN > 1}}">共 {{wikiVarN}} 种配方变体</text>
+    </view>
+    <view class="mats card">
+      <view class="mat-row" wx:for="{{wikiMats}}" wx:key="name"
+        bindtap="onWikiMatTap" data-f="{{item.f}}">
+        <view class="mat-art" style="box-shadow: 0 0 14rpx {{item.rcol}}44;">
+          <image wx:if="{{item.sprite}}" class="mat-sprite" src="{{item.sprite}}" mode="aspectFit" />
+          <text wx:else class="px">❔</text>
+        </view>
+        <text class="mat-n flex-1">{{item.name}}</text>
+        <text class="tag tag-item">配料</text>
+      </view>
+    </view>
+    <view class="wiki-note px">配方来自 wiki 全量配方库 · 点击配料可查看详情；"/"表示任选其一</view>
+  </block>
 
   <!-- 配方筛选：分类 + 工作台 -->
   <view class="sec-title"><view class="diamond" /><text class="t">配方筛选</text>
@@ -243,3 +282,5 @@
   <!-- 分享海报 -->
   <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
 </view>
+
+<cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" />

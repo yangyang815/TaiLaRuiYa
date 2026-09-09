@@ -190,3 +190,10 @@
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .pad-bottom { height: 200rpx; }
+
+/* wiki 配方卡 */
+.tc-sprite { width: 72rpx; height: 72rpx; }
+.tc-ph { font-size: 40rpx; color: var(--text-faint); }
+.mat-sprite { width: 56rpx; height: 56rpx; }
+.sg-wiki { font-size: 17rpx; color: #4CE0E0; border: 2rpx solid #4CE0E066; border-radius: 6rpx; padding: 0 6rpx; margin-left: 8rpx; }
+.wiki-note { text-align: center; font-size: 19rpx; color: var(--text-faint); margin-top: 16rpx; }

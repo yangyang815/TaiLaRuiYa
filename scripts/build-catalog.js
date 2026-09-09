@@ -304,13 +304,13 @@ async function build () {
       if (zi.lc) r.listcat = zi.lc
       if (zi.dt) r.damagetype = zi.dt
       const rec = zhdetail.byResult[r.en]
-      if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(zName).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
+      if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
       const use = zhdetail.byIng[r.en]
       if (use) r._use = '用于合成：' + use.map(zName).slice(0, 4).join('、') + (use.length > 4 ? ' 等 ' + use.length + ' 项' : '')
     }
     if (!r._ob) {
       const rec2 = zhdetail.byResult[zhName]
-      if (rec2) r._ob = '合成：' + rec2.map(rc => rc.i.map(zName).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
+      if (rec2) r._ob = '合成：' + rec2.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
     }
     if (!r._use) {
       const use2 = zhdetail.byIng[zhName]
@@ -421,17 +421,18 @@ async function zhdata () {
   recs.forEach(r => {
     const res = cleanWiki(r.result)
     const st = cleanWiki(r.station)
-    // 配方可能含多个变体（^ 分隔），每个变体内配料用 ¦ 分隔
-    String(r.ingredients || '').split('^').forEach(variant => {
-      const ings = variant.split('¦').map(x => x.trim()).filter(Boolean)
-      if (!res || !ings.length) return
+    // 格式（zh wiki 实测）：^ 分隔"必备材料槽"，¦ 分隔槽内可替代选项（如 手机 = ¦PDA¦^¦Ice Mirror¦）
+    const slots = String(r.ingredients || '').split('^')
+      .map(slot => slot.split('¦').map(x => x.trim()).filter(Boolean))
+      .filter(slot => slot.length)
+    if (res && slots.length) {
       byResult[res] = byResult[res] || []
-      if (byResult[res].length < 3) byResult[res].push({ i: ings, st })
-      ings.forEach(ing => {
+      if (byResult[res].length < 3) byResult[res].push({ i: slots, st })
+      slots.forEach(slot => slot.forEach(ing => {
         byIng[ing] = byIng[ing] || []
         if (byIng[ing].length < 6 && byIng[ing].indexOf(res) < 0) byIng[ing].push(res)
-      })
-    })
+      }))
+    }
   })
   writeStage('zhdetail.json', { items, byResult, byIng })
   console.log('中文条目:', Object.keys(items).length, '| 配方:', recs.length, '行')

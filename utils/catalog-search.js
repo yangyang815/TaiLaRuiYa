@@ -60,4 +60,9 @@ function getById (f) {
   return load().then(all => all.find(x => x.f === f) || null)
 }
 
-module.exports = { load, search, getById, __useLoader: fn => { loader = fn; p = null } }
+// 按中文名精确查找（wiki 配料图标/详情用）
+function findByName (name) {
+  return load().then(all => all.find(x => x.n === name) || null)
+}
+
+module.exports = { load, search, getById, findByName, __useLoader: fn => { loader = fn; p = null } }

@@ -5,6 +5,17 @@ const acq = require('../../utils/acq')
 const store = require('../../utils/store')
 const R = require('../../data/recipes')
 const { startClock } = require('../../utils/clock')
+const catSearch = require('../../utils/catalog-search')
+
+// wiki 全量配方（分包异步化懒加载，3457 条）
+let _wikiP = null
+function wikiRecipes () {
+  if (!_wikiP) {
+    try { _wikiP = require.async('../../pkg-cat-2/data/recipes-wiki.js').catch(() => []) }
+    catch (e) { _wikiP = Promise.resolve([]) }
+  }
+  return _wikiP
+}
 
 // 物品分类 → 中文标签（配方筛选用）
 const CAT_LABEL = {
@@ -145,9 +156,27 @@ Page({
       return r && r.station === this.data.fStation
     })
     this.setData({ kw, targetSuggests: sug })
+    // wiki 全量配方联想（异步回填，请求序号防过期；本地已命中的名字不重复出现）
+    const reqId = (this._wReqId = (this._wReqId || 0) + 1)
+    if (kw.trim()) {
+      const k = kw.trim().toLowerCase()
+      wikiRecipes().then(list => {
+        if (reqId !== this._wReqId) return
+        const localNames = {}
+        ;(this.data.targetSuggests || []).forEach(x => { localNames[x.name] = 1 })
+        const wikiSug = (list || [])
+          .filter(r => (r.n || '').toLowerCase().includes(k) || (r.en || '').toLowerCase().includes(k))
+          .slice(0, 6)
+          .map(r => ({ id: 'w_' + r.en, name: r.n, en: r.en, wiki: true, artId: 'stone' }))
+          .filter(x => !localNames[x.name])
+        if (!wikiSug.length) return
+        this.setData({ targetSuggests: (this.data.targetSuggests || []).concat(wikiSug) })
+      })
+    }
   },
   clearKw () { this.setData({ kw: '', targetSuggests: [] }) },
   onSuggestTap (e) {
+    if (e.currentTarget.dataset.wiki) { this.setWikiTarget(e.currentTarget.dataset.name); return }
     this.setTarget(e.currentTarget.dataset.id)
   },
   onQuickTap (e) { this.setTarget(e.currentTarget.dataset.id) },
@@ -173,6 +202,38 @@ Page({
     this.setTarget(e.currentTarget.dataset.id)
     wx.pageScrollTo({ scrollTop: 0, duration: 250 })
   },
+
+  // wiki 配方目标：展示标准配方卡（配料带官方图标，点击看配料详情）
+  setWikiTarget (name) {
+    store.markFlag('craftUsed')
+    wikiRecipes().then(list => {
+      const rec = (list || []).find(r => r.n === name)
+      if (!rec) return
+      const v = rec.v[0]
+      this.setData({
+        kw: name, targetSuggests: [], mats: [], rows: [],
+        target: { wiki: true, name, en: rec.en, glow: '#4CE0E0', station: v.s, count: 1, fav: false, sprite: '' },
+        wikiMats: v.i.map(n => ({ name: n })),
+        wikiVarN: rec.v.length
+      })
+      // 官方精灵图异步回填（结果 + 各配料）
+      const reqId = (this._wsReqId = (this._wsReqId || 0) + 1)
+      Promise.all([name].concat(v.i).map(n => catSearch.findByName(n).catch(() => null))).then(res => {
+        if (reqId !== this._wsReqId || !this.data.target || this.data.target.name !== name) return
+        const mats = (this.data.wikiMats || []).slice()
+        res.slice(1).forEach((info, i) => {
+          if (info && mats[i]) mats[i] = { name: mats[i].name, f: info.f, sprite: info.sprite, rcol: info.rcol }
+        })
+        this.setData({ 'target.sprite': (res[0] && res[0].sprite) || '', wikiMats: mats })
+      })
+    })
+  },
+  onWikiMatTap (e) {
+    const f = e.currentTarget.dataset.f
+    if (!f) { wx.showToast({ title: '该配料暂无详情', icon: 'none' }); return }
+    catSearch.getById(f).then(entry => { if (entry) this.setData({ catDetail: entry }) })
+  },
+  onCatDetailClose () { this.setData({ catDetail: null }) },
 
   setTarget (id) {
     const rec = R.byId[id]

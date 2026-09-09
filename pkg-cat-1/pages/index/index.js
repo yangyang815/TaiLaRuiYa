@@ -11,7 +11,7 @@ Page({
     themeClass: '',
     vol: 1,
     cats: '可合成物品 / 战利品',
-    total: 2963,
+    total: 2965,
     kw: '',
     rows: [],
     shown: 0,

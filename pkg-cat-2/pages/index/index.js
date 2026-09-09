@@ -11,7 +11,7 @@ Page({
     themeClass: '',
     vol: 2,
     cats: '掉落物品 / 家具',
-    total: 2738,
+    total: 2736,
     kw: '',
     rows: [],
     shown: 0,
