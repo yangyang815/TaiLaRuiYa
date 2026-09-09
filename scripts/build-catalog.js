@@ -89,7 +89,8 @@ const STATION = {
   "Tinkerer's Workshop": '工匠作坊', 'Water Source': '水源', Sink: '水槽', Honey: '蜂蜜',
   'Ice Machine': '冰雪机', 'Living Loom': '生命织布机', 'Sky Mill': '天空磨坊',
   'Ancient Manipulator': '远古操纵机', 'Blend-o-matic': '搅拌机', 'Meat Grinder': '绞肉机',
-  'Solidifier': '固化机', SteampunkerBoiler: '蒸汽锅炉', ByHand: '徒手', 'By Hand': '徒手'
+  'Solidifier': '固化机', SteampunkerBoiler: '蒸汽锅炉', ByHand: '徒手', 'By Hand': '徒手',
+  'Iron Anvil': '铁砧', 'Lead Anvil': '铅砧', Shimmer: '微光'
 }
 // 泛型桶（分类筛选时跳过，取更具体的分类）
 const GENERIC_CAT = {
@@ -306,30 +307,29 @@ async function build () {
   // 合并中文详情/获得/用途
   const zhdetail = readStage('zhdetail.json', { items: {}, byResult: {}, byIng: {} })
   const zhExtract = readStage('zhextract.json', {})
+  let dexZhMap = null
   entries.forEach(r => {
     const zi = zhdetail.items[r.internal] || zhdetail.items[r.en] || null
     const zhName = zh[r.page] || r.en
-    const zhByName = zhdetail.items && Object.keys(zhdetail.items).length ? null : null
-    const zName = en => zh[en] || en
+    // 配料翻译链：zh Items 表（internalname）→ 精品图鉴 → langlinks → 原文
+    if (!dexZhMap) {
+      dexZhMap = {}
+      try { require('../data/items.js').forEach(x => { if (x.en && x.name && !dexZhMap[x.en]) dexZhMap[x.en] = x.name }) } catch (e) { /* 缺失跳过 */ }
+    }
+    const WILD = { 'Any Iron Bar': '任意铁锭（铁/铅）', 'Any Silver Bar': '任意银锭（银/钨）', 'Any Gold Bar': '任意金锭（金/铂）', 'Any Copper Bar': '任意铜锭（铜/锡）', 'Any Cobalt Bar': '任意钴锭（钴/钯金）', 'Any Mythril Bar': '任意秘银锭（秘银/山铜）', 'Any Adamantite Bar': '任意精金锭（精金/钛金）', 'Any Evil Bar': '任意邪恶金属锭', 'Any Wood': '任意木材', 'Any Stone Block': '任意石块', 'Any Torch': '火把', 'Any Balloon': '任意气球', 'Any Fruit': '任意水果', 'Any Bird': '任意鸟', 'Any Butterfly': '任意蝴蝶', 'Any Snail': '任意蜗牛', 'Any Firefly': '任意萤火虫', 'Any Pylon': '任意晶塔' }
+    const zName = en => WILD[en] || (zhdetail.items[en] && /[\u4e00-\u9fa5]/.test(zhdetail.items[en].n) && zhdetail.items[en].n) || dexZhMap[en] || zh[en] || en
+    // 配方查找：EN 键优先（Cargo byResult 键为 EN），回退 zh 名；不被 zi 门控
+    const rec = zhdetail.byResult[r.en] || zhdetail.byResult[zhName] || null
+    const use = zhdetail.byIng[r.en] || zhdetail.byIng[zhName] || null
     if (zi) {
       if (zi.t) r.tooltip = zi.t
       else if (zhExtract[zhName]) r.tooltip = zhExtract[zhName]
       if (zi.b) r._bonus = zi.b
       if (zi.lc) r.listcat = zi.lc
       if (zi.dt) r.damagetype = zi.dt
-      const rec = zhdetail.byResult[r.en]
-      if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
-      const use = zhdetail.byIng[r.en]
-      if (use) r._use = '用于合成：' + use.map(zName).slice(0, 4).join('、') + (use.length > 4 ? ' 等 ' + use.length + ' 项' : '')
     }
-    if (!r._ob) {
-      const rec2 = zhdetail.byResult[zhName]
-      if (rec2) r._ob = '合成：' + rec2.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
-    }
-    if (!r._use) {
-      const use2 = zhdetail.byIng[zhName]
-      if (use2) r._use = '用于合成：' + use2.map(zName).slice(0, 4).join('、') + (use2.length > 4 ? ' 等 ' + use2.length + ' 项' : '')
-    }
+    if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
+    if (use) r._use = '用于合成：' + use.map(zName).slice(0, 4).join('、') + (use.length > 4 ? ' 等 ' + use.length + ' 项' : '')
     if (!zh[r.page]) r._zhmiss = true
   })
 
@@ -448,8 +448,37 @@ async function zhdata () {
       }))
     }
   })
+  // EN Recipes 全表补缺（zh 表不含部分配方，如部分家具；EN 键为英文名，翻译在展示层做）
+  let erecs = []
+  offset = 0
+  while (true) {
+    const url = 'https://terraria.wiki.gg/api.php?action=cargoquery&tables=Recipes&format=json&limit=500&offset=' + offset +
+      '&fields=result,ingredients,station'
+    let d
+    try { d = await fetchJson(url) } catch (e) { console.log('EN 重试 offset=' + offset); d = await fetchJson(url) }
+    const rows = (d.cargoquery || []).map(x => x.title)
+    erecs = erecs.concat(rows)
+    if (rows.length < 500) break
+    offset += 500
+  }
+  let added = 0
+  erecs.forEach(r => {
+    const res = cleanWiki(r.result)
+    if (!res || byResult[res]) return // zh 已有的优先
+    const st = cleanWiki(r.station)
+    const slots = String(r.ingredients || '').split('^')
+      .map(slot => slot.split('¦').map(x => x.trim()).filter(Boolean))
+      .filter(slot => slot.length)
+    if (!slots.length) return
+    byResult[res] = [{ i: slots, st }]
+    added++
+    slots.forEach(slot => slot.forEach(ing => {
+      byIng[ing] = byIng[ing] || []
+      if (byIng[ing].length < 6 && byIng[ing].indexOf(res) < 0) byIng[ing].push(res)
+    }))
+  })
   writeStage('zhdetail.json', { items, byResult, byIng })
-  console.log('中文条目:', Object.keys(items).length, '| 配方:', recs.length, '行')
+  console.log('中文条目:', Object.keys(items).length, '| 配方:', recs.length, '行 | EN 补缺:', added, '（总结果', Object.keys(byResult).length + '）')
 }
 
 const stage = process.argv[2] || ''

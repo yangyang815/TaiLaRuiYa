@@ -19,7 +19,7 @@ const batchZh = {}, batchIco = {}, batchObt = {}
 ;[1, 2].forEach(v => {
   try {
     require('../pkg-cat-' + v + '/data/batch.js').forEach(x => {
-      if (x.en && x.n && !batchZh[x.en]) batchZh[x.en] = x.n
+      if (x.en && x.n && /[\u4e00-\u9fa5]/.test(x.n) && !batchZh[x.en]) batchZh[x.en] = x.n
       if (x.en && x.f && !batchIco[x.en]) batchIco[x.en] = [x.f, v]
       if (x.en && x.ob && !batchObt[x.en]) batchObt[x.en] = String(x.ob).slice(0, 70)
     })
@@ -30,7 +30,7 @@ const batchZh = {}, batchIco = {}, batchObt = {}
 const dexZh = {}, dexArt = {}, dexObt = {}
 try {
   require('../data/items.js').forEach(x => {
-    if (x.en && x.name && !dexZh[x.en]) dexZh[x.en] = x.name
+    if (x.en && x.name && /[\u4e00-\u9fa5]/.test(x.name) && !dexZh[x.en]) dexZh[x.en] = x.name
     if (x.en && x.art && !dexArt[x.en]) dexArt[x.en] = x.art
     if (x.en && x.obtain && !dexObt[x.en]) dexObt[x.en] = String(x.obtain).slice(0, 70)
   })
@@ -63,7 +63,7 @@ function zhName (en) {
   if (WILD[en]) return WILD[en]
   if (batchZh[en]) return batchZh[en]
   if (dexZh[en]) return dexZh[en]
-  if (items[en] && items[en].n) return items[en].n
+  if (items[en] && /[\u4e00-\u9fa5]/.test(items[en].n)) return items[en].n
   return zhLL[en] || en
 }
 
