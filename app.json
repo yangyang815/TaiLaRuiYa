@@ -109,7 +109,12 @@
     "pages/home/home": {
       "network": "wifi",
       "packages": [
-        "cat1",
+        "cat1"
+      ]
+    },
+    "pages/search/search": {
+      "network": "wifi",
+      "packages": [
         "cat2"
       ]
     }
