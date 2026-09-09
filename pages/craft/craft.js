@@ -6,12 +6,13 @@ const store = require('../../utils/store')
 const R = require('../../data/recipes')
 const { startClock } = require('../../utils/clock')
 const catSearch = require('../../utils/catalog-search')
+const wikiCraft = require('../../utils/wiki-craft')
 
 // wiki 全量配方（分包异步化懒加载，3457 条）
 let _wikiP = null
 function wikiRecipes () {
   if (!_wikiP) {
-    try { _wikiP = require.async('../../pkg-cat-2/data/recipes-wiki.js').catch(() => []) }
+    try { _wikiP = require.async('../../pkg-recipe/data/recipes-wiki.js').catch(() => []) }
     catch (e) { _wikiP = Promise.resolve([]) }
   }
   return _wikiP
@@ -203,35 +204,54 @@ Page({
     wx.pageScrollTo({ scrollTop: 0, duration: 250 })
   },
 
-  // wiki 配方目标：展示标准配方卡（配料带官方图标，点击看配料详情）
-  setWikiTarget (name) {
+  // wiki 配方目标：递归合成树（点击材料逐级展开到不可再合成为止）
+  setWikiTarget (name, en) {
     store.markFlag('craftUsed')
-    wikiRecipes().then(list => {
-      const rec = (list || []).find(r => r.n === name)
-      if (!rec) return
-      const v = rec.v[0]
+    wikiRecipes().then(data => {
+      const idx = wikiCraft.buildIndex(data)
+      const rootEn = en || Object.keys(idx.rec).find(k => idx.zh[k] === name)
+      if (!rootEn || !idx.rec[rootEn]) return
+      this._wikiIdx = idx
+      this._wikiOpen = new Set()
+      this._wikiEn = rootEn
       this.setData({
-        kw: name, targetSuggests: [], mats: [], rows: [],
-        target: { wiki: true, name, en: rec.en, glow: '#4CE0E0', station: v.s, count: 1, fav: false, sprite: '' },
-        wikiMats: v.i.map(n => ({ name: n })),
-        wikiVarN: rec.v.length
+        kw: idx.zh[rootEn] || name, targetSuggests: [], mats: [], rows: [],
+        target: {
+          wiki: true, name: idx.zh[rootEn] || name, en: rootEn,
+          glow: '#4CE0E0', station: '', count: 1, fav: false,
+          sprite: (wikiCraft.rootInfo(idx, rootEn) || {}).sprite || '',
+          artId: (wikiCraft.rootInfo(idx, rootEn) || {}).artId || '',
+          varN: (idx.rec[rootEn] || []).length
+        },
+        wikiRows: wikiCraft.rows(idx, rootEn, this._wikiOpen)
       })
-      // 官方精灵图异步回填（结果 + 各配料）
-      const reqId = (this._wsReqId = (this._wsReqId || 0) + 1)
-      Promise.all([name].concat(v.i).map(n => catSearch.findByName(n).catch(() => null))).then(res => {
-        if (reqId !== this._wsReqId || !this.data.target || this.data.target.name !== name) return
-        const mats = (this.data.wikiMats || []).slice()
-        res.slice(1).forEach((info, i) => {
-          if (info && mats[i]) mats[i] = { name: mats[i].name, f: info.f, sprite: info.sprite, rcol: info.rcol }
-        })
-        this.setData({ 'target.sprite': (res[0] && res[0].sprite) || '', wikiMats: mats })
-      })
+      this._patchWikiRoot()
     })
   },
+  // 根节点工作站信息
+  _patchWikiRoot () {
+    const en = this._wikiEn
+    if (!en || !this._wikiIdx) return
+    const rec = this._wikiIdx.rec[en]
+    if (rec && rec.length) this.setData({ 'target.station': rec[0].s || '徒手' })
+  },
+  // 展开/收起材料节点
+  onWikiRowTap (e) {
+    const key = e.currentTarget.dataset.key
+    if (!e.currentTarget.dataset.expandable) return
+    if (this._wikiOpen.has(key)) this._wikiOpen.delete(key)
+    else this._wikiOpen.add(key)
+    this.setData({ wikiRows: wikiCraft.rows(this._wikiIdx, this._wikiEn, this._wikiOpen) })
+  },
+  // 配料详情（精灵图行 → 图鉴卷完整条目；精品行 → dex 跳转）
   onWikiMatTap (e) {
-    const f = e.currentTarget.dataset.f
-    if (!f) { wx.showToast({ title: '该配料暂无详情', icon: 'none' }); return }
-    catSearch.getById(f).then(entry => { if (entry) this.setData({ catDetail: entry }) })
+    const { f, en } = e.currentTarget.dataset
+    if (f) {
+      catSearch.getById(f).then(entry => { if (entry) this.setData({ catDetail: entry }) })
+      return
+    }
+    const entry = en && dex.ALL.find(x => (x.en || '').toLowerCase() === String(en).toLowerCase())
+    if (entry) { this.setData({ catDetail: null }); dex.go(entry.id) }
   },
   onCatDetailClose () { this.setData({ catDetail: null }) },
 

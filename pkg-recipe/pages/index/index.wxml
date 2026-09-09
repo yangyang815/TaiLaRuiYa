@@ -1,0 +1,6 @@
+<view class="pg {{themeClass}}">
+  <view class="card tip">
+    <text class="t1">📦 配方数据分包</text>
+    <text class="t2">wiki 全量配方数据随需加载，为合成向导提供支持。</text>
+  </view>
+</view>

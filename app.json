@@ -91,6 +91,13 @@
       "pages": [
         "pages/index/index"
       ]
+    },
+    {
+      "root": "pkg-recipe",
+      "name": "recipe",
+      "pages": [
+        "pages/index/index"
+      ]
     }
   ],
   "preloadRule": {
@@ -116,6 +123,12 @@
       "network": "wifi",
       "packages": [
         "cat2"
+      ]
+    },
+    "pages/craft/craft": {
+      "network": "wifi",
+      "packages": [
+        "recipe"
       ]
     }
   }

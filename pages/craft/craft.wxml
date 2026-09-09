@@ -226,14 +226,20 @@
       <text class="more" wx:if="{{wikiVarN > 1}}">共 {{wikiVarN}} 种配方变体</text>
     </view>
     <view class="mats card">
-      <view class="mat-row" wx:for="{{wikiMats}}" wx:key="name"
-        bindtap="onWikiMatTap" data-f="{{item.f}}">
-        <view class="mat-art" style="box-shadow: 0 0 14rpx {{item.rcol}}44;">
-          <image wx:if="{{item.sprite}}" class="mat-sprite" src="{{item.sprite}}" mode="aspectFit" />
+      <view class="wt-row" wx:for="{{wikiRows}}" wx:key="key"
+        style="padding-left: {{14 + item.depth * 36}}rpx"
+        bindtap="onWikiRowTap" data-key="{{item.key}}" data-expandable="{{item.expandable}}">
+        <view class="mat-art" style="box-shadow: 0 0 12rpx {{item.artId ? '#4CE0E044' : 'transparent'}};">
+          <image wx:if="{{item.sprite || item.f}}" class="mat-sprite" src="{{item.sprite || '/pkg-cat-' + item.vol + '/assets/' + item.f + '.png'}}" mode="aspectFit" />
+          <pixel-icon wx:elif="{{item.artId}}" art-id="{{item.artId}}" size="44" />
           <text wx:else class="px">❔</text>
         </view>
-        <text class="mat-n flex-1">{{item.name}}</text>
-        <text class="tag tag-item">配料</text>
+        <view class="col flex-1">
+          <text class="mat-n">{{item.label}}<text class="wt-cyc px" wx:if="{{item.cyclic}}"> ↺ 已在上层</text></text>
+          <text class="wt-obt px" wx:if="{{item.obtTxt}}">{{item.obtTxt}}</text>
+        </view>
+        <text class="wt-detail tappable" catchtap="onWikiMatTap" data-f="{{item.f}}" data-en="{{item.en}}">ℹ</text>
+        <text class="wt-arrow px">{{item.open ? '▾' : (item.expandable ? '▸ 可合成' : '')}}</text>
       </view>
     </view>
     <view class="wiki-note px">配方来自 wiki 全量配方库 · 点击配料可查看详情；"/"表示任选其一</view>
