@@ -177,14 +177,20 @@ Page({
     const reqId = (this._wReqId = (this._wReqId || 0) + 1)
     if (kw.trim()) {
       const k = kw.trim().toLowerCase()
-      wikiList().then(list => {
+      wikiRecipes().then(data => {
         if (reqId !== this._wReqId) return
+        const idx = wikiCraft.buildIndex(data)
         const localNames = {}
         ;(this.data.targetSuggests || []).forEach(x => { localNames[x.name] = 1 })
-        const wikiSug = list
+        const wikiSug = Object.keys(idx.rec)
+          .map(en => ({ en, name: idx.zh[en] || en }))
           .filter(r => r.name.toLowerCase().includes(k) || r.en.toLowerCase().includes(k))
+          .sort((a, b) => (a.name.startsWith(k) || a.en.toLowerCase().startsWith(k) ? 0 : 1) - (b.name.startsWith(k) || b.en.toLowerCase().startsWith(k) ? 0 : 1))
           .slice(0, 6)
-          .map(r => ({ id: 'w_' + r.en, name: r.name, en: r.en, wiki: true, artId: 'stone' }))
+          .map(r => {
+            const icon = wikiCraft.iconOf(idx, r.en)
+            return { id: 'w_' + r.en, name: r.name, en: r.en, wiki: true, artId: (icon && icon.artId) || 'stone', sprite: (icon && icon.sprite) || '' }
+          })
           .filter(x => !localNames[x.name])
         if (!wikiSug.length) return
         this.setData({ targetSuggests: (this.data.targetSuggests || []).concat(wikiSug) })
@@ -221,7 +227,7 @@ Page({
   },
 
   // wiki 配方目标：递归合成树（点击材料逐级展开到不可再合成为止）
-  setWikiTarget (name, en) {
+  setWikiTarget (name, en, varI) {
     store.markFlag('craftUsed')
     wikiRecipes().then(data => {
       const idx = wikiCraft.buildIndex(data)
@@ -230,26 +236,29 @@ Page({
       this._wikiIdx = idx
       this._wikiOpen = new Set()
       this._wikiEn = rootEn
+      this._wikiVarI = varI || 0
+      const icon = wikiCraft.iconOf(idx, rootEn)
+      const rec = idx.rec[rootEn]
+      const v = rec[Math.min(this._wikiVarI, rec.length - 1)]
       this.setData({
         kw: idx.zh[rootEn] || name, targetSuggests: [], mats: [], rows: [],
         target: {
           wiki: true, name: idx.zh[rootEn] || name, en: rootEn,
-          glow: '#4CE0E0', station: '', count: 1, fav: false,
-          sprite: (wikiCraft.rootInfo(idx, rootEn) || {}).sprite || '',
-          artId: (wikiCraft.rootInfo(idx, rootEn) || {}).artId || '',
-          varN: (idx.rec[rootEn] || []).length
+          glow: '#4CE0E0', station: v.s || '徒手', count: 1, fav: false,
+          sprite: (icon && icon.sprite) || '',
+          artId: (icon && icon.artId) || '',
+          varN: rec.length,
+          varI: this._wikiVarI
         },
-        wikiRows: wikiCraft.rows(idx, rootEn, this._wikiOpen)
+        wikiRows: wikiCraft.rows(idx, rootEn, this._wikiOpen, this._wikiVarI)
       })
-      this._patchWikiRoot()
     })
   },
-  // 根节点工作站信息
-  _patchWikiRoot () {
-    const en = this._wikiEn
-    if (!en || !this._wikiIdx) return
-    const rec = this._wikiIdx.rec[en]
-    if (rec && rec.length) this.setData({ 'target.station': rec[0].s || '徒手' })
+  // 切换配方变体（多工作站/多配比时）
+  onWikiVariant () {
+    const rec = this._wikiIdx && this._wikiIdx.rec[this._wikiEn]
+    if (!rec || rec.length < 2) return
+    this.setWikiTarget(this.data.target.name, this._wikiEn, (this._wikiVarI + 1) % rec.length)
   },
   // 展开/收起材料节点
   onWikiRowTap (e) {

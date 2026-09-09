@@ -50,7 +50,10 @@
     <view class="suggest card pop-in" wx:if="{{targetSuggests.length}}">
       <view class="sg-item" wx:for="{{targetSuggests}}" wx:key="id"
         bindtap="onSuggestTap" data-id="{{item.id}}" data-wiki="{{item.wiki}}" data-name="{{item.name}}" data-en="{{item.en}}">
-        <view class="sg-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+        <view class="sg-art">
+          <image wx:if="{{item.sprite}}" class="sg-sprite" src="{{item.sprite}}" mode="aspectFit" />
+          <pixel-icon wx:else art-id="{{item.artId}}" size="56" />
+        </view>
         <view class="col flex-1">
           <text class="sg-name">{{item.name}}<text class="sg-wiki px" wx:if="{{item.wiki}}"> WIKI</text></text>
           <text class="sg-sub" wx:if="{{item.wiki}}">{{item.en}}</text>
@@ -204,7 +207,8 @@
   <!-- wiki 全量配方目标：标准配方卡 -->
   <block wx:if="{{target && target.wiki}}">
     <view class="sec-title"><view class="diamond" /><text class="t">合成配方</text>
-      <text class="more px">WIKI RECIPE</text>
+      <text class="more tappable" wx:if="{{target.varN > 1}}" bindtap="onWikiVariant">配方 {{target.varI || 0}}/{{target.varN}} · 换一种 ▸</text>
+      <text class="more px" wx:else>WIKI RECIPE</text>
     </view>
 
     <view class="target-card card">
@@ -212,6 +216,7 @@
       <view class="tc-row">
         <view class="tc-art" style="box-shadow: 0 0 24rpx {{target.glow}}55;">
           <image wx:if="{{target.sprite}}" class="tc-sprite" src="{{target.sprite}}" mode="aspectFit" />
+          <pixel-icon wx:elif="{{target.artId}}" art-id="{{target.artId}}" size="112" />
           <text wx:else class="tc-ph px">…</text>
         </view>
         <view class="col flex-1">

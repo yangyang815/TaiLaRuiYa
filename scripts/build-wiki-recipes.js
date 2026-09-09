@@ -56,7 +56,8 @@ const STATION = {
   "Tinkerer's Workshop": '工匠作坊', 'Water Source': '水源', Sink: '水槽', Honey: '蜂蜜',
   'Ice Machine': '冰雪机', 'Living Loom': '生命织布机', 'Sky Mill': '天空磨坊',
   'Ancient Manipulator': '远古操纵机', 'Blend-o-matic': '搅拌机', 'Meat Grinder': '绞肉机',
-  'Solidifier': '固化机', SteampunkerBoiler: '蒸汽锅炉', ByHand: '徒手', 'By Hand': '徒手'
+  'Solidifier': '固化机', SteampunkerBoiler: '蒸汽锅炉', ByHand: '徒手', 'By Hand': '徒手',
+  Shimmer: '微光', 'Lihzahrd Furnace': '蜥蜴熔炉', 'Sky Mill': '天空磨坊'
 }
 function zhName (en) {
   if (WILD[en]) return WILD[en]
@@ -64,6 +65,41 @@ function zhName (en) {
   if (dexZh[en]) return dexZh[en]
   if (items[en] && items[en].n) return items[en].n
   return zhLL[en] || en
+}
+
+// 盔甲套装 → 部件（Cargo Recipes 只登记部件，套装总称页手动映射；部件名均为游戏内标准名）
+const SET_PIECES = {
+  'Cactus Armor': [['Cactus Helmet', '仙人掌头盔'], ['Cactus Breastplate', '仙人掌胸甲'], ['Cactus Leggings', '仙人掌护腿']],
+  'Copper Armor': [['Copper Helmet', '铜头盔'], ['Copper Chainmail', '铜链甲'], ['Copper Greaves', '铜护腿']],
+  'Iron Armor': [['Iron Helmet', '铁头盔'], ['Iron Chainmail', '铁链甲'], ['Iron Greaves', '铁护腿']],
+  'Silver Armor': [['Silver Helmet', '银头盔'], ['Silver Chainmail', '银链甲'], ['Silver Greaves', '银护腿']],
+  'Gold Armor': [['Gold Helmet', '金头盔'], ['Gold Chainmail', '金链甲'], ['Gold Greaves', '金护腿']],
+  'Platinum Armor': [['Platinum Helmet', '铂金头盔'], ['Platinum Chainmail', '铂金链甲'], ['Platinum Greaves', '铂金护腿']],
+  'Meteor Armor': [['Meteor Helmet', '流星头盔'], ['Meteor Suit', '流星战甲'], ['Meteor Leggings', '流星护腿']],
+  'Jungle Armor': [['Jungle Helmet', '丛林头盔'], ['Jungle Shirt', '丛林衬衫'], ['Jungle Pants', '丛林护腿']],
+  'Bee Armor': [['Bee Headgear', '蜜蜂头饰'], ['Bee Breastplate', '蜜蜂胸甲'], ['Bee Greaves', '蜜蜂护腿']],
+  'Obsidian Armor': [['Obsidian Helm', '黑曜石头盔'], ['Obsidian Longcoat', '黑曜石长外套'], ['Obsidian Pants', '黑曜石护腿']],
+  'Cobalt Armor': [['Cobalt Helmet', '钴头盔'], ['Cobalt Breastplate', '钴胸甲'], ['Cobalt Leggings', '钴护腿']],
+  'Palladium Armor': [['Palladium Headgear', '钯金头饰'], ['Palladium Breastplate', '钯金胸甲'], ['Palladium Leggings', '钯金护腿']],
+  'Orichalcum Armor': [['Orichalcum Headgear', '山铜头饰'], ['Orichalcum Breastplate', '山铜胸甲'], ['Orichalcum Leggings', '山铜护腿']],
+  'Adamantite Armor': [['Adamantite Headgear', '精金头饰'], ['Adamantite Breastplate', '精金胸甲'], ['Adamantite Leggings', '精金护腿']],
+  'Titanium Armor': [['Titanium Headgear', '钛金头饰'], ['Titanium Breastplate', '钛金胸甲'], ['Titanium Leggings', '钛金护腿']],
+  'Forbidden Armor': [['Forbidden Mask', '禁戒面具'], ['Forbidden Robe', '禁戒长袍'], ['Forbidden Treads', '禁戒护胫']],
+  'Shroomite Armor': [['Shroomite Headgear', '蘑菇矿头饰'], ['Shroomite Breastplate', '蘑菇矿胸甲'], ['Shroomite Leggings', '蘑菇矿护腿']],
+  'Spectre Armor': [['Spectre Mask', '幽灵面具'], ['Spectre Robe', '幽灵长袍'], ['Spectre Pants', '幽灵护腿']]
+}
+// Cargo 表缺行的可合成物品补丁（配料经 zhName 翻译）
+const REC_PATCH = {
+  Hammush: [{ s: 'Mythril Anvil', i: [['Chlorophyte Bar'], ['Glowing Mushroom'], ['Mushroom Spear?']] }]
+}
+delete REC_PATCH.Hammush // 蘑菇锤配方待核，先不写死，避免引入错误
+
+// 通配符槽 → 代表物品（图标/详情兜底用）
+const WILD_REP = {
+  'Any Iron Bar': 'Iron Bar', 'Any Silver Bar': 'Silver Bar', 'Any Gold Bar': 'Gold Bar',
+  'Any Copper Bar': 'Copper Bar', 'Any Cobalt Bar': 'Cobalt Bar', 'Any Mythril Bar': 'Mythril Bar',
+  'Any Adamantite Bar': 'Adamantite Bar', 'Any Evil Bar': 'Demonite Bar', 'Any Doom Bar': 'Demonite Bar',
+  'Any Wood': 'Wood', 'Any Stone Block': 'Stone Block', 'Any Torch': 'Torch'
 }
 
 // ---- 组装 ----
@@ -89,6 +125,23 @@ allEn.forEach(en => {
   if (dexArt[en]) dexArtOut[en] = dexArt[en]
   const o = batchObt[en] || dexObt[en]
   if (o) obt[en] = o
+})
+
+// 套装条目注入：套装为根，部件为槽（部件在 Cargo 有自身配方 → 递归树可展开）
+Object.keys(SET_PIECES).forEach(setEn => {
+  if (rec[setEn]) return // Cargo 已有则不覆盖
+  const pieces = SET_PIECES[setEn].filter(p => ico[p[0]] || dexArtOut[p[0]] || rec[p[0]])
+  if (pieces.length) {
+    rec[setEn] = [{ s: '部件合成', i: pieces.map(p => [p[0]]) }]
+    // 部件官方中文名（langlinks 可能指向套装页导致污染，此处用标准译名覆盖）
+    pieces.forEach(p => { zh[p[0]] = p[1] })
+  }
+})
+// 通配符槽图标别名（代表物品的图标/精品 artId）
+Object.keys(WILD_REP).forEach(w => {
+  const rep = WILD_REP[w]
+  if (ico[rep]) ico[w] = ico[rep]
+  else if (dexArtOut[rep]) dexArtOut[w] = dexArtOut[rep]
 })
 
 const data = { zh, rec, ico, dexArt: dexArtOut, obt }

@@ -98,6 +98,7 @@ function normRare (raw) {
   return m ? Number(m[1]) : null
 }
 const cleanWiki = s => String(s || '')
+  .replace(/#i:[\w:]+/g, '')
   .replace(/<[^>]+>/g, '')
   .replace(/\[\[([^|\]]*\|)?([^\]]*)\]\]/g, '$2')
   .replace(/'''?/g, '')

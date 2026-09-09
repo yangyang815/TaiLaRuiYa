@@ -206,3 +206,5 @@
 .wt-obt { font-size: 19rpx; color: var(--text-faint); margin-top: 4rpx; line-height: 1.5; }
 .wt-detail { font-size: 26rpx; color: #4CE0E0; padding: 6rpx 12rpx; flex-shrink: 0; }
 .wt-arrow { font-size: 22rpx; color: var(--gold); flex-shrink: 0; }
+
+.sg-sprite { width: 52rpx; height: 52rpx; }

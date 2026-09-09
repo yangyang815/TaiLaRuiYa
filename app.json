@@ -79,6 +79,13 @@
       ]
     },
     {
+      "root": "pkg-recipe",
+      "name": "recipe",
+      "pages": [
+        "pages/index/index"
+      ]
+    },
+    {
       "root": "pkg-cat-1",
       "name": "cat1",
       "pages": [
@@ -88,13 +95,6 @@
     {
       "root": "pkg-cat-2",
       "name": "cat2",
-      "pages": [
-        "pages/index/index"
-      ]
-    },
-    {
-      "root": "pkg-recipe",
-      "name": "recipe",
       "pages": [
         "pages/index/index"
       ]
