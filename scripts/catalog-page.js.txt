@@ -58,7 +58,7 @@ Page({
       catChips.push({ k: '__other__', n: '其他', cnt: this._all.length - mainCnt })
     }
     this._cat = ''
-    this.setData({ total: this._all.length, catChips })
+    this.setData({ total: this._all.length, catChips, cat: '' })
     // 深链：全局搜索结果直达（kw 预填筛选，id 直接弹详情）
     if (opts && opts.kw) this.applyFilter(decodeURIComponent(opts.kw))
     else this.applyFilter('')
@@ -85,6 +85,7 @@ Page({
   onKw (e) { this.applyFilter(e.detail.value) },
   onCat (e) {
     this._cat = e.currentTarget.dataset.k || ''
+    this.setData({ cat: this._cat })
     this.applyFilter(this.data.kw)
   },
   more () {
