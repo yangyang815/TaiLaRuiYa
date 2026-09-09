@@ -50,6 +50,20 @@
         <text class="st-go">›</text>
       </view>
 
+      <view class="sec-title" wx:if="{{catalogHits.length}}"><view class="diamond" /><text class="t">全物品图鉴</text></view>
+      <view class="r-item card tappable" wx:for="{{catalogHits}}" wx:key="f" bindtap="onCatalog" data-vol="{{item.vol}}" data-f="{{item.f}}">
+        <image class="r-img" src="/pkg-cat-{{item.vol}}/assets/{{item.f}}.png" mode="aspectFit" />
+        <view class="col flex-1">
+          <view class="r-line">
+            <text class="r-name">{{item.n}}</text>
+            <text class="r-tags px" wx:if="{{item.c}}">{{item.c}}</text>
+          </view>
+          <text class="r-acq">{{item.en}}</text>
+        </view>
+        <text class="tag tag-item" wx:if="{{item.d}}">{{item.d}} 伤害</text>
+        <text class="tag tag-item" wx:else>全物品</text>
+      </view>
+
       <view class="sec-title" wx:if="{{fishingHits.length}}"><view class="diamond" /><text class="t">钓鱼图鉴</text></view>
       <view class="r-item card tappable" wx:for="{{fishingHits}}" wx:key="id" bindtap="onFish" data-kw="{{item.name}}">
         <view class="r-art">{{item.kind === 'quest' ? '🎣' : (item.kind === 'food' ? '🐟' : (item.kind === 'gear' ? '🧪' : (item.kind === 'bait' ? '🐛' : '📦')))}}</view>
@@ -70,7 +84,7 @@
         <text class="st-go">›</text>
       </view>
 
-      <view class="empty" wx:if="{{!results.length && !stratHits.length && !recipeHits.length && !fishingHits.length && !guideHits.length}}">
+      <view class="empty" wx:if="{{!results.length && !stratHits.length && !recipeHits.length && !fishingHits.length && !guideHits.length && !catalogHits.length}}">
         <view class="e-icon">🌑</view>
         <text>没有找到「{{kw}}」，换个关键词试试</text>
       </view>

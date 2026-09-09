@@ -7,6 +7,7 @@ const remoteMsg = require('../../utils/remote-msg')
 const { startClock } = require('../../utils/clock')
 const fishUtil = require('../../utils/fishing')
 const bossGuides = require('../../data/bossGuides')
+const catSearch = require('../../utils/catalog-search')
 
 const GRID = [
   { k: 'boss', n: 'Boss大全', art: 'boss_eye_cthulhu', go: 'list?type=boss' },
@@ -173,6 +174,7 @@ Page({
 
   onLoad () {
     const app = getApp()
+    this._catPreload() // 全物品图鉴数据预载（分包异步化，WiFi 下已由 preloadRule 预下载）
     const hour = new Date().getHours()
     const daytime = hour >= 6 && hour < 18
     const gs = store.getGrid()
@@ -336,8 +338,15 @@ Page({
     const recipes = dex.recipeSearch(kw).slice(0, 3).map(r => ({ id: r.id, name: r.name, artId: r.artId }))
     const fishingHits = fishUtil.searchAll(kw).slice(0, 3)
     const guideHits = bossGuides.searchGuides(kw).slice(0, 3)
-    this.setData({ searchPanel: { items, strats, recipes, fishingHits, guideHits, total: hits.length } })
+    this.setData({ searchPanel: { items, strats, recipes, fishingHits, guideHits, catalogHits: [], total: hits.length } })
+    // 全物品图鉴（分包异步加载）：加载完成后回填；请求序号防过期结果
+    const reqId = (this._catReqId = (this._catReqId || 0) + 1)
+    catSearch.search(kw).then(hits => {
+      if (reqId !== this._catReqId || !this.data.searchPanel) return
+      this.setData({ 'searchPanel.catalogHits': hits })
+    })
   },
+  _catPreload () { catSearch.load().catch(() => {}) },
   onSearchFocus () {
     if (this._blurTimer) { clearTimeout(this._blurTimer); this._blurTimer = null }
     this.setData({ searchFocus: true })
@@ -380,6 +389,13 @@ Page({
     const kw = e.currentTarget.dataset.kw
     this._closePanel()
     wx.navigateTo({ url: '/pkgA-tool/pages/fishing/fishing?kw=' + encodeURIComponent(kw) })
+  },
+  // 全物品图鉴结果 → 对应分卷页并直接弹出详情卡
+  onPanelCatalog (e) {
+    if (this.data.searchKw.trim()) store.pushHist(this.data.searchKw.trim())
+    const { vol, f } = e.currentTarget.dataset
+    this._closePanel()
+    wx.navigateTo({ url: '/pkg-cat-' + vol + '/pages/index/index?id=' + f })
   },
   // Boss 攻略清单 → 深度攻略页
   onPanelGuide (e) {

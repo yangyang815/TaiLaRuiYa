@@ -4,6 +4,7 @@ const store = require('../../utils/store')
 const acq = require('../../utils/acq')
 const fishUtil = require('../../utils/fishing')
 const bossGuides = require('../../data/bossGuides')
+const catSearch = require('../../utils/catalog-search')
 
 
 Page({
@@ -13,7 +14,7 @@ Page({
     capsuleRight: 100,
     themeClass: '',
     kw: '',
-    results: [], stratHits: [], recipeHits: [],
+    results: [], stratHits: [], recipeHits: [], catalogHits: [],
     hist: [], hotWords: []
   },
 
@@ -38,7 +39,7 @@ Page({
   onKw (e) {
     const kw = e.detail.value
     this.setData({ kw })
-    if (!kw.trim()) { this.setData({ results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [] }); return }
+    if (!kw.trim()) { this.setData({ results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [], catalogHits: [] }); return }
     const results = dex.search(kw).slice(0, 12).map(x => ({
       id: x.id, name: x.name, en: x.en, type: x.type, artId: x.artId, glow: x.glow,
       tagsTxt: (x.tags || []).slice(0, 2).join(' · '),
@@ -50,7 +51,13 @@ Page({
       id: x.id, kind: x.kind, kindN: x.kindN, name: x.name, info: x.info || ''
     }))
     const guideHits = bossGuides.searchGuides(kw).slice(0, 4)
-    this.setData({ results, stratHits, recipeHits, fishingHits, guideHits })
+    this.setData({ results, stratHits, recipeHits, fishingHits, guideHits, catalogHits: [] })
+    // 全物品图鉴：异步回填，请求序号防过期
+    const reqId = (this._catReqId = (this._catReqId || 0) + 1)
+    catSearch.search(kw).then(hits => {
+      if (reqId !== this._catReqId) return
+      this.setData({ catalogHits: hits })
+    })
   },
 
   confirmSearch () {
@@ -81,13 +88,18 @@ Page({
     this.confirmSearch()
     wx.navigateTo({ url: '/pages/bossguide/detail?id=' + e.currentTarget.dataset.id })
   },
+  onCatalog (e) {
+    this.confirmSearch()
+    const { vol, f } = e.currentTarget.dataset
+    wx.navigateTo({ url: '/pkg-cat-' + vol + '/pages/index/index?id=' + f })
+  },
   onWord (e) {
     const w = e.currentTarget.dataset.w
     this.setData({ kw: w })
     this.onKw({ detail: { value: w } })
   },
   clearKw () {
-    this.setData({ kw: '', results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [] })
+    this.setData({ kw: '', results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [], catalogHits: [] })
   },
   clearHist () {
     store.clearHist()

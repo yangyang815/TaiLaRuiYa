@@ -22,7 +22,7 @@ Page({
   _all: [],
   _hit: [],
 
-  onLoad () {
+  onLoad (opts) {
     const app = getApp()
     this.setData({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
@@ -43,7 +43,13 @@ Page({
       })
       .sort((a, b) => (a.n < b.n ? -1 : 1))
     this.setData({ total: this._all.length })
-    this.applyFilter('')
+    // 深链：全局搜索结果直达（kw 预填筛选，id 直接弹详情）
+    if (opts && opts.kw) this.applyFilter(decodeURIComponent(opts.kw))
+    else this.applyFilter('')
+    if (opts && opts.id) {
+      const it = this._all.find(x => x.f === opts.id)
+      if (it) this.setData({ detail: { ...it, rcol2: it.rcol, rlab2: it.rlab } })
+    }
   },
 
   applyFilter (kw) {

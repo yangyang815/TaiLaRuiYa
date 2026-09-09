@@ -49,3 +49,5 @@
 .w-fire { margin-right: 8rpx; }
 
 .pad-bottom { height: 120rpx; }
+
+.r-img { width: 64rpx; height: 64rpx; margin-right: 16rpx; flex-shrink: 0; }

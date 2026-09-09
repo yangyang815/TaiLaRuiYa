@@ -76,6 +76,19 @@
         <text class="sp-go">›</text>
       </view>
     </block>
+    <block wx:if="{{searchPanel.catalogHits.length}}">
+      <view class="sp-label">全物品图鉴</view>
+      <view class="sp-row tappable" wx:for="{{searchPanel.catalogHits}}" wx:key="f"
+        bindtap="onPanelCatalog" data-vol="{{item.vol}}" data-f="{{item.f}}">
+        <image class="sp-img" src="/pkg-cat-{{item.vol}}/assets/{{item.f}}.png" mode="aspectFit" />
+        <view class="col flex-1">
+          <text class="sp-name">{{item.n}}</text>
+          <text class="sp-sub px" wx:if="{{item.c}}">{{item.c}}</text>
+        </view>
+        <text class="sp-tag" wx:if="{{item.d}}">{{item.d}} 伤害</text>
+        <text class="sp-go">›</text>
+      </view>
+    </block>
     <block wx:if="{{searchPanel.fishingHits.length}}">
       <view class="sp-label">钓鱼图鉴</view>
       <view class="sp-row tappable" wx:for="{{searchPanel.fishingHits}}" wx:key="id"

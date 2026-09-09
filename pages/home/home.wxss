@@ -267,3 +267,5 @@
     radial-gradient(80% 120% at 90% 10%, rgba(124, 232, 124, 0.12), transparent 60%),
     rgba(255, 252, 240, 0.6); }
 .sp-emoji { font-size: 40rpx; line-height: 1.2; margin-right: 16rpx; flex-shrink: 0; }
+
+.sp-img { width: 56rpx; height: 56rpx; margin-right: 16rpx; flex-shrink: 0; }

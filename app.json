@@ -105,6 +105,13 @@
       "packages": [
         "guide"
       ]
+    },
+    "pages/home/home": {
+      "network": "wifi",
+      "packages": [
+        "cat1",
+        "cat2"
+      ]
     }
   }
 }
