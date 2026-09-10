@@ -93,4 +93,4 @@ function findByName (name) {
   return load().then(all => all.find(x => x.n === name) || null)
 }
 
-module.exports = { load, search, searchTotal, getById, findByName, __useLoader: fn => { loader = fn; p = null } }
+module.exports = { load, search, searchTotal, getById, findByName, ALIAS, __useLoader: fn => { loader = fn; p = null } }

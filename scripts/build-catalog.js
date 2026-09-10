@@ -359,16 +359,7 @@ async function build () {
   const app = JSON.parse(fs.readFileSync(appJsonPath, 'utf8'))
   app.subpackages = (app.subpackages || []).filter(sp => !sp.root.startsWith('pkg-cat-'))
 
-  const PAGE_JS = fs.readFileSync(path.join(__dirname, 'catalog-page.js.txt'), 'utf8')
-  const PAGE_WXML = fs.readFileSync(path.join(__dirname, 'catalog-page.wxml.txt'), 'utf8')
-  const PAGE_WXSS = fs.readFileSync(path.join(__dirname, 'catalog-page.wxss.txt'), 'utf8')
-  const PAGE_JSON = JSON.stringify({ usingComponents: { 'back-top': '/components/back-top/back-top' }, navigationBarTitleText: '全物品图鉴' })
-
-  const topCats = vi => {
-    const cc = volCatCount[vi] || {}
-    return Object.entries(cc).sort((a, b) => b[1] - a[1]).filter(x => x[1] >= 2).slice(0, 2).map(x => x[0]).join(' / ') || '综合物品'
-  }
-  const navList = volumes.map((v, i) => ({ root: 'pkg-cat-' + (i + 1), vol: i + 1, cats: topCats(i) }))
+  // 图鉴统一入口为主包 pages/catalog/catalog（读三卷数据），分包仅承载数据与精灵图
   volumes.forEach((vol, vi) => {
     const root = 'pkg-cat-' + (vi + 1)
     const pkgDir = path.join(ROOT, root)
@@ -392,19 +383,9 @@ async function build () {
     const assetDir = path.join(pkgDir, 'assets')
     fs.mkdirSync(assetDir, { recursive: true })
     vol.items.forEach(r => fs.copyFileSync(r._spritePath, path.join(assetDir, r._safeId + '.png')))
-    // 页面
-    const pageDir = path.join(pkgDir, 'pages', 'index')
-    fs.mkdirSync(pageDir, { recursive: true })
-    const cats = topCats(vi)
-    fs.writeFileSync(path.join(pageDir, 'index.js'),
-      PAGE_JS.replace(/__VOL__/g, String(vi + 1)).replace(/__CATS__/g, cats).replace(/__TOTAL__/g, String(compact.length))
-        .replace('__NAV__', JSON.stringify(navList)).replace('__ROOT__', root))
-    fs.writeFileSync(path.join(pageDir, 'index.wxml'), PAGE_WXML)
-    fs.writeFileSync(path.join(pageDir, 'index.wxss'), PAGE_WXSS)
-    fs.writeFileSync(path.join(pageDir, 'index.json'), PAGE_JSON)
-    // app.json
-    app.subpackages.push({ root, name: 'cat' + (vi + 1), pages: ['pages/index/index'] })
-    console.log('  卷 ' + (vi + 1) + ': ' + root + ' | ' + compact.length + ' 条 | ' + vol.cats.join('/'))
+    // app.json（纯资源数据卷，无页面；入口统一在主包 pages/catalog/catalog）
+    app.subpackages.push({ root, name: 'cat' + (vi + 1) })
+    console.log('  卷 ' + (vi + 1) + ': ' + root + ' | ' + compact.length + ' 条 | ' + vol.cats.slice(0, 4).join('/'))
   })
 
   fs.writeFileSync(appJsonPath, JSON.stringify(app, null, 2) + '\n')

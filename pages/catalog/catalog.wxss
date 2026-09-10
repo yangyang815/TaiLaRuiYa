@@ -70,3 +70,5 @@
   background: rgba(255, 255, 255, 0.08); border: 2rpx solid transparent; }
 .cc-chip.on { color: #0E2A33; background: #4CE0E0; font-weight: 700; }
 .cc-n { font-size: 18rpx; opacity: 0.75; }
+/* 加载态 */
+.loadtip { text-align: center; padding: 60rpx 0; color: var(--text-faint); font-size: 24rpx; }

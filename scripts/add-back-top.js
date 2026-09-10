@@ -4,15 +4,14 @@ const path = require('path')
 
 const PAGES = [
   'pages/codex/codex', 'pages/craft/craft', 'pages/detail/detail', 'pages/strategy/strategy',
-  'pages/list/list', 'pages/search/search',
+  'pages/list/list', 'pages/search/search', 'pages/catalog/catalog',
   'pkgA-tool/pages/fishing/fishing', 'pkgA-tool/pages/career/career',
   'pkgA-tool/pages/careerlib/careerlib', 'pkgA-tool/pages/careerpath/careerpath',
   'pkgA-tool/pages/build/detail',
   'pkgB-guide/pages/guide/guide', 'pkgB-guide/pages/achv/achv', 'pkgB-guide/pages/gameachv/gameachv',
   'pkgB-guide/pages/secrets/secrets', 'pkgB-guide/pages/worldseeds/worldseeds',
   'pkgB-guide/pages/biomes/biomes', 'pkgB-guide/pages/prefixes/prefixes',
-  'pkgB-guide/pages/bossguide/detail',
-  'pkg-cat-1/pages/index/index', 'pkg-cat-2/pages/index/index'
+  'pkgB-guide/pages/bossguide/detail'
 ]
 
 let ok = 0

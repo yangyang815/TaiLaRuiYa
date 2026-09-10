@@ -1,0 +1,4 @@
+{
+  "usingComponents": { "back-top": "/components/back-top/back-top" },
+  "navigationBarTitleText": "全物品图鉴"
+}

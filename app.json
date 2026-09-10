@@ -13,7 +13,8 @@
     "pages/messages/messages",
     "pages/bossguide/bossguide",
     "pages/bossguide/detail",
-    "pages/acq/acq"
+    "pages/acq/acq",
+    "pages/catalog/catalog"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -87,24 +88,15 @@
     },
     {
       "root": "pkg-cat-1",
-      "name": "cat1",
-      "pages": [
-        "pages/index/index"
-      ]
+      "name": "cat1"
     },
     {
       "root": "pkg-cat-2",
-      "name": "cat2",
-      "pages": [
-        "pages/index/index"
-      ]
+      "name": "cat2"
     },
     {
       "root": "pkg-cat-3",
-      "name": "cat3",
-      "pages": [
-        "pages/index/index"
-      ]
+      "name": "cat3"
     }
   ],
   "preloadRule": {
@@ -117,7 +109,8 @@
     "pages/codex/codex": {
       "network": "all",
       "packages": [
-        "guide"
+        "guide",
+        "cat3"
       ]
     },
     "pages/home/home": {
@@ -136,18 +129,6 @@
       "network": "wifi",
       "packages": [
         "recipe"
-      ]
-    },
-    "pkg-cat-1/pages/index/index": {
-      "network": "wifi",
-      "packages": [
-        "cat2"
-      ]
-    },
-    "pkg-cat-2/pages/index/index": {
-      "network": "wifi",
-      "packages": [
-        "cat3"
       ]
     }
   }
