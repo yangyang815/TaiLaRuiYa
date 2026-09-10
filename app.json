@@ -90,21 +90,21 @@
       "root": "pkg-cat-1",
       "name": "cat1",
       "pages": [
-        "pages/blank/blank"
+        "pages/index/index"
       ]
     },
     {
       "root": "pkg-cat-2",
       "name": "cat2",
       "pages": [
-        "pages/blank/blank"
+        "pages/index/index"
       ]
     },
     {
       "root": "pkg-cat-3",
       "name": "cat3",
       "pages": [
-        "pages/blank/blank"
+        "pages/index/index"
       ]
     }
   ],
