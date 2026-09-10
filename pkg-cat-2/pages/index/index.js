@@ -1,6 +1,6 @@
 // 全物品图鉴 · 卷 2（自动生成页面）
 const BT = require('../../../utils/back-top-behavior')
-const NAV = [{"root":"pkg-cat-1","vol":1,"cats":"家具 / 时装"},{"root":"pkg-cat-2","vol":2,"cats":"墙 / 饰品"}]
+const NAV = [{"root":"pkg-cat-1","vol":1,"cats":"家具 / 时装"},{"root":"pkg-cat-2","vol":2,"cats":"饰品 / 盔甲"},{"root":"pkg-cat-3","vol":3,"cats":"ore / 子弹"}]
 const ROOT = 'pkg-cat-2'
 // 官方稀有度配色（游戏内同款）
 const RCOL = { '-13': '#B57BFF', '-12': '#FF4CE0', '-1': '#B4B4B4', 0: '#FFFFFF', 1: '#9696FF', 2: '#96FF96', 3: '#FFC896', 4: '#FF9696', 5: '#FF96FF', 6: '#D2A0FF', 7: '#96FF0A', 8: '#FFFF32', 9: '#32FFFF', 10: '#FF3232' }
@@ -12,8 +12,8 @@ Page({
     capsuleRight: 100,
     themeClass: '',
     vol: 2,
-    cats: '墙 / 饰品',
-    total: 2669,
+    cats: '饰品 / 盔甲',
+    total: 3177,
     kw: '',
     rows: [],
     shown: 0,
@@ -111,9 +111,9 @@ Page({
   },
   back () { wx.navigateBack() },
   onShareAppMessage () {
-    return { title: '泰拉瑞亚全物品图鉴 · 卷2（墙 / 饰品）', path: '/' + ROOT + '/pages/index/index' }
+    return { title: '泰拉瑞亚全物品图鉴 · 卷2（饰品 / 盔甲）', path: '/' + ROOT + '/pages/index/index' }
   },
   onShareTimeline () {
-    return { title: '泰拉瑞亚全物品图鉴 · 卷2（墙 / 饰品）' }
+    return { title: '泰拉瑞亚全物品图鉴 · 卷2（饰品 / 盔甲）' }
   }
 })

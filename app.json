@@ -98,6 +98,13 @@
       "pages": [
         "pages/index/index"
       ]
+    },
+    {
+      "root": "pkg-cat-3",
+      "name": "cat3",
+      "pages": [
+        "pages/index/index"
+      ]
     }
   ],
   "preloadRule": {
@@ -129,6 +136,18 @@
       "network": "wifi",
       "packages": [
         "recipe"
+      ]
+    },
+    "pkg-cat-1/pages/index/index": {
+      "network": "wifi",
+      "packages": [
+        "cat2"
+      ]
+    },
+    "pkg-cat-2/pages/index/index": {
+      "network": "wifi",
+      "packages": [
+        "cat3"
       ]
     }
   }

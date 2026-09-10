@@ -199,12 +199,11 @@ async function sprites () {
   console.log('== 阶段 3：精灵图下载（可断点续跑） ==')
   const raw = readStage('raw.json', [])
   const zh = readStage('zh.json', {})
-  const existing = new Set(require(path.join(ROOT, 'data', 'items')).map(i => (i.en || '').toLowerCase()))
   const stageDir = path.join(STAGE_DIR, 'sprites')
   fs.mkdirSync(stageDir, { recursive: true })
-  // 目录扁平哈希避免单目录上万文件
-  const targets = raw.filter(r => !existing.has(r.en.toLowerCase()))
-  console.log('目标精灵图:', targets.length, '张（跳过已收录', raw.length - targets.length, '条）')
+  // 全量下载（含精品图鉴已收录条目）：全物品图鉴必须是真全量，否则这些物品在图鉴/全局搜索里消失
+  const targets = raw.slice()
+  console.log('目标精灵图:', targets.length, '张')
   let ok = 0, skip = 0, fail = 0, idx = 0
   const CONC = 5
   async function worker () {
@@ -285,18 +284,30 @@ function packVolumes (entries) {
   return { volumes, groups, volCatCount }
 }
 
+// 圣物（大师模式 Boss 战利品）中文命名：zh wiki 未翻译，按 Boss 官方名硬编码
+const RELIC_ZH = {
+  'Betsy Relic': '贝蒂圣物', 'Brain of Cthulhu Relic': '克苏鲁之脑圣物', 'Dark Mage Relic': '黑暗魔法师圣物',
+  'Deerclops Relic': '独眼巨鹿圣物', 'Destroyer Relic': '毁灭者圣物', 'Duke Fishron Relic': '猪龙鱼公爵圣物',
+  'Eater of Worlds Relic': '世界吞噬怪圣物', 'Empress of Light Relic': '光之女皇圣物', 'Everscream Relic': '常绿尖叫怪圣物',
+  'Eye of Cthulhu Relic': '克苏鲁之眼圣物', 'Flying Dutchman Relic': '飞翔荷兰人圣物', 'Golem Relic': '石巨人圣物',
+  'Ice Queen Relic': '冰雪女皇圣物', 'King Slime Relic': '史莱姆王圣物', 'Lunatic Cultist Relic': '拜月教邪教徒圣物',
+  'Martian Saucer Relic': '火星飞碟圣物', 'Moon Lord Relic': '月亮领主圣物', 'Mourning Wood Relic': '哀木圣物',
+  'Ogre Relic': '食人魔圣物', 'Plantera Relic': '世纪之花圣物', 'Pumpking Relic': '南瓜王圣物',
+  'Queen Bee Relic': '蜂后圣物', 'Queen Slime Relic': '史莱姆女王圣物', 'Santa-NK1 Relic': '圣诞坦克圣物',
+  'Skeletron Prime Relic': '机械骷髅王圣物', 'Skeletron Relic': '骷髅王圣物', 'Twins Relic': '双子魔眼圣物',
+  'Wall of Flesh Relic': '血肉墙圣物'
+}
+
 async function build () {
   console.log('== 阶段 4：组包生成 ==')
   const raw = readStage('raw.json', [])
   const zh = readStage('zh.json', {})
-  const existing = new Set(require(path.join(ROOT, 'data', 'items')).map(i => (i.en || '').toLowerCase()))
   const stageDir = path.join(STAGE_DIR, 'sprites')
   const h2 = s => require('crypto').createHash('md5').update(s).digest('hex').slice(0, 2)
 
-  // 汇总可用条目（精灵图存在）
+  // 汇总可用条目（精灵图存在；不排除精品图鉴条目，保证全物品图鉴完整）
   const entries = []
   raw.forEach(r => {
-    if (existing.has(r.en.toLowerCase())) return
     const safeId = (r.internal || r.en).replace(/[\\/:"*?<>|]/g, '_')
     const sp = path.join(stageDir, h2(safeId), safeId + '.png')
     if (!fs.existsSync(sp)) return
@@ -365,7 +376,10 @@ async function build () {
     const dataDir = path.join(pkgDir, 'data')
     fs.mkdirSync(dataDir, { recursive: true })
     const compact = vol.items.map(r => ({
-      n: zh[r.page] || r.en, en: r.en, f: r._safeId,
+      // 名称解析链：zh Items 表按 internalname（CJK）→ 物品自有页 langlinks → 圣物硬编码 → 英文
+      n: (zhdetail.items[r.internal] && /[\u4e00-\u9fa5]/.test(zhdetail.items[r.internal].n) && zhdetail.items[r.internal].n) ||
+         (r.page === r.en && zh[r.page]) || RELIC_ZH[r.en] || r.en,
+      en: r.en, f: r._safeId,
       c: fineCat(r),
       d: r.damage, dt: DTZH[r.damagetype] || r.damagetype, df: r.defense, r: normRare(r.rare),
       u: r.usetime, k: r.knockback,

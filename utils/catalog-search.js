@@ -6,29 +6,42 @@ const RLAB = { '-13': '大师', '-12': '专家', '-1': '任务', 0: '白色', 1:
 let loader = realLoad
 let p = null
 
+// 常用俗称 → 官方译名（搜索时同时匹配，提升命中率）
+const ALIAS = {
+  '地狱花': '火焰花',
+  '黑曜石药水': '黑曜石皮药水',
+  '红心': '生命水晶',
+  '蓝心': '魔力水晶',
+  '肉山': '血肉墙',
+  '蜂王': '蜂后',
+  '世界吞噬者': '世界吞噬怪',
+  '克苏鲁之脑': '克苏鲁之脑'
+}
+
 function realLoad () {
-  try {
-    return Promise.all([
-      require.async('../pkg-cat-1/data/batch.js'),
-      require.async('../pkg-cat-2/data/batch.js')
-    ]).then(ms => {
-      const out = []
-      ms.forEach((m, i) => (m || []).forEach(x => {
-        const r = Number(x.r)
-        out.push({
-          ...x,
-          vol: i + 1,
-          sprite: '/pkg-cat-' + (i + 1) + '/assets/' + x.f + '.png',
-          rcol: RCOL[r] || '#FFFFFF',
-          rlab: RLAB[r] || ''
-        })
-      }))
-      return out
-    }).catch(() => [])
-  } catch (e) {
-    // 基础库过低不支持分包异步化等异常：静默降级为无结果
-    return Promise.resolve([])
-  }
+  // 动态适配卷数（缺卷静默跳过，require.async 失败不阻断其它卷）
+  const vols = [1, 2, 3, 4]
+  return Promise.all(vols.map(i =>
+    new Promise(res => {
+      try {
+        require.async('../pkg-cat-' + i + '/data/batch.js').then(m => res(m || []), () => res([]))
+      } catch (e) { res([]) }
+    })
+  )).then(ms => {
+    const out = []
+    ms.forEach((m, i) => (m || []).forEach(x => {
+      if (!x || !x.f) return
+      const r = Number(x.r)
+      out.push({
+        ...x,
+        vol: i + 1,
+        sprite: '/pkg-cat-' + (i + 1) + '/assets/' + x.f + '.png',
+        rcol: RCOL[r] || '#FFFFFF',
+        rlab: RLAB[r] || ''
+      })
+    }))
+    return out
+  })
 }
 
 function load () {
@@ -36,16 +49,19 @@ function load () {
   return p
 }
 
-// 搜索全量图鉴（中文名/英文名）：前缀命中优先，最多 8 条
+// 搜索全量图鉴（中文名/英文名/俗称别名）：前缀命中优先，最多 8 条
 function search (kw) {
   const k = (kw || '').trim().toLowerCase()
   if (!k) return Promise.resolve([])
+  const terms = [k]
+  const aliased = ALIAS[(kw || '').trim()]
+  if (aliased) terms.push(aliased.toLowerCase())
   return load().then(all => {
-    const hits = all.filter(x =>
-      (x.n || '').toLowerCase().indexOf(k) >= 0 || (x.en || '').toLowerCase().indexOf(k) >= 0)
+    const inX = (x, t) => (x.n || '').toLowerCase().indexOf(t) >= 0 || (x.en || '').toLowerCase().indexOf(t) >= 0
+    const hits = all.filter(x => terms.some(t => inX(x, t)))
     hits.sort((a, b) => {
-      const ap = (a.n || '').toLowerCase().startsWith(k) || (a.en || '').toLowerCase().startsWith(k) ? 0 : 1
-      const bp = (b.n || '').toLowerCase().startsWith(k) || (b.en || '').toLowerCase().startsWith(k) ? 0 : 1
+      const ap = terms.some(t => ((a.n || '').toLowerCase().startsWith(t) || (a.en || '').toLowerCase().startsWith(t))) ? 0 : 1
+      const bp = terms.some(t => ((b.n || '').toLowerCase().startsWith(t) || (b.en || '').toLowerCase().startsWith(t))) ? 0 : 1
       return ap - bp || (a.n || '').length - (b.n || '').length
     })
     return hits.slice(0, 8).map(x => ({

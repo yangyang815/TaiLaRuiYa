@@ -1,0 +1,72 @@
+/* 全物品图鉴分卷页（与图鉴页同款行样式，主题自适应，禁止硬编码深色底） */
+.cat-root { min-height: 100vh; padding-bottom: 60rpx; }
+
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
+  background: rgba(255, 255, 255, 0.06); color: var(--gold); font-size: 40rpx;
+  display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 800; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10rpx; }
+.nav-ph { width: 64rpx; }
+
+.vol-nav { white-space: nowrap; padding: 8rpx 20rpx 4rpx; box-sizing: border-box; width: 100%; }
+.v-chip { display: inline-block; padding: 10rpx 20rpx; margin-right: 12rpx; border-radius: 999rpx;
+  font-size: 21rpx; font-weight: 700; color: var(--text-dim);
+  border: 2rpx solid var(--line); background: var(--card); max-width: 420rpx;
+  overflow: hidden; text-overflow: ellipsis; }
+.v-chip.on { color: #3A2400; background: linear-gradient(180deg, #FFE55C, #E5B800); border-color: #FFF0B0; }
+
+.search-bar { margin: 12rpx 30rpx 0; display: flex; align-items: center;
+  padding: 14rpx 24rpx; border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.08); border: 2rpx solid var(--line); }
+.s-ico { font-size: 26rpx; margin-right: 14rpx; }
+.s-input { flex: 1; font-size: 26rpx; color: var(--text); }
+.s-ph { color: var(--text-faint); }
+.stat { display: block; margin: 10rpx 34rpx 0; font-size: 20rpx; color: var(--text-faint); }
+
+/* 列表行：与图鉴页 l-item 同款结构 */
+.rows { margin: 16rpx 30rpx 0; }
+.row { display: flex; align-items: center; padding: 18rpx 22rpx; margin-bottom: 16rpx; }
+.r-art { width: 88rpx; height: 88rpx; border-radius: 14rpx; background: rgba(0, 0, 0, 0.3);
+  display: flex; align-items: center; justify-content: center; margin-right: 22rpx; flex-shrink: 0; }
+.r-img { width: 56rpx; height: 56rpx; }
+.r-n { font-size: 27rpx; color: var(--text); font-weight: 700; }
+.r-en { font-size: 15rpx; color: var(--text-faint); margin-top: 6rpx; }
+.r-meta { font-size: 20rpx; color: var(--text-dim); margin-top: 6rpx;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360rpx; }
+.r-right { align-items: flex-end; flex-shrink: 0; }
+.r-dmg { font-size: 24rpx; color: var(--gold); font-weight: 900; }
+.r-dmg-k { font-size: 16rpx; color: var(--text-faint); margin-top: 4rpx; }
+.r-rare { font-size: 20rpx; font-weight: 700; border: 2rpx solid; border-radius: 8rpx; padding: 4rpx 12rpx; }
+.more { text-align: center; padding: 20rpx 0; font-size: 24rpx; font-weight: 700;
+  color: var(--gold); border: 2rpx dashed var(--gold-faint); border-radius: 12rpx; }
+.empty { text-align: center; padding: 80rpx 0; color: var(--text-faint); font-size: 24rpx; }
+
+.mask { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); z-index: 90; }
+.sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 91;
+  background: var(--card); border-radius: 28rpx 28rpx 0 0; padding: 20rpx 30rpx 40rpx; }
+.sheet-handle { width: 72rpx; height: 8rpx; border-radius: 4rpx; background: var(--line); margin: 0 auto 18rpx; }
+.d-head { display: flex; align-items: center; }
+.d-imgbox { width: 96rpx; height: 96rpx; border-radius: 14rpx; background: rgba(0, 0, 0, 0.3);
+  display: flex; align-items: center; justify-content: center; margin-right: 20rpx; flex-shrink: 0; }
+.d-img { width: 64rpx; height: 64rpx; }
+.d-n { font-size: 32rpx; font-weight: 800; color: var(--text); }
+.d-en { font-size: 20rpx; color: var(--text-faint); margin-top: 4rpx; }
+.d-chips { display: flex; gap: 10rpx; margin-top: 10rpx; flex-wrap: wrap; }
+.d-chip { font-size: 19rpx; color: var(--gold); border: 2rpx solid var(--gold-faint);
+  border-radius: 6rpx; padding: 2rpx 10rpx; }
+.d-body { margin-top: 20rpx; }
+.d-row { display: flex; padding: 12rpx 0; border-bottom: 2rpx solid var(--line); font-size: 24rpx; }
+.d-k { width: 150rpx; color: var(--text-faint); flex-shrink: 0; }
+.d-row > .flex-1 { color: var(--text); line-height: 1.6; }
+.d-btn { margin-top: 24rpx; text-align: center; padding: 16rpx 0; border-radius: 12rpx;
+  font-size: 26rpx; font-weight: 800; color: #3A2400;
+  background: linear-gradient(180deg, #FFE55C, #E5B800); }
+
+/* 分类筛选 chips */
+.cat-chips { white-space: nowrap; padding: 14rpx 20rpx 4rpx; box-sizing: border-box; width: 100%; }
+.cc-chip { display: inline-flex; align-items: center; gap: 8rpx; margin-right: 14rpx;
+  padding: 8rpx 20rpx; border-radius: 999rpx; font-size: 22rpx; color: var(--text);
+  background: rgba(255, 255, 255, 0.08); border: 2rpx solid transparent; }
+.cc-chip.on { color: #0E2A33; background: #4CE0E0; font-weight: 700; }
+.cc-n { font-size: 18rpx; opacity: 0.75; }

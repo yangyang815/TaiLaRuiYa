@@ -16,7 +16,7 @@ const byResult = zd.byResult || {}
 
 // 图鉴卷数据：en → 中文名 / 精灵图 / 获得方式
 const batchZh = {}, batchIco = {}, batchObt = {}
-;[1, 2].forEach(v => {
+;[1, 2, 3, 4].forEach(v => {
   try {
     require('../pkg-cat-' + v + '/data/batch.js').forEach(x => {
       if (x.en && x.n && /[\u4e00-\u9fa5]/.test(x.n) && !batchZh[x.en]) batchZh[x.en] = x.n
