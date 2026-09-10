@@ -88,7 +88,7 @@ const CATZH = {
   'potion ingredients': '药水配料', 'projectile melee': '投射近战',
   'Minion summon items': '召唤武器', Souls: '灵魂'
 }
-const DTZH = { melee: '近战', ranged: '远程', magic: '魔法', summon: '召唤', 'summon|+': '召唤', thrown: '投掷' }
+const DTZH = { melee: '近战', ranged: '远程', magic: '魔法', summon: '召唤', 'summon|+': '召唤', thrown: '投掷', Melee: '近战', Ranged: '远程', Magic: '魔法', Summon: '召唤', Thrown: '投掷', 'Melee attack': '近战', 'Ranged attack': '远程', 'Magic attack': '魔法', 'Summon attack': '召唤' }
 const STATION = {
   'Work Bench': '工作台', Furnace: '熔炉', Anvil: '铁砧', 'Mythril Anvil': '秘银砧',
   'Adamantite Forge': '精金熔炉', Hellforge: '地狱熔炉', 'Demon Altar': '恶魔祭坛',
@@ -118,8 +118,18 @@ function fineCat (r) {
   }
   return CATZH[chain[0]] || chain[0]
 }
-function normRare (raw) {
-  const str = String(raw == null ? '' : raw)
+// 游戏价值（铜币）→ 中文售价串（售价 = 价值 / 5）
+function priceZh (v) {
+  if (!v || v <= 0) return ''
+  const j = Math.floor(v / 10000), y = Math.floor(v % 10000 / 100), t = v % 100
+  const p = []
+  if (j) p.push(j + '金')
+  if (y) p.push(y + '银')
+  if (t || !p.length) p.push(t + '铜')
+  return p.join('')
+}
+
+function normRare (raw) {  const str = String(raw == null ? '' : raw)
   if (/quest/i.test(str)) return -1
   const m = str.match(/(-?\d+)/)
   return m ? Number(m[1]) : null
@@ -335,6 +345,36 @@ async function build () {
   // 合并中文详情/获得/用途
   const zhdetail = readStage('zhdetail.json', { items: {}, byResult: {}, byIng: {} })
   const zhExtract = readStage('zhextract.json', {})
+  // 游戏官方中文文本（GameText）：ItemName/NPCName 按 internalname
+  let GT = {}, GTN = {}
+  try { GT = JSON.parse(fs.readFileSync(path.join(STAGE_DIR, 'gametext-zh.json'), 'utf8')).ItemName || {} } catch (e) {}
+  try { GTN = JSON.parse(fs.readFileSync(path.join(STAGE_DIR, 'gametext-zh.json'), 'utf8')).NPCName || {} } catch (e) {}
+  // 游戏数值库（Iteminfo）：internalName → damage/defense/useTime/knockBack/value
+  let II = null
+  try {
+    const s = fs.readFileSync(path.join(STAGE_DIR, 'iteminfo-zh.txt'), 'utf8')
+    const i1 = s.indexOf('[=====['), i2 = s.indexOf(']=====')
+    const blob = JSON.parse(s.slice(i1 + 7, i2))
+    II = {}
+    Object.keys(blob).forEach(id => { const it = blob[id]; if (it && it.internalName && !II[it.internalName]) II[it.internalName] = it })
+  } catch (e) { console.log('  Iteminfo 解析失败（数值补全跳过）:', e.message); II = null }
+  // 掉落来源表
+  let DROPS = null
+  try { DROPS = readStage('drops.json', {}) } catch (e) { DROPS = null }
+  if (DROPS && !Object.keys(DROPS).length) DROPS = null
+  // NPC/来源页中文名：精品怪物/Boss + 旗帜 tooltip 反推
+  const npcZh = {}
+  try { require('../data/monsters.js').forEach(m => { if (m.en && m.name) npcZh[m.en] = m.name }) } catch (e) {}
+  try { require('../data/bosses.js').forEach(m => { if (m.en && m.name) npcZh[m.en] = m.name }) } catch (e) {}
+  Object.values(zhdetail.items).forEach(z => {
+    if (z && z.t && /加成：/.test(z.t) && / Banner$/i.test(z.n || '')) {
+      const m = z.t.match(/加成：([^（。；]+)/)
+      if (m) npcZh[(z.n || '').replace(/ Banner$/i, '')] = m[1]
+    }
+  })
+  // en 物品名 → internalname（供 GameText 查询）
+  const nm2in = {}
+  raw.forEach(x => { const iv = validInternal(x.internal); if (x.name && iv && !nm2in[x.name]) nm2in[x.name] = iv })
   let dexZhMap = null
   entries.forEach(r => {
     const vi = validInternal(r.internal)
@@ -346,7 +386,7 @@ async function build () {
       try { require('../data/items.js').forEach(x => { if (x.en && x.name && !dexZhMap[x.en]) dexZhMap[x.en] = x.name }) } catch (e) { /* 缺失跳过 */ }
     }
     const WILD = { 'Any Iron Bar': '任意铁锭（铁/铅）', 'Any Silver Bar': '任意银锭（银/钨）', 'Any Gold Bar': '任意金锭（金/铂）', 'Any Copper Bar': '任意铜锭（铜/锡）', 'Any Cobalt Bar': '任意钴锭（钴/钯金）', 'Any Mythril Bar': '任意秘银锭（秘银/山铜）', 'Any Adamantite Bar': '任意精金锭（精金/钛金）', 'Any Evil Bar': '任意邪恶金属锭', 'Any Wood': '任意木材', 'Any Stone Block': '任意石块', 'Any Torch': '火把', 'Any Balloon': '任意气球', 'Any Fruit': '任意水果', 'Any Bird': '任意鸟', 'Any Butterfly': '任意蝴蝶', 'Any Snail': '任意蜗牛', 'Any Firefly': '任意萤火虫', 'Any Pylon': '任意晶塔' }
-    const zName = en => WILD[en] || (zhdetail.items[en] && /[\u4e00-\u9fa5]/.test(zhdetail.items[en].n) && zhdetail.items[en].n) || dexZhMap[en] || zh[en] || en
+    const zName = en => WILD[en] || (nm2in[en] && GT[nm2in[en]]) || (zhdetail.items[en] && /[\u4e00-\u9fa5]/.test(zhdetail.items[en].n) && zhdetail.items[en].n) || dexZhMap[en] || (zh[en] && /[\u4e00-\u9fa5]/.test(zh[en]) && zh[en]) || en
     // 配方查找：EN 键优先（Cargo byResult 键为 EN），回退 zh 名；不被 zi 门控
     const rec = zhdetail.byResult[r.en] || zhdetail.byResult[zhName] || null
     const use = zhdetail.byIng[r.en] || zhdetail.byIng[zhName] || null
@@ -358,7 +398,24 @@ async function build () {
       if (zi.dt) r.damagetype = zi.dt
     }
     if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
-    if (use) r._use = '用于合成：' + use.map(zName).slice(0, 4).join('、') + (use.length > 4 ? ' 等 ' + use.length + ' 项' : '')
+    if (use && use.length) {
+      const rs = [...new Set(use.map(zName))]
+      r._use = rs.length ? '可用于合成：' + rs.slice(0, 3).join('、') + (rs.length > 3 ? ' 等 ' + rs.length + ' 种' : '') : ''
+    } else r._use = ''
+    if (!rec && DROPS && DROPS[r.en] && DROPS[r.en].length) {
+      const dps = [...new Set(DROPS[r.en].map(d => npcZh[d.by] || (zh[d.by] && /[\u4e00-\u9fa5]/.test(zh[d.by]) && zh[d.by]) || d.by))]
+      r._ob = '掉落：' + dps.slice(0, 3).join('、') + (dps.length > 3 ? ' 等 ' + dps.length + ' 种来源' : '')
+    }
+    // 游戏数值补全（wiki Cargo 缺失时用 Iteminfo 官方数据）
+    const ii = vi && II && II[vi]
+    if (ii) {
+      if (r.damage === undefined || r.damage === '') r.damage = ii.damage || ''
+      if (!r.defense) r.defense = ii.defense || ''
+      if (!r.usetime) r.usetime = ii.useTime || ''
+      if (!r.knockback && ii.knockBack !== undefined) r.knockback = ii.knockBack
+      if ((r.rare === undefined || r.rare === '') && ii.rare !== undefined) r.rare = ii.rare
+      r._value = ii.value || 0
+    }
     if (!zh[r.page]) r._zhmiss = true
     // 用户要求除英文名外全中文：无中文说明 → 置空（隐藏行，不展示英文）
     if (r.tooltip && !/[\u4e00-\u9fa5]/.test(r.tooltip)) r.tooltip = ''
@@ -384,17 +441,22 @@ async function build () {
     // 数据
     const dataDir = path.join(pkgDir, 'data')
     fs.mkdirSync(dataDir, { recursive: true })
-    const compact = vol.items.map(r => ({
-      // 名称解析链：zh Items 表按 internalname（CJK）→ 物品自有页 langlinks → 圣物硬编码 → 英文
-      n: (vi && zhdetail.items[vi] && /[\u4e00-\u9fa5]/.test(zhdetail.items[vi].n) && zhdetail.items[vi].n) ||
-         (r.page === r.en && zh[r.page]) || RELIC_ZH[r.en] || r.en,
-      en: r.en, f: r._safeId,
+    const compact = vol.items.map(r => {
+      const rin = validInternal(r.internal)
+      // 名称解析链：游戏官方译名（GameText）→ zh Items 表 → langlinks（page===en 直用 / banner 加“旗”）→ 圣物硬编码 → 英文
+      const n = (rin && GT[rin]) ||
+        (rin && zhdetail.items[rin] && /[\u4e00-\u9fa5]/.test(zhdetail.items[rin].n) && zhdetail.items[rin].n) ||
+        (zh[r.page] && /[\u4e00-\u9fa5]/.test(zh[r.page]) && (r.page === r.en ? zh[r.page] : (/ Banner$/i.test(r.en) ? zh[r.page] + '旗' : ''))) ||
+        RELIC_ZH[r.en] || r.en
+      return {
+      n, en: r.en, f: r._safeId,
       c: fineCat(r),
       d: r.damage, dt: DTZH[r.damagetype] || r.damagetype, df: r.defense, r: normRare(r.rare),
       u: r.usetime, k: r.knockback,
-      t: String(r.tooltip || '').slice(0, 160), b: r._bonus || '', s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus].filter(Boolean).join('；'),
+      t: String(r.tooltip || '').slice(0, 160), b: r._bonus || '', s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus, r._value ? '售价 ' + priceZh(Math.round(r._value / 5)) : ''].filter(Boolean).join('；'),
       ob: r._ob || '', use: r._use || '', hm: r.hardmode ? 1 : 0
-    }))
+      }
+    })
     fs.writeFileSync(path.join(dataDir, 'data-v' + (vi + 1) + '.js'),
       '// 自动生成：全物品图鉴数据卷 ' + (vi + 1) + '（勿手改）\nmodule.exports = ' + JSON.stringify(compact) + '\n')
     // 精灵图
@@ -446,6 +508,52 @@ async function build () {
   fs.writeFileSync(path.join(ROOT, 'utils', 'cat-vols.js'),
     '// 自动生成：全物品图鉴数据卷数（勿手改）\nmodule.exports = ' + volumes.length + '\n')
   console.log('app.json 已注册 ' + volumes.length + ' 个数据分包')
+}
+
+async function gametext () {
+  console.log('== 阶段 2.7：游戏官方中文文本（Module:GameText/db-zh.json） ==')
+  const dest = path.join(STAGE_DIR, 'gametext-zh.json')
+  if (fs.existsSync(dest) && fs.statSync(dest).size > 100000) { console.log('已存在，跳过'); return }
+  const d = await fetchJson('https://terraria.wiki.gg/zh/index.php?title=Module:GameText/db-zh.json&action=raw')
+  fs.writeFileSync(dest, JSON.stringify(d))
+  console.log('ItemName:', Object.keys(d.ItemName || {}).length, '| NPCName:', Object.keys(d.NPCName || {}).length)
+}
+
+async function iteminfo () {
+  console.log('== 阶段 2.8：游戏数值库（Module:Iteminfo/data） ==')
+  const dest = path.join(STAGE_DIR, 'iteminfo-zh.txt')
+  if (fs.existsSync(dest) && fs.statSync(dest).size > 1000000) { console.log('已存在，跳过'); return }
+  const raw = await new Promise((res, rej) => {
+    https.get('https://terraria.wiki.gg/zh/index.php?title=Module:Iteminfo/data&action=raw', { headers: { 'User-Agent': 'Mozilla/5.0 TerraHandbook/1.0' } }, r => {
+      if (r.statusCode !== 200) { r.resume(); return rej(new Error('HTTP ' + r.statusCode)) }
+      let s = ''
+      r.on('data', c => { s += c })
+      r.on('end', () => res(s))
+      r.on('error', rej)
+    }).on('error', rej)
+  })
+  fs.writeFileSync(dest, raw)
+  console.log('大小:', Math.round(raw.length / 1024) + 'KB')
+}
+
+async function drops () {
+  console.log('== 阶段 2.9：掉落来源表（en Drops） ==')
+  const out = {}
+  let offset = 0
+  while (true) {
+    const url = 'https://terraria.wiki.gg/api.php?action=cargoquery&tables=Drops&format=json&limit=500&offset=' + offset + '&fields=item,_pageName,rate'
+    let d
+    try { d = await fetchJson(url) } catch (e) { console.log('重试 offset=' + offset); d = await fetchJson(url) }
+    const rows = (d.cargoquery || []).map(x => x.title)
+    rows.forEach(r => {
+      if (!r.item || !r._pageName) return
+      ;(out[r.item] = out[r.item] || []).push({ by: r._pageName, rate: r.rate || '' })
+    })
+    if (rows.length < 500) break
+    offset += 500
+  }
+  writeStage('drops.json', out)
+  console.log('有掉落来源的物品:', Object.keys(out).length)
 }
 
 async function zhdata () {
@@ -569,6 +677,6 @@ async function zhextract () {
   console.log('中文摘要提取完成:', got, '/', titles.length)
 }
 
-const runners = { '--harvest': harvest, '--zh': zh, '--zhdata': zhdata, '--zhextract': zhextract, '--sprites': sprites, '--build': build }
+const runners = { '--harvest': harvest, '--zh': zh, '--zhdata': zhdata, '--zhextract': zhextract, '--gametext': gametext, '--iteminfo': iteminfo, '--drops': drops, '--sprites': sprites, '--build': build }
 if (runners[stage]) runners[stage]().catch(e => { console.error(e); process.exit(1) })
-else console.log('用法: node scripts/build-catalog.js --harvest|--zh|--sprites|--build')
+else console.log('用法: node scripts/build-catalog.js --harvest|--zh|--zhdata|--zhextract|--gametext|--iteminfo|--drops|--sprites|--build')
