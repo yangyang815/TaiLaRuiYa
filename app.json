@@ -88,15 +88,24 @@
     },
     {
       "root": "pkg-cat-1",
-      "name": "cat1"
+      "name": "cat1",
+      "pages": [
+        "pages/blank/blank"
+      ]
     },
     {
       "root": "pkg-cat-2",
-      "name": "cat2"
+      "name": "cat2",
+      "pages": [
+        "pages/blank/blank"
+      ]
     },
     {
       "root": "pkg-cat-3",
-      "name": "cat3"
+      "name": "cat3",
+      "pages": [
+        "pages/blank/blank"
+      ]
     }
   ],
   "preloadRule": {

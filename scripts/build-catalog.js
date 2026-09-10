@@ -383,8 +383,16 @@ async function build () {
     const assetDir = path.join(pkgDir, 'assets')
     fs.mkdirSync(assetDir, { recursive: true })
     vol.items.forEach(r => fs.copyFileSync(r._spritePath, path.join(assetDir, r._safeId + '.png')))
-    // app.json（纯资源数据卷，无页面；入口统一在主包 pages/catalog/catalog）
-    app.subpackages.push({ root, name: 'cat' + (vi + 1) })
+    // 占位页（开发者工具要求分包 pages 不能为空；无任何入口跳转到此页）
+    const pageDir = path.join(pkgDir, 'pages', 'blank')
+    fs.mkdirSync(pageDir, { recursive: true })
+    fs.writeFileSync(path.join(pageDir, 'blank.js'), 'Page({})\n')
+    fs.writeFileSync(path.join(pageDir, 'blank.wxml'),
+      '<view style="padding:60rpx 40rpx;text-align:center;color:#8E7FA6;font-size:26rpx;">物品图鉴数据卷 ' + (vi + 1) + '（纯资源页，请从「全物品图鉴」入口访问）</view>\n')
+    fs.writeFileSync(path.join(pageDir, 'blank.json'), '{}\n')
+    fs.writeFileSync(path.join(pageDir, 'blank.wxss'), '/* 占位页 */\n')
+    // app.json（数据卷；入口统一在主包 pages/catalog/catalog）
+    app.subpackages.push({ root, name: 'cat' + (vi + 1), pages: ['pages/blank/blank'] })
     console.log('  卷 ' + (vi + 1) + ': ' + root + ' | ' + compact.length + ' 条 | ' + vol.cats.slice(0, 4).join('/'))
   })
 
