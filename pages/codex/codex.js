@@ -4,6 +4,7 @@ const BT = require('../../utils/back-top-behavior')
 const dex = require('../../utils/dex')
 const catSearch = require('../../utils/catalog-search')
 const catGroups = require('../../utils/cat-groups')
+const CAT_VOLS = require('../../utils/cat-vols')
 const fmt = require('../../utils/fmt')
 const store = require('../../utils/store')
 const { startClock } = require('../../utils/clock')
@@ -138,7 +139,7 @@ Page({
     try {
       const app = getApp()
       if (!app || !app.globalData) return
-      for (let i = 1; i <= 3; i++) {
+      for (let i = 1; i <= CAT_VOLS; i++) {
         const v = app.globalData['catVol' + i]
         if (v && v.length && !(this._vols[i] && this._vols[i].length)) {
           this._vols[i] = catSearch.normalizeRows(v, i)
@@ -148,7 +149,7 @@ Page({
     } catch (e) { /* getApp 不可用时忽略 */ }
   },
   _missingVols () {
-    return [1, 2, 3].filter(i => !(this._vols[i] && this._vols[i].length))
+    return Array.from({ length: CAT_VOLS }, (x, k) => k + 1).filter(i => !(this._vols[i] && this._vols[i].length))
   },
   _rebuild () {
     this._catEntries = []

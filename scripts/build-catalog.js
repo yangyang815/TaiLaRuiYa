@@ -222,9 +222,10 @@ async function sprites () {
   async function worker () {
     while (idx < targets.length) {
       const r = targets[idx++]
-      const safeId = validInternal(r.internal) || r.en
+      // 哈希必须基于净化后的 id（与 build 阶段查找路径一致）
+      const safeId = (validInternal(r.internal) || r.en).replace(/[^A-Za-z0-9_]/g, '_')
       const h = require('crypto').createHash('md5').update(safeId).digest('hex').slice(0, 2)
-      const dest = path.join(stageDir, h, safeId.replace(/[\\/:"*?<>|]/g, '_') + '.png')
+      const dest = path.join(stageDir, h, safeId + '.png')
       fs.mkdirSync(path.dirname(dest), { recursive: true })
       if (fs.existsSync(dest)) { ok++; continue }
       try {
@@ -322,7 +323,7 @@ async function build () {
   const entries = []
   const seenIds = new Set()
   raw.forEach(r => {
-    const safeId = (validInternal(r.internal) || r.en).replace(/[\\/:"*?<>|]/g, '_')
+    const safeId = (validInternal(r.internal) || r.en).replace(/[^A-Za-z0-9_]/g, '_')
     if (seenIds.has(safeId)) return
     const sp = path.join(stageDir, h2(safeId), safeId + '.png')
     if (!fs.existsSync(sp)) return
@@ -441,6 +442,9 @@ async function build () {
   })
 
   fs.writeFileSync(appJsonPath, JSON.stringify(app, null, 2) + '\n')
+  // 卷数常量（运行时按此探测，避免探测不存在的卷）
+  fs.writeFileSync(path.join(ROOT, 'utils', 'cat-vols.js'),
+    '// 自动生成：全物品图鉴数据卷数（勿手改）\nmodule.exports = ' + volumes.length + '\n')
   console.log('app.json 已注册 ' + volumes.length + ' 个数据分包')
 }
 

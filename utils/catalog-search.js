@@ -5,6 +5,7 @@ const RCOL = { '-13': '#B57BFF', '-12': '#FF4CE0', '-1': '#B4B4B4', 0: '#FFFFFF'
 const RLAB = { '-13': '大师', '-12': '专家', '-1': '任务', 0: '白色', 1: '蓝色', 2: '绿色', 3: '橙色', 4: '浅红', 5: '粉色', 6: '浅紫', 7: '青柠', 8: '黄色', 9: '青色', 10: '红色' }
 
 let loader = null
+const VOLS = require('./cat-vols')
 const hasWx = typeof wx !== 'undefined' && !!wx.getStorageSync
 
 // 常用俗称 → 官方译名（搜索时同时匹配，提升命中率）
@@ -100,15 +101,15 @@ function normalizeRows (rows, vol) {
   return out
 }
 
-/* ---------- 每卷本地缓存 ---------- */
+/* ---------- 每卷本地缓存（v2：文件名白名单化后旧缓存作废） ---------- */
 function saveVol (i, rows) {
   if (!hasWx) return
-  try { wx.setStorageSync('terr_catv' + i, rows) } catch (e) { /* 存储满静默忽略 */ }
+  try { wx.setStorageSync('terr_catv2_' + i, rows) } catch (e) { /* 存储满静默忽略 */ }
 }
 function loadVolStorage (i) {
   if (!hasWx) return []
   try {
-    const v = wx.getStorageSync('terr_catv' + i)
+    const v = wx.getStorageSync('terr_catv2_' + i)
     return v && v.length ? v : []
   } catch (e) { return [] }
 }
@@ -151,7 +152,7 @@ function mapEntries (rows, vol) {
 
 /* ---------- 全量加载（等全部卷就绪；搜索/详情用） ---------- */
 function load () {
-  return Promise.all([1, 2, 3].map(i => loadVol(i))).then(ms => {
+  return Promise.all(Array.from({ length: VOLS }, (x, k) => k + 1).map(i => loadVol(i))).then(ms => {
     const out = []
     ms.forEach((m, i) => out.push(...mapEntries(m, i + 1)))
     return out
@@ -160,7 +161,7 @@ function load () {
 
 /* ---------- 渐进式加载（图鉴页用）：三卷并行，各自就绪立即回调，互不阻塞 ---------- */
 function loadProgressive (onPart) {
-  return Promise.all([1, 2, 3].map(i =>
+  return Promise.all(Array.from({ length: VOLS }, (x, k) => k + 1).map(i =>
     loadVol(i).then(rows => {
       if (rows && rows.length) {
         try { onPart(mapEntries(rows, i), i) } catch (e) { console.error('[图鉴] 上屏异常:', e && e.message) }
@@ -213,4 +214,4 @@ function findByName (name) {
   return load().then(all => all.find(x => x.n === name) || null)
 }
 
-module.exports = { load, loadVol, loadProgressive, resetVols, search, searchTotal, getById, findByName, lastStats, normalizeRows, saveVolCache: saveVol, ALIAS, __useLoader: fn => { loader = fn } }
+module.exports = { VOLS, load, loadVol, loadProgressive, resetVols, search, searchTotal, getById, findByName, lastStats, normalizeRows, saveVolCache: saveVol, ALIAS, __useLoader: fn => { loader = fn } }
