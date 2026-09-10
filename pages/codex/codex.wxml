@@ -127,7 +127,10 @@
     <view class="empty" wx:if="{{!list.length}}">
       <view class="e-icon">🕳️</view>
       <text wx:if="{{tab === 'allitem' && allLoading}}">全量图鉴加载中…</text>
-      <text wx:elif="{{tab === 'allitem' && allLoadFail}}" class="tappable" bindtap="retryAll">全量图鉴加载失败，点击重试</text>
+      <block wx:elif="{{tab === 'allitem' && allLoadFail}}">
+        <text class="tappable" bindtap="retryAll">全量图鉴加载失败，点击重试</text>
+        <text class="px" style="display:block;margin-top:12rpx;font-size:20rpx;opacity:0.7;">{{allDiag}}</text>
+      </block>
       <text wx:else>未找到相关条目，试试其他关键词</text>
     </view>
 

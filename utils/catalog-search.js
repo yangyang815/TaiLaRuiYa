@@ -22,6 +22,7 @@ function realLoad () {
   // 动态适配卷数（缺卷静默跳过，require.async 失败不阻断其它卷）
   const vols = [1, 2, 3, 4]
   const stats = {}
+  if (typeof require.async !== 'function') stats.api = '低版本'
   return Promise.all(vols.map(i =>
     new Promise(res => {
       try {
@@ -47,6 +48,31 @@ function realLoad () {
   })
 }
 
+/* ---------- 本地缓存层：任何一次成功加载都落盘，之后不再依赖分包异步加载 ---------- */
+const hasWx = typeof wx !== 'undefined' && !!wx.getStorageSync
+function saveStorage (items) {
+  if (!hasWx) return
+  try {
+    const vols = {}
+    ;(items || []).forEach(x => {
+      const v = Math.min(4, x.vol || 4)
+      ;(vols[v] = vols[v] || []).push(x)
+    })
+    Object.keys(vols).forEach(v => { wx.setStorageSync('terr_catv' + v, vols[v]) })
+  } catch (e) { /* 存储满等静默忽略 */ }
+}
+function loadStorage () {
+  if (!hasWx) return []
+  try {
+    const out = []
+    for (let i = 1; i <= 4; i++) {
+      const v = wx.getStorageSync('terr_catv' + i)
+      if (v && v.length) out.push(...v)
+    }
+    return out
+  } catch (e) { return [] }
+}
+
 // 最近一次分卷加载统计（诊断用）：v1..v4 = 各卷条数，-1 = 加载失败，null = 尚未加载
 let _lastStats = null
 function lastStats () { return _lastStats }
@@ -54,10 +80,18 @@ function lastStats () { return _lastStats }
 function load () {
   if (!p) {
     p = Promise.resolve(loader()).then(r => {
-      // 空结果不缓存：分包尚未就绪/瞬时失败时允许下次调用重试
-      if (!r || !r.length) { p = null; return [] }
-      return r
-    }).catch(() => { p = null; return [] })
+      if (r && r.length) { saveStorage(r); return r }
+      // 分包异步加载失败/为空（真机兼容性等）→ 回退本地缓存
+      p = null
+      const cached = loadStorage()
+      if (cached.length) { _lastStats = { cache: cached.length }; return cached }
+      return []
+    }).catch(() => {
+      p = null
+      const cached = loadStorage()
+      if (cached.length) { _lastStats = { cache: cached.length }; return cached }
+      return []
+    })
   }
   return p
 }

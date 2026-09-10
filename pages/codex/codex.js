@@ -53,7 +53,7 @@ Page({
     list: [], total: 0,
     letters: LET, letter: '',
     recents: [], recentsAll: false,
-    allLoading: false, allLoadFail: false,
+    allLoading: false, allLoadFail: false, allDiag: '',
     secTitle: '全部图鉴',
     sheet: null, sheetFav: false
   },
@@ -79,15 +79,22 @@ Page({
     this.loadAllItems()
   },
 
-  /* ---------- 全物品（wiki 全量 6317 条，分包异步加载） ---------- */
+  /* ---------- 全物品（wiki 全量 6317 条，分包异步加载 + 本地缓存兜底） ---------- */
   loadAllItems (attempt) {
     attempt = attempt || 0
-    catSearch.load().then(items => {
-      if ((!items || !items.length) && attempt < 3) {
-        setTimeout(() => this.loadAllItems(attempt + 1), 1500 * (attempt + 1))
+    const timeout = new Promise(res => setTimeout(() => res([]), 12000))
+    Promise.race([catSearch.load(), timeout]).then(items => {
+      if ((!items || !items.length) && attempt < 2) {
+        setTimeout(() => this.loadAllItems(attempt + 1), 2000 * (attempt + 1))
         return
       }
-      if (!items || !items.length) { this.setData({ allLoadFail: true, allLoading: false }); return }
+      if (!items || !items.length) {
+        const st = catSearch.lastStats()
+        const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起'
+        this.setData({ allLoadFail: true, allLoading: false, allDiag: '诊断 ' + diag })
+        return
+      }
+      this.setData({ allDiag: '' })
       this._catEntries = items.map(x => {
         const m = catGroups.macroOf(x.c)
         return {
