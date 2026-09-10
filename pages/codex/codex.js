@@ -2,6 +2,7 @@ const BT = require('../../utils/back-top-behavior')
 // 图鉴页：搜索联想 + 筛选 + 瀑布流卡片 + 半屏详情弹窗 + 收藏
 // 性能：分页渲染（滚动增量加载）、图标传 artId 字符串、onShow 脏检查
 const dex = require('../../utils/dex')
+const catSearch = require('../../utils/catalog-search')
 const fmt = require('../../utils/fmt')
 const store = require('../../utils/store')
 const { startClock } = require('../../utils/clock')
@@ -277,10 +278,25 @@ Page({
         mode: 'brand', tag: '万物图鉴',
         artId: 'tab_book_on', color: '#FFD700',
         title: '泰拉瑞亚图鉴', sub: '一册在手 · 万物皆有档案',
-        features: [['物品收录', cnt('item') + ' 件'], ['敌怪档案', cnt('mon') + ' 只'], ['Boss 全录', cnt('boss') + ' 位'], ['NPC 图鉴', cnt('npc') + ' 位']],
+        features: [['物品收录', '统计中…'], ['敌怪档案', cnt('mon') + ' 只'], ['Boss 全录', cnt('boss') + ' 位'], ['NPC 图鉴', cnt('npc') + ' 位']],
         desc: '支持中文/拼音/别名搜索，掉落、属性、出现地点一查便知'
       },
       posterShow: true
+    })
+    this._fillPosterCounts()
+  },
+
+  /* 异步统计全物品图鉴真实数量（5701+），就绪后回填海报 */
+  _fillPosterCounts () {
+    const fbItem = dex.ALL.filter(e => e.type === 'item').length
+    if (!this._posterCountsP) {
+      this._posterCountsP = catSearch.load().catch(() => null).then(cats => ({ nCat: cats && cats.length }))
+    }
+    this._posterCountsP.then(({ nCat }) => {
+      if (!this.data.posterShow || !this.data.posterData) return
+      const f = this.data.posterData.features.slice()
+      f[0] = ['物品收录', (nCat || fbItem) + ' 件']
+      this.setData({ posterData: Object.assign({}, this.data.posterData, { features: f }) })
     })
   },
   closePoster () { this.setData({ posterShow: false }) }

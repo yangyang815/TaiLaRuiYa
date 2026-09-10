@@ -65,8 +65,8 @@ Component({
   },
   data: { saving: false, cw: 300, ch: 500, closing: false },
   observers: {
-    show (v) {
-      if (v) {
+    'show, info' () {
+      if (this.properties.show) {
         this.setData({ closing: false })
         this.redraw()
       }
@@ -85,7 +85,8 @@ Component({
     }
   },
   methods: {
-    /* 每次打开都重新查询画布节点（wx:if 关闭时已销毁，节点是新的） */
+    /* 每次打开都重新查询画布节点（wx:if 关闭时已销毁，节点是新的）
+       _paintSeq 序号防并发：info 异步更新触发重绘时，丢弃上一轮未完成的绘制 */
     redraw () {
       wx.nextTick(() => {
         this.createSelectorQuery().select('#posterCanvas').fields({ node: true }).exec(res => {
@@ -97,7 +98,8 @@ Component({
           const ctx = canvas.getContext('2d')
           ctx.scale(dpr, dpr)
           this._canvas = canvas
-          this.paint(ctx, canvas)
+          const seq = (this._paintSeq = (this._paintSeq || 0) + 1)
+          this.paint(ctx, canvas, seq)
         })
       })
     },
@@ -119,7 +121,8 @@ Component({
     },
 
     /* ================= 主绘制 ================= */
-    async paint (ctx, canvas) {
+    async paint (ctx, canvas, seq) {
+      const stale = () => seq !== undefined && seq !== this._paintSeq
       const d = this.properties.info || {}
       const mode = d.mode || 'entry'
       const color = d.color || '#FFD700'
@@ -204,11 +207,13 @@ Component({
       ;[[20, 20], [W - 20, 20], [20, H - 20], [W - 20, H - 20]].forEach(c => diamond(ctx, c[0], c[1], 5, '#FFD700'))
 
       /* ---- 7. 内容版式 ---- */
-      if (mode === 'brand') await this.paintBrand(ctx, canvas, d, color)
+      if (stale()) return
+      if (mode === 'brand') await this.paintBrand(ctx, canvas, d, color, seq)
       else if (mode === 'card') await this.paintCard(ctx, canvas, d, color)
       else await this.paintEntry(ctx, canvas, d, color)
 
       /* ---- 8. 底部品牌区 ---- */
+      if (stale()) return
       this.drawFooter(ctx, mode)
     },
 
@@ -398,10 +403,12 @@ Component({
     },
 
     /* ============ 版式二：品牌海报（首页/图鉴/合成） ============ */
-    async paintBrand (ctx, canvas, d, color) {
+    async paintBrand (ctx, canvas, d, color, seq) {
       const cx = W / 2
       this.drawTag(ctx, d.tag || '泰拉瑞亚手册', color, 64)
       await this.drawSprite(ctx, canvas, d.artId, color, cx, 296, 230, 138)
+      // 绘制期间 info 被异步更新（数据统计回填）时放弃本轮，交给新一轮重绘
+      if (seq !== undefined && seq !== this._paintSeq) return
       const title = d.title || '泰拉瑞亚手册'
       const fs = this.fitFont(ctx, title, 40, 460)
       this.shimmerText(ctx, title, cx, 486, fs, color)

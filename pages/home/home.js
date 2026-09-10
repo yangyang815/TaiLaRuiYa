@@ -621,19 +621,45 @@ Page({
 
   /* ---------- 分享海报（品牌版式） ---------- */
   openPoster () {
-    const nItem = dex.ALL.filter(e => e.type === 'item').length
     const nMon = dex.ALL.filter(e => e.type === 'mon').length
     const nBoss = dex.ALL.filter(e => e.type === 'boss').length
-    const nRec = Object.keys(dex.R.byId).length
+    // 物品/配方数量以全量数据为准（全物品图鉴 + wiki 配方），分包未就绪前先占位
     this.setData({
       posterData: {
         mode: 'brand', tag: '随身百科',
         artId: 'zenith', color: '#FFD700',
         title: '泰拉瑞亚手册', sub: '冒险者的随身百科',
-        features: [['物品图鉴', nItem + ' 收录'], ['敌怪档案', nMon + ' 收录'], ['Boss 图鉴', nBoss + ' 全录'], ['合成配方', nRec + ' 条']],
+        features: [['物品图鉴', '统计中…'], ['敌怪档案', nMon + ' 收录'], ['Boss 图鉴', nBoss + ' 全录'], ['合成配方', '统计中…']],
         desc: '查物品、看掉落、追合成路线，从开荒到毕业的全流程助手'
       },
       posterShow: true
+    })
+    this._fillPosterCounts()
+  },
+
+  /* 异步统计全物品图鉴与 wiki 配方真实数量，就绪后回填海报（组件监听 info 自动重绘） */
+  _fillPosterCounts () {
+    const fbItem = dex.ALL.filter(e => e.type === 'item').length
+    const fbRec = Object.keys(dex.R.byId).length
+    if (!this._posterCountsP) {
+      this._posterCountsP = Promise.all([
+        catSearch.load().catch(() => null),
+        wikiCraft.dataPromise().catch(() => null)
+      ]).then(([cats, wiki]) => {
+        let nCat = 0, nRec = 0
+        if (cats && cats.length) nCat = cats.length
+        if (wiki && wiki.rec) Object.keys(wiki.rec).forEach(k => { nRec += wiki.rec[k].length })
+        return { nCat, nRec }
+      })
+    }
+    this._posterCountsP.then(({ nCat, nRec }) => {
+      if (!this.data.posterShow || !this.data.posterData) return
+      const f = this.data.posterData.features.slice()
+      // 分包加载失败时回退为内置图鉴数量，避免「统计中…」挂死
+      f[0] = ['物品图鉴', (nCat || fbItem) + ' 收录']
+      f[3] = ['合成配方', (nRec || fbRec) + ' 条']
+      // 整对象覆盖，保证 poster 组件的 info 属性观察器能触发重绘
+      this.setData({ posterData: Object.assign({}, this.data.posterData, { features: f }) })
     })
   },
   closePoster () { this.setData({ posterShow: false }) }

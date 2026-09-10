@@ -474,10 +474,29 @@ Page({
         mode: 'brand', tag: '合成速查',
         artId: 'tab_anvil_on', color: '#FFD700',
         title: '合成路线速查', sub: '向导为你展开每一层材料树',
-        features: [['合成配方', nRec + ' 条'], ['制作站', nSt + ' 种'], ['材料核对', '缺料标红'], ['常用合成', '一键直达']],
+        features: [['合成配方', '统计中…'], ['制作站', nSt + ' 种'], ['材料核对', '缺料标红'], ['常用合成', '一键直达']],
         desc: '输入目标物品自动展开完整合成树，勾选已有材料即可盘点缺口'
       },
       posterShow: true
+    })
+    this._fillPosterCounts()
+  },
+
+  /* 异步统计 wiki 配方真实数量，就绪后回填海报 */
+  _fillPosterCounts () {
+    const fbRec = Object.keys(R.byId).length
+    if (!this._posterCountsP) {
+      this._posterCountsP = wikiCraft.dataPromise().catch(() => null).then(wiki => {
+        let nRec = 0
+        if (wiki && wiki.rec) Object.keys(wiki.rec).forEach(k => { nRec += wiki.rec[k].length })
+        return { nRec }
+      })
+    }
+    this._posterCountsP.then(({ nRec }) => {
+      if (!this.data.posterShow || !this.data.posterData) return
+      const f = this.data.posterData.features.slice()
+      f[0] = ['合成配方', (nRec || fbRec) + ' 条']
+      this.setData({ posterData: Object.assign({}, this.data.posterData, { features: f }) })
     })
   },
   closePoster () { this.setData({ posterShow: false }) }

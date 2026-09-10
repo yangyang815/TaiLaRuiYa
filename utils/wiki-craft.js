@@ -125,4 +125,4 @@ function hasCraft (en) {
   return dataPromise().then(d => !!(d && d.rec && d.rec[en]))
 }
 
-module.exports = { buildIndex, rows, rootInfo, iconOf, obtOf, leafObt, slotLabel, hasCraft }
+module.exports = { buildIndex, rows, rootInfo, iconOf, obtOf, leafObt, slotLabel, hasCraft, dataPromise }
