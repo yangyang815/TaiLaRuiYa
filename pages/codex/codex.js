@@ -27,6 +27,7 @@ const NGRP = { svc: '服务型', shop: '肉前入住', post: '肉后入住', evt
 const LET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 const PAGE = 40 // 每页条数
 const RECENT_PAGE = 4 // 最近浏览默认展示数
+const TAB_TITLES = { all: '全部图鉴', item: '物品', allitem: '全物品图鉴', mon: '敌怪', boss: 'Boss', npc: 'NPC 图鉴' }
 
 // 稀有度 → 星级（1~5）：亮星 + 暗星
 function starsOf (e) {
@@ -53,6 +54,7 @@ Page({
     letters: LET, letter: '',
     recents: [], recentsAll: false,
     allLoading: false, allLoadFail: false,
+    secTitle: '全部图鉴',
     sheet: null, sheetFav: false
   },
   _all: [],    // 当前筛选全量（内存）
@@ -202,6 +204,7 @@ Page({
       this._all = list
       this._sig = tab + '|' + cat + '|' + letter
       this.setData({
+        secTitle: TAB_TITLES[tab] || '全部图鉴',
         cats: this._catLoaded ? this.allItemChips() : [],
         list: list.slice(0, PAGE).map(e => this.fmt(e)),
         total: list.length,
@@ -225,6 +228,7 @@ Page({
     this._sig = tab + '|' + cat + '|' + letter
     const cats = (dex.CATS[tab] || [{ k: '', n: '全部' }]).slice()
     this.setData({
+      secTitle: TAB_TITLES[tab] || '全部图鉴',
       cats,
       list: list.slice(0, PAGE).map(e => this.fmt(e)),
       total: list.length

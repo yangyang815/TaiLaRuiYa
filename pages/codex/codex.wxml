@@ -81,7 +81,7 @@
 
     <!-- 全部图鉴 -->
     <view class="sec-head">
-      <text class="sec-t">{{tab === 'all' ? '全部图鉴' : (tab === 'item' ? '物品' : (tab === 'allitem' ? '全物品图鉴' : (tab === 'mon' ? '敌怪' : (tab === 'npc' ? 'NPC 图鉴' : 'Boss')))}}</text>
+      <text class="sec-t">{{secTitle}}</text>
       <text class="sec-sub px">ALL</text>
     </view>
 
