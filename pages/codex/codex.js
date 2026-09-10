@@ -108,13 +108,22 @@ Page({
     }).then(() => {
       console.log('[图鉴] 全部卷加载流程结束, 共', this._catEntries.length, '条')
       if (this._catEntries.length) {
-        this.setData({ allLoading: false })
+        this.setData({ allLoading: false, allLoadFail: false })
         if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
-      } else {
-        const st = catSearch.lastStats()
-        const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起'
-        this.setData({ allLoading: false, allLoadFail: true, allDiag: '诊断 ' + diag })
+        return
       }
+      // 关键时序：require.async 必须等分包预下载完成才可用（启动即调用会直接 reject）
+      // 自动重试 3 次（1s/2s/3s），覆盖预下载窗口
+      if (attempt < 3) {
+        const delay = 1000 * (attempt + 1)
+        console.log('[图鉴] 分包未就绪,', delay, 'ms 后自动重试(第', attempt + 2, '次)')
+        this.setData({ allDiag: '分包就绪中，即将自动重试…' })
+        setTimeout(() => this.loadAllItems(attempt + 1), delay)
+        return
+      }
+      const st = catSearch.lastStats()
+      const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起'
+      this.setData({ allLoading: false, allLoadFail: true, allDiag: '诊断 ' + diag + ' · 请检查网络后点击重试' })
     }).catch(err => {
       console.error('[图鉴] 加载链路异常:', err && err.message, err && err.stack)
       this.setData({ allLoading: false, allLoadFail: true, allDiag: '加载链路异常: ' + (err && err.message) })
