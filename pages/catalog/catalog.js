@@ -38,19 +38,28 @@ Page({
     this.loadData()
   },
 
-  /* 加载三卷全量数据（preloadRule 已链式预下载，基本无感）；空结果自动重试一次；带超时与分卷诊断 */
-  loadData (isRetry) {
+  /* 加载三卷全量数据：递进式自动重试（600ms/2s/5s/10s），覆盖分包冷启动/下载慢等场景 */
+  loadData (attempt) {
+    attempt = attempt || 0
     this.setData({ loading: true, loadFail: false })
-    // 15s 超时保护：require.async 异常挂起时不再无限转圈
-    const timeout = new Promise(res => setTimeout(() => res([]), 15000))
+    // 12s 超时保护：require.async 异常挂起时不再无限转圈
+    const timeout = new Promise(res => setTimeout(() => res([]), 12000))
     Promise.race([catSearch.load(), timeout]).then(all => {
       if (!all || !all.length) {
         const st = catSearch.lastStats()
         const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起加载'
-        if (!isRetry) { setTimeout(() => this.loadData(true), 600); return }
-        this.setData({ loading: false, loadFail: true, diag: '诊断 ' + diag })
+        const waits = [600, 2000, 5000, 10000]
+        if (attempt < waits.length) {
+          console.log('[图鉴] 第' + (attempt + 1) + '次加载为空，' + waits[attempt] + 'ms 后自动重试 |', diag)
+          this.setData({ loading: true, diag: '第 ' + (attempt + 2) + ' 次尝试中… ' + diag })
+          setTimeout(() => this.loadData(attempt + 1), waits[attempt])
+          return
+        }
+        console.log('[图鉴] 自动重试耗尽 |', diag)
+        this.setData({ loading: false, loadFail: true, diag: '诊断 ' + diag + ' · 多次失败请回首页再进，或重启工具' })
         return
       }
+      console.log('[图鉴] 加载成功:', all.length, '条')
       this._all = all.slice().sort((a, b) => (a.n < b.n ? -1 : 1))
       // 分类 chips（全量统计；长尾合并为"其他"，最多 24 个主分类）
       const cnt = {}
@@ -61,7 +70,7 @@ Page({
       const catChips = [{ k: '', n: '全部', cnt: this._all.length }].concat(main)
       this._mainSet = new Set(main.map(x => x.k))
       if (this._all.length - mainCnt > 0) catChips.push({ k: '__other__', n: '其他', cnt: this._all.length - mainCnt })
-      this.setData({ loading: false, total: this._all.length, catChips })
+      this.setData({ loading: false, loadFail: false, diag: '', total: this._all.length, catChips })
       const o = this._opts
       if (o.kw) this.applyFilter(decodeURIComponent(o.kw))
       else this.applyFilter('')
