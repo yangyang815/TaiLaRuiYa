@@ -101,6 +101,14 @@
         "pages/index/index",
         "pages/blank/blank"
       ]
+    },
+    {
+      "root": "pkg-cat-3",
+      "name": "cat3",
+      "pages": [
+        "pages/index/index",
+        "pages/blank/blank"
+      ]
     }
   ],
   "preloadRule": {
@@ -113,7 +121,8 @@
     "pages/codex/codex": {
       "network": "all",
       "packages": [
-        "guide"
+        "guide",
+        "cat3"
       ]
     },
     "pages/home/home": {

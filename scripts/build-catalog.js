@@ -129,6 +129,18 @@ function priceZh (v) {
   return p.join('')
 }
 
+// wiki 购买价格文本 → 中文（10 SC / 2 Gold&#32;50 Silver / 20 Copper / 45 Defender Medals）
+function priceTag (s) {
+  if (!s) return ''
+  let t = String(s).replace(/&#\d+;/g, ' ')
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/\bPC\b/gi, '铂金').replace(/\bGC\b/gi, '金').replace(/\bSC\b/gi, '银').replace(/\bCC\b/gi, '铜')
+    .replace(/Defender Medals/gi, '防御者勋章')
+    .replace(/Platinum/gi, '铂金').replace(/Gold/gi, '金').replace(/Silver/gi, '银').replace(/Copper/gi, '铜')
+    .replace(/\s+/g, ' ').trim()
+  return t
+}
+
 function normRare (raw) {  const str = String(raw == null ? '' : raw)
   if (/quest/i.test(str)) return -1
   const m = str.match(/(-?\d+)/)
@@ -154,7 +166,7 @@ async function harvest () {
   let offset = 0
   while (true) {
     const url = API + '?action=cargoquery&tables=Items&format=json&limit=' + LIMIT + '&offset=' + offset +
-      '&fields=_pageTitle,name,internalname,imagefile,type,listcat,damage,damagetype,defense,rare,tooltip,hardmode,unobtainable,pick,axe,hammer,bait,bonus,usetime,knockback'
+      '&fields=_pageTitle,name,internalname,imagefile,type,listcat,damage,damagetype,defense,rare,tooltip,hardmode,unobtainable,pick,axe,hammer,bait,bonus,usetime,knockback,tag,buy,hheal,mheal'
     let d
     try { d = await fetchJson(url) } catch (e) { console.log('批次失败(offset=' + offset + ')，重试一次'); d = await fetchJson(url) }
     const rows = ((d.cargoquery || []).map(x => x.title))
@@ -180,7 +192,8 @@ async function harvest () {
       hardmode: r.hardmode === 'true',
       pick: cleanWiki(r.pick), axe: cleanWiki(r.axe), hammer: cleanWiki(r.hammer),
       bait: r.bait || '', bonus: cleanWiki(r.bonus).slice(0, 80),
-      usetime: cleanWiki(r.usetime), knockback: cleanWiki(r.knockback)
+      usetime: cleanWiki(r.usetime), knockback: cleanWiki(r.knockback),
+      tag: r.tag || '', buy: cleanWiki(r.buy), hheal: cleanWiki(r.hheal), mheal: cleanWiki(r.mheal)
     }))
   writeStage('raw.json', list)
   console.log('采集完成:', list.length, '条（已剔除无名称/不可获得）')
@@ -265,7 +278,7 @@ function packVolumes (entries) {
   // 记录每卷的分类计数（供标题取主导分类）
   const bySize = Object.keys(groups).map(c => ({
     cat: c,
-    size: groups[c].reduce((a, r) => a + 260 + r._spriteSize, 0),
+    size: groups[c].reduce((a, r) => a + 480 + r._spriteSize, 0),
     items: groups[c]
   })).sort((a, b) => b.size - a.size)
   const MAX = 1600 * 1024
@@ -274,7 +287,7 @@ function packVolumes (entries) {
   for (const g of bySize) {
     if (g.size <= MAX && volumes.length) {
       const last = volumes[volumes.length - 1]
-      const lastSize = last.items.reduce((a, r) => a + 260 + r._spriteSize, 0)
+      const lastSize = last.items.reduce((a, r) => a + 480 + r._spriteSize, 0)
       if (lastSize + g.size <= MAX) {
         last.items = last.items.concat(g.items)
         last.cats.push(g.cat)
@@ -366,6 +379,7 @@ async function build () {
   const npcZh = {}
   try { require('../data/monsters.js').forEach(m => { if (m.en && m.name) npcZh[m.en] = m.name }) } catch (e) {}
   try { require('../data/bosses.js').forEach(m => { if (m.en && m.name) npcZh[m.en] = m.name }) } catch (e) {}
+  try { require('../utils/dex').ALL.filter(e => e.type === 'npc').forEach(n => { if (n.en && n.name) npcZh[n.en] = n.name }) } catch (e) {}
   Object.values(zhdetail.items).forEach(z => {
     if (z && z.t && /加成：/.test(z.t) && / Banner$/i.test(z.n || '')) {
       const m = z.t.match(/加成：([^（。；]+)/)
@@ -402,9 +416,34 @@ async function build () {
       const rs = [...new Set(use.map(zName))]
       r._use = rs.length ? '可用于合成：' + rs.slice(0, 3).join('、') + (rs.length > 3 ? ' 等 ' + rs.length + ' 种' : '') : ''
     } else r._use = ''
-    if (!rec && DROPS && DROPS[r.en] && DROPS[r.en].length) {
-      const dps = [...new Set(DROPS[r.en].map(d => npcZh[d.by] || (zh[d.by] && /[\u4e00-\u9fa5]/.test(zh[d.by]) && zh[d.by]) || d.by))]
-      r._ob = '掉落：' + dps.slice(0, 3).join('、') + (dps.length > 3 ? ' 等 ' + dps.length + ' 种来源' : '')
+    // 获得方式：合成详情优先；否则按 wiki tag 分类（vendor/drop/loot/fished/plunder）组合生成
+    if (!rec) {
+      const tags = String(r.tag || '').split('^').map(x => x.trim()).filter(Boolean)
+      const vendors = [...new Set(tags.filter(t => t.indexOf('vendor:') === 0).map(t => t.slice(7)))]
+      const isDrop = tags.some(t => /^drop/i.test(t))
+      const isLoot = tags.some(t => /loot/i.test(t))
+      const isFish = tags.some(t => /fish/i.test(t))
+      const isPlunder = tags.some(t => /plunder/i.test(t))
+      const isCraft = tags.some(t => /craftable/i.test(t))
+      const parts = []
+      if (vendors.length) {
+        const vn = [...new Set(vendors.map(v => npcZh[v] || (zh[v] && /[\u4e00-\u9fa5]/.test(zh[v]) && zh[v]) || v))].slice(0, 2)
+        parts.push('由 ' + vn.join('、') + ' 出售' + (r.buy ? '（' + priceTag(r.buy) + '）' : ''))
+      }
+      if (isDrop) {
+        if (DROPS && DROPS[r.en] && DROPS[r.en].length) {
+          const dps = [...new Set(DROPS[r.en].map(d => npcZh[d.by] || (zh[d.by] && /[\u4e00-\u9fa5]/.test(zh[d.by]) && zh[d.by]) || d.by))]
+          parts.push('由 ' + dps.slice(0, 3).join('、') + (dps.length > 3 ? ' 等 ' + dps.length + ' 种来源' : '') + ' 掉落')
+        } else parts.push('击败敌怪掉落')
+      }
+      if (isLoot) parts.push(/bag loot/i.test(r.tag || '') ? '开启宝藏袋获得' : '开启宝箱获得')
+      if (isFish) parts.push('钓鱼获得')
+      if (isPlunder) parts.push('敲碎陶罐 / 探索获得')
+      if (/quest/i.test(r.tag || '')) parts.push('完成任务获得')
+      if (/^Music Box/i.test(r.en)) parts.push('用空白音乐盒录制获得')
+      if (!parts.length && isCraft) parts.push('通过合成获得')
+      if (!parts.length) parts.push('可于世界中探索、击败敌怪或参与事件获得')
+      if (parts.length) r._ob = parts.join('；')
     }
     // 游戏数值补全（wiki Cargo 缺失时用 Iteminfo 官方数据）
     const ii = vi && II && II[vi]
@@ -453,7 +492,7 @@ async function build () {
       c: fineCat(r),
       d: r.damage, dt: DTZH[r.damagetype] || r.damagetype, df: r.defense, r: normRare(r.rare),
       u: r.usetime, k: r.knockback,
-      t: String(r.tooltip || '').slice(0, 160), b: r._bonus || '', s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus, r._value ? '售价 ' + priceZh(Math.round(r._value / 5)) : ''].filter(Boolean).join('；'),
+      t: String(r.tooltip || '').slice(0, 160), b: r._bonus || '', s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.hheal && '恢复 ' + r.hheal + ' 生命', r.mheal && '恢复 ' + r.mheal + ' 魔力', r.bonus, r._value ? '售价 ' + priceZh(Math.round(r._value / 5)) : ''].filter(Boolean).join('；'),
       ob: r._ob || '', use: r._use || '', hm: r.hardmode ? 1 : 0
       }
     })
