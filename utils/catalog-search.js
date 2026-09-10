@@ -30,24 +30,41 @@ function rawVol (i) {
     return Promise.resolve(loader()).then(all => (all || []).filter(x => (x.vol || i) === i))
   }
   _lastStats = _lastStats || {}
-  console.log('[图鉴] v' + i + ' require.async 发起')
+  // 多路径尝试：不同工具版本对分包模块的注册路径解析不一致
+  const paths = [
+    '../pkg-cat-' + i + '/data/batch.js',
+    '/pkg-cat-' + i + '/data/batch.js',
+    '../../pkg-cat-' + i + '/data/batch.js'
+  ]
   return new Promise(res => {
-    try {
-      require.async('../pkg-cat-' + i + '/data/batch.js')
-        .then(m => {
+    let pi = 0
+    let lastErr = ''
+    const tryNext = () => {
+      if (pi >= paths.length) {
+        _lastStats['v' + i] = -1
+        console.log('[图鉴] v' + i + ' 全部路径失败, 最后错误:', lastErr)
+        res([])
+        return
+      }
+      const p = paths[pi++]
+      console.log('[图鉴] v' + i + ' 尝试路径:', p)
+      try {
+        require.async(p).then(m => {
           _lastStats['v' + i] = (m || []).length
-          console.log('[图鉴] v' + i + ' 加载成功:', _lastStats['v' + i], '条')
+          console.log('[图鉴] v' + i + ' 加载成功:', _lastStats['v' + i], '条 via', p)
           res(m || [])
-        }, () => {
-          _lastStats['v' + i] = -1
-          console.log('[图鉴] v' + i + ' 加载失败(reject)')
-          res([])
+        }, err => {
+          lastErr = (err && (err.message || err.errMsg)) || String(err)
+          console.log('[图鉴] v' + i + ' 该路径失败:', lastErr)
+          tryNext()
         })
-    } catch (e) {
-      _lastStats['v' + i] = -1
-      console.log('[图鉴] v' + i + ' 加载异常:', e && e.message)
-      res([])
+      } catch (e) {
+        lastErr = (e && e.message) || String(e)
+        console.log('[图鉴] v' + i + ' 同步抛错:', lastErr)
+        tryNext()
+      }
     }
+    tryNext()
   })
 }
 
