@@ -12,17 +12,39 @@
       "outputPath": ""
     },
     "useCompilerPlugins": false,
-    "minifyWXML": true
+    "minifyWXML": true,
+    "compileWorklet": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "minifyWXSS": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "condition": false
   },
   "compileType": "miniprogram",
   "simulatorPluginLibVersion": {},
   "packOptions": {
     "ignore": [
-      { "type": "regexp", "value": "guide_avatar.*\\.png" },
-      { "type": "regexp", "value": "^(debug-deflate|test-png|_pycheck)\\.js$" },
-      { "type": "folder", "value": "泰拉瑞亚_设计素材" },
-      { "type": "folder", "value": "scripts" },
-      { "type": "folder", "value": ".workbuddy" }
+      {
+        "value": "guide_avatar.*\\.png",
+        "type": "regexp"
+      },
+      {
+        "value": "^(debug-deflate|test-png|_pycheck)\\.js$",
+        "type": "regexp"
+      },
+      {
+        "value": "泰拉瑞亚_设计素材",
+        "type": "folder"
+      },
+      {
+        "value": "scripts",
+        "type": "folder"
+      },
+      {
+        "value": ".workbuddy",
+        "type": "folder"
+      }
     ],
     "include": []
   },

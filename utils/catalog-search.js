@@ -21,13 +21,16 @@ const ALIAS = {
 function realLoad () {
   // 动态适配卷数（缺卷静默跳过，require.async 失败不阻断其它卷）
   const vols = [1, 2, 3, 4]
+  const stats = {}
   return Promise.all(vols.map(i =>
     new Promise(res => {
       try {
-        require.async('../pkg-cat-' + i + '/data/batch.js').then(m => res(m || []), () => res([]))
-      } catch (e) { res([]) }
+        require.async('../pkg-cat-' + i + '/data/batch.js')
+          .then(m => { stats['v' + i] = (m || []).length; res(m || []) }, () => { stats['v' + i] = -1; res([]) })
+      } catch (e) { stats['v' + i] = -1; res([]) }
     })
   )).then(ms => {
+    _lastStats = stats
     const out = []
     ms.forEach((m, i) => (m || []).forEach(x => {
       if (!x || !x.f) return
@@ -43,6 +46,10 @@ function realLoad () {
     return out
   })
 }
+
+// 最近一次分卷加载统计（诊断用）：v1..v4 = 各卷条数，-1 = 加载失败，null = 尚未加载
+let _lastStats = null
+function lastStats () { return _lastStats }
 
 function load () {
   if (!p) {
@@ -99,4 +106,4 @@ function findByName (name) {
   return load().then(all => all.find(x => x.n === name) || null)
 }
 
-module.exports = { load, search, searchTotal, getById, findByName, ALIAS, __useLoader: fn => { loader = fn; p = null } }
+module.exports = { load, search, searchTotal, getById, findByName, lastStats, ALIAS, __useLoader: fn => { loader = fn; p = null } }

@@ -16,6 +16,7 @@ Page({
     total: 0,
     loading: true,
     loadFail: false,
+    diag: '',
     detail: null,
     cat: '',
     catChips: []
@@ -37,13 +38,17 @@ Page({
     this.loadData()
   },
 
-  /* 加载三卷全量数据（preloadRule 已链式预下载，基本无感）；空结果自动重试一次 */
+  /* 加载三卷全量数据（preloadRule 已链式预下载，基本无感）；空结果自动重试一次；带超时与分卷诊断 */
   loadData (isRetry) {
     this.setData({ loading: true, loadFail: false })
-    catSearch.load().then(all => {
+    // 15s 超时保护：require.async 异常挂起时不再无限转圈
+    const timeout = new Promise(res => setTimeout(() => res([]), 15000))
+    Promise.race([catSearch.load(), timeout]).then(all => {
       if (!all || !all.length) {
+        const st = catSearch.lastStats()
+        const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起加载'
         if (!isRetry) { setTimeout(() => this.loadData(true), 600); return }
-        this.setData({ loading: false, loadFail: true })
+        this.setData({ loading: false, loadFail: true, diag: '诊断 ' + diag })
         return
       }
       this._all = all.slice().sort((a, b) => (a.n < b.n ? -1 : 1))
@@ -65,7 +70,7 @@ Page({
         if (it) this.setData({ detail: { ...it, rcol2: it.rcol, rlab2: it.rlab } })
       }
       this._opts = {}
-    }).catch(() => this.setData({ loading: false, loadFail: true }))
+    }).catch(() => this.setData({ loading: false, loadFail: true, diag: '诊断 加载异常' }))
   },
   retry () { this.loadData() },
 
