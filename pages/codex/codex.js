@@ -87,6 +87,7 @@ Page({
     this._catLoaded = false
     this._catChips = null
     catSearch.loadProgressive(part => {
+      console.log('[图鉴] 卷到货:', part.length, '条')
       part.forEach(x => {
         const id = 'cat:' + x.f
         if (this._catById[id]) return
@@ -105,6 +106,7 @@ Page({
       this._catChips = null
       if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
     }).then(() => {
+      console.log('[图鉴] 全部卷加载流程结束, 共', this._catEntries.length, '条')
       if (this._catEntries.length) {
         this.setData({ allLoading: false })
         if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
@@ -113,6 +115,9 @@ Page({
         const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起'
         this.setData({ allLoading: false, allLoadFail: true, allDiag: '诊断 ' + diag })
       }
+    }).catch(err => {
+      console.error('[图鉴] 加载链路异常:', err && err.message, err && err.stack)
+      this.setData({ allLoading: false, allLoadFail: true, allDiag: '加载链路异常: ' + (err && err.message) })
     })
   },
   retryAll () {

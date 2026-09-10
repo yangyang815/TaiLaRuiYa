@@ -30,12 +30,24 @@ function rawVol (i) {
     return Promise.resolve(loader()).then(all => (all || []).filter(x => (x.vol || i) === i))
   }
   _lastStats = _lastStats || {}
+  console.log('[图鉴] v' + i + ' require.async 发起')
   return new Promise(res => {
     try {
       require.async('../pkg-cat-' + i + '/data/batch.js')
-        .then(m => { _lastStats['v' + i] = (m || []).length; res(m || []) },
-              () => { _lastStats['v' + i] = -1; res([]) })
-    } catch (e) { _lastStats['v' + i] = -1; res([]) }
+        .then(m => {
+          _lastStats['v' + i] = (m || []).length
+          console.log('[图鉴] v' + i + ' 加载成功:', _lastStats['v' + i], '条')
+          res(m || [])
+        }, () => {
+          _lastStats['v' + i] = -1
+          console.log('[图鉴] v' + i + ' 加载失败(reject)')
+          res([])
+        })
+    } catch (e) {
+      _lastStats['v' + i] = -1
+      console.log('[图鉴] v' + i + ' 加载异常:', e && e.message)
+      res([])
+    }
   })
 }
 
@@ -43,7 +55,11 @@ function rawVol (i) {
 function volWithTimeout (i) {
   return Promise.race([
     rawVol(i),
-    new Promise(res => setTimeout(() => { _lastStats['v' + i] = -1; res([]) }, 12000))
+    new Promise(res => setTimeout(() => {
+      if (_lastStats) _lastStats['v' + i] = -1
+      console.log('[图鉴] v' + i + ' 12s 超时，放弃等待')
+      res([])
+    }, 12000))
   ])
 }
 
@@ -105,7 +121,11 @@ function load () {
 /* ---------- 渐进式加载（图鉴页用）：三卷并行，各自就绪立即回调，互不阻塞 ---------- */
 function loadProgressive (onPart) {
   return Promise.all([1, 2, 3, 4].map(i =>
-    loadVol(i).then(rows => { if (rows && rows.length) onPart(mapEntries(rows, i), i) })
+    loadVol(i).then(rows => {
+      if (rows && rows.length) {
+        try { onPart(mapEntries(rows, i), i) } catch (e) { console.error('[图鉴] 上屏异常:', e && e.message) }
+      }
+    })
   ))
 }
 
