@@ -1,6 +1,6 @@
 const BT = require('../../../utils/back-top-behavior')
 // 新手指南：新玩家的完整上手路线
-const guide = require('../../../data/guide')
+const guide = require('../../data/guide')
 
 const CATS = [
   { k: '', n: '全部' }, { k: 'start', n: '初见泰拉' }, { k: 'live', n: '生存发展' },

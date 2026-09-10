@@ -1,6 +1,6 @@
 const BT = require('../../../utils/back-top-behavior')
 // 案例详情：成品图 / 规格 / 材料 / 分步图解 / 布局 / 相关案例 / 建成打卡
-const B = require('../../../utils/building')
+const B = require('../../utils/building')
 const store = require('../../../utils/store')
 const qrcode = require('../../../utils/qrcode')
 

@@ -1,6 +1,6 @@
 const BT = require('../../../utils/back-top-behavior')
 // 生物群系：地图各大环境分区速查
-const biomes = require('../../../data/biomes')
+const biomes = require('../../data/biomes')
 
 const CATS = [
   { k: '', n: '全部' }, { k: 'surface', n: '地表层' }, { k: 'under', n: '地下层' },

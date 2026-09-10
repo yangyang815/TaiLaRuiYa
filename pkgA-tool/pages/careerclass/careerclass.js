@@ -1,5 +1,5 @@
 // 职业专属专题页：汇总该职业的攻略合集 / 配装推荐 / Boss 打法 / 阶段路线
-const X = require('../../../utils/career')
+const X = require('../../utils/career')
 const D = require('../../../data/career')
 const store = require('../../../utils/store')
 

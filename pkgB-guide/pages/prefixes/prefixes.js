@@ -1,6 +1,6 @@
 const BT = require('../../../utils/back-top-behavior')
 // 词条图鉴：武器与饰品重铸前缀
-const { PREFIXES, ACCESSORY_LINES, TIPS } = require('../../../data/prefixes')
+const { PREFIXES, ACCESSORY_LINES, TIPS } = require('../../data/prefixes')
 
 const CATS = [
   { k: '', n: '全部' }, { k: 'best', n: '毕业词条' }, { k: 'common', n: '通用词条' },

@@ -1,6 +1,6 @@
 const BT = require('../../../utils/back-top-behavior')
 // 路线规划器：8 阶段进度 + 锁定 + 阶段详情（装备推荐 / Boss 跳转 / 攻略跳转）
-const X = require('../../../utils/career')
+const X = require('../../utils/career')
 const store = require('../../../utils/store')
 const dex = require('../../../utils/dex')
 

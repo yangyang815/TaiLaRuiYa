@@ -1,6 +1,6 @@
 // 建造指南主页：搜索 + 建造基础入口 + 实用案例 + 建筑技巧 + 灵感画廊
 const D = require('../../../data/building')
-const B = require('../../../utils/building')
+const B = require('../../utils/building')
 const store = require('../../../utils/store')
 
 Page({

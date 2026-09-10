@@ -1,6 +1,6 @@
 const BT = require('../../../utils/back-top-behavior')
 // 隐藏知识库：冷知识/隐藏机制/彩蛋玩法
-const secrets = require('../../../data/secrets')
+const secrets = require('../../data/secrets')
 
 const CATS = [
   { k: '', n: '全部' }, { k: 'mech', n: '隐藏机制' }, { k: 'event', n: '隐藏事件' },

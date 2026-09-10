@@ -1,6 +1,6 @@
 // DPS 计算器主页：职业/武器 → 配装 → 目标 → 实时结果
 const D = require('../../../data/dps')
-const X = require('../../../utils/dps')
+const X = require('../../utils/dps')
 
 Page({
   data: {

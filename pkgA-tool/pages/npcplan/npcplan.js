@@ -1,5 +1,5 @@
 // NPC 规划器：最优配对推荐 + 偏好速查表
-const X = require('../../../utils/npcplan')
+const X = require('../../utils/npcplan')
 const D = require('../../../data/npcplan')
 
 Page({

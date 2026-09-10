@@ -1,6 +1,6 @@
 const BT = require('../../../utils/back-top-behavior')
 // 职业资料库：职业筛选 + 分类筛选 + 攻略列表
-const X = require('../../../utils/career')
+const X = require('../../utils/career')
 const D = require('../../../data/career')
 
 Page({
