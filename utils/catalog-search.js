@@ -68,16 +68,36 @@ function rawVol (i) {
   })
 }
 
-// 单卷 12s 超时保护：挂起不再拖死整页
+// 单卷 12s 超时保护：已成功则静默（不再打超时日志/污染诊断）
 function volWithTimeout (i) {
+  let settled = false
   return Promise.race([
-    rawVol(i),
+    rawVol(i).then(m => { settled = true; return m }),
     new Promise(res => setTimeout(() => {
-      if (_lastStats) _lastStats['v' + i] = -1
-      console.log('[图鉴] v' + i + ' 12s 超时，放弃等待')
+      if (!settled) {
+        if (_lastStats) _lastStats['v' + i] = -1
+        console.log('[图鉴] v' + i + ' 12s 超时，放弃等待')
+      }
       res([])
     }, 12000))
   ])
+}
+
+/* ---------- 行规范化：补齐 vol/sprite/rcol/rlab（globalData/存储通道的原始行缺这些字段） ---------- */
+function normalizeRows (rows, vol) {
+  const out = []
+  ;(rows || []).forEach(x => {
+    if (!x || !x.f) return
+    const r = Number(x.r)
+    out.push({
+      ...x,
+      vol,
+      sprite: x.sprite || '/pkg-cat-' + vol + '/assets/' + x.f + '.png',
+      rcol: x.rcol || RCOL[r] || '#FFFFFF',
+      rlab: x.rlab || RLAB[r] || ''
+    })
+  })
+  return out
 }
 
 /* ---------- 每卷本地缓存 ---------- */
@@ -108,11 +128,15 @@ function loadVol (i, force) {
   if (force) delete volP[i]
   if (!volP[i]) {
     volP[i] = volWithTimeout(i).then(m => {
-      if (m && m.length) { saveVol(i, m); return m }
+      if (m && m.length) {
+        const rows = mapEntries(m, i)
+        saveVol(i, rows)
+        return rows
+      }
       delete volP[i]
-      const g = globalDataVol(i)
+      const g = mapEntries(globalDataVol(i), i)
       if (g.length) { saveVol(i, g); return g }
-      return loadVolStorage(i)
+      return mapEntries(loadVolStorage(i), i)
     })
   }
   return volP[i]
@@ -122,19 +146,7 @@ function resetVols () { Object.keys(volP).forEach(k => { delete volP[k] }) }
 
 /* ---------- 条目映射 ---------- */
 function mapEntries (rows, vol) {
-  const out = []
-  ;(rows || []).forEach(x => {
-    if (!x || !x.f) return
-    const r = Number(x.r)
-    out.push({
-      ...x,
-      vol,
-      sprite: '/pkg-cat-' + vol + '/assets/' + x.f + '.png',
-      rcol: RCOL[r] || '#FFFFFF',
-      rlab: RLAB[r] || ''
-    })
-  })
-  return out
+  return normalizeRows(rows, vol)
 }
 
 /* ---------- 全量加载（等全部卷就绪；搜索/详情用） ---------- */
@@ -201,4 +213,4 @@ function findByName (name) {
   return load().then(all => all.find(x => x.n === name) || null)
 }
 
-module.exports = { load, loadVol, loadProgressive, resetVols, search, searchTotal, getById, findByName, lastStats, saveVolCache: saveVol, ALIAS, __useLoader: fn => { loader = fn } }
+module.exports = { load, loadVol, loadProgressive, resetVols, search, searchTotal, getById, findByName, lastStats, normalizeRows, saveVolCache: saveVol, ALIAS, __useLoader: fn => { loader = fn } }

@@ -141,8 +141,8 @@ Page({
       for (let i = 1; i <= 3; i++) {
         const v = app.globalData['catVol' + i]
         if (v && v.length && !(this._vols[i] && this._vols[i].length)) {
-          this._vols[i] = v
-          try { catSearch.saveVolCache(i, v) } catch (e) { /* 忽略 */ }
+          this._vols[i] = catSearch.normalizeRows(v, i)
+          try { catSearch.saveVolCache(i, this._vols[i]) } catch (e) { /* 忽略 */ }
         }
       }
     } catch (e) { /* getApp 不可用时忽略 */ }
