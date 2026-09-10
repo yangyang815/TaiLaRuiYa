@@ -1,5 +1,5 @@
 // 兼容页 + 数据装载器：同步 require 本卷数据写入 globalData（主包经 globalData 读取，100% 兼容所有环境）
-const batch = require('../../data/batch.js')
+const batch = require('../../data/data-v1.js')
 Page({
   data: { n: (batch || []).length },
   onLoad (q) {

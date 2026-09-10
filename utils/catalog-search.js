@@ -32,9 +32,9 @@ function rawVol (i) {
   _lastStats = _lastStats || {}
   // 多路径尝试：不同工具版本对分包模块的注册路径解析不一致
   const paths = [
-    '../pkg-cat-' + i + '/data/batch.js',
-    '/pkg-cat-' + i + '/data/batch.js',
-    '../../pkg-cat-' + i + '/data/batch.js'
+    '../pkg-cat-' + i + '/data/data-v' + i + '.js',
+    '/pkg-cat-' + i + '/data/data-v' + i + '.js',
+    '../../pkg-cat-' + i + '/data/data-v' + i + '.js'
   ]
   return new Promise(res => {
     let pi = 0

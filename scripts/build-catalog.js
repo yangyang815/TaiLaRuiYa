@@ -394,7 +394,7 @@ async function build () {
       t: String(r.tooltip || '').slice(0, 160), b: r._bonus || '', s: [r.pick && '镐力 ' + r.pick, r.axe && '斧力 ' + r.axe, r.hammer && '锤力 ' + r.hammer, r.bait && '鱼饵力 ' + r.bait, r.bonus].filter(Boolean).join('；'),
       ob: r._ob || '', use: r._use || '', hm: r.hardmode ? 1 : 0
     }))
-    fs.writeFileSync(path.join(dataDir, 'batch.js'),
+    fs.writeFileSync(path.join(dataDir, 'data-v' + (vi + 1) + '.js'),
       '// 自动生成：全物品图鉴数据卷 ' + (vi + 1) + '（勿手改）\nmodule.exports = ' + JSON.stringify(compact) + '\n')
     // 精灵图
     const assetDir = path.join(pkgDir, 'assets')
@@ -405,7 +405,7 @@ async function build () {
     fs.mkdirSync(pageDir, { recursive: true })
     const stub = [
       '// 兼容页 + 数据装载器：同步 require 本卷数据写入 globalData（主包经 globalData 读取，100% 兼容所有环境）',
-      "const batch = require('../../data/batch.js')",
+      "const batch = require('../../data/data-v" + (vi + 1) + ".js')",
       'Page({',
       '  data: { n: (batch || []).length },',
       '  onLoad (q) {',
