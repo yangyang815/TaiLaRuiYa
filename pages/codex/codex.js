@@ -80,7 +80,8 @@ Page({
   },
 
   /* ---------- 全物品（wiki 全量，逐卷渐进加载：单卷就绪即上屏，互不阻塞） ---------- */
-  loadAllItems () {
+  loadAllItems (attempt) {
+    attempt = attempt || 0
     this.setData({ allLoading: true, allLoadFail: false, allDiag: '' })
     this._catEntries = []
     this._catById = {}
