@@ -1,10 +1,11 @@
-// 全物品图鉴搜索：主包通过 require.async（分包异步化）懒加载两卷数据
-// 首次调用触发分包下载（配合 preloadRule WiFi 预下载基本无感），结果在页面间共享缓存
+// 全物品图鉴搜索：逐卷渐进式加载（分包异步化 require.async）
+// 设计目标：单卷失败/挂起不阻塞其它卷；每卷成功即落盘本地缓存，之后秒读
+// 主包页面通过 require.async 跨分包读数据（分包异步化，基础库 ≥2.17.3）
 const RCOL = { '-13': '#B57BFF', '-12': '#FF4CE0', '-1': '#B4B4B4', 0: '#FFFFFF', 1: '#9696FF', 2: '#96FF96', 3: '#FFC896', 4: '#FF9696', 5: '#FF96FF', 6: '#D2A0FF', 7: '#96FF0A', 8: '#FFFF32', 9: '#32FFFF', 10: '#FF3232' }
 const RLAB = { '-13': '大师', '-12': '专家', '-1': '任务', 0: '白色', 1: '蓝色', 2: '绿色', 3: '橙色', 4: '浅红', 5: '粉色', 6: '浅紫', 7: '青柠', 8: '黄色', 9: '青色', 10: '红色' }
 
-let loader = realLoad
-let p = null
+let loader = null
+const hasWx = typeof wx !== 'undefined' && !!wx.getStorageSync
 
 // 常用俗称 → 官方译名（搜索时同时匹配，提升命中率）
 const ALIAS = {
@@ -18,85 +19,97 @@ const ALIAS = {
   '克苏鲁之脑': '克苏鲁之脑'
 }
 
-function realLoad () {
-  // 动态适配卷数（缺卷静默跳过，require.async 失败不阻断其它卷）
-  const vols = [1, 2, 3, 4]
-  const stats = {}
-  if (typeof require.async !== 'function') stats.api = '低版本'
-  return Promise.all(vols.map(i =>
-    new Promise(res => {
-      try {
-        require.async('../pkg-cat-' + i + '/data/batch.js')
-          .then(m => { stats['v' + i] = (m || []).length; res(m || []) }, () => { stats['v' + i] = -1; res([]) })
-      } catch (e) { stats['v' + i] = -1; res([]) }
+// 最近一次分卷加载统计（诊断用）：v1..v4 = 各卷条数，-1 = 加载失败
+let _lastStats = {}
+function lastStats () { return _lastStats }
+
+/* ---------- 单卷原始加载 ---------- */
+function rawVol (i) {
+  if (loader) {
+    // 测试注入：从全量结果中筛出该卷
+    return Promise.resolve(loader()).then(all => (all || []).filter(x => (x.vol || i) === i))
+  }
+  _lastStats = _lastStats || {}
+  return new Promise(res => {
+    try {
+      require.async('../pkg-cat-' + i + '/data/batch.js')
+        .then(m => { _lastStats['v' + i] = (m || []).length; res(m || []) },
+              () => { _lastStats['v' + i] = -1; res([]) })
+    } catch (e) { _lastStats['v' + i] = -1; res([]) }
+  })
+}
+
+// 单卷 12s 超时保护：挂起不再拖死整页
+function volWithTimeout (i) {
+  return Promise.race([
+    rawVol(i),
+    new Promise(res => setTimeout(() => { _lastStats['v' + i] = -1; res([]) }, 12000))
+  ])
+}
+
+/* ---------- 每卷本地缓存 ---------- */
+function saveVol (i, rows) {
+  if (!hasWx) return
+  try { wx.setStorageSync('terr_catv' + i, rows) } catch (e) { /* 存储满静默忽略 */ }
+}
+function loadVolStorage (i) {
+  if (!hasWx) return []
+  try {
+    const v = wx.getStorageSync('terr_catv' + i)
+    return v && v.length ? v : []
+  } catch (e) { return [] }
+}
+
+/* ---------- 单卷加载：分包 → 失败回退该卷缓存（失败不缓存，允许重试） ---------- */
+const volP = {}
+function loadVol (i, force) {
+  if (force) delete volP[i]
+  if (!volP[i]) {
+    volP[i] = volWithTimeout(i).then(m => {
+      if (m && m.length) { saveVol(i, m); return m }
+      delete volP[i]
+      return loadVolStorage(i)
     })
-  )).then(ms => {
-    _lastStats = stats
+  }
+  return volP[i]
+}
+// 丢弃所有挂起/失败的卷加载（手动重试时强制重新发起）
+function resetVols () { Object.keys(volP).forEach(k => { delete volP[k] }) }
+
+/* ---------- 条目映射 ---------- */
+function mapEntries (rows, vol) {
+  const out = []
+  ;(rows || []).forEach(x => {
+    if (!x || !x.f) return
+    const r = Number(x.r)
+    out.push({
+      ...x,
+      vol,
+      sprite: '/pkg-cat-' + vol + '/assets/' + x.f + '.png',
+      rcol: RCOL[r] || '#FFFFFF',
+      rlab: RLAB[r] || ''
+    })
+  })
+  return out
+}
+
+/* ---------- 全量加载（等全部卷就绪；搜索/详情用） ---------- */
+function load () {
+  return Promise.all([1, 2, 3, 4].map(i => loadVol(i))).then(ms => {
     const out = []
-    ms.forEach((m, i) => (m || []).forEach(x => {
-      if (!x || !x.f) return
-      const r = Number(x.r)
-      out.push({
-        ...x,
-        vol: i + 1,
-        sprite: '/pkg-cat-' + (i + 1) + '/assets/' + x.f + '.png',
-        rcol: RCOL[r] || '#FFFFFF',
-        rlab: RLAB[r] || ''
-      })
-    }))
+    ms.forEach((m, i) => out.push(...mapEntries(m, i + 1)))
     return out
   })
 }
 
-/* ---------- 本地缓存层：任何一次成功加载都落盘，之后不再依赖分包异步加载 ---------- */
-const hasWx = typeof wx !== 'undefined' && !!wx.getStorageSync
-function saveStorage (items) {
-  if (!hasWx) return
-  try {
-    const vols = {}
-    ;(items || []).forEach(x => {
-      const v = Math.min(4, x.vol || 4)
-      ;(vols[v] = vols[v] || []).push(x)
-    })
-    Object.keys(vols).forEach(v => { wx.setStorageSync('terr_catv' + v, vols[v]) })
-  } catch (e) { /* 存储满等静默忽略 */ }
-}
-function loadStorage () {
-  if (!hasWx) return []
-  try {
-    const out = []
-    for (let i = 1; i <= 4; i++) {
-      const v = wx.getStorageSync('terr_catv' + i)
-      if (v && v.length) out.push(...v)
-    }
-    return out
-  } catch (e) { return [] }
+/* ---------- 渐进式加载（图鉴页用）：三卷并行，各自就绪立即回调，互不阻塞 ---------- */
+function loadProgressive (onPart) {
+  return Promise.all([1, 2, 3, 4].map(i =>
+    loadVol(i).then(rows => { if (rows && rows.length) onPart(mapEntries(rows, i), i) })
+  ))
 }
 
-// 最近一次分卷加载统计（诊断用）：v1..v4 = 各卷条数，-1 = 加载失败，null = 尚未加载
-let _lastStats = null
-function lastStats () { return _lastStats }
-
-function load () {
-  if (!p) {
-    p = Promise.resolve(loader()).then(r => {
-      if (r && r.length) { saveStorage(r); return r }
-      // 分包异步加载失败/为空（真机兼容性等）→ 回退本地缓存
-      p = null
-      const cached = loadStorage()
-      if (cached.length) { _lastStats = { cache: cached.length }; return cached }
-      return []
-    }).catch(() => {
-      p = null
-      const cached = loadStorage()
-      if (cached.length) { _lastStats = { cache: cached.length }; return cached }
-      return []
-    })
-  }
-  return p
-}
-
-// 搜索全量图鉴（中文名/英文名/俗称别名）：前缀命中优先；limit 可调（默认 8，传大值查全量）
+/* ---------- 搜索（中文名/英文名/俗称别名）：前缀命中优先；limit 可调 ---------- */
 function search (kw, limit) {
   const k = (kw || '').trim().toLowerCase()
   if (!k) return Promise.resolve([])
@@ -140,4 +153,4 @@ function findByName (name) {
   return load().then(all => all.find(x => x.n === name) || null)
 }
 
-module.exports = { load, search, searchTotal, getById, findByName, lastStats, ALIAS, __useLoader: fn => { loader = fn; p = null } }
+module.exports = { load, loadVol, loadProgressive, resetVols, search, searchTotal, getById, findByName, lastStats, ALIAS, __useLoader: fn => { loader = fn } }

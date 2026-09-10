@@ -79,46 +79,45 @@ Page({
     this.loadAllItems()
   },
 
-  /* ---------- 全物品（wiki 全量 6317 条，分包异步加载 + 本地缓存兜底） ---------- */
-  loadAllItems (attempt) {
-    attempt = attempt || 0
-    const timeout = new Promise(res => setTimeout(() => res([]), 12000))
-    Promise.race([catSearch.load(), timeout]).then(items => {
-      if ((!items || !items.length) && attempt < 2) {
-        setTimeout(() => this.loadAllItems(attempt + 1), 2000 * (attempt + 1))
-        return
-      }
-      if (!items || !items.length) {
-        const st = catSearch.lastStats()
-        const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起'
-        this.setData({ allLoadFail: true, allLoading: false, allDiag: '诊断 ' + diag })
-        return
-      }
-      this.setData({ allDiag: '' })
-      this._catEntries = items.map(x => {
+  /* ---------- 全物品（wiki 全量，逐卷渐进加载：单卷就绪即上屏，互不阻塞） ---------- */
+  loadAllItems () {
+    this.setData({ allLoading: true, allLoadFail: false, allDiag: '' })
+    this._catEntries = []
+    this._catById = {}
+    this._catLoaded = false
+    this._catChips = null
+    catSearch.loadProgressive(part => {
+      part.forEach(x => {
+        const id = 'cat:' + x.f
+        if (this._catById[id]) return
         const m = catGroups.macroOf(x.c)
-        return {
-          id: 'cat:' + x.f,
-          name: x.n, en: x.en, type: 'catitem',
+        const e = {
+          id, name: x.n, en: x.en, type: 'catitem',
           sprite: x.sprite, glow: x.rcol, rarity: x.r || 0,
           macro: m.k,
           raw: { cat: x.c || '其他', dmg: x.d, dt: x.dt, df: x.df, u: x.u, k: x.k,
             t: x.t, ob: x.ob, use: x.use, s: x.s, hm: x.hm, r: x.r }
         }
+        this._catById[id] = e
+        this._catEntries.push(e)
       })
-      this._catById = {}
-      this._catEntries.forEach(e => { this._catById[e.id] = e })
       this._catLoaded = true
       this._catChips = null
-      // 当前正在看全物品标签 → 立即刷新；全部标签也要并入
       if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
-    }).catch(() => {
-      if (attempt < 3) setTimeout(() => this.loadAllItems(attempt + 1), 1500 * (attempt + 1))
-      else this.setData({ allLoadFail: true, allLoading: false })
+    }).then(() => {
+      if (this._catEntries.length) {
+        this.setData({ allLoading: false })
+        if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
+      } else {
+        const st = catSearch.lastStats()
+        const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起'
+        this.setData({ allLoading: false, allLoadFail: true, allDiag: '诊断 ' + diag })
+      }
     })
   },
   retryAll () {
-    this.setData({ allLoadFail: false, allLoading: true })
+    catSearch.resetVols() // 丢弃挂起/失败的卷加载，强制重新发起
+    this.setData({ allLoadFail: false, allLoading: true, allDiag: '' })
     this.loadAllItems()
   },
 
