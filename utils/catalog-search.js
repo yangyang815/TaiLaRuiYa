@@ -49,10 +49,11 @@ function load () {
   return p
 }
 
-// 搜索全量图鉴（中文名/英文名/俗称别名）：前缀命中优先，最多 8 条
-function search (kw) {
+// 搜索全量图鉴（中文名/英文名/俗称别名）：前缀命中优先；limit 可调（默认 8，传大值查全量）
+function search (kw, limit) {
   const k = (kw || '').trim().toLowerCase()
   if (!k) return Promise.resolve([])
+  const max = limit || 8
   const terms = [k]
   const aliased = ALIAS[(kw || '').trim()]
   if (aliased) terms.push(aliased.toLowerCase())
@@ -64,11 +65,22 @@ function search (kw) {
       const bp = terms.some(t => ((b.n || '').toLowerCase().startsWith(t) || (b.en || '').toLowerCase().startsWith(t))) ? 0 : 1
       return ap - bp || (a.n || '').length - (b.n || '').length
     })
-    return hits.slice(0, 8).map(x => ({
+    return hits.slice(0, max).map(x => ({
       n: x.n, en: x.en, f: x.f, vol: x.vol, c: x.c || '',
       d: x.d || '', dt: x.dt || '', sprite: x.sprite, rcol: x.rcol, rlab: x.rlab
     }))
   })
+}
+
+// 命中总数（不限条数），供结果页显示"共 N 条"
+function searchTotal (kw) {
+  const k = (kw || '').trim().toLowerCase()
+  if (!k) return Promise.resolve(0)
+  const terms = [k]
+  const aliased = ALIAS[(kw || '').trim()]
+  if (aliased) terms.push(aliased.toLowerCase())
+  return load().then(all => all.filter(x => terms.some(t =>
+    (x.n || '').toLowerCase().indexOf(t) >= 0 || (x.en || '').toLowerCase().indexOf(t) >= 0)).length)
 }
 
 // 按 id 取完整条目（含说明/获得方式/用途等），供详情弹窗使用
@@ -81,4 +93,4 @@ function findByName (name) {
   return load().then(all => all.find(x => x.n === name) || null)
 }
 
-module.exports = { load, search, getById, findByName, __useLoader: fn => { loader = fn; p = null } }
+module.exports = { load, search, searchTotal, getById, findByName, __useLoader: fn => { loader = fn; p = null } }

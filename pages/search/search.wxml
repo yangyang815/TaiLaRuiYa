@@ -50,7 +50,7 @@
         <text class="st-go">›</text>
       </view>
 
-      <view class="sec-title" wx:if="{{catalogHits.length}}"><view class="diamond" /><text class="t">全物品图鉴</text></view>
+      <view class="sec-title" wx:if="{{catalogHits.length}}"><view class="diamond" /><text class="t">全物品图鉴{{catalogTotal > catalogHits.length ? ' · 共 ' + catalogTotal + ' 条，显示前 ' + catalogHits.length + ' 条' : (catalogTotal ? ' · ' + catalogTotal + ' 条' : '')}}</text></view>
       <view class="r-item card tappable" wx:for="{{catalogHits}}" wx:key="f" bindtap="onCatalog" data-vol="{{item.vol}}" data-f="{{item.f}}">
         <image class="r-img" src="/pkg-cat-{{item.vol}}/assets/{{item.f}}.png" mode="aspectFit" />
         <view class="col flex-1">

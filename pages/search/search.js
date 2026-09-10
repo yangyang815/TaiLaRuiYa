@@ -21,7 +21,7 @@ Page({
     capsuleRight: 100,
     themeClass: '',
     kw: '',
-    results: [], stratHits: [], recipeHits: [], catalogHits: [],
+    results: [], stratHits: [], recipeHits: [], catalogHits: [], catalogTotal: 0,
     hist: [], hotWords: []
   },
 
@@ -46,7 +46,7 @@ Page({
   onKw (e) {
     const kw = e.detail.value
     this.setData({ kw })
-    if (!kw.trim()) { this.setData({ results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [], catalogHits: [] }); return }
+    if (!kw.trim()) { this.setData({ results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [], catalogHits: [], catalogTotal: 0 }); return }
     const results = dex.search(kw).slice(0, 12).map(x => ({
       id: x.id, name: x.name, en: x.en, type: x.type, artId: x.artId, glow: x.glow,
       tagsTxt: (x.tags || []).slice(0, 2).join(' · '),
@@ -59,11 +59,15 @@ Page({
     }))
     const guideHits = bossGuides.searchGuides(kw).slice(0, 4)
     this.setData({ results, stratHits, recipeHits, fishingHits, guideHits, catalogHits: [] })
-    // 全物品图鉴：异步回填，请求序号防过期
+    // 全物品图鉴：异步回填，请求序号防过期；上限 50 条 + 真实命中总数
     const reqId = (this._catReqId = (this._catReqId || 0) + 1)
-    catSearch.search(kw).then(hits => {
+    catSearch.search(kw, 50).then(hits => {
       if (reqId !== this._catReqId) return
       this.setData({ catalogHits: hits })
+    })
+    catSearch.searchTotal(kw).then(total => {
+      if (reqId !== this._catReqId) return
+      this.setData({ catalogTotal: total })
     })
   },
 
@@ -121,7 +125,7 @@ Page({
     this.onKw({ detail: { value: w } })
   },
   clearKw () {
-    this.setData({ kw: '', results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [], catalogHits: [] })
+    this.setData({ kw: '', results: [], stratHits: [], recipeHits: [], fishingHits: [], guideHits: [], catalogHits: [], catalogTotal: 0 })
   },
   clearHist () {
     store.clearHist()

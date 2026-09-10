@@ -340,9 +340,9 @@ Page({
     const fishingHits = fishUtil.searchAll(kw).slice(0, 3)
     const guideHits = bossGuides.searchGuides(kw).slice(0, 3)
     this.setData({ searchPanel: { items, strats, recipes, fishingHits, guideHits, catalogHits: [], total: hits.length } })
-    // 全物品图鉴（分包异步加载）：加载完成后回填；请求序号防过期结果
+    // 全物品图鉴（分包异步加载）：加载完成后回填；请求序号防过期结果；上限 30 覆盖"圣物"等整类查询
     const reqId = (this._catReqId = (this._catReqId || 0) + 1)
-    catSearch.search(kw).then(hits => {
+    catSearch.search(kw, 30).then(hits => {
       if (reqId !== this._catReqId || !this.data.searchPanel) return
       this.setData({ 'searchPanel.catalogHits': hits })
     })
