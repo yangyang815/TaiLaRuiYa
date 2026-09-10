@@ -100,7 +100,13 @@ const STATION = {
   'Ice Machine': '冰雪机', 'Living Loom': '生命织布机', 'Sky Mill': '天空磨坊',
   'Ancient Manipulator': '远古操纵机', 'Blend-o-matic': '搅拌机', 'Meat Grinder': '绞肉机',
   'Solidifier': '固化机', SteampunkerBoiler: '蒸汽锅炉', ByHand: '徒手', 'By Hand': '徒手',
-  'Iron Anvil': '铁砧', 'Lead Anvil': '铅砧', Shimmer: '微光'
+  'Iron Anvil': '铁砧', 'Lead Anvil': '铅砧', Shimmer: '微光',
+  'Bone Welder': '骨头焊机', 'Glass Kiln': '玻璃窑', 'Honey Dispenser': '蜂蜜分配机',
+  'Flesh Cloning Vat': '血肉克隆缸', 'Decay Chamber': '腐化室', 'Steampunk Boiler': '蒸汽朋克锅炉',
+  'Lihzahrd Furnace': '丛林蜥蜴熔炉', 'Chlorophyte Extractinator': '叶绿提炼机',
+  'Placed Bottle': '放置的瓶子', 'Heavy Assembler and Ecto Mist': '重型装配器和灵雾',
+  'Work Bench and Ecto Mist': '工作台和灵雾', 'Crystal Ball and Ecto Mist': '水晶球和灵雾',
+  'Book Case and Ecto Mist': '书架和灵雾', Table: '桌子', Water: '水源'
 }
 // 泛型桶（分类筛选时跳过，取更具体的分类）
 const GENERIC_CAT = {
@@ -133,9 +139,14 @@ function priceZh (v) {
 function priceTag (s) {
   if (!s) return ''
   let t = String(s).replace(/&#\d+;/g, ' ')
-    .replace(/\s*\([^)]*\)/g, '')
-    .replace(/\bPC\b/gi, '铂金').replace(/\bGC\b/gi, '金').replace(/\bSC\b/gi, '银').replace(/\bCC\b/gi, '铜')
-    .replace(/Defender Medals/gi, '防御者勋章')
+  // 防御者勋章：价格模板较乱（如 500000*50 22px|link=|alt=Defender Medal），单独解析
+  if (/Defender Medal/i.test(t)) {
+    const m = t.match(/(\d+)\*\s*(\d+)/) || t.match(/(\d+)\s*Defender/i) || t.match(/\*\s*(\d+)/)
+    return m ? '防御者勋章×' + (m[2] || m[1]) : '防御者勋章'
+  }
+  t = t.replace(/\s*\([^)]*\)/g, ' ')
+  t = t.replace(/\|link=\|alt=/g, ' ').replace(/\d+px/gi, ' ').replace(/\*\s*\d+/g, ' ')
+    .replace(/\bPC\b/gi, '铂金').replace(/\bGC\b/gi, '金').replace(/\bSC\b/gi, '银').replace(/\bCC\b/gi, '铜').replace(/(GC|SC|CC|PC)(?=\d)/gi, m => ({ GC: '金', SC: '银', CC: '铜', PC: '铂金' })[m.toUpperCase()])
     .replace(/Platinum/gi, '铂金').replace(/Gold/gi, '金').replace(/Silver/gi, '银').replace(/Copper/gi, '铜')
     .replace(/\s+/g, ' ').trim()
   return t
@@ -386,9 +397,10 @@ async function build () {
       if (m) npcZh[(z.n || '').replace(/ Banner$/i, '')] = m[1]
     }
   })
-  // en 物品名 → internalname（供 GameText 查询）
+  // en 物品名 → internalname（供 GameText 查询）；Iteminfo 的英文名映射补全 raw 之外的物品
   const nm2in = {}
-  raw.forEach(x => { const iv = validInternal(x.internal); if (x.name && iv && !nm2in[x.name]) nm2in[x.name] = iv })
+  raw.forEach(x => { const iv = validInternal(x.internal); if (x.en && iv && !nm2in[x.en]) nm2in[x.en] = iv })
+  if (II) Object.values(II).forEach(it => { if (it && it.name && it.internalName && !nm2in[it.name]) nm2in[it.name] = it.internalName })
   let dexZhMap = null
   entries.forEach(r => {
     const vi = validInternal(r.internal)
@@ -399,8 +411,14 @@ async function build () {
       dexZhMap = {}
       try { require('../data/items.js').forEach(x => { if (x.en && x.name && !dexZhMap[x.en]) dexZhMap[x.en] = x.name }) } catch (e) { /* 缺失跳过 */ }
     }
-    const WILD = { 'Any Iron Bar': '任意铁锭（铁/铅）', 'Any Silver Bar': '任意银锭（银/钨）', 'Any Gold Bar': '任意金锭（金/铂）', 'Any Copper Bar': '任意铜锭（铜/锡）', 'Any Cobalt Bar': '任意钴锭（钴/钯金）', 'Any Mythril Bar': '任意秘银锭（秘银/山铜）', 'Any Adamantite Bar': '任意精金锭（精金/钛金）', 'Any Evil Bar': '任意邪恶金属锭', 'Any Wood': '任意木材', 'Any Stone Block': '任意石块', 'Any Torch': '火把', 'Any Balloon': '任意气球', 'Any Fruit': '任意水果', 'Any Bird': '任意鸟', 'Any Butterfly': '任意蝴蝶', 'Any Snail': '任意蜗牛', 'Any Firefly': '任意萤火虫', 'Any Pylon': '任意晶塔' }
-    const zName = en => WILD[en] || (nm2in[en] && GT[nm2in[en]]) || (zhdetail.items[en] && /[\u4e00-\u9fa5]/.test(zhdetail.items[en].n) && zhdetail.items[en].n) || dexZhMap[en] || (zh[en] && /[\u4e00-\u9fa5]/.test(zh[en]) && zh[en]) || en
+    const WILD = { 'Any Iron Bar': '任意铁锭（铁/铅）', 'Any Silver Bar': '任意银锭（银/钨）', 'Any Gold Bar': '任意金锭（金/铂）', 'Any Copper Bar': '任意铜锭（铜/锡）', 'Any Cobalt Bar': '任意钴锭（钴/钯金）', 'Any Mythril Bar': '任意秘银锭（秘银/山铜）', 'Any Adamantite Bar': '任意精金锭（精金/钛金）', 'Any Evil Bar': '任意邪恶金属锭', 'Any Wood': '任意木材', 'Any Stone Block': '任意石块', 'Any Sand Block': '任意沙块', 'Any Torch': '火把', 'Any Balloon': '任意气球', 'Any Blizzard Balloon': '任意暴雪气球', 'Any Sandstorm Balloon': '任意沙尘暴气球', 'Any Fruit': '任意水果', 'Any Bird': '任意鸟', 'Any Butterfly': '任意蝴蝶', 'Any Snail': '任意蜗牛', 'Any Firefly': '任意萤火虫', 'Any Pylon': '任意晶塔', 'Any Jungle Bug': '任意丛林虫', 'Any Cockatiel': '任意鸡尾鹦鹉', 'Any Macaw': '任意金刚鹦鹉', 'Any Pressure Plate': '任意压力板', 'Any Dragonfly': '任意蜻蜓', 'Any Duck': '任意鸭', 'Any Scorpion': '任意蝎子', 'Any Squirrel': '任意松鼠', 'Any Turtle': '任意乌龟', 'Any Gem Critter': '任意宝石小动物', 'Any Seashell or Starfish': '任意贝壳或海星', 'Any Magic Mirror': '任意魔镜', 'Any Guide to Critter Companionship': '任意《小动物同伴指南》', 'Any Guide to Environmental Preservation': '任意《环境保护指南》', 'Purple Thread': '紫线', 'Green Thread': '绿线', 'Dragon Breastplate': '龙胸甲', 'Dragon Mask': '龙面具', 'Dragon Greaves': '龙护腿', 'Spectral Armor': '灵能盔甲', 'Spectral Mask': '灵能面具', 'Spectral Mail': '灵能锁甲', 'Titan Mail': '泰坦锁甲', 'Titan Helmet': '泰坦头盔', 'Titan Leggings': '泰坦护腿', 'Titan Glove': '泰坦手套', 'Spectral Headgear': '灵能头饰', 'Spectral Subligar': '灵能护腿', 'Corruption Key Mold': '腐化钥匙模具', 'Crimson Key Mold': '猩红钥匙模具', 'Jungle Key Mold': '丛林钥匙模具', 'Frozen Key Mold': '冰冻钥匙模具', 'Hallowed Key Mold': '神圣钥匙模具', 'Desert Key Mold': '沙漠钥匙模具', 'Corruption Key': '腐化钥匙', 'Crimson Key': '猩红钥匙', 'Jungle Key': '丛林钥匙', 'Frozen Key': '冰冻钥匙', 'Hallowed Key': '神圣钥匙', 'Desert Key': '沙漠钥匙', 'Suspicious Looking Eye': '可疑的眼球', 'Suspicious Looking Skull': '可疑的骷髅', 'Fiery Greatsword': '火焰大剑', 'Recorded Music Boxes': '已录制的八音盒', 'Ghost Wings': '幽灵翅膀', 'Slimes': '各类史莱姆' }
+    const MBZH = { 'Queen Bee': '蜂王', 'Alt Queen Bee': '异版蜂王', Desert: '沙漠', Ice: '冰雪', 'Space Day': '太空白天', 'Space Night': '太空夜', 'Ocean Night': '海洋夜', 'Ocean Day': '海洋白天', 'Morning Rain': '晨雨', 'Torch God': '火把神', 'Alt Torch God': '异版火把神', Title: '主题曲', 'Alt Title': '异版主题曲', Tutorial: '教学曲', 'Overworld Day': '地表白天', 'Alt Overworld Day': '异版地表白天', "Journey's Beginning": '旅程之始', 'Slime Rain': '史莱姆雨', 'Town Day': '城镇白天', 'Town Night': '城镇夜晚', 'Windy Day': '刮风天', Storm: '风暴', Graveyard: '墓地', 'Underground Jungle': '地下丛林', 'Jungle Night': '丛林夜', 'Underground Desert': '地下沙漠', 'Day Remix': '白天混音', Eerie: '诡异', Night: '夜晚', Underground: '地下', Jungle: '丛林', Corruption: '腐化', 'Underground Corruption': '地下腐化', 'The Hallow': '神圣之地', Hallow: '神圣', Silence: '寂静', Crimson: '猩红', 'Underground Crimson': '地下猩红', Snow: '雪', Underworld: '地狱', Rain: '雨' }
+    const zName = en => {
+      if (/^Music Box \(/.test(en)) { const p = en.replace(/^Music Box \(/, '').replace(/\)$/, ''); return '八音盒（' + (MBZH[p] || p) + '）' }
+      if (/\(bait\)$/i.test(en)) return zName(en.replace(/\s*\(bait\)$/i, '')) + '（鱼饵）'
+      if (/ and Chair$/.test(en)) return zName(en.replace(/ and Chair$/, '')) + '和椅子'
+      return WILD[en] || (nm2in[en] && GT[nm2in[en]]) || (zhdetail.items[en] && /[\u4e00-\u9fa5]/.test(zhdetail.items[en].n) && zhdetail.items[en].n) || dexZhMap[en] || (zh[en] && /[\u4e00-\u9fa5]/.test(zh[en]) && zh[en]) || en
+    }
     // 配方查找：EN 键优先（Cargo byResult 键为 EN），回退 zh 名；不被 zi 门控
     const rec = zhdetail.byResult[r.en] || zhdetail.byResult[zhName] || null
     const use = zhdetail.byIng[r.en] || zhdetail.byIng[zhName] || null
@@ -411,7 +429,15 @@ async function build () {
       if (zi.lc) r.listcat = zi.lc
       if (zi.dt) r.damagetype = zi.dt
     }
-    if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + (STATION[rc.st] || rc.st) : '')).join('；或 ').slice(0, 180)
+    const stZh = st => {
+      const core = st.replace(/ only$/i, '')
+      if (/ and Ecto Mist$/.test(core)) return stZh(core.replace(/ and Ecto Mist$/, '')) + '和灵雾'
+      if (/ and Chair$/.test(core)) return stZh(core.replace(/ and Chair$/, '')) + '和椅子'
+      const m2 = core.match(/^(.*) and (Water|Honey|Lava)$/)
+      if (m2) return stZh(m2[1]) + '和' + ({ Water: '水源', Honey: '蜂蜜', Lava: '岩浆' })[m2[2]]
+      return STATION[core] || (nm2in[core] && GT[nm2in[core]]) || core
+    }
+    if (rec) r._ob = '合成：' + rec.map(rc => rc.i.map(slot => [...new Set(slot)].map(zName).join('/')).join(' + ') + (rc.st ? ' @ ' + stZh(rc.st) : '')).join('；或 ').slice(0, 180)
     if (use && use.length) {
       const rs = [...new Set(use.map(zName))]
       r._use = rs.length ? '可用于合成：' + rs.slice(0, 3).join('、') + (rs.length > 3 ? ' 等 ' + rs.length + ' 种' : '') : ''
@@ -427,12 +453,12 @@ async function build () {
       const isCraft = tags.some(t => /craftable/i.test(t))
       const parts = []
       if (vendors.length) {
-        const vn = [...new Set(vendors.map(v => npcZh[v] || (zh[v] && /[\u4e00-\u9fa5]/.test(zh[v]) && zh[v]) || v))].slice(0, 2)
+        const vn = [...new Set(vendors.map(v => npcZh[v] || GTN[v.replace(/ /g, '')] || (zh[v] && /[\u4e00-\u9fa5]/.test(zh[v]) && zh[v]) || v))].slice(0, 2)
         parts.push('由 ' + vn.join('、') + ' 出售' + (r.buy ? '（' + priceTag(r.buy) + '）' : ''))
       }
       if (isDrop) {
         if (DROPS && DROPS[r.en] && DROPS[r.en].length) {
-          const dps = [...new Set(DROPS[r.en].map(d => npcZh[d.by] || (zh[d.by] && /[\u4e00-\u9fa5]/.test(zh[d.by]) && zh[d.by]) || d.by))]
+          const dps = [...new Set(DROPS[r.en].map(d => npcZh[d.by] || GTN[d.by.replace(/ /g, '')] || (zh[d.by] && /[\u4e00-\u9fa5]/.test(zh[d.by]) && zh[d.by]) || d.by))]
           parts.push('由 ' + dps.slice(0, 3).join('、') + (dps.length > 3 ? ' 等 ' + dps.length + ' 种来源' : '') + ' 掉落')
         } else parts.push('击败敌怪掉落')
       }
