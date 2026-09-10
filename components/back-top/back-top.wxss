@@ -1,10 +1,11 @@
-/* 返回顶部悬浮按钮 */
-.btt { position: fixed; right: 30rpx; bottom: 230rpx; z-index: 85;
-  width: 88rpx; height: 88rpx; border-radius: 50%;
-  background: var(--card); border: 2rpx solid var(--gold-faint);
-  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.35);
+/* 返回顶部悬浮按钮（配色自包含，不依赖页面主题变量） */
+.btt { position: fixed; right: 28rpx; bottom: 230rpx; z-index: 999;
+  width: 100rpx; height: 100rpx; border-radius: 50%;
+  background: linear-gradient(160deg, #2E3E58, #141E2C);
+  border: 3rpx solid #FFD700;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.55), 0 0 18rpx rgba(255, 215, 0, 0.4);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   animation: btt-in 0.25s ease-out; }
-@keyframes btt-in { from { opacity: 0; transform: translateY(20rpx); } to { opacity: 1; transform: none; } }
-.btt-arrow { font-size: 32rpx; font-weight: 800; color: var(--gold); line-height: 1; }
-.btt-t { font-size: 17rpx; color: var(--gold); margin-top: 2rpx; }
+@keyframes btt-in { from { opacity: 0; transform: translateY(24rpx); } to { opacity: 1; transform: none; } }
+.btt-arrow { font-size: 38rpx; font-weight: 800; color: #FFD700; line-height: 1; text-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.6); }
+.btt-t { font-size: 19rpx; font-weight: 700; color: #FFD700; margin-top: 2rpx; }
