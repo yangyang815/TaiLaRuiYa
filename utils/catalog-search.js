@@ -45,7 +45,13 @@ function realLoad () {
 }
 
 function load () {
-  if (!p) p = Promise.resolve(loader()).catch(() => [])
+  if (!p) {
+    p = Promise.resolve(loader()).then(r => {
+      // 空结果不缓存：分包尚未就绪/瞬时失败时允许下次调用重试
+      if (!r || !r.length) { p = null; return [] }
+      return r
+    }).catch(() => { p = null; return [] })
+  }
   return p
 }
 

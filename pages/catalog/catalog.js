@@ -37,11 +37,15 @@ Page({
     this.loadData()
   },
 
-  /* 加载三卷全量数据（preloadRule 已链式预下载，基本无感） */
-  loadData () {
+  /* 加载三卷全量数据（preloadRule 已链式预下载，基本无感）；空结果自动重试一次 */
+  loadData (isRetry) {
     this.setData({ loading: true, loadFail: false })
     catSearch.load().then(all => {
-      if (!all || !all.length) { this.setData({ loading: false, loadFail: true }); return }
+      if (!all || !all.length) {
+        if (!isRetry) { setTimeout(() => this.loadData(true), 600); return }
+        this.setData({ loading: false, loadFail: true })
+        return
+      }
       this._all = all.slice().sort((a, b) => (a.n < b.n ? -1 : 1))
       // 分类 chips（全量统计；长尾合并为"其他"，最多 24 个主分类）
       const cnt = {}
