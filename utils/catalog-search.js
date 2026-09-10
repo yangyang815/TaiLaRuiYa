@@ -151,7 +151,7 @@ function mapEntries (rows, vol) {
 
 /* ---------- 全量加载（等全部卷就绪；搜索/详情用） ---------- */
 function load () {
-  return Promise.all([1, 2, 3, 4].map(i => loadVol(i))).then(ms => {
+  return Promise.all([1, 2, 3].map(i => loadVol(i))).then(ms => {
     const out = []
     ms.forEach((m, i) => out.push(...mapEntries(m, i + 1)))
     return out
@@ -160,7 +160,7 @@ function load () {
 
 /* ---------- 渐进式加载（图鉴页用）：三卷并行，各自就绪立即回调，互不阻塞 ---------- */
 function loadProgressive (onPart) {
-  return Promise.all([1, 2, 3, 4].map(i =>
+  return Promise.all([1, 2, 3].map(i =>
     loadVol(i).then(rows => {
       if (rows && rows.length) {
         try { onPart(mapEntries(rows, i), i) } catch (e) { console.error('[图鉴] 上屏异常:', e && e.message) }
