@@ -1,5 +1,5 @@
 // NPC 规划器逻辑层：价格系数计算 + 最优分配（贪心配对）
-const D = require('../data/npcplan')
+const D = require('../../data/npcplan')
 
 const byId = {}
 D.NPCS.forEach(n => { byId[n.id] = n })

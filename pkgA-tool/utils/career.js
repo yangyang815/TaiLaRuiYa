@@ -1,7 +1,7 @@
 // 职业养成逻辑层：进度计算 / 阶段状态 / 资料库筛选
-const D = require('../data/career')
-const store = require('./store')
-const dex = require('./dex')
+const D = require('../../data/career')
+const store = require('../../utils/store')
+const dex = require('../../utils/dex')
 
 const byId = {}
 D.CLASSES.forEach(c => { byId[c.id] = c })

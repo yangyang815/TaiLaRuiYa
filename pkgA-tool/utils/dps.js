@@ -2,7 +2,7 @@
 // 1.基础伤害 × 词条(乘算) → 2.×伤害加成(加算区:盔甲/饰品/增益)
 // 3.-防御减伤(难度系数) → 4.±15%浮动 → 5.暴击期望(×2)
 // DPS = 期望伤害 × 60 / 实际使用时间
-const D = require('../data/dps')
+const D = require('../../data/dps')
 
 function find (list, id) { return list.find(x => x.id === id) }
 

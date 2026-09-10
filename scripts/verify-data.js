@@ -132,26 +132,32 @@ if (appJson) {
     const cbOk = ['js', 'json', 'wxml', 'wxss'].every(ext => fs.existsSync('custom-tab-bar/index.' + ext))
     cbOk ? ok('custom-tab-bar 文件齐全') : fail('custom-tab-bar 文件缺失')
   }
-  // 分包页面相对引用可解析（../ 深度校验）
-  let reqFail = 0
-  pkgList.forEach(pkg => {
-    (pkg.pages || []).forEach(pg => {
-      const full = (pkg.root ? pkg.root + '/' + pg : pg) + '.js'
-      if (!fs.existsSync(full)) return
-      const s = fs.readFileSync(full, 'utf8')
-      const re = /require\('((?:\.+\/)[^']+)'\)/g
-      let m
-      const dir = path.posix.dirname(full)
-      while ((m = re.exec(s))) {
-        const resolved = path.posix.normalize(path.posix.join(dir, m[1]))
-        // require 可省略 .js 后缀，三种形态任一存在即可
-        if (!fs.existsSync(resolved) && !fs.existsSync(resolved + '.js') && !fs.existsSync(path.posix.join(resolved, 'index.js'))) {
-          reqFail++; console.log('  [引用失效]', full + ' -> ' + m[1])
-        }
+  // 全项目相对引用可解析（含分包嵌套模块；分包内文件可跳出分包引用主包）
+  let reqFail = 0, reqTotal = 0
+  const checkFile = fp => {
+    const src = fs.readFileSync(fp, 'utf8')
+    const re = /require\('((?:\.+\/)[^']+)'\)/g
+    let m
+    while ((m = re.exec(src))) {
+      reqTotal++
+      const resolved = path.resolve(__dirname, '..', path.dirname(fp), m[1])
+      if (!fs.existsSync(resolved) && !fs.existsSync(resolved + '.js') && !fs.existsSync(path.join(resolved, 'index.js'))) {
+        reqFail++; console.log('  [引用失效]', fp.split(path.sep).join('/') + ' -> ' + m[1])
       }
+    }
+  }
+  const roots = ['pages', 'components', 'utils', 'custom-tab-bar', 'data', 'app.js'].concat((appJson.subpackages || []).map(sp => sp.root))
+  const walkReq = d => {
+    fs.readdirSync(d).forEach(f => {
+      const fp = path.join(d, f)
+      if (fs.statSync(fp).isDirectory()) return walkReq(fp)
+      if (!f.endsWith('.js')) return
+      checkFile(fp)
     })
-  })
-  reqFail === 0 ? ok('分包页面相对 require 全部可解析') : fail(reqFail + ' 处相对引用失效（分包层级变化未适配）')
+  }
+  const walkReqSingle = fp => { if (fp.endsWith('.js')) checkFile(fp) }
+  roots.forEach(rt => { const p = path.join(__dirname, '..', rt); if (!fs.existsSync(p)) return; if (fs.statSync(p).isFile()) walkReqSingle(p); else walkReq(p) })
+  reqFail === 0 ? ok('全项目 ' + reqTotal + ' 处相对 require 全部可解析（含分包嵌套）') : fail(reqFail + ' 处相对引用失效（分包层级变化未适配）')
 }
 
 /* ========== 5. 存储 key 合法性 ========== */

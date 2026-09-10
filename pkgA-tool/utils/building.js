@@ -1,5 +1,5 @@
 // 建造指南逻辑层：案例列表 / 案例详情 / 搜索 / 打卡进度
-const D = require('../data/building')
+const D = require('../../data/building')
 
 // 主页案例卡片
 function list (doneSet) {
