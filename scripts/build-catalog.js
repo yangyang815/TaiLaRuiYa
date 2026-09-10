@@ -402,8 +402,16 @@ async function build () {
     fs.writeFileSync(path.join(pageDir, 'index.wxml'), '<view />\n')
     fs.writeFileSync(path.join(pageDir, 'index.json'), '{}\n')
     fs.writeFileSync(path.join(pageDir, 'index.wxss'), '/* 重定向兼容页 */\n')
-    // app.json（数据卷；入口统一在主包 pages/catalog/catalog）
-    app.subpackages.push({ root, name: 'cat' + (vi + 1), pages: ['pages/index/index'] })
+    // blank 占位页：开发者工具预编译缓存会永久记住历史注册过的页面，所有页面路径必须长期保留（否则预览 ENOENT）
+    const blankDir = path.join(pkgDir, 'pages', 'blank')
+    fs.mkdirSync(blankDir, { recursive: true })
+    fs.writeFileSync(path.join(blankDir, 'blank.js'), 'Page({})\n')
+    fs.writeFileSync(path.join(blankDir, 'blank.wxml'),
+      '<view style="padding:60rpx 40rpx;text-align:center;color:#8E7FA6;font-size:26rpx;">物品图鉴数据卷 ' + (vi + 1) + '（纯资源页，请从「全物品图鉴」入口访问）</view>\n')
+    fs.writeFileSync(path.join(blankDir, 'blank.json'), '{}\n')
+    fs.writeFileSync(path.join(blankDir, 'blank.wxss'), '/* 占位页 */\n')
+    // app.json（数据卷；入口统一在主包 pages/catalog/catalog；历史页面路径永久保留）
+    app.subpackages.push({ root, name: 'cat' + (vi + 1), pages: ['pages/index/index', 'pages/blank/blank'] })
     console.log('  卷 ' + (vi + 1) + ': ' + root + ' | ' + compact.length + ' 条 | ' + vol.cats.slice(0, 4).join('/'))
   })
 
