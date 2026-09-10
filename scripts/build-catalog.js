@@ -76,7 +76,17 @@ const CATZH = {
   mechanism: '机械', 'Mechanism items': '机械物品', 'spell books': '法书',
   'weapon items': '武器', weapon: '武器', 'wall-piercing weapons': '穿墙武器',
   'Wall-piercing weapons': '穿墙武器', debuffs: '减益物品', 'Treasure Bag loot items': '宝藏袋战利品',
-  '其他': '其他'
+  // 补充翻译（图鉴页全量分类 chips 需要全中文）
+  food: '食物', miscellaneous: '杂项', 'Ranged weapons': '远程武器', 'Melee weapons': '近战武器',
+  'novelty items': '趣味物品', 'Novelty items': '趣味物品', bait: '鱼饵', potion: '药水',
+  bar: '锭', ore: '矿石', gem: '宝石', coins: '钱币', sands: '沙', 'background object': '背景物体',
+  key: '钥匙', consumable: '消耗品', 'healing items': '治疗物品', shield: '盾', Scope: '瞄准镜',
+  'ammunition items': '弹药', 'Accessory items': '饰品', 'Furniture items': '家具',
+  'summon weapons': '召唤武器', 'Summon weapons': '召唤武器', Whips: '鞭', souls: '灵魂',
+  launchers: '发射器', Launchers: '发射器', Boomerangs: '回旋镖', boomerangs: '回旋镖',
+  guns: '枪', Guns: '枪', '射弹近战': '投射近战',
+  'potion ingredients': '药水配料', 'projectile melee': '投射近战',
+  'Minion summon items': '召唤武器', Souls: '灵魂'
 }
 const DTZH = { melee: '近战', ranged: '远程', magic: '魔法', summon: '召唤', 'summon|+': '召唤', thrown: '投掷' }
 const STATION = {
@@ -98,10 +108,10 @@ const GENERIC_CAT = {
   'loot items': 1, 'Loot items': 1, 'bag loot items': 1, 'Bag loot items': 1,
   'grab bag': 1, 'Treasure Bag loot items': 1, 'quest rewards': 1, 'Quest rewards': 1
 }
-// 细分类：listcat 链中第一个非泛型分类（全链皆泛型则回退首值）
+// 细分类：listcat 链中第一个非泛型分类（全链皆泛型则回退首值）；'|' 为子类分隔（souls|Fright → souls）
 function fineCat (r) {
-  const chain = String(r.listcat || '').split('^').map(x => x.trim()).filter(Boolean)
-    .concat(String(r.type || '').split('^').map(x => x.trim()).filter(Boolean))
+  const chain = String(r.listcat || '').split('^').map(x => x.split('|')[0].trim()).filter(Boolean)
+    .concat(String(r.type || '').split('^').map(x => x.split('|')[0].trim()).filter(Boolean))
   if (!chain.length) return '其他'
   for (let i = 0; i < chain.length; i++) {
     if (!GENERIC_CAT[chain[i]]) return CATZH[chain[i]] || chain[i]
@@ -123,6 +133,9 @@ const cleanWiki = s => String(s || '')
   .replace(/&[a-z]+;/gi, ' ')
   .replace(/\s+/g, ' ')
   .trim()
+
+// Cargo 缺失值：internalname 为 None/空的行（套装总览页）回退用英文名做 id
+const validInternal = i => (i && i !== 'None' ? i : '')
 
 async function harvest () {
   console.log('== 阶段 1：Cargo 全量采集 ==')
@@ -209,7 +222,7 @@ async function sprites () {
   async function worker () {
     while (idx < targets.length) {
       const r = targets[idx++]
-      const safeId = r.internal || r.en
+      const safeId = validInternal(r.internal) || r.en
       const h = require('crypto').createHash('md5').update(safeId).digest('hex').slice(0, 2)
       const dest = path.join(stageDir, h, safeId.replace(/[\\/:"*?<>|]/g, '_') + '.png')
       fs.mkdirSync(path.dirname(dest), { recursive: true })
@@ -305,12 +318,15 @@ async function build () {
   const stageDir = path.join(STAGE_DIR, 'sprites')
   const h2 = s => require('crypto').createHash('md5').update(s).digest('hex').slice(0, 2)
 
-  // 汇总可用条目（精灵图存在；不排除精品图鉴条目，保证全物品图鉴完整）
+  // 汇总可用条目（精灵图存在；不排除精品图鉴条目，保证全物品图鉴完整；按 safeId 去重）
   const entries = []
+  const seenIds = new Set()
   raw.forEach(r => {
-    const safeId = (r.internal || r.en).replace(/[\\/:"*?<>|]/g, '_')
+    const safeId = (validInternal(r.internal) || r.en).replace(/[\\/:"*?<>|]/g, '_')
+    if (seenIds.has(safeId)) return
     const sp = path.join(stageDir, h2(safeId), safeId + '.png')
     if (!fs.existsSync(sp)) return
+    seenIds.add(safeId)
     entries.push({ ...r, _spritePath: sp, _spriteSize: fs.statSync(sp).size, _safeId: safeId })
   })
   console.log('可用条目:', entries.length)
@@ -320,7 +336,8 @@ async function build () {
   const zhExtract = readStage('zhextract.json', {})
   let dexZhMap = null
   entries.forEach(r => {
-    const zi = zhdetail.items[r.internal] || zhdetail.items[r.en] || null
+    const vi = validInternal(r.internal)
+    const zi = (vi && zhdetail.items[vi]) || zhdetail.items[r.en] || null
     const zhName = zh[r.page] || r.en
     // 配料翻译链：zh Items 表（internalname）→ 精品图鉴 → langlinks → 原文
     if (!dexZhMap) {
@@ -368,7 +385,7 @@ async function build () {
     fs.mkdirSync(dataDir, { recursive: true })
     const compact = vol.items.map(r => ({
       // 名称解析链：zh Items 表按 internalname（CJK）→ 物品自有页 langlinks → 圣物硬编码 → 英文
-      n: (zhdetail.items[r.internal] && /[\u4e00-\u9fa5]/.test(zhdetail.items[r.internal].n) && zhdetail.items[r.internal].n) ||
+      n: (vi && zhdetail.items[vi] && /[\u4e00-\u9fa5]/.test(zhdetail.items[vi].n) && zhdetail.items[vi].n) ||
          (r.page === r.en && zh[r.page]) || RELIC_ZH[r.en] || r.en,
       en: r.en, f: r._safeId,
       c: fineCat(r),

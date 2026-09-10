@@ -154,3 +154,8 @@
 
 .sh-btns { display: flex; gap: 20rpx; padding: 24rpx 34rpx 6rpx; }
 .sh-btn { flex: 1; }
+
+/* 全物品条目：真图片渲染（分包精灵图） */
+.sprite-img { width: 48rpx; height: 48rpx; }
+.sprite-img-lg { width: 100rpx; height: 100rpx; }
+.sprite-img-xl { width: 120rpx; height: 120rpx; }

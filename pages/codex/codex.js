@@ -3,6 +3,7 @@ const BT = require('../../utils/back-top-behavior')
 // 性能：分页渲染（滚动增量加载）、图标传 artId 字符串、onShow 脏检查
 const dex = require('../../utils/dex')
 const catSearch = require('../../utils/catalog-search')
+const catGroups = require('../../utils/cat-groups')
 const fmt = require('../../utils/fmt')
 const store = require('../../utils/store')
 const { startClock } = require('../../utils/clock')
@@ -19,7 +20,8 @@ const PS_BY_ID = {}
 PS_ENTRIES.forEach(e => { PS_BY_ID[e.id] = e })
 
 const TABS = [
-  { k: 'all', n: '全部' }, { k: 'item', n: '物品' }, { k: 'mon', n: '敌怪' }, { k: 'boss', n: 'Boss' }, { k: 'npc', n: 'NPC' }
+  { k: 'all', n: '全部' }, { k: 'item', n: '物品' }, { k: 'allitem', n: '全物品' },
+  { k: 'mon', n: '敌怪' }, { k: 'boss', n: 'Boss' }, { k: 'npc', n: 'NPC' }
 ]
 const NGRP = { svc: '服务型', shop: '肉前入住', post: '肉后入住', evt: '特殊到访' }
 const LET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
@@ -50,11 +52,16 @@ Page({
     list: [], total: 0,
     letters: LET, letter: '',
     recents: [], recentsAll: false,
+    allLoading: false, allLoadFail: false,
     sheet: null, sheetFav: false
   },
   _all: [],    // 当前筛选全量（内存）
   _sig: '',    // 筛选签名（onShow 脏检查）
   _timer: null, // 时钟定时器
+  _catEntries: [],  // 全物品条目（异步加载 6317 条）
+  _catById: {},     // id → 条目（搜索联想点击用）
+  _catLoaded: false,
+  _catChips: null,  // 全物品二级分类 chips（缓存）
 
   onLoad () {
     const app = getApp()
@@ -67,6 +74,59 @@ Page({
     // 整分钟对齐刷新右上角时钟（与其它 Tab 页同相位，跨分钟即跳变）
     this._timer = startClock(() => this.setData({ clock: fmt.fmtClock(new Date()) }))
     this.loadRecents()
+    this.loadAllItems()
+  },
+
+  /* ---------- 全物品（wiki 全量 6317 条，分包异步加载） ---------- */
+  loadAllItems (attempt) {
+    attempt = attempt || 0
+    catSearch.load().then(items => {
+      if ((!items || !items.length) && attempt < 3) {
+        setTimeout(() => this.loadAllItems(attempt + 1), 1500 * (attempt + 1))
+        return
+      }
+      if (!items || !items.length) { this.setData({ allLoadFail: true, allLoading: false }); return }
+      this._catEntries = items.map(x => {
+        const m = catGroups.macroOf(x.c)
+        return {
+          id: 'cat:' + x.f,
+          name: x.n, en: x.en, type: 'catitem',
+          sprite: x.sprite, glow: x.rcol, rarity: x.r || 0,
+          macro: m.k,
+          raw: { cat: x.c || '其他', dmg: x.d, dt: x.dt, df: x.df, u: x.u, k: x.k,
+            t: x.t, ob: x.ob, use: x.use, s: x.s, hm: x.hm, r: x.r }
+        }
+      })
+      this._catById = {}
+      this._catEntries.forEach(e => { this._catById[e.id] = e })
+      this._catLoaded = true
+      this._catChips = null
+      // 当前正在看全物品标签 → 立即刷新；全部标签也要并入
+      if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
+    }).catch(() => {
+      if (attempt < 3) setTimeout(() => this.loadAllItems(attempt + 1), 1500 * (attempt + 1))
+      else this.setData({ allLoadFail: true, allLoading: false })
+    })
+  },
+  retryAll () {
+    this.setData({ allLoadFail: false, allLoading: true })
+    this.loadAllItems()
+  },
+
+  /* 全物品二级分类 chips（按条目数降序，"其他"固定最后） */
+  allItemChips () {
+    if (this._catChips) return this._catChips
+    const cnt = {}
+    this._catEntries.forEach(e => { cnt[e.macro] = (cnt[e.macro] || 0) + 1 })
+    const groups = catGroups.GROUPS
+      .map(g => ({ k: g.k, n: g.n, cnt: cnt[g.k] || 0 }))
+      .filter(g => g.cnt > 0)
+      .sort((a, b) => b.cnt - a.cnt)
+    const other = this._catEntries.filter(e => e.macro === 'other').length
+    const chips = [{ k: '', n: '全部', cnt: this._catEntries.length }].concat(groups)
+    if (other) chips.push({ k: 'other', n: '其他', cnt: other })
+    this._catChips = chips
+    return chips
   },
 
   onUnload () {
@@ -107,6 +167,14 @@ Page({
 
   fmt (e) {
     const st = starsOf(e)
+    if (e.type === 'catitem') {
+      return {
+        id: e.id, name: e.name, en: e.en, type: e.type,
+        sprite: e.sprite, glow: e.glow, rarity: e.rarity,
+        starsOn: st.on, starsOff: st.off,
+        subName: e.raw.cat
+      }
+    }
     return {
       id: e.id, name: e.name, en: e.en, type: e.type,
       artId: e.artId, glow: e.glow, rarity: e.rarity,
@@ -123,6 +191,24 @@ Page({
     const { tab, cat, letter } = this.data
     // 种子 = 种植种子（药草/环境草种），与其他分类一样在图鉴页内筛选展示
     const seedMode = tab === 'item' && cat === 'seed'
+    // 全物品标签：wiki 全量 6317 条，按宏观分组二级筛选
+    if (tab === 'allitem') {
+      let list = this._catEntries
+      if (cat) list = list.filter(e => e.macro === cat)
+      if (letter) {
+        if (letter === '#') list = list.filter(e => !/^[a-z]/i.test((e.en || '')[0] || ''))
+        else list = list.filter(e => (e.en || '').toLowerCase().startsWith(letter.toLowerCase()))
+      }
+      this._all = list
+      this._sig = tab + '|' + cat + '|' + letter
+      this.setData({
+        cats: this._catLoaded ? this.allItemChips() : [],
+        list: list.slice(0, PAGE).map(e => this.fmt(e)),
+        total: list.length,
+        allLoading: !this._catLoaded
+      })
+      return
+    }
     let list
     if (seedMode) {
       list = PS_ENTRIES.slice()
@@ -174,14 +260,34 @@ Page({
       tagsTxt: (s.tags || []).slice(0, 2).join(' · ')
     })) : []
     this.setData({ kw, suggests })
+    // 全物品联想（异步分包数据，序号防过期）
+    if (!kw.trim()) return
+    const reqId = (this._sugReqId = (this._sugReqId || 0) + 1)
+    catSearch.search(kw, 6).then(hits => {
+      if (reqId !== this._sugReqId || this.data.kw !== kw) return
+      const catSug = hits.map(x => {
+        const id = 'cat:' + x.f
+        return { id, name: x.n, en: x.en, type: 'catitem', sprite: x.sprite, glow: x.rcol, tagsTxt: x.c || '' }
+      })
+      this.setData({ suggests: this.data.suggests.concat(catSug) })
+    })
   },
-  onSuggestTap (e) { dex.go(e.currentTarget.dataset.id) },
+  onSuggestTap (e) {
+    const id = e.currentTarget.dataset.id
+    if (id && id.indexOf('cat:') === 0) {
+      const entry = this._catById[id]
+      if (entry) { this.setData({ kw: '', suggests: [] }); this.openCatSheet(entry) }
+      return
+    }
+    dex.go(id)
+  },
   clearKw () { this.setData({ kw: '', suggests: [] }) },
 
   onCardTap (e) {
     const id = e.currentTarget.dataset.id
-    const entry = dex.byId[id] || PS_BY_ID[id]
+    const entry = dex.byId[id] || PS_BY_ID[id] || this._catById[id]
     if (!entry) return
+    if (entry.type === 'catitem') { this.openCatSheet(entry); return }
     if (entry.type === 'plantseed') {
       const r = entry.raw
       this.setData({
@@ -233,6 +339,32 @@ Page({
       sheetFav: store.isFav(id)
     })
   },
+  /* 全物品条目 → 半屏详情卡 */
+  openCatSheet (entry) {
+    const r = entry.raw
+    const stats = [['分类', r.cat]]
+    if (r.dmg) stats.push(['伤害', r.dmg + (r.dt ? '（' + r.dt + '）' : '')])
+    if (r.df) stats.push(['防御', r.df])
+    if (r.u) stats.push(['使用时间', r.u])
+    if (r.k) stats.push(['击退', r.k])
+    if (r.hm) stats.push(['模式', '困难模式'])
+    this.setData({
+      sheet: {
+        id: entry.id, name: entry.name, en: entry.en, type: 'catitem',
+        sprite: entry.sprite, glow: entry.glow, rarity: entry.rarity,
+        catName: r.cat,
+        desc: r.t || '',
+        stats,
+        obtainTitle: '获得方式',
+        obtain: r.ob || '非合成物品 · 通过掉落 / 购买 / 采集获得',
+        obtainLinks: [],
+        use: r.use || '',
+        shop: [], shopNote: '', drops: [], phases: [], mechanics: [], exclusives: [], strategy: []
+      },
+      sheetFav: false
+    })
+  },
+
   // 半屏弹窗中的实体链接：关闭弹窗后跳转对应条目
   onSheetLink (e) {
     const id = e.currentTarget.dataset.id
@@ -257,7 +389,7 @@ Page({
   sheetFavToggle () { this.onCardLong({ currentTarget: { dataset: { id: this.data.sheet.id } } }) },
   sheetFull () {
     const s = this.data.sheet
-    if (s.type === 'plantseed') return // 种植种子详情已完整展示在卡内
+    if (s.type === 'plantseed' || s.type === 'catitem') return // 详情已完整展示在卡内
     wx.navigateTo({ url: '/pages/detail/detail?type=' + s.type + '&id=' + s.id })
   },
 

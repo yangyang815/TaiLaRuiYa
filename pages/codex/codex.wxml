@@ -33,7 +33,8 @@
     <view class="suggest card pop-in" wx:if="{{suggests.length}}">
       <view class="sg-item" wx:for="{{suggests}}" wx:key="id" bindtap="onSuggestTap" data-id="{{item.id}}">
         <view class="sg-art" style="box-shadow: 0 0 14rpx {{item.glow}}55;">
-          <pixel-icon art-id="{{item.artId}}" size="64" />
+          <image wx:if="{{item.sprite}}" class="sprite-img" src="{{item.sprite}}" mode="aspectFit" lazy-load />
+          <pixel-icon wx:else art-id="{{item.artId}}" size="64" />
         </view>
         <view class="col flex-1">
           <view class="r-line">
@@ -42,7 +43,7 @@
           </view>
           <text class="sg-en px">{{item.en}}</text>
         </view>
-        <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : (item.type === 'seed' ? 'tag-seed' : (item.type === 'npc' ? 'tag-npc' : 'tag-item')))}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' || item.type === 'plantseed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</text>
+        <text class="tag {{item.type === 'boss' ? 'tag-boss' : (item.type === 'mon' ? 'tag-mon' : (item.type === 'seed' || item.type === 'plantseed' ? 'tag-seed' : (item.type === 'npc' ? 'tag-npc' : 'tag-item')))}}">{{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : (item.type === 'seed' || item.type === 'plantseed' ? '种子' : (item.type === 'npc' ? 'NPC' : '物品')))}}</text>
       </view>
     </view>
 
@@ -80,17 +81,20 @@
 
     <!-- 全部图鉴 -->
     <view class="sec-head">
-      <text class="sec-t">{{tab === 'all' ? '全部图鉴' : (tab === 'item' ? '物品' : (tab === 'mon' ? '敌怪' : (tab === 'npc' ? 'NPC 图鉴' : 'Boss')))}}</text>
+      <text class="sec-t">{{tab === 'all' ? '全部图鉴' : (tab === 'item' ? '物品' : (tab === 'allitem' ? '全物品图鉴' : (tab === 'mon' ? '敌怪' : (tab === 'npc' ? 'NPC 图鉴' : 'Boss')))}}</text>
       <text class="sec-sub px">ALL</text>
     </view>
 
-    <view class="masonry fade-in">
+    <view class="masonry fade-in" wx:if="{{tab !== 'allitem' || !allLoading}}">
       <view class="m-col">
         <block wx:for="{{list}}" wx:key="id">
           <view class="card m-card tappable" wx:if="{{index % 2 === 0}}"
             bindtap="onCardTap" bindlongpress="onCardLong" data-id="{{item.id}}">
             <view class="m-glow" style="background: radial-gradient(circle at 50% 38%, {{item.glow}}3D 0%, transparent 68%);" />
-            <view class="m-art"><pixel-icon art-id="{{item.artId}}" size="112" /></view>
+            <view class="m-art">
+              <image wx:if="{{item.sprite}}" class="sprite-img-lg" src="{{item.sprite}}" mode="aspectFit" lazy-load />
+              <pixel-icon wx:else art-id="{{item.artId}}" size="112" />
+            </view>
             <view class="col">
               <text class="m-name">{{item.name}}</text>
               <text class="m-en px" wx:if="{{item.en}}">{{item.en}}</text>
@@ -105,7 +109,10 @@
           <view class="card m-card tappable" wx:if="{{index % 2 === 1}}"
             bindtap="onCardTap" bindlongpress="onCardLong" data-id="{{item.id}}">
             <view class="m-glow" style="background: radial-gradient(circle at 50% 38%, {{item.glow}}3D 0%, transparent 68%);" />
-            <view class="m-art"><pixel-icon art-id="{{item.artId}}" size="112" /></view>
+            <view class="m-art">
+              <image wx:if="{{item.sprite}}" class="sprite-img-lg" src="{{item.sprite}}" mode="aspectFit" lazy-load />
+              <pixel-icon wx:else art-id="{{item.artId}}" size="112" />
+            </view>
             <view class="col">
               <text class="m-name">{{item.name}}</text>
               <text class="m-en px" wx:if="{{item.en}}">{{item.en}}</text>
@@ -119,7 +126,9 @@
 
     <view class="empty" wx:if="{{!list.length}}">
       <view class="e-icon">🕳️</view>
-      <text>未找到相关条目，试试其他关键词</text>
+      <text wx:if="{{tab === 'allitem' && allLoading}}">全量图鉴加载中…</text>
+      <text wx:elif="{{tab === 'allitem' && allLoadFail}}" class="tappable" bindtap="retryAll">全量图鉴加载失败，点击重试</text>
+      <text wx:else>未找到相关条目，试试其他关键词</text>
     </view>
 
     <!-- 字母索引 -->
@@ -138,7 +147,8 @@
     <view class="sheet-handle" bindtap="closeSheet" />
     <view class="sh-head">
       <view class="sh-art" style="box-shadow: 0 0 30rpx {{sheet.glow}}66;">
-        <pixel-icon art-id="{{sheet.artId}}" size="140" />
+        <image wx:if="{{sheet.sprite}}" class="sprite-img-xl" src="{{sheet.sprite}}" mode="aspectFit" />
+        <pixel-icon wx:else art-id="{{sheet.artId}}" size="140" />
       </view>
       <view class="col flex-1">
         <view class="row">
@@ -231,7 +241,7 @@
 
     <view class="sh-btns safe-bottom">
       <view class="btn-ghost sh-btn" bindtap="sheetFavToggle">{{sheetFav ? '★ 已收藏' : '☆ 收藏'}}</view>
-      <view class="btn-gold sh-btn" wx:if="{{sheet.type !== 'plantseed'}}" bindtap="sheetFull">查看完整详情</view>
+      <view class="btn-gold sh-btn" wx:if="{{sheet.type !== 'plantseed' && sheet.type !== 'catitem'}}" bindtap="sheetFull">查看完整详情</view>
     </view>
   </view>
 
