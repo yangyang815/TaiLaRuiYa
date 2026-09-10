@@ -546,6 +546,9 @@ async function build () {
   // 卷数常量（运行时按此探测，避免探测不存在的卷）
   fs.writeFileSync(path.join(ROOT, 'utils', 'cat-vols.js'),
     '// 自动生成：全物品图鉴数据卷数（勿手改）\nmodule.exports = ' + volumes.length + '\n')
+  // 数据版本号：客户端缓存键带上它，数据重新生成后旧缓存自动作废
+  fs.writeFileSync(path.join(ROOT, 'utils', 'cat-data-ver.js'),
+    '// 自动生成：图鉴数据版本（勿手改）\nmodule.exports = "v' + Date.now() + '"\n')
   console.log('app.json 已注册 ' + volumes.length + ' 个数据分包')
 }
 
