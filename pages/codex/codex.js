@@ -64,6 +64,9 @@ Page({
   _catById: {},     // id → 条目（搜索联想点击用）
   _catLoaded: false,
   _catChips: null,  // 全物品二级分类 chips（缓存）
+  _vols: {},        // 各卷原始数据（1..3）
+  _loaderActive: false,
+  _loaderQueue: [], // 待装载卷队列
 
   onLoad () {
     const app = getApp()
@@ -79,17 +82,79 @@ Page({
     this.loadAllItems()
   },
 
-  /* ---------- 全物品（wiki 全量，逐卷渐进加载：单卷就绪即上屏，互不阻塞） ---------- */
+  /* ---------- 全物品（wiki 全量；数据由分包装载页写入 globalData，主包收集，100% 兼容） ---------- */
   loadAllItems (attempt) {
     attempt = attempt || 0
     this.setData({ allLoading: true, allLoadFail: false, allDiag: '' })
+    this._ingestGlobal()
+    const missing = this._missingVols()
+    if (!missing.length) { this._allLoaded(); return }
+    // 快速通道：require.async（部分环境可用，10s 超时；失败自动进入分包装载链）
+    let pending = missing.length
+    missing.forEach(i => {
+      Promise.race([
+        catSearch.loadVol(i),
+        new Promise(res => setTimeout(() => res([]), 10000))
+      ]).then(rows => {
+        if (rows && rows.length) this._vols[i] = rows
+        pending--
+        if (pending === 0) this._afterRequire()
+      })
+    })
+  },
+  _afterRequire () {
+    this._ingestGlobal()
+    const still = this._missingVols()
+    if (!still.length) { this._allLoaded(); return }
+    // require.async 不可用（module not defined）→ 分包装载页链：导航到各卷装载页写入 globalData 后返回
+    this._loaderQueue = still.slice()
+    this._loaderActive = true
+    this.setData({ allDiag: '通过数据卷装载…' })
+    console.log('[图鉴] 进入分包装载链:', this._loaderQueue.join(','))
+    this._nextLoader()
+  },
+  _nextLoader () {
+    const still = this._missingVols()
+    if (!still.length) { this._loaderActive = false; this._allLoaded(); return }
+    const vol = still[0]
+    console.log('[图鉴] 打开装载页: 卷', vol)
+    wx.navigateTo({
+      url: '/pkg-cat-' + vol + '/pages/index/index?loader=1',
+      fail: () => this._giveUp('无法打开数据卷页面')
+    })
+  },
+  _continueLoader () {
+    if (!this._loaderActive) return
+    this._ingestGlobal()
+    const still = this._missingVols()
+    if (!still.length) { this._loaderActive = false; this._allLoaded(); return }
+    // 只导航每个装载页一次，防止全局数据写入失败时死循环
+    this._loaderQueue = (this._loaderQueue || []).filter(v => still.indexOf(v) >= 0)
+    const nextVol = this._loaderQueue.shift()
+    if (nextVol === undefined) { this._loaderActive = false; this._giveUp('数据卷装载失败'); return }
+    this._nextLoader()
+  },
+  _ingestGlobal () {
+    try {
+      const app = getApp()
+      if (!app || !app.globalData) return
+      for (let i = 1; i <= 3; i++) {
+        const v = app.globalData['catVol' + i]
+        if (v && v.length && !(this._vols[i] && this._vols[i].length)) {
+          this._vols[i] = v
+          try { catSearch.saveVolCache(i, v) } catch (e) { /* 忽略 */ }
+        }
+      }
+    } catch (e) { /* getApp 不可用时忽略 */ }
+  },
+  _missingVols () {
+    return [1, 2, 3].filter(i => !(this._vols[i] && this._vols[i].length))
+  },
+  _rebuild () {
     this._catEntries = []
     this._catById = {}
-    this._catLoaded = false
-    this._catChips = null
-    catSearch.loadProgressive(part => {
-      console.log('[图鉴] 卷到货:', part.length, '条')
-      part.forEach(x => {
+    for (let i = 1; i <= 3; i++) {
+      ;(this._vols[i] || []).forEach(x => {
         const id = 'cat:' + x.f
         if (this._catById[id]) return
         const m = catGroups.macroOf(x.c)
@@ -103,35 +168,23 @@ Page({
         this._catById[id] = e
         this._catEntries.push(e)
       })
-      this._catLoaded = true
-      this._catChips = null
-      if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
-    }).then(() => {
-      console.log('[图鉴] 全部卷加载流程结束, 共', this._catEntries.length, '条')
-      if (this._catEntries.length) {
-        this.setData({ allLoading: false, allLoadFail: false })
-        if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
-        return
-      }
-      // 关键时序：require.async 必须等分包预下载完成才可用（启动即调用会直接 reject）
-      // 自动重试 3 次（1s/2s/3s），覆盖预下载窗口
-      if (attempt < 3) {
-        const delay = 1000 * (attempt + 1)
-        console.log('[图鉴] 分包未就绪,', delay, 'ms 后自动重试(第', attempt + 2, '次)')
-        this.setData({ allDiag: '分包就绪中，即将自动重试…' })
-        setTimeout(() => this.loadAllItems(attempt + 1), delay)
-        return
-      }
-      const st = catSearch.lastStats()
-      const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : '未发起'
-      this.setData({ allLoading: false, allLoadFail: true, allDiag: '诊断 ' + diag + ' · 请检查网络后点击重试' })
-    }).catch(err => {
-      console.error('[图鉴] 加载链路异常:', err && err.message, err && err.stack)
-      this.setData({ allLoading: false, allLoadFail: true, allDiag: '加载链路异常: ' + (err && err.message) })
-    })
+    }
+    this._catLoaded = this._catEntries.length > 0
+    this._catChips = null
+  },
+  _allLoaded () {
+    this._rebuild()
+    this.setData({ allLoading: false, allLoadFail: false, allDiag: '' })
+    if (this.data.tab === 'allitem' || this.data.tab === 'all') this.refresh()
+  },
+  _giveUp (msg) {
+    const st = catSearch.lastStats()
+    const diag = st ? Object.keys(st).map(k => k + ':' + (st[k] === -1 ? '失败' : st[k])).join(' ') : ''
+    this.setData({ allLoading: false, allLoadFail: true, allDiag: (msg || '加载失败') + (diag ? ' · ' + diag : '') })
   },
   retryAll () {
-    catSearch.resetVols() // 丢弃挂起/失败的卷加载，强制重新发起
+    this._vols = {}
+    catSearch.resetVols()
     this.setData({ allLoadFail: false, allLoading: true, allDiag: '' })
     this.loadAllItems()
   },
@@ -160,6 +213,8 @@ Page({
     if (typeof this.getTabBar === 'function' && this.getTabBar()) this.getTabBar().init(1)
     const app = getApp()
     this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '', clock: fmt.fmtClock(new Date()) })
+    // 分包装载页返回 → 收集数据并继续装载链
+    if (this._loaderActive) { this._continueLoader(); return }
     if (app.globalData.pendingCodex) {
       let { tab } = app.globalData.pendingCodex
       app.globalData.pendingCodex = null

@@ -1,9 +1,14 @@
-// 兼容页：旧版分享/收藏链接仍指向 /pkg-cat-N/pages/index/index，统一重定向到主包统一图鉴
-// 关键：require 本卷数据，确保 batch.js 被编译进分包模块表（否则主包 require.async 报 module not defined）
+// 兼容页 + 数据装载器：同步 require 本卷数据写入 globalData（主包经 globalData 读取，100% 兼容所有环境）
 const batch = require('../../data/batch.js')
 Page({
   data: { n: (batch || []).length },
   onLoad (q) {
+    try { const app = getApp(); if (app) app.globalData['catVol' + 2] = batch } catch (e) {}
+    if (q && q.loader) {
+      // 装载模式：由图鉴页导航而来，写完数据即返回
+      setTimeout(() => wx.navigateBack({ fail: () => wx.switchTab({ url: "/pages/codex/codex" }) }), 500)
+      return
+    }
     const qs = q && Object.keys(q).length
       ? '?' + Object.keys(q).map(k => k + '=' + encodeURIComponent(q[k])).join('&')
       : ''

@@ -92,8 +92,17 @@ function loadVolStorage (i) {
     return v && v.length ? v : []
   } catch (e) { return [] }
 }
+// 分包装载页写入的全局数据（同步 require，100% 兼容；装载页 onLoad 时写入）
+function globalDataVol (i) {
+  try {
+    if (typeof getApp !== 'function') return []
+    const app = getApp()
+    const v = app && app.globalData && app.globalData['catVol' + i]
+    return v && v.length ? v : []
+  } catch (e) { return [] }
+}
 
-/* ---------- 单卷加载：分包 → 失败回退该卷缓存（失败不缓存，允许重试） ---------- */
+/* ---------- 单卷加载：分包 → globalData（装载页写入）→ 该卷缓存（失败不缓存，允许重试） ---------- */
 const volP = {}
 function loadVol (i, force) {
   if (force) delete volP[i]
@@ -101,6 +110,8 @@ function loadVol (i, force) {
     volP[i] = volWithTimeout(i).then(m => {
       if (m && m.length) { saveVol(i, m); return m }
       delete volP[i]
+      const g = globalDataVol(i)
+      if (g.length) { saveVol(i, g); return g }
       return loadVolStorage(i)
     })
   }
@@ -190,4 +201,4 @@ function findByName (name) {
   return load().then(all => all.find(x => x.n === name) || null)
 }
 
-module.exports = { load, loadVol, loadProgressive, resetVols, search, searchTotal, getById, findByName, lastStats, ALIAS, __useLoader: fn => { loader = fn } }
+module.exports = { load, loadVol, loadProgressive, resetVols, search, searchTotal, getById, findByName, lastStats, saveVolCache: saveVol, ALIAS, __useLoader: fn => { loader = fn } }

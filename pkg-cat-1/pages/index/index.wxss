@@ -1,1 +1,6 @@
-/* 重定向兼容页 */
+/* 数据装载页 */
+.ld-root { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #160A2E; }
+.ld-ring { width: 72rpx; height: 72rpx; border: 6rpx solid rgba(255,215,0,0.25); border-top-color: #FFD700; border-radius: 50%; animation: ldspin 1s linear infinite; }
+.ld-t1 { margin-top: 30rpx; color: #9D8BC0; font-size: 26rpx; }
+.ld-t2 { margin-top: 12rpx; color: #5E4F7A; font-size: 20rpx; }
+@keyframes ldspin { to { transform: rotate(360deg); } }
