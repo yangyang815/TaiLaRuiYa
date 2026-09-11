@@ -37,6 +37,18 @@
         <text class="sg-go px">详情 ›</text>
       </view>
     </view>
+    <!-- 搜索联想（全物品 · 点击查配方） -->
+    <view class="suggest card pop-in" wx:if="{{searchCatSuggests.length}}">
+      <view class="sg-item" wx:for="{{searchCatSuggests}}" wx:key="en"
+        bindtap="onSearchCatTap" data-en="{{item.en}}" data-name="{{item.name}}">
+        <view class="sg-art"><image src="{{item.sprite}}" mode="aspectFit" class="sg-img" /></view>
+        <view class="col flex-1">
+          <text class="sg-name">{{item.name}}</text>
+          <text class="sg-en px">{{item.en}} · 全物品图鉴</text>
+        </view>
+        <text class="sg-go px">合成 ›</text>
+      </view>
+    </view>
 
     <!-- 目标 + 材料输入 -->
     <view class="in-box">
@@ -264,8 +276,11 @@
   </scroll-view>
   <view class="fr-list card" wx:if="{{fRecipes.length}}">
     <view class="fr-row tappable" wx:for="{{fRecipes}}" wx:key="rid"
-      bindtap="onRecipeTap" data-id="{{item.rid}}">
-      <view class="fr-art"><pixel-icon art-id="{{item.artId}}" size="56" /></view>
+      bindtap="onRecipeTap" data-id="{{item.rid}}" data-wiki="{{item.wiki}}">
+      <view class="fr-art">
+        <image wx:if="{{item.sprite}}" src="{{item.sprite}}" mode="aspectFit" class="fr-img" />
+        <pixel-icon wx:else art-id="{{item.artId}}" size="56" />
+      </view>
       <view class="col flex-1">
         <text class="fr-n">{{item.name}}</text>
         <text class="fr-s">⚒ {{item.stationName}}</text>

@@ -208,3 +208,6 @@
 .wt-arrow { font-size: 22rpx; color: var(--gold); flex-shrink: 0; }
 
 .sg-sprite { width: 52rpx; height: 52rpx; }
+
+.sg-img { width: 52rpx; height: 52rpx; }
+.fr-img { width: 52rpx; height: 52rpx; }
