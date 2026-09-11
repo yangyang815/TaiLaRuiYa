@@ -31,7 +31,8 @@ items.forEach(it => {
   const p = find('镐力')
   if (p && row.pick != null && num(p[1]) !== row.pick) res.pick.push(it.id + ' ' + it.name + ': 写' + p[1] + ' 官方' + row.pick)
   const a = find('斧力')
-  if (a && row.axe != null && num(a[1]) !== row.axe) res.axe.push(it.id + ' ' + it.name + ': 写' + a[1] + ' 官方' + row.axe)
+  // 游戏内斧力显示 = 内部值 × 5
+  if (a && row.axe != null && num(a[1]) !== row.axe * 5) res.axe.push(it.id + ' ' + it.name + ': 写' + a[1] + ' 官方显示 ' + row.axe * 5 + '%')
   const h = find('锤力')
   if (h && row.hammer != null && num(h[1]) !== row.hammer) res.hammer.push(it.id + ' ' + it.name + ': 写' + h[1] + ' 官方' + row.hammer)
   const bait = find('鱼饵力')
