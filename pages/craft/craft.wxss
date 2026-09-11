@@ -211,3 +211,5 @@
 
 .sg-img { width: 52rpx; height: 52rpx; }
 .fr-img { width: 52rpx; height: 52rpx; }
+
+.f-reset { color: #ff8a8a; margin-left: 16rpx; }

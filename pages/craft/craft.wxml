@@ -264,7 +264,8 @@
 
   <!-- 配方筛选：分类 + 工作台 -->
   <view class="sec-title"><view class="diamond" /><text class="t">配方筛选</text>
-    <text class="more">{{fCount}} 条配方 · 点击直达</text>
+    <text class="more">{{fCount}} 条配方<block wx:if="{{fRecipes.length < fCount}}"> · 上滑加载更多</block></text>
+    <text class="more tappable f-reset" wx:if="{{fCat || fStation}}" bindtap="resetFilter">✕ 重置筛选</text>
   </view>
   <scroll-view class="f-scroll" scroll-x enhanced show-scrollbar="{{false}}">
     <view class="f-chip tappable {{fCat === item.k ? 'on' : ''}}" wx:for="{{catChips}}" wx:key="k"
