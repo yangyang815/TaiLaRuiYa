@@ -1,0 +1,394 @@
+{
+ "Lesser Healing Potion": [
+  "Mushroom",
+  "^",
+  "Gel",
+  "^",
+  "Bottle"
+ ],
+ "Healing Potion": [
+  "Lesser Healing Potion",
+  "^",
+  "Glowing Mushroom"
+ ],
+ "Mana Potion": [
+  "Lesser Mana Potion",
+  "^",
+  "Glowing Mushroom"
+ ],
+ "Ironskin Potion": [
+  "Bottled Water",
+  "^",
+  "Daybloom",
+  "^",
+  "Iron Ore"
+ ],
+ "Regeneration Potion": [
+  "Bottled Water",
+  "^",
+  "Daybloom",
+  "^",
+  "Mushroom"
+ ],
+ "Swiftness Potion": [
+  "Bottled Water",
+  "^",
+  "Blinkroot",
+  "^",
+  "Cactus"
+ ],
+ "Spelunker Potion": [
+  "Bottled Water",
+  "^",
+  "Blinkroot",
+  "^",
+  "Moonglow",
+  "^",
+  "Gold Ore"
+ ],
+ "Battle Potion": [
+  "Bottled Water",
+  "^",
+  "Deathweed",
+  "^",
+  "Rotten Chunk"
+ ],
+ "Luck Potion": [
+  "Bottled Water",
+  "^",
+  "Waterleaf",
+  "^",
+  "Ladybug",
+  "^",
+  "Black Pearl"
+ ],
+ "Fishing Potion": [
+  "Bottled Water",
+  "^",
+  "Crispy Honey Block",
+  "^",
+  "Waterleaf"
+ ],
+ "Summoning Potion": [
+  "Bottled Water",
+  "^",
+  "Variegated Lardfish",
+  "^",
+  "Moonglow"
+ ],
+ "Obsidian Skin Potion": [
+  "Bottled Water",
+  "^",
+  "Fireblossom",
+  "^",
+  "Waterleaf",
+  "^",
+  "Obsidian"
+ ],
+ "Gills Potion": [
+  "Bottled Water",
+  "^",
+  "Waterleaf",
+  "^",
+  "Coral"
+ ],
+ "Builder Potion": [
+  "Bottled Water",
+  "^",
+  "Blinkroot",
+  "^",
+  "Shiverthorn",
+  "^",
+  "Moonglow"
+ ],
+ "Hunter Potion": [
+  "Bottled Water",
+  "^",
+  "Daybloom",
+  "^",
+  "Blinkroot",
+  "^",
+  "Shark Fin"
+ ],
+ "Night Owl Potion": [
+  "Bottled Water",
+  "^",
+  "Daybloom",
+  "^",
+  "Blinkroot"
+ ],
+ "Shine Potion": [
+  "Bottled Water",
+  "^",
+  "Daybloom",
+  "^",
+  "Glowing Mushroom"
+ ],
+ "Invisibility Potion": [
+  "Bottled Water",
+  "^",
+  "Blinkroot",
+  "^",
+  "Moonglow"
+ ],
+ "Magic Power Potion": [
+  "Bottled Water",
+  "^",
+  "Moonglow",
+  "^",
+  "Deathweed",
+  "^",
+  "Fallen Star"
+ ],
+ "Mana Regeneration Potion": [
+  "Bottled Water",
+  "^",
+  "Moonglow",
+  "^",
+  "Daybloom",
+  "^",
+  "Fallen Star"
+ ],
+ "Archery Potion": [
+  "Bottled Water",
+  "^",
+  "Daybloom",
+  "^",
+  "Lens"
+ ],
+ "Ammo Reservation Potion": [
+  "Bottled Water",
+  "^",
+  "Double Cod",
+  "^",
+  "Moonglow"
+ ],
+ "Endurance Potion": [
+  "Bottled Water",
+  "^",
+  "Armored Cavefish",
+  "^",
+  "Blinkroot"
+ ],
+ "Lifeforce Potion": [
+  "Bottled Water",
+  "^",
+  "Prismite",
+  "^",
+  "Moonglow",
+  "^",
+  "Shiverthorn",
+  "^",
+  "Waterleaf"
+ ],
+ "Rage Potion": [
+  "Bottled Water",
+  "^",
+  "Hemopiranha",
+  "^",
+  "Deathweed"
+ ],
+ "Wrath Potion": [
+  "Bottled Water",
+  "^",
+  "Ebonkoi",
+  "^",
+  "Deathweed"
+ ],
+ "Warmth Potion": [
+  "Bottled Water",
+  "^",
+  "Frost Minnow",
+  "^",
+  "Shiverthorn"
+ ],
+ "Heartreach Potion": [
+  "Bottled Water",
+  "^",
+  "Crimson Tigerfish",
+  "^",
+  "Daybloom"
+ ],
+ "Sonar Potion": [
+  "Bottled Water",
+  "^",
+  "Waterleaf",
+  "^",
+  "Coral"
+ ],
+ "Crate Potion": [
+  "Bottled Water",
+  "^",
+  "Amber",
+  "^",
+  "Moonglow",
+  "^",
+  "Deathweed"
+ ],
+ "Gravitation Potion": [
+  "Bottled Water",
+  "^",
+  "Fireblossom",
+  "^",
+  "Deathweed",
+  "^",
+  "Blinkroot",
+  "^",
+  "Feather"
+ ],
+ "Flipper Potion": [
+  "Bottled Water",
+  "^",
+  "Shiverthorn",
+  "^",
+  "Waterleaf"
+ ],
+ "Water Walking Potion": [
+  "Bottled Water",
+  "^",
+  "Waterleaf",
+  "^",
+  "Shark Fin"
+ ],
+ "Titan Potion": [
+  "Bottled Water",
+  "^",
+  "Bone",
+  "^",
+  "Deathweed",
+  "^",
+  "Shiverthorn"
+ ],
+ "Dangersense Potion": [
+  "Bottled Water",
+  "^",
+  "Shiverthorn",
+  "^",
+  "Cobweb"
+ ],
+ "Biome Sight Potion": [
+  "Bottled Water",
+  "^",
+  "Fireblossom",
+  "^",
+  "Blinkroot",
+  "^",
+  "Moonglow",
+  "^",
+  "Grass Seeds"
+ ],
+ "Super Healing Potion": [
+  "Greater Healing Potion",
+  "^",
+  "Nebula Fragment",
+  "^",
+  "Solar Fragment",
+  "^",
+  "Stardust Fragment",
+  "^",
+  "Vortex Fragment"
+ ],
+ "Super Mana Potion": [
+  "Greater Mana Potion",
+  "^",
+  "Fallen Star",
+  "^",
+  "Crystal Shard",
+  "^",
+  "Unicorn Horn"
+ ],
+ "Restoration Potion": [
+  "Mana Potion",
+  "^",
+  "Healing Potion"
+ ],
+ "Inferno Potion": [
+  "Bottled Water",
+  "^",
+  "Flarefin Koi",
+  "^",
+  "Obsidifish",
+  "^",
+  "Fireblossom"
+ ],
+ "Recall Potion": [
+  "Bottled Water",
+  "^",
+  "Specular Fish",
+  "^",
+  "Daybloom"
+ ],
+ "Wormhole Potion": [
+  "Bottled Water",
+  "^",
+  "Specular Fish",
+  "^",
+  "Blinkroot"
+ ],
+ "Love Potion": [
+  "Bottled Water",
+  "^",
+  "Princess Fish",
+  "^",
+  "Shiverthorn"
+ ],
+ "Gender Change Potion": [
+  "Bottled Water",
+  "^",
+  "Daybloom",
+  "^",
+  "Moonglow",
+  "^",
+  "Blinkroot",
+  "^",
+  "Waterleaf",
+  "^",
+  "Deathweed",
+  "^",
+  "Shiverthorn",
+  "^",
+  "Fireblossom"
+ ],
+ "Flask of Fire": [
+  "Bottled Water",
+  "^",
+  "Hellstone"
+ ],
+ "Flask of Poison": [
+  "Bottled Water",
+  "^",
+  "Stinger"
+ ],
+ "Flask of Gold": [
+  "Bottled Water",
+  "^",
+  "Gold Dust"
+ ],
+ "Flask of Party": [
+  "Bottled Water",
+  "^",
+  "Confetti"
+ ],
+ "Flask of Cursed Flames": [
+  "Bottled Water",
+  "^",
+  "Cursed Flame"
+ ],
+ "Flask of Ichor": [
+  "Bottled Water",
+  "^",
+  "Ichor"
+ ],
+ "Flask of Venom": [
+  "Bottled Water",
+  "^",
+  "Vial of Venom"
+ ],
+ "Greater Healing Potion": [
+  "Bottled Water",
+  "^",
+  "Pixie Dust",
+  "^",
+  "Crystal Shard"
+ ]
+}
