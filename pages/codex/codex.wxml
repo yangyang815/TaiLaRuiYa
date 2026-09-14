@@ -198,7 +198,7 @@
 
       <block wx:if="{{sheet.drops.length}}">
         <view class="sec-title"><view class="diamond" /><text class="t">掉落物</text></view>
-        <view class="drop card" wx:for="{{sheet.drops}}" wx:key="name">
+        <view class="drop card tappable" wx:for="{{sheet.drops}}" wx:key="name" bindtap="onSheetDrop" data-id="{{item.id}}">
           <text class="d-n">{{item.name}}</text>
           <text class="d-r px">{{item.rate}}</text>
         </view>

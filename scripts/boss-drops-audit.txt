@@ -1,0 +1,384 @@
+[归属错误] 史莱姆王 的 凝胶×25 | 官方掉落者: Baby Slime, Black Slime, Blue Slime, Bouncy Slime
+[缺失] 史莱姆王 官方还掉: Gold Coin
+[缺失] 史莱姆王 官方还掉: King Slime Mask
+[缺失] 史莱姆王 官方还掉: King Slime Relic
+[缺失] 史莱姆王 官方还掉: King Slime Trophy
+[缺失] 史莱姆王 官方还掉: Lesser Healing Potion
+[缺失] 史莱姆王 官方还掉: Ninja Hood
+[缺失] 史莱姆王 官方还掉: Ninja Pants
+[缺失] 史莱姆王 官方还掉: Ninja Shirt
+[缺失] 史莱姆王 官方还掉: Royal Delight
+[缺失] 史莱姆王 官方还掉: Royal Gel
+[缺失] 史莱姆王 官方还掉: Slime Gun
+[缺失] 史莱姆王 官方还掉: Slime Hook
+[缺失] 史莱姆王 官方还掉: Solidifier
+[缺失] 史莱姆王 官方还掉: Treasure Bag (King Slime)
+[归属错误] 克苏鲁之眼 的 腐肉/椎骨×1~3 | 官方掉落者: Corruptor, Devourer, Eater of Souls, Blood Crawler
+[缺失] 克苏鲁之眼 官方还掉: 0x33's Aviators
+[缺失] 克苏鲁之眼 官方还掉: Badger's Hat
+[缺失] 克苏鲁之眼 官方还掉: Binoculars
+[缺失] 克苏鲁之眼 官方还掉: Corrupt Seeds
+[缺失] 克苏鲁之眼 官方还掉: Crimson Altar
+[缺失] 克苏鲁之眼 官方还掉: Crimson Seeds
+[缺失] 克苏鲁之眼 官方还掉: Demon Altar
+[缺失] 克苏鲁之眼 官方还掉: Eye of Cthulhu Mask
+[缺失] 克苏鲁之眼 官方还掉: Eye of Cthulhu Relic
+[缺失] 克苏鲁之眼 官方还掉: Eye of Cthulhu Trophy
+[缺失] 克苏鲁之眼 官方还掉: Gold Coin
+[缺失] 克苏鲁之眼 官方还掉: Lesser Healing Potion
+[缺失] 克苏鲁之眼 官方还掉: Suspicious Grinning Eye
+[缺失] 克苏鲁之眼 官方还掉: Treasure Bag (Eye of Cthulhu)
+[缺失] 世界吞噬怪 官方还掉: Blue Brick
+[缺失] 世界吞噬怪 官方还掉: Cursed Blue Brick Wall
+[缺失] 世界吞噬怪 官方还掉: Cursed Blue Slab Wall
+[缺失] 世界吞噬怪 官方还掉: Cursed Blue Tiled Wall
+[缺失] 世界吞噬怪 官方还掉: Cursed Green Brick Wall
+[缺失] 世界吞噬怪 官方还掉: Cursed Green Slab Wall
+[缺失] 世界吞噬怪 官方还掉: Cursed Green Tiled Wall
+[缺失] 世界吞噬怪 官方还掉: Cursed Pink Brick Wall
+[缺失] 世界吞噬怪 官方还掉: Cursed Pink Slab Wall
+[缺失] 世界吞噬怪 官方还掉: Cursed Pink Tiled Wall
+[缺失] 世界吞噬怪 官方还掉: Eater of Worlds Mask
+[缺失] 世界吞噬怪 官方还掉: Eater of Worlds Relic
+[缺失] 世界吞噬怪 官方还掉: Eater of Worlds Trophy
+[缺失] 世界吞噬怪 官方还掉: Gold Coin
+[缺失] 世界吞噬怪 官方还掉: Green Brick
+[缺失] 世界吞噬怪 官方还掉: Lesser Healing Potion
+[缺失] 世界吞噬怪 官方还掉: Pink Brick
+[缺失] 世界吞噬怪 官方还掉: Treasure Bag (Eater of Worlds)
+[缺失] 世界吞噬怪 官方还掉: Worm Scarf
+[缺失] 世界吞噬怪 官方还掉: Writhing Remains
+[缺失] 克苏鲁之脑 官方还掉: Bone Rattle
+[缺失] 克苏鲁之脑 官方还掉: Brain in a Jar
+[缺失] 克苏鲁之脑 官方还掉: Brain of Cthulhu Mask
+[缺失] 克苏鲁之脑 官方还掉: Brain of Cthulhu Relic
+[缺失] 克苏鲁之脑 官方还掉: Brain of Cthulhu Trophy
+[缺失] 克苏鲁之脑 官方还掉: Gold Coin
+[缺失] 克苏鲁之脑 官方还掉: Lesser Healing Potion
+[缺失] 克苏鲁之脑 官方还掉: Treasure Bag (Brain of Cthulhu)
+[缺失] 蜂王 官方还掉: Bee Hat
+[缺失] 蜂王 官方还掉: Bee Pants
+[缺失] 蜂王 官方还掉: Bee Shirt
+[缺失] 蜂王 官方还掉: Beenade
+[缺失] 蜂王 官方还掉: Bottled Honey
+[缺失] 蜂王 官方还掉: Gold Coin
+[缺失] 蜂王 官方还掉: Hive Wand
+[缺失] 蜂王 官方还掉: Honey Comb
+[缺失] 蜂王 官方还掉: Honeyed Goggles
+[缺失] 蜂王 官方还掉: Nectar
+[缺失] 蜂王 官方还掉: Queen Bee Mask
+[缺失] 蜂王 官方还掉: Queen Bee Relic
+[缺失] 蜂王 官方还掉: Queen Bee Trophy
+[缺失] 蜂王 官方还掉: Queen of Bees
+[缺失] 蜂王 官方还掉: Sparkling Honey
+[缺失] 蜂王 官方还掉: The Bee's Knees
+[缺失] 蜂王 官方还掉: Treasure Bag (Queen Bee)
+[缺失] 骷髅王 官方还掉: Chippy's Chestplate
+[缺失] 骷髅王 官方还掉: Chippy's Cloak (Inactive)
+[缺失] 骷髅王 官方还掉: Chippy's Couch
+[缺失] 骷髅王 官方还掉: Chippy's Greaves
+[缺失] 骷髅王 官方还掉: Chippy's Headband
+[缺失] 骷髅王 官方还掉: Chippy's Helmet
+[缺失] 骷髅王 官方还掉: Gold Coin
+[缺失] 骷髅王 官方还掉: Greater Healing Potion
+[缺失] 骷髅王 官方还掉: Hallowed Bar
+[缺失] 骷髅王 官方还掉: Healing Potion
+[缺失] 骷髅王 官方还掉: Hellforge
+[缺失] 骷髅王 官方还掉: Mechanical Battery Piece
+[缺失] 骷髅王 官方还掉: Possessed Skull
+[缺失] 骷髅王 官方还掉: Robotic Skull
+[缺失] 骷髅王 官方还掉: Skeletron Hand
+[缺失] 骷髅王 官方还掉: Skeletron Mask
+[缺失] 骷髅王 官方还掉: Skeletron Prime Mask
+[缺失] 骷髅王 官方还掉: Skeletron Prime Relic
+[缺失] 骷髅王 官方还掉: Skeletron Prime Trophy
+[缺失] 骷髅王 官方还掉: Skeletron Relic
+[缺失] 骷髅王 官方还掉: Skeletron Trophy
+[缺失] 骷髅王 官方还掉: Soul of Fright
+[缺失] 骷髅王 官方还掉: Treasure Bag (Skeletron Prime)
+[缺失] 骷髅王 官方还掉: Treasure Bag (Skeletron)
+[无法反查] 独眼巨鹿 → 骨刀
+[归属错误] 独眼巨鹿 的 怪物肉 | 官方掉落者: Blood Crawler, Blood Feeder, Clinger, Corrupt Slime
+[缺失] 独眼巨鹿 官方还掉: Bone Helm
+[缺失] 独眼巨鹿 官方还掉: Deerclops Eyeball
+[缺失] 独眼巨鹿 官方还掉: Deerclops Mask
+[缺失] 独眼巨鹿 官方还掉: Deerclops Relic
+[缺失] 独眼巨鹿 官方还掉: Deerclops Trophy
+[缺失] 独眼巨鹿 官方还掉: Dizzy's Rare Gecko Chester
+[缺失] 独眼巨鹿 官方还掉: Eye Bone
+[缺失] 独眼巨鹿 官方还掉: Gold Coin
+[缺失] 独眼巨鹿 官方还掉: Healing Potion
+[缺失] 独眼巨鹿 官方还掉: Houndius Shootius
+[缺失] 独眼巨鹿 官方还掉: Radio Thing
+[缺失] 独眼巨鹿 官方还掉: Treasure Bag (Deerclops)
+[缺失] 血肉墙 官方还掉: Badger's Hat
+[缺失] 血肉墙 官方还掉: Breaker Blade
+[缺失] 血肉墙 官方还掉: Clockwork Assault Rifle
+[缺失] 血肉墙 官方还掉: Demon Heart
+[缺失] 血肉墙 官方还掉: Firecracker
+[缺失] 血肉墙 官方还掉: Goat Skull
+[缺失] 血肉墙 官方还掉: Gold Coin
+[缺失] 血肉墙 官方还掉: Healing Potion
+[缺失] 血肉墙 官方还掉: Heart
+[缺失] 血肉墙 官方还掉: Ranger Emblem
+[缺失] 血肉墙 官方还掉: Sorcerer Emblem
+[缺失] 血肉墙 官方还掉: Treasure Bag (Wall of Flesh)
+[缺失] 血肉墙 官方还掉: Wall of Flesh Mask
+[缺失] 血肉墙 官方还掉: Wall of Flesh Relic
+[缺失] 血肉墙 官方还掉: Wall of Flesh Trophy
+[缺失] 血肉墙 官方还掉: Warrior Emblem
+[官方表无] 史莱姆皇后 → 水晶蛇
+[缺失] 史莱姆皇后 官方还掉: Crystal Assassin Hood
+[缺失] 史莱姆皇后 官方还掉: Crystal Assassin Pants
+[缺失] 史莱姆皇后 官方还掉: Crystal Assassin Shirt
+[缺失] 史莱姆皇后 官方还掉: Gelatinous Pillion
+[缺失] 史莱姆皇后 官方还掉: Gold Coin
+[缺失] 史莱姆皇后 官方还掉: Greater Healing Potion
+[缺失] 史莱姆皇后 官方还掉: Hook of Dissonance
+[缺失] 史莱姆皇后 官方还掉: Queen Slime Mask
+[缺失] 史莱姆皇后 官方还掉: Queen Slime Relic
+[缺失] 史莱姆皇后 官方还掉: Queen Slime Trophy
+[缺失] 史莱姆皇后 官方还掉: Sparkle Slime Balloon
+[缺失] 史莱姆皇后 官方还掉: Treasure Bag (Queen Slime)
+[缺失] 史莱姆皇后 官方还掉: Volatile Gelatin
+[缺失] 双子魔眼 官方还掉: Gold Coin
+[缺失] 双子魔眼 官方还掉: Greater Healing Potion
+[缺失] 双子魔眼 官方还掉: Mechanical Wheel Piece
+[缺失] 双子魔眼 官方还掉: Pair of Eyeballs
+[缺失] 双子魔眼 官方还掉: Retinazer Trophy
+[缺失] 双子魔眼 官方还掉: Spazmatism Trophy
+[缺失] 双子魔眼 官方还掉: Treasure Bag (The Twins)
+[缺失] 双子魔眼 官方还掉: Twins Mask
+[缺失] 双子魔眼 官方还掉: Twins Relic
+[缺失] 毁灭者 官方还掉: Deactivated Probe
+[缺失] 毁灭者 官方还掉: Destroyer Mask
+[缺失] 毁灭者 官方还掉: Destroyer Relic
+[缺失] 毁灭者 官方还掉: Destroyer Trophy
+[缺失] 毁灭者 官方还掉: Gold Coin
+[缺失] 毁灭者 官方还掉: Greater Healing Potion
+[缺失] 毁灭者 官方还掉: Mechanical Wagon Piece
+[缺失] 毁灭者 官方还掉: Treasure Bag (The Destroyer)
+[缺失] 机械骷髅王 官方还掉: Gold Coin
+[缺失] 机械骷髅王 官方还掉: Greater Healing Potion
+[缺失] 机械骷髅王 官方还掉: Mechanical Battery Piece
+[缺失] 机械骷髅王 官方还掉: Robotic Skull
+[缺失] 机械骷髅王 官方还掉: Skeletron Prime Mask
+[缺失] 机械骷髅王 官方还掉: Skeletron Prime Relic
+[缺失] 机械骷髅王 官方还掉: Skeletron Prime Trophy
+[缺失] 机械骷髅王 官方还掉: Treasure Bag (Skeletron Prime)
+[缺失] 世纪之花 官方还掉: Forbidden Lihzahrd Brick Wall
+[缺失] 世纪之花 官方还掉: Gold Coin
+[缺失] 世纪之花 官方还掉: Greater Healing Potion
+[缺失] 世纪之花 官方还掉: Lihzahrd Altar
+[缺失] 世纪之花 官方还掉: Lihzahrd Brick
+[缺失] 世纪之花 官方还掉: Nettle Burst
+[缺失] 世纪之花 官方还掉: Picksaw
+[缺失] 世纪之花 官方还掉: Plantera Mask
+[缺失] 世纪之花 官方还掉: Plantera Relic
+[缺失] 世纪之花 官方还掉: Plantera Seedling
+[缺失] 世纪之花 官方还掉: Plantera Trophy
+[缺失] 世纪之花 官方还掉: Rocket I
+[缺失] 世纪之花 官方还掉: Seedling
+[缺失] 世纪之花 官方还掉: Spore Sac
+[缺失] 世纪之花 官方还掉: Thorn Hook
+[缺失] 世纪之花 官方还掉: Treasure Bag (Plantera)
+[缺失] 世纪之花 官方还掉: Vulgar Display of Flower
+[缺失] 石巨人 官方还掉: Beetle Husk
+[缺失] 石巨人 官方还掉: Eye of the Golem
+[缺失] 石巨人 官方还掉: Frost Core
+[缺失] 石巨人 官方还掉: Geode
+[缺失] 石巨人 官方还掉: Gold Coin
+[缺失] 石巨人 官方还掉: Golem Mask
+[缺失] 石巨人 官方还掉: Golem Relic
+[缺失] 石巨人 官方还掉: Golem Trophy
+[缺失] 石巨人 官方还掉: Granite Block
+[缺失] 石巨人 官方还掉: Greater Healing Potion
+[缺失] 石巨人 官方还掉: Guardian Golem
+[缺失] 石巨人 官方还掉: Heat Ray
+[缺失] 石巨人 官方还掉: Ice Feather
+[缺失] 石巨人 官方还掉: Mobius Strip
+[缺失] 石巨人 官方还掉: Night Vision Helmet
+[缺失] 石巨人 官方还掉: Rock Golem Head
+[缺失] 石巨人 官方还掉: Shiny Stone
+[缺失] 石巨人 官方还掉: Snapping Stone
+[缺失] 石巨人 官方还掉: Spaghetti
+[缺失] 石巨人 官方还掉: Staff of Earth
+[缺失] 石巨人 官方还掉: Stone Block
+[缺失] 石巨人 官方还掉: Stynger
+[缺失] 石巨人 官方还掉: Stynger Bolt
+[缺失] 石巨人 官方还掉: Treasure Bag (Golem)
+[无法反查] 猪龙鱼公爵 → 海啸弓
+[缺失] 猪龙鱼公爵 官方还掉: Aqua Scepter
+[缺失] 猪龙鱼公爵 官方还掉: Bubble Gun
+[缺失] 猪龙鱼公爵 官方还掉: Duke Fishron Mask
+[缺失] 猪龙鱼公爵 官方还掉: Duke Fishron Relic
+[缺失] 猪龙鱼公爵 官方还掉: Duke Fishron Trophy
+[缺失] 猪龙鱼公爵 官方还掉: Electric Eel
+[缺失] 猪龙鱼公爵 官方还掉: Gold Coin
+[缺失] 猪龙鱼公爵 官方还掉: Greater Healing Potion
+[缺失] 猪龙鱼公爵 官方还掉: Kraken
+[缺失] 猪龙鱼公爵 官方还掉: Pork of the Sea
+[缺失] 猪龙鱼公爵 官方还掉: Shrimpy Truffle
+[缺失] 猪龙鱼公爵 官方还掉: Tempest Staff
+[缺失] 猪龙鱼公爵 官方还掉: Treasure Bag (Duke Fishron)
+[缺失] 猪龙鱼公爵 官方还掉: Tsunami
+[缺失] 光之女皇 官方还掉: Empress of Light Mask
+[缺失] 光之女皇 官方还掉: Empress of Light Relic
+[缺失] 光之女皇 官方还掉: Empress of Light Trophy
+[缺失] 光之女皇 官方还掉: Empress Wings
+[缺失] 光之女皇 官方还掉: Eventide
+[缺失] 光之女皇 官方还掉: Gold Coin
+[缺失] 光之女皇 官方还掉: Greater Healing Potion
+[缺失] 光之女皇 官方还掉: Jewel of Light
+[缺失] 光之女皇 官方还掉: Prismatic Dye
+[缺失] 光之女皇 官方还掉: Rainbow Cursor
+[缺失] 光之女皇 官方还掉: Stellar Tune
+[缺失] 光之女皇 官方还掉: Treasure Bag (Empress of Light)
+[无法反查] 拜月教邪教徒 → 触发月亮事件（四座天界塔降临）
+[无法反查] 拜月教邪教徒 → 拜月教宝藏袋（专家+：幽魂套装材料相关战利品）
+[无法反查] 拜月教邪教徒 → 邪教徒面具（装饰）
+[缺失] 拜月教邪教徒 官方还掉: Greater Healing Potion
+[缺失] 拜月教邪教徒 官方还掉: Lunatic Cultist Mask
+[缺失] 拜月教邪教徒 官方还掉: Lunatic Cultist Relic
+[缺失] 拜月教邪教徒 官方还掉: Lunatic Cultist Trophy
+[缺失] 拜月教邪教徒 官方还掉: Tablet Fragment
+[缺失] 月亮领主 官方还掉: Celebration Mk2
+[缺失] 月亮领主 官方还掉: Celestial Starboard
+[缺失] 月亮领主 官方还掉: Gold Coin
+[缺失] 月亮领主 官方还掉: Gravity Globe
+[缺失] 月亮领主 官方还掉: Lunar Flare
+[缺失] 月亮领主 官方还掉: Lunar Portal Staff
+[缺失] 月亮领主 官方还掉: Meowmere Minecart
+[缺失] 月亮领主 官方还掉: Moon Lord Mask
+[缺失] 月亮领主 官方还掉: Moon Lord Relic
+[缺失] 月亮领主 官方还掉: Moon Lord Trophy
+[缺失] 月亮领主 官方还掉: Piece of Moon Squid
+[缺失] 月亮领主 官方还掉: Portal Gun
+[缺失] 月亮领主 官方还掉: Possession
+[缺失] 月亮领主 官方还掉: Rainbow Crystal Staff
+[缺失] 月亮领主 官方还掉: Super Healing Potion
+[缺失] 月亮领主 官方还掉: Suspicious Looking Tentacle
+[缺失] 月亮领主 官方还掉: Treasure Bag (Moon Lord)
+[无法反查] 荷兰飞盗船 → 好运币
+[无法反查] 荷兰飞盗船 → 折扣卡
+[缺失] 荷兰飞盗船 官方还掉: Barrel Launcher
+[缺失] 荷兰飞盗船 官方还掉: Coin Gun
+[缺失] 荷兰飞盗船 官方还掉: Cutlass
+[缺失] 荷兰飞盗船 官方还掉: Discount Card
+[缺失] 荷兰飞盗船 官方还掉: Flying Dutchman Relic
+[缺失] 荷兰飞盗船 官方还掉: Flying Dutchman Trophy
+[缺失] 荷兰飞盗船 官方还掉: Golden furniture
+[缺失] 荷兰飞盗船 官方还掉: Lucky Coin
+[缺失] 荷兰飞盗船 官方还掉: The Black Spot
+[缺失] 荷兰飞盗船 官方还掉: The Dutchman
+[无法反查] 恐惧鹦鹉螺 → 血腥法杖
+[无法反查] 恐惧鹦鹉螺 → 血腥鱼饵桶
+[缺失] 恐惧鹦鹉螺 官方还掉: Blood Moon Monolith
+[缺失] 恐惧鹦鹉螺 官方还掉: Bloody Tear
+[缺失] 恐惧鹦鹉螺 官方还掉: Chum Bucket
+[缺失] 恐惧鹦鹉螺 官方还掉: Sanguine Staff
+[无法反查] 黑暗魔法师 → 守护者勋章
+[缺失] 黑暗魔法师 官方还掉: Apprentice's Scarf
+[缺失] 黑暗魔法师 官方还掉: Dark Mage Mask
+[缺失] 黑暗魔法师 官方还掉: Dark Mage Relic
+[缺失] 黑暗魔法师 官方还掉: Dark Mage Trophy
+[缺失] 黑暗魔法师 官方还掉: Dark Mage's Tome
+[缺失] 黑暗魔法师 官方还掉: Gato Egg
+[缺失] 黑暗魔法师 官方还掉: Squire's Shield
+[缺失] 黑暗魔法师 官方还掉: War Table
+[缺失] 黑暗魔法师 官方还掉: War Table Banner
+[无法反查] 食人魔 → 守护者勋章
+[缺失] 食人魔 官方还掉: Brand of the Inferno
+[缺失] 食人魔 官方还掉: Creeper Egg
+[缺失] 食人魔 官方还掉: Ghastly Glaive
+[缺失] 食人魔 官方还掉: Huntress's Buckler
+[缺失] 食人魔 官方还掉: Monk's Belt
+[缺失] 食人魔 官方还掉: Ogre Relic
+[缺失] 食人魔 官方还掉: Ogre Trophy
+[缺失] 食人魔 官方还掉: Ogre's Club
+[缺失] 食人魔 官方还掉: Phantom Phoenix
+[缺失] 食人魔 官方还掉: Sleepy Octopod
+[缺失] 食人魔 官方还掉: Tome of Infinite Wisdom
+[缺失] 食人魔 官方还掉: War Table
+[缺失] 食人魔 官方还掉: War Table Banner
+[无法反查] 双足翼龙 → 贝茜之怒（魔法书）
+[无法反查] 双足翼龙 → 空中祸根（弓）
+[无法反查] 双足翼龙 → 可怕骑枪
+[无法反查] 双足翼龙 → 守护者勋章
+[缺失] 双足翼龙 官方还掉: Aerial Bane
+[缺失] 双足翼龙 官方还掉: Betsy Mask
+[缺失] 双足翼龙 官方还掉: Betsy Relic
+[缺失] 双足翼龙 官方还掉: Betsy Trophy
+[缺失] 双足翼龙 官方还掉: Betsy's Egg
+[缺失] 双足翼龙 官方还掉: Betsy's Wings
+[缺失] 双足翼龙 官方还掉: Betsy's Wrath
+[缺失] 双足翼龙 官方还掉: Defender Medal
+[缺失] 双足翼龙 官方还掉: Treasure Bag (Betsy)
+[无法反查] 哀木 → 诡异木×100+
+[无法反查] 哀木 → 木桩发射器
+[缺失] 哀木 官方还掉: Cursed Sapling
+[缺失] 哀木 官方还掉: Hexxed Branch
+[缺失] 哀木 官方还掉: Mourning Wood Relic
+[缺失] 哀木 官方还掉: Mourning Wood Trophy
+[缺失] 哀木 官方还掉: Spooky Hook
+[缺失] 哀木 官方还掉: Spooky Twig
+[缺失] 哀木 官方还掉: Spooky Wood
+[缺失] 哀木 官方还掉: Stake
+[缺失] 哀木 官方还掉: Stake Launcher
+[缺失] 哀木 官方还掉: Witch's Broom
+[无法反查] 南瓜王 → 骑士之刃
+[无法反查] 南瓜王 → 受诅咒的树苗（宠物）
+[无法反查] 南瓜王 → 南瓜王面具
+[缺失] 南瓜王 官方还掉: Bat Scepter
+[缺失] 南瓜王 官方还掉: Black Fairy Dust
+[缺失] 南瓜王 官方还掉: Candy Corn
+[缺失] 南瓜王 官方还掉: Candy Corn Rifle
+[缺失] 南瓜王 官方还掉: Dark Harvest
+[缺失] 南瓜王 官方还掉: Explosive Jack 'O Lantern
+[缺失] 南瓜王 官方还掉: Jack 'O Lantern Launcher
+[缺失] 南瓜王 官方还掉: Pumpkin Scented Candle
+[缺失] 南瓜王 官方还掉: Pumpking Relic
+[缺失] 南瓜王 官方还掉: Pumpking Trophy
+[缺失] 南瓜王 官方还掉: Raven Staff
+[缺失] 南瓜王 官方还掉: Spider Egg
+[缺失] 南瓜王 官方还掉: The Horseman's Blade
+[无法反查] 常绿尖叫怪 → 常绿尖叫怪面具
+[缺失] 常绿尖叫怪 官方还掉: Christmas Hook
+[缺失] 常绿尖叫怪 官方还掉: Everscream Relic
+[缺失] 常绿尖叫怪 官方还掉: Everscream Trophy
+[缺失] 常绿尖叫怪 官方还掉: Festive Wings
+[缺失] 常绿尖叫怪 官方还掉: Razorpine
+[缺失] 常绿尖叫怪 官方还掉: Shrub Star
+[无法反查] 圣诞坦克 → 链枪
+[无法反查] 圣诞坦克 → 精灵熔化器
+[无法反查] 圣诞坦克 → 圣诞坦克面具
+[缺失] 圣诞坦克 官方还掉: Chain Gun
+[缺失] 圣诞坦克 官方还掉: Elf Melter
+[缺失] 圣诞坦克 官方还掉: Santa-NK1 Relic
+[缺失] 圣诞坦克 官方还掉: Santa-NK1 Trophy
+[缺失] 圣诞坦克 官方还掉: Toy Tank
+[无法反查] 冰雪女王 → 冰雪女王面具
+[缺失] 冰雪女王 官方还掉: Baby Grinch's Mischief Whistle
+[缺失] 冰雪女王 官方还掉: Frozen Crown
+[缺失] 冰雪女王 官方还掉: Ice Queen Relic
+[缺失] 冰雪女王 官方还掉: Ice Queen Trophy
+[缺失] 冰雪女王 官方还掉: North Pole
+[缺失] 冰雪女王 官方还掉: Reindeer Bells
+[无法反查] 火星飞碟 → 异星法杖
+[无法反查] 火星飞碟 → 电球发射器
+[归属错误] 火星飞碟 的 充能爆破炮 | 官方掉落者: Brain Scrambler, Gigazapper, Gray Grunt, Martian Engineer
+[无法反查] 火星飞碟 → 反重力钩爪
+[缺失] 火星飞碟 官方还掉: Arc Surge
+[缺失] 火星飞碟 官方还掉: Cosmic Skateboard
+[缺失] 火星飞碟 官方还掉: Electrosphere Launcher
+[缺失] 火星飞碟 官方还掉: Greater Healing Potion
+[缺失] 火星飞碟 官方还掉: Influx Waver
+[缺失] 火星飞碟 官方还掉: Martian Saucer Relic
+[缺失] 火星飞碟 官方还掉: Martian Saucer Trophy
+[缺失] 火星飞碟 官方还掉: Xeno Staff
+[缺失] 火星飞碟 官方还掉: Xenopopper
+[归属错误] 机械美杜莎 的 神圣锭×41~165（三份合计） | 官方掉落者: Skeletron Prime, The Destroyer, The Twins
+[归属错误] 机械美杜莎 的 恐惧之魂（机械骷髅袋） | 官方掉落者: Skeletron Prime
+[归属错误] 机械美杜莎 的 视域之魂（双子袋） | 官方掉落者: The Twins
+[归属错误] 机械美杜莎 的 力量之魂（毁灭者袋） | 官方掉落者: The Destroyer
+[无法反查] 机械美杜莎 → 机械三王宝袋×3（含矿车组件，可合成机械矿车）
