@@ -1,0 +1,631 @@
+[
+  {
+    "t": "obtain-source-mismatch",
+    "id": "keybrand",
+    "en": "Keybrand",
+    "obtain": "世纪之花后地牢：蓝装甲/地狱装甲/锈甲骷髅 0.5% 掉落（专家 1%）",
+    "official": "蓝装甲骷髅 / 地狱装甲骷髅 / Rusty Armored Bones"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "frostbrand",
+    "en": "Frostbrand",
+    "obtain": "冰雪宝箱怪 23.75% 掉落",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "cascade",
+    "en": "Cascade",
+    "obtain": "地狱敌怪 0.25% 掉落（肉前即可获得）"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "amarok",
+    "en": "Amarok",
+    "obtain": "困难模式雪原敌怪 0.5% 掉落"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "kraken",
+    "en": "Kraken",
+    "obtain": "击败世纪之花后，地牢内任意敌怪 0.25% 掉落",
+    "official": "Dungeon enemies (post-Plantera)"
+  },
+  {
+    "t": "damage-mismatch",
+    "id": "kraken",
+    "en": "Kraken",
+    "stated": "95",
+    "official": 120
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "bees_knees",
+    "en": "Bee's Knees",
+    "obtain": "蜂王 33% 掉落"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "daedalus_stormbow",
+    "en": "Daedalus Stormbow",
+    "obtain": "神圣宝箱怪 20% 掉落（击败任一机械 Boss 后出现）",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-rate-mismatch",
+    "id": "phantom_phoenix",
+    "en": "Phantom Phoenix",
+    "obtain": "撒旦军队·食人魔（二级 10% / 三级 5%）掉落",
+    "official": "食人魔 5%"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "golden_shower",
+    "en": "Golden Shower",
+    "obtain": "书架：魔法书 + 灵液×20 + 暗影之魂×10 合成；另有 宝箱怪 33% 掉落",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "slime_staff",
+    "en": "Slime Staff",
+    "obtain": "各类史莱姆极低概率掉落",
+    "official": "史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Bouncy Slime / Crystal Slime / 绿史莱姆 / Heavenly Slime / I am error / 冰雪史莱姆 / 夜明史莱姆 / 丛林史莱姆 / 史莱姆王 / 史莱姆之母 / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / 沙史莱姆 / 小史莱姆 / 尖刺冰雪史莱姆 / 尖刺丛林史莱姆 / Spiked Slime / 毒泥 / 黄史莱姆 / 僵尸"
+  },
+  {
+    "t": "obtain-rate-mismatch",
+    "id": "blade_staff",
+    "en": "Blade Staff",
+    "obtain": "史莱姆皇后 25% 掉落（专家 33.33%）",
+    "official": "史莱姆皇后 33.33%"
+  },
+  {
+    "t": "obtain-rate-mismatch",
+    "id": "pygmy_staff",
+    "en": "Pygmy Staff",
+    "obtain": "世纪之花 50% 掉落",
+    "official": "世纪之花 25%"
+  },
+  {
+    "t": "obtain-rate-mismatch",
+    "id": "picksaw",
+    "en": "Picksaw",
+    "obtain": "石巨人 33.33% 掉落",
+    "official": "石巨人 25%"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "laser_drill",
+    "en": "Laser Drill",
+    "obtain": "火星暴乱事件敌怪 0.13% 掉落",
+    "official": "扰脑怪 / 电击怪 / 灰咕噜 / 火星工程师 / 火星军官 / 火星走妖 / 激光枪手 / 鳞甲怪"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "grapple",
+    "en": "Grappling Hook",
+    "obtain": "骷髅掉落钩子 + 锁链×3 合成"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "dual_hook",
+    "en": "Dual Hook",
+    "obtain": "宝箱怪 16.67% 掉落（困难模式）",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-rate-mismatch",
+    "id": "slime_hook",
+    "en": "Slime Hook",
+    "obtain": "史莱姆王 33.33% 掉落（专家 50%）",
+    "official": "史莱姆王 50%"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "glowstick",
+    "en": "Glowstick",
+    "obtain": "水母掉落/商人出售",
+    "official": "Chests / 飞鱼 / Gold Chest / Jellyfish / Raincoat Zombie / Shadow Chest"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "vitamin",
+    "en": "Vitamin",
+    "obtain": "腐化者 / 漂浮恶灵掉落（各约 1%）"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "paladin_shield",
+    "en": "Paladin Shield",
+    "obtain": "地牢圣骑士掉落"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "cross_necklace",
+    "en": "Cross Necklace",
+    "obtain": "宝箱怪 16.67% 掉落（困难模式）",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "putrid_scent",
+    "en": "Putrid Scent",
+    "obtain": "腐化宝箱怪 20% 掉落",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "flesh_knuckles",
+    "en": "Flesh Knuckles",
+    "obtain": "猩红宝箱怪 20% 掉落",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "wood",
+    "en": "Wood",
+    "obtain": "砍树；由 各类宝箱 50%、各类史莱姆 100% 掉落",
+    "official": "Chests / Slimes"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "luminite_bar",
+    "en": "Luminite Bar",
+    "obtain": "熔炉：夜明矿×4（月亮领主掉落）"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "cobweb",
+    "en": "Cobweb",
+    "obtain": "采集蛛网；由 各类史莱姆 100% 掉落",
+    "official": "Slimes"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "soul_of_night",
+    "en": "Soul of Night",
+    "obtain": "腐化之地地下怪物 20% 掉落",
+    "official": "Defiled Crate / Hematic Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "soul_of_light",
+    "en": "Soul of Light",
+    "obtain": "神圣之地地下怪物 20% 掉落",
+    "official": "Divine Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "nebula_fragment",
+    "en": "Nebula Fragment",
+    "obtain": "月亮事件中击败星云天界塔 100% 掉落",
+    "official": "Celestial Pillars"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "stardust_fragment",
+    "en": "Stardust Fragment",
+    "obtain": "月亮事件中击败星尘天界塔 100% 掉落",
+    "official": "Celestial Pillars"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "solar_fragment",
+    "en": "Solar Fragment",
+    "obtain": "月亮事件中击败日耀天界塔 100% 掉落",
+    "official": "Celestial Pillars"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "vortex_fragment",
+    "en": "Vortex Fragment",
+    "obtain": "月亮事件中击败星旋天界塔 100% 掉落",
+    "official": "Celestial Pillars"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "golden_key",
+    "en": "Golden Key",
+    "obtain": "地牢罐子/地牢敌怪掉落，或地牢金宝箱内自带",
+    "official": "愤怒骷髅怪 / 诅咒骷髅头 / 暗黑法师 / 地牢史莱姆 / 图书管理员骷髅"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "hallowed_key",
+    "en": "Hallowed Key",
+    "obtain": "神圣之地刷怪掉落（模具+钥匙合成）"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "corruption_key",
+    "en": "Corruption Key",
+    "obtain": "腐化之地刷怪掉落"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "crimson_key",
+    "en": "Crimson Key",
+    "obtain": "猩红之地刷怪掉落"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "frozen_key",
+    "en": "Frozen Key",
+    "obtain": "雪原刷怪掉落"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "jungle_key",
+    "en": "Jungle Key",
+    "obtain": "丛林刷怪掉落"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "desert_key",
+    "en": "Desert Key",
+    "obtain": "沙漠刷怪掉落"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "copper_ore",
+    "en": "Copper Ore",
+    "obtain": "地表/地下挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / 史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Boreal Crate / Bramble Crate / Corrupt Crate / Crimson Crate / Defiled Crate / Divine Crate / Dungeon Crate / Frozen Crate / 绿史莱姆 / Hallowed Crate / Hematic Crate / Iron Crate / Jungle Crate / 丛林史莱姆 / Mirage Crate / Mythril Crate / Oasis Crate / Ocean Crate / Pearlwood Crate / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / Seaside Crate / Sky Crate / Stockade Crate / Wooden Crate / 黄史莱姆"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "tin_ore",
+    "en": "Tin Ore",
+    "obtain": "地表/地下挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / 史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Boreal Crate / Bramble Crate / Corrupt Crate / Crimson Crate / Defiled Crate / Divine Crate / Dungeon Crate / Frozen Crate / 绿史莱姆 / Hallowed Crate / Hematic Crate / Iron Crate / Jungle Crate / 丛林史莱姆 / Mirage Crate / Mythril Crate / Oasis Crate / Ocean Crate / Pearlwood Crate / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / Seaside Crate / Sky Crate / Stockade Crate / Wooden Crate / 黄史莱姆"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "iron_ore",
+    "en": "Iron Ore",
+    "obtain": "地下/洞穴层挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / 史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Boreal Crate / Bramble Crate / Corrupt Crate / Crimson Crate / Defiled Crate / Divine Crate / Dungeon Crate / Frozen Crate / 绿史莱姆 / Hallowed Crate / Hematic Crate / Iron Crate / Jungle Crate / 丛林史莱姆 / Mirage Crate / Mythril Crate / Oasis Crate / Ocean Crate / Pearlwood Crate / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / Seaside Crate / Sky Crate / Stockade Crate / Wooden Crate / 黄史莱姆"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "lead_ore",
+    "en": "Lead Ore",
+    "obtain": "地下/洞穴层挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / 史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Boreal Crate / Bramble Crate / Corrupt Crate / Crimson Crate / Defiled Crate / Divine Crate / Dungeon Crate / Frozen Crate / 绿史莱姆 / Hallowed Crate / Hematic Crate / Iron Crate / Jungle Crate / 丛林史莱姆 / Mirage Crate / Mythril Crate / Oasis Crate / Ocean Crate / Pearlwood Crate / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / Seaside Crate / Sky Crate / Stockade Crate / Wooden Crate / 黄史莱姆"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "silver_ore",
+    "en": "Silver Ore",
+    "obtain": "洞穴层挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / 史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Boreal Crate / Bramble Crate / Corrupt Crate / Crimson Crate / Defiled Crate / Divine Crate / Dungeon Crate / Frozen Crate / Golden Crate / 绿史莱姆 / Hallowed Crate / Hematic Crate / Iron Crate / Jungle Crate / 丛林史莱姆 / Mirage Crate / Mythril Crate / Oasis Crate / Ocean Crate / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / Seaside Crate / Sky Crate / Stockade Crate / Titanium Crate / 黄史莱姆"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "tungsten_ore",
+    "en": "Tungsten Ore",
+    "obtain": "洞穴层挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / 史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Boreal Crate / Bramble Crate / Corrupt Crate / Crimson Crate / Defiled Crate / Divine Crate / Dungeon Crate / Frozen Crate / Golden Crate / 绿史莱姆 / Hallowed Crate / Hematic Crate / Iron Crate / Jungle Crate / 丛林史莱姆 / Mirage Crate / Mythril Crate / Oasis Crate / Ocean Crate / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / Seaside Crate / Sky Crate / Stockade Crate / Titanium Crate / 黄史莱姆"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "gold_ore",
+    "en": "Gold Ore",
+    "obtain": "洞穴层/地狱边缘挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / 史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Boreal Crate / Bramble Crate / Corrupt Crate / Crimson Crate / Defiled Crate / Divine Crate / Dungeon Crate / Frozen Crate / Golden Crate / 绿史莱姆 / Hallowed Crate / Hematic Crate / Jungle Crate / 丛林史莱姆 / Mirage Crate / Oasis Crate / Ocean Crate / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / Seaside Crate / Sky Crate / Stockade Crate / Titanium Crate / 黄史莱姆"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "platinum_ore",
+    "en": "Platinum Ore",
+    "obtain": "洞穴层/地狱边缘挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / 史莱姆宝宝 / 黑史莱姆 / 蓝史莱姆 / Boreal Crate / Bramble Crate / Corrupt Crate / Crimson Crate / Defiled Crate / Divine Crate / Dungeon Crate / Frozen Crate / Golden Crate / 绿史莱姆 / Hallowed Crate / Hematic Crate / Jungle Crate / 丛林史莱姆 / Mirage Crate / Oasis Crate / Ocean Crate / 粉史莱姆 / 紫史莱姆 / 红史莱姆 / Seaside Crate / Sky Crate / Stockade Crate / Titanium Crate / 黄史莱姆"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "cobalt_ore",
+    "en": "Cobalt Ore",
+    "obtain": "洞穴层挖掘（砸祭坛后生成）；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / Boreal Crate / Bramble Crate / Defiled Crate / Divine Crate / Hellstone Crate / Hematic Crate / Mirage Crate / Mythril Crate / Pearlwood Crate / Seaside Crate / Slimes / Stockade Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "palladium_ore",
+    "en": "Palladium Ore",
+    "obtain": "洞穴层挖掘（砸祭坛后生成）；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / Boreal Crate / Bramble Crate / Defiled Crate / Divine Crate / Hellstone Crate / Hematic Crate / Mirage Crate / Mythril Crate / Pearlwood Crate / Seaside Crate / Slimes / Stockade Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "mythril_ore",
+    "en": "Mythril Ore",
+    "obtain": "洞穴层深处挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / Boreal Crate / Bramble Crate / Defiled Crate / Divine Crate / Hellstone Crate / Hematic Crate / Mirage Crate / Mythril Crate / Seaside Crate / Slimes / Stockade Crate / Titanium Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "orichalcum_ore",
+    "en": "Orichalcum Ore",
+    "obtain": "洞穴层深处挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / Boreal Crate / Bramble Crate / Defiled Crate / Divine Crate / Hellstone Crate / Hematic Crate / Mirage Crate / Mythril Crate / Seaside Crate / Slimes / Stockade Crate / Titanium Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "adamantite_ore",
+    "en": "Adamantite Ore",
+    "obtain": "洞穴层最深处/冰层挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / Boreal Crate / Bramble Crate / Defiled Crate / Divine Crate / Hellstone Crate / Hematic Crate / Mirage Crate / Seaside Crate / Slimes / Stockade Crate / Titanium Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "titanium_ore",
+    "en": "Titanium Ore",
+    "obtain": "洞穴层最深处/冰层挖掘；部分史莱姆与匣子也会掉落",
+    "official": "Azure Crate / Boreal Crate / Bramble Crate / Defiled Crate / Divine Crate / Hellstone Crate / Hematic Crate / Mirage Crate / Seaside Crate / Slimes / Stockade Crate / Titanium Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "regeneration",
+    "en": "Regeneration Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 太阳花 + 蘑菇；由 金箱 9.52% 掉落",
+    "official": "Gold Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "battle_potion",
+    "en": "Battle Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 死亡草 + 腐肉；由 暗影箱 8.33% 掉落",
+    "official": "Shadow Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "gills",
+    "en": "Gills Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 水叶草 + 珊瑚；由 金箱 9.52%、珍珠木匣 1.43%、木匣 1.43% 掉落",
+    "official": "Gold Chest / Pearlwood Crate / Wooden Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "builder",
+    "en": "Builder Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 闪耀根 + 寒颤棘 + 月光草；由 各类宝箱 11.11% 掉落",
+    "official": "Chests"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "night_owl",
+    "en": "Night Owl Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 太阳花 + 闪耀根；由 各类宝箱 11.11%、金箱 9.52%、珍珠木匣 1.43%、木匣 1.43% 掉落",
+    "official": "Chests / Gold Chest / Pearlwood Crate / Wooden Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "shine",
+    "en": "Shine Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 太阳花 + 发光蘑菇；由 各类宝箱 11.11%、金箱 9.52%、珍珠木匣 1.43%、木匣 1.43% 掉落",
+    "official": "Chests / Gold Chest / Pearlwood Crate / Wooden Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "invisibility",
+    "en": "Invisibility Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 闪耀根 + 月光草；由 金箱 5.56%、暗影箱 9.38% 掉落",
+    "official": "Gold Chest / Shadow Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "magic_power",
+    "en": "Magic Power Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 月光草 + 死亡草 + 坠落之星；由 暗影箱 9.38% 掉落",
+    "official": "Shadow Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "mana_regen",
+    "en": "Mana Regeneration Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 月光草 + 太阳花 + 坠落之星；由 暗影箱 9.38% 掉落",
+    "official": "Shadow Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "archery",
+    "en": "Archery Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 太阳花 + 晶状体；由 金箱 9.52% 掉落",
+    "official": "Gold Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "lifeforce",
+    "en": "Lifeforce Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 七彩矿鱼 + 月光草 + 寒颤棘 + 水叶草；由 暗影箱 8.33% 掉落",
+    "official": "Shadow Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "water_walking",
+    "en": "Water Walking Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 水叶草 + 鲨鱼鳍；由 金箱 11.11%、暗影箱 8.33% 掉落",
+    "official": "Gold Chest / Shadow Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "titan",
+    "en": "Titan Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 骨头 + 死亡草 + 寒颤棘；由 金箱 5.56% 掉落",
+    "official": "Gold Chest"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "dangersense",
+    "en": "Dangersense Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 寒颤棘 + 蛛网；由 金箱 9.52%、珍珠木匣 1.43%、木匣 1.43% 掉落",
+    "official": "Gold Chest / Pearlwood Crate / Wooden Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "inferno",
+    "en": "Inferno Potion",
+    "obtain": "摆放的瓶子：瓶装水 + 闪鳍锦鲤 + 黑曜石鱼 + 火焰花；由 暗影箱 8.33% 掉落",
+    "official": "Shadow Chest"
+  },
+  {
+    "t": "obtain-rate-mismatch",
+    "id": "slime_mount",
+    "en": "Slimy Saddle",
+    "obtain": "史莱姆王 25% 掉落（专家 50%）",
+    "official": "史莱姆王 50%"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "ancient_horn",
+    "en": "Ancient Horn",
+    "obtain": "地下沙漠 蛇怪 2% 掉落",
+    "official": "Basilisk"
+  },
+  {
+    "t": "obtain-rate-mismatch",
+    "id": "gelatinous_pillion",
+    "en": "Gelatinous Pillion",
+    "obtain": "史莱姆皇后 25% 掉落（专家 50%）",
+    "official": "史莱姆皇后 50%"
+  },
+  {
+    "t": "obtain-rate-mismatch",
+    "id": "nectar",
+    "en": "Nectar",
+    "obtain": "蜂王 6.7% 掉落（专家 11%）",
+    "official": "蜂王 11%"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "seaweed",
+    "en": "Seaweed",
+    "obtain": "地下丛林 常春藤箱 2% 开出；由 荆棘匣 5%、常春藤箱 2%、丛林匣 5% 掉落",
+    "official": "Bramble Crate / Ivy Chest / Jungle Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "dragon_egg",
+    "en": "Dragon Egg",
+    "obtain": "撒旦军队 黑魔法师 16.67% 掉落",
+    "official": "黑暗魔法师"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "wisp_in_bottle",
+    "en": "Wisp in a Bottle",
+    "obtain": "世纪之花后地牢：蓝甲/地狱甲/锈甲骷髅 0.25% 掉落（专家 0.5%）",
+    "official": "蓝装甲骷髅 / 地狱装甲骷髅 / Rusty Armored Bones"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "lightning_carrot",
+    "en": "Lightning Carrot",
+    "obtain": "大师模式 光之女皇 25% 掉落"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "blowpipe",
+    "en": "Blowpipe",
+    "obtain": "地表/地下木箱随机开出；由 各类宝箱 9.09% 掉落",
+    "official": "Chests"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "dart_pistol",
+    "en": "Dart Pistol",
+    "obtain": "猩红世界肉后敌怪掉落",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "dart_rifle",
+    "en": "Dart Rifle",
+    "obtain": "腐化世界肉后敌怪掉落",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "beam_sword",
+    "en": "Beam Sword",
+    "obtain": "地牢盔甲骷髅 0.67% 掉落",
+    "official": "装甲骷髅"
+  },
+  {
+    "t": "obtain-no-dropdata",
+    "id": "yelets",
+    "en": "Yelets",
+    "obtain": "世纪之花后丛林敌怪 0.5% 掉落"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "betsys_wrath",
+    "en": "Betsy's Wrath",
+    "obtain": "撒旦军队T3·贝茜掉落",
+    "official": "双足翼龙"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "flying_dragon",
+    "en": "Flying Dragon",
+    "obtain": "撒旦军队T3·贝茜掉落",
+    "official": "双足翼龙"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "anti_gravity_hook",
+    "en": "Anti-Gravity Hook",
+    "obtain": "火星暴乱事件敌怪 0.13% 掉落",
+    "official": "扰脑怪 / 电击怪 / 灰咕噜 / I am error / 火星工程师 / 火星军官 / 火星走妖 / 激光枪手 / 鳞甲怪"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "flower_of_frost",
+    "en": "Flower of Frost",
+    "obtain": "冰雪宝箱怪 23.75% 掉落",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "inferno_fork",
+    "en": "Inferno Fork",
+    "obtain": "地牢（世纪之花后）驱魔僧 5% 掉落",
+    "official": "Diabolist"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "morning_star",
+    "en": "Morning Star",
+    "obtain": "世纪之花后地牢：蓝装甲/地狱装甲/锈甲骷髅 0.5% 掉落（专家 1%）",
+    "official": "蓝装甲骷髅 / 地狱装甲骷髅 / Rusty Armored Bones"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "feral_claws",
+    "en": "Feral Claws",
+    "obtain": "丛林神龛 / 常春藤箱；由 荆棘匣 19%、常春藤箱 22.17%、丛林匣 19% 掉落",
+    "official": "Bramble Crate / Ivy Chest / Jungle Crate"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "titan_glove",
+    "en": "Titan Glove",
+    "obtain": "宝箱怪 16.67% 掉落（困难模式）",
+    "official": "Mimics"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "cursed_flame_mat",
+    "en": "Cursed Flame",
+    "obtain": "腐化之地敌怪掉落",
+    "official": "爬藤怪 / Defiled Crate / Ghouls / 吞世怪"
+  },
+  {
+    "t": "obtain-source-mismatch",
+    "id": "greater_mana_potion",
+    "en": "Greater Mana Potion",
+    "obtain": "魔法师出售（5金）；困难模式宝箱怪掉落",
+    "official": "Mimics"
+  }
+]
