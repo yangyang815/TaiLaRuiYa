@@ -458,7 +458,6 @@ async function build () {
       }
       if (isDrop) {
         if (DROPS && DROPS[r.en] && DROPS[r.en].length) {
-          const DROPBY_ZH = { 'Dungeon enemies (post-Plantera)': '地牢敌怪（世纪之花后）' }
           const dps = [...new Set(DROPS[r.en].map(d => DROPBY_ZH[d.by] || npcZh[d.by] || GTN[d.by.replace(/ /g, '')] || (zh[d.by] && /[\u4e00-\u9fa5]/.test(zh[d.by]) && zh[d.by]) || d.by))]
           parts.push('由 ' + dps.slice(0, 3).join('、') + (dps.length > 3 ? ' 等 ' + dps.length + ' 种来源' : '') + ' 掉落')
         } else parts.push('击败敌怪掉落')
