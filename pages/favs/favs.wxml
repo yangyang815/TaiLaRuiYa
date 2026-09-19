@@ -19,7 +19,8 @@
       wx:if="{{tab === 'all' || item.type === tab}}"
       bindtap="onFavTap" data-id="{{item.id}}">
       <view class="f-art" style="box-shadow: 0 0 14rpx {{item.glow}}55;">
-        <pixel-icon art-id="{{item.artId}}" size="64" />
+        <image wx:if="{{item.sprite}}" src="{{item.sprite}}" mode="aspectFit" class="f-sprite" lazy-load />
+        <pixel-icon wx:else art-id="{{item.artId}}" size="64" />
       </view>
       <text class="f-name flex-1">{{item.name}}</text>
       <text class="tag {{item.tagCls}}">{{item.label}}</text>
