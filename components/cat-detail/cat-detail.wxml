@@ -27,12 +27,12 @@
 
       <view class="sh-sec">
         <view class="sec-title"><view class="diamond" /><text class="t">获得方式</text></view>
-        <view class="sh-line"><block wx:for="{{vm.obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}">{{item.s}}</text></block></view>
+        <view class="sh-line"><block wx:for="{{vm.obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}" data-name="{{item.s}}">{{item.s}}</text></block></view>
       </view>
 
       <block wx:if="{{vm.use}}">
         <view class="sec-title"><view class="diamond" /><text class="t">用途</text></view>
-        <view class="sh-line"><block wx:for="{{vm.useLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}">{{item.s}}</text></block></view>
+        <view class="sh-line"><block wx:for="{{vm.useLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}" data-name="{{item.s}}">{{item.s}}</text></block></view>
       </block>
     </scroll-view>
 

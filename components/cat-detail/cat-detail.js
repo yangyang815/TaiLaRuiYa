@@ -47,14 +47,25 @@ Component({
     },
     onSheetLink(e) {
       const id = e.currentTarget.dataset.id
+      const name = e.currentTarget.dataset.name || ""
       if (!id) return
       if (id.indexOf("cat:") === 0) {
         const f = id.slice(4)
         wx.showLoading({ title: "加载中", mask: true })
-        catSearch.getById(f).then(x => {
+        // 限时 8s：getById 内部卷加载有 12s 超时，弹窗内不等那么久
+        const timeout = new Promise(res => setTimeout(() => res(null), 8000))
+        Promise.race([catSearch.getById(f).catch(() => null), timeout]).then(x => {
           wx.hideLoading()
-          if (x) this.build(x)
-          else wx.showToast({ title: "未找到该物品", icon: "none" })
+          if (x) { this.build(x); return }
+          // 兜底1：按显示名查找
+          const byName = name ? catSearch.findByName(name).catch(() => null) : Promise.resolve(null)
+          return Promise.race([byName, timeout]).then(y => {
+            if (y) { this.build(y); return }
+            // 兜底2：可能是精品条目，交给页面跳转
+            const dexEntry = name && dex.ALL.find(en => en.name === name)
+            if (dexEntry) { this.triggerEvent("go", { id: dexEntry.id }); return }
+            wx.showToast({ title: "暂时找不到，稍后再试", icon: "none" })
+          })
         }).catch(() => { wx.hideLoading(); wx.showToast({ title: "加载失败，请重试", icon: "none" }) })
         return
       }
