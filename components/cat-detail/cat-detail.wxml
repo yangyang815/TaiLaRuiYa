@@ -1,4 +1,4 @@
-<view class="cd-root {{theme === 'light' ? 'cd-light' : ''}}">
+<view class="cd-root {{lift ? 'cd-lift' : ''}} {{theme === 'light' ? 'cd-light' : ''}}">
   <view class="mask" wx:if="{{vm}}" bindtap="onClose" />
   <view class="sheet" wx:if="{{vm}}" catchtap="noop">
     <view class="sheet-handle" bindtap="onClose" />

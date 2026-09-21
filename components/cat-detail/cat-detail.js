@@ -5,7 +5,8 @@ const catSearch = require("../../utils/catalog-search")
 Component({
   properties: {
     item: { type: Object, value: null },
-    theme: { type: String, value: "dark" }
+    theme: { type: String, value: "dark" },
+    lift: { type: Boolean, value: false }
   },
   data: { vm: null, fav: false },
   observers: {

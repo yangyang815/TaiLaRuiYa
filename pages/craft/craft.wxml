@@ -310,6 +310,6 @@
   <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
 </view>
 
-<cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" />
+<cat-detail item="{{catDetail}}" lift="{{true}}" bind:close="onCatDetailClose" />
 
 <back-top show="{{showBackTop}}" />
