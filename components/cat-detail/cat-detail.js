@@ -36,7 +36,6 @@ Component({
       })
     },
     onClose() { this.triggerEvent("close") },
-    onCraft() { this.triggerEvent("craft") },
     onGo(e) { this.triggerEvent("go", { id: e.currentTarget.dataset.id }) },
     onFav() {
       const vm = this.data.vm

@@ -38,7 +38,6 @@
 
     <view class="sh-btns">
       <view class="btn-ghost sh-btn" bindtap="onFav">{{fav ? '★ 已收藏' : '☆ 收藏'}}</view>
-      <view class="btn-gold sh-btn" bindtap="onCraft">查看合成</view>
     </view>
   </view>
 </view>
