@@ -25,8 +25,6 @@
   position: fixed; left: 0; right: 0;
   bottom: env(safe-area-inset-bottom);
   z-index: 1201;
-  max-height: 82vh;
-  display: flex; flex-direction: column;
   background: linear-gradient(180deg, #2E1C4D 0%, #1E1136 100%);
   border-top: 3rpx solid var(--gold-soft);
   border-radius: 30rpx 30rpx 0 0;
@@ -46,7 +44,7 @@
 .sh-tag { margin-top: 6rpx; }
 .sh-en { font-size: 16rpx; color: var(--text-faint); margin-top: 8rpx; }
 
-.sh-body { flex: 1 1 0; min-height: 0; padding: 0 34rpx; box-sizing: border-box; }
+.sh-body { max-height: 52vh; padding: 0 34rpx; box-sizing: border-box; }
 .sh-desc { font-size: 26rpx; color: var(--text-dim); line-height: 1.7; margin-bottom: 6rpx; }
 .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14rpx; padding: 10rpx 0 4rpx; }
 .stat { min-width: 0; padding: 16rpx 20rpx; display: flex; flex-direction: column; box-sizing: border-box;
