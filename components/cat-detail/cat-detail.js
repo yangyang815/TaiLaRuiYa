@@ -54,7 +54,8 @@ Component({
         catSearch.getById(f).then(x => {
           wx.hideLoading()
           if (x) this.build(x)
-        }).catch(() => wx.hideLoading())
+          else wx.showToast({ title: "未找到该物品", icon: "none" })
+        }).catch(() => { wx.hideLoading(); wx.showToast({ title: "加载失败，请重试", icon: "none" }) })
         return
       }
       const en = dex.byId[id]
