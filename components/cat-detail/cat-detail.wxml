@@ -21,8 +21,8 @@
     <view class="cd-row" wx:if="{{item.u}}"><text class="cd-k">使用时间</text><text class="flex-1">{{item.u}}</text></view>
     <view class="cd-row" wx:if="{{item.k}}"><text class="cd-k">击退</text><text class="flex-1">{{item.k}}</text></view>
     <view class="cd-row" wx:if="{{item.t}}"><text class="cd-k">说明</text><text class="flex-1">{{item.t}}</text></view>
-    <view class="cd-row" wx:if="{{item.ob}}"><text class="cd-k">获得方式</text><text class="flex-1">{{item.ob}}</text></view>
-    <view class="cd-row" wx:if="{{item.use}}"><text class="cd-k">用途</text><text class="flex-1">{{item.use}}</text></view>
+    <view class="cd-row" wx:if="{{item.ob}}"><text class="cd-k">获得方式</text><view class="flex-1 cd-text"><block wx:for="{{item.obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="cd-lnk">{{item.s}}</text></block></view></view>
+    <view class="cd-row" wx:if="{{item.use}}"><text class="cd-k">用途</text><view class="flex-1 cd-text"><block wx:for="{{item.useLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="cd-lnk">{{item.s}}</text></block></view></view>
     <view class="cd-row" wx:if="{{item.s}}"><text class="cd-k">工具/特殊</text><text class="flex-1">{{item.s}}</text></view>
     <view class="cd-row"><text class="cd-k">英文名</text><text class="flex-1">{{item.en}}</text></view>
   </scroll-view>
