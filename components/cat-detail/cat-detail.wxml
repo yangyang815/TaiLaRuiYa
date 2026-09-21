@@ -1,33 +1,44 @@
-<view class="cd-mask" wx:if="{{item}}" bindtap="onClose" />
-<view class="cd-sheet" wx:if="{{item}}" catchtap="noop">
-  <view class="cd-handle" />
-  <view class="cd-head">
-    <view class="cd-imgbox" style="box-shadow: 0 0 20rpx {{item.rcol}}55;">
-      <image class="cd-img" src="{{item.sprite}}" mode="aspectFit" />
-    </view>
-    <view class="col flex-1">
-      <text class="cd-n">{{item.n}}</text>
-      <text class="cd-en px">{{item.en}}</text>
-      <view class="cd-chips">
-        <text class="cd-chip" wx:if="{{item.c}}">{{item.c}}</text>
-        <text class="cd-chip" style="color: {{item.rcol}}; border-color: {{item.rcol}}66;">{{item.rlab}}稀有度</text>
-        <text class="cd-chip" wx:if="{{item.hm}}">困难模式</text>
+<view class="cd-root {{theme === 'light' ? 'cd-light' : ''}}">
+  <view class="mask" wx:if="{{vm}}" bindtap="onClose" />
+  <view class="sheet" wx:if="{{vm}}" catchtap="noop">
+    <view class="sheet-handle" bindtap="onClose" />
+    <view class="sh-head">
+      <view class="sh-art" style="box-shadow: 0 0 30rpx {{vm.glow}}66;">
+        <image wx:if="{{vm.sprite}}" class="sprite-img-xl" src="{{vm.sprite}}" mode="aspectFit" />
+      </view>
+      <view class="col flex-1">
+        <view class="row">
+          <text class="sh-name">{{vm.name}}</text>
+          <text class="tag tag-item sh-tag">物品</text>
+        </view>
+        <text class="sh-en px">{{vm.en}}</text>
       </view>
     </view>
-  </view>
-  <scroll-view class="cd-body" scroll-y>
-    <view class="cd-row" wx:if="{{item.d}}"><text class="cd-k">伤害</text><text class="flex-1">{{item.d}}{{item.dt ? '（' + item.dt + '）' : ''}}</text></view>
-    <view class="cd-row" wx:if="{{item.df}}"><text class="cd-k">防御</text><text class="flex-1">{{item.df}}</text></view>
-    <view class="cd-row" wx:if="{{item.u}}"><text class="cd-k">使用时间</text><text class="flex-1">{{item.u}}</text></view>
-    <view class="cd-row" wx:if="{{item.k}}"><text class="cd-k">击退</text><text class="flex-1">{{item.k}}</text></view>
-    <view class="cd-row" wx:if="{{item.t}}"><text class="cd-k">说明</text><text class="flex-1">{{item.t}}</text></view>
-    <view class="cd-row" wx:if="{{item.ob}}"><text class="cd-k">获得方式</text><view class="flex-1 cd-text"><block wx:for="{{item.obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="cd-lnk">{{item.s}}</text></block></view></view>
-    <view class="cd-row" wx:if="{{item.use}}"><text class="cd-k">用途</text><view class="flex-1 cd-text"><block wx:for="{{item.useLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="cd-lnk">{{item.s}}</text></block></view></view>
-    <view class="cd-row" wx:if="{{item.s}}"><text class="cd-k">工具/特殊</text><text class="flex-1">{{item.s}}</text></view>
-    <view class="cd-row"><text class="cd-k">英文名</text><text class="flex-1">{{item.en}}</text></view>
-  </scroll-view>
-  <view class="cd-btns">
-    <view class="cd-btn ghost" wx:if="{{item.hasCraft}}" bindtap="onCraft">⚒ 如何合成</view>
-    <view class="cd-btn" bindtap="onClose">关闭</view>
+
+    <scroll-view class="sh-body" scroll-y>
+      <view class="sh-desc" wx:if="{{vm.desc}}">{{vm.desc}}</view>
+
+      <view class="stat-grid" wx:if="{{vm.stats.length}}">
+        <view class="stat card" wx:for="{{vm.stats}}" wx:key="index">
+          <text class="st-k">{{item[0]}}</text>
+          <text class="st-v">{{item[1]}}</text>
+        </view>
+      </view>
+
+      <view class="sh-sec">
+        <view class="sec-title"><view class="diamond" /><text class="t">获得方式</text></view>
+        <view class="sh-line"><block wx:for="{{vm.obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}">{{item.s}}</text></block></view>
+      </view>
+
+      <block wx:if="{{vm.use}}">
+        <view class="sec-title"><view class="diamond" /><text class="t">用途</text></view>
+        <view class="sh-line"><block wx:for="{{vm.useLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}">{{item.s}}</text></block></view>
+      </block>
+    </scroll-view>
+
+    <view class="sh-btns">
+      <view class="btn-ghost sh-btn" bindtap="onFav">{{fav ? '★ 已收藏' : '☆ 收藏'}}</view>
+      <view class="btn-gold sh-btn" bindtap="onCraft">查看合成</view>
+    </view>
   </view>
 </view>

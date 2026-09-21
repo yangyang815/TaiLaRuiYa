@@ -178,4 +178,4 @@
 
 <back-top show="{{showBackTop}}" />
 
-<cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" bind:craft="onCatDetailCraft" />
+<cat-detail item="{{catDetail}}" theme="{{themeClass === 'theme-light' ? 'light' : 'dark'}}" bind:close="onCatDetailClose" bind:go="onCatGo" />
