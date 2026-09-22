@@ -88,3 +88,7 @@
 .fb.share { background: linear-gradient(180deg, #FFE55C, #E5B800); color: #3A2400;
   border: 2rpx solid #FFF0B0; padding: 0; line-height: 88rpx; box-shadow: 0 0 22rpx rgba(255, 215, 0, 0.35); }
 .fb.share::after { border: none; }
+
+/* 亮色主题底部按钮条 */
+.page-root.theme-light .fb.collect { background: rgba(233, 226, 245, 0.95); }
+.page-root.theme-light .fb.defeated { background: rgba(233, 226, 245, 0.95); }

@@ -9,8 +9,8 @@
 .home-root.night {
   background:
     radial-gradient(70% 26% at 85% -4%, rgba(255, 215, 0, 0.1), transparent 70%),
-    radial-gradient(60% 30% at 8% 2%, rgba(94, 60, 154, 0.28), transparent 72%),
-    #120925;
+    radial-gradient(60% 30% at 8% 2%, rgba(255, 255, 255, 0.07), transparent 72%),
+    var(--bg-deep);
 }
 .home-root.day {
   background:

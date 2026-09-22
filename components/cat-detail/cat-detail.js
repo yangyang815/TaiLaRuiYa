@@ -8,7 +8,13 @@ Component({
     theme: { type: String, value: "dark" },
     lift: { type: Boolean, value: false }
   },
-  data: { vm: null, fav: false },
+  data: { vm: null, fav: false, light: false },
+  lifetimes: {
+    attached() { this.syncLight() }
+  },
+  pageLifetimes: {
+    show() { this.syncLight() }
+  },
   observers: {
     item: function (v) {
       if (v && v.f) this.build(v)
@@ -16,6 +22,11 @@ Component({
     }
   },
   methods: {
+    syncLight() {
+      const app = getApp()
+      const t = app && app.globalData && app.globalData.theme
+      this.setData({ light: this.data.theme === "light" || t === "light" || t === "hallow" })
+    },
     build(v) {
       const stats = [["分类", v.c]]
       if (v.d) stats.push(["伤害", v.d + (v.dt ? "（" + v.dt + "）" : "")])
