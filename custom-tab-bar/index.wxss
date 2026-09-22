@@ -66,11 +66,7 @@
 .tabbar.theme-lunar .tab-text { color: #6E96C0; }
 .tabbar.theme-lunar .tab-text.on { color: #62E0F0; text-shadow: 0 0 12rpx rgba(98, 224, 240, 0.5); }
 .tabbar.theme-lunar .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(98, 224, 240, 0.65)); }
-.tabbar.theme-halloween { background: rgba(24, 14, 5, 0.97); border-top-color: rgba(255, 174, 66, 0.35); }
-.tabbar.theme-halloween .tab-text { color: #BC9660; }
-.tabbar.theme-halloween .tab-text.on { color: #FFAE42; text-shadow: 0 0 12rpx rgba(255, 174, 66, 0.5); }
-.tabbar.theme-halloween .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(255, 174, 66, 0.65)); }
-.tabbar.theme-hallow { background: rgba(253, 248, 253, 0.97); border-top-color: rgba(184, 92, 168, 0.35); box-shadow: 0 -6rpx 30rpx rgba(120, 60, 110, 0.18); }
-.tabbar.theme-hallow .tab-text { color: #A080A4; }
-.tabbar.theme-hallow .tab-text.on { color: #B85CA8; text-shadow: 0 0 12rpx rgba(184, 92, 168, 0.4); }
-.tabbar.theme-hallow .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(184, 92, 168, 0.55)); }
+.tabbar.theme-hallow { background: rgba(251, 251, 255, 0.97); border-top-color: rgba(200, 78, 200, 0.35); box-shadow: 0 -6rpx 30rpx rgba(110, 90, 160, 0.18); }
+.tabbar.theme-hallow .tab-text { color: #9088AC; }
+.tabbar.theme-hallow .tab-text.on { color: #C84EC8; text-shadow: 0 0 12rpx rgba(200, 78, 200, 0.4); }
+.tabbar.theme-hallow .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(200, 78, 200, 0.55)); }

@@ -363,20 +363,20 @@ page {
 .page-root.theme-crimson .sheet { background: linear-gradient(180deg, #40161E 0%, #1B080C 100%); }
 .page-root.theme-crimson .chip { background: rgba(255, 158, 107, 0.08); border-color: rgba(255, 158, 107, 0.2); }
 
-/* ---------- 主题皮肤：神圣之地（珍珠圣域·亮色） ---------- */
+/* ---------- 主题皮肤：神圣之地（彩虹圣域·亮色） ---------- */
 .page-root.theme-hallow {
-  --bg: #F7ECF7; --bg-deep: #EDDFED; --bg-2: #FCF4FC;
-  --card: rgba(255, 255, 255, 0.85); --card-solid: #FDF8FD;
-  --gold: #B85CA8; --gold-deep: #8A3E80;
-  --gold-soft: rgba(184, 92, 168, 0.45); --gold-faint: rgba(184, 92, 168, 0.2);
-  --text: #46284A; --text-dim: #86688A; --text-faint: #B09CB4;
-  --line: rgba(160, 80, 150, 0.35); --shadow: rgba(120, 60, 110, 0.25);
-  --hero: linear-gradient(180deg, #E8C8F0 0%, #FDF6E8 60%, #F0E2F0 100%);
-  background: linear-gradient(180deg, #F0D8F0 0%, #FDF4F0 55%, #EDDFED 100%);
+  --bg: #F2F2FB; --bg-deep: #E6E6F4; --bg-2: #FBFBFF;
+  --card: rgba(255, 255, 255, 0.85); --card-solid: #FFFFFF;
+  --gold: #C84EC8; --gold-deep: #9E38A8;
+  --gold-soft: rgba(200, 78, 200, 0.42); --gold-faint: rgba(200, 78, 200, 0.18);
+  --text: #3A3054; --text-dim: #7A6E96; --text-faint: #A8A0C0;
+  --line: rgba(150, 120, 190, 0.32); --shadow: rgba(110, 90, 160, 0.25);
+  --hero: linear-gradient(180deg, #B8D4F8 0%, #E8C8F0 55%, #E6E2F6 100%);
+  background: linear-gradient(180deg, #C8E0FA 0%, #F4E6F8 48%, #E6E6F4 100%);
 }
-.page-root.theme-hallow .sheet { background: linear-gradient(180deg, #FDF8FD 0%, #F0E2F0 100%); }
-.page-root.theme-hallow .chip { background: rgba(184, 92, 168, 0.08); border-color: rgba(184, 92, 168, 0.2); }
-.page-root.theme-hallow .input-dark { background: rgba(255, 255, 255, 0.75); }
+.page-root.theme-hallow .sheet { background: linear-gradient(180deg, #FFFFFF 0%, #EEE8F8 100%); }
+.page-root.theme-hallow .chip { background: rgba(200, 78, 200, 0.08); border-color: rgba(200, 78, 200, 0.2); }
+.page-root.theme-hallow .input-dark { background: rgba(255, 255, 255, 0.78); }
 
 /* ---------- 主题皮肤：月亮领主（深空夜明） ---------- */
 .page-root.theme-lunar {
