@@ -71,8 +71,12 @@ Page({
     wx.showModal({
       title: "解锁「" + t.name + "」主题",
       content: "观看一段短视频即可永久解锁该主题，确定要继续吗？",
-      confirmText: "看视频解锁",
+      confirmText: "看视频",
       confirmColor: "#C8A84B",
+      fail: err => {
+        console.error("[theme] showModal 失败:", err)
+        wx.showToast({ title: "弹窗失败:" + (err && err.errMsg || "未知"), icon: "none" })
+      },
       success: r => {
         if (!r.confirm) return
         wx.showLoading({ title: "加载中", mask: true })
