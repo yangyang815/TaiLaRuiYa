@@ -105,6 +105,8 @@ function unlockByAd(themeId) {
   })
 }
 
+function markThemeSeen(){try{wx.setStorageSync("terr_theme_seen",1)}catch(e){}}
+function hasSeenTheme(){try{return !!wx.getStorageSync("terr_theme_seen")}catch(e){return true}}
 module.exports = {
   THEMES: THEMES,
   AD_UNIT_ID: AD_UNIT_ID,
@@ -116,4 +118,6 @@ module.exports = {
   classOf: classOf,
   tabbarIsLight: tabbarIsLight,
   unlockByAd: unlockByAd,
+  markThemeSeen: markThemeSeen,
+  hasSeenTheme: hasSeenTheme,
 }

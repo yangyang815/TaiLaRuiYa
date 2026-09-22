@@ -45,8 +45,9 @@ Page({
       unlockedCount: unlocked.length,
       lockedLeft: lockedLeft,
     })
+    theme.markThemeSeen()
     // 首页入口角标：看完一次主题页就不再提示
-    try { wx.setStorageSync("terr_theme_seen", 1) } catch (e) { }
+    
   },
 
   goBack() { wx.navigateBack() },
