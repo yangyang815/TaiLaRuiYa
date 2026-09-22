@@ -114,10 +114,10 @@
         <view class="ver px">{{version}} ▼</view>
       </picker>
     </view>
-    <view class="m-row">
-      <text class="m-icon">🌙</text>
-      <text class="m-n flex-1">夜间模式</text>
-      <switch checked="{{dark}}" bindchange="onTheme" color="#FFD700" />
+    <view class="m-row tappable" bindtap="goTheme">
+      <text class="m-icon">🎨</text>
+      <text class="m-n flex-1">主题皮肤</text>
+      <text class="m-arrow">›</text>
     </view>
   </view>
 

@@ -20,6 +20,10 @@
         </view>
       </view>
       <view class="quick-btns">
+        <view class="q-btn tappable" bindtap="goTheme" aria-label="主题皮肤">
+          <text class="q-ico">🎨</text>
+          <view class="q-dot" wx:if="{{themeBadge}}" />
+        </view>
         <view class="q-btn tappable" bindtap="goMsgs" aria-label="消息中心">
           <text class="q-ico">🔔</text>
           <view class="q-dot" wx:if="{{hasMsgs}}" />

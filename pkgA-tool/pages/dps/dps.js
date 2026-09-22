@@ -44,13 +44,13 @@ Page({
     this.setData({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
       capsuleRight: app.globalData.capsuleRight || 100,
-      themeClass: app.globalData.theme === 'light' ? 'theme-light' : ''
+      themeClass: app.themeClass()
     })
   },
 
   onShow () {
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
+    this.setData({ themeClass: app.themeClass() })
   },
 
   /* 应用一个完整 state（默认/预设） */

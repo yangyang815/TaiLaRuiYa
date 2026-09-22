@@ -47,7 +47,7 @@ Page({
 
   onShow () {
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
+    this.setData({ themeClass: app.themeClass() })
     this.refresh()
   },
 

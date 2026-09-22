@@ -199,7 +199,7 @@ Page({
     this.setData({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
       capsuleRight: app.globalData.capsuleRight || 100,
-      themeClass: app.globalData.theme === 'light' ? 'theme-light' : '',
+      themeClass: app.themeClass(),
       clock: (hour < 10 ? '0' + hour : '' + hour) + ':00',
       timeNight: hour >= 19 || hour < 5
     })
@@ -220,7 +220,7 @@ Page({
 
   onShow () {
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === 'light' ? 'theme-light' : '' })
+    this.setData({ themeClass: app.themeClass() })
     this.refresh()
   },
 

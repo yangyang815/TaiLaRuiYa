@@ -7,12 +7,12 @@ Page({
   data: { statusBarHeight: 20, navTop: 64, themeClass: "", tabs: TABS, tab: "all", favs: [], favCount: 0 },
   onLoad() {
     const app = getApp()
-    this.setData({ statusBarHeight: app.globalData.sys && app.globalData.sys.statusBarHeight || 20, navTop: app.globalData.navTop || 64, capsuleRight: app.globalData.capsuleRight || 100, themeClass: app.globalData.theme === "light" ? "theme-light" : "" })
+    this.setData({ statusBarHeight: app.globalData.sys && app.globalData.sys.statusBarHeight || 20, navTop: app.globalData.navTop || 64, capsuleRight: app.globalData.capsuleRight || 100, themeClass: app.themeClass() })
   },
   goBack() { wx.navigateBack() },
   onShow() {
     const app = getApp()
-    this.setData({ themeClass: app.globalData.theme === "light" ? "theme-light" : "" })
+    this.setData({ themeClass: app.themeClass() })
     this.loadFavs()
   },
   loadFavs() {

@@ -1,0 +1,41 @@
+<view class="page-root {{themeClass}} tp-root">
+  <view class="tp-head" style="padding-top:{{statusBarHeight}}px;">
+    <view class="tp-back tappable" bindtap="goBack">‹</view>
+    <view class="col flex-1">
+      <text class="tp-t px">THEMES</text>
+      <text class="tp-s">选择你的泰拉世界</text>
+    </view>
+  </view>
+
+  <view class="tp-tip card">
+    <text class="tp-tip-t">🔒 锁定主题：观看一段短视频即可永久解锁，全部主题均无使用限制。</text>
+  </view>
+
+  <view class="tp-list">
+    <view class="tp-card card tappable {{item.using ? 'tp-using' : ''}}"
+      wx:for="{{themes}}" wx:key="id"
+      bindtap="onThemeTap" data-id="{{item.id}}">
+      <view class="tp-swatch">
+        <view class="tp-sw-a" style="background:{{item.swatch[0]}};" />
+        <view class="tp-sw-b" style="background:{{item.swatch[1]}};" />
+        <view class="tp-sw-c" style="background:{{item.swatch[2]}};" />
+      </view>
+      <view class="col flex-1">
+        <view class="row">
+          <text class="tp-n">{{item.name}}</text>
+          <text class="tp-en px">{{item.en}}</text>
+        </view>
+        <text class="tp-d">{{item.desc}}</text>
+      </view>
+      <view class="tp-state">
+        <text wx:if="{{item.using}}" class="tp-st tp-on">使用中</text>
+        <text wx:elif="{{item.free || item.unlocked}}" class="tp-st tp-ok">点击应用</text>
+        <text wx:else class="tp-st tp-lock">🔒 看视频解锁</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="tp-note">
+    <text>解锁记录保存在本机 · 共 {{unlockedCount}}/{{themes.length}} 个主题已解锁</text>
+  </view>
+</view>

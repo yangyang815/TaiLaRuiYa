@@ -27,7 +27,7 @@ Component({
     // 读取全局主题；"我的"页切换主题时会主动调用
     syncTheme () {
       const app = getApp()
-      this.setData({ light: !!(app && app.globalData && app.globalData.theme === 'light') })
+      const th = app && app.globalData && app.globalData.theme || 'dark'; this.setData({ light: th === 'light' || th === 'hallow' })
     },
     // 各 Tab 页 onShow 时调用，同步选中项 + 主题
     // （custom-tab-bar 的 pageLifetimes.show 不可靠，主题必须在这里同步）
