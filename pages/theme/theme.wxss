@@ -40,3 +40,5 @@
 
 .tp-note { padding: 10rpx 30rpx 40rpx; text-align: center; }
 .tp-note text { font-size: 20rpx; color: var(--text-faint); }
+
+.tp-card-hover { opacity: 0.82; transform: scale(0.985); transition: all 0.08s; }

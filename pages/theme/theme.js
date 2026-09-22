@@ -52,9 +52,12 @@ Page({
   goBack() { wx.navigateBack() },
 
   onThemeTap(e) {
-    const id = e.currentTarget.dataset.id
-    const t = theme.THEMES.find(x => x.id === id)
-    if (!t) return
+    try {
+      const id = e.currentTarget.dataset.id
+      console.log("[theme] tap:", id)
+      if (!id) { wx.showToast({ title: "未取得主题ID", icon: "none" }); return }
+      const t = theme.THEMES.find(x => x.id === id)
+      if (!t) { wx.showToast({ title: "主题数据缺失:" + id, icon: "none" }); return }
     const current = theme.getCurrent()
     if (id === current) { wx.showToast({ title: "正在使用该主题", icon: "none" }); return }
 
@@ -88,6 +91,10 @@ Page({
         })
       },
     })
+    } catch (err) {
+      console.error("[theme] onThemeTap 异常:", err)
+      wx.showToast({ title: "点击异常:" + (err && err.message || err), icon: "none", duration: 3000 })
+    }
   },
 
   apply(id) {

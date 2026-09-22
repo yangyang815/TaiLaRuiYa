@@ -14,6 +14,7 @@
   <view class="tp-list">
     <view class="tp-card card tappable {{item.using ? 'tp-using' : ''}}"
       wx:for="{{themes}}" wx:key="id"
+      hover-class="tp-card-hover" hover-stay-time="80"
       bindtap="onThemeTap" data-id="{{item.id}}">
 
       <!-- 迷你场景预览：渐变天空 + 天体 + 星点 + 地表剪影 -->
