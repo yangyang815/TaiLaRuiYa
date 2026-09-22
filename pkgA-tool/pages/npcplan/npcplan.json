@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "泰拉瑞亚NPC入住规划器",
   "usingComponents": {
     "pixel-icon": "/components/pixel-icon/pixel-icon"
   }

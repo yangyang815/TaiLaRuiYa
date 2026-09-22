@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "泰拉瑞亚词条图鉴·全部修饰语",
   "usingComponents": {
     "pixel-icon": "/components/pixel-icon/pixel-icon",
     "back-top": "/components/back-top/back-top"

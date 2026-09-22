@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "泰拉瑞亚职业养成·四职业路线",
   "usingComponents": {
     "pixel-icon": "/components/pixel-icon/pixel-icon",
     "back-top": "/components/back-top/back-top"

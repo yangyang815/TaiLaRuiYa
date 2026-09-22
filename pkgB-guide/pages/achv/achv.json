@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "向导之书·成就系统",
   "usingComponents": {
     "back-top": "/components/back-top/back-top"
   }

@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "泰拉瑞亚游戏内成就列表",
   "usingComponents": {
     "back-top": "/components/back-top/back-top"
   }

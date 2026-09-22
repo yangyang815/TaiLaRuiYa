@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "泰拉瑞亚图鉴·物品·Boss·怪物",
   "usingComponents": {
     "pixel-icon": "/components/pixel-icon/pixel-icon",
     "poster": "/components/poster/poster",
