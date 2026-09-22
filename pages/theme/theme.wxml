@@ -15,11 +15,19 @@
     <view class="tp-card card tappable {{item.using ? 'tp-using' : ''}}"
       wx:for="{{themes}}" wx:key="id"
       bindtap="onThemeTap" data-id="{{item.id}}">
-      <view class="tp-swatch">
-        <view class="tp-sw-a" style="background:{{item.swatch[0]}};" />
-        <view class="tp-sw-b" style="background:{{item.swatch[1]}};" />
-        <view class="tp-sw-c" style="background:{{item.swatch[2]}};" />
+
+      <!-- 迷你场景预览：渐变天空 + 天体 + 星点 + 地表剪影 -->
+      <view class="tp-scene">
+        <view class="tp-sky" style="background:{{item.scene.sky}};">
+          <view class="tp-orb" style="background:{{item.scene.orb}}; left:{{index % 2 === 0 ? '58rpx' : '86rpx'}};" />
+          <view class="tp-dot tp-d1" style="background:{{item.scene.dot}};" />
+          <view class="tp-dot tp-d2" style="background:{{item.scene.dot}};" />
+          <view class="tp-dot tp-d3" style="background:{{item.scene.dot}};" />
+          <view class="tp-ground" style="background:{{item.scene.ground}};" />
+          <view class="tp-hill" style="background:{{item.scene.ground}};" />
+        </view>
       </view>
+
       <view class="col flex-1">
         <view class="row">
           <text class="tp-n">{{item.name}}</text>
@@ -27,6 +35,7 @@
         </view>
         <text class="tp-d">{{item.desc}}</text>
       </view>
+
       <view class="tp-state">
         <text wx:if="{{item.using}}" class="tp-st tp-on">使用中</text>
         <text wx:elif="{{item.free || item.unlocked}}" class="tp-st tp-ok">点击应用</text>

@@ -8,14 +8,14 @@ const STORE_KEY_CURRENT = "terr_theme"
 
 // 主题清单：swatch 用于选择页预览色条
 const THEMES = [
-  { id: "dark", name: "暗夜紫", en: "Corrupt Night", desc: "默认主题，深邃的紫夜。", free: true, swatch: ["#1A0E2E", "#2A1B45", "#FFD700"] },
-  { id: "light", name: "晨光", en: "Daylight", desc: "柔和的羊皮纸亮色。", free: true, swatch: ["#F1EADA", "#FFFBE9", "#A8790A"] },
-  { id: "jungle", name: "丛林", en: "Jungle", desc: "藤蔓与苔藓的深绿秘境。", locked: true, swatch: ["#12240F", "#1E3D1A", "#B8D44A"] },
-  { id: "corruption", name: "腐化之地", en: "Corruption", desc: "魔矿紫雾弥漫的诅咒之地。", locked: true, swatch: ["#170E22", "#2C1B44", "#B86AE0"] },
-  { id: "crimson", name: "猩红之地", en: "Crimson", desc: "血肉与骨骼编织的红色梦魇。", locked: true, swatch: ["#260D12", "#38141C", "#E07050"] },
-  { id: "hallow", name: "神圣之地", en: "Hallow", desc: "彩虹与珍珠铺成的圣洁国度。", locked: true, swatch: ["#F5EAF5", "#FDF8FD", "#B85CA8"] },
-  { id: "lunar", name: "月亮领主", en: "Lunar", desc: "夜明青光笼罩的深空终局。", locked: true, swatch: ["#06090F", "#0E1A2C", "#5AD8E8"] },
-  { id: "halloween", name: "万圣节", en: "Halloween", desc: "南瓜灯与糖果的橙夜狂欢。", locked: true, swatch: ["#1E140A", "#2E1E0E", "#FFA030"] },
+  { id: "dark", scene: {"sky":"linear-gradient(180deg,#3E2F63 0%,#1A0E2E 75%)","ground":"#120925","dot":"#FFE066","orb":"#FFD700"}, name: "暗夜紫", en: "Corrupt Night", desc: "默认主题，深邃的紫夜。", free: true, swatch: ["#1A0E2E", "#2A1B45", "#FFD700"] },
+  { id: "light", scene: {"sky":"linear-gradient(180deg,#BFE0FF 0%,#FFF3D6 75%)","ground":"#D8C48A","dot":"#FFFFFF","orb":"#FFC94A"}, name: "晨光", en: "Daylight", desc: "柔和的羊皮纸亮色。", free: true, swatch: ["#F1EADA", "#FFFBE9", "#A8790A"] },
+  { id: "jungle", scene: {"sky":"linear-gradient(180deg,#4A7E3A 0%,#1B3317 75%)","ground":"#0B180A","dot":"#B8D44A","orb":"#D8E86A"}, name: "丛林", en: "Jungle", desc: "藤蔓与苔藓的深绿秘境。", locked: true, swatch: ["#12240F", "#1E3D1A", "#B8D44A"] },
+  { id: "corruption", scene: {"sky":"linear-gradient(180deg,#3A2058 0%,#170E22 75%)","ground":"#0F0818","dot":"#B86AE0","orb":"#8A45B0"}, name: "腐化之地", en: "Corruption", desc: "魔矿紫雾弥漫的诅咒之地。", locked: true, swatch: ["#170E22", "#2C1B44", "#B86AE0"] },
+  { id: "crimson", scene: {"sky":"linear-gradient(180deg,#5E1E28 0%,#260D12 75%)","ground":"#19080C","dot":"#E07050","orb":"#B04830"}, name: "猩红之地", en: "Crimson", desc: "血肉与骨骼编织的红色梦魇。", locked: true, swatch: ["#260D12", "#38141C", "#E07050"] },
+  { id: "hallow", scene: {"sky":"linear-gradient(180deg,#E8C8F5 0%,#F5EAF5 75%)","ground":"#D8B8D8","dot":"#B85CA8","orb":"#FFD1F0"}, name: "神圣之地", en: "Hallow", desc: "彩虹与珍珠铺成的圣洁国度。", locked: true, swatch: ["#F5EAF5", "#FDF8FD", "#B85CA8"] },
+  { id: "lunar", scene: {"sky":"linear-gradient(180deg,#12244A 0%,#06090F 75%)","ground":"#04060B","dot":"#5AD8E8","orb":"#9AE8F5"}, name: "月亮领主", en: "Lunar", desc: "夜明青光笼罩的深空终局。", locked: true, swatch: ["#06090F", "#0E1A2C", "#5AD8E8"] },
+  { id: "halloween", scene: {"sky":"linear-gradient(180deg,#5E3A14 0%,#1E140A 75%)","ground":"#140D05","dot":"#FFA030","orb":"#FFC94A"}, name: "万圣节", en: "Halloween", desc: "南瓜灯与糖果的橙夜狂欢。", locked: true, swatch: ["#1E140A", "#2E1E0E", "#FFA030"] },
 ]
 
 function getUnlocked() {

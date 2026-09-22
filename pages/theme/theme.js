@@ -33,7 +33,7 @@ Page({
       name: t.name,
       en: t.en,
       desc: t.desc,
-      swatch: t.swatch,
+      scene: t.scene,
       free: !!t.free,
       unlocked: theme.isUnlocked(t.id),
       using: t.id === current,
@@ -45,9 +45,8 @@ Page({
       unlockedCount: unlocked.length,
       lockedLeft: lockedLeft,
     })
+    // 首页入口角标：看过主题页即不再提示
     theme.markThemeSeen()
-    // 首页入口角标：看完一次主题页就不再提示
-    
   },
 
   goBack() { wx.navigateBack() },
