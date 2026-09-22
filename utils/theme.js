@@ -13,7 +13,7 @@ const THEMES = [
   { id: "jungle", scene: {"sky":"linear-gradient(180deg,#4E8E3C 0%,#142E12 75%)","ground":"#0A1D0C","dot":"#C8E85A","orb":"#D8E86A"}, name: "丛林", en: "Jungle", desc: "藤蔓与苔藓的深绿秘境。", locked: true, swatch: ["#12240F", "#1E3D1A", "#B8D44A"] },
   { id: "corruption", scene: {"sky":"linear-gradient(180deg,#4A2A7E 0%,#241243 75%)","ground":"#120A20","dot":"#C77DFF","orb":"#9B5CF0"}, name: "腐化之地", en: "Corruption", desc: "魔矿紫雾弥漫的诅咒之地。", locked: true, swatch: ["#170E22", "#2C1B44", "#B86AE0"] },
   { id: "crimson", scene: {"sky":"linear-gradient(180deg,#7A2832 0%,#38121A 75%)","ground":"#1B080C","dot":"#FF9E6B","orb":"#E8704A"}, name: "猩红之地", en: "Crimson", desc: "血肉与骨骼编织的红色梦魇。", locked: true, swatch: ["#260D12", "#38141C", "#E07050"] },
-  { id: "hallow", scene: {"sky":"linear-gradient(180deg,#B8D4F8 0%,#E8C8F0 75%)","ground":"#DCC8EC","dot":"#C84EC8","orb":"#FFE8FA"}, name: "神圣之地", en: "Hallow", desc: "彩虹与珍珠铺成的圣洁国度。", locked: true, swatch: ["#F5EAF5", "#FDF8FD", "#B85CA8"] },
+  { id: "hallow", scene: {"sky":"linear-gradient(180deg,#9CC2F8 0%,#C8A8F4 40%,#F2B8DC 75%)","ground":"#D4C0EC","dot":"#C044C8","orb":"#FFE0F4"}, name: "神圣之地", en: "Hallow", desc: "彩虹与珍珠铺成的圣洁国度。", locked: true, swatch: ["#F5EAF5", "#FDF8FD", "#B85CA8"] },
   { id: "lunar", scene: {"sky":"linear-gradient(180deg,#1A3E74 0%,#0A1B36 75%)","ground":"#040B18","dot":"#62E0F0","orb":"#A0ECF8"}, name: "月亮领主", en: "Lunar", desc: "夜明青光笼罩的深空终局。", locked: true, swatch: ["#06090F", "#0E1A2C", "#5AD8E8"] },
   { id: "halloween", scene: {"sky":"linear-gradient(180deg,#7A4E18 0%,#36200C 75%)","ground":"#180E05","dot":"#FFAE42","orb":"#FFC96A"}, name: "万圣节", en: "Halloween", desc: "南瓜灯与糖果的橙夜狂欢。", locked: true, swatch: ["#1E140A", "#2E1E0E", "#FFA030"] },
 ]

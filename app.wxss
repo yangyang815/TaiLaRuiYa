@@ -365,17 +365,23 @@ page {
 
 /* ---------- 主题皮肤：神圣之地（彩虹圣域·亮色） ---------- */
 .page-root.theme-hallow {
-  --bg: #F2F2FB; --bg-deep: #E6E6F4; --bg-2: #FBFBFF;
-  --card: rgba(255, 255, 255, 0.85); --card-solid: #FFFFFF;
-  --gold: #C84EC8; --gold-deep: #9E38A8;
-  --gold-soft: rgba(200, 78, 200, 0.42); --gold-faint: rgba(200, 78, 200, 0.18);
-  --text: #3A3054; --text-dim: #7A6E96; --text-faint: #A8A0C0;
-  --line: rgba(150, 120, 190, 0.32); --shadow: rgba(110, 90, 160, 0.25);
-  --hero: linear-gradient(180deg, #B8D4F8 0%, #E8C8F0 55%, #E6E2F6 100%);
-  background: linear-gradient(180deg, #C8E0FA 0%, #F4E6F8 48%, #E6E6F4 100%);
+  --bg: #F4F0FA; --bg-deep: #E9E2F5; --bg-2: #FCFAFE;
+  --card: rgba(255, 255, 255, 0.82); --card-solid: #FFFFFF;
+  --gold: #C044C8; --gold-deep: #9830A8;
+  --gold-soft: rgba(192, 68, 200, 0.42); --gold-faint: rgba(192, 68, 200, 0.18);
+  --text: #40305C; --text-dim: #7E6E9A; --text-faint: #ACA0C4;
+  --line: rgba(140, 110, 180, 0.32); --shadow: rgba(110, 80, 160, 0.25);
+  --hero: linear-gradient(135deg, #9CC2F8 0%, #C8A8F4 45%, #F2B8DC 100%);
+  background: linear-gradient(180deg, #B8D0FA 0%, #E4C6F6 38%, #F8D4E8 66%, #CDEEE4 100%);
 }
-.page-root.theme-hallow .sheet { background: linear-gradient(180deg, #FFFFFF 0%, #EEE8F8 100%); }
-.page-root.theme-hallow .chip { background: rgba(200, 78, 200, 0.08); border-color: rgba(200, 78, 200, 0.2); }
+/* 彩虹光带：神圣主题专属身份标识 */
+.page-root.theme-hallow::before {
+  content: "";
+  position: fixed; top: 0; left: 0; right: 0; height: 8rpx; z-index: 50;
+  background: linear-gradient(90deg, #F8A8C8 0%, #C8A0F0 25%, #8AB8F8 50%, #7CD8C8 75%, #F8E09A 100%);
+}
+.page-root.theme-hallow .sheet { background: linear-gradient(180deg, #FFFFFF 0%, #F2E4F6 100%); }
+.page-root.theme-hallow .chip { background: rgba(192, 68, 200, 0.08); border-color: rgba(192, 68, 200, 0.2); }
 .page-root.theme-hallow .input-dark { background: rgba(255, 255, 255, 0.78); }
 
 /* ---------- 主题皮肤：月亮领主（深空夜明） ---------- */
