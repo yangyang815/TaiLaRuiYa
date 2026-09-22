@@ -48,3 +48,29 @@
   color: #A8790A;
   text-shadow: none;
 }
+
+/* ---------- biome 主题换装 ---------- */
+.tabbar.theme-jungle { background: rgba(10, 29, 12, 0.97); border-top-color: rgba(200, 232, 90, 0.35); }
+.tabbar.theme-jungle .tab-text { color: #8FB060; }
+.tabbar.theme-jungle .tab-text.on { color: #C8E85A; text-shadow: 0 0 12rpx rgba(200, 232, 90, 0.5); }
+.tabbar.theme-jungle .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(200, 232, 90, 0.65)); }
+.tabbar.theme-corruption { background: rgba(18, 10, 32, 0.97); border-top-color: rgba(199, 125, 255, 0.35); }
+.tabbar.theme-corruption .tab-text { color: #9B7FC8; }
+.tabbar.theme-corruption .tab-text.on { color: #C77DFF; text-shadow: 0 0 12rpx rgba(199, 125, 255, 0.5); }
+.tabbar.theme-corruption .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(199, 125, 255, 0.65)); }
+.tabbar.theme-crimson { background: rgba(27, 8, 12, 0.97); border-top-color: rgba(255, 158, 107, 0.35); }
+.tabbar.theme-crimson .tab-text { color: #B88478; }
+.tabbar.theme-crimson .tab-text.on { color: #FF9E6B; text-shadow: 0 0 12rpx rgba(255, 158, 107, 0.5); }
+.tabbar.theme-crimson .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(255, 158, 107, 0.65)); }
+.tabbar.theme-lunar { background: rgba(4, 11, 24, 0.97); border-top-color: rgba(98, 224, 240, 0.35); }
+.tabbar.theme-lunar .tab-text { color: #6E96C0; }
+.tabbar.theme-lunar .tab-text.on { color: #62E0F0; text-shadow: 0 0 12rpx rgba(98, 224, 240, 0.5); }
+.tabbar.theme-lunar .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(98, 224, 240, 0.65)); }
+.tabbar.theme-halloween { background: rgba(24, 14, 5, 0.97); border-top-color: rgba(255, 174, 66, 0.35); }
+.tabbar.theme-halloween .tab-text { color: #BC9660; }
+.tabbar.theme-halloween .tab-text.on { color: #FFAE42; text-shadow: 0 0 12rpx rgba(255, 174, 66, 0.5); }
+.tabbar.theme-halloween .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(255, 174, 66, 0.65)); }
+.tabbar.theme-hallow { background: rgba(253, 248, 253, 0.97); border-top-color: rgba(184, 92, 168, 0.35); box-shadow: 0 -6rpx 30rpx rgba(120, 60, 110, 0.18); }
+.tabbar.theme-hallow .tab-text { color: #A080A4; }
+.tabbar.theme-hallow .tab-text.on { color: #B85CA8; text-shadow: 0 0 12rpx rgba(184, 92, 168, 0.4); }
+.tabbar.theme-hallow .tab-icon.on { filter: drop-shadow(0 0 12rpx rgba(184, 92, 168, 0.55)); }

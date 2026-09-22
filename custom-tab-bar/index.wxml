@@ -1,4 +1,4 @@
-<view class="tabbar {{light ? 'theme-light' : ''}}">
+<view class="tabbar {{light ? 'theme-light' : ''}} {{themeCls}}">
   <view
     wx:for="{{list}}"
     wx:key="pagePath"

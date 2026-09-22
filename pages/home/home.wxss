@@ -15,7 +15,7 @@
 .home-root.day {
   background:
     radial-gradient(70% 30% at 85% -6%, rgba(255, 233, 138, 0.35), transparent 70%),
-    linear-gradient(180deg, #3A2C58 0%, #1A0E2E 40%, #120925 100%);
+    var(--hero);
 }
 .home-root > nav, .home-root > .nav { position: relative; z-index: 2; }
 
@@ -55,7 +55,7 @@
 .q-dot {
   position: absolute; top: 6rpx; right: 6rpx;
   width: 16rpx; height: 16rpx; border-radius: 50%;
-  background: #E85555; border: 2rpx solid #1A0E2E;
+  background: #E85555; border: 2rpx solid var(--bg-deep);
   box-shadow: 0 0 10rpx rgba(232, 85, 85, 0.8);
 }
 /* 成就角标：已解锁数 */

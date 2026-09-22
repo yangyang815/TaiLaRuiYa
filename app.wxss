@@ -32,6 +32,7 @@ page {
   --text-faint: #6E5F86;
   --line: rgba(255, 215, 0, 0.25);
   --shadow: rgba(0, 0, 0, 0.45);
+  --hero: linear-gradient(180deg, #3A2C58 0%, #1A0E2E 42%, #120925 100%);
   min-height: 100vh;
   background: var(--bg-deep);
   box-sizing: border-box;
@@ -55,6 +56,7 @@ page {
   --text-faint: #A79B84;
   --line: rgba(140, 104, 24, 0.35);
   --shadow: rgba(90, 70, 30, 0.25);
+  --hero: linear-gradient(180deg, #C8E4FA 0%, #FFF3D6 60%, #F1EADA 100%);
 }
 
 /* ---------- 像素字体（英文/数字） ---------- */
@@ -318,123 +320,88 @@ page {
 }
 .empty .e-icon { font-size: 64rpx; margin-bottom: 16rpx; filter: grayscale(0.4); }
 
-/* ---------- 主题皮肤：丛林 ---------- */
+
+/* ---------- 主题皮肤：丛林（苍翠秘境） ---------- */
 .page-root.theme-jungle {
-  --bg: #12240F;
-  --bg-deep: #0B180A;
-  --bg-2: #1B3317;
-  --card: rgba(30, 74, 30, 0.45);
-  --card-solid: #1E3D1A;
-  --gold: #B8D44A;
-  --gold-deep: #7FA02E;
-  --gold-soft: rgba(184, 212, 74, 0.45);
-  --gold-faint: rgba(184, 212, 74, 0.22);
-  --text: #D8E8C0;
-  --text-dim: #7FA060;
-  --text-faint: #557042;
-  --line: rgba(184, 212, 74, 0.25);
-  --shadow: rgba(0, 0, 0, 0.45);
+  --bg: #122B12; --bg-deep: #0A1D0C; --bg-2: #1C3D1C;
+  --card: rgba(46, 94, 36, 0.5); --card-solid: #1C3D18;
+  --gold: #C8E85A; --gold-deep: #8FB02E;
+  --gold-soft: rgba(200, 232, 90, 0.5); --gold-faint: rgba(200, 232, 90, 0.22);
+  --text: #D8E8B8; --text-dim: #8FB060; --text-faint: #5C7A3E;
+  --line: rgba(200, 232, 90, 0.28); --shadow: rgba(0, 0, 0, 0.5);
+  --hero: linear-gradient(180deg, #3E7A30 0%, #1E4418 46%, #0A1D0C 100%);
+  background: linear-gradient(180deg, #2E5A24 0%, #142E12 46%, #0A1D0C 100%);
 }
-.page-root.theme-jungle .sheet { background: linear-gradient(180deg, #1B3317 0%, #12240F 100%); }
-.page-root.theme-jungle .chip { background: rgba(184, 212, 74, 0.08); border-color: rgba(184, 212, 74, 0.18); }
+.page-root.theme-jungle .sheet { background: linear-gradient(180deg, #1C3D1C 0%, #0A1D0C 100%); }
+.page-root.theme-jungle .chip { background: rgba(200, 232, 90, 0.08); border-color: rgba(200, 232, 90, 0.2); }
 
-/* ---------- 主题皮肤：腐化之地 ---------- */
+/* ---------- 主题皮肤：腐化之地（魔紫深渊） ---------- */
 .page-root.theme-corruption {
-  --bg: #170E22;
-  --bg-deep: #0F0818;
-  --bg-2: #231533;
-  --card: rgba(74, 42, 110, 0.45);
-  --card-solid: #2C1B44;
-  --gold: #B86AE0;
-  --gold-deep: #8A45B0;
-  --gold-soft: rgba(184, 106, 224, 0.45);
-  --gold-faint: rgba(184, 106, 224, 0.22);
-  --text: #D4C8E8;
-  --text-dim: #9078B8;
-  --text-faint: #5E4C80;
-  --line: rgba(184, 106, 224, 0.25);
-  --shadow: rgba(0, 0, 0, 0.45);
+  --bg: #1D1030; --bg-deep: #120A20; --bg-2: #2E1B4A;
+  --card: rgba(90, 50, 150, 0.5); --card-solid: #2A1846;
+  --gold: #C77DFF; --gold-deep: #8A45D8;
+  --gold-soft: rgba(199, 125, 255, 0.5); --gold-faint: rgba(199, 125, 255, 0.22);
+  --text: #DCC8F5; --text-dim: #9B7FC8; --text-faint: #65508C;
+  --line: rgba(199, 125, 255, 0.28); --shadow: rgba(0, 0, 0, 0.5);
+  --hero: linear-gradient(180deg, #4A2A7E 0%, #2A1550 46%, #120A20 100%);
+  background: linear-gradient(180deg, #3D2266 0%, #241243 46%, #120A20 100%);
 }
-.page-root.theme-corruption .sheet { background: linear-gradient(180deg, #231533 0%, #170E22 100%); }
-.page-root.theme-corruption .chip { background: rgba(184, 106, 224, 0.08); border-color: rgba(184, 106, 224, 0.18); }
+.page-root.theme-corruption .sheet { background: linear-gradient(180deg, #2E1B4A 0%, #120A20 100%); }
+.page-root.theme-corruption .chip { background: rgba(199, 125, 255, 0.08); border-color: rgba(199, 125, 255, 0.2); }
 
-/* ---------- 主题皮肤：猩红之地 ---------- */
+/* ---------- 主题皮肤：猩红之地（血肉梦魇） ---------- */
 .page-root.theme-crimson {
-  --bg: #260D12;
-  --bg-deep: #19080C;
-  --bg-2: #36141C;
-  --card: rgba(104, 28, 40, 0.45);
-  --card-solid: #38141C;
-  --gold: #E07050;
-  --gold-deep: #B04830;
-  --gold-soft: rgba(224, 112, 80, 0.45);
-  --gold-faint: rgba(224, 112, 80, 0.22);
-  --text: #E8D4CC;
-  --text-dim: #B89088;
-  --text-faint: #7E5A54;
-  --line: rgba(224, 112, 80, 0.25);
-  --shadow: rgba(0, 0, 0, 0.45);
+  --bg: #2A0F14; --bg-deep: #1B080C; --bg-2: #40161E;
+  --card: rgba(110, 32, 44, 0.5); --card-solid: #341019;
+  --gold: #FF9E6B; --gold-deep: #C86438;
+  --gold-soft: rgba(255, 158, 107, 0.5); --gold-faint: rgba(255, 158, 107, 0.22);
+  --text: #F0D4C8; --text-dim: #B88478; --text-faint: #7E564C;
+  --line: rgba(255, 158, 107, 0.28); --shadow: rgba(0, 0, 0, 0.5);
+  --hero: linear-gradient(180deg, #7A2832 0%, #461520 46%, #1B080C 100%);
+  background: linear-gradient(180deg, #5E1E28 0%, #38121A 46%, #1B080C 100%);
 }
-.page-root.theme-crimson .sheet { background: linear-gradient(180deg, #36141C 0%, #260D12 100%); }
-.page-root.theme-crimson .chip { background: rgba(224, 112, 80, 0.08); border-color: rgba(224, 112, 80, 0.18); }
+.page-root.theme-crimson .sheet { background: linear-gradient(180deg, #40161E 0%, #1B080C 100%); }
+.page-root.theme-crimson .chip { background: rgba(255, 158, 107, 0.08); border-color: rgba(255, 158, 107, 0.2); }
 
-/* ---------- 主题皮肤：神圣之地（亮色系） ---------- */
+/* ---------- 主题皮肤：神圣之地（珍珠圣域·亮色） ---------- */
 .page-root.theme-hallow {
-  --bg: #F5EAF5;
-  --bg-deep: #EADAEA;
-  --bg-2: #FBF3FB;
-  --card: rgba(255, 255, 255, 0.8);
-  --card-solid: #FDF8FD;
-  --gold: #B85CA8;
-  --gold-deep: #8A3E80;
-  --gold-soft: rgba(184, 92, 168, 0.4);
-  --gold-faint: rgba(184, 92, 168, 0.2);
-  --text: #46284A;
-  --text-dim: #86688A;
-  --text-faint: #B09CB4;
-  --line: rgba(160, 80, 150, 0.35);
-  --shadow: rgba(120, 60, 110, 0.25);
+  --bg: #F7ECF7; --bg-deep: #EDDFED; --bg-2: #FCF4FC;
+  --card: rgba(255, 255, 255, 0.85); --card-solid: #FDF8FD;
+  --gold: #B85CA8; --gold-deep: #8A3E80;
+  --gold-soft: rgba(184, 92, 168, 0.45); --gold-faint: rgba(184, 92, 168, 0.2);
+  --text: #46284A; --text-dim: #86688A; --text-faint: #B09CB4;
+  --line: rgba(160, 80, 150, 0.35); --shadow: rgba(120, 60, 110, 0.25);
+  --hero: linear-gradient(180deg, #E8C8F0 0%, #FDF6E8 60%, #F0E2F0 100%);
+  background: linear-gradient(180deg, #F0D8F0 0%, #FDF4F0 55%, #EDDFED 100%);
 }
 .page-root.theme-hallow .sheet { background: linear-gradient(180deg, #FDF8FD 0%, #F0E2F0 100%); }
 .page-root.theme-hallow .chip { background: rgba(184, 92, 168, 0.08); border-color: rgba(184, 92, 168, 0.2); }
 .page-root.theme-hallow .input-dark { background: rgba(255, 255, 255, 0.75); }
 
-/* ---------- 主题皮肤：月亮领主 ---------- */
+/* ---------- 主题皮肤：月亮领主（深空夜明） ---------- */
 .page-root.theme-lunar {
-  --bg: #06090F;
-  --bg-deep: #04060B;
-  --bg-2: #0C1420;
-  --card: rgba(18, 38, 66, 0.45);
-  --card-solid: #0E1A2C;
-  --gold: #5AD8E8;
-  --gold-deep: #2E9CB0;
-  --gold-soft: rgba(90, 216, 232, 0.45);
-  --gold-faint: rgba(90, 216, 232, 0.2);
-  --text: #C8DAEA;
-  --text-dim: #5E82A8;
-  --text-faint: #3A5570;
-  --line: rgba(90, 216, 232, 0.25);
-  --shadow: rgba(0, 0, 0, 0.5);
+  --bg: #081426; --bg-deep: #040B18; --bg-2: #10233E;
+  --card: rgba(24, 52, 92, 0.5); --card-solid: #0E1C33;
+  --gold: #62E0F0; --gold-deep: #2EA4BC;
+  --gold-soft: rgba(98, 224, 240, 0.5); --gold-faint: rgba(98, 224, 240, 0.2);
+  --text: #C8DEF2; --text-dim: #6E96C0; --text-faint: #426084;
+  --line: rgba(98, 224, 240, 0.28); --shadow: rgba(0, 0, 0, 0.55);
+  --hero: linear-gradient(180deg, #1A3E74 0%, #0E2244 46%, #040B18 100%);
+  background: linear-gradient(180deg, #12305E 0%, #0A1B36 46%, #040B18 100%);
 }
-.page-root.theme-lunar .sheet { background: linear-gradient(180deg, #0C1420 0%, #06090F 100%); }
-.page-root.theme-lunar .chip { background: rgba(90, 216, 232, 0.08); border-color: rgba(90, 216, 232, 0.18); }
+.page-root.theme-lunar .sheet { background: linear-gradient(180deg, #10233E 0%, #040B18 100%); }
+.page-root.theme-lunar .chip { background: rgba(98, 224, 240, 0.08); border-color: rgba(98, 224, 240, 0.2); }
 
-/* ---------- 主题皮肤：万圣节 ---------- */
+/* ---------- 主题皮肤：万圣节（南瓜夜） ---------- */
 .page-root.theme-halloween {
-  --bg: #1E140A;
-  --bg-deep: #140D05;
-  --bg-2: #2C1C0E;
-  --card: rgba(96, 62, 20, 0.45);
-  --card-solid: #2E1E0E;
-  --gold: #FFA030;
-  --gold-deep: #C87818;
-  --gold-soft: rgba(255, 160, 48, 0.45);
-  --gold-faint: rgba(255, 160, 48, 0.22);
-  --text: #EAD9BC;
-  --text-dim: #AC8C60;
-  --text-faint: #74603E;
-  --line: rgba(255, 160, 48, 0.25);
-  --shadow: rgba(0, 0, 0, 0.45);
+  --bg: #261708; --bg-deep: #180E05; --bg-2: #3A240E;
+  --card: rgba(110, 72, 22, 0.5); --card-solid: #30200E;
+  --gold: #FFAE42; --gold-deep: #CC7E1E;
+  --gold-soft: rgba(255, 174, 66, 0.5); --gold-faint: rgba(255, 174, 66, 0.22);
+  --text: #F2DFC0; --text-dim: #BC9660; --text-faint: #7E643E;
+  --line: rgba(255, 174, 66, 0.28); --shadow: rgba(0, 0, 0, 0.5);
+  --hero: linear-gradient(180deg, #7A4E18 0%, #462A10 46%, #180E05 100%);
+  background: linear-gradient(180deg, #5E3A12 0%, #36200C 46%, #180E05 100%);
 }
-.page-root.theme-halloween .sheet { background: linear-gradient(180deg, #2C1C0E 0%, #1E140A 100%); }
-.page-root.theme-halloween .chip { background: rgba(255, 160, 48, 0.08); border-color: rgba(255, 160, 48, 0.18); }
+.page-root.theme-halloween .sheet { background: linear-gradient(180deg, #3A240E 0%, #180E05 100%); }
+.page-root.theme-halloween .chip { background: rgba(255, 174, 66, 0.08); border-color: rgba(255, 174, 66, 0.2); }
