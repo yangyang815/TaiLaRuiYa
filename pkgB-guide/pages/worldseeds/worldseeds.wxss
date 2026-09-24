@@ -46,3 +46,6 @@
 .ws-arrow { color: var(--gold); font-size: 32rpx; margin-left: 10rpx; flex-shrink: 0; }
 
 .pad-bottom { height: calc(env(safe-area-inset-bottom) + 40rpx); }
+
+/* 原生模板广告槽 */
+.ad-slot { margin: 20rpx 30rpx 0; border-radius: 16rpx; overflow: hidden; }

@@ -55,6 +55,11 @@
     <text>该分组下暂无种子</text>
   </view>
 
+  <!-- 原生模板广告：种子列表末尾 -->
+  <view class="ad-slot">
+    <ad unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
+  </view>
+
   <view class="pad-bottom" />
 </view>
 

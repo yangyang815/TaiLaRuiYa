@@ -81,3 +81,6 @@
 /* 底部 */
 .foot { text-align: center; padding: 30rpx 0 10rpx; }
 .foot-t { font-size: 20rpx; color: var(--text-dim); letter-spacing: 4rpx; }
+
+/* 原生模板广告槽 */
+.ad-slot { margin: 20rpx 30rpx 0; border-radius: 16rpx; overflow: hidden; }

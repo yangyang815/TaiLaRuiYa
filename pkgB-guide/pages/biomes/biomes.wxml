@@ -92,6 +92,11 @@
         <text class="f-d">{{item.d}}</text>
       </view>
 
+      <!-- 原生模板广告：群系列表末尾 -->
+      <view class="ad-slot">
+        <ad unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
+      </view>
+
       <view class="sh-pad" />
     </scroll-view>
   </view>

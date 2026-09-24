@@ -27,6 +27,8 @@ Page({
   },
   _all: [],
 
+  onAdError (e) { console.warn('[worldseeds] 原生模板广告错误:', (e && e.detail && e.detail.errMsg) || e) },
+
   onLoad () {
     const app = getApp()
     this.setData({
