@@ -165,6 +165,11 @@
       </view>
     </block>
 
+    <!-- 原生模板广告：内容末尾、固定按钮栏上方 -->
+    <view class="ad-slot">
+      <ad unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
+    </view>
+
     <view class="pad-bottom" />
   </view>
 

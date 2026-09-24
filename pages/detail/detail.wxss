@@ -92,3 +92,6 @@
 /* 亮色主题底部按钮条 */
 .page-root.theme-light .fb.collect { background: rgba(233, 226, 245, 0.95); }
 .page-root.theme-light .fb.defeated { background: rgba(233, 226, 245, 0.95); }
+
+/* 原生模板广告槽 */
+.ad-slot { margin: 20rpx 30rpx 0; border-radius: 16rpx; overflow: hidden; }
