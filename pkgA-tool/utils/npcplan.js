@@ -121,6 +121,9 @@ function bestSolo (npcId, biomeGroups) {
 }
 
 /* 构造展示组 */
+// 官方规则：能出售晶塔的必须是"商贩"NPC（wiki 晶塔页名单，排除酒馆老板/旅商/骷髅商人等）
+const PYLON_VENDOR_NAMES = ["军火商", "服装商", "机器侠", "爆破专家", "树妖", "染料商", "哥布林工匠", "高尔夫球手",
+  "机械师", "商人", "油漆工", "派对女孩", "海盗", "公主", "圣诞老人", "蒸汽朋克人", "发型师", "松露人", "巫医", "巫师", "动物学家"]
 function makeGroup (biomeId, npcIds) {
   const members = npcIds.map(id => {
     const others = npcIds.filter(x => x !== id)
@@ -143,7 +146,8 @@ function makeGroup (biomeId, npcIds) {
     biomeName: D.BIOME_N[biomeId],
     biomeIcon: (D.BIOMES.find(b => b.id === biomeId) || {}).icon || '🏠',
     members,
-    pylon: members.some(m => m.pylon) // 任一成员 ≤90% 即可买晶塔
+    // 需要一名"商贩"成员快乐度达线才能购买晶塔（非商贩如护士/税收官/向导只能当邻居）
+    pylon: members.some(m => m.pylon && PYLON_VENDOR_NAMES.indexOf(m.name) >= 0)
   }
 }
 
