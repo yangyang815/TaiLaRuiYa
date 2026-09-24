@@ -1,6 +1,6 @@
 // 插屏广告：物品详情页/获取方式页返回时触发，带频控
 // 上线前在 mp后台-流量主-自主接入 新建「插屏广告」，把 ID 填入下方（空 = 功能关闭）
-const AD_UNIT_ID = "" // TODO: 填入插屏广告位 ID（adunit-xxxx）
+const AD_UNIT_ID = "adunit-990db9bb1f7174ce" // 插屏广告位（mp后台-流量主-自主接入）
 const LAUNCH_TS = Date.now()      // 模块加载时刻 ≈ 小程序启动
 const MIN_AGE_MS = 30 * 1000      // 启动 30 秒内不弹
 const MAX_PER_SESSION = 2         // 每次启动最多展示 2 次
