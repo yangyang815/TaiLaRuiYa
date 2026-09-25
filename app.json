@@ -123,8 +123,6 @@
       "network": "all",
       "packages": [
         "guide",
-        "cat1",
-        "cat2",
         "cat3"
       ]
     },
