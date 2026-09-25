@@ -52,6 +52,11 @@
     </view>
   </view>
 
+  <!-- 原生模板广告：群系列表末尾 -->
+  <view class="ad-slot">
+    <ad unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
+  </view>
+
   <view class="foot safe-bottom">
     <text class="foot-t px">KNOW THE WORLD, BEAT THE WORLD</text>
   </view>
@@ -90,11 +95,6 @@
           <text class="f-t">{{item.t}}</text>
         </view>
         <text class="f-d">{{item.d}}</text>
-      </view>
-
-      <!-- 原生模板广告：群系列表末尾 -->
-      <view class="ad-slot">
-        <ad unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
       </view>
 
       <view class="sh-pad" />

@@ -72,7 +72,7 @@
 .rel-t { font-size: 25rpx; color: var(--text); font-weight: 600; }
 .rel-time { font-size: 18rpx; color: var(--text-faint); margin-left: 12rpx; flex-shrink: 0; }
 
-.pad-bottom { height: 200rpx; }
+.pad-bottom { height: 320rpx; }
 
 /* 底部悬浮 */
 .float-btns { position: fixed; left: 30rpx; right: 30rpx; bottom: calc(env(safe-area-inset-bottom) + 24rpx);
