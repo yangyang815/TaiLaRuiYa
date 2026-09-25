@@ -2,7 +2,7 @@
 .guide-root { min-height: 100vh; padding: 0 24rpx 40rpx; box-sizing: border-box; }
 
 /* 顶部导航 */
-.nav { display: flex; align-items: center; height: 88rpx; margin-bottom: 12rpx; }
+.nav { display: flex; align-items: center; height: 88rpx; margin-bottom: 12rpx; position: sticky; top: 0; z-index: 50; background: var(--bg); }
 .back { width: 64rpx; height: 64rpx; line-height: 60rpx; text-align: center;
   font-size: 44rpx; color: var(--text); border: 2rpx solid var(--line);
   border-radius: 14rpx; background: var(--card); }
