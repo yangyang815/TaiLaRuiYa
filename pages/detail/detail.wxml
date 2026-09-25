@@ -183,4 +183,4 @@
 
 <back-top show="{{showBackTop}}" />
 
-<cat-detail item="{{catDetail}}" theme="{{themeClass === 'theme-light' ? 'light' : 'dark'}}" bind:close="onCatDetailClose" bind:go="onCatGo" />
+<cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" theme="{{themeClass === 'theme-light' ? 'light' : 'dark'}}" bind:close="onCatDetailClose" bind:go="onCatGo" />

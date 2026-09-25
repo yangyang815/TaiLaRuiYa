@@ -112,6 +112,6 @@
   </scroll-view>
 </view>
 
-<cat-detail item="{{catDetail}}" bind:close="onCatDetailClose" bind:craft="onCatDetailCraft" />
+<cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" bind:close="onCatDetailClose" bind:craft="onCatDetailCraft" />
 
 <back-top show="{{showBackTop}}" />

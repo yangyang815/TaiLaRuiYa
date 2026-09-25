@@ -254,8 +254,8 @@
   </view>
 
   <!-- 全物品图鉴详情弹窗 -->
-  <cat-detail item="{{catDetail}}" lift="{{true}}" bind:close="onCatDetailClose" bind:go="onCatGo" bind:craft="onCatDetailCraft" />
+  <cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" lift="{{true}}" bind:close="onCatDetailClose" bind:go="onCatGo" bind:craft="onCatDetailCraft" />
 
   <!-- 分享海报 -->
-  <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
+  <poster wx:if="{{posterData}}" show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
 </view>

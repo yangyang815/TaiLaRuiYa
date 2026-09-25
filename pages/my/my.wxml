@@ -199,5 +199,5 @@
   </view>
 
   <!-- 分享海报（冒险者名片） -->
-  <poster show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
+  <poster wx:if="{{posterData}}" show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
 </view>
