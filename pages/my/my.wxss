@@ -69,6 +69,10 @@
 .m-n { font-size: 27rpx; color: var(--text); font-weight: 700; }
 .m-v { font-size: 22rpx; color: var(--text-faint); margin-left: 12rpx; }
 .m-arrow { color: var(--gold); font-size: 34rpx; margin-left: 8rpx; }
+.menu-title { font-size: 22rpx; color: var(--text-faint); padding: 18rpx 0 0; letter-spacing: 2rpx; }
+.m-desc { font-size: 21rpx; color: var(--text-faint); margin-top: 4rpx; line-height: 1.4; }
+.app-row .m-n { display: block; }
+.app-row .m-desc { display: block; }
 .ver-picker { margin-left: 12rpx; }
 .ver { display: inline-flex; align-items: center; font-size: 22rpx; color: var(--gold);
   font-weight: 800; border: 2rpx solid var(--gold-faint); border-radius: 999rpx;
