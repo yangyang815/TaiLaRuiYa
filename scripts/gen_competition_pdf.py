@@ -7,7 +7,8 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas as canvas_mod
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph, Spacer,
-                                Table, TableStyle, PageBreak, HRFlowable, KeepTogether)
+                                Table, TableStyle, PageBreak, HRFlowable, KeepTogether,
+                                NextPageTemplate)
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 
@@ -89,6 +90,7 @@ story.append(Spacer(1, 26 * mm))
 story.append(Paragraph('作 品：向导之书（泰拉瑞亚游戏辅助图鉴小程序）', st_cover_i))
 story.append(Paragraph('开发团队：杨浩志（独立开发者）', st_cover_i))
 story.append(Paragraph('完成日期：2026 年 10 月', st_cover_i))
+story.append(NextPageTemplate('body'))
 story.append(PageBreak())
 
 # ================= 一、作品概述 =================
@@ -291,8 +293,6 @@ doc.addPageTemplates([
     PageTemplate(id='cover', frames=[frame_cover], onPage=cover_bg),
     PageTemplate(id='body', frames=[frame_body], onPage=page_bg),
 ])
-story.insert(0, __import__('reportlab').platypus.NextPageTemplate('body'))
-story.insert(1, PageBreak())
 doc.build(story)
 print('PDF 生成完成:', OUT)
 import os
