@@ -87,7 +87,7 @@ story.append(Spacer(1, 14 * mm))
 story.append(Paragraph('微信小程序大赛 · 作品说明文档', st_cover_s))
 story.append(Spacer(1, 26 * mm))
 story.append(Paragraph('作 品：向导之书（泰拉瑞亚游戏辅助图鉴小程序）', st_cover_i))
-story.append(Paragraph('开发团队：杨扬（独立开发者）', st_cover_i))
+story.append(Paragraph('开发团队：杨浩志（独立开发者）', st_cover_i))
 story.append(Paragraph('完成日期：2026 年 10 月', st_cover_i))
 story.append(PageBreak())
 
@@ -255,7 +255,7 @@ story.append(Paragraph(
 story.append(Paragraph('十、团队情况', st_title))
 story.append(HRFlowable(width='100%', thickness=1.2, color=ACCENT, spaceAfter=8))
 story.append(Paragraph(
-    '本作品由独立开发者杨扬完成，采用"独立开发者 + AI 结对"的开发范式：本人负责产品定位、数据标准制定、'
+    '本作品由独立开发者杨浩志完成，采用"独立开发者 + AI 结对"的开发范式：本人负责产品定位、数据标准制定、'
     '内容逐条核对、体验决策与日常运营；AI 助手承担代码实现、数据批量处理与自动化脚本编写，'
     '所有产出均经本人逐项验证与把关。这一范式使一名开发者得以同时胜任策划、前端、数据工程、测试与运营五个角色，'
     '在业余时间完成本作品的全部开发与持续迭代。', st_body))
@@ -284,7 +284,7 @@ story.append(Paragraph(
 # ================= 构建 =================
 doc = BaseDocTemplate(OUT, pagesize=A4,
                       leftMargin=18 * mm, rightMargin=18 * mm, topMargin=18 * mm, bottomMargin=18 * mm,
-                      title='向导之书-微信小程序大赛说明文档', author='杨扬')
+                      title='向导之书-微信小程序大赛说明文档', author='杨浩志')
 frame_cover = Frame(0, 0, A4[0], A4[1], id='cover')
 frame_body = Frame(18 * mm, 18 * mm, A4[0] - 36 * mm, A4[1] - 36 * mm, id='body')
 doc.addPageTemplates([
