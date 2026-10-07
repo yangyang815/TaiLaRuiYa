@@ -44,6 +44,10 @@
       {
         "value": ".workbuddy",
         "type": "folder"
+      },
+      {
+        "type": "folder",
+        "value": "docs"
       }
     ],
     "include": []
