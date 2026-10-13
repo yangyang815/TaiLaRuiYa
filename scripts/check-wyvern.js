@@ -1,0 +1,10 @@
+const items = require('D:/小程序库/泰拉瑞亚/data/items.js');
+items.filter(i => i.name.indexOf('飞龙') >= 0).forEach(i => console.log('[items] ' + i.name + ' en=' + i.en + ' cat=' + i.cat + ' id=' + i.id));
+const mon = require('fs').readFileSync('D:/小程序库/泰拉瑞亚/data/monsters.js', 'utf8');
+['飞龙', '云龙'].forEach(k => { if (mon.indexOf('name:"' + k + '"') >= 0) console.log('[monsters] 存在 ' + k); });
+const bosses = require('D:/小程序库/泰拉瑞亚/data/bosses.js');
+console.log('[bosses] 含飞龙:', JSON.stringify(bosses.filter(b => (b.name || '').indexOf('飞龙') >= 0).map(b => b.name)));
+const dex = require('D:/小程序库/泰拉瑞亚/utils/dex.js');
+const hit = dex.ALL ? dex.ALL.filter(e => e.name === '飞龙') : [];
+console.log('[dex.ALL 飞龙]:', JSON.stringify(hit.map(h => ({ id: h.id, type: h.type }))));
+console.log('[byId wyv]:', Object.keys(dex.byId || {}).filter(k => k.indexOf('wyv') >= 0));
