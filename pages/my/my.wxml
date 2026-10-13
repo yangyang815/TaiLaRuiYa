@@ -212,6 +212,12 @@
       <view class="hr" />
       <text class="ab-line">· 图鉴 / 合成 / 攻略数据参考泰拉瑞亚 Wiki（1.4.4 基准）</text>
       <text class="ab-line">· 本小程序为玩家自制学习作品，与 Re-Logic 无关</text>
+      <view class="hr" />
+      <text class="ab-law">· 泰拉瑞亚游戏及相关素材版权归 Re-Logic 与 505 Games 所有</text>
+      <text class="ab-law">· 数据参考泰拉瑞亚官方 Wiki（CC BY-NC-SA 3.0），仅作非商业性玩家参考</text>
+      <text class="ab-law">· 本工具独立制作，非官方出品，内容仅供玩家学习交流</text>
+      <text class="ab-law" bindtap="copyEmail">· 如有侵权请联系：1990909398@qq.com（点击复制，将立即处理）</text>
+      <view class="hr" />
       <text class="ab-line">· 反馈建议：在各大应用市场或微信"关于"中留言</text>
       <view class="btn-gold ab-btn" bindtap="closeAbout">继续冒险</view>
     </view>

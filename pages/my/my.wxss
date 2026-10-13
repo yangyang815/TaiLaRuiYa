@@ -96,6 +96,7 @@
 .about .hr { width: 100%; }
 .about { text-align: left; }
 .ab-line { font-size: 23rpx; color: var(--text-dim); line-height: 2; align-self: flex-start; }
+.ab-law { font-size: 20rpx; color: var(--text-faint); line-height: 1.7; align-self: flex-start; }
 .ab-btn { margin-top: 30rpx; }
 
 /* 存档备份：导入面板与二维码 */
