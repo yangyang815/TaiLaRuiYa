@@ -1,0 +1,2252 @@
+[
+ [
+  "Abeemination",
+  1,
+  "[[\"Honey Block\"],[\"Stinger\"],[\"Hive\"],[\"Bottled Honey\"],[\"Crispy Honey Block\"],[\"Obsidian\"]]"
+ ],
+ [
+  "Actuation Rod",
+  0,
+  "[[\"Actuator\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Adamantite Bar",
+  2,
+  "[[\"Titanium Bar\"]]"
+ ],
+ [
+  "Aether Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Aether Torch\"]]"
+ ],
+ [
+  "Aether Campfire",
+  1,
+  "[[\"Campfire\"]]"
+ ],
+ [
+  "Aetherium Block",
+  1,
+  "[[\"Snow Block\"]]"
+ ],
+ [
+  "Aetherium Chest",
+  0,
+  "[[\"Aetherium Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Aetherium Clock",
+  0,
+  "[[\"Aetherium Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Ambrosia",
+  0,
+  "[[\"Any Fruit\"]]"
+ ],
+ [
+  "Ancient Blue Brick",
+  1,
+  "[[\"Blue Brick\"]]"
+ ],
+ [
+  "Ancient Cobalt Brick",
+  1,
+  "[[\"Cobalt Brick\"]]"
+ ],
+ [
+  "Ancient Copper Brick",
+  1,
+  "[[\"Copper Brick\"]]"
+ ],
+ [
+  "Ancient Gold Brick",
+  1,
+  "[[\"Gold Brick\"]]"
+ ],
+ [
+  "Ancient Green Brick",
+  1,
+  "[[\"Green Brick\"]]"
+ ],
+ [
+  "Ancient Hellstone Brick",
+  1,
+  "[[\"Hellstone Brick\"]]"
+ ],
+ [
+  "Ancient Mythril Brick",
+  1,
+  "[[\"Mythril Brick\"]]"
+ ],
+ [
+  "Ancient Obsidian Brick",
+  1,
+  "[[\"Obsidian Brick\"]]"
+ ],
+ [
+  "Ancient Pink Brick",
+  1,
+  "[[\"Pink Brick\"]]"
+ ],
+ [
+  "Ancient Silver Brick",
+  1,
+  "[[\"Silver Brick\"]]"
+ ],
+ [
+  "Ankh Charm",
+  0,
+  "[[\"Armor Bracing\"],[\"Medicated Bandage\"],[\"The Plan\"],[\"Countercurse Mantra\"],[\"Blindfold\"]]"
+ ],
+ [
+  "Announcement Box",
+  0,
+  "[[\"Sign\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Aquarium Clock",
+  0,
+  "[[\"Aquarium Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Ash Block",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Ash Wood Chest",
+  0,
+  "[[\"Ash Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Ash Wood Clock",
+  0,
+  "[[\"Ash Wood\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Astra Brick",
+  1,
+  "[[\"Luminite Brick\"]]"
+ ],
+ [
+  "Axe of Regrowth",
+  0,
+  "[[\"Axearang\"]]"
+ ],
+ [
+  "Balloon Bathtub",
+  0,
+  "[[\"Any Balloon\"]]"
+ ],
+ [
+  "Balloon Bed",
+  0,
+  "[[\"Any Balloon\"],[\"Silk\"]]"
+ ],
+ [
+  "Balloon Bookcase",
+  0,
+  "[[\"Any Balloon\"],[\"Book\"]]"
+ ],
+ [
+  "Balloon Candelabra",
+  0,
+  "[[\"Any Balloon\"],[\"Torch\"]]"
+ ],
+ [
+  "Balloon Candle",
+  0,
+  "[[\"Any Balloon\"],[\"Torch\"]]"
+ ],
+ [
+  "Balloon Chair",
+  0,
+  "[[\"Any Balloon\"]]"
+ ],
+ [
+  "Balloon Chandelier",
+  0,
+  "[[\"Any Balloon\"],[\"Torch\"],[\"Chain\"]]"
+ ],
+ [
+  "Balloon Chest",
+  0,
+  "[[\"Any Balloon\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Balloon Clock",
+  0,
+  "[[\"Any Balloon\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Balloon Door",
+  0,
+  "[[\"Any Balloon\"]]"
+ ],
+ [
+  "Balloon Dresser",
+  0,
+  "[[\"Any Balloon\"]]"
+ ],
+ [
+  "Balloon Lamp",
+  0,
+  "[[\"Torch\"],[\"Any Balloon\"]]"
+ ],
+ [
+  "Balloon Lantern",
+  0,
+  "[[\"Any Balloon\"],[\"Torch\"]]"
+ ],
+ [
+  "Balloon Piano",
+  0,
+  "[[\"Any Balloon\"],[\"Bone\"],[\"Book\"]]"
+ ],
+ [
+  "Balloon Platform",
+  0,
+  "[[\"Any Balloon\"]]"
+ ],
+ [
+  "Balloon Sink",
+  0,
+  "[[\"Any Balloon\"],[\"Water Bucket\"]]"
+ ],
+ [
+  "Balloon Sofa",
+  0,
+  "[[\"Any Balloon\"],[\"Silk\"]]"
+ ],
+ [
+  "Balloon Table",
+  0,
+  "[[\"Any Balloon\"]]"
+ ],
+ [
+  "Balloon Toilet",
+  0,
+  "[[\"Any Balloon\"]]"
+ ],
+ [
+  "Balloon Work Bench",
+  0,
+  "[[\"Any Balloon\"]]"
+ ],
+ [
+  "Bamboo Chest",
+  0,
+  "[[\"Bamboo\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Bamboo Clock",
+  0,
+  "[[\"Bamboo\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Banquet Table",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Bar",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Bar Stool",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Barrel",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Bathtub",
+  0,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Bench",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Blacksmith Rack",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Blue Dungeon Chest",
+  0,
+  "[[\"Blue Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Blue Jellyfish Jar",
+  0,
+  "[[\"Blue Jellyfish (bait)\"],[\"Bottled Water\"]]"
+ ],
+ [
+  "Bone Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Bone Torch\"]]"
+ ],
+ [
+  "Bone Chest",
+  0,
+  "[[\"Bone\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Bone Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Bone\"]]"
+ ],
+ [
+  "Boreal Wood Chest",
+  0,
+  "[[\"Boreal Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Boreal Wood Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Boreal Wood\"]]"
+ ],
+ [
+  "Boulder Chest",
+  0,
+  "[[\"Boulder Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Boulder Clock",
+  0,
+  "[[\"Boulder Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Bowl of Soup",
+  0,
+  "[[\"Bowl\"],[\"Mushroom\"],[\"Goldfish\"]]"
+ ],
+ [
+  "Bundle of Horseshoe Balloons",
+  0,
+  "[[\"Blue Horseshoe Balloon\"],[\"Any Blizzard Balloon\"],[\"Any Sandstorm Balloon\"]]"
+ ],
+ [
+  "Cactus Chest",
+  0,
+  "[[\"Cactus\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Cactus Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Cactus\"]]"
+ ],
+ [
+  "Cactus Clock",
+  1,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Cactus\"]]"
+ ],
+ [
+  "Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Torch\"]]"
+ ],
+ [
+  "Campfire",
+  1,
+  "[[\"Any Wood\"],[\"Torch\"]]"
+ ],
+ [
+  "Captain Hat",
+  0,
+  "[[\"Angler Hat\",1],[\"Any Mythril Bar\",10]]"
+ ],
+ [
+  "Captain Pants",
+  0,
+  "[[\"Angler Pants\",1],[\"Any Mythril Bar\",10]]"
+ ],
+ [
+  "Captain Vest",
+  0,
+  "[[\"Angler Vest\",1],[\"Any Mythril Bar\",10]]"
+ ],
+ [
+  "Carpentry Rack",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Chain",
+  0,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Chain",
+  1,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Chest",
+  0,
+  "[[\"Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Cloud Chest",
+  0,
+  "[[\"Cloud\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Cloud Clock",
+  0,
+  "[[\"Cloud\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Cobalt Bar",
+  1,
+  "[[\"Palladium Bar\"]]"
+ ],
+ [
+  "Cobwhip",
+  0,
+  "[[\"Cobweb\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Coffin Minecart",
+  0,
+  "[[\"Any Iron Bar\"],[\"Any Wood\"],[\"Rotten Chunk\"]]"
+ ],
+ [
+  "Coffin Minecart",
+  1,
+  "[[\"Any Iron Bar\"],[\"Any Wood\"],[\"Vertebra\"]]"
+ ],
+ [
+  "Cooked Fish",
+  2,
+  "[[\"Red Snapper\"]]"
+ ],
+ [
+  "Cooking Pot",
+  0,
+  "[[\"Any Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Copper Axe",
+  0,
+  "[[\"Copper Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Copper Axe",
+  1,
+  "[[\"Copper Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Copper Bar",
+  1,
+  "[[\"Tin Bar\"]]"
+ ],
+ [
+  "Copper Hammer",
+  0,
+  "[[\"Copper Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Copper Hammer",
+  1,
+  "[[\"Copper Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Copper Pickaxe",
+  0,
+  "[[\"Copper Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Copper Pickaxe",
+  1,
+  "[[\"Copper Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Coral Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Coral Torch\"]]"
+ ],
+ [
+  "Corrupt Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Corrupt Torch\"]]"
+ ],
+ [
+  "Cosmic Ember Brick",
+  1,
+  "[[\"Luminite Brick\"]]"
+ ],
+ [
+  "Crate Potion",
+  0,
+  "[[\"Bottled Water\"],[\"Amber\"],[\"Moonglow\"],[\"Deathweed\"]]"
+ ],
+ [
+  "Crescent Wall",
+  0,
+  "[[\"Disc Wall\"]]"
+ ],
+ [
+  "Crimsand Block",
+  0,
+  "[[\"Crimsandstone Block\"]]"
+ ],
+ [
+  "Crimson Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Crimson Torch\"]]"
+ ],
+ [
+  "Crimtane Bar",
+  2,
+  "[[\"Demonite Bar\"]]"
+ ],
+ [
+  "Crimtane Chest",
+  0,
+  "[[\"Crimtane Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Crimtane Clock",
+  0,
+  "[[\"Crimtane Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Cryocore Brick",
+  1,
+  "[[\"Luminite Brick\"]]"
+ ],
+ [
+  "Crystal Chest",
+  0,
+  "[[\"Crystal Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Crystal Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Crystal Block\"]]"
+ ],
+ [
+  "Cursed Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Cursed Torch\"]]"
+ ],
+ [
+  "Cyan Weighted Pressure Plate",
+  0,
+  "[[\"Any Pressure Plate\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Dark Celestial Brick",
+  1,
+  "[[\"Luminite Brick\"]]"
+ ],
+ [
+  "Demon Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Demon Torch\"]]"
+ ],
+ [
+  "Demonite Bar",
+  0,
+  "[[\"Crimtane Bar\"]]"
+ ],
+ [
+  "Demonite Chest",
+  0,
+  "[[\"Demonite Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Demonite Clock",
+  0,
+  "[[\"Demonite Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Desert Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Desert Torch\"]]"
+ ],
+ [
+  "Disc Wall",
+  0,
+  "[[\"Crescent Wall\"]]"
+ ],
+ [
+  "Duskware Chest",
+  0,
+  "[[\"Moonplate Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Duskware Clock",
+  0,
+  "[[\"Moonplate Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Dynasty Bathtub",
+  0,
+  "[[\"Dynasty Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Dynasty Chest",
+  0,
+  "[[\"Dynasty Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Dynasty Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Dynasty Wood\"]]"
+ ],
+ [
+  "Easter Chest",
+  0,
+  "[[\"Easter Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Easter Clock",
+  0,
+  "[[\"Easter Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Ebonsand Block",
+  0,
+  "[[\"Ebonsandstone Block\"]]"
+ ],
+ [
+  "Ebonwood Chest",
+  0,
+  "[[\"Ebonwood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Ebonwood Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Ebonwood\"]]"
+ ],
+ [
+  "Empty Bucket",
+  0,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Empty Bucket",
+  1,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Fallen Star Chest",
+  0,
+  "[[\"Fallen Star Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Fallen Star Clock",
+  0,
+  "[[\"Fallen Star Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Fancy Hallowed Chest",
+  0,
+  "[[\"Hallowed Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Fancy Picnic Table",
+  0,
+  "[[\"Any Wood\"],[\"Silk\"]]"
+ ],
+ [
+  "Feywood",
+  0,
+  "[[\"Any Wood\"],[\"Mushroom\"]]"
+ ],
+ [
+  "Feywood Chest",
+  0,
+  "[[\"Feywood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Feywood Clock",
+  0,
+  "[[\"Feywood\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Fireplace",
+  0,
+  "[[\"Gray Brick\"],[\"Any Wood\"],[\"Torch\"]]"
+ ],
+ [
+  "Flamethrower",
+  0,
+  "[[\"Any Iron Bar\"],[\"Illegal Gun Parts\"],[\"Soul of Fright\"]]"
+ ],
+ [
+  "Flesh Chest",
+  0,
+  "[[\"Flesh Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Flesh Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Flesh Block\"]]"
+ ],
+ [
+  "Flint",
+  0,
+  "[[\"Any Adamantite Bar\"],[\"Hellstone Bar\"]]"
+ ],
+ [
+  "Flinx Fur Chest",
+  0,
+  "[[\"Flinx Fur Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Flinx Fur Clock",
+  0,
+  "[[\"Flinx Fur Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Forbidden Chest",
+  0,
+  "[[\"Forbidden Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Forbidden Clock",
+  0,
+  "[[\"Forbidden Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Forbidden Mask",
+  0,
+  "[[\"Any Adamantite Bar\",10],[\"Forbidden Fragment\",1]]"
+ ],
+ [
+  "Forbidden Robes",
+  0,
+  "[[\"Any Adamantite Bar\",20],[\"Forbidden Fragment\",1]]"
+ ],
+ [
+  "Forbidden Treads",
+  0,
+  "[[\"Any Adamantite Bar\",16],[\"Forbidden Fragment\",1]]"
+ ],
+ [
+  "Format:C",
+  0,
+  "[[\"Any Adamantite Bar\"],[\"Any Gold Bar\"],[\"Soul of Night\"],[\"Soul of Fright\"]]"
+ ],
+ [
+  "Fossil Pickaxe",
+  0,
+  "[[\"Sturdy Fossil\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Frost Breastplate",
+  0,
+  "[[\"Any Adamantite Bar\",20],[\"Frost Core\",1]]"
+ ],
+ [
+  "Frost Helmet",
+  0,
+  "[[\"Any Adamantite Bar\",10],[\"Frost Core\",1]]"
+ ],
+ [
+  "Frost Leggings",
+  0,
+  "[[\"Any Adamantite Bar\",16],[\"Frost Core\",1]]"
+ ],
+ [
+  "Frozen Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Ice Torch\"]]"
+ ],
+ [
+  "Frozen Chest",
+  0,
+  "[[\"Ice Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Frozen Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Ice Block\"]]"
+ ],
+ [
+  "Fruit Juice",
+  0,
+  "[[\"Any Fruit\"],[\"Bottle\"]]"
+ ],
+ [
+  "Fruit Salad",
+  0,
+  "[[\"Any Fruit\"],[\"Bowl\"]]"
+ ],
+ [
+  "Furnace",
+  0,
+  "[[\"Any Stone Block\"],[\"Any Wood\"],[\"Torch\"]]"
+ ],
+ [
+  "Furnace",
+  1,
+  "[[\"Stone Block\"],[\"Any Wood\"],[\"Torch\"]]"
+ ],
+ [
+  "Gas Trap",
+  0,
+  "[[\"Used Gas Trap\"]]"
+ ],
+ [
+  "Gentleman's Beard",
+  1,
+  "[[\"Gentleman's Magnificent Beard\"]]"
+ ],
+ [
+  "Gentleman's Long Beard",
+  0,
+  "[[\"Gentleman's Magnificent Beard\"]]"
+ ],
+ [
+  "Glass",
+  0,
+  "[[\"Any Sand Block\"]]"
+ ],
+ [
+  "Glass Chest",
+  0,
+  "[[\"Glass\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Glass Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Glass Kiln",
+  0,
+  "[[\"Any Iron Bar\"],[\"Torch\"]]"
+ ],
+ [
+  "Goblin Battle Standard",
+  0,
+  "[[\"Tattered Cloth\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Gold Axe",
+  0,
+  "[[\"Gold Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Gold Axe",
+  1,
+  "[[\"Gold Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Gold Bar",
+  1,
+  "[[\"Platinum Bar\"]]"
+ ],
+ [
+  "Gold Hammer",
+  0,
+  "[[\"Gold Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Gold Hammer",
+  1,
+  "[[\"Gold Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Gold Pickaxe",
+  0,
+  "[[\"Gold Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Gold Pickaxe",
+  1,
+  "[[\"Gold Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Gothic Chest",
+  0,
+  "[[\"Gothic Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Gothic Clock",
+  0,
+  "[[\"Gothic Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Grandfather Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Wood\"]]"
+ ],
+ [
+  "Granite Block",
+  1,
+  "[[\"Marble Block\"]]"
+ ],
+ [
+  "Granite Chest",
+  0,
+  "[[\"Smooth Granite Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Granite Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Smooth Granite Block\"]]"
+ ],
+ [
+  "Grate",
+  0,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Gravedigger's Shovel",
+  0,
+  "[[\"Any Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Green Brick",
+  0,
+  "[[\"Blue Brick\"]]"
+ ],
+ [
+  "Green Dungeon Chest",
+  0,
+  "[[\"Green Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Green Jellyfish Jar",
+  0,
+  "[[\"Green Jellyfish (bait)\"],[\"Bottled Water\"]]"
+ ],
+ [
+  "Green Stucco",
+  2,
+  "[[\"Silt Block\"],[\"Stone Block\"],[\"Purple Thread\"]]"
+ ],
+ [
+  "Guide to Peaceful Coexistence",
+  0,
+  "[[\"Any Guide to Critter Companionship\"],[\"Any Guide to Environmental Preservation\"]]"
+ ],
+ [
+  "Hallowed Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Hallowed Torch\"]]"
+ ],
+ [
+  "Hallowed Clock",
+  0,
+  "[[\"Hallowed Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Hardened Sand Block",
+  0,
+  "[[\"Hardened Crimsand Block\"]]"
+ ],
+ [
+  "Hardened Sand Block",
+  1,
+  "[[\"Hardened Ebonsand Block\"]]"
+ ],
+ [
+  "Hardened Sand Block",
+  2,
+  "[[\"Hardened Pearlsand Block\"]]"
+ ],
+ [
+  "Harpy Charm",
+  0,
+  "[[\"Amber\"],[\"Feather\"],[\"Any Silver Bar\"]]"
+ ],
+ [
+  "Harpy Chest",
+  0,
+  "[[\"Harpy Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Harpy Clock",
+  0,
+  "[[\"Harpy Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Hat Rack",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Heartreach Potion",
+  1,
+  "[[\"Bottled Water\"],[\"Crimson Tigerfish\"],[\"Daybloom\"],[\"Moonglow\"]]"
+ ],
+ [
+  "Heavenforge Brick",
+  1,
+  "[[\"Luminite Brick\"]]"
+ ],
+ [
+  "Heavy Assembler",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Hellfire Arrow",
+  1,
+  "[[\"Wooden Arrow\"],[\"Torch\"],[\"Hellstone Bar\"]]"
+ ],
+ [
+  "Helmet Rack",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Hero's Hat",
+  1,
+  "[[\"Silk\"],[\"Purple Thread\"]]"
+ ],
+ [
+  "Hero's Pants",
+  1,
+  "[[\"Silk\"],[\"Purple Thread\"]]"
+ ],
+ [
+  "Hero's Shirt",
+  1,
+  "[[\"Silk\"],[\"Purple Thread\"]]"
+ ],
+ [
+  "Hero's Shirt",
+  2,
+  "[[\"Silk\"],[\"Purple Thread\"]]"
+ ],
+ [
+  "Hive",
+  0,
+  "[[\"Crispy Honey Block\"]]"
+ ],
+ [
+  "Hive",
+  2,
+  "[[\"Honey Block\"]]"
+ ],
+ [
+  "Honey Bed",
+  0,
+  "[[\"Crispy Honey Block\"],[\"Silk\"]]"
+ ],
+ [
+  "Honey Block",
+  0,
+  "[[\"Crispy Honey Block\"]]"
+ ],
+ [
+  "Honey Bucket",
+  1,
+  "[[\"Lava Bucket\"]]"
+ ],
+ [
+  "Honey Chair",
+  0,
+  "[[\"Crispy Honey Block\"]]"
+ ],
+ [
+  "Honey Chest",
+  0,
+  "[[\"Honey Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Honey Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Honey Block\"]]"
+ ],
+ [
+  "Honey Door",
+  0,
+  "[[\"Crispy Honey Block\"]]"
+ ],
+ [
+  "Honey Table",
+  0,
+  "[[\"Crispy Honey Block\"]]"
+ ],
+ [
+  "Ice Block",
+  2,
+  "[[\"Pink Ice Block\"]]"
+ ],
+ [
+  "Ichor Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Ichor Torch\"]]"
+ ],
+ [
+  "Inlet Pump",
+  0,
+  "[[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Iron Axe",
+  0,
+  "[[\"Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Iron Axe",
+  1,
+  "[[\"Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Iron Bar",
+  2,
+  "[[\"Lead Bar\"]]"
+ ],
+ [
+  "Iron Hammer",
+  0,
+  "[[\"Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Iron Hammer",
+  1,
+  "[[\"Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Iron Pickaxe",
+  0,
+  "[[\"Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Iron Pickaxe",
+  1,
+  "[[\"Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Item Frame",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Jellyfish Chest",
+  0,
+  "[[\"Jellyfish Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Jellyfish Clock",
+  0,
+  "[[\"Jellyfish Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Jungle Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Jungle Torch\"]]"
+ ],
+ [
+  "Jungle Grass Seeds",
+  2,
+  "[[\"Mushroom Grass Seeds\"]]"
+ ],
+ [
+  "Keg",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Lamp Post",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Torch\"]]"
+ ],
+ [
+  "Lead Axe",
+  0,
+  "[[\"Lead Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Lead Axe",
+  1,
+  "[[\"Lead Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Lead Bar",
+  0,
+  "[[\"Iron Bar\"]]"
+ ],
+ [
+  "Lead Hammer",
+  0,
+  "[[\"Lead Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Lead Hammer",
+  1,
+  "[[\"Lead Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Lead Ore",
+  0,
+  "[[\"Iron Ore\"]]"
+ ],
+ [
+  "Lead Pickaxe",
+  0,
+  "[[\"Lead Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Lead Pickaxe",
+  1,
+  "[[\"Lead Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Lesion Chest",
+  0,
+  "[[\"Lesion Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Lesion Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Lesion Block\"]]"
+ ],
+ [
+  "Librarian Block",
+  0,
+  "[[\"Any Wood\"],[\"Book\"]]"
+ ],
+ [
+  "Librarian Chest",
+  0,
+  "[[\"Librarian Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Librarian Clock",
+  0,
+  "[[\"Librarian Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Lightning Boots",
+  0,
+  "[[\"Spectre Boots\"],[\"Anklet of the Wind\"],[\"Aglet\"]]"
+ ],
+ [
+  "Lightning Strike",
+  0,
+  "[[\"Thunder Zapper\"],[\"Any Adamantite Bar\"],[\"Soul of Night\"]]"
+ ],
+ [
+  "Lihzahrd Chest",
+  0,
+  "[[\"Lihzahrd Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Lihzahrd Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Lihzahrd Brick\"]]"
+ ],
+ [
+  "Little Kinship Peach",
+  0,
+  "[[\"Any Fruit\"],[\"Soul of Light\"],[\"Soul of Night\"]]"
+ ],
+ [
+  "Living Wood Chest",
+  0,
+  "[[\"Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Living Wood Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Wood\"]]"
+ ],
+ [
+  "Logic Sensor (Day)",
+  0,
+  "[[\"Soul of Light\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Logic Sensor (Night)",
+  0,
+  "[[\"Soul of Night\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Logic Sensor (Player Above)",
+  0,
+  "[[\"Soul of Sight\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Loom",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Lunar Rust Brick",
+  0,
+  "[[\"Luminite Brick\"]]"
+ ],
+ [
+  "Magic Sand Dropper",
+  0,
+  "[[\"Empty Dropper\"],[\"Any Sand Block\"]]"
+ ],
+ [
+  "Mannequin",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Marble Block",
+  0,
+  "[[\"Granite Block\"]]"
+ ],
+ [
+  "Marble Chest",
+  0,
+  "[[\"Smooth Marble Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Marble Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Smooth Marble Block\"]]"
+ ],
+ [
+  "Marshmallow on a Stick",
+  0,
+  "[[\"Marshmallow\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Martian Astro Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Martian Conduit Plating\"]]"
+ ],
+ [
+  "Martian Chest",
+  0,
+  "[[\"Martian Conduit Plating\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Mechanical Eye",
+  0,
+  "[[\"Lens\"],[\"Any Iron Bar\"],[\"Soul of Light\"]]"
+ ],
+ [
+  "Mechanical Skull",
+  0,
+  "[[\"Bone\"],[\"Any Iron Bar\"],[\"Soul of Light\"],[\"Soul of Night\"]]"
+ ],
+ [
+  "Mechanical Worm",
+  0,
+  "[[\"Rotten Chunk\"],[\"Any Iron Bar\"],[\"Soul of Night\"]]"
+ ],
+ [
+  "Mechanical Worm",
+  1,
+  "[[\"Vertebra\"],[\"Any Iron Bar\"],[\"Soul of Night\"]]"
+ ],
+ [
+  "Mercury Brick",
+  0,
+  "[[\"Luminite Brick\"]]"
+ ],
+ [
+  "Metal Sink",
+  0,
+  "[[\"Any Iron Bar\"],[\"Water Bucket\"]]"
+ ],
+ [
+  "Meteorite Chest",
+  0,
+  "[[\"Meteorite Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Meteorite Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Meteorite Brick\"]]"
+ ],
+ [
+  "Minecart",
+  0,
+  "[[\"Any Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Minecart Track",
+  0,
+  "[[\"Any Iron Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Moonplate Block",
+  2,
+  "[[\"Sunplate Block\"]]"
+ ],
+ [
+  "Mushroom",
+  0,
+  "[[\"Vicious Mushroom\"]]"
+ ],
+ [
+  "Mushroom Chest",
+  0,
+  "[[\"Glowing Mushroom\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Mushroom Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Glowing Mushroom\"]]"
+ ],
+ [
+  "Mushroom Clock",
+  1,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Glowing Mushroom\"]]"
+ ],
+ [
+  "Mythril Bar",
+  1,
+  "[[\"Orichalcum Bar\"]]"
+ ],
+ [
+  "Nebula Chest",
+  0,
+  "[[\"Nebula Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Nebula Clock",
+  0,
+  "[[\"Nebula Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Night's Edge",
+  0,
+  "[[\"Blood Butcherer\"],[\"Muramasa\"],[\"Blade of Grass\"],[\"Fiery Greatsword\"]]"
+ ],
+ [
+  "Night's Edge",
+  2,
+  "[[\"Light's Bane\"],[\"Muramasa\"],[\"Blade of Grass\"],[\"Fiery Greatsword\"]]"
+ ],
+ [
+  "Obsidian Chest",
+  0,
+  "[[\"Obsidian\"],[\"Hellstone\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Office Block",
+  0,
+  "[[\"Any Wood\"],[\"Gel\"]]"
+ ],
+ [
+  "Office Chest",
+  0,
+  "[[\"Office Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Office Clock",
+  0,
+  "[[\"Office Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Orange Weighted Pressure Plate",
+  0,
+  "[[\"Any Pressure Plate\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Orichalcum Bar",
+  0,
+  "[[\"Mythril Bar\"]]"
+ ],
+ [
+  "Orichalcum Ore",
+  1,
+  "[[\"Mythril Ore\"]]"
+ ],
+ [
+  "Outlet Pump",
+  0,
+  "[[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Palladium Bar",
+  0,
+  "[[\"Cobalt Bar\"]]"
+ ],
+ [
+  "Palladium Ore",
+  0,
+  "[[\"Cobalt Ore\"]]"
+ ],
+ [
+  "Palm Wood Chest",
+  0,
+  "[[\"Palm Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Palm Wood Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Palm Wood\"]]"
+ ],
+ [
+  "Pearlsand Block",
+  1,
+  "[[\"Pearlsandstone Block\"]]"
+ ],
+ [
+  "Pearlstone Brick",
+  0,
+  "[[\"Pearlsand Block\"],[\"Pearlstone Block\"]]"
+ ],
+ [
+  "Pearlwood Chest",
+  0,
+  "[[\"Pearlwood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Pearlwood Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Pearlwood\"]]"
+ ],
+ [
+  "Picnic Table",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Pine Chest",
+  0,
+  "[[\"Pine Tree Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Pine Chest",
+  1,
+  "[[\"Pine Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Pine Clock",
+  0,
+  "[[\"Pine Tree Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Pine Clock",
+  1,
+  "[[\"Pine Wood\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Pink Brick",
+  0,
+  "[[\"Green Brick\"]]"
+ ],
+ [
+  "Pink Dungeon Chest",
+  0,
+  "[[\"Pink Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Pink Jellyfish Jar",
+  0,
+  "[[\"Pink Jellyfish (bait)\"],[\"Bottled Water\"]]"
+ ],
+ [
+  "Pink Torch",
+  0,
+  "[[\"Pink Gel\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Pink Weighted Pressure Plate",
+  0,
+  "[[\"Any Pressure Plate\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Planked Wall",
+  0,
+  "[[\"Stone Block\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Platinum Axe",
+  0,
+  "[[\"Platinum Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Platinum Axe",
+  1,
+  "[[\"Platinum Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Platinum Bar",
+  0,
+  "[[\"Gold Bar\"]]"
+ ],
+ [
+  "Platinum Hammer",
+  0,
+  "[[\"Platinum Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Platinum Hammer",
+  1,
+  "[[\"Platinum Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Platinum Ore",
+  1,
+  "[[\"Gold Ore\"]]"
+ ],
+ [
+  "Platinum Pickaxe",
+  0,
+  "[[\"Platinum Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Platinum Pickaxe",
+  1,
+  "[[\"Platinum Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Power Bomb",
+  0,
+  "[[\"Bomb\"],[\"Any Cobalt Bar\"]]"
+ ],
+ [
+  "Power Glove",
+  0,
+  "[[\"Titan Glove\"],[\"Feral Claws\"]]"
+ ],
+ [
+  "Pressure Plate Track",
+  0,
+  "[[\"Minecart Track\"],[\"Any Pressure Plate\"]]"
+ ],
+ [
+  "Prospector Helmet",
+  0,
+  "[[\"Mining Helmet\",1],[\"Any Mythril Bar\",10]]"
+ ],
+ [
+  "Prospector Pants",
+  0,
+  "[[\"Mining Pants\",1],[\"Any Mythril Bar\",10]]"
+ ],
+ [
+  "Prospector Shirt",
+  0,
+  "[[\"Mining Shirt\",1],[\"Any Mythril Bar\",10]]"
+ ],
+ [
+  "Pumpkin",
+  0,
+  "[[\"Cactus\"]]"
+ ],
+ [
+  "Pumpkin Chest",
+  0,
+  "[[\"Pumpkin\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Pumpkin Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Pumpkin\"]]"
+ ],
+ [
+  "Pumpkin Clock",
+  1,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Pumpkin\"]]"
+ ],
+ [
+  "Purification Powder",
+  0,
+  "[[\"Vicious Powder\"]]"
+ ],
+ [
+  "Purple Weighted Pressure Plate",
+  0,
+  "[[\"Any Pressure Plate\"],[\"Any Iron Bar\"],[\"Wire\"]]"
+ ],
+ [
+  "Rainbow Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Rainbow Torch\"]]"
+ ],
+ [
+  "Recall Potion",
+  1,
+  "[[\"Bottled Water\"],[\"Specular Fish\"],[\"Deathweed\"]]"
+ ],
+ [
+  "Reef Block",
+  2,
+  "[[\"Stone Block\"],[\"Coral\"],[\"Any Seashell or Starfish\"]]"
+ ],
+ [
+  "Reef Chest",
+  0,
+  "[[\"Reef Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Reef Clock",
+  0,
+  "[[\"Reef Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Reinforced Fishing Pole",
+  0,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Restoration Potion",
+  0,
+  "[[\"Mana Potion\"],[\"Healing Potion\"]]"
+ ],
+ [
+  "Rich Mahogany Chest",
+  0,
+  "[[\"Rich Mahogany\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Rich Mahogany Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Rich Mahogany\"]]"
+ ],
+ [
+  "Rock Candy",
+  0,
+  "[[\"Any Gem Critter\"]]"
+ ],
+ [
+  "Sand Block",
+  0,
+  "[[\"Crimsand Block\"]]"
+ ],
+ [
+  "Sand Block",
+  1,
+  "[[\"Ebonsand Block\"]]"
+ ],
+ [
+  "Sand Block",
+  2,
+  "[[\"Hardened Sand Block\"]]"
+ ],
+ [
+  "Sandstone Block",
+  0,
+  "[[\"Crimsandstone Block\"]]"
+ ],
+ [
+  "Sandstone Block",
+  1,
+  "[[\"Ebonsandstone Block\"]]"
+ ],
+ [
+  "Sandstone Block",
+  2,
+  "[[\"Pearlsandstone Block\"]]"
+ ],
+ [
+  "Sandstone Chest",
+  0,
+  "[[\"Smooth Sandstone\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Sandstone Clock",
+  0,
+  "[[\"Smooth Sandstone\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Sandstorm in a Bottle",
+  1,
+  "[[\"Pharaoh's Mask\"]]"
+ ],
+ [
+  "Sawmill",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"],[\"Chain\"]]"
+ ],
+ [
+  "Scrying Orb",
+  0,
+  "[[\"Any Magic Mirror\"],[\"Lens\"],[\"Wormhole Potion\"]]"
+ ],
+ [
+  "Shadewood Chest",
+  0,
+  "[[\"Shadewood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Shadewood Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Shadewood\"]]"
+ ],
+ [
+  "Shimmer Arrow",
+  0,
+  "[[\"Hellfire Arrow\"]]"
+ ],
+ [
+  "Shimmer Flare",
+  0,
+  "[[\"Blue Flare\"]]"
+ ],
+ [
+  "Shimmerfall Block",
+  1,
+  "[[\"Waterfall Block\"]]"
+ ],
+ [
+  "Sign",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Silver Axe",
+  0,
+  "[[\"Silver Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Silver Axe",
+  1,
+  "[[\"Silver Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Silver Bar",
+  1,
+  "[[\"Tungsten Bar\"]]"
+ ],
+ [
+  "Silver Hammer",
+  0,
+  "[[\"Silver Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Silver Hammer",
+  1,
+  "[[\"Silver Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Silver Pickaxe",
+  0,
+  "[[\"Silver Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Silver Pickaxe",
+  1,
+  "[[\"Silver Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Skyware Chest",
+  0,
+  "[[\"Sunplate Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Skyware Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Sunplate Block\"]]"
+ ],
+ [
+  "Slime Chest",
+  0,
+  "[[\"Slime Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Slime Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Slime Block\"]]"
+ ],
+ [
+  "Snow Block",
+  0,
+  "[[\"Ice Block\"]]"
+ ],
+ [
+  "Snow Chest",
+  0,
+  "[[\"Snow Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Snow Clock",
+  0,
+  "[[\"Snow Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Solar Chest",
+  0,
+  "[[\"Solar Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Solar Clock",
+  0,
+  "[[\"Solar Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Space Gun",
+  1,
+  "[[\"Meteorite Bar\"],[\"Fallen Star\"]]"
+ ],
+ [
+  "Space Gun",
+  2,
+  "[[\"Meteorite Bar\"],[\"Fallen Star\"],[\"Flintlock Pistol\"]]"
+ ],
+ [
+  "Spear Rack",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Spectre Hamaxe",
+  0,
+  "[[\"Ectoplasm\"],[\"Chlorophyte Bar\"]]"
+ ],
+ [
+  "Spectre Paint Roller",
+  0,
+  "[[\"Chlorophyte Bar\"],[\"Ectoplasm\"]]"
+ ],
+ [
+  "Spectre Paint Scraper",
+  0,
+  "[[\"Ectoplasm\"],[\"Chlorophyte Bar\"]]"
+ ],
+ [
+  "Spectre Paintbrush",
+  0,
+  "[[\"Ectoplasm\"],[\"Chlorophyte Bar\"]]"
+ ],
+ [
+  "Spectre Pants",
+  0,
+  "[[\"Chlorophyte Bar\"],[\"Ectoplasm\"]]"
+ ],
+ [
+  "Spectre Pickaxe",
+  0,
+  "[[\"Ectoplasm\"],[\"Chlorophyte Bar\"]]"
+ ],
+ [
+  "Spectre Robe",
+  0,
+  "[[\"Chlorophyte Bar\"],[\"Ectoplasm\"]]"
+ ],
+ [
+  "Spider Chest",
+  0,
+  "[[\"Spider Nest Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Spider Clock",
+  0,
+  "[[\"Spider Nest Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Spike Chest",
+  0,
+  "[[\"Spike Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Spike Clock",
+  0,
+  "[[\"Spike Block\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Spooky Chest",
+  0,
+  "[[\"Spooky Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Spooky Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Spooky Wood\"]]"
+ ],
+ [
+  "Star Royale Brick",
+  0,
+  "[[\"Luminite Brick\"]]"
+ ],
+ [
+  "Stardust Chest",
+  0,
+  "[[\"Stardust Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Stardust Clock",
+  0,
+  "[[\"Stardust Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Steampunk Chest",
+  0,
+  "[[\"Cog\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Steampunk Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Cog\"]]"
+ ],
+ [
+  "Sticky Power Bomb",
+  1,
+  "[[\"Sticky Bomb\"],[\"Any Cobalt Bar\"]]"
+ ],
+ [
+  "Stone Block",
+  0,
+  "[[\"Clay Block\"]]"
+ ],
+ [
+  "Stone Block",
+  2,
+  "[[\"Crimstone Block\"]]"
+ ],
+ [
+  "Stone Chest",
+  0,
+  "[[\"Gray Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Stone Clock",
+  0,
+  "[[\"Gray Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Sunplate Block",
+  1,
+  "[[\"Moonplate Block\"]]"
+ ],
+ [
+  "Sunplate Clock",
+  0,
+  "[[\"Any Iron Bar\"],[\"Glass\"],[\"Sunplate Block\"]]"
+ ],
+ [
+  "Sword Rack",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Tall Gate",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Target Dummy",
+  0,
+  "[[\"Any Wood\"],[\"Hay\"]]"
+ ],
+ [
+  "Tattered Wood Sign",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Thorns Potion",
+  1,
+  "[[\"Bottled Water\"],[\"Deathweed\"],[\"Cactus\"],[\"Worm Tooth\"],[\"Stinger\"]]"
+ ],
+ [
+  "Tiki Torch",
+  0,
+  "[[\"Torch\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tin Axe",
+  0,
+  "[[\"Tin Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tin Axe",
+  1,
+  "[[\"Tin Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tin Bar",
+  0,
+  "[[\"Copper Bar\"]]"
+ ],
+ [
+  "Tin Hammer",
+  0,
+  "[[\"Tin Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tin Hammer",
+  1,
+  "[[\"Tin Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tin Ore",
+  0,
+  "[[\"Copper Ore\"]]"
+ ],
+ [
+  "Tin Pickaxe",
+  0,
+  "[[\"Tin Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tin Pickaxe",
+  1,
+  "[[\"Tin Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Titanium Bar",
+  0,
+  "[[\"Adamantite Bar\"]]"
+ ],
+ [
+  "Titanium Ore",
+  0,
+  "[[\"Adamantite Ore\"]]"
+ ],
+ [
+  "Toilet",
+  0,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Torch",
+  0,
+  "[[\"Gel\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Trap Door",
+  0,
+  "[[\"Any Wood\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Trash Can",
+  0,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "True Excalibur",
+  0,
+  "[[\"Excalibur\"],[\"Broken Hero Sword\"]]"
+ ],
+ [
+  "True Night's Edge",
+  0,
+  "[[\"Night's Edge\"],[\"Broken Hero Sword\"]]"
+ ],
+ [
+  "Tungsten Axe",
+  0,
+  "[[\"Tungsten Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tungsten Axe",
+  1,
+  "[[\"Tungsten Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tungsten Bar",
+  0,
+  "[[\"Silver Bar\"]]"
+ ],
+ [
+  "Tungsten Hammer",
+  0,
+  "[[\"Tungsten Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tungsten Hammer",
+  1,
+  "[[\"Tungsten Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tungsten Ore",
+  1,
+  "[[\"Silver Ore\"]]"
+ ],
+ [
+  "Tungsten Pickaxe",
+  0,
+  "[[\"Tungsten Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Tungsten Pickaxe",
+  1,
+  "[[\"Tungsten Bar\"],[\"Any Wood\"]]"
+ ],
+ [
+  "Ultrabright Campfire",
+  0,
+  "[[\"Any Wood\"],[\"Ultrabright Torch\"]]"
+ ],
+ [
+  "Unholy Arrow",
+  2,
+  "[[\"Wooden Arrow\"],[\"Worm Tooth\"]]"
+ ],
+ [
+  "Vortex Chest",
+  0,
+  "[[\"Vortex Brick\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Vortex Clock",
+  0,
+  "[[\"Vortex Brick\"],[\"Any Iron Bar\"],[\"Glass\"]]"
+ ],
+ [
+  "Water Chest",
+  0,
+  "[[\"Aquarium Block\"],[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Weapon Rack",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Weather Vane",
+  0,
+  "[[\"Any Iron Bar\"]]"
+ ],
+ [
+  "Welding Mask",
+  0,
+  "[[\"Any Iron Bar\"],[\"Any Mythril Bar\"]]"
+ ],
+ [
+  "Wicked Claws",
+  0,
+  "[[\"Wicked Armlet\"],[\"Feral Claws\"]]"
+ ],
+ [
+  "Womannequin",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Wood",
+  0,
+  "[[\"Ash Wood\"]]"
+ ],
+ [
+  "Wood",
+  1,
+  "[[\"Boreal Wood\"]]"
+ ],
+ [
+  "Wooden Arrow",
+  0,
+  "[[\"Any Wood\"],[\"Stone Block\"]]"
+ ],
+ [
+  "Wooden Arrow",
+  1,
+  "[[\"Any Wood\"],[\"Stone Block\"]]"
+ ],
+ [
+  "Wooden Beam",
+  0,
+  "[[\"Any Wood\"]]"
+ ],
+ [
+  "Wooden Yoyo",
+  0,
+  "[[\"Any Wood\"],[\"Cobweb\"]]"
+ ],
+ [
+  "Yoyo Bag",
+  0,
+  "[[\"Yoyo Glove\"],[\"Strung Counterweight\"]]"
+ ]
+]
