@@ -1,0 +1,94 @@
+{
+ "Fishing Potion": [],
+ "Luck Potions": [],
+ "Rage Potion": [
+  "* It is possible to naturally acquire a Rage Potion in a Corruption world by purchasing Crimson Seeds from the Dryad in a Hardmode Graveyard biome, and using the Crimson Seeds to make an artificial Crimson biome to fish in."
+ ],
+ "Ammo Reservation Potion": [],
+ "Healing Potion": [
+  "In addition to being crafted, Healing Potions can be found naturally in pots during Hardmode and pots in the Underworld in pre-Hardmode.",
+  "Healing Potions are also dropped by Deerclops, Skeletron, and the Wall of Flesh, and are sold by the Merchant and the Skeleton Merchant in Hardmode for .",
+  "** Now sold by the Merchant and the Skeleton Merchant in Hardmode.}} {{history|Desktop 1.3.0.1| ** Sprite updated.",
+  "** No longer a crafting material.}} {{history|Desktop 1.0.6| ** Health gained was decreased from 200 to 100."
+ ],
+ "Lesser Healing Potion": [
+  "In addition to being crafted, Lesser Healing Potions can also be found naturally in pots (only in pre-Hardmode), generated chests, Wooden and Pearlwood Crates, or dropped from most early pre-Hardmode bosses.",
+  "They can also be purchased for from the Merchant, or from the Skeleton Merchant during moon phases 2, 4, 6, and 8: .",
+  "** Now used to craft the Decorative Healing Potion.}} during moon phases 2, 4, 6, and 8.",
+  "Old sprite was: File:Lesser Healing Potion (old).png}} {{history|Desktop 1.0.6| ** Consumption will now trigger the Potion Sickness debuff for one minute.",
+  "** Health gained decreased from 100 to 50.}} to .}} {{history|Console 1.0.933.1|Sprite updated to match Desktop 1.3.0.1.",
+  "** No longer dropped by Ocram, Turkor the Ungrateful, and Lepus due to their removals.}}"
+ ],
+ "Summoning Potion": [],
+ "Endurance Potion": [],
+ "Mana Potion": [
+  "It can be crafted or occasionally obtained from any Crates except for Wooden and Pearlwood Crates.",
+  "They are also sold by the Merchant in Hardmode for .",
+  "** Now sold by the Merchant in Hardmode.}} {{history|Desktop 1.3.0.1| ** Sprite updated."
+ ],
+ "Miner Potion": "(NOCONTENT)",
+ "Super Healing Potion": [
+  "They are also always dropped by the Moon Lord.",
+  "* These potions are obtainable before breaking the fourth Celestial Pillar by crafting the fragments dropped by the remaining tower with the other three types of fragments.",
+  "== See also == * Super Mana Potion == History == {{history|Console 1.0.933.1|Introduced."
+ ],
+ "Super Mana Potion": [],
+ "Heartreach Potion": [
+  "In addition to being crafted, Heartreach Potions can be found in Pots and crates.",
+  "** It is possible to naturally acquire a Heartreach Potion in a Corruption world by purchasing Crimson Seeds from the Dryad in a Hardmode Graveyard biome, and using the Crimson Seeds to make an artificial Crimson biome to fish in.",
+  "== Tips == * The Heartreach Potion is especially useful during large-scale events such as the Pumpkin and Frost Moon, as the large amounts of Hearts dropped by mini-bosses or by specific enemies with likelier odds of dropping them can be collected much more quickly with the Heartreach buff active."
+ ],
+ "Wrath Potion": [
+  "* It is possible to naturally acquire a Wrath Potion in a Crimson world by purchasing Corrupt Seeds from the Dryad in a Hardmode Graveyard biome, and using the Corrupt Seeds to make an artificial Corruption biome to fish in."
+ ],
+ "Sonar Potion": [],
+ "Crate Potion": [],
+ "Restoration Potion": [
+  "The '''Restoration Potion''' is a recovery potion that can be found in Shadow Chests in the Underworld."
+ ],
+ "Warmth Potion": [],
+ "Recall Potion": [
+  "In addition to being crafted, Recall Potions can be found in Pots and Chests, and have a small chance to appear as a bonus drop from slimes.",
+  "They are also renewable and plentiful within Chests.",
+  "** Can now drop from certain slimes as a bonus drop.}} {{history|Console 1.0.933.1|Made changes from PS4's 1.0.750.0 update."
+ ],
+ "Biome Sight Potion": [],
+ "Flask of Ichor": [],
+ "Love Potion": [],
+ "Teleportation Potion": [
+  "In addition to being crafted, it can be found in Chests located in the Cavern layer and in Shadow Chests.",
+  "Returning to the spawn point can also be done by exiting and re-entering the world."
+ ],
+ "Flask of Cursed Flames": [],
+ "Wormhole Potion": [
+  "In addition to being crafted, Wormhole Potions can be found in Pots and have a small chance to appear as a bonus drop from slimes, but only in multiplayer."
+ ],
+ "Gender Change Potion": [],
+ "Flask of Poison": [],
+ "Flask of Gold": [],
+ "Flask of Party": [
+  "* In worlds with the Celebration Mk 10 seed enabled, the Flask of Party can be purchased from the Princess for .",
+  "== History == {{history|Desktop 1.3.0.1| ** Flasks now last across death."
+ ],
+ "Flask of Fire": [],
+ "Flask of Venom": [],
+ "Potion of Return": [
+  "In addition to being crafted, the Potion of Return can be found in Pots in the Cavern layer and the Underworld, as well as in Shadow Chests.",
+  "== History =="
+ ],
+ "Greater Healing Potion": [
+  "Greater Healing Potions can be crafted using materials found in The Hallow or obtained from most Hardmode bosses as well as from Biome Mimics and Martian Saucers.",
+  "== Crafting == === Recipes === === Used in === == Tips == * Through the use of hoiks, Greater Healing Potions can be acquired in pre-Hardmode by clipping through the door of a Jungle Temple and looting its chests early.",
+  "** Now drops from Biome Mimics.",
+  "** Now drops from Biome Mimics.",
+  "** No longer dropped by Ocram due to its removal.}} {{history|Mobile 1.3.0.7| ** Sprite updated to match Desktop 1.3.0.1.",
+  "** Now drops from Biome Mimics.}} <!-- NOTE: Mobile's Ocram drop was Lesser Healing Potions, so the history involved with Ocram's removal is over at the Lesser Healing Potion page."
+ ],
+ "Stink Potion": [
+  "== Crafting == === Recipes === == History == {{history|Console 1.0.933.1|Item sprite updated."
+ ],
+ "Mining Potion": [
+  "In addition to being crafted, Mining Potions can be found in pots, chests, and crates, and have a small chance to appear as a bonus drop from slimes.",
+  "** Can now drop from certain slimes as a bonus drop.}}"
+ ]
+}
