@@ -1,0 +1,62 @@
+{{exclusive|1.3.1}}<!-- This {{exclusive}} banner refers to the trap object, which was introduced in 1.3.1. The {{exclusive}} for the Bee Hive item is at [[Bee Hive (item)]]. -->
+{{item infobox
+| auto = 5066
+| type = Furniture
+| width = 2 | height = 2
+| idprojectile = 655
+| sound1 = Dig 0.wav, Dig 1.wav, Dig 2.wav
+| soundcaption1 = Broken
+| sound2 = NPC Killed 1.wav
+| soundcaption2 = Impact
+}}
+{{forlist|the biome|Bee Hive (biome)|the block|Hive}}
+[[File:BeeHive2.png|thumb|200px|A player standing near a Bee Hive in the Underground Jungle.]]
+
+The '''Bee Hive''' is a natural [[trap]] which spawns over time under [[Jungle grass]] ceilings of the [[Jungle]] and [[Underground Jungle]]. When a Bee Hive is hit, it falls to the ground and rolls, releasing 2–5 [[Bee]]s upon breaking. If it falls into any [[liquid]], it will not release any Bees upon breaking, and drop 2–5 [[Hive]] blocks instead.{{source code ref|name=kill|v=1.4.5.4|method=Terraria.Projectile.Kill}} It can be crafted and placed manually.
+
+== Crafting ==
+=== Recipes ===
+{{recipes|result=Bee Hive|expectedrows=1}}
+
+== Notes ==
+* At least 2 Bees will be spawned. There are three independent {{chance|1/3}} chances to increase this number by 1,<ref name="kill"/> resulting in a maximum possible number of Bees of 5. The following table visualizes the number of Bees and the respective chances:
+: {| class="terraria sortable"
+! {{ht|#|Number of Bees}} !! Chance
+|-
+| align=center | 2 || {{chance|8/27}}
+|-
+| align=center | 3 || {{chance|12/27|reduce=no}}
+|-
+| align=center | 4 || {{chance|6/27|reduce=no}}
+|-
+| align=center | 5 || {{chance|1/27}}
+|}
+: On average, 3 Bees will be spawned.
+* A Bee Hive will only spawn Bees when there are less than 100 [[NPC spawning|NPCs]] existing in the world (e.g. without any other [[enemies]], friendly [[NPCs]], [[critters]], etc., a maximum of 100 Bees can be spawned from the Bee Hive).<ref name="kill"/>
+* Bee Hives can generate in [[water]].
+* Since the Bees are spawned when the Bee Hive breaks, a long fall can put them far enough from the player to be instantly despawned.
+* A Bee Hive cannot be retrieved once placed, as hitting it with a [[pickaxe]] or [[drill]], which would otherwise break the tile and drop an item, causes it to fall and break.
+* The Bee Hive itself does not deal damage to the player on contact.
+* Bee Hives have a chance to drop upon [[shaking]] a [[Mahogany tree]]. They will drop as projectiles that will break, not as collectible items.
+
+== History ==
+{{history|Desktop 1.4.5.0|Now drops 2–5 [[Hive]] blocks when dropped into any [[liquid]].}}
+{{history|Desktop 1.4.4|Stack limit increased from 999 to 9999.}}
+{{history|Desktop 1.4.1.2|Bees will no longer spawn if more than 100 [[enemies]], [[critters]] and [[NPCs]] are active in the world.}}
+{{history|Desktop 1.4.1|Can now be crafted.}}
+{{history|Desktop 1.4.0.1|
+** No longer has a chance to spawn a [[Hornet]] upon impact.
+** Can now drop from shaking a Jungle tree.}}
+{{history|Desktop 1.3.1|Introduced.}}
+{{history|Console 1.0.1372.5|Introduced.}}
+{{history|Switch 1.0.895.9|Introduced.}}
+{{history|Mobile 1.4.0.5.0|Introduced.}}
+
+== References ==
+{{reflist}}
+
+{{Master Template Furniture
+| show-other = yes
+}}
+
+{{language info|en=Bee Hive}}

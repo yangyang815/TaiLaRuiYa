@@ -1,0 +1,102 @@
+{{item infobox
+| image = Candle.png
+| type = Furniture / Light source / Mechanism
+| rare = {{iteminfo|105|rare}}
+| placeable = Yes
+| width = 1
+| height = 1
+| stack = {{iteminfo|105|stack}}
+| consumable = true
+| use = {{iteminfo|105|use}}
+| autoswing = yes
+| sell = {{iteminfo|2045|sell}}<br/>{{iteminfo|105|sell}} {{note|paren=y|{{tr|{{itemNameFromId|105}}}}/{{tr|{{itemNameFromId|713}}}}}}
+| research = {{iteminfo|105|research}}
+| idtile = {{iteminfo|105|tile}}, {{iteminfo|713|tile}} {{note|paren=y|{{tr|{{itemNameFromId|713}}}}}},<br/>{{iteminfo|148|tile}} {{note|paren=y|{{tr|{{itemNameFromId|148}}}}}}, {{iteminfo|3117|tile}} {{note|paren=y|{{tr|{{itemNameFromId|3117}}}}}}, <br/>{{iteminfo|5322|tile}} {{note|paren=y|{{tr|{{itemNameFromId|5322}}}}}}
+| cargo = no
+| allversions = yes
+}}
+[[File:Placed Candles.png|frame|放置蜡烛（在开和关状态下，如果有的话）。单击以查看每行的摘要。]]
+
+{{redirect|{{tr|Pumpkin Candle}}|[[{{tr|Pets}}|{{tr|pet summon item}}]]|{{tr|Pumpkin Scented Candle}}}}
+
+'''{{tr|Candle}}'''是一种[[{{tr|Furniture}}]]和[[{{tr|Light source}}]]。可以将其放置在[[{{tr|flat-surface items}}]]上。{{tr|Candle}}即使放置在水下也会发光。可以通过 {{key|open}} 键或者[[{{tr|mechanism}}]]来打开或关闭。
+
+部分{{tr|candles}}可以提供{{tr|buffs or debuffs}}。[[{{tr|Water Candle}}]]是在[[{{tr|Dungeon}}]]中发现的一种特殊类型的{{tr|candles}}。放置或手持时，会使{{tr|enemy}}的生成速度提高 33%，并将屏幕内同时出现的{{tr|enemy}}数量上限提高 50%。相反地，[[{{tr|Peace Candle}}]]能使{{tr|enemy}}的生成速度降低 23%，屏幕内同时出现的{{tr|enemy}}数量上限降低 30%。{{eil|Shadow Candle}} 取消了[[{{tr|town}}]]区域的{{tr|enemy}}生成减少的效果。对于{{tr|Water Candle}}和{{tr|Peace Candle}}，放置多个的效果不会叠加，但是手持和放置的效果会叠加。
+
+== {{tr|Crafting}} ==
+=== {{tr|Recipes}} ===
+{{recipes|cate=force|showresultid=y|result=LIKE %Candle|resultnot=Large Dynasty Candle|expectedrows=39|resulttemplate=:{{PAGENAME}}/resultcell}}
+
+=== 不可制作 ===
+{{options/set|item infobox|view=table|cols=item2cells-anchor-nolink/sell/col:notes}}
+{| class="terraria lined"
+! colspan=2 | {{tr|Candle}} !! {{tr|Sell}} !! {{tr|Notes}}
+{{item infobox|type=Furniture/Light source|width=1|height=1|auto=1405|tags=plunder|col:notes=在{{tr|Dungeon}}中找到。}}
+{{item infobox|type=Furniture/Light source|width=1|height=1|auto=1406|tags=plunder|col:notes=在{{tr|Dungeon}}中找到。}}
+{{item infobox|type=Furniture/Light source|width=1|height=1|auto=1407|tags=plunder|col:notes=在{{tr|Dungeon}}中找到。}}
+{{item infobox|type=Furniture/Light source|width=1|height=1|auto=2651|tags=plunder|col:notes=在[[{{tr|Ruined House}}]]中找到，不会被[[{{tr|lava}}]]摧毁。}}
+{{item infobox|type=Furniture/Light source|width=1|height=1|auto=2155|tags=drop|col:notes=由[[{{tr|Pirate Invasion}}|{{tr|Pirate}}]]掉落。}}
+|}{{options/reset|item infobox}}
+
+== {{tr|Notes}} ==
+* 只有由[[{{tr|Gold Bar}}]]制成的普通{{tr|Candle}}在掉落时会发光，类似于[[{{tr|Torches}}]]，如果掉入[[{{tr|Water}}]]中则会熄灭。
+* 只有[[{{tr|Water Candle}}]]可以在水下手持时发光。
+* {{tr|Water Candle}}的效果可以与[[{{tr|Battle Potion}}]]和[[{{tr|Blood Moon}}]]的效果叠加。
+* [[{{tr|Skull Lantern}}]]似乎是{{tr|Candle}}的“{{tr|bone}}” 版本，最明显的区别是它的大小。{{tr|Candle}}的尺寸为 1×1，而{{tr|Skull Lantern}}的尺寸为 2×2。{{tr|Skull Lantern}}''无法''通过{{tr|mechanism}}进行开关。
+* [[{{tr|Large Dynasty Candle}}]]尽管名字含有“蜡烛”，但它实际上是{{tr|Candelabra}}。
+* {{tr|Cactus Candle}}有点像[[{{tr|Pink Prickly Pear}}]]。
+
+== {{tr|History}} ==
+{{history|Desktop 1.4.5.6|现在可以放置在[[{{tr|Metal Bars}}]]上。}}
+{{history|Desktop 1.4.5.0|
+** 加入了{{tr|Aetherium Candle}}、{{tr|Aquarium Candle}}、{{tr|Boulder Candle}}、{{tr|Cloud Candle}}、{{tr|Crimtane Candle}}、{{tr|Demonite Candle}}、{{tr|Duskware Candle}}、{{tr|Easter Candle}}、{{tr|Fallen Star Candle}}、{{tr|Feywood Candle}}、{{tr|Flinx Fur Candle}}、{{tr|Forbidden Candle}}、{{tr|Gothic Candle}}、{{tr|Hallowed Candle}}、{{tr|Harpy Candle}}、{{tr|Jellyfish Candle}}、{{tr|Librarian Candle}}、{{tr|Office Candle}}、{{tr|Pine Candle}}、{{tr|Snow Candle}}、{{tr|Spike Candle}}和{{tr|Stone Candle}}。
+** {{tr|Water Candles}}现在在水下手持时会发光。}}
+{{history|Desktop 1.4.4|加入了{{tr|Ash Wood Candle}}、{{tr|Balloon Candle}}、{{tr|Reef Candle}}和{{tr|Shadow Candle}}。}}
+{{history|Desktop 1.4.0.1|
+** 加入了{{tr|Spider Candle}}、{{tr|Lesion Candle}}、{{tr|Sandstone Candle}}、{{tr|Bamboo Candle}}、{{tr|Nebula Candle}}、{{tr|Solar Candle}}、{{tr|Stardust Candle}}和{{tr|Vortex Candle}}。
+** {{tr|Skyware Candle}}物品和放置外观更新。}}
+{{history|Desktop 1.3.5|加入了{{tr|Crystal Candle}}。}}
+{{history|Desktop 1.3.0.1|
+** 加入了{{tr|Granite Candle}}、{{tr|Marble Candle}}、{{tr|Martian Candle}}、{{tr|Meteorite Candle}}和{{tr|Peace Candle}}。
+** 现在可以制作{{tr|Water Candle}}。}}
+{{history|Desktop 1.2.4.1|现在可以制作{{tr|Steampunk Candle}}。}}
+{{history|Desktop 1.2.4|加入了{{tr|Boreal Wood Candle}}、{{tr|Palm Wood Candle}}、{{tr|Mushroom Candle}}、{{tr|Obsidian Candle}}、{{tr|Pumpkin Candle}}、{{tr|Slime Candle}}、{{tr|Honey Candle}}、{{tr|Spooky Candle}}和不可制作的{{tr|Steampunk Candle}}。}}
+{{history|Desktop 1.2.3|
+** 加入了{{tr|Ebonwood Candle}}、{{tr|Pearlwood Candle}}、{{tr|Shadewood Candle}}、{{tr|Cactus Candle}}、{{tr|Dynasty Candle}}、{{tr|Flesh Candle}}、{{tr|Frozen Candle}}、{{tr|Glass Candle}}、{{tr|Golden Candle}}、{{tr|Lihzahrd Candle}}、{{tr|Living Wood Candle}}、{{tr|Rich Mahogany Candle}}和{{tr|Skyware Candle}}。
+** 修复了{{tr|Platinum Candle}}在非 RGB 照明模式下不发光的问题。
+** 修复了{{tr|Platinum Candle}}无法右键单击的问题。}}
+{{history|Desktop 1.2.1.2|为{{tr|Water Candle}}添加了一个{{tr|debuff}}图标。}}
+{{history|Desktop 1.2|
+** 加入了{{tr|Platinum Candle}}和蓝、绿、粉{{tr|Dungeon Candle}}。
+** 现在放置{{tr|Water Candle}}也可以提高{{tr|enemy}}的生成速度。}}
+{{history|Desktop 1.0.5|在水下手持{{tr|Candle}}将不再发光。}}
+{{history|Desktop 1.0.4|现在在手持{{tr|Water Candle}}时可以正常提高{{tr|enemy}}生成速度。}}
+{{history|Desktop-Release|{{tr|Introduced.}}}}
+{{history|Console 1.0.933.1|随 PS4 的 1.0.750.0 的更新进行了更改。 ({{icon/xbox one}})}}
+{{history|Console 1.0.750.0|({{icon/ps4}})
+** 加入了{{tr|Granite Candle}}、{{tr|Marble Candle}}、{{tr|Martian Hover Candle}}、{{tr|Meteorite Candle}}和{{tr|Peace Candle}}。
+** 现在可以制作{{tr|Water Candle}}。}}
+{{history|Console 1.07|加入了{{tr|Boreal Wood Candle}}、{{tr|Palm Wood Candle}}、{{tr|Mushroom Candle}}、{{tr|Obsidian Candle}}、{{tr|Pumpkin Candle}}、{{tr|Slime Candle}}、{{tr|Honey Candle}}、{{tr|Spooky Candle}}和{{tr|Steampunk Candle}}。}}
+{{history|Console 1.06|加入了{{tr|Ebonwood Candle}}、{{tr|Pearlwood Candle}}、{{tr|Shadewood Candle}}、{{tr|Cactus Candle}}、{{tr|Dynasty Candle}}、{{tr|Flesh Candle}}、{{tr|Frozen Candle}}、{{tr|Glass Candle}}、{{tr|Golden Candle}}、{{tr|Lihzahrd Candle}}、{{tr|Living Wood Candle}}、{{tr|Rich Mahogany Candle}}和{{tr|Skyware Candle}}。}}
+{{history|Console 1.02|
+** 加入了{{tr|Platinum Candle}}和蓝、绿、粉{{tr|Dungeon Candle}}。
+** 现在放置{{tr|Water Candle}}也可以提高{{tr|enemy}}的生成速度。
+** 为{{tr|Water Candle}}添加了一个{{tr|debuff}}图标。}}
+{{history|Console-Release|引入了对电脑版 1.0.5 的更改。}}
+{{history|Switch 1.0.711.6|引入了对电脑版 1.3.0.1 的更改。}}
+{{history|Mobile 1.3.0.7|
+** 加入了{{tr|Granite Candle}}、{{tr|Marble Candle}}、{{tr|Martian Hover Candle}}、{{tr|Meteorite Candle}}和{{tr|Peace Candle}}。
+** 现在可以制作{{tr|Water Candle}}。
+** 现在手持{{tr|Water Candle}}可以增加{{tr|enemy}}的生成速度。}}
+{{history|Mobile 1.2.11212|加入了{{tr|Ebonwood Candle}}、{{tr|Pearlwood Candle}}、{{tr|Shadewood Candle}}、{{tr|Cactus Candle}}、{{tr|Dynasty Candle}}、{{tr|Flesh Candle}}、{{tr|Frozen Candle}}、{{tr|Glass Candle}}、{{tr|Golden Candle}}、{{tr|Lihzahrd Candle}}、{{tr|Living Wood Candle}}、{{tr|Rich Mahogany Candle}}、{{tr|Skyware Candle}}、{{tr|Boreal Wood Candle}}、{{tr|Palm Wood Candle}}、{{tr|Mushroom Candle}}、{{tr|Pumpkin Candle}}、{{tr|Slime Candle}}、{{tr|Honey Candle}}、{{tr|Spooky Candle}}和{{tr|Steampunk Candle}}。}}
+{{history|Mobile 1.2.6508|
+** 加入了{{tr|Platinum Candle}}和蓝、绿、粉{{tr|Dungeon Candle}}。
+** 现在放置{{tr|Water Candle}}也可以提高{{tr|enemy}}的生成速度。}}<!-- held ones, due to bugs, didn't until Mobile 1.3.0.7 -->
+** 为{{tr|Water Candle}}添加了一个{{tr|debuff}}图标。
+{{history|Mobile-Release|加入，在水下手持{{tr|Candle}}将不再发光。}}<!-- held Candles didn't increase spawnrate until Mobile 1.3.0.7 -->
+{{history|3DS-Release|引入了对电脑版 1.2 的更改。}}
+
+{{Master Template Furniture
+| show-light = yes
+}}
+{{language info|en=Candles}}

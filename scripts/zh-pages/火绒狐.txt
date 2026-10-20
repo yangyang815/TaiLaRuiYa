@@ -1,0 +1,125 @@
+{{exclusive|1.4.5.0}}
+{{infobox wrapper
+|{{item infobox
+| auto = 5664
+| debuff = On Fire!
+| debuffchance = 100%
+| debuffduration = {{duration|rawseconds=5-10}} {{note|{{tr|Fireball}}|small=y|paren=y}} <br/> {{duration|rawseconds=5}} {{note|火焰喷射|small=y|paren=y}}
+| idprojectile = 1094, 1097, 1106
+| sound1 = Pal foxparks joy.wav
+| soundcaption1 = 抚摸
+| tags = minion <!-- minion tag goes first for [[List of summon weapons]] categorization -->
+}}
+|{{item infobox
+| auto = 6149
+| debuff = Hellfire
+| debuffchance = 100%
+| debuffduration = {{duration|rawseconds=5-10}} {{note|{{tr|Fireball}}|small=y|paren=y}} <br/> {{duration|rawseconds=5}} {{note|火焰喷射|small=y|paren=y}}
+| idprojectile = 1113, 1097, 1106
+| sound1 = Pal foxparks joy.wav
+| soundcaption1 = 抚摸
+| tags = minion <!-- minion tag goes first for [[List of summon weapons]] categorization -->/ hardmode
+}}
+|{{npc infobox
+| auto = 696
+| image = Foxparks (distressed).png
+| type =
+}}
+}}
+{{see also|{{tr|Flamethrower}}|{{tr|Elf Melter}}}}
+[[File:Foxparks (demo).gif|thumb|{{tr|Foxparks}}攻击[[{{tr|Drippler}}]]和[[{{tr|Target Dummies}}]]。注意它可以被手持并用作{{tr|flamethrower}}。]]
+
+'''{{tr|Foxparks}}'''是一个[[{{tr|pre-Hardmode}}]]的[[{{tr|summon weapon}}]]，可召唤'''{{tr|Foxparks}}'''[[{{tr|minion}}]]。它不会造成{{tr|contact damage}}，而是会向[[{{tr|enemies}}]]奔跑并发射{{tr|fireball}}，施加 5–10 秒的[[{{tr|On Fire!}}]]{{tr|debuff}}。当手持此{{tr|weapon}}按下 {{key|use}} 时，{{tr|Foxparks}}会传送到{{tr|player}}处并被举起，使用特殊的火焰喷射攻击，不消耗任何[[{{tr|ammunition}}]]。火焰喷射攻击会快速发射烈焰，施加 5 秒的[[{{tr|On Fire!}}]][[{{tr|debuff}}]]，能够穿透{{tr|enemies}}，且每次击中后{{tr|damage}}降低 15%。两种攻击均造成 100% 的{{tr|weapon damage and knockback}}。同时仅能召唤一只{{tr|Foxparks}}；额外使用该{{tr|summon weapon}}不会召唤额外的{{tr|minion}}，也不会强化现有的{{tr|minion}}。和其他[[{{tr|Pals}}]]一样，可以按 {{key|open}} 来抚摸{{tr|Foxparks}}。
+
+若玩家不在[[{{tr|Graveyard}}]]{{tr|biome}}中，{{tr|Foxparks}}在[[{{tr|day}}]]期间可罕见地生成在[[{{tr|surface}}]]以上的[[{{tr|grass}}]]、[[{{tr|Jungle grass}}]]、[[{{tr|Snow Block}}]]、或[[{{tr|Ice Block}}]]上，但它不能生成在{{tr|world}}中心的水平四分之一宽度区域内{{note|small=y|paren=y|从{{tr|world}}中心算起，向两侧各八分之一宽度}}。{{source code ref|name=SpawnAnNPC|v=1.4.5.8|method=Terraria.NPC.SpawnAnNPC}}它最初生成为{{tr|distressed}}{{tr|Foxparks}}，附近会生成两个[[{{tr|Goblin Archer}}]]。当两个{{tr|Goblin Archers}}均被杀死（或消失）时，{{tr|Foxparks}}会在玩家位于 6.25 格内时转变为其{{tr|item}}形态。{{source code ref|v=1.4.5.8|method=Terraria.NPC.AI_127_Pal}}
+
+{{Lifeform Analyzer note}}
+
+{{modifier|summon}}
+
+== 可靠的火绒狐 ==
+[[File:Trusty Foxparks (demo).gif|thumb|{{tr|Trusty Foxparks}}攻击[[{{tr|Pigron}}]]和[[{{tr|Target Dummies}}]]。注意每三次{{tr|fireball}}攻击，发射的{{tr|fireball}}会分裂为 8 个更小的{{tr|fireballs}}。]]
+'''{{tr|Trusty Foxparks}}'''是{{tr|Foxparks}}的升级版本，通过将{{tr|Foxparks}}和[[{{tr|Kinship Peach}}]]{{tr|crafting}}获得。相较于{{tr|Foxparks}}，它具有更高的{{tr|base damage}}、能够在更远距离索敌、发射{{tr|fireballs}}更快、且其火焰喷射攻击范围更大。它也会获得“烈焰溅射”能力，每第三个发射的{{tr|fireball}}在消失时（击中{{tr|enemies}}时，或在飞行一小段距离后）会分裂成 8 个扇形散射的小{{tr|fireballs}}，每个小{{tr|fireballs}}造成 50% {{tr|weapon damage}}（{{#expr:floor({{iteminfo|Trusty Foxparks|damage}}*0.5)}} {{tr|base damage}}）和{{tr|knockback}}（{{knockback|full=y|{{#expr:{{iteminfo|Trusty Foxparks|knockback}}*0.5}}|class=}}{{tr|base knockback}}）。{{source code ref|v=1.4.5.8|method=Terraria.Projectile.AI_026 / Terraria.Projectile.Kill}}两种攻击改为造成[[{{tr|Hellfire}}]]{{tr|debuff}}而非[[{{tr|On Fire!}}]]，{{tr|fireballs}}造成 5–10 秒，火焰喷射攻击造成 5 秒。{{source code ref|v=1.4.5.8|method=Terraria.Projectile.StatusNPC}}它在其他方面的行为与{{tr|Foxparks}}相同。玩家无法同时召唤{{tr|Foxparks and Trusty Foxparks}}，它们在召唤时会互相替换。{{source code ref|v=1.4.5.8|method=Terraria.Player.FreeUpPetsAndMinions}}
+
+== 制作 ==
+=== 配方 ===
+{{recipes|result=Trusty Foxparks|expectedrows=1|link=no}}
+
+== 备注 ==
+=== 苦恼的火绒狐 ===
+* 如果{{tr|world}}上已经存在一只{{tr|distressed}}[[{{tr|Cattiva}}]]或一只{{tr|distressed}}{{tr|Foxparks}}，则{{tr|Foxparks}}不会生成。
+** 当尝试生成{{tr|distressed Pal}}时，游戏会首先检查{{tr|player}}的[[{{tr|inventory}}]]中是否有{{tr|Cattiva and Foxparks items}}（不包括可靠版本）。如果玩家{{tr|inventory}}中有其中之一，游戏会生成玩家没有的那个。如果玩家拥有两件或都没有，则有 40% 几率生成{{tr|distressed Foxparks}}，60% 几率生成{{tr|distressed Cattiva}}。{{tr|Foxparks}}的 40% 几率受[[{{tr|luck}}]]影响且首先检查，这意味着正值的{{tr|luck}}会提高{{tr|distressed Foxparks}}的生成几率，负值的{{tr|luck}}则会降低该几率。<ref name="SpawnAnNPC"/>
+* 假设{{tr|distressed}}{{tr|Foxparks}}位于 <code>(x, y)</code>，它会在 <code>(x-6, y-5)</code> 至 <code>(x-6, y+11)</code> 和 <code>(x+6, y-5)</code> 至 <code>(x+6, y+11)</code> 的范围内（两个 17 格高的竖列，位于其左侧和右侧各 6 格远处）寻找两个合适的实心{{tr|tile}}（包括[[{{tr|platforms}}]]和[[{{tr|Planter Boxes}}]]）。要使得{{tr|tile}}合适，其正上方 3×3 格区域内必须为空（区域左下角和右下角的两格除外，即 <code>(x-1, y-1)</code> 和 <code>(x+1, y-1)</code>）。{{source code ref|v=1.4.5.4|method=Terraria.GameContent.Events.CultistRitual.CheckFloor2}}相关的{{tr|Goblin Archers}}会在这两个{{tr|tile}}处生成。
+** {{tr|distressed}}{{tr|Foxparks}}在找不到两个合适{{tr|tile}}时会立即消失。
+* {{tr|distressed}}{{tr|Foxparks}}的 [[{{tr|AI}}]] 有时会不正确地检测其相关的{{tr|Goblin Archers}}，从而阻止它变为{{tr|item}}。此种情况下，远离它（但不要让它消失）然后重新接近，再杀死所有附近的{{tr|enemies}}可能能修复该问题。
+* {{tr|distressed Foxparks}}会受到{{tr|enemies}}的伤害，但所有攻击均只会对其造成 5 伤害，无论{{tr|enemy}}实际伤害如何。该伤害值随后会被{{tr|distressed Foxparks}}的 15 {{tr|defense}}降低，这意味着实际情况下它每次仅会受到 1 伤害。{{source code ref|v=1.4.5.8|method=Terraria.NPC.BeHurtByOtherNPC}}
+* 在内部，游戏会检测{{tr|Foxparks}}的生成位置与[[{{tr|world spawn}}]]的水平距离是否超过[[{{tr|world size}}|世界宽度]]的 1/8（在{{tr|small}} / {{tr|medium}} / {{tr|large}}{{tr|worlds}}中分别为 525 / 800 / 1050 格）。在普通{{tr|world}}中，这会阻止它生成在地图中心 1/4 的区域内生成，而在改变了{{tr|spawn point}}的[[{{tr|Special world seeds}}|特殊]]或[[{{tr|Secret world seeds}}|秘密]]世界种子中，其生成区域会有所不同，例如 [[{{tr|Celebration Mk 10@seed}}]] 和 [[{{tr|How did I get here}}]]。<ref name="SpawnAnNPC"/>
+=== 火绒狐 & 可靠的火绒狐 ===
+* {{tr|The Foxparks minion}}每 {{duration|42 ticks}}向{{tr|enemies}}发射一次{{tr|fireballs}}，而{{tr|Trusty Foxparks minion}}每 {{duration|30 ticks}}发射一次。{{source code ref|name=aistyle26|v=1.4.5.8|method=Terraria.Projectile.AI_026}}
+* {{tr|fireballs}}飞行过程中在视觉上会变小，并在 {{duration|35 ticks}}后消失。{{source code ref|name=aistyle1|v=1.4.5.8|method=Terraria.Projectile.AI_001}}
+** {{tr|Trusty Foxparks minion}}发射的每第 3 个{{tr|fireball}}改为在 {{duration|15 ticks}}后消失，它放出的小{{tr|fireballs}}在再经过 {{duration|20 ticks}}后消失。
+** 在{{tr|fireballs}}发射后的最初 {{duration|20 ticks}}内，只要它没有向下的动量，它就可以穿过{{tr|blocks}}。在经过这段时间后，{{tr|fireballs}}会开始受{{tr|gravity}}影响并完全失去穿过{{tr|blocks}}的能力。
+* {{tr|The Foxparks minion}}可攻击{{维基百科|taxicab distance|曼哈顿距离}} 50 格以内且水平距离在 28.125 格以内的{{tr|enemies}}，而{{tr|Trusty Foxparks minion}}可攻击曼哈顿距离 72.5 格以内且水平距离在 39.375 格以内的{{tr|enemies}}。<ref name="aistyle26"/>
+** 它会通过根据目标当前位置与速度预测它 {{duration|20 ticks}}后的位置以尝试预判发射{{tr|fireball}}。
+* 若{{tr|Foxparks minion}}无有效目标，且与{{tr|player}}距离过远时，它会传送至{{tr|player}}位置。这会在与{{tr|player}}的垂直距离大于 18.75 格，或总距离大于 31.25 格时触发。若触发传送时{{tr|player}}位于空中，则{{tr|Foxparks}}会坐在{{tr|player}}肩膀上，待{{tr|player}}落地后才恢复行动。<ref name="aistyle26"/>
+* 火焰喷射攻击每 {{duration|4 ticks}}发射一次火焰。<ref name="aistyle26"/>
+* 火焰喷射攻击的火焰{{tr|projectiles}}能穿透 3 个目标，并在第 4 次击中时消失。{{source code ref|v=1.4.5.8|method=Terraria.Projectile.SetDefaults}}
+* 火焰喷射攻击击中时造成 10 {{tr|ticks}}{{tick}}的[[{{tr|static invincibility frame}}]]，这意味着其每秒最多可击中单个目标 6 次。<ref name="aistyle26"/>
+** 由于其极高的发射频率，会使火焰{{tr|projectiles}}干扰彼此的{{tr|damage}}，不过第 4 次击中不会造成任何{{tr|invincibility frames}}。
+*** 例如，使用火焰喷射攻击一群线性排布的{{tr|enemy}}时，第一个{{tr|projectile}}会击中第1、2、3、4 个目标，而第二个{{tr|projectile}}能够击中第 4、5、6、7 个目标，第三个{{tr|projectile}}则会击中第 7、8、9、10 个目标。此后，第一个{{tr|projectile}}造成的{{tr|invincibility frames}}结束，下一个{{tr|projectile}}可再次击中前 4 个目标，然后重复此循环。
+* {{tr|Foxparks minion}}的火焰喷射攻击的最大范围 16.875 格，{{tr|Trusty Foxparks minion}}则为 36.59375 格。{{source code ref|v=1.4.5.8|method=Terraria.Projectile.SetDefaults / Terraria.Projectile.Damage_CanDealDamage / Terraria.Projectile.Damage_GetHitbox / Terraria.Projectile.AI_026|t=火焰喷射攻击的{{tr|velocity}}为 5 {{tr|pixels}}/{{tr|tick}}（10.5 {{tr|pixels}}/{{tr|tick}}）。{{tr|The projectile}}生成的初始位置为玩家{{tr|center}}向瞄准方向反向移动 12 {{tr|pixels}}。{{tr|projectile}} <code>localAI[0]</code> 初始为 0，每{{tr|tick}}增加 1。当 <code>localAI[0]</code> ≥ 54 时，它不再造成{{tr|damage}}。{{tr|The projectile}}初始{{tr|hitbox}}为 6×6，且最终造成伤害框架的{{tr|hitbox}}会向两侧各扩大 14（38）{{tr|pixels}}。因此{{tr|projectile}}最终范围为：5 × 53 − 12 + 3 + 14 = 270 {{tr|pixels}}（10.5 × 53 − 12 + 3 + 38 = 597.5 {{tr|pixels}}），即 16.875 格（36.59375 格）。}}
+* 类似于其他{{tr|minion projectiles}}，火焰喷射攻击也会获得所有{{tr|whip}}标记效果加成。{{source code ref|v=1.4.5.8|field=Terraria.ID.ProjectileID.Sets&#46;MinionShot}}
+** 由于火焰喷射攻击被记作{{tr|minion projectiles}}，所以它不会对[[{{tr|critters}}]]造成{{tr|damage}}。{{source code ref|v=1.4.5.8|method=Terraria.Player.CanNPCBeHitByPlayerOrPlayerProjectile}}
+* {{tr|fireball}}和火焰喷射攻击在接触{{tr|liquids}}时均会消失，[[{{tr|lava}}]]除外。{{source code ref|v=1.4.5.8|field=Terraria.ID.ProjectileID.Sets&#46;IsDestroyedByWater}}
+** {{tr|The fireballs}}可在[[{{tr|shimmer}}]]表面反弹，但若在{{tr|shimmer}}内部发射时会被立即摧毁。
+* 与[[{{tr|Traveling Merchant}}]]对话时，如果{{tr|player}}的{{tr|inventory}}或任何[[{{tr|portable storage}}]]{{tr|item}}中有{{tr|Cattiva}}、{{tr|Foxparks}}、[[{{tr|Chillet}}]]、[[{{tr|Chillet Ignis}}]]、[[{{tr|Digtoise}}]]或它们的“可靠”变体，他就会出售[[{{tr|Pal Metal set}}]]。
+
+== 小贴士 ==
+[[File:Foxparks farm.png|thumb|刷{{tr|Foxparks}}场地的一个例子，建造在{{tr|Ocean}}上，{{tr|world border}}附近。注意{{tr|Water Candle}}{{tr|Battle Potion}}和人造{{tr|Jungle biome}}可用于提升{{tr|spawn}}率。]]
+* 为了提升{{tr|Foxparks}}或[[{{tr|Cattiva}}]]的出现率，玩家可以放置一长排的[[{{tr|Snow}}]]或[[{{tr|Ice}}]]以供它们生成。玩家还可以使用[[{{tr|Water Candle}}]]和[[{{tr|Battle Potion}}]]，并在附近建造人工[[{{tr|Jungle}}]]{{tr|biome}}（见[[指南:{{tr|Artificial biomes}}]]），以提升[[{{tr|spawn rate}}]]。增加[[{{tr|luck}}]]的{{tr|Items}}，如[[{{tr|Lucky Clover}}]]或[[{{tr|Garden Gnome}}]]，也有所帮助。注意它们仅会在[[{{tr|day}}]]期间的[[{{tr|Surface}}]]生成。
+** [[{{tr|Grass}}]]或[[{{tr|Jungle Grass}}]]也可用作生成区域，但它们并不理想，因为当处于{{tr|world}}外侧六分之一区域时，{{tr|Grass}}上可能会导致期望外的[[{{tr|King Slime}}]]生成，而{{tr|Jungle Grass}}会因{{tr|jungle enemies}}的生成而降低{{tr|Pals}}的生成率。
+** 在[[{{tr|Ocean}}]]上方直接建造场地十分有用，因为{{tr|Ocean}}天然提供了一个大型空旷区域，意味着玩家不必担心{{tr|enemies}}会生成在期望外的位置而降低刷怪场的效率。
+*** 此外，玩家在[[{{tr|world border}}]]附近时，{{tr|enemies}}可生成在屏幕内，使得{{tr|Pals}}的生成易于被注意到。
+** 在获得其中之一之后就完全无需考虑{{tr|Luck}}了，因为保证会生成玩家未拥有的那只。
+* 当其与{{tr|Goblin Archers}}一起生成时，{{tr|music}}会切换为[[{{tr|Music|link=y}}#{{tr|Goblin Army}}|{{tr|Goblin Army}}]]主题，使得即使没有[[{{tr|Lifeform Analyzer}}]]也可以判断附近是否有{{tr|Pal}}。
+
+== 花絮 ==
+* {{tr|Foxparks}}的 {{key|use}} 按键攻击模仿了其在{{维基百科|b=y|Palworld|t={{tr|Palworld}}}}中的伙伴技能“抱抱火焰”。
+* {{tr|Trusty Foxparks}}的烈焰溅射攻击参考了《{{tr|Palworld}}》中的{{iwlink|pal|Spirit Fire|同名技能}}，这会发射一个能分裂成数个小{{tr|fireball}}的{{tr|fireball}}。
+* 获得{{tr|Foxparks}}的方式参考了《{{tr|Palworld}}》中由敌对 {{tr|NPCs}} 守卫的营地，其中{{tr|Pals}}被锁在笼子中等待救援。
+* {{tr|Foxparks}}（Foxparks）的手持外观 [[File:Foxparks (held).png]] 的内部名称有拼写错误：<code>FoxsparksHeld</code>。
+
+== 另见 ==
+* {{pal link}}
+
+== 历史 ==
+{{history|Desktop 1.4.5.7|
+** {{tr|Distressed Pal}}{{tr|event}}现在保证会生成玩家尚未获得的{{tr|pal}}。
+** {{tr|Distressed Pal event}}现在发生几率提高 25%。
+** {{tr|Distressed}}{{tr|Foxparks}}现在从所有攻击中受到 5 {{tr|damage}}，这应当显著提高在更高[[{{tr|difficulties}}]]下救下它们的几率。
+** 现在可使用[[{{tr|Kinship Peach}}]]（通过{{tr|crafting}}）升级为其“可靠”{{tr|variant}}。
+** 火焰喷射攻击的伤害由{{tr|item damage}}的 75% 提升至 100%。
+** 移除了火焰喷射攻击的[[{{tr|armor penetration}}]]。
+** 火焰喷射攻击造成的[[{{tr|static invincibility frame}}]]由 15 降低至 10。
+** {{tr|Foxparks}}现在不再坐在旋转的玩家的肩膀上。}}
+{{history|Desktop 1.4.5.3|
+** 生成率由 {{chance|1/300}} 提升至 {{chance|1/200}}。
+** 比例由 70% {{tr|Cattiva}}和 30% {{tr|Foxparks}}调整为 60% {{tr|Cattiva}}和 40% {{tr|Foxparks}}。}}
+{{history|Desktop 1.4.5.0|{{tr|Introduced.}}}}
+{{history|Console 1.4.5|{{tr|Introduced.}}}}
+{{history|Switch 1.4.5|{{tr|Introduced.}}}}
+{{history|Mobile 1.4.5|{{tr|Introduced.}}}}
+
+== 参考 ==
+{{reflist}}
+
+{{Minions}}
+{{Master Template Weapons
+| show-summon = yes
+}}
+{{Master Template Buffs
+| show-buffs = yes
+}}
+
+
+{{language info|en=Foxparks}}

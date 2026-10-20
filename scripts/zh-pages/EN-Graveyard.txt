@@ -1,0 +1,366 @@
+{{exclusive|1.4.0.1}}
+{{screenshot banner}}
+{{for|the painting|Graveyard (item)}}
+
+The '''Graveyard''' is a [[mini-biome]] that starts to appear when at least five{{source code ref|v=1.4.5.6|method=Terraria.SceneState.UpdateGraveyard|field=Terraria.SceneMetrics.GraveyardTileMin}} [[Tombstones]] are near the player and completes when at least seven{{source code ref|v=1.4.5.6|method=Terraria.SceneMetrics.EnoughTilesForGraveyard|field=Terraria.SceneMetrics.GraveyardTileThreshold}} Tombstones are near the player. Some special visual effects can be seen in the Graveyard, and these effects grow stronger as more Tombstones are added, capped at nine Tombstones:{{source code ref|v=1.4.5.6|method=Terraria.SceneState.UpdateGraveyard|field=Terraria.SceneMetrics.GraveyardTileMax}} colors desaturate, lightning randomly strikes in the background, and [[Ecto Mist]] accumulates on the ground.
+
+When at least seven Tombstones are nearby, the Graveyard biome will gain additional functional effects: unique Graveyard [[enemies]] spawn here [[Day and night cycle|day and night]], as well as the usual creatures originally spawning at night. The [[spawn rate]] is not increased, but the enemy spawn reduction of [[towns]] is weakened. [[NPC]] vendors have unique trades here, and the Ecto Mist on the ground enables [[Ecto Mist#Crafting|unique crafting recipes]] for the player.
+
+[[Sunflower]]s can prevent the forming of Graveyards: each Sunflower nearby negates the presence of one Tombstone.{{source code ref|v=1.4.4.9|method=Terraria.SceneMetrics.ExportTileCountsToMain}}
+
+== Contents ==
+{{for|information about the items crafted in a Graveyard|Ecto Mist#Crafting}}
+{{options/set|item|icons=n|scale=0.75}}{{options/set|dotlist|dot=no|space=l}}<!--
+-->{{infocard/start|class=compact small biome}}<!--
+
+	-->{{infocard/mainheading|Characters}}<!--
+	--><div><!--
+		-->{{infocard/box|title=[[Pre-Hardmode]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Maggot Zombie}}<!--
+			-->|{{item|Moss Zombie}}<!--
+			-->|{{item|Zombie}}<!--
+			-->|{{item|Raincoat Zombie|note2=(rain)}}<!--
+			-->|{{item|Frozen Zombie|note2=([[Snow biome]])}}<!--
+			-->|{{item|The Groom|note2=(rare)}}<!--
+			-->|{{item|The Bride|note2=(rare)}}<!--
+			-->|{{item|Demon Eye}}<!--
+			-->|{{item|Raven}}<!--
+			-->|{{item|Ghost (enemy)|Ghost|note2=(uncommon)}}<!--
+			-->|{{item|Spore Zombie|note2=([[Glowing Mushroom biome]])}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=After defeating [[Skeletron]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Statue (enemy)}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=[[Hardmode]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Hoppin' Jack}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=[[Critters]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Rat}}<!--
+			-->|{{item|Maggot|note2=(Maggot Zombies)}}<!--
+			-->}}<!--
+		-->}}<!--
+	--></div><!--
+
+	-->{{infocard/mainheading|Unique Drops}}<!--
+	--><div><!--
+		-->{{infocard/box|title=From [[Raincoat Zombie]]s:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Rain Hat}}<!--
+			-->|{{item|Rain Coat}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Frozen Zombie]]s:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Snow Hood}}<!--
+			-->|{{item|Snow Coat}}<!--
+			-->|{{item|Snow Pants}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[The Groom]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Top Hat}}<!--
+			-->|{{item|Bloody Tear}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[The Bride]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Wedding Veil}}<!--
+			-->|{{item|Wedding Dress}}<!--
+			-->|{{item|Bloody Tear}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Raven]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Raven Feather}}<!--
+			-->}}<!--
+		-->}}<!--
+	--></div><!--
+
+	-->{{infocard/mainheading|For Sale}}<!--
+	--><div><!--
+		-->{{infocard/box|title=From [[Arms Dealer]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Quad-Barrel Shotgun|note2=(post-[[Skeletron]])}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Dye Trader]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Fogbound Dye}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Steampunker]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Bone Welder}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Mechanic]] or [[Cyborg]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Spectre Goggles}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Cyborg]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Echo Block}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Painter]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Illuminant Coating}}<!--
+			-->|{{item|Echo Coating|note2=(if [[Mechanic]] is present or [[Plantera]] has been defeated)}}<!--
+			-->|{{item|Nevermore}}<!--
+			-->|{{item|Reborn}}<!--
+			-->|{{item|Graveyard (item)|Graveyard}}<!--
+			-->|{{item|Ghost Manifestation}}<!--
+			-->|{{item|Wicked Undead}}<!--
+			-->|{{item|Bloody Goblet}}<!--
+			-->|{{item|Still Life}}<!--
+			-->|{{item|Hail to the King}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Party Girl]]:|<!--
+		-->{{dotlist<!--
+		-->|{{item|Release Doves}}<!--
+		-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Clothier]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Gravedigger Hat}}<!--
+			-->|{{item|Gravedigger Coat}}<!--
+			-->|{{item|Funeral Hat}}<!--
+			-->|{{item|Funeral Coat}}<!--
+			-->|{{item|Funeral Pants}}<!--
+			-->|{{item|Tragic Umbrella}}<!--
+			-->|{{item|Victorian Goth Hat}}<!--
+			-->|{{item|Victorian Goth Dress}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=From [[Dryad]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Corrupt Seeds|note2=(Hardmode, in worlds with [[Crimson]])}}<!--
+			-->|{{item|Crimson Seeds|note2=(Hardmode, in worlds with [[Corruption]])}}<!--
+			-->}}<!--
+		-->}}<!--
+        -->{{infocard/box|title=From [[Pirate]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Jellyfish Block}}<!--
+			-->}}<!--
+			-->}}<!--
+        -->{{infocard/box|title=From [[Stylist]]:|<!--
+			-->{{dotlist<!--
+			-->|{{item|Pretty Mirror}}<!--
+			-->}}<!--
+			-->}}<!--		
+	--></div><!--
+
+	-->{{infocard/mainheading|Music}}<!--
+	--><div><!--
+		-->{{infocard/box|<!--
+			-->{{dotlist<!--
+			-->|{{item|Music Box (Graveyard)| {{sound|track=Graveyard}}}}<!--
+			-->|{{item|Otherworldly Music Box (Eerie)| {{sound|track=Eerie (Otherworldly)}}}} <!--
+			-->}}<!--
+		-->}}<!--
+	--></div><!--
+
+-->{{infocard/end}}<!--
+-->{{options/reset|item}}{{options/reset|dotlist}}
+
+=== NPC quotes ===
+Most [[NPCs]] display unique quotes when spoken to in a Graveyard:
+{{options/set|item|class=mirror|icons=n}}
+{| class="terraria lined mw-collapsible"
+! width="140px" | NPC !! Quotes&emsp;
+|-
+| {{item|Angler}} ||
+{{gameText|AnglerSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|AnglerSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Arms Dealer}} ||
+{{gameText|ArmsDealerSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|ArmsDealerSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Clothier}} ||
+{{gameText|ClothierSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|ClothierSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Cyborg}} ||
+{{gameText|CyborgSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|CyborgSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Demolitionist}} ||
+{{gameText|DemolitionistSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|DemolitionistSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Dryad}} ||
+{{gameText|DryadSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|DryadSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Dye Trader}} ||
+{{gameText|DyeTraderSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|DyeTraderSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Goblin Tinkerer}} ||
+{{gameText|GoblinTinkererSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|GoblinTinkererSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Golfer}} ||
+{{gameText|GolferSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|GolferSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Guide}} ||
+{{gameText|GuideSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|GuideSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Mechanic}} ||
+{{gameText|MechanicSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|MechanicSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Merchant}} ||
+{{gameText|MerchantSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|MerchantSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Nurse}} ||
+{{gameText|NurseSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|NurseSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Painter}} ||
+{{gameText|PainterSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|PainterSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Party Girl}} ||
+{{gameText|PartyGirlSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|PartyGirlSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Pirate}} ||
+{{gameText|PirateSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|PirateSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Princess}} ||
+{{gameText|PrincessSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|PrincessSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Santa Claus}} ||
+{{gameText|SantaSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|SantaSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Skeleton Merchant}} ||
+{{gameText|SkeletonMerchantSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|SkeletonMerchantSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Steampunker}} ||
+{{gameText|SteampunkerSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|SteampunkerSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Stylist}} ||
+{{gameText|StylistSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|StylistSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Tavernkeep}} ||
+{{gameText|BartenderSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|BartenderSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Tax Collector}} ||
+{{gameText|TaxCollectorSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|TaxCollectorSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Traveling Merchant}} ||
+{{gameText|TravellingMerchantSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|TravellingMerchantSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Truffle}} ||
+{{gameText|TruffleSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|TruffleSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Witch Doctor}} ||
+{{gameText|WitchDoctorSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|WitchDoctorSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Wizard}} ||
+{{gameText|WizardSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|WizardSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Zoologist}} ||
+{{gameText|BestiaryGirlSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|BestiaryGirlSpecialText.Graveyard2|quote=yes}}
+|}{{options/reset|item}}
+
+== Notes ==
+* All Tombstones within a {{buff area}} centered on the player are considered when determining whether the area is a Graveyard biome.
+** Each Sunflower within the same area makes the Graveyard biome require one additional Tombstone to form (e.g. six Tombstones are required to form the biome if one Sunflower is nearby); additionally, Sunflowers will not grant the [[Happy!]] [[buff]] if there are at least five Tombstones within this area.
+* While [[night]]-only [[enemies]] can spawn at daytime through the graveyard, nocturnal [[bosses]] still cannot be spawned during the day.
+* [[NPCs]] in worlds with [[Hardcore]] characters will drop Tombstones when they are killed, making it possible to build a Graveyard without sacrificing a character.
+* Although most NPCs will complain when in a Graveyard, it does not actually affect their [[happiness]] at all. As a Graveyard is always in combination with a different biome, their happiness value will be based on the other present biome.
+** However, the [[Painter]] will not sell the paintings [[Daylight]], [[First Encounter]], [[Good Morning]], [[Underground Reward]], [[Through the Window]], [[Place Above the Clouds]], and [[Sky Guardian]] if he is spoken to in a Graveyard.
+* Normally, certain enemies with the [[Fighter AI]] cannot open [[doors]] and [[Tall Gate]]s unless during a [[Blood Moon]]. In a Graveyard, these enemies have a {{chance|1/60}} chance to open a door or Tall Gate even outside of a Blood Moon.{{source code ref|v=1.4.4.9|method=Terraria.NPC.AI_003_Fighters}}
+* An underground Graveyard will generate Ecto Mist, but not spawn its enemies.
+
+== Achievements ==
+{{achievement|name=Quiet Neighborhood}}
+
+== Tips ==
+* A large amount of [[Ecto Mist]] coats surfaces in Graveyard biomes, which can obscure items like [[Pressure Plates]].<!--This could previously be toggled on and off with the "Blood and Gore" [[Settings|setting]], but this appears to have been patched.-->
+* The large number of enemies spawns, including the particularly powerful [[Ghost (enemy)|Ghosts]], can make the Graveyard fairly dangerous during the early game. Players may wish to avoid letting Tombstones accumulate around their base and [[spawn point]].
+** This is especially true for [[Mediumcore]] players, as generating Tombstones over and over at the same spawn point can lead to a softlock situation, where it becomes almost impossible to retrieve items without being attacked.
+* Tombstones require two adjacent tiles of free space in order to be placed. Their placement can be prevented altogether by rendering at least every other block of a surface invalid, which includes placing [[platforms]], [[Torches]], [[furniture]], or [[saplings]], [[Slope|sloping]] the blocks with a [[hammer]], deactivating them with [[Actuator]]s, or simply digging them out.
+* Placing [[Sunflower]]s around common death spots such as [[arena]]s can help to prevent a Graveyard from being created without the need to constantly mine Tombstones.
+** Strategically placed Sunflowers with an overlapping radius can also create a pocket of non-Graveyard within the biome. This can be especially useful in worlds where the [[secret world seed]] [[What a horrible night to have a curse]] is enabled, allowing the player to go just outside a structure during the day without spawning Graveyard enemies while inside.
+* Collecting Tombstones in the early game and creating a Graveyard can be a way to easily obtain [[Abigail's Flower]] and farm [[Maggot]]s as [[bait]] from [[Maggot Zombie]]s.
+* The [[Dryad]] sells [[Crimson Seeds]] in a [[The Corruption|Corrupt]] world and [[Corrupt Seeds]] in a [[The Crimson|Crimson]] world during [[Hardmode]] when housed in a Graveyard biome, facilitating the presence of both [[evil biomes]] in one world without bringing items from other worlds.
+
+== History ==
+{{history|Desktop 1.4.5.0|
+** The [[Peace Candle]] now reduces the boosted spawn rates of Graveyard biomes by 33%.
+** [[Statue (enemy)|Statue]] enemies and [[Moss Zombie]]s now spawn in Graveyard biomes.
+** [[Spectre Goggles]] are now also sold by the [[Mechanic]] in Graveyards.
+** [[Echo Coating]] is now already sold prior to defeating [[Plantera]], provided the Mechanic is present in the world.}}
+{{history|Desktop 1.4.1|
+** [[Hoppin' Jack]]s can now spawn in the [[Hardmode]] Graveyard at any time of the year.
+** Increased Graveyard threshold of Tombstones by 1.
+** Added an achievement.}}
+{{history|Desktop 1.4.0.3|Ecto Mist clouds can no longer be removed by disabling [[Blood and Gore]].}}
+{{history|Desktop 1.4.0.1|Introduced.}}
+{{history|Console 1.4.0.5.4.1|Introduced with changes from Desktop 1.4.0.3.}}
+{{history|Switch 1.4.0.5.5|Introduced with changes from Desktop 1.4.0.3.}}
+{{history|Mobile 1.4.0.5.0|Introduced with changes from Desktop 1.4.0.3.}}
+
+== References ==
+{{reflist}}
+
+{{Biomes}}
+
+{{language info|en=Graveyard}}

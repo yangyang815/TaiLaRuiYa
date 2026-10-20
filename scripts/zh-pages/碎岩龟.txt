@@ -1,0 +1,86 @@
+{{exclusive|1.4.5.0}}
+{{item infobox
+| auto = 5667
+| idtile = 751
+| sound1 = Pal digtoise joy.wav
+| soundcaption1 = 抚摸
+}}
+[[File:Digtoise in Underground Desert.png|400px|thumb|right|{{tr|Underground Desert}}中发现的{{tr|Sleeping Digtoise}}。]]
+[[File:Digtoise (demo).gif|thumb|玩家召唤{{tr|Digtoise}}，抚摸它，并指示它挖掘{{tr|blocks}}。注意它会在碰到较硬的{{tr|blocks}}（如[[{{tr|Obsidian}}]]）时停止挖掘。]]
+
+'''{{tr|Digtoise}}'''是一种[[{{tr|pre-Hardmode}}]]的[[{{tr|Pets|pet-summoning}}]]{{tr|item}}，可以生成'''{{tr|Digtoise}}'''跟随玩家。手持此{{tr|item}}时，按下 {{key|use}} 可使其朝{{tr|cursor}}方向滚动。当它接触到[[{{tr|block}}]]时，它会开始朝该方向（向下或水平）挖掘，一次 3 个{{tr|blocks}}。其[[{{tr|pickaxe power}}]]为 26%（低于任何[[{{tr|pickaxe}}]]），[[{{tr|mining speed}}]]为 20。{{source code ref|name=digtoiseai|v=1.4.5.6|method=Terraria.Projectile.AI_204_Digtoise}}水平挖掘时，它可以跨越一格的缝隙，但两格或以上的缝隙会使其停止。它也会在碰到{{tr|pickaxe power}}不足以挖掘的{{tr|block}}时停止。当手持该{{tr|item}}时，在屏幕上除了{{tr|Digtoise}}所在处以外的任何位置按下 {{key|use}} 会使其停止挖掘，在除了{{tr|Digtoise}}所在处以外的任何位置按下 {{key|open}} 会使其消失。和其他[[{{tr|Pals}}]]一样，可以对其按下 {{key|open}} 按键抚摸它。
+
+{{tr|Digtoise}}罕见地以“{{tr|Sleeping Digtoise}}”<!--Internal tile name-->形式出现，一种在[[{{tr|Underground Desert}}]]的实心{{tr|object}}。在世界生成时，{{tr|Sleeping Digtoise}}有 {{chance|1/30}} 几率代替[[{{tr|Antlion Eggs}}]]生成；{{source code ref|v=1.4.5.3|method=Terraria.GameContent.Biomes.Desert.DesertHive.AddTileVariance}}且有{{tr|Antlion Eggs}}重新生成时，{{tr|Sleeping Digtoise}}有 {{chance|1/100}} 几率代替{{tr|Antlion Eggs}}生成。{{source code ref|v=1.4.5.3|method=Terraria.WorldGen.UpdateWorld_UndergroundTile}}
+
+== {{tr|Trusty Digtoise}} ==
+'''{{tr|Trusty Digtoise}}'''是{{tr|Digtoise}}的升级版，通过{{tr|Digtoise}}和[[{{tr|Little Kinship Peach}}]]{{tr|crafting}}而来。这会将{{tr|Digtoise}}的{{tr|pickaxe power}}升级为匹配玩家的{{tr|pickaxe power}}。
+
+== 制作 ==
+=== 配方 ===
+{{recipes|result=Trusty Digtoise|expectedrows=1|link=no}}
+
+== {{tr|tools}}使用 ==
+{{tr|Digtoise}}可被[[{{tr|Rubblemaker}}]]使用来将其重新变为放置状态：
+{| class="terraria lined"
+! {{tr|Tool}} !! 输出
+|-
+| {{item|Rubblemaker (Medium)}}
+| {{item|image=Sleeping Digtoise.png}}
+|}
+{{tr|The Trusty Digtoise}}不能被{{tr|Rubblemaker}}使用。
+
+== 备注 ==
+* 使用该{{tr|item}}时会在{{tr|cursor}}下方的第一个{{tr|solid block}}上生成{{tr|Digtoise}}，忽略任何{{tr|platforms}}和斜坡{{tr|blocks}}。{{source code ref|v=1.4.5.6|method=Terraria.Player.TrySpawnDigtoiseAt}}
+* 可以在玩家屏幕上的任何位置生成{{tr|Digtoise}}，并不需要有清晰视线。
+* 若{{tr|Digtoise}}在生成后 {{duration|180 ticks}}内没有被抚摸或命令挖掘，它会自动开始向下挖掘。<ref name="digtoiseai"/>
+* 在玩家手持{{tr|Digtoise item}}时，若{{tr|Digtoise}}保持空闲状态（无论是路径上有坚硬{{tr|blocks}}还是空隙，或由于玩家命令它停止）持续 {{duration|600 ticks}}，它就会消失。<ref name="digtoiseai"/>
+** 若玩家未手持{{tr|Digtoise item}}，它会在进入空闲状态时立即消失。
+** 玩家手持{{tr|Digtoise item}}时抚摸{{tr|Digtoise}}不被视作空闲状态，但在抚摸它时切换到另一件{{tr|item}}会使其立即消失。
+* {{tr|Digtoise}}和玩家之间的距离没有限制，这意味着距离它太远不会导致它消失。
+* {{tr|Digtoise}}可以穿过[[{{tr|liquids}}]]挖掘，但在{{tr|liquids}}中时会减缓其{{tr|movement}}。
+** {{tr|Digtoise}}会在接触[[{{tr|Shimmer}}]]时消失。
+* {{tr|Digtoise}}的最高水平速度为 {{mph|8 pixels}}，最高下落{{tr|speed}}为 {{mph|16 pixels}}。<ref name="digtoiseai"/>
+* 当 [[{{tr|For the Worthy@seed}}]] {{tr|seed}}激活时，{{tr|Digtoise}}摧毁{{tr|block}}所需的打击次数减半（向上取整）。{{source code ref|v=1.4.5.6|method=Terraria.Player.PickTile_DetermineDamage}}
+* {{tr|Sleeping Digtoise}}的外貌可以是以下任何一种：[[File:Sleeping Digtoise.png]]
+* {{tr|The Sleeping Digtoise}}可被[[{{tr|Metal Detector}}]]{{tr|and its upgrades}}探测到且被[[{{tr|Spelunker}}]][[{{tr|buff}}]]高亮显示，但不能被[[{{tr|Lifeform Analyzer}}]]探测到或被[[{{tr|Hunter}}]]{{tr|buff}}显示。这是因为它是{{tr|block}}，而非实体。
+* 在 [[{{tr|Remix@seed}}]] {{tr|worlds}}中，{{tr|Digtoise}}仅会在{{tr|world}}靠上部分的 57% 至 63% [[高度]]生成，范围在{{tr|world generation}}时随机选定。有一些额外的随机变化可能会超出该深度范围，此处不详述。{{source code ref|v=1.4.5.5|field=Terraria.WorldBuilding.GenVars.rockLayer|method=Terraria.GameContent.Biomes.ApplyPass/Terraria.GameContent.Biomes.Desert.DesertHive.AddTileVariance}}
+** 当与 [[{{tr|Mole people}}]] 组合时，该范围上升至 36% 至 43.6% 高度。
+
+== 小贴士 ==
+* {{tr|Digtoise}}相较于其他挖掘方式最大的优势为其脱手性质；玩家可以让{{tr|Digtoise}}挖掘隧道，同时自己去做其他事情。不过，由于下述一些原因，应当定时检查{{tr|Digtoise}}。
+* 它对建造[[{{tr|hellevator}}]]或其他通道非常有帮助，甚至可以在击败任何 [[{{tr|boss}}]] 之前获得它。
+** 在启用了 [[{{tr|Remix@seed}}]] {{tr|seed}}时，{{tr|Digtoise}}也非常有帮助。
+* 尽管{{tr|Digtoise}}能够水平挖掘，玩家在这样做时应当心，因为它下方需要有{{tr|block}}支持。
+** 尽管更难获得，[[{{tr|Digging Molecart}}]]是近乎自动挖掘水平隧道的更快方式，且它在挖掘时能自动建造[[{{tr|Minecart Track}}]]支撑自身。
+** 不过，来自多名玩家的{{tr|Digtoises}}可以叠加，且可以独立于挖掘或{{tr|Digging Molecart}}使用，从而高效地不使用[[{{tr|explosives (class)}}]]挖掘大片区域。
+* 由于生成和命令{{tr|Digtoise}}不需要与玩家之间的清晰视线，玩家可以和它一起从两个方向挖掘厚墙壁。
+* {{tr|Digtoise}}能触发一些[[{{tr|traps}}]]（如[[{{tr|Rolling Cactus}}]]），让玩家可保持安全距离。
+
+== 另见 ==
+* {{pal link}}
+
+== 历史 ==
+{{history|Desktop 1.4.5.7|
+** 现在可使用[[{{tr|Little Kinship Peach}}]]升级为其“可靠”变体（通过{{tr|crafting}}）。
+** {{tr|Digtoise}}现在会在进入[[{{tr|Shimmer}}]]时消失。
+** {{tr|Digtoise}}现在会在{{tr|minimap}}上出现，且其{{tr|item icon}}会指出它是否被召唤。
+** 修复了{{tr|Digtoise}}在{{tr|multiplayer}}下会穿过未加载的区块下落的问题。
+** 修复了{{tr|Digtoise}}无法穿过{{tr|platform stairs}}下落的问题。}}
+{{history|Desktop 1.4.5.6|{{tr|Digtoise}}现在可用[[{{tr|Rubblemaker}}]]（中）放置。}}
+{{history|Desktop 1.4.5.4|{{tr|Digtoise}}不再在[[{{tr|Old One's Army}}]]{{tr|event}}期间出现。}}
+{{history|Desktop 1.4.5.0|{{tr|Introduced.}}}}
+{{history|Console 1.4.5|{{tr|Introduced.}}}}
+{{history|Switch 1.4.5|{{tr|Introduced.}}}}
+{{history|Mobile 1.4.5|{{tr|Introduced.}}}}
+
+== 参考 ==
+{{reflist}}
+
+{{Master Template Tools
+| show-summon = yes
+}}
+{{Master Template Buffs
+| show-buffs = yes
+}}
+
+{{language info|en=Digtoise}}

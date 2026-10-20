@@ -1,0 +1,1653 @@
+{{patch infobox
+| versions = desktop-console-mobile
+| image = 1.4.5.0 Banner.png
+| patchname = Bigger and Boulder
+| release = 01/27/2026
+| ref = {{forums thread|145773|Terraria 1.4.5: Bigger & Boulder - Available Now!}}
+}}
+{{tocright}}
+
+The '''1.4.5.0''' update, named '''Bigger and Boulder''', is a major update that was released on January 27, 2026.
+
+== Content Changes and Additions ==
+=== Seeds ===
+* Added the [[Skyblock]] seed, where you start out on nothing but a small floating island with a [[Shimmer]] island off in the distance. It's up to you to build everything else!
+* [[Special world seeds|Special seeds]] can now be combined! Some combinations may have some interesting interactions.
+* Added a new seed selection window to the world creation menu, which allows you to easily enable special seeds.
+* Identical worlds with special seed enabled can now be created by using seed.
+* Added [[secret world seeds|secret seeds]].
+
+=== Items ===
+* Added 650+ new items.
+* Added 9 new [[whips]]: [[Cobwhip]], [[Slime Whip]], [[Soulscourge]], [[Vasculash]], [[Starcrash]], [[Vulgar Display of Flower]], [[Electric Eel]], [[Constellation]], and [[Possession]].
+* Added over 60 new [[hairstyles]]!
+* Added 22 new [[furniture sets]].
+* Added 20 new [[paintings]].
+* Added [[Crossover content#Dead Cells|Dead Cells crossover content]], including: five new [[weapons]], a [[Alchemy Flask|buff station]], a [[The Beheaded's set|vanity set]], an [[Ram Rune|accessory]], a [[Swarm Grenade|loyal pet]] and a [[Item Flask|new way]] to display your items in the world.
+* Added [[Crossover content#Palworld|Palworld crossover content]], including 5 pals and a [[Pal Metal set|vanity set]].
+* Added four new transformation [[mounts]].
+* Added two new [[Pylons]].
+* Added [[Stress Ball]].
+* Added [[Magic String]].
+* Added [[Strung Counterweight]].
+* Added [[Roller Skates]].
+* Added [[Prospector armor]] set.
+* Added [[Captain armor]] set.
+* Added [[Jungle Juice]].
+* Added [[Torch God's Flavor]].
+* Added [[Lucky Clover]].
+* Added [[Raven Feather]].
+* Added [[Pretty Mirror]].
+* Added [[Blackened Fish]].
+* Added [[Rock Candy]].
+* Added [[Shimmer Gun]].
+* Added [[Wall Racer Car]].
+* Added [[Acorn Slingshot]].
+* Added [[Slime Spear]].
+* Added [[Slime Whip]].
+* Added [[Power Bomb]].
+* Added [[Freeze Bomb]].
+* Added [[Mud Ball]].
+* Added [[Rainbow Glowstick]]s.
+* Added [[Toybreaker Brick]].
+* Added [[Sharp Spike Block]]s.
+* Added [[Dull Team Blocks]].
+* Added [[Cloud Platform]]s.
+* Added [[Pink Phaseblade]] and [[Pink Phasesaber|Phasesaber]].
+* Added [[Chlorophyte armor#With_Visor-0|Chlorophyte Visor]].
+* Added the [[Mitey-Titey]], a new tool for placing decorative [[stalagmite]]s and [[stalactite]]s.
+* Added the [[Portable Kiln]], a new tool for placing decorative [[pots]].
+* Added [[Axearang|some]] [[Faecorn|memorabilia]] from the great Tree vs Axe War of 2023.
+* Added [[Replica Altars|decorative Demon/Crimson Altars]].
+* Added [[Decorative Cobweb]]s.
+* Added [[Shimmerfall Block]]s and [[Shimmerfall Wall|Wall]]s.
+* Added [[Magic Shimmer Dropper]].
+* Added [[Pink Banner|Pink]] and [[White Banner]]s.
+* Added [[Heroicis' set]].
+* Added [[CRT Monolith]].
+* Added [[Retro Monolith]].
+* Added [[Bikini]], Swimsuit, and Swimtrunks.
+* Added [[Lilac Dusk set]].
+* Added [[Hallowed Crown]].
+* Added [[Welding Mask]].
+* Added [[Chicken Bones' set|Chicken Bones']] and [[Kazzymodus' set|Kazzymodus']] developer armor sets.
+* Gave [[Skeletron]] a fancy new hat.
+* Added [[Chippy's set|vanity set for Terraria Enthusiasts]].
+* Added [[Luna's Runic Pixie set]].
+* Added spectating of other players, either via the new [[Scrying Orb]], or by haunting them after being slain!
+* [[Kites]] and [[critters]] can now be placed in the world as persistent background objects. You can place them from the hotbar by right-clicking.
+* [[Mannequin]]s can now hold items and [[mounts]], and pose with those items when [[hammer]]ed.
+* [[Rubblemaker]] can now place [[Abigail's Flower]], [[Life Fruit]]s, [[Jungle Rose]], [[Nature's Gift]], [[Jungle Spores]], [[Glow Tulip]], [[Fallen Log]]s (that do not attract [[Fairies]]), [[Oasis]] Plants, [[Water Bolt]], and the [[Terragrim]].
+* [[Sandcastle Bucket]], [[Garden Gnome]]s, and [[Lawn Flamingo]]es now use the up/down keys to cycle through placement styles (like the Rubblemaker).
+* Items that can cycle through placement styles will now only do so if they're the currently selected item.
+* Building items that consume materials (such as the Rubblemaker and the [[Paintbrush]]) now show how much material they have available on their hotbar item icon.
+* [[Paladin's Shield]] now displays its range, and feedback when it is used. Getting killed by the Paladin's Shield now displays a unique [[death message]].
+* The [[Zombie Arm]] can now be held out, and throws complementary bits and pieces when swung.
+* The [[Paintball Gun]] now paints [[Slimes]] on hit.
+* Normal and biome [[torches]] can now be converted when placed.
+* [[Conveyor Belt]]s can now carry items upwards.
+* When spawning NPCs on Conveyor Belts, the block directly below the belt is now used to determine which NPC to spawn.
+* Falling blocks ([[Sand]], [[Silt]], [[Slush]], etc.) will no longer settle on Conveyor Belts but remain in their item form.
+* [[Bricks]] made from [[Hardmode ore]] are now immune to {{$|explosives||class}}.
+* [[Brown Solution]] now changes [[Old Stone Wall]] and [[Craggy Stone Wall]]s into their unsafe variants.
+* [[Green Solution]] now turns safe [[Jungle Wall]]s into their unsafe variants.
+* [[Demon Conch]] will now teleport players to the outer edges of [[the Underworld]] if there is no valid destination in the middle. It also no longer avoids teleporting you onto platforms.
+* [[Pets]] and [[minions]] can now walk through closed [[Doors]] and [[Tall Gate]]s.
+* Placed items that can be used to craft [[potions]] (e.g. [[Bottle]], [[Pink Vase]]) can no longer be removed by interacting in order to support the new crafting menu filters (they can still be mined as normal).
+* The [[Whoopie Cushion]] can now be equipped.
+* Empty [[Bucket]]s left out in the rain will now fill up.
+* The [[Beach Ball]] now bounces off of enemies and villagers.
+* [[Music Boxes]] now count as vanity.
+* [[Crystal Block]] now merges with [[Dirt]].
+* Yoyo [[Counterweight]]s will now override the visuals of the [[Yoyo Bag]] if placed in a vanity slot.
+* [[Grate]]s with [[liquid]] in them can no longer be block swapped.
+* Grates with objects on them can now be properly destroyed by merging liquids.
+* [[Gelatin Crystal]] now glows in the dark.
+* [[Reef Chest]] now has a more appropriate map color.
+* All [[Living Fire Blocks]] can now be sloped.
+* [[Radio Thing]] is now placeable.
+* [[Water Gun]], [[Slime Gun]], and [[Portal Gun]] can now be placed on [[Weapon Rack]]s.
+* You can now attach furniture to [[Wooden Spike]]s if you feel so inclined.
+* Items in the world now stop reacting to fluids when being picked up.
+* Added many [[Shimmer]] "exchanging" transmutations (e.g. [[Putrid Scent]] and [[Flesh Knuckles]]).
+
+=== NPCs ===
+* Added [[Moss Zombie]].
+* Added [[Statue (enemy)|Statue (Mimic)]].
+* Added [[Pufferfish]].
+* Added [[Orca]].
+* Added [[Librarian Skeleton]] and [[Water Bolt Mimic]].
+* [[Slimes]] can now contain more items.
+* [[Fish]] now change direction randomly when they flop on the floor.
+* The [[Martian Saucer]] is no longer listed as a boss in the [[Bestiary]].
+* The Bestiary now properly reflects the incomprehensible nature of the [[Torch God]].
+* Villagers now wait a minute to look for a new [[house]] after being evicted.
+
+=== World ===
+* [[Lightning]] strikes can now occur during [[storm]]s.
+* Added new [[Dungeon]] entrance variants.
+* [[Cracked Dungeon Brick]]s now hint at their fragility.
+* You can now start a [[Slime Rain]] by [[Shimmer]]ing a [[Slime Crown]].
+* [[Trees]] are now converted to and from [[Palm Tree]]s when using [[Yellow Solution|Yellow]], [[Brown Solution|Brown]], and [[White Solution]], rather than being destroyed.
+* [[Corrupt grass|Corrupt]] and [[Crimson grass]] can now infect [[Mowed grass]], turning it into normal Corrupt/Crimson grass.
+* Blooming [[Blinkroot]] is now brighter.
+* You can no longer attach items to [[Boulders]]. Rubble and [[Pressure Plate]]s will no longer generate on top of Boulders.
+* Jungle Plants and Vines can now grow on [[Lihzahrd Brick]].
+* [[Cactus]], [[stalagmite]]s, [[stalactite]]s, [[seashells]], [[Coral]], [[Antlion Egg]], alchemy [[herbs]], and [[wild Jungle plants]] now take on the paint and coating of the block they grow on.
+* Safe [[Underground Desert]] walls now stop you from being considered to be in the Underground Desert.
+* [[The Constant]]'s filter is now hidden when mixed with other world seeds.
+* [[Falling Star]]s are now considered as traps - they're still friendly, though!
+* [[Liquid]] inside [[Bubble]]s is no longer cleared when leaving and rejoining a world.
+* [[The Aether]] biome visuals are now suppressed when in the Dungeon.
+* Boosted nature's growth on the [[surface]] during [[rain]]y times.
+* Worlds now support up to 32,000 [[sign]]s, up from 1,000.
+* [[Meteor]]s now avoid Demon/Crimson Altars.
+* You can no longer stand on the bottom of the world. We suggest you don't try to, either.
+* [[World Globe]]s can now assign the same [[Forest]] biome to different parts of the world.
+* Improved how [[liquid]]s merge during world gen, reducing the likelihood of out-of-place liquid patches (e.g. [[Honey]] in [[Granite Cave]]s).
+* When two different liquids collide during world gen they now leave less of a mess.
+* [[Living Mahogany Tree]] chests now always contain Jungle loot.
+* Small and medium sand piles now generate in [[Underground Desert]]s.
+* Newly generated [[Boulder trap]]s now use [[Actuator]]s instead of [[Active Stone Block]]s.
+* The max surface height of newly generated small worlds has been lowered to prevent sky enemies from spawning too close to the surface.
+* [[Micro-biomes]] (e.g. [[Detonator]] traps) will no longer generate on top of [[Boulder trap]]s.
+* [[Living Mahogany Wand]]s are now guaranteed in every world.
+* More Boulder.
+
+=== Wiring and Mechanisms ===
+* When [[Chests]] receive a [[wire]] signal they now pick up all nearby dropped items. Great for automated farms!
+* [[Extractinator]]s now process items from nearby chests (up to two blocks away) when they receive a wire signal.
+* [[Timers]] can now be freely placed without requiring an anchor block.
+* [[Inactive Stone Block]]s now share the same restrictions on actuating beneath protected blocks (e.g. [[Lihzahrd Altar]], [[Mannequin]]s) as [[Actuator]]s.
+* [[Inlet Pump|Inlet]] and [[Outlet Pump]] items are now immune to [[lava]].
+
+=== Tooltips and Clarifications ===
+* Items that interact with [[wire]] now have a "{{gameText|CommonItemTooltip.Wireable}}" tooltip. Improved the tooltips of several of these items.
+* Items that can be extractinated now have a tooltip to indicate this.
+* Reworded the "No stats will be gained" tooltip on items in vanity slots. Vanity items no longer show this tooltip while in a vanity slot.
+* Clarified the [[Inlet Pump|Inlet]] and [[Outlet Pump]]'s tooltips to make clear it can transport any [[liquid]], not just [[water]].
+* Bat Bat's tooltip now clarifies it always heals on hit rather than only sometimes.
+* Improved the consistency of some set bonus effect tooltips.
+* Clarified the [[Beetle Shell]] and [[Solar Flare armor]] tooltips (functionality unchanged).
+* [[Whips]] now show their use time in their tooltip.
+* [[Bubble]]s now have a tooltip to explain their function.
+* [[Actuator]]s now have the "Can be placed" tooltip.
+* Removed "Can be placed" tooltip from wand-type items.
+* [[Blade Staff]] now properly mentions that it ignores some enemy defense (functionality unchanged).
+* Added usage tooltips to [[Hooks|grappling hooks]].
+* Improved [[platform]] tooltips with usage instructions.
+* Improved [[bed]] tooltips with usage instructions.
+* Improved [[Sawmill]] tooltip to clarify its purpose.
+* Clarified harmful blocks tooltips to mention their danger.
+* Clarified tooltips of [[minion]] slots granted by several sources.
+* Improved [[Solar Tablet]] tooltip.
+* [[Bug Net]]'s tooltip now mentions it can catch [[bait]].
+* Improved some [[portable storage]] items' tooltips.
+* Portable storage tooltips (e.g. [[Piggy Bank]]) now mention their stored coins can be used in shops.
+* Improved [[Gills Potion]] tooltip.
+* Improved [[Lavaproof Bug Net]] tooltip.
+* Improved [[immunity accessories]] (e.g. [[Bezoar]]) tooltips.
+* Improved [[Discount Card]] tooltip.
+* Improved [[Sandstorm in a Balloon]] tooltip.
+* Improved [[Flame Waker Boots]] tooltip.
+* Improved [[Sandcastle Bucket]] tooltip.
+* [[Cloud]] blocks and platforms now mention they prevent [[fall damage]] in their tooltip.
+* Improved [[Yellow Horseshoe Balloon]] tooltip.
+* Clarified [[Brain of Confusion]] tooltip.
+* Improved [[Enchanted Sundial]] and [[Enchanted Moondial|Moondial]] tooltip.
+* Improved [[Planter Box]] tooltip.
+* The "not enough NPCs nearby" [[Pylon]] message now clarifies [[NPCs]] need to live near them, not just be near them.
+* Added flavor text to the [[Fertilizer]]s.
+* Added flavor text to the [[Fruit Salad]].
+* Fixed punctuation issues with several tooltips.
+
+=== [[Journey Mode]] ===
+* [[Trash Slot|Trashing]] an item now automatically attempts to research it.
+* Researching items now also contributes to the research progress of your online [[team]] members.
+* Partially researched items now show up in the duplication menu (but cannot be duplicated).
+* Duplicating an item now gives only one of that item if you don't need multiple (such as single-use upgrade items).
+* [[Deerclops]], [[Eye of Cthulhu]], and [[mechanical bosses]] no longer randomly spawn when the spawn rate slider is set to 0×.
+* The Difficulty Slider now more closely matches the scaling of [[Expert]] and [[Master]] worlds.
+
+=== Quality of Life ===
+* Items can now be crafted from nearby [[chests]]! This can be toggled on/off as desired.
+* Right-clicking a [[crafting station]] now opens the crafting menu, showing items that can be crafted at the station and [[By Hand]].
+* When the [[Goblin Tinkerer]] reforges an item and gets the best available [[modifier]], a special effect plays and the reforge button is briefly blocked to prevent unintentional further reforges.
+* Individual [[armor]] set pieces now show the set bonus in their tooltip.
+* [[Pylons]] now take priority over [[Wormhole Potion]]s when clicking on either to teleport on the map.
+* Almost every item in the game can now stack to 9999, including [[weapons]] and equipment (with modifiers).
+* Added a "[[Similar Stack to Nearby Chests]]" mode, which aside from default quick stack behaviour also tries to put items in chests with similar items (for example, putting [[Iron Ore]] with [[Copper Ore]]). You can toggle between quick stacking modes by right-clicking the Quick Stack button.
+* The [[housing query]] now gives visual feedback on the suitability of any queried space.
+* [[Houses]] no longer require at least one solid, non-[[platform]] block to be valid.
+* The housing query now indicates when a house is invalid because it does not have a spot to stand on.
+* When holding an equipable item in the cursor, usable [[equipment slot]]s are now highlighted, and others are dimmed.
+* Greatly improved how the game handles too many items being on the ground: when the item cap is hit, items now try to stack with nearby items to make room.
+* Improved the sorting behaviour of many items.
+* [[Treasure Bag]]s now appear on the [[minimap]].
+* Mining [[Boulders]] that you are standing on no longer damages you if the Boulder has no space to roll.
+* When you try to switch to another [[hotbar]] slot while already using an item, you will now switch once the item finishes its current use rather than when you stop using the item.
+* Improved the indicator for the selected hotbar item when overriding the default selected item (e.g. when using smart select).
+* When trying to Quick Stack, there is now a visual indicator on chests that cannot be stacked to because they are in use by another player.
+* When assigning a [[spawn point]] at a [[bed]] fails, you'll now be provided the reason.
+* [[Minion]] buffs now show how many of that minion you have summoned.
+* When you respawn, any minions you had active when you were slain are now automatically resummoned.
+* If you are slain while holding an item in your cursor, the item will now be put back into your inventory, if possible.
+* [[Torches]] now have [[Placement Preview]]s.
+* [[Block Swap]]ping a [[platform]] onto a sloped block will now clear the slope.
+* You will now automatically join your last [[team]] when (re)joining a world.
+* Improved [[Smart Cursor]] behaviour when placing platforms, and added an arrow visual to clarify the placement direction.
+* Hovering over a [[buff]] icon while using an item will no longer interrupt usage of said item.
+* Interacting with villagers and items while holding an item on the cursor no longer throws said item.
+* Equipment in [[vanity]] slots now shows its full tooltip text.
+* Quick swapping now supports [[Vanity Accessories]].
+* You can now dismount a [[minecart]] by interacting with the [[Minecart Track|track]] (dismount key still works as well).
+* [[Ropes]] can now pass through up to five passable blocks (such as [[platforms]] and Minecart Tracks).
+* Ropes can now pass through [[Planter Boxes]]. You can now also block swap Rope with Planter Boxes if there's already a Planter Box adjacent to it, like you can with Platforms.
+* Extending a [[rope]] is no longer blocked by objects such as cobwebs and plants.
+* [[Eternia Crystal]]s can now be used from the Void Bag.
+* If you are grappled to the ground, you will no longer jump by default when pressing jump. You will still jump if you're holding the Up input.
+* When you get hurt, you'll now hear your character's hurt sound, regardless of where the camera is.
+* Slain [[Hardcore]] player's ghosts now have their names displayed in multiplayer.
+* Right clicking any search bar now clears it, and clicking outside the search bar clears focus away from it.
+* [[Emote]] commands are no longer case sensitive.
+* Improved "[[Frame Skip]]: Subtle" setting to reduce stuttering.
+* [[Server]]s now save the world when the last player leaves.
+* The map now more consistently updates when changes happen in remote sections of the world (e.g. plant growth).
+* [[Camera Mode]] screenshots now only capture blocks that are fully on screen, which fixes some visual issues.
+* Certain visual effects that previously did not appear in Camera Mode snapshots now do appear if the entire snapshotted area is also on screen.
+* Camera Mode captures can now capture the [[Space]] sky and stars if the center of the capture is in Space.
+* World maps from [[Mobile version|Mobile]] Terraria are now supported on [[Desktop|PC]] Terraria.
+* You can now join your own servers via {{gameText|LegacyMenu.145}}.
+* Added failsafes to prevent losing save files when failing to save to a full Steam cloud storage.
+* Making changes to folder-based [[Resource Pack]]s while the game is running now immediately updates the content in-game.
+* Added recycle bin support for OSX and Linux.
+
+=== UI Changes ===
+* Greatly overhauled the crafting window, added a search bar and filter tabs.
+* Added a special [[Banner Menu]]. Whenever you gain a [[Banner (enemy)|banner]] it is no longer placed directly into your [[inventory]] but stored in this menu, where you can retrieve it at will. This does not affect any previously earned banners.
+* The [[character]] creation menu now lets you choose the type and pitch of your hurt sound. This is also available through [[Dressers]].
+* Added outfit preview buttons to character creation.
+* The character creation menu now shows a confirmation prompt when trying to exit without saving.
+* The character creation menu's tab icons now have hover tooltips.
+* Various [[tips]] are now shown during character creation.
+* The [[world creation]] progress bar's accuracy and messages have been improved.
+* When generating a world with a random evil, the progress bar is now neutral to avoid spoiling which evil is being generated.
+* Your players and worlds are now sorted by most recently used (favorites still come first), and any freshly generated world will appear at the top for ease of access.
+* Added marker icons for previously visited and newly generated worlds in the menu.
+* Quick trash settings can now be changed while in a world.
+* Improved [[Pylon]] overview in the map.
+* Shops now have a visual indicator showing how [[NPC happiness]] is affecting prices.
+* The Savings display now caps the amount of [[Platinum Coin]]s to 999, to prevent overflows.
+* [[Coins]] in inventory now animate when gained and when spent.
+* The [[defense]] counter now has a tooltip showing how much damage it effectively blocks. Its appearance now changes based on world [[difficulty]].
+* Homeless NPCs now have a Housing dialogue option instead of Happiness, containing instructions on how to build a suitable house.
+* Reordered the NPCs in the Housing menu so they now appear in their approximate unlock order.
+* Improved offscreen [[team]] member indicators on wide screens.
+* Overhead [[chat]] and [[multiplayer]] nameplates now also appear above the player in [[reverse gravity]].
+* Added tooltips for the [[Team]] and [[PvP]] icons.
+* Faraway villagers will now move smoother on the [[minimap]].
+* Players are now hidden from the world map while slain.
+* Map icons now match the map's transparency.
+* When renaming a character with the virtual keyboard, the original name is now prefilled.
+* The Packet Stacks menu (F8) now has an instruction on how to close it.
+* Added a new FPS diagnostics view, which can be toggled with F7.
+* The FPS display (F10) now also shows your UPS (Updates Per Second).
+* Added an error message for when the {{gameText|LegacyMenu.88}} server fails to start.
+* Added sounds when passing over most interface buttons.
+* Added a [[boss]] damage tracker that tracks how much damage each player deals during a boss fight. Type <code>/bossdamage</code> in the [[chat]] to view the result of the last fight(s).
+
+=== Gamepad Improvements ===
+* Added icons for Playstation and Nintendo Switch controllers. They can be toggled in the Keybind menu.
+* Using any [[Toggles#Ruler|Ruler]] option on gamepad now allows the cursor to reach the entire screen.
+* If you are locked on to an enemy using a gamepad, the [[Rod of Discord]]/[[Rod of Harmony|Harmony]] will now teleport you to your cursor rather than to said enemy.
+* Improved the housing menu's gamepad support.
+* Improved gamepad hints for the [[Journey]] menu and the [[Bestiary]].
+* Improved the in-game settings menu accessibility for gamepad users.
+* Prioritized Drop and Transfer hints on gamepad when holding an item on the cursor.
+* Items crafted via Quick Craft now temporarily highlight their item slot.
+
+=== Art and Visuals ===
+* Added Villager Portraits!
+* Added sunrise and sunset visuals!
+* Added [[nighttime]] aurora effects to the [[Snow biome]]!
+* Added new backgrounds to various [[biomes]].
+* [[Fish]] now visually appear in the [[water]] while you are [[fishing]].
+* Added new ambient insects and falling rubble to the world.
+* The [[Barrel]] and [[Trash Can]] now have opening and closing animations.
+* The [[moon]] now properly obstructs stars behind it from view.
+* Polished [[Moon Lord]].
+* Polished many [[banner]] sprites.
+* Polished the existing [[pots|pot]] sprites, and added a few new variants.
+* Polished [[Lihzahrd Temple]] content.
+* Polished the [[Demon Altar]], [[Crimson Altar]], [[Shadow Orb]], and [[Crimson Heart]] (both the background item and the light pet) art.
+* Polished [[Trophies]] and [[Weapon Rack]]s.
+* Polished [[Bar]]s, [[Bar Stool]]s, and [[Banquet Table]]s.
+* Polished [[Hanging Skeleton]]s and [[Catacomb]]s.
+* Polished [[Hornet]]s.
+* Polished [[Ancient Manipulator]].
+* Polished [[Fire Imp]], [[Imp Staff]], and Imp minion.
+* Polished [[Slime Staff|Baby Slime minion]].
+* Polished [[Alchemy Table]], [[Imbuing Station]], and [[Bewitching Table]].
+* Polished the various [[Cloud]] blocks and walls.
+* Polished Spider [[stalactite]]s.
+* Polished sand piles.
+* Polished [[Seahorse Cage]].
+* Polished [[Fallen Log]].
+* Polished [[Drill Containment Unit]] buff icon.
+* Polished [[Jim's set|Jim's developer set]].
+* Updated some of the [[credits]] scenes art.
+* Updated [[Chlorophyte Dye]]'s [[glow mask]].
+* Updated the [[Blood and Gore]] [[Dust IDs|dust]] filter to be more accurate.
+* Painted [[Mushroom furniture]] lighting now matches the [[paint]]'s color.
+* [[Shroomite Plating Wall]] lighting now matches the paint's color.
+* Improved [[Influx Waver]] projectile's visual animation.
+* Improved the [[Step Stool]] animation.
+* Equipping the [[Ghost Shirt]] will now show the player bare legged.
+* [[Spectre Pants]] and [[Cenx's Dress Pants]] no longer draw shoes underneath, like other robe-bottom pants.
+* Added mining dust to [[Large Bamboo]] Blocks.
+
+=== Audio ===
+* Added new boss music for [[King Slime]], [[Eater of Worlds]], [[Queen Bee]], [[Skeletron]], [[The Twins]], [[The Destroyer]], [[Skeletron Prime]], and the [[Lunatic Cultist]].
+* Adjusted the Eater of Worlds' digging sound.
+* Updated thunder sound effects.
+* Added a sound effect for when the player is [[Starving]] on [[The Constant]] worlds.
+* Improved sound for item [[Trash Slot|trashing]].
+* [[Sonar Potion]]s now play a sound cue when you hook a [[fish]].
+* Added audio feedback to several buttons in the [[inventory]].
+* Added new sounds for [[drills]] and [[chainsaws]].
+* Added a new sound for [[Lilith's Necklace]].
+* Added a splash sound when catching a [[fish]].
+* Reduced the loudness of the [[Flameburst sentry summons|Flameburst Tower]].
+* Added a fuse sound to [[bombs]].
+* Added a reel sound to [[kites]].
+* Added a new sound for the [[Flintlock Pistol]] and [[Musket]].
+* Added a new sound for the [[Leaf Blower]].
+* Added a new sound for the [[Unicorn on a Stick]].
+* All sounds now pan/attenuate consistently regardless of game resolution.
+* Added a configuration option ("TitleMusic") that allows you to choose which music to play on the main menu: "Current" (Journey's End), "Old" (original), "Console", or "Random".
+
+=== Localization ===
+* Added Japanese, Korean, and Traditional Chinese localization.
+* Implemented a great deal of community contributed suggestions and improvements to our German, Spanish, French, Polish, Brazilian Portuguese, and Simplified Chinese localizations!
+<!-- Although contributors to the russian localization are already credited, their suggestions have not yet been reviewed or even partially implemented in the game: https://discord.com/channels/251072485095636994/1174886712401481849/1465920213689045246-->
+* Improved localizations to support variants for composite content, like [[modifiers]].
+* You can now use English [[chat]] commands regardless of what language Terraria is set to.
+* Renamed [[Heavy Work Bench]] to [[Heavy Assembler]], as it does not function as a [[Work Bench]].
+* Renamed [[Crimson Bunny Kite]] to [[Vicious Bunny Kite]] to match the NPC.
+* Renamed [[Martian Brainscrambler Banner]] to [[Martian Brain Scrambler Banner]] to match the NPC.
+* Renamed [[Meteor Toilet]] to [[Meteorite Toilet]] for consistency with [[Meteorite furniture]].
+
+=== Performance/Modding ===
+* Improved performance around many parts of Terraria. Most notably around trying to achieve frame rendering stability, and reducing small freezes.
+* Folder based [[Resource Pack]]s are now hot-reloadable. Changing most content in the folder will make Terraria attempt to reload it instantly! This should dramatically help iterating on localizations/art changes quickly!
+* Introduced several new systems to replace previously hard-coded logic. (e.g. [[Wings]], [[Armor]] sets, [[Fishing]], Horizons<!-- sun, moon, sky backgrounds-->, NPC Interaction commands, and more have been made easier to check and modify/replace).
+* Included a new interactive world generation debugger (available through modding), and improved world generation's determinism and consistency.
+* Included a suite of internal dev commands for modded use (available through modding). These are primarily aimed at debugging content in different situations, such as [[multiplayer]].
+* Native support of Apple Silicon was implemented, which makes the game work better on newer Mac devices.
+
+== Balance ==
+=== Global Mechanics ===
+* Fixed an issue that caused certain weapon projectiles that perform multiple updates per frames to have a lower hit cooldown than intended. In practice, the DPS of almost all of these weapons is unaffected by this change, with the exception of the [[Deadly Sphere Staff]]: its damage has been increased to compensate (overall DPS remains the same).
+
+=== Melee Weapons ===
+[[Bone Sword]] and [[Bone Pickaxe]]
+* Now launches a bone projectile when striking an enemy.
+
+[[Bat Bat]]
+* Attack speed increased by 12.5%.
+
+[[Gladius]]
+* Can now only have spear-type modifiers.
+* Attack speed increased by ~17%.
+
+[[Phaseblade]]s, [[Phasesaber]]s, and [[Keybrand]]
+* Can now be thrown by releasing the attack button mid-swing. The weapon will embed itself in the ground and will continuously damage any enemy that touches it. Can be recalled by pressing the attack button again.
+
+[[Purple Clubberfish]]
+* Now has a 50% chance to inflict the [[Confused]] debuff.
+
+[[Storm Spear]]
+* Range increased by 66.67%.
+* Bolt damage increased from 150% of weapon damage to 160%.
+
+[[Mandible Blade]]
+* Can now be thrown by releasing the attack button mid-swing.
+* Attack speed increased by ~13%.
+* Now has 7% critical strike chance.
+
+[[Stylish Scissors]]
+* Can now be thrown by releasing the attack button mid-swing.
+* Can now be [[autoswing|autoswung]].
+* Now inflicts [[Bleeding]], dealing 12 damage per second.
+* Attack speed reduced by ~8%.
+
+[[Ale Tosser]]
+* Is now a melee weapon.
+* Now deals damage in an area.
+* Damage increased from 20 to 32.
+* [[Velocity]] increased by ~70%.
+* Knockback reduced by ~43%.
+* Now has a 5% chance to inflict the [[Confused]] debuff on enemies.
+* Now inflicts the [[Tipsy]] debuffs on players and villagers.
+* Now has a ~70% chance to not consume [[Ale]] on use.
+* Sell price increased from {{sc|1}} to {{sc|25}}.
+
+[[Falcon Blade]], [[Exotic Scimitar]], and [[Cutlass]]
+* Striking an enemy now briefly increases the weapon's damage by 12% to a maximum of 50%. This extra damage decays at a rate of 30% per second.
+
+[[Bee Keeper]]
+* [[Confused]] debuff chance increased from 90% to 100%.
+
+[[Starfury]]
+* Stars that spawn when the cursor is on or directly above/below the player now have their direction randomised rather than always falling to the direction the player is facing.
+
+[[Blue Moon]] and [[Sunfury]]
+* Synergy increased by 100%.
+
+[[Volcano]]
+* The explosion on hit now uses [[local invincibility]] rather than [[global invincibility]]. In practical terms, this means a struck enemy can now be damaged by both the explosion and attacks from minions and sentries at the same time.
+
+[[Bloody Machete]]
+* Now inflicts [[Bleeding]], dealing 12 damage per second.
+
+[[Hel-Fire]]
+* Damage reduced from 41 to 39.
+* Range increased by 20%.
+
+[[Chik]]
+* Velocity decreased by ~12%.
+
+[[Format:C]]
+* Lifetime increased from 8 seconds to 16 seconds.
+* Velocity increased by ~13%.
+
+[[Gradient]]
+* Lifetime increased from 10 seconds to 30 seconds.
+
+[[Classy Cane]]
+* Damage increased from 16 to 40.
+* Can now strike villagers, dealing 1 damage.
+* Hitting an enemy or villager will cause them to drop a small amount of Copper Coins.
+* Sell price increased from {{sc|50}} to {{gc|2}}.
+
+[[Anchor]]
+* Now creates an explosion upon hitting solid blocks that damages nearby enemies.
+* Now has a 33% chance to inflict the [[Confused]] debuff.
+* Now pierces enemies.
+
+[[Obsidian Swordfish]]
+* Now spews 1 to 3 fire projectiles when thrust.
+
+[[Beam Sword]]
+* The beam projectile can now penetrate once, and bounce up to 3 times.
+
+[[Shadowflame Knife]]
+* Damage increased from 38 to 43.
+
+[[Chlorophyte Claymore]]
+* The orb projectile is now reflected by [[Shimmer]].
+
+[[Paladin's Hammer]]
+* Tapping the attack button now throws the Paladin Hammer out much farther (it can be recalled in flight by pressing the attack button again).
+* Now creates an explosion that damages nearby enemies upon hitting a solid block.
+* Now applies the [[Broken Armor]] debuff, reducing defense by 20.
+* Damage increased from 90 to 100.
+
+[[Possessed Hatchet]]
+* Now inflicts [[Hemorrhage]], dealing 100 damage per second.
+
+[[Golem Fist]]
+* Now creates an explosion upon hitting enemies or solid blocks that damages nearby enemies.
+* Now has a 33% chance to inflict the [[Confused]] debuff.
+
+[[Sky Dragon's Fury]]
+* Fixed the alternate fire projectiles being considered ranged projectiles. They now use the player's melee critical strike chance rather than the ranged critical strike chance, and can inflict debuffs from [[Flasks]] and the [[Magma Stone]].
+
+[[Flairon]]
+* Now has an alternate weapon mode in which it behaves like a [[flails|flail]]. You can freely switch between modes by right-clicking the item. The original version has been renamed to [[Flairoon]].
+* Bubbles from both modes now bounce once.
+* Bubbles from both modes can now apply the on-hit effects from [[Flasks]], the [[Frost armor]] set, and the [[Magma Stone]].
+
+=== Ranged Weapons ===
+* Fixed an issue that would cause weapons that use non-standard ammo (e.g. gel) to deal 1 less damage than intended. This affects the following weapons: [[Star Cannon]], [[Super Star Shooter]], [[Sandgun]], [[Flamethrower]], and [[Elf Melter]].
+
+[[Ammunition]]
+* [[Shroomite Helmet]]s now apply their damage bonus to ammo as well as weapons. To compensate for the increase in overall damage, their damage bonus has been reduced from 15% to 12%. Overall, this slightly buffs most [[ranged weapons]].
+* Several weapons that would be too strongly affected by this change have been adjusted to compensate:
+** [[Piranha Gun]]: damage increased from 38 to 40.
+** [[Elf Melter]]: damage increased from 53 to 57.
+** [[Sniper Rifle]]: damage increased from 185 to 200.
+** [[Aerial Bane]]: damage decreased from 39 to 38.
+
+[[Magic Quiver]]
+* Now applies its damage bonus to [[arrows]] as well as [[bows]].
+
+[[Spiky Ball]]
+* Lifetime increased by ~33%.
+* Can now be [[autoswing|auto-reused]].
+
+[[Harpoon]]
+* The harpoon can now be retracted by letting go of the attack button.
+* Can now penetrate up two enemies before retracting (upon hitting the third).
+* Now inflicts [[Bleeding]], dealing 12 damage per second.
+* [[Velocity]] increased by ~36%.
+
+[[Musket]]
+* Critical strike chance increased from 7% to 8%.
+
+[[Flintlock Pistol]]
+* Now has a 10% critical strike chance.
+* [[Velocity]] increased by 20%.
+
+[[Revolver]]
+* Firing the Revolver just as it comes off cooldown now gradually increases its attack speed (up to 100%) and critical strike chance (up to 20%). Does not work with [[autofire]].
+* Base critical strike chance removed (was 5%).
+* Knockback increased by 12.5%.
+* Buy price increased from {{gc|10}} to {{gc|15}}.
+
+[[Hellwing Bow]]
+* Fixed Hellwing Bow being much more inaccurate than intended when not using [[Wooden Arrow]]s.
+
+[[Cursed Dart]]
+* Main projectile now pierces up to one enemy. Cursed Dart Flame no longer pierces.
+* Now requires a [[Mythril Anvil|Mythril]]/[[Orichalcum Anvil]] to craft.
+
+[[Ichor Dart]]
+* Damage reduced from 10 to 7.
+* Now display a visual effect when splitting.
+* Now requires a [[Mythril Anvil|Mythril]]/[[Orichalcum Anvil]] to craft.
+
+[[Crystal Dart]]
+* Max bounces/penetrations reduced from 6 to 4.
+* Damage is now reduced by 15% on every terrain bounce.
+* Dart now instantly rotates when bouncing.
+* Now requires a [[Mythril Anvil|Mythril]]/[[Orichalcum Anvil]] to craft.
+
+[[Flamethrower]] and [[Elf Melter]]
+* Can now be used while submerged in [[lava]].
+
+[[Tactical Shotgun]]
+* Damage increased from 29 to 36.
+
+[[Piranha Gun]]
+* Now inflicts [[Hemorrhage]], dealing 100 damage per second.
+* Will now re-fire Piranhas that have returned to the player as long as the attack button is held.
+
+[[Nano Bullet]]
+* Now inflict their debuff in [[PvP]].
+
+[[Eventide]] and [[Tsunami]]
+* Will now ensure their [[arrows]] do not spawn inside blocks and be immediately destroyed when firing parallel to the ground.
+
+[[Candy Corn Rifle]]
+* Damage increased from 44 to 60.
+* [[Candy Corn]]s now use [[local invincibility frame]]s, meaning that a single enemy can now be damaged by multiple Candy Corns (and other sources of damage) at the same time.
+* Lifetime reduced from 10 seconds to 5 seconds.
+
+[[Jack 'O Lantern Launcher]]
+* Damage increased from 65 to 85.
+
+[[Chain Gun]]
+* Damage increased from 31 to 38.
+* Chance to save ammo increased from 50% to ~67%.
+
+=== Magic Weapons ===
+[[Thunder Zapper]]
+* Mana cost reduced from 7 to 6.
+
+[[Space Gun]]
+* Damage increased from 17 to 20.
+* Projectiles now grow larger, deal more damage, and penetrate more enemies with distance.
+
+[[Aqua Scepter]] and [[Water Bolt]]
+* Now react appropriately to [[lava]].
+
+[[Flamelash]] and [[Flower of Fire]]
+* Can now be used while submerged in [[lava]].
+
+[[Laser Rifle]]
+* Projectiles now grow larger, deal more damage, and penetrate more enemies with distance.
+* Now has no [[mana]] cost when the [[Meteor armor]] is equipped.
+
+[[Magic Dagger]]
+* Now pierces up to 2 enemies, up from 1.
+* Damage reduced from 35 to 30.
+
+[[Sky Fracture]]
+* [[Velocity]] increased by 25%.
+
+[[Crystal Storm]]
+* Damage increased from 32 to 35.
+
+[[Crystal Serpent]]
+* [[Velocity]] of initial projectile increased by ~31%.
+
+[[Flower of Frost]]
+* Now bounces on platforms.
+
+[[Magical Harp]]
+* Increased maximum note speed by ~50%, and reduced minimum note speed by ~60%.
+
+=== Summon Weapons ===
+All [[Summon weapons]]
+* Added new Summon [[modifiers]]!
+* [[Mana]] costs have been removed.
+** Any existing summoning weapon with a mana cost reducing modifier (e.g. [[Mythical]]) will receive a random new modifier upon loading the world.
+
+[[Flinx Staff]]
+* Recipe cost increased from 6 [[Flinx Fur]] to 10 Flinx Fur.
+
+[[Spider Staff]] and [[Queen Spider Staff]]
+* Now require a [[Mythril Anvil|Mythril]]/[[Orichalcum Anvil]] to craft.
+
+[[Abigail's Flower]]
+* Now has knockback when attacking.
+
+[[Blade Staff]]
+* Removed 25% tag damage penalty.
+
+[[Deadly Sphere Staff]]
+* Damage increased from 40 to 55 (DPS unchanged, see [[#Global Mechanics|Global Mechanics]] section for explanation).
+
+All [[Whips]]
+* Different whip tags can no longer stack with one another. Hitting an enemy with a whip now clears the effect of any other whip that is active.
+* Whips now use varying arcs when swung.
+
+[[Spinal Tap]]
+* Damage increased from 27 to 29.
+
+[[Morning Star]]
+* Damage reduced from 165 to 160.
+* Tag critical strike chance reduced from 12% to 10%.
+
+[[Dark Harvest]]
+* Damage increased from 100 to 110.
+* Tag effect damage increased from 10 to 15.
+
+[[Kaleidoscope]]
+* Damage reduced from 180 to 170.
+* Multihit penalty increased from 10% to 20%.
+
+=== Equipment ===
+[[Dead Man's Sweater]]
+* Now grants 4 defense.
+* Now reduces [[trap]] damage by 50%, and caps it at 300.
+* Now reduces trap debuff duration by 50%.
+
+[[Gladiator armor]]
+* Armor pieces now have a [[Shimmer]] loop.
+
+[[Meteor armor]]
+* Now also removes the mana cost of the [[Laser Rifle]].
+
+[[Molten armor]]
+* Now grants immunity to [[Burning]] blocks.
+
+[[Spider armor]]
+* Now requires a [[Mythril Anvil|Mythril]]/[[Orichalcum Anvil]] to craft.
+
+[[Shroomite armor]]
+* Helmets now apply their damage bonus to ammo as well as weapons. To compensate for the increase in overall damage, their damage bonus has been reduced from 15% to 12%. Overall, this slightly buffs most ranged weapons.
+
+[[Magic Quiver]]
+* Now applies its damage bonus to arrows as well as bows.
+
+Yoyo [[Counterweights]]
+* Damage increased from 80% of yoyo damage to 100%.
+* Velocity increased by 100%.
+
+Yoyo [[Strings]]
+* Now increases max yoyo lifetime by 50%.
+
+[[Spore Sac]]
+* Spores now use [[static invincibility frame]]s, meaning that a single enemy can now be damaged by spores and other sources of damage at the same time (but not multiple spores).
+
+[[Paladin's Shield]]
+* Now has a visual effect that allows both the wearer and other players to see if they are near or in range.
+* No longer triggers when allies take damage from non-enemy hazards.
+* No longer triggers on instant kill effects (e.g [[Dungeon Guardian]]).
+* Self damage can no longer be [[dodge]]d.
+* Self damage now inflicts an individual type of [[invincibility frames]].
+* Will now only proc every 0.67 seconds.
+
+[[Honeycomb]], [[Brain of Confusion]], and [[Solar Flare armor]] set
+* No longer trigger when taking damage from non-enemy hazards.
+
+[[Discount Card]]
+* Now also applies to the [[Nurse]]'s healing service and the [[Stylist]]'s [[hairstyle]] shop.
+
+[[Informational Accessories]]
+* Now functional while in [[vanity]] slots.
+
+[[Mounts]]
+* Can now fully negate [[fall damage]], rather than only reduce it to 1.
+
+[[Slimy Saddle]] (Slime Mount)
+* Now extends the distance you can fall without taking damage by 10 blocks.
+
+[[Pogo Stick]]
+* Now extends the distance you can fall without taking damage by 20 blocks.
+
+[[Superheated Blood]] (Lava Shark)
+* Now grants immunity to [[Burning]] blocks.
+* Now grants [[lava]] vision and increased jump height when swimming in lava.
+* [[Water Walking (disambiguation)|Water Walking]] is now disabled while mounted.
+
+[[Ancient Horn]] (Basilisk)
+* Fixed the Basilisk's innate double jump being overridden by [[extra jump]] accessories (e.g. [[Cloud in a Bottle]]). They now stack as intended.
+
+[[Digging Molecart]]
+* Can now dig falling blocks such as [[Sand]], [[Silt]], and [[Slush]].
+
+=== Bosses, Invasions, and Events ===
+General
+* You can now use [[Pylons]] during [[boss]] fights and [[invasion]]s.
+* [[Shimmer]] invincibility no longer applies to bosses, invasion enemies, or [[the Torch God]]. You cannot hide!
+
+[[King Slime]] and [[Queen Slime]]
+* Can now teleport to [[platforms]].
+
+[[Eye of Cthulhu]]
+* Now also drops [[Unholy Arrow]]s on [[Crimson]] worlds.
+
+[[Deerclops]]
+* You can now dash through Deerclops' legs using a [[Shield of Cthulhu]] or [[Solar armor]] (previously you would collide with it).
+* Fixed Shadow Hands appearing on top of non-targeted players in multiplayer.
+
+[[Skeletron]]
+* Hand movement when slamming is now a bit smarter, avoiding an issue that caused it to fly off-screen.
+* Can no longer be [[dodge]]d by [[accessories]] when enraged during daytime.
+
+[[Skeletron Prime]]
+* Can no longer be dodged by accessories when enraged during daytime.
+
+[[Duke Fishron]]
+* Fixed Duke Fishron transitioning too quickly from its final ram attack to the Cthulunado/Bubble Circle in phase 2 (does not affect [[Expert]]+ difficulty).
+
+[[Pirate Deadeye]]
+* Firing rate reduced by 25%.
+* Bullet speed reduced by ~30%.
+* Firing range reduced by ~10%.
+* Accuracy slightly decreased.
+
+[[Pirate Crossbower]]
+* Firing rate reduced by 12.5%.
+* Arrow speed reduced by 12.5%.
+* Arrow damage reduced from 80 to 70.
+* Firing range reduced by ~20%.
+
+[[Pirate Captain]]
+* Firing rate reduced by 12.5%.
+* Bullet speed reduced by ~20%.
+* Bullet accuracy decreased.
+* Cannonball charge time increased from 1 second to 3 seconds.
+* Interrupting the Pirate Captain while he is charging his cannonball attack now reduces the charge time by 0.33 seconds, to a minimum of 1 second. Once he fires a cannonball, the charge time will reset back to 3 seconds.
+* Cannonball speed increased by ~40%.
+
+[[Flying Dutchman]] and [[Martian Saucer]]
+* [[Expert]]+ health scaling reduced from 100% of base health to 85%.
+
+=== Enemies and Critters ===
+
+[[Conveyor Belt]] interactions
+* [[Critters]], regular [[Mimics]], [[Lost Girl]]s, [[Slimes]], [[Gnome]]s and Bound [[NPCs]] are now affected by [[Conveyor Belt]]s.
+* [[Antlion]]s can now spit [[Sand]] while on Conveyor Belts.
+
+[[Buggy]], [[Sluggy]], and [[Grubby]]
+* Spawn chance from [[wild Jungle plants]] reduced by 25%.
+
+[[Meteor Head]]
+* Can now drop items in [[Hardmode]] again, but cannot drop [[Souls]] or [[Biome Keys]].
+
+[[Rainbow Slime]]
+* Spawn chance increased by ~17%. Now more likely to spawn for [[luck]]y players.
+
+[[Rock Golem]]
+* Spawn chance increased by ~17%.
+* [[Rock Golem Head]] drop chance increased from 10% to ~33.33%.
+
+[[Shark]]
+* Now has a 80% higher chance to spawn if there's [[chum]] in the [[water]].
+
+[[Shimmer Slime]]
+* Now drop [[Gel]].
+
+[[Spiked Ice Slime]]
+* Can now spawn on [[Ice Block|Ice]] and [[Snow Block]]s outside of the [[Snow biome]].
+
+[[Tomb Crawler]] and [[Dune Splicer]]
+* Spawn chance reduced by ~25%.
+
+[[Toxic Sludge]]
+* Spawn chance reduced by ~33%.
+
+[[Water Strider]]s
+* Can now tolerate slightly [[Windy Day|windier]] conditions.
+
+=== Villagers ===
+General
+* Can now arrive even when there are no available [[houses]]. Only one will arrive per day, and they will leave if they do not have a house by [[night]]fall.
+* Villagers now take priority over [[Town pet]]s when respawning.
+* Can now attack [[enemies]] while talking to players.
+* Defeating a [[boss]] now also gives each villager a 1.5% attack speed bonus.
+* Now also gain stat bonuses from defeating [[King Slime]], [[Deerclops]], and [[Duke Fishron]].
+* Will now avoid [[Stinky]] players.
+
+[[Guide]]
+* Increased [[defense]] from 15 to 30.
+* Increased [[health regeneration]] by 500%.
+* Increased [[arrow]] damage from 8 to 12.
+
+[[Dryad]]
+* [[Dryad's Blessing]] [[defense]] bonus to other villagers increased from 6 to 10 in [[Classic]] difficulty, 10 to 15 in [[Expert]] and 14 to 20 in [[Master]].
+* Defeating [[Queen Slime]], [[Duke Fishron]], and [[Empress of Light]] now boost the damage of Dryad's Bane by 15% each (same as other [[Hardmode]] [[boss]]es).
+
+[[Party Girl]]
+* Villager count requirement to move in increased from 14 to 20, to account for [[Town pet]]s and [[Town Slimes|Slimes]].
+
+[[Cyborg]]
+* Increased [[defense]] from 15 to 30.
+* Increased [[health]] from 250 to 500.
+* Increased [[health regeneration]] by 900%.
+* Increased attack rate by 200%.
+* Increased knockback resistance from 50% to 75%.
+
+=== World ===
+[[Tombstone]]s, [[Ghost (enemy)|Ghosts]], and [[Graveyard]]s
+
+* Tombstones can now be broken three times as fast (no change on [[For the Worthy]] worlds).
+* [[Ghost (enemy)|Ghost]] spawn chance from breaking a Tombstone reduced from 50% in all difficulties to 12.5% in [[Classic]] and 25% in [[Expert]] ([[Master]] unchanged).
+* Ghosts that spawn from broken Tombstones now only care about their initial target. Once said target is slain, they will attempt to flee.
+* Ghosts no longer pick up money on Expert+ difficulty.
+* The [[Peace Candle]] now reduces the boosted spawn rates of Graveyard biomes by 33%.
+
+Other
+* Newly generated [[Mythril Ore|Mythril]], [[Orichalcum Ore|Orichalcum]], [[Adamantite Ore|Adamantite]], and [[Titanium Ore]] patches are now the same size as [[Cobalt Ore|Cobalt]] and [[Palladium Ore|Palladium]] patches.
+* [[Windy Day]]s and [[Rain]] now only occur when there is a player in the world with at least one [[Life Crystal]] consumed.
+* Rain is now less obscuring while a [[boss]] fight or [[event]] is ongoing.
+
+=== Tools and Utility ===
+General
+* You can now [[Block Swap]] blocks that are touching [[lava]].
+
+[[Hooks]]
+* All multi-hook grappling hooks can now have multiple hooks in flight, rather than just one.
+* When jumping from a grapple, you now jump the full height rather than half.
+
+[[Skeletron Hand]]
+* Velocity and range increased by ~7%.
+
+[[Axes]]
+* Axes with higher [[axe power]] now have a higher chance to get extra [[wood]] when cutting [[trees]].
+
+[[Golden Bug Net]], [[Lavaproof Bug Net]], and [[Lawn Mower]]
+* Can now cut large Jungle plants.
+<!-- These changes were only made in 1.4.5.1.
+[[Staff of Regrowth]]
+* Now automatically replant harvested [[herbs]].
+* Now only yields extra [[seeds]] and herbs from mature herbs if used to harvest them, rather than as long as it's held.
+
+[[Axe of Regrowth]]
+* Axe power reduced from 150% to 125%.
+* Now automatically replant harvested [[herbs]].
+* Now only yields extra [[seeds]] and herbs from mature herbs if used to harvest them, rather than as long as it's held.
+-->
+[[Chlorophyte Extractinator]]
+* Now only drops [[Hardmode ores]] when in [[Hardmode]].
+
+[[Water Gun]]
+* Now douses [[torches]], [[campfires]], and most other light sources.
+* [[Wet]] debuff now gives immunity to [[On Fire!]], [[Hellfire]], and [[Burning]] debuffs.
+
+[[Slime Gun]]
+* Now ignites [[torches]], [[campfires]], and most other light sources. 
+* [[Slimed]] debuff now doubles damage from [[On Fire!]], [[Hellfire]], [[Cursed Inferno]], [[Frostburn]], [[Frostbite]], and [[Shadowflame]] debuffs.
+* Slimed debuff duration reduced from 25 seconds to 3 seconds.
+
+[[Purification Powder]]
+* Now has a slightly bigger area of effect.
+* Now converts [[walls]], and also purifies [[Hallow]] blocks and walls.
+
+[[Vile Powder]] and [[Vicious Powder]]
+* Now have a slightly bigger area of effect.
+
+Wiring and [[Mechanism]]s
+* [[Venom Dart Trap]]s now require a [[Mythril Anvil]] to craft.
+* [[Cannon]]s are now fired by using [[torches]] rather than [[ammo]]. They can also be fired using a [[wire]] signal (cooldown is shared between cannons). [[Cannonball]]s are now a decorative item.
+* [[Snowball]]s fired by a wired [[Snowball Launcher]] now deal damage. It shares its fire cooldown with the cannons.
+* [[Flame Trap]]s now inflict the [[Hellfire]] debuff.
+
+[[Fishing]]
+* Using all three [[lava]] fishing enablers ([[Hotline Fishing Hook]], [[Lavaproof Fishing Hook]], lava critter bait) will now give you an additional bonus when fishing in lava.
+* You can now gain the Fishing Power bonus of sitting from any [[chair]], not just [[toilets]].
+
+=== Buffs and Consumables ===
+[[Kites]]
+* Flying a kite now grants the [[High Spirits]] buff, increasing [[movement speed]], [[mining speed]], placement speed and [[luck]].
+* Kites are now automatically deployed when AFKing for more than 1 minute.
+
+[[Invisibility]]
+* No longer makes you fully invisible on your own client, so you can better see what you are doing (you are still fully invisible to other players).
+* Getting hit while invisible now reduces the remaining buff time by 1 minute rather than removing it outright.
+
+[[Tipsy]]
+* Now reduces the time to answer a call of nature by 75% (reduces the time to produce [[Poo]] by 75%).
+* Now can also affect villagers (via the [[Ale Tosser]]), granting a 10% damage, defense and attack speed boost.
+
+[[Stinky]] ([[Stink Potion]])
+* Now reduces your [[luck]].
+* Can now be removed by [[water]].
+* Now causes NPCs to flee.
+
+[[Lovestruck]] ([[Love Potion]])
+* Now increases Villager happiness by 10%.
+
+[[Wet]] ([[Water Gun]])
+* Now gives immunity to [[On Fire!]], [[Hellfire]], and [[Burning]] debuffs.
+
+[[Slimed]] ([[Slime Gun]])
+* Now doubles damage from [[On Fire!]], [[Hellfire]], [[Cursed Inferno]], [[Frostburn]], [[Frostbite]], and [[Shadowflame]] debuffs.
+
+[[Pumpkin Pie]]
+* Now grants [[Well Fed]] (tier 1) instead of [[Plenty Satisfied]] (tier 2). Duration unchanged.
+* Recipe cost increased from 10 [[Pumpkin]]s to 15.
+
+[[Bottled Water]]
+* Healing increased from 20 to 30.
+* [[Potion Sickness]] duration decreased from 60 seconds to 45 seconds.
+
+[[Eggnog]]
+* [[Potion Sickness]] duration decreased from 60 seconds to 40 seconds.
+* Now resets the player's hunger in [[The Constant]] worlds.
+
+[[Sharpening Station]]
+* Buff now only applies to [[melee]] items and projectiles as intended.
+
+[[Advanced Combat Techniques]] and [[Advanced Combat Techniques: Volume Two]]
+* [[Defense]] bonus increased from 6 to 8.
+* Damage bonus increased from 20% to 25%. 
+* Now increases villager health by 250 each.
+* Now grants a 20% attack speed bonus (stacks multiplicatively).
+
+=== Drop and Obtainment Changes ===
+[[Pigronata]]
+* No longer drops [[Bacon]].
+
+[[Compass]]
+* Drop chance from [[Mother Slime]], [[Snow Flinx]], [[Undead Viking]], and [[Armored Viking]] reduced from 2% to 1%.
+
+[[Depth Meter]]
+* Drop chance from [[bats|bat]] enemies reduced from 1% to 0.5%.
+
+[[Rally]]
+* Drop chance from [[Salamander]]s, [[Crawdad]]s, and [[Giant Shelly|Giant Shellies]] increased from 4% to 6.67%.
+
+[[Bat Bat]]
+* Drop chance from all [[bats]] reduced from 0.4% to 0.33%. 
+
+[[Snowball Launcher]]
+* Drop chance from [[Snow Flinx]]es increased from 2% to 4%.{{note|paren=y|Actually, increased from {{chance|1/150}}{{source code ref|old=y|v=1.4.4.9|method=Terraria.GameContent.ItemDropRules.ItemDropDatabase.RegisterMiscDrops}} to {{chance|1/25}}}}
+
+[[Ale Tosser]]
+* Drop chance from the [[Tavernkeep]] reduced from 16.67% to 12.5%.
+
+[[Advanced Combat Techniques]]
+* Drop chance from [[fishing]] increased by ~33%.
+
+[[Bewitching Table]]
+* Now available as a drop when [[fishing]] in the [[Dungeon]].
+
+[[Potion of Return]]
+* Can now also drop from [[pots]] in the [[Cavern]] layer.
+
+[[Terragrim]]
+* Drop chance from [[Enchanted Sword Shrine]]s increased from 2% to 3.33%.
+
+[[Rock Golem Head]]
+* Drop chance from [[Rock Golem]]s increased from 10% to ~33.33%.
+
+[[Lamia set]]
+* Now drops from both [[Lamia]] variants at the same rate (2.5%).
+
+[[Prismatic Dye]]
+* Now drops from the [[Empress of Light]] in a stack of 3, up from 1.
+
+[[War Table]] and [[War Table Banner]]
+* Now drop from [[Ogre]]s.
+
+[[Slime Staff]]
+* Now has a ~3.33% chance to be dropped by [[King Slime]].
+
+[[Dungeon Brick]]
+* Can now be crafted at a [[Heavy Assembler]] (the crafting station formerly known as [[Heavy Work Bench]]) in [[Graveyard]]s.
+
+[[Lihzahrd Furnace]]
+* Now also sold by the [[Steampunker]] in the [[Jungle]] after [[Golem]] has been defeated.
+
+[[Lihzahrd Work Bench]]
+* Can now be crafted at [[Lihzahrd Furnace]]s from 10 [[Lihzahrd Brick]]s.
+
+[[Pearls]]
+* Pink Pearl drop chance from [[Oyster]] increased from 1.33% to 2.5%.
+* Black Pearl drop chance from Oyster increased from 6.22% to 7.5%.
+* White Pearl drop chance from Oyster increased from 12.44% to 15%.
+
+[[Obsidian Crate]] and [[Hellstone Crate]]
+* Replaced the ore and bar drops by [[Hellstone]] and [[Hellstone Bars]] respectively.
+* Now have a 5% chance to contain [[Hellforge]]s.
+
+[[Dungeon Crate]] and [[Stockade Crate]]
+* Now have a 50% chance to contain [[Dungeon Brick]]s.
+
+[[Paintings]]
+* Biome Fishing [[Crates]] now have a chance to contain paintings from their biomes.
+
+[[Deer Thing]]
+* Now replaces [[Suspicious Looking Eye]]s in [[Frozen Chest]]s.
+
+=== Recipe changes ===
+[[Watches]], [[Goggles]], and [[Sunglasses]]
+* Now crafted at a [[Work Bench]] rather than [[chairs]] with [[tables]] (these are no longer used for any crafting).
+
+All [[Loom]] Recipes
+* Can now also be crafted at [[Living Loom]]s.
+
+All [[Water]] Recipes
+* Can now also be crafted at [[Fountains]].
+
+[[Phaseblade]]s
+* Now require 15 [[gems]] to craft, up from 10.
+
+[[Endless Quiver]] and [[Endless Musket Pouch]]
+* Recipe cost increased from 3996 [[Wooden Arrow]]s/[[Musket Ball]]s to 9999.
+
+[[Unholy Arrow]]
+* 1 Worm Tooth now makes 20 Arrows (up from 5), and 1 Vertebrae now makes 10 (up from 5). Wooden Arrow cost increased to match.
+
+[[Poison Dart]]
+* Now requires an [[Anvil]] to craft.
+
+[[Cursed Dart]], [[Ichor Dart]], and [[Crystal Dart]]
+* Now require a [[Mythril Anvil|Mythril]]/[[Orichalcum Anvil]] to craft.
+
+[[Spider armor]], [[Spider Staff]], and [[Queen Spider Staff]]
+* Now require a [[Mythril Anvil|Mythril]]/[[Orichalcum Anvil]] to craft.
+
+[[Mushroom Torch]]
+* Can now also be crafted using [[Glowing Mushroom]]s and [[Gel]].
+
+[[Golden Delight]]
+* Can now also be crafted from [[Golden Carp]].
+
+[[Roasted Bird]]
+* Can now also be crafted from [[Owl]].
+
+[[Furnace]]
+* Can now also be crafted from [[Ebonstone]], [[Crimstone]], and [[Pearlstone]].
+
+[[Stink Potion]]
+* Recipe now crafts 2 Stink Potions, up from 1.
+
+=== Shop and Price Changes ===
+[[Pylons]]
+* Now sold by villagers regardless of how happy they are (they do still need at least 2 other villagers in their vicinity).
+
+[[Gray Zapinator]]
+* Now also available from the [[Traveling Merchant]] when [[King Slime]] or [[Deerclops]] have been defeated.
+
+[[Katana]]
+* Buy price reduced from {{gc|10}} to {{gc|5}}.
+
+[[Revolver]]
+* Buy price increased from {{gc|10}} to {{gc|15}}.
+
+[[Birdie Rattle]]
+* Buy price reduced from {{pc|1}} to {{gc|50}}. 
+
+[[Bamboo Leaf]]
+* Buy price reduced from {{pc|1}} to {{gc|75}}.
+
+[[Leather Whip]]
+* Now sold by the [[Zoologist]] at 3% [[Bestiary]] completion, down from 10%.
+
+[[Squirrel Hook]]
+* Now has a 10% [[Bestiary]] completion requirement to buy from the [[Zoologist]].
+
+[[Digging Molecart]]
+* Now sold by the [[Zoologist]] at 25% [[Bestiary]] completion, down from 35%.
+
+[[Planter Boxes]]
+* The [[Dryad]] now sells all of the [[Planter Boxes]] without any [[boss]] requirements.
+
+[[Potted Trees|Potted Forest and Jungle Trees]]
+* Now sold by the [[Dryad]] in [[pre-Hardmode]] (the Hallowed trees still have a Hardmode requirement).
+
+[[Rubblemaker]]
+* Now sold by the [[Goblin Tinkerer]] in [[pre-Hardmode]].
+
+[[Ale Tosser]]
+* Sell price increased from {{sc|1}} to {{sc|25}}.
+
+[[Classy Cane]]
+* Sell price increased from {{sc|50}} to {{gc|2}}.
+
+[[Magma Skull]]
+* Sell price increased from {{coin|2gc50sc}} to {{coin|7gc50sc}} to match the [[Molten Charm]].
+
+[[Molten Skull Rose]]
+* Sell price increased from {{gc|5}} to {{gc|9}}.
+
+[[Living Loom]]
+* No longer sold by [[Steampunker]].
+* Sell price reduced from {{gc|2}} to {{cc|40}}.
+
+[[Spectre Goggles]]
+* Now also sold by the [[Mechanic]] in [[Graveyard]]s.
+
+[[Echo Coating]]
+* Now also sold by the [[Painter]] in [[Graveyard]]s if the [[Mechanic]] is present in the world.
+
+=== Special Seeds ===
+[[Not the Bees]]
+* Reduced the amount of [[Larva]]e placed during world generation.
+* [[Gem]] blocks are no longer replaced with [[Crispy Honey Block]]s during world generation.
+
+[[For the Worthy]]
+* The passive mining boost now also applies when using [[Block Swap]].
+
+[[Don't dig up]]
+* [[Pre-Hardmode]] [[Mimics]] now have a 5% chance to drop [[Flare Gun]]s and [[Extractinator]]s.
+* [[Katana]] and [[Keybrand]] are no longer swapped in progression.
+* Depth-based [[quest fish]] are now easier to catch.
+* [[Ocean]] biome [[Crates]] are now less common, allowing a more balanced distribution of the other Biome Crates.
+
+== Bug Fixes ==
+=== Crashes and Major Issues ===
+* Fixed several [[multiplayer]] crashes involving [[furniture]].
+* Fixed a rare crash when placing [[torches]] in multiplayer.
+* Fixed a rare magical crash involving [[Unicorn]]s in multiplayer.
+* Fixed a crash involving [[paint]]ed [[cactus|cacti]] and the minimap.
+* Fixed a rare multiplayer crash involving animated trails.
+* Fixed some crashes involving sounds.
+* Fixed a rare crash involving [[snail]]s. Yes, snails.
+* Fixed a multiplayer crash involving faraway villagers.
+* Fixed a [[Pylons]] multiplayer crash.
+* Fixed a freeze caused by spawning [[NPCs]] when most of the world has been wiped of blocks.
+* Fixed a lighting crash caused by running the game at a very high resolution.
+* Fixed crash involving [[Enchanted Sword Shrine]]s.
+* Fixed a few crashes related to display modes.
+* Fixed a server crash caused by loading a world of a newer version than the server.
+* Fixed a crash involving the [[Flying Dutchman]] in multiplayer.
+* Fixed a crash caused by leaving a [[multiplayer]] world and joining a singleplayer world.
+* Fixed crashes involving [[emotes]].
+* Fixed a crash caused by resizing the window while waiting for {{gameText|LegacyMenu.88}} to start.
+* Fixed a crash on iOS when toggling Fullscreen.
+* Fixed crash involving [[Dressers]] and merging [[liquids]].
+* Fixed the <code>-join</code> launch parameter reverting all player files to their backups when launching the game.
+
+=== Player ===
+* Fixed spawning code not clearing spawn properly.
+* Fixed cases where [[respawn]]ing would consider passthrough blocks as solid.
+* Fixed some [[projectiles]] not applying their [[debuffs]] in [[PvP]].
+* Fixed [[PvP]] debuffs scaling with difficulty.
+* Fixed [[Journey Mode]]'s Pickup power ignoring Pickup speed boosts.
+* Fixed the [[Slimed]] debuff not showing its duration.
+* Fixed being unable to pick up a dead player's items if they have not respawned yet.
+* Fixed a bug where {{key|buff}} could consume non-consumable items if used when you have no [[buff]] items in your inventory.
+* Fixed quick mounting a [[Minecart Track]] always grappling the track even if there are solid blocks in the way.
+* Fixed some mismatches between [[Torch God's Favor]] and the current biome detection.
+* Fixed [[minecarts]] having a smaller hitbox when traveling in [[liquid]].
+* Fixed [[Hardcore]] player [[Ghost]]s contributing to enemy health scaling in [[Expert]]+ difficulty.
+* Fixed [[Informational Accessories]] still showing their info on [[Hardcore]] player [[Ghost]]s.
+* Fixed [[Block Swap]]'s speed not matching the player's best pickaxe.
+* Fixed certain [[buffs]] not being synced properly when joining a server.
+* Fixed [[hooks]] not being synced properly when joining a server.
+* Fixed certain [[debuffs]] being removable via right click.
+* Fixed the [[Lucky Break]] achievement not being granted if you are [[Stoned]].
+* Fixed the [[Matching Attire]] achievement not unlocking when quick-equipping vanity.
+* Fixed [[Smart Cursor]] placing [[Palm Tree]]s too close together.
+* Smart Cursor now properly reacts to changes in item placement range when placing [[blocks]] and [[walls]].
+* [[Torches]] are now properly placable on [[platforms]] when Smart Cursor is on.
+* Fixed Smart Cursor not targeting the blocks directly below the player when mining if the cursor is close to the player's feet.
+* Biome calculations are now based on the position of the player rather than the position of the camera. This means that using [[Binoculars]] or [[Rifle Scope]]s no longer changes the player's biomes.
+
+=== Items ===
+* Fixed the [[Magic Conch]] not always teleporting you onto solid ground.
+* Fixed the [[Staff of Regrowth|Staff]]/[[Axe of Regrowth]] breaking [[Flower vine]]s.
+* Fixed [[Battle Potion]] and [[Mechanical Worm]] returning [[Crimson]] materials when [[Shimmer]]ed on [[Corrupt]] worlds.
+* Fixed [[Chest Lock]]s being usable on [[Dressers]].
+* Fixed [[Spectre Paintbrush]] and [[Spectre Paint Roller|Roller]] being usable when there is no paint in the [[inventory]].
+* Fixed the [[Presserator]] placing [[Actuator]]s in empty blocks when placing certain objects over existing objects (e.g. [[Antlion Egg]]).
+* Fixed [[Queen Spider Staff]] sentry's eggs and baby spiders not being able to fall through platforms.
+* Fixed certain cases of [[Paladin's Shield]] overdealing and underdealing damage.
+* Fixed the Paladin's Shield deflecting instant kill damage from the [[Dungeon Guardian]], [[Skeletron]], and [[Skeletron Prime]].
+* Paladin's Shield [[buff]] can no longer be cleared by right-clicking.
+* Fixed the [[Gray Zapinator|Gray]]/[[Orange Zapinator]]'s tooltip still showing a mana cost in its tooltip when using [[Meteor armor]].
+* Fixed [[Water Candle]]s not being holdable underwater, despite being placeable underwater.
+* Fixed [[Gas Trap]]s not working in singleplayer when autopause is on.
+* Fixed the [[Vampire Knives]], [[Scourge of the Corruptor]], and [[Shadowflame Knife]] firing inaccurately at high melee speeds.
+* Fixed [[Binoculars]] being able to see further than intended on high resolutions.
+* Fixed [[Wormhole Potion]] not teleporting you to the right position if both you and the target are mounted.
+* Fixed the [[Robbing the Grave]] achievement not being triggered by the [[Shadow Jousting Lance]].
+* Fixed extremely rare cases of items staying in the inventory despite having a stack size of 0.
+* Fixed [[Life Drain]] and [[Resonance Scepter]]'s knockback in [[PvP]].
+* Improved the reliability of certain quick projectiles, like the [[Heat Ray]].
+* Fixed [[Stellar Tune]] having a limited range on gamepad.
+* Fixed Stellar Tune's "no line of sight" damage penalty not applying to PvP.
+* Fixed [[Brown Solution]] converting certain stone walls to dirt walls.
+* Fixed [[Green Solution]] converting Jungle walls to stone walls.
+* Fixed [[Drills]], [[Chainsaws]], and the [[Chlorophyte Jackhammer]] being one tick slower than they should be.
+* Fixed the [[Spider Staff]]'s spider minions sometimes getting locked up during movement.
+* Fixed [[Temple Key]]s being consumed from every inventory the player has instead of just once, when attempting to unlock the [[Temple Door]].
+* Fixed [[Teleporter]]s sometimes failing their initial use in [[multiplayer]].
+* Fixed items from [[Fishing]] [[Crate]]s, [[Treasure Bags]] and [[Presents]] never having [[modifier]]s.
+* Fixed [[Shield of Cthulhu]]'s first dash after joining a world not hitting anything.
+* You can no longer blow up the [[Snake Charmer's Flute]]'s snake. You monster.
+* Fixed items getting stuck in weird states after being thrown into certain [[Shimmer]] pools.
+* Fixed releasing [[critters]] in [[reverse gravity]] not releasing them at the cursor.
+* Fixed [[Jousting Lance]]s having an asymmetrical hitbox when attacking.
+* Fixed [[Vortex Beater]], [[Phantasm]], [[Phantom Phoenix]], and [[Celebration Mk2]] dealing contact damage.
+* Improved [[Portal Gun]] teleportation stability in multiplayer.
+* Trash items (items with {{rare|-1|cate=no}} [[rarity]]) are no longer immune to [[lava]].
+* Fixed [[Water Gun]] projectiles being destroyed when getting near [[water]].
+* Fixed the [[Shiny Red Balloon]] and its upgrades sometimes reducing total jump height, for example when in water.
+* Fixed [[Hive Pack]]'s Giant Bees being instantly slain by [[Shimmer]].
+* Fixed [[boomerang]] weapons getting locked out when thrown off the edges of the world.
+* [[Clinger Staff]] is now properly usable on top of [[Planter Boxes]].
+* Fixed [[Red's set]] and the [[Fairy Bell]] rarely allowing you to have two fairies at once.
+* Fixed [[flails]] breaking at high melee speed.
+* Fixed rapidly switching between projectile firing weapons (e.g. [[Starfury]]) allowing you fire more projectiles than intended.
+* Fixed certain [[mounts]] being slowed by certain [[accessories]].
+* Fixed [[Purification Powder]] converting [[mowed grass]] into unmowed grass.
+* Fixed synchronization of the [[Charged Blaster Cannon]] in multiplayer.
+* Fixed being able to sell back items purchased with [[Defender Medal]]s for their full buy price in [[coins]] when the shop menu is still open. They now follow the default behavior of selling for {{chance|1/5}} of their value in coins.
+* Fixed synchronization issues involving [[Fairy Glowstick]]s.
+* Fixed an issue with [[The Dirtiest Block]]'s behavior.
+* Fixed rare cases where Yoyo [[Counterweights]] would fail to appear.
+* Fixed the [[Archery Potion]]'s damage bonus not being reflected in the damage tooltips of arrows.
+
+=== Bosses, Invasions and Events ===
+* Fixed some inconsistencies between loot dropped directly by [[bosses]] in [[Classic]] difficulty and loot obtained from [[Treasure Bags]] in [[Expert]]+.
+* Fixed [[invasion]]s not being properly synced in [[multiplayer]].
+* Fixed boss [[minimap]] icons not animating smoothly when far away.
+* Fixed cases where two [[Eye of Cthulhu]]s would appear at once. You were definitely just seeing twice.
+* Fixed the [[Eater of World]]s not being considered a "danger" for certain mechanics such as the [[Pylon]] Network despite being the literal Eater of Worlds!
+* Fixed an issue where [[Deerclops]] could get stuck into an infinite falling loop when teleporting.
+* Deerclops' Shadow Hands now avoid spawning on all players, rather than just the primary target.
+* Fixed [[Skeletron Prime]]'s Laser not firing properly.
+* Fixed Skeletron Prime's Bomb explosions appearing in the wrong position in multiplayer.
+* Fixed [[Empress of Light]]'s Ethereal Lances sometimes not spawning in the correct position.
+* Fixed enraged Empress of Light's contact damage being dodgeable on [[Don't dig up]] worlds under certain circumstances.
+* Fixed spooky cases of the [[Pumpking]] disappearing in the middle of the fight, never to return.
+* Fixed [[Flocko]] and [[Krampus]] not being counted as part of the [[Frost Moon]].
+* Fixed [[Dark Mage]]s and [[Ogre]]s almost always arriving from the left portal in tier 1 and 2 [[Old One's Army]] events. They will now randomly pick a portal.
+* Fixed an asymmetry in [[Lightning Aura]]'s minimum placement distance during the Old One's Army event.
+* Fixed Old One's Army enemies being affected by [[Shimmer]].
+* Fixed [[Martian Saucer]] increasing the player's respawn time in multiplayer.
+
+=== Enemies ===
+* Fixed "{{gameText|Announcement.HasArrived|x_0=&lt;Enemy name&gt;}}" messages appearing in the [[chat]] in worlds with lots of active enemies.
+* Fixed a spawn cap exploit involving [[Antlion Egg]]s and [[Bee]]s.
+* Fixed a rare bug where [[worm enemies]] segments could attach to other enemies.
+* Fixed [[Biome Mimic]]s not turning hostile when damaged by [[lava]].
+* The [[Bird Banner]] now properly applies to normal [[Bird]]s, [[Blue Jay]]s, and [[Cardinal]]s.
+* Fixed destroying a [[Slimer]]'s wings increasing its kill count.
+* Fixed the [[Golem]] sometimes spawning with multiple heads in multiplayer.
+* Fixed a rare bug where a second bound version of an [[NPC]] could spawn at the same time the first one is rescued.
+* Fixed [[NPC]] buffs not being synced when a player first joins a server.
+* Fixed [[spider]]s sometimes managing to clip through solid blocks! Aaaah!
+* Fixed Crimson [[Pigron]]s uniquely being incapable of entering water.
+* Fixed [[rain]] enemies spawning in the wrong places on [[Don't dig up]] worlds.
+* Fixed [[Wraith]]s and [[Hoppin' Jack]]s not spawning in the right places on [[Don't dig up]] worlds.
+* Fixed certain [[Crimslime]] variants not counting towards the [[Gelatin World Tour]] achievement.
+* The [[Nurse]] can no longer remove [[Brain of Confusion]]'s [[Cerebral Mindtrick]] buff. She was slightly confused there.
+* Fixed [[multiplayer]] issues involving [[Antlion]]'s sand balls.
+* Fixed web spitting [[spider]]s spitting webs at slain players.
+* Fixed [[Spiked Slime]]s maintaining their focus on players that they've slain.
+* Improved [[Fighter AI]] enemies' ability to jump on [[platforms]].
+* Fixed Fighter AI enemies jumping endlessly on platforms, when at the same elevation as their target.
+* Fixed rare cases of [[NPCs]] being perpetually wet, making the bees very sad.
+* Fixed [[Jungle Slime|Jungle]] and [[Spiked Ice Slime]]s sometimes spawning inside of blocks.
+* Fixed [[worm enemies]] with picked up [[coins]] not respawning properly in [[Expert]]+.
+* Fixed some [[Snow biome]] NPCs being unable to spawn on [[Red Ice Block]].
+* Fixed [[Corrupt]] and [[Crimson]] enemies not spawning correctly on [[Lesion Block|Lesion]] and [[Flesh Block]]s.
+* Fixed [[For the Worthy]] and [[Journey Mode]] scaling issues.
+
+=== Villagers ===
+* Fixed cases where the [[Dryad]] would forget how to do math when asked about the world's infection status.
+* Fixed the [[Skeleton Merchant]] having broken behaviour in [[liquids]]. Additionally, he can no longer spawn in liquid.
+* Fixed [[Skeleton Merchant]] ignoring a player's [[Shadow Candle]] and appearing anyway.
+* Fixed the spirit of [[Christmas]] preventing NPCs from being killed when falling out of the bottom of the world.
+* Fixed villagers not dropping their party hats if slain during a [[party]].
+
+=== Blocks and Furniture ===
+* Fixed [[Platforms]] and [[Planter Boxes]] not framing properly when next to [[Echo Block|Echo]] ([[Echo Coating|coated]]) blocks.
+* Fixed [[Aetherium Brick]] not blending with [[Dirt]].
+* Fixed [[Teleporter]]s not breaking objects above them when they are broken.
+* Fixed being able to place items in [[Weapon Rack]]s/[[Item Frame]]s while you are using them.
+* [[Mowed Hallowed grass]] no longer spreads [[paint]] when it grows.
+* Fixed closed [[doors]] breaking objects in their way when interacted with even if the door is blocked.
+* Fixed [[Christmas Tree]]s not properly breaking objects when placed by [[Block Swap]].
+* Fixed placed [[Garden Gnome]]s having incorrect [[minimap]] labels.
+* [[Campfires]] and [[torches]] are now properly limited to their [[water]] resistant variants when [[Block Swap]]ping them underwater.
+* Fixed certain hanging objects like [[Boulder Statue]]s not breaking when their anchor blocks are block swapped into platforms.
+* Fixed being unable to place [[Moss]] on a single, isolated block.
+* Fixed being unable to place [[Ash grass]] on a single, isolated [[Ash Block]].
+* Fixed platforms other than wood not being considered solid surfaces in certain cases.
+* Fixed being able to block swap solid blocks onto platforms that players are standing in.
+* Fixed [[Acorn]]s not being plantable on [[Ash grass]].
+* Fixed [[Crystal Shard]]s, [[Holiday Light]]s and [[gems]] being placeable on the "wrong" side of sloped blocks.
+* Fixed cases where breaking one [[cage]] would break another adjacent cage.
+* Fixed [[Gem Tree]]s breaking when moss spreads beneath them.
+* Fixed being able to step on a [[Weighted Pressure Plate]] twice.
+* Fixed auto-[[paint]] and auto-actuation failing when using block swap to switch similar items, such as one [[chest]] for another.
+* Fixed being unable to place more [[rope]] on an already very long rope in multiplayer.
+* Fixed Water [[Sensors]] being triggered by [[Shimmer]].
+* Fixed being able to toggle half of a hanging [[lantern]] in multiplayer.
+* Fixed [[Honey Block]]s slowing you down too much in [[reverse gravity]].
+* Fixed certain block interactions happening multiple times at low FPS, such as putting items in [[Item Frame]]s.
+* Fixed being able to craft items while using a [[Mannequin]]s or [[Hat Rack]].
+* Fixed [[Hanging Brazier]]/Pots instantly breaking when hanging them under a platform/block combination.
+* Fixed [[Bubble]]s being actuatable by [[timers]].
+* Fixed [[vines]] not considering [[mowed grass]] a valid anchor, making them liable to spontaneous decomposition.
+* Fixed [[Land Mine]]s and [[Geyser]]s spawning projectiles twice in multiplayer.
+* Fixed unsafe [[Desert Fossil Wall]]s being considered suitable housing material.
+
+=== World ===
+* Fixed biome [[music]] and [[biome backgrounds|backgrounds]] not having the same priorities, causing mismatches in certain biome combinations.
+* Fixed [[Meteorite (biome)|Meteorites]] not fully syncing in multiplayer when landing.
+* Fixed Meteorites not clearing slopes, paints and coatings when generated.
+* Fixed [[Hardmode ores]] retaining [[paint]] when generating over painted blocks.
+* Fixed certain [[Pyramid]] pots having broken map colours.
+* Fixed [[Palm Trees]] not inheriting the paint and coating of their root block when growing.
+* Fixed Palm Trees, [[Bamboo]], [[Seaweeds]], and [[Sea Oat]]s not being coated when growing on a block with [[Illuminant Coating]].
+* Fixed certain tree branches dropping [[Acorn]]s when they're above [[grass]] blocks.
+* Fixed [[Sakura]] and [[Yellow Willow]] trees not converting properly.
+* Fixed [[Celebrationmk10]] worlds flagging the initially spawned villagers as unlocked.
+* [[Boulders]] now properly interact with [[Shimmer]].
+* Fixed rare cases of [[trees]] growing through solid blocks.
+* Fixed darkness damage applying incorrectly while the screen is panning in [[The Constant]] worlds.
+* Fixed [[luck]] incorrectly affecting damage from cutting [[Cactus]] in The Constant worlds.
+* Fixed grass and desert wall infection spreading asymmetrically.
+* Fixed [[Ash Tree]]s dropping regular wood in certain cases.
+* [[Lily pad]]s can now properly grow above [[Mowed Hallowed grass]].
+* Fixed lily pads losing their paint when floating up or down.
+* Fixed [[wild Crimson plants]] not counting as Crimson blocks.
+* Fixed [[grass]] spread synchronization in [[multiplayer]].
+* Fixed the [[underground]] to [[cavern]] background transitions not matching with [[Depth Meter]] values.
+* The [[Dryad]] now counts [[Lesion Block|Lesion]] and [[Flesh Block]]s as Corrupt/Crimson blocks in [[Don't dig up]] worlds.
+* Fixed [[Living Tree]] leaves burrowing into [[Floating Lake]]s and drinking all the water. Save some for the fish!
+* [[Rain]] now only stops [[Fireblossom]] from blooming if it is growing in a [[layer]] that actually experiences rain.
+
+=== World Generation ===
+* Fixed several minor world gen issues.
+* Fixed [[Boulders]] sometimes generating without a surrounding trap.
+* Fixed [[Boulder trap]]s sometimes generating without a Boulder.
+* Fixed [[honey]] patches appearing outside of the [[Jungle]] (such as in [[the Underworld]]).
+* Fixed several [[liquid]] merge issues.
+* Fixed rare cases of [[Floating Island]] chests not containing their [[paintings]].
+* Fixed Boulder traps overlapping and breaking containers in rare situations.
+* Fixed extremely rare cases where [[Minecart Track]]s would manage to get into the [[Dungeon]] and [[Jungle Temple]].
+* Fixed [[campsite]]s sometimes generating too close to the Dungeon.
+* Fixed rare cases of [[Jungle Temple]] chest loot appearing inside [[Mushroom Chest]]s.
+* Fixed a minor bug with [[liquid]] cleanup during world generation.
+* Fixed [[Underground Cabin]]s attempting to generate outside the world.
+* Fixed traps in the [[Jungle Temple]] sometimes generating without a [[Pressure Plate]].
+* Fixed spider [[stalactite]]s and honey stalactites/[[stalagmite]] not generating.
+* Fixed [[Living Wood Chest]]s at the [[surface]] containing [[underground]] loot.
+* Fixed Living Wood Chests appearing outside of [[Living Tree]]s.
+* Fixed exposed [[gems]] and [[Crystal Shard]]s generating on [[Boulders]] and closed [[doors]].
+* Fixed rare cases where [[Not the Bees]] worlds were missing an [[Ocean]].
+* Fixed cases of [[Underground Desert]] Pressure Plates appearing over other objects.
+* Fixed several chest loot items not appearing with [[modifier]]s.
+* Fixed a rare case where a new world could start at night. Spooky!
+* Fixed rare failures to place [[wild Jungle plants]] during generation.
+* Fixed cases of the [[Dead Man's Chest]] Boulders spawning over other valuables such as [[Life Crystal]]s.
+* Fixed the wrong kind of [[pots]] generating in the Underground Desert.
+* Fixed the [[Dungeon]]'s guaranteed [[Shadow Key]] always being placed in a [[Biome Chest]]. Shadow Keys no longer generate in Biome Chests at all.
+
+=== UI ===
+* Fixed favorited [[ammo]] sometimes being affected by quick stacking.
+* Fixed being unable to navigate the [[inventory]] when placing [[chests]] on gamepad.
+* Fixed the Create World menu showing the wrong world size preview image when initially opened.
+* Fixed the [[Resource Pack]] info scrollbar overlapping the textbox.
+* Fixed the main menu sometimes being upside down when quitting a world with [[reverse gravity]] active.
+* Fixed the back button in some menus backtracking all the way to the title screen instead of the previous menu.
+* Fixed the game falling back to the default [[hotbar]] hotkeys (1 through 0) rather than the assigned hotkeys while an item is being used.
+* Fixed [[Quick Stack to Nearby Chests]] taking items from ammo and hotbar slots in certain cases.
+* Fixed some NPCs in the [[Bestiary]] appearing in the wrong size.
+* [[Axe]] tools now get sorted properly when sorting.
+* Fixed [[dyes]] not getting sorted when sorting.
+* Fixed NPCs appearing incorrectly in the [[Bestiary]] in [[For the Worthy]] worlds.
+* Fixed some oddities with the hover range of [[Chest]] menu buttons.
+* Fixed death markers being invisible in the overlay map.
+* Fixed rare cases where UI elements would overlap when the player has the maximum amount of [[accessory slot]]s.
+* Fixed the [[Metal Detector]] not always highlighting the most valuable treasure.
+* Fixed the [[Stopwatch]] showing wrong values when moving through [[Shimmer]].
+* Fixed the [[DPS Meter]] not taking NPC [[defense]] into account in some cases.
+* Fixed items potentially being picked up into the cursor when opening [[Chester]], the [[Money Trough]] or the [[Void Vault]] portal at high UI scales.
+* Fixed [[Bestiary]] kill counts resetting to 0 on multiplayer when getting very high.
+* Fixed the cursor icon flickering when hovering over the minimap buttons.
+* Fixed the [[Guide]] forgetting his initial 'help' text in certain cases. He only needed a bit of help, that's all.
+* Fixed the Guide's help text on grappling hooks not checking for all hook types.
+* Fixed the world's edge not matching up with the [[minimap]]'s edge.
+* Fixed certain [[hairstyles]] potentially not appearing in the [[Stylist]]'s shop menu.
+* Fixed scrolling through the Stylist's hair window also scrolling through your hotbar under certain zoom settings.
+* Fixed repeatedly sorting sometimes causing items to leapfrog over each other.
+* Fixed the incorrect error message displaying when trying to join a server with an incompatible character.
+* Fixed shops showing incorrect gamepad hints.
+* Fixed the cursor icon not always indicating when you are about to trash an item.
+* Fixed [[multiplayer]] chat not drawing above [[Hardcore]] [[ghost]]'s heads.
+* Fixed [[Void Vault]] and [[Defender's Forge]] icons overlapping in the savings display.
+* Fixed exiting the virtual keyboard on gamepad also closing the [[Journey]] menu.
+* Fixed the mouse cursor rendering incorrectly when certain menus are open.
+* Fixed certain chat commands converting their input to lowercase.
+* Fixed mouseover text appearing when hovering over certain buttons that have items behind them in the world.
+* Fixed gamepad navigation in the villager housing menu when there is only one column of villagers.
+* Fixed teleporting causing erratic minimap patterns.
+* Fixed map pings persisting between worlds.
+* Fixed Quick Use deleting items when used while an item is already mid-use.
+* Fixed the Esc key not working for anything but chat on Mac/Linux.
+* Fixed the game overlaying the cursor for the rest of the session when the mouse is disconnected and then reconnected on Mac.
+* Fixed the [[Toggles#Ruler|Ruler]]'s distance display scaling with World Zoom rather than UI Scale.
+* Fixed being unable to quick-unequip the [[Master Mode]] accessory on Steam Deck.
+* Fixed quick-crafted coins on gamepad immediately converting back to their original denomination.
+* Fixed the player being dismounted when opening the [[Bestiary]] on gamepad.
+* Fixed the "Take One" action on gamepad not working for single items.
+* Fixed the [[Smart Cursor]] icon rendering in the fullscreen map on gamepad.
+* Fixed the Smart Cursor visual extending beyond the player's functional range in extreme situations.
+* Fixed Smart Cursor's direction lock being asymmetrical.
+* Fixed a visual issue with the achievement unlocked notifications.
+* Fixed [[house]] assignment not working correctly in [[reverse gravity]].
+* Fixed D-Pad cursor snapping not working in reverse gravity.
+* Fixed moving the map not respecting mouse input at certain resolutions.
+* Fixed a duplicate gamepad hint that appears when hovering over the [[minecart]] equip slot.
+* Fixed other player's names showing when hovering over them while they are invisible.
+* Fixed the gamepad hints for accessory slots in [[Master Mode]] being incorrect in certain cases.
+* Fixed gamepad's virtual keyboard breaking on lower framerates.
+* Fixed [[kites]] responding to mouse clicks when trying to click interface buttons.
+* [[Bed]] and Spawn map icons are now properly centered.
+* Fixed player chat text going offscreen when resizing the game window. 
+* [[Emotes]] are now correctly removed when players are slain.
+
+=== [[Camera Mode]] ===
+* Fixed the sky not appearing correctly in captures during [[rain]].
+* Fixed [[the Aether]] biome's background stars not appearing properly in snapshots of [[underground]] areas.
+* Fixed certain background elements not appearing in their correct place in camera captures.
+* Fixed blurry backgrounds in high resolution camera captures.
+* Fixed [[Monoliths]] not properly working with camera captures.
+* Fixed camera captures sometimes not having transparent backgrounds when backgrounds are disabled.
+* Fixed large world snapshots with lots of [[furniture]] crashing in certain circumstances.
+* Fixed the screenshot area being affected by UI scale.
+* Fixed [[water]] artifacts appearing in snapshots.
+
+=== Visual Issues ===
+* Fixed the [[Tax Collector's set]]'s scarf being visible when you are transformed into a [[Moon Charm|Werewolf]] or [[Merfolk]].
+* Fixed [[Starlight]]'s animation not pausing when the game is paused.
+* [[Dungeon Guardian]] now properly emits effects when attacked.
+* Fixed several items not matching the player's [[stealth]] when held out.
+* Fixed drinking [[Biome Sight Potion]] not producing particles.
+* Fixed some [[stalactite]]s/[[stalagmite]]s having the wrong break [[Dust IDs|dust]]s.
+* Fixed the leaf burst from a growing [[tree]] not using the tree's [[paint]].
+* Fixed the [[Hellfire Treads]]' and [[Terraspark Boots]]' effects not being affected by [[dye]] properly.
+* Fixed [[Xeno Staff]] minions not displaying attack dusts on remote clients.
+* Fixed [[Queen Slime]]'s projectiles not having the same default brightness as her minion's projectiles.
+* Fixed brightness flickering when entering a surface [[Glowing Mushroom biome]].
+* Fixed cases where the camera would move very fast instead of transitioning to black when teleporting.
+* Fixed the game not using a black fade transition when switching from tracking view ([[Golf Ball]], [[FPV Goggles]]) to [[Binoculars]].
+* Fixed certain backgrounds having their treetops slightly cut-off.
+* Fixed the [[Flesh Grinder]] not rendering properly.
+* Fixed rare visual errors with [[Martian Dye]].
+* Fixed various plants ignoring certain [[paint]]s.
+* Fixed some [[furniture]] not properly reacting to [[coating]]s.
+* Fixed [[Shaking|tree shake]] effects playing twice in [[multiplayer]] in certain cases.
+* Fixed certain [[mounts]] making bubble effects appear in the wrong position underwater.
+* Fixed [[NPCs]] rarely sliding instead of teleporting after using [[Teleporter]]s in multiplayer.
+* Fixed regular and wooden [[minecarts]] animating in reverse.
+* Fixed [[Brain of Cthulhu]] sometimes rendering incorrectly in phase two.
+* Fixed certain items being offset incorrectly when used by mounted players.
+* Fixed visual glitches from [[Magic Missile]]-type weapons on certain graphics cards.
+* Fixed certain cases where [[liquid]] would incorrectly draw, especially near [[Bubble]]s.
+* Fixed some visual issues with sleeping in a [[bed]].
+* Fixed the [[Pigron]] mount's idle animation not being used.
+* Fixed [[Jellyfish jars]]' [[Placement Preview]]s and [[glow mask]]s being skewed.
+* Fixed [[Jellyfish jars]] not creating extra bright light when the Jellyfish is glowing.
+* Fixed [[Placement Preview]] issues with placed [[Sign]]s, [[Tattered Sign]]s, [[Arrow Sign]]s, [[Item Frame]]s, [[Switch]]es, and [[Announcement Box]]es.
+* Fixed the alchemy [[herbs]]' [[Placement Preview]] not being accurate.
+* Fixed visual glitches with child safe [[gore]]s.
+* Fixed the [[mana]] gained effect from the [[Magic Cuffs]] appearing twice for other players.
+* Fixed certain [[wings]] unintentionally being visible when grappled to a surface.
+* Fixed the [[Eyebrella]] spawning rain while the fullscreen map is active, causing a burst of rain when you close the map.
+* Fixed [[Christmas Tree]]s not properly attaching to the ground.
+* Fixed main menu sometimes showing watery ripples.
+* Fixed some [[chandeliers]] not emitting sparks.
+* Fixed small visual oddities with [[Chain Knife]] and [[Chain Guillotines]].
+* Fixed yucky cases where [[Stinkbug Blockers]] would appear incorrectly.
+* Fixed the [[Crystal Dart]] projectiles not properly rotating when bouncing.
+* Fixed some issues with the [[Crystal Serpent]]'s visual effects.
+* Fixed some interactions between glowing blocks and complete darkness.
+* Fixed [[Shadowflame Apparition]]'s... appearance?
+* Fixed certain visual effects that track players incorrectly tracking velocity.
+* Fixed [[Orange Stained Glass]] appearance in [[the Underworld]].
+* Fixed the [[Gold Water Strider]] not emitting sparkles.
+* Fixed [[Truffle Worm]] losing its glow effect when escaping from players.
+* Fixed certain wings not becoming fully invisible when entering [[stealth]] (e.g. [[Shroomite armor]]).
+* The [[Inner Tube]] now correctly gets affected by stealth.
+* Fixed stray white pixels appearing around [[Pigrons]] and the [[Pigron Mount]].
+* Removed a white pixel in the [[Demolitionist]] and [[Tavernkeep]]'s spritesheets that appears when they fall.
+* The main menu will no longer skip a [[moon phase]] when cycling through the days.
+* Players will no longer show their failed attempts at using [[mana]] consuming items, when they do not have enough mana, in multiplayer.
+* Fixed [[clouds]] moving excessively at low framerates.
+* Fixed distant clouds stuttering when moving vertically.
+* Fixed [[lava]] emitting water particles when a player gets out.
+* Fixed framing issues with [[Crystal Shard]]s interacting with half-bricks.
+* Fixed [[wild Ash plants]] and [[lily pads]] not reacting to [[paint]].
+* Fixed [[paint]] not working properly on [[Sunflower]]s.
+* Fixed [[Chlorophyte Partisan]]'s projectile being visually cut off.
+* Fixed [[Shiverthorn]] not glowing in the dark.
+* Fixed blood disappearing quicker than intended.
+* Fixed players respawning with [[honey]] particles after being slain in honey.
+* Fixed scaling artifacts on [[Eater of Worlds]]' segments.
+* Fixed visual issues with [[Rocket Boots]] when mounting/swapping [[loadouts]] mid-air.
+* Fixed the [[Glass Slipper]]'s sparkle effect being visible when the accessory isn't.
+* Fixed certain visual effects not functioning correctly in [[reverse gravity]].
+* Fixed several [[pets]] changing directions or going invisible when entering flight from standstill.
+* Improved [[Caveling Gardener]]'s direction when standing still.
+* Fixed visual issues involving player's overhead [[chat]], nameplates, [[reverse gravity]], and high latencies.
+* Fixed the background suddenly disappearing at high altitude in certain circumstances.
+* Fixed the [[glow mask]]s of certain dyes.
+* Improved [[Obsidian Skull Rose]] and [[Molten Skull Rose]] compatibility with various armor pieces.
+* Fixed certain furniture items not emitting their effects properly in Retro Lighting.
+* Fixed certain coats appearing incorrectly when the player is sitting.
+* Fixed visual issues when sitting while wearing some specific leg items.
+* Fixed [[Shimmer]] animations breaking when under the effect of a [[Hunter Potion]].
+* Fixed a visual issue with the [[Graduation Gown]].
+* Fixed a visual issue with the [[Fallen Tuxedo Pants]].
+* Fixed a visual issue with the [[Desert Spirit]].
+* Fixed inconsistencies in the item directions of [[minecarts]], [[chairs]], and [[beds]].
+* Fixed [[fishing poles]] jittering when moving horizontally.
+* Fixed [[spears]] jittering when moving over slopes.
+* Fixed framing issues caused by block swapping [[Glass]].
+* Fixed [[vines]] disappearing when their anchor block is hammered.
+* Fixed an issue with sloped glowing blocks.
+* Fixed a variety of enemies animating slower when walking to the left.
+* Fixed [[Snowfall Block]] drawing liquids behind it.
+* Fixed [[Headless Horseman]]'s NPC's Pumpkin projectiles having upside down shadows. Spooky!
+* Fixed [[Truffle]]'s glow not fading when [[Shimmer]]ing.
+* Fixed [[Hades Dye]] not working properly on certain [[pets]] and [[mounts]].
+* Fixed a lot of projectiles drawing twice.
+* Fixed the [[Mechanic]] being offset by a single pixel when sitting.
+* Fixed [[Echo Coating|Echo]] coated blocks drawing black artifacts in certain cases.
+* Fixed [[Chlorophyte Dye]]'s [[glow mask]] being in the wrong place at the right time.
+* Fixed [[Oozed]] debuff still producing visual effects on slain players.
+* Fixed [[waterfall]]s flowing upwards in certain cases.
+* Fixed certain visual effects appearing incorrectly in multiplayer at high latencies.
+* Fixed [[Moon Lord]] floating to the left in multiplayer in its final moments.
+* Fixed cut-off rendering on Retro Lighting at high resolutions.
+* Fixed a framing issue with exposed gems.
+* Fixed certain [[wings]] not blinking when the wearer is damaged.
+* Fixed [[Martian Conduit Wall]]'s [[glow mask]] not aligning with the main sprite.
+* Fixed an issue with the [[Flesh Chandelier]]'s animation.
+* Fixed [[Team Dye]] not applying properly to [[minions]], [[pets]], [[light pets]], and [[hooks]].
+
+=== Audio ===
+* Terraria no longer fails to launch when it fails to detect an available audio device.
+* Fixed item use sounds from remote clients not playing properly in [[multiplayer]] in specific cases.
+* Fixed [[Shadowflame Apparition]]s, [[Parrot]]s, [[Pirate's Curse]], [[Tesla Turret]], and [[Martian Saucer]]s not playing their [[invasion]] music if they're the only enemy left.
+* Fixed [[waterfall]] sounds being anchored to the player rather than the camera.
+* Fixed certain sounds playing twice when switching between menus.
+* Fixed the item pickup sound not always being centered.
+* Fixed [[Betsy]]'s scream being audible throughout the whole world.
+* Fixed some sounds playing multiple times on the gamepad's virtual keyboard at low framerates.
+
+=== Localization ===
+* Fixed several IME issues.
+* Fixed references to mouse buttons in loading tips not being localized.
+* Improved line wrapping of text for some languages.
+* Fixed [[Green Cap]], [[Ivy]], and [[Jim's Cap]] not dropping when the game is set to certain languages.
+* Fixed [[Old One's Army]], [[Pumpkin Moon]], and [[Frost Moon]] having an extra colon in the numbered wave text.
+* Fixed the [[Drax]]'s outdated name in several languages.
+* Fixed some errors in the [[Princess]] and [[Pirate]]'s dialogue.
+* Fixed the [[Steampunker]]'s [[party]] dialogue.
+* Fixed a typo in [[Goblin Tinkerer]]'s [[happiness]] dialogue.
+* Fixed [[Celebration Mk2]]'s projectiles having no localization.
+* Fixed some of the [[Tax Collector]]'s dialogue being inaccessible.
+* Fixed several punctuation issues.
+* Fixed some inconsistencies with the [[credits]] localization.
+
+=== Miscellaneous ===
+* Terraria no longer fails to launch if a [[Resource Pack]] fails to load properly.
+* Fixed several certain exploits.
+* Fixed an incompatibility with Terraria [[1.0.6.1]] saves.
+* Fixed some input issues when using AZERTY keyboard layouts.
+* Fixed a rare "Lost connection" issue for slower clients.
+* Fixed the <code>language</code> option from the dedicated server configuration not working.
+* Fixed the <code>autocreate</code> option from the dedicated server configuration not working if used out of order.
+* Fixed the dedicated server's <code>world</code> argument crashing when the world does not exist, even if <code>autocreate</code> is also used.
+* Improved menu related stability when joining friends via Steam.
+* Fixed an issue where uploading a player to the Steam Cloud when a player with the same name already exists there could delete that player's minimap data.
+* Fixed updating a published [[Steam Workshop]] item resetting its publicity to Public in certain cases.
+* Fixed some incorrect default values when opening Terraria for the first time. This caused hardware [[RGB]] to not function.
+* Fixed being unable to join your own {{gameText|LegacyMenu.88}} server after having previously connected to a server using a different port than 7777.
+
+== Trivia ==
+* The timespan between [[1.4.4.9]] and 1.4.5.0 was 3 years, 2 months, and 10 days, making it the longest in-development update in the game's history. The second longest gap was between the updates [[1.3.5.3]] and [[1.4.0.1]], at 3 years and 23 days.
+** While 1.4.5.0 was originally announced to be "relatively small in scope"<ref>[https://twitter.com/Cennxx/status/1609991462053109761 The intent is for this update to be relatively small in scope. Some Dead Cells crossover content, Seeds Menu, etc.] {{small|{{date|2023|01|02}}}}</ref> and was planned to be released in 2023,<ref>{{forums thread|terraria-1-4-5-is-coming-in-2023-including-terraria-x-dead-cells.116264|Terraria 1.4.5 is Coming in 2023 - including Terraria x Dead Cells!}} {{small|{{date|2022|11|07}}}}</ref> it had grown in size<ref>{{forums thread|terraria-state-of-the-game-august-2023.126435|Terraria State of the Game - August 2023}} {{small|{{date|2023|08|31}}}}</ref><ref>"What started as a "quick and short" update to add our side of the Terraria x Dead Cells crossover content has morphed into a much larger update that we have been working on for over a year now." ({{forums thread|terraria-state-of-the-game-february-2024.132494|Terraria State of the Game - February 2024}}) {{small|{{date|2024|02|29}}}}</ref> and had therefore been postponed several times.<ref>Developer comments regarding a release date during the development of 1.4.5.0:
+* {{date|2022|11|07}} – {{forums thread|terraria-1-4-5-is-coming-in-2023-including-terraria-x-dead-cells.116264|Terraria 1.4.5 is Coming in 2023}}
+* {{date|2023|08|10}} – [https://forums.terraria.org/index.php?threads/when-do-yall-estimate-this-updates-comin-out.122696/post-3009949 It is at a minimum several months away. Maybe longer]
+* {{date|2023|08|31}} – "[...] the update is going to take a bit longer to come out than we had originally anticipated. [...] we expect this extension to be in the scope of a few months at least" ({{forums thread|terraria-state-of-the-game-august-2023.126435|Terraria State of the Game - August 2023}})
+* {{date|2023|10|26}} – "[...] it is looking increasingly likely that we are looking at a 2024 release for 1.4.5 at this point." ({{forums thread|terraria-state-of-the-game-october-2023.130412|Terraria State of the Game - October 2023}})
+* {{date|2023|11|30}} – "With Crossplay and 1.4.5 on the horizon, 2024 is shaping up to be a big one [...]" ({{forums thread|terraria-state-of-the-game-november-2023.131306|Terraria State of the Game - November 2023}})
+* {{date|2024|10|31}} – [https://twitter.com/Cennxx/status/1852053521363046815 No date yet and it is safe to say we will not have a date this year. :). 💚🌳]
+* {{date|2024|11|28}} – "[...] the next Terraria update is moving along into 2025." ({{forums thread|terraria-state-of-the-game-november-2024.139594|Terraria State of the Game - November 2024}})
+</ref>
+* 1.4.5.0 is the only patch of the {{desktop version}} since the initial [[1.0]] release to have a trailing zero in its version number.
+
+{{patchlist}}
+
+== References ==
+{{reflist}}
+
+{{Desktop versions}}
+
+{{language info|en=1.4.5.0}}

@@ -1,0 +1,117 @@
+{{exclusive|1.4.5.0}}
+{{infobox wrapper
+|{{item infobox
+| auto = 5663
+| tags = minion
+| sound1 = Pal cattiva joy.wav
+| soundcaption1 = 抚摸
+}}
+|{{item infobox
+| auto = 6148
+| tags = minion / hardmode
+| sound1 = Pal cattiva joy.wav
+| soundcaption1 = 抚摸
+}}
+|{{npc infobox
+| auto = 695
+| image = Cattiva (distressed).png
+| type =
+}}
+}}
+[[File:Cattiva (demo).gif|thumb|{{tr|Cattiva}}与玩家攻击[[{{tr|Skeleton}}]]和[[{{tr|Blue Jellyfish}}]]，并一起采挖{{tr|blocks}}。注意它能在空中进行{{tr|double jump}}来到达目标处。]]
+
+'''{{tr|Cattiva}}'''是一个[[{{tr|pre-Hardmode}}]]的[[{{tr|summon weapon}}]]，能召唤'''{{tr|Cattiva}}'''[[{{tr|minion}}]]。它会奔跑并跳向[[{{tr|enemies}}]]，造成{{tr|contact damage}}。当{{tr|Cattiva}}下落且其目标在其上方超过 6.25 格时，它也能进行一次{{tr|double jump}}（具有和[[{{tr|Cloud in a Bottle}}]]类似的视觉效果）来到达目标处。与玩家使用的{{tr|double jumps}}不同，{{tr|Cattiva}}不需要落地就能刷新其{{tr|double jump}}，可以在空中无限地使用。{{source code ref|name=aistyle67|v=1.4.5.8|method=Terraria.Projectile.AI_067_FreakingPirates}}
+
+{{tr|Cattiva}}也可以伴随玩家挖掘，具有 41% 等效[[{{tr|pickaxe power}}]]（约为[[{{tr|Iron Pickaxe}}]]的{{tr|pickaxe power}}）和 16 的[[{{tr|mining speed}}]]。{{source code ref|v=1.4.5.8|method=Terraria.Projectile.AI_067_FreakingPirates_HitIntention / Terraria.Projectile.AI_067_FreakingPirates}}只要玩家仍位于附近，即使玩家停止挖掘{{tr|Cattiva}}也会继续挖掘。{{tr|Cattiva}}也会伴随玩家砍伐[[{{tr|trees}}]]和[[{{tr|cacti}}]]，可以砍伐同一棵{{tr|tree}}/{{tr|cactus}}，也可以砍伐附近的另一棵。它在砍{{tr|trees}}时有 171% 的[[{{tr|axe power}}]]，砍{{tr|cacti}}时有 57 % 的{{tr|axe power}}，两种情况下的[[{{tr|chopping speed}}]]均为 16。同时仅能召唤一只{{tr|Cattiva}}；额外使用该{{tr|summon weapon}}不会召唤额外的{{tr|minions}}，也不会强化现有的{{tr|minion}}。和其他[[{{tr|Pals}}]]一样，可以按 {{key|open}} 来抚摸{{tr|Cattiva}}。
+
+若玩家不在[[{{tr|Graveyard}}]]{{tr|biome}}中，{{tr|Cattiva}}在[[{{tr|day}}]]期间可罕见地生成在[[{{tr|surface}}]]以上的[[{{tr|grass}}]]、[[{{tr|Jungle grass}}]]、[[{{tr|Snow Block}}]]、或[[{{tr|Ice Block}}]]上，但它不能生成在{{tr|world}}中心的水平四分之一宽度区域内{{note|small=y|paren=y|从{{tr|world}}中心算起，向两侧各八分之一宽度}}。{{source code ref|name=SpawnAnNPC|v=1.4.5.8|method=Terraria.NPC.SpawnAnNPC}}它最初生成为{{tr|distressed}}{{tr|Cattiva}}，附近会生成两个[[{{tr|Goblin Archer}}]]。当两个{{tr|Goblin Archers}}均被杀死（或消失）时，{{tr|Cattiva}}会在玩家位于 6.25 格内时转变为其{{tr|item}}形态。{{source code ref|v=1.4.5.8|method=Terraria.NPC.AI_127_Pal}}
+
+{{Lifeform Analyzer note}}
+
+{{modifier|summon}}
+
+== 可靠的捣蛋猫 ==
+[[File:Trusty Cattiva (demo).gif|thumb|{{tr|Trusty Cattiva}}与玩家攻击[[{{tr|Pigrons}}]]，并一起采挖{{tr|blocks}}。注意它在攻击目标时会附着在其上。]]
+'''{{tr|Trusty Cattiva}}'''是{{tr|Cattiva}}的升级版本，通过将{{tr|Cattiva}}和[[{{tr|Kinship Peach}}]]{{tr|crafting}}获得。相较于{{tr|Cattiva}}，它有更高的{{tr|base damage}}、更高的{{tr|movement speed}}和加速度。它也会在攻击{{tr|enemies}}时附着在其上，使得它能比{{tr|Cattiva}}更稳定地造成伤害（{{tr|Cattiva}}攻击{{tr|enemies}}时会倾向于穿过它们）。它在其他方面的行为与{{tr|Cattiva}}相同。<ref name="aistyle67"/>玩家无法同时召唤{{tr|Cattiva and Trusty Cattiva}}，它们在召唤时会互相替换。
+
+== 制作 ==
+=== 配方 ===
+{{recipes|result=Trusty Cattiva|expectedrows=1|link=no}}
+
+== 备注 ==
+=== 苦恼的捣蛋猫 ===
+* 如果{{tr|world}}上已经存在一只{{tr|distressed}}{{tr|Cattiva}}或一只{{tr|distressed}}[[{{tr|Foxparks}}]]，则{{tr|Cattiva}}不会生成。
+** 当尝试生成{{tr|distressed Pal}}时，游戏会首先检查{{tr|player}}的[[{{tr|inventory}}]]中是否有{{tr|Cattiva and Foxparks items}}（不包括可靠版本）。如果玩家{{tr|inventory}}中有其中之一，游戏会生成玩家没有的那个。如果玩家拥有两件或都没有，则有 40% 几率生成{{tr|distressed Foxparks}}，60% 几率生成{{tr|distressed Cattiva}}。{{tr|Foxparks}}的 40% 几率受[[{{tr|luck}}]]影响且首先检查，这意味着正值的{{tr|luck}}会降低{{tr|distressed Cattiva}}的生成几率，负值的{{tr|luck}}则会提高该几率。<ref name="SpawnAnNPC"/>
+* 假设{{tr|distressed}}{{tr|Cattiva}}位于 <code>(x, y)</code>，它会在 <code>(x-6, y-5)</code> 至 <code>(x-6, y+11)</code> 和 <code>(x+6, y-5)</code> 至 <code>(x+6, y+11)</code> 的范围内（两个 17 格高的竖列，位于其左侧和右侧各 6 格远处）寻找两个合适的实心{{tr|tile}}（包括[[{{tr|platforms}}]]和[[{{tr|Planter Boxes}}]]）。要使得{{tr|tile}}合适，其正上方 3×3 格区域内必须为空（区域左下角和右下角的两格除外，即 <code>(x-1, y-1)</code> 和 <code>(x+1, y-1)</code>）。{{source code ref|v=1.4.5.6|method=Terraria.GameContent.Events.CultistRitual.CheckFloor2}}相关的{{tr|Goblin Archers}}会在这两个{{tr|tile}}处生成。
+** {{tr|distressed}}{{tr|Cattiva}}在找不到两个合适{{tr|tile}}时会立即消失。
+* {{tr|distressed Cattiva}}的 [[{{tr|AI}}]] 有时会不正确地检测其相关的{{tr|Goblin Archers}}，从而阻止它变为{{tr|item}}。此种情况下，远离它（但不要让它消失）然后重新接近，再杀死所有附近的{{tr|enemies}}可能能修复该问题。
+* {{tr|distressed Cattiva}}会受到{{tr|enemies}}的伤害，但所有攻击均只会对其造成 5 伤害，无论{{tr|enemy}}实际伤害如何。该伤害值随后会被{{tr|distressed Cattiva}}的 15 {{tr|defense}}降低，这意味着实际情况下它每次仅会受到 1 伤害。{{source code ref|v=1.4.5.8|method=Terraria.NPC.BeHurtByOtherNPC}}
+* 在内部，游戏会检测{{tr|Cattiva}}的生成位置与[[{{tr|world spawn}}]]的水平距离是否超过[[{{tr|world size}}|世界宽度]]的 1/8（在{{tr|small}} / {{tr|medium}} / {{tr|large}}{{tr|worlds}}中分别为 525 / 800 / 1050 格）。在普通{{tr|world}}中，这会阻止它生成在地图中心 1/4 的区域内生成，而在改变了{{tr|spawn point}}的[[{{tr|Special world seeds}}|特殊]]或[[{{tr|Secret world seeds}}|秘密]]世界种子中，其生成区域会有所不同，例如 [[{{tr|Celebration Mk 10@seed}}]] 和 [[{{tr|How did I get here}}]]。<ref name="SpawnAnNPC"/>
+
+=== 捣蛋猫 & 可靠的捣蛋猫 ===
+* {{tr|The Cattiva minion}}可以锁定 50 格范围内的{{tr|enemies}}，且对于未使用{{tr|summon weapon}}标记的非 {{tr|boss}} 目标必须位于以{{tr|player}}为中心的 120×75 格矩形区域内。{{player center}}{{source code ref|v=1.4.5.8|method=Terraria.Projectile.AI_067_FreakingPirates / Terraria.Projectile.Minion_FindTargetInRange}}
+* {{tr|The Cattiva}}在地面上时，或者在{{tr|liquid}}中下落时，若与目标的 Y 坐标{{footnote|name=target vector}}垂直距离大于 1.875 <!--30 pixels-->格（或当伴随{{tr|player}}挖掘，其目标为{{tr|block}}时，为 1 <!--16 pixels-->格）则会向上跳跃。{{source code ref|v=1.4.5.8|method=Terraria.Projectile.AI_067_FreakingPirates_TryJumpingToTarget}}
+* {{tr|The Cattiva minion}}仅会在其挥爪动画期间造成伤害，它会在距离其目标位置{{footnote|准确地说，对于{{tr|Cattiva}}的目标位置并非目标中心。其 X 坐标为目标中心向远离{{tr|Cattiva}}的方向移动 10 {{tr|pixels}}，而其 Y 坐标则是目标的顶部/底部向下/上移动 11 {{tr|pixels}}，若{{tr|Cattiva}}的 Y 坐标位于此范围内，则为{{tr|Cattiva}}的 Y 坐标。|name=target vector}}小于 1.25 格时挥爪，持续 {{duration|16 ticks}}。<ref name="aistyle67"/>
+** 这意味着若地面上的{{tr|cattiva}}处于目标底部下方 1.875 格以内，1.25 格以外时，它既不会攻击也不会跳跃，而是一直跟随着目标。
+* {{tr|The Cattiva minion}}在满足下列条件时，会使用二段跳接近其目标：<ref name="aistyle67"/>
+** 正在下落，下落速度大于 {{mph|1pixels}}.
+** 未处于[[{{tr|liquid}}]]中.
+**  位于目标下方，底部距离目标 Y 坐标{{footnote|name=target vector}}大于 6.25 <!--100 pixels-->格。
+* 当{{tr|Trusty Cattiva}}附着于{{tr|enemy}}上时，其最大速度为 {{mph|20pixels}}，但是其最大下落速度仍为 {{mph|10pixels}}。<ref name="aistyle67"/>
+* {{tr|Cattiva minion}}击中时造成 9 {{tr|ticks}}{{tick}}的[[{{tr|local invincibility frame}}]]，这意味着其每秒可击中 6.67 次。{{source code ref|v=1.4.5.8|method=Terraria.Projectile.SetDefaults}}
+* 当 [[{{tr|For the Worthy@seed}}]] {{tr|seed}}激活时，{{tr|Cattiva}}摧毁{{tr|blocks, trees and cacti}}所需的打击次数减半（向上取整）。{{source code ref|v=1.4.5.8|method=Terraria.Player.PickTile_DetermineDamage}}
+* 与[[{{tr|Traveling Merchant}}]]对话时，如果{{tr|player}}的{{tr|inventory}}或任何[[{{tr|portable storage}}]]{{tr|item}}中有{{tr|Cattiva}}、{{tr|Foxparks}}、[[{{tr|Chillet}}]]、[[{{tr|Chillet Ignis}}]]、[[{{tr|Digtoise}}]]或它们的“可靠”变体，他就会出售[[{{tr|Pal Metal set}}]]。
+
+== 小贴士 ==
+[[File:Cattiva farm.png|thumb|刷{{tr|Cattiva}}场地的一个例子，建造在{{tr|Ocean}}上，{{tr|world border}}附近。{{tr|Water Candle}}{{tr|Battle Potion}}和人造{{tr|Jungle biome}}可用于提升{{tr|spawn}}率。]]
+* 为了提升{{tr|Cattiva}}或[[{{tr|Foxparks}}]]的出现率，玩家可以放置一长排的[[{{tr|Snow block}}|{{tr|snow}}]]或[[{{tr|Ice blocks}}]]以供它们生成。玩家还可以使用[[{{tr|Water Candle}}]]和[[{{tr|Battle Potion}}]]，并在附近建造人工[[{{tr|Jungle}}]]{{tr|biome}}''（见[[指南:{{tr|Artificial biomes}}]]）''，以提升[[{{tr|spawn rate}}]]。增加[[{{tr|luck}}]]的{{tr|Items}}，如[[{{tr|Lucky Clover}}]]或[[{{tr|Garden Gnome}}]]，也有所帮助。注意它们仅会在[[{{tr|day}}]]期间的[[{{tr|Surface}}]]生成。
+** [[{{tr|Grass}}]]或[[{{tr|Jungle Grass}}]]也可用作生成区域，但它们并不理想，因为当处于{{tr|world}}外侧六分之一区域时，{{tr|Grass}}上可能会导致期望外的[[{{tr|King Slime}}]]生成，而{{tr|Jungle Grass}}会因{{tr|jungle enemies}}的生成而降低{{tr|Pals}}的生成率。
+** 在[[{{tr|Ocean}}]]上方直接建造场地十分有用，因为{{tr|Ocean}}天然提供了一个大型空旷区域，意味着玩家不必担心{{tr|enemies}}会生成在期望外的位置而降低刷怪场的效率。
+*** 此外，玩家在[[{{tr|world border}}]]附近时，{{tr|enemies}}可生成在屏幕内，使得{{tr|Pals}}的生成易于被注意到。
+** 在获得其中之一之后就完全无需考虑{{tr|Luck}}了，因为保证会生成玩家未拥有的那只。
+* 当其与{{tr|Goblin Archers}}一起生成时，{{tr|music}}会切换为{{tr|Goblin Army}}主题，使得即使没有[[{{tr|Lifeform Analyzer}}]]也可以判断附近是否有{{tr|Pal}}。
+* 是否已击败[[{{tr|Goblin Army}}]]与是否生成{{tr|distressed Cattiva}}无关。它可在击败{{tr|event}}前生成，也会在击败后继续生成。<!-- This is worth pointing out explicitly because of the Goblin Archer connection. -->
+* {{tr|Cattiva}}的行为类似于{{tr|pre-Hardmode}}版本的[[{{tr|Blade Staff}}]]，两者均有极快的攻击速度。因此，它与具有高{{tr|tag damage}}的{{tr|whip}}（如[[{{tr|Spinal Tap}}]]）或在玩家有高{{tr|armor penetration}}（如使用[[{{tr|Shark Tooth Necklace}}]]）时搭配较好。
+* {{tr|Cattiva}}的挖矿能力在某些情况下会带来不便，尤其是在试图挖掘[[{{tr|lava}}]]附近区域或者建筑时。
+
+== 花絮 ==
+{{float file box|float=none|width=12em|[[File:Cattiva (sunglasses).png|link=]]|戴着[[{{tr|Sunglasses}}]]的{{tr|Cattiva}}。}}
+* 当玩家戴着[[{{tr|Sunglasses}}]]时，{{tr|Cattiva}}也会戴上。{{source code ref|v=1.4.5.8|method=Terraria.Main.DrawProjDirect|t=相关部分为 <code>type == 1093</code> 部分。}}
+** 该{{tr|Sunglasses}}是通过叠加两个玩家装备的{{tr|Sunglasses}}外观达成的：{{item|image=Sunglasses (pre-1.4.0.1).png<!--This image is the same as equipped sprite-->|class=mirror|nolink=y}}。
+* 获得{{tr|Cattiva}}的方式参考了{{维基百科|b=y|Palworld|t={{tr|Palworld}}}}中由敌对 {{tr|NPCs}} 守卫的营地，其中{{tr|Pals}}被锁在笼子中等待救援。
+* 当攻击或挖掘时，{{tr|Cattiva}}会产生可见的闪烁粒子。
+
+== 另见 ==
+* {{pal link}}
+
+== 历史 ==
+{{history|Desktop 1.4.5.7|
+** {{tr|Distressed Pal}}{{tr|event}}现在保证会生成玩家尚未获得的{{tr|pal}}。
+** {{tr|Distressed Pal event}}现在发生几率提高 25%。
+** {{tr|Distressed Cattiva}}现在从所有攻击中受到 5 伤害，这应当显著提高在更高[[{{tr|difficulties}}]]下救下它们的几率。
+** 现在可使用[[{{tr|Kinship Peach}}]]（通过{{tr|crafting}}）升级为其“可靠”{{tr|variant}}。
+** {{tr|damage}}由 9 提升至 11。
+** 攻击间的[[{{tr|Invincibility frames}}]]由 8 {{tr|ticks}}提升至 9 {{tr|ticks}}。
+** 现在可在空中跳跃。
+** {{tr|Cattiva}}现在不再坐在旋转的玩家的肩膀上。}}
+{{history|Desktop 1.4.5.3|
+** 生成率由 {{chance|1/300}} 提升至 {{chance|1/200}}。
+** 比例由 70% {{tr|Cattiva}}和 30% {{tr|Foxparks}}调整为 60% {{tr|Cattiva}}和 40% {{tr|Foxparks}}。}}
+{{history|Desktop 1.4.5.0|{{tr|Introduced.}}}}
+{{history|Console 1.4.5|{{tr|Introduced.}}}}
+{{history|Switch 1.4.5|{{tr|Introduced.}}}}
+{{history|Mobile 1.4.5|{{tr|Introduced.}}}}
+
+== 参考 ==
+{{reflist}}
+{{footnotelist}}
+
+{{Minions}}
+{{Master Template Weapons
+| show-summon = yes
+}}
+{{Master Template Buffs
+| show-buffs = yes
+}}
+
+{{language info|en=Cattiva}}

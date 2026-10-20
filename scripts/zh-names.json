@@ -1,0 +1,114 @@
+{
+ "蜡烛": {
+  "from": "Stone Candle",
+  "len": 7749
+ },
+ "烛台": {
+  "from": "Candelabras",
+  "len": 4883
+ },
+ "染料": {
+  "from": "Color Only Dye",
+  "len": 36200
+ },
+ "蜂巢": {
+  "from": "Bee Hive",
+  "len": 2703
+ },
+ "摩羯座套装": {
+  "from": "Capricorn set",
+  "len": 1853
+ },
+ "巫师套装": {
+  "from": "Ruby Wizard set",
+  "len": 15143
+ },
+ "Amber Wizard set": {
+  "from": "",
+  "len": 0
+ },
+ "门": {
+  "from": "Doors",
+  "len": 7412
+ },
+ "黑暗": {
+  "from": "Darkness",
+  "len": 4051
+ },
+ "乡村俱乐部套装": {
+  "from": "Country Club set",
+  "len": 1055
+ },
+ "墓地": {
+  "from": "Graveyard",
+  "len": 14053
+ },
+ "苔藓": {
+  "from": "Helium Moss",
+  "len": 6865
+ },
+ "氦苔藓砖墙": {
+  "from": "Helium Moss Brick Wall",
+  "len": 689
+ },
+ "氦苔藓砖": {
+  "from": "Helium Moss Brick",
+  "len": 645
+ },
+ "彩虹砖": {
+  "from": "Rainbow Brick",
+  "len": 2724
+ },
+ "瘟疫使者套装": {
+  "from": "Plaguebringer's set",
+  "len": 1604
+ },
+ "绘画作品": {
+  "from": "R/Terraria",
+  "len": 73228
+ },
+ "钓鱼浮标": {
+  "from": "Helium Moss Fishing Bobber",
+  "len": 1437
+ },
+ "Mystic Wizard set": {
+  "from": "",
+  "len": 0
+ },
+ "永恒旅人套装": {
+  "from": "Timeless Traveler's set",
+  "len": 1778
+ },
+ "石材板": {
+  "from": "Stone Accent Slab",
+  "len": 1059
+ },
+ "彩虹砖墙": {
+  "from": "Rainbow Brick Wall",
+  "len": 785
+ },
+ "最土的块": {
+  "from": "The Dirtiest Block",
+  "len": 1888
+ },
+ "浪人套装": {
+  "from": "Wandering set",
+  "len": 1199
+ },
+ "电视头套装": {
+  "from": "TV Head set",
+  "len": 2414
+ },
+ "捣蛋猫": {
+  "from": "Trusty Cattiva",
+  "len": 9873
+ },
+ "火绒狐": {
+  "from": "Trusty Foxparks",
+  "len": 11561
+ },
+ "碎岩龟": {
+  "from": "Trusty Digtoise",
+  "len": 5310
+ }
+}

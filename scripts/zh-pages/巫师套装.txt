@@ -1,0 +1,297 @@
+{{legacy nav tab}}
+{{item infobox
+| type = Armor/Set
+| rare =
+| setbonus = {{item|Magic Hat|mode=image|nolink=y|maxsize=20x16px}}&#8239;&#58;&nbsp;{{gameText|ArmorSetBonus.MagicHat}}<br/>{{item|Wizard Hat|mode=image|nolink=y|maxsize=20x16px}}&#8239;&#58;&nbsp;{{gameText|ArmorSetBonus.Wizard}}
+| cargo = no
+| allversions = yes
+}}
+
+'''{{tr|Wizard set}}'''是一套由任意一件{{tr|magic headgear}}和任意一件{{tr|magic robes}}组成的[[{{tr|armor}}]]套装。{{tr|magic headgear}}可以选择由[[{{tr|Tim}}]]掉落的[[{{tr|Wizard Hat}}]]，或偶尔由{{tr|Traveling Merchant}}出售的[[{{tr|Magic Hat}}]]。{{tr|magic robes}}可以选择由[[{{tr|gem}}]]和[[{{tr|robe}}]]制作的 7 种{{tr|Gem Robe}}之一，或从[[{{tr|Traveling Merchant}}]]处购买的[[{{tr|Mystic Robe}}]]。腿部{{tr|equipment}}可以任意选择，不会影响获取{{tr|set bonus}}。
+
+== 套装部件 ==
+{{options/set|item|icons=no}}
+{| class="terraria sortable align-center lined"
+! colspan = 2 | 物品
+! class=unsortable | 装备后的外观
+! 身体部位
+! {{tr|Defense}}
+! {{tr|Bonus}}
+! {{tr|Rarity}}
+! data-sort-type=number | 购买
+! data-sort-type=number | 卖出
+<!-- Rows for the headgear: -->
+{{#invoke:CargoQuery|main
+| q?tables = Items
+| q?fields = itemid, name, bodyslot, defense, tooltip, internalname, rare, buy, sell
+| q?groupBy = itemid
+| q?orderBy = itemid
+| q?where = itemid in (238, 2275)
+| q?limit = 1000
+| template = :{{BASEPAGENAME}}/row0
+}}
+<!-- Rows for the robes: -->
+{{#invoke:CargoQuery|main
+| q?tables = Items, Equipinfo
+| q?join = Items.itemid=Equipinfo.itemid
+| q?fields = Items.itemid=itemid, name, bodyslot, defense, tooltip, internalname, rare, buy, sell
+| q?groupBy = Items.itemid
+| q?orderBy = manaCost
+| q?where = Items.itemid in (1282, 1283, 1284, 1285, 1286, 1287, 2279, 4256)
+| q?limit = 1000
+| template = :{{BASEPAGENAME}}/row0
+}}
+|}{{options/reset|item}}
+
+== 套装 ==
+{{tr|Wizard set}}的[[{{tr|set bonus}}]]取决于{{tr|headgear item}}：
+* 搭配{{item|icons=no|Magic Hat}}：{{gameText|ArmorSetBonus.MagicHat}}
+* 搭配{{item|Wizard Hat}}：{{gameText|ArmorSetBonus.Wizard}}
+
+下表列出了{{tr|Wizard set}}所有组合的属性加成。{{tr|set bonus}}已包含在这些数值内。 <!-- The set bonus values can be edited in the source code of [[Wizard set/row]]. -->
+{{options/set|item|mode=image|icons=no|maxsize=x20px}}
+{| class="sortable terraria lined align-center"
+|-
+! rowspan=2 | {{tr|Set}}
+! rowspan=2 colspan=2 | 部件
+! rowspan=2 | {{tr|Defense}}
+! colspan=4 | {{tr|Bonus}}
+! rowspan=2 data-sort-type=number | 卖价
+|-
+! data-sort-type=number | {{tr|Magic damage}}
+! data-sort-type=number | 魔法[[{{tr|Critical strike chance}}]]
+! data-sort-type=number | 最大{{tr|mana}}
+! data-sort-type=number | {{tr|Mana}}消耗
+|-
+| rowspan=2 align=left | '''{{tr|Mystic Wizard set}}''' <!-- invisible infobox for storing this set to the Cargo table: -->{{item infobox
+	| view = void
+	| name = Mystic Wizard set
+	| type = Armor/Set
+	| defense = {{setinfo|head=Magic Hat, Wizard Hat|body=Mystic Robe||defense}}
+	| sell = {{setinfo|head=Magic Hat, Wizard Hat|body=Mystic Robe||sell}}
+	| rare =
+}}
+| {{item|Mystic Robe}} || {{item|Magic Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Magic Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Magic Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Magic Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Magic Hat|stat=maxmana}}
+| rowspan=2 | {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Magic Hat|stat=manacost}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Magic Hat|stat=sell}}
+|-
+| {{item|Mystic Robe}} || {{item|Wizard Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Wizard Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Wizard Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Wizard Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Wizard Hat|stat=maxmana}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Mystic Robe|head=Wizard Hat|stat=sell}}
+|-
+| rowspan=2 align=left | '''{{tr|Amethyst Wizard set}}''' <!-- invisible infobox for storing this set to the Cargo table: -->{{item infobox
+	| view = void
+	| name = Amethyst Wizard set
+	| type = Armor/Set
+	| defense = {{setinfo|head=Magic Hat, Wizard Hat|body=Amethyst Robe||defense}}
+	| sell = {{setinfo|head=Magic Hat, Wizard Hat|body=Amethyst Robe||sell}}
+	| rare =
+}}
+| {{item|Amethyst Robe}} || {{item|Magic Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Magic Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Magic Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Magic Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Magic Hat|stat=maxmana}}
+| rowspan=2 | {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Magic Hat|stat=manacost}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Magic Hat|stat=sell}}
+|-
+| {{item|Amethyst Robe}} || {{item|Wizard Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Wizard Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Wizard Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Wizard Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Wizard Hat|stat=maxmana}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Amethyst Robe|head=Wizard Hat|stat=sell}}
+|-
+| rowspan=2 align=left | '''{{tr|Topaz Wizard set}}''' <!-- invisible infobox for storing this set to the Cargo table: -->{{item infobox
+	| view = void
+	| name = Topaz Wizard set
+	| type = Armor/Set
+	| defense = {{setinfo|head=Magic Hat, Wizard Hat|body=Topaz Robe||defense}}
+	| sell = {{setinfo|head=Magic Hat, Wizard Hat|body=Topaz Robe||sell}}
+	| rare =
+}}
+| {{item|Topaz Robe}} || {{item|Magic Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Magic Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Magic Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Magic Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Magic Hat|stat=maxmana}}
+| rowspan=2 | {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Magic Hat|stat=manacost}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Magic Hat|stat=sell}}
+|-
+| {{item|Topaz Robe}} || {{item|Wizard Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Wizard Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Wizard Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Wizard Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Wizard Hat|stat=maxmana}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Topaz Robe|head=Wizard Hat|stat=sell}}
+|-
+| rowspan=2 align=left | '''{{tr|Sapphire Wizard set}}''' <!-- invisible infobox for storing this set to the Cargo table: -->{{item infobox
+	| view = void
+	| name = Sapphire Wizard set
+	| type = Armor/Set
+	| defense = {{setinfo|head=Magic Hat, Wizard Hat|body=Sapphire Robe||defense}}
+	| sell = {{setinfo|head=Magic Hat, Wizard Hat|body=Sapphire Robe||sell}}
+	| rare =
+}}
+| {{item|Sapphire Robe}} || {{item|Magic Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Magic Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Magic Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Magic Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Magic Hat|stat=maxmana}}
+| rowspan=2 | {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Magic Hat|stat=manacost}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Magic Hat|stat=sell}}
+|-
+| {{item|Sapphire Robe}} || {{item|Wizard Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Wizard Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Wizard Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Wizard Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Wizard Hat|stat=maxmana}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Sapphire Robe|head=Wizard Hat|stat=sell}}
+|-
+| rowspan=2 align=left | '''{{tr|Emerald Wizard set}}''' <!-- invisible infobox for storing this set to the Cargo table: -->{{item infobox
+	| view = void
+	| name = Emerald Wizard set
+	| type = Armor/Set
+	| defense = {{setinfo|head=Magic Hat, Wizard Hat|body=Emerald Robe||defense}}
+	| sell = {{setinfo|head=Magic Hat, Wizard Hat|body=Emerald Robe||sell}}
+	| rare =
+}}
+| {{item|Emerald Robe}} || {{item|Magic Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Magic Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Magic Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Magic Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Magic Hat|stat=maxmana}}
+| rowspan=2 | {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Magic Hat|stat=manacost}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Magic Hat|stat=sell}}
+|-
+| {{item|Emerald Robe}} || {{item|Wizard Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Wizard Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Wizard Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Wizard Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Wizard Hat|stat=maxmana}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Emerald Robe|head=Wizard Hat|stat=sell}}
+|-
+| rowspan=2 align=left | '''{{tr|Ruby Wizard set}}''' <!-- invisible infobox for storing this set to the Cargo table: -->{{item infobox
+	| view = void
+	| name = Ruby Wizard set
+	| type = Armor/Set
+	| defense = {{setinfo|head=Magic Hat, Wizard Hat|body=Ruby Robe||defense}}
+	| sell = {{setinfo|head=Magic Hat, Wizard Hat|body=Ruby Robe||sell}}
+	| rare =
+}}
+| {{item|Ruby Robe}} || {{item|Magic Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Magic Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Magic Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Magic Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Magic Hat|stat=maxmana}}
+| rowspan=2 | {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Magic Hat|stat=manacost}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Magic Hat|stat=sell}}
+|-
+| {{item|Ruby Robe}} || {{item|Wizard Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Wizard Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Wizard Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Wizard Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Wizard Hat|stat=maxmana}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Ruby Robe|head=Wizard Hat|stat=sell}}
+|-
+| rowspan=2 align=left | '''{{tr|Amber Wizard set}}''' <!-- invisible infobox for storing this set to the Cargo table: -->{{item infobox
+	| view = void
+	| name = Amber Wizard set
+	| type = Armor/Set
+	| defense = {{setinfo|head=Magic Hat, Wizard Hat|body=Amber Robe||defense}}
+	| sell = {{setinfo|head=Magic Hat, Wizard Hat|body=Amber Robe||sell}}
+	| rare =
+}}
+| {{item|Amber Robe}} || {{item|Magic Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Magic Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Magic Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Magic Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Magic Hat|stat=maxmana}}
+| rowspan=2 | {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Magic Hat|stat=manacost}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Magic Hat|stat=sell}}
+|-
+| {{item|Amber Robe}} || {{item|Wizard Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Wizard Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Wizard Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Wizard Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Wizard Hat|stat=maxmana}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Amber Robe|head=Wizard Hat|stat=sell}}
+|-
+| rowspan=2 align=left | '''{{tr|Diamond Wizard set}}''' <!-- invisible infobox for storing this set to the Cargo table: -->{{item infobox
+	| view = void
+	| name = Diamond Wizard set
+	| type = Armor/Set
+	| defense = {{setinfo|head=Magic Hat, Wizard Hat|body=Diamond Robe||defense}}
+	| sell = {{setinfo|head=Magic Hat, Wizard Hat|body=Diamond Robe||sell}}
+	| rare =
+}}
+| {{item|Diamond Robe}} || {{item|Magic Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Magic Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Magic Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Magic Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Magic Hat|stat=maxmana}}
+| rowspan=2 | {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Magic Hat|stat=manacost}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Magic Hat|stat=sell}}
+|-
+| {{item|Diamond Robe}} || {{item|Wizard Hat}}
+| {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Wizard Hat|stat=defense}}
+| {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Wizard Hat|stat=damage}}
+| {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Wizard Hat|stat=crit}}
+| {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Wizard Hat|stat=maxmana}}
+| align=right | {{:{{BASEPAGENAME}}/row|body=Diamond Robe|head=Wizard Hat|stat=sell}}
+|}{{options/reset|item}}
+
+== 制作 ==
+=== 配方 ===
+{{recipes|cate=force|result=Amethyst Robe/Topaz Robe/Sapphire Robe/Emerald Robe/Ruby Robe/Diamond Robe/Amber Robe|expectedrows=7}}
+
+== 小贴士 ==
+* 玩家在游戏初期就能轻松获得该套装：可以使用[[{{tr|Extractinator}}]]从[[{{tr|Silt Block}}]]或[[{{tr|Slush Block}}]]中提取[[{{tr|Diamond}}]]，而穿着任意魔法长袍时[[{{tr|Tim}}]]的生成概率会大大提高，使得玩家能早早取得{{tr|Wizard Hat}}。
+* 对于不关心[[{{tr|defense}}]]的{{tr|magic}}玩家来说，{{tr|Mystic Robe}}配合{{tr|Wizard Hat}}可被视为[[{{tr|pre-Hardmode}}]]最强的{{tr|magic armor}}，因为它们的进攻性属性大大超过了[[{{tr|Jungle armor}}]]和[[{{tr|Meteor armor}}]]。由于此{{tr|set}}仅由两个部件组成，可以在{{tr|leggings slot}}穿着来自其他{{tr|armor set}}的另一件{{tr|armor}}，进一步增加奖励。
+
+== 花絮 ==
+* {{tr|Wizard set}}是目前游戏中仅有的两套由两个部件组成的{{tr|armor set}}之一，另一套是[[{{tr|Rain armor}}]]。
+
+== 另见 ==
+* [[{{tr|Wizard's Hat}}]]
+* [[{{tr|Rune set}}]]
+
+== 历史 ==
+{{history|Desktop 1.4.1.2|将{{tr|Gypsy Robe}}重命名为[[{{tr|Mystic Robe}}]]。}}
+{{history|Desktop 1.4.0.1|添加了{{tr|Amber Robe}}。}}
+{{history|Desktop 1.2.3|
+** 添加了[[{{tr|Gypsy Robe}}]]和[[{{tr|Magic Hat}}]]。
+** 为所有[[{{tr|Robe}}#{{tr|Used in}}|{{tr|Gem robes}}]]更新贴图。}}
+{{history|Desktop 1.2|添加了[[{{tr|Robe}}#{{tr|Used in}}|{{tr|Gem robes}}]]。}}
+{{history|Desktop 1.0.3|引入{{tr|Wizard Hat}}。}}
+{{history|Console 1.4.3.2.0|将{{tr|Gypsy Robe}}重命名为{{tr|Mystic Robe}}。}}
+{{history|Console 1.4.0.5.4.1|添加了{{tr|Amber Robe}}。}}
+{{history|Console 1.06|
+** 添加了{{tr|Gypsy Robe}}和{{tr|Magic Hat}}。
+** {{tr|Sprites updated}}为与电脑版 1.2.3 一致。}}
+{{history|Console 1.02|添加了{{tr|Amber Robe}}。}}
+{{history|Console-Release|引入{{tr|Wizard Hat}}。}}
+{{history|Switch 1.4.3.2.0|将{{tr|Gypsy Robe}}重命名为{{tr|Mystic Robe}}。}}
+{{history|Switch 1.4.0.5.5|添加了{{tr|Amber Robe}}。}}
+{{history|Switch 1.0.711.6|引入了来自电脑版 1.2.3 外观的{{tr|Wizard Hat}}、{{tr|gem robes}}、{{tr|Gypsy Robe}}、和{{tr|Magic Hat}}。}}
+{{history|Mobile 1.4.3.2.0|将{{tr|Gypsy Robe}}重命名为{{tr|Mystic Robe}}。}}
+{{history|Mobile 1.4.0.5.0|添加了{{tr|Amber Robe}}。}}
+{{history|Mobile 1.2.11212|
+** 添加了{{tr|Gypsy Robe}}和{{tr|Magic Hat}}。
+** {{tr|Sprites updated}}为与电脑版 1.2.3 一致。}}
+{{history|Mobile 1.2.6508|添加了{{tr|gem robes}}。}}
+{{history|Mobile-Release|引入{{tr|Wizard Hat}}。}}
+{{history|3DS-Release|引入{{tr|Wizard Hat}}和{{tr|gem robes}}。}}
+
+{{Master Template Equipables
+| show-armor = yes
+}}
+
+{{language info|en=Wizard set}}

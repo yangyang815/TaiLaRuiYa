@@ -1,0 +1,62 @@
+{{exclusive|1.3.1|nocat=y}}<!-- This {{exclusive}} banner refers to the trap object, which was introduced in 1.3.1. The {{exclusive}} for the Bee Hive item is at [[Bee Hive (item)]]. -->
+{{item infobox
+| auto = 5066
+| type = Furniture
+| width = 2 | height = 2
+| idprojectile = 655
+| sound1 = Dig 0.wav, Dig 1.wav, Dig 2.wav
+| soundcaption1 = 被打破
+| sound2 = NPC Killed 1.wav
+| soundcaption2 = 碰撞
+}}
+{{forlist|{{tr|the biome}}|{{tr|Bee Hive (biome)}}|{{tr|the block}}|[[{{tr|Hive|link=y}}|{{tr|hive}}]]}}
+[[File:BeeHive2.png|thumb|200px|在{{tr|Underground Jungle}}中站在{{tr|Bee Hive}}附近的玩家。]]
+
+'''{{tr|Bee hive}}'''是随着时间推移在[[{{tr|Jungle}}]]和[[{{tr|Underground Jungle}}]]的[[{{tr|jungle grass}}]]天花板下生成的天然[[{{tr|trap}}]]。当{{tr|Bee hive}}被击中时，它会坠落到地面上，在撞击时破碎并释放出 2–5 只[[{{tr|Bee}}]]。若蜂巢落入[[{{tr|liquid}}]]中，破裂时将不会释放蜜蜂，而是掉落 2-5 个[[{{tr|Hive|link=y}}]]。{{source code ref|name=kill|v=1.4.5.4|method=Terraria.Projectile.Kill}}它可以手工制作并放置。
+
+== 制作 ==
+=== 配方 ===
+{{recipes|result=Bee Hive|expectedrows=1}}
+
+== 备注 ==
+* 至少会{{tr|Spawn}} 2 只{{tr|Bee}}。有三次独立的 {{chance|1/3}} 几率使此数量增加 1，<ref name="kill"/>最终{{tr|Bee}}的最大可能数量为 5。下表展示了{{tr|Bee}}数量及各自的几率：
+: {| class="terraria sortable"
+! {{ht|#|{{tr|Bee}}的数量}} !! 几率
+|-
+| align=center | 2 || {{chance|8/27}}
+|-
+| align=center | 3 || {{chance|12/27|reduce=no}}
+|-
+| align=center | 4 || {{chance|6/27|reduce=no}}
+|-
+| align=center | 5 || {{chance|1/27}}
+|}
+: 平均来说，将{{tr|Spawn}} 3 只{{tr|Bee}}。
+* 只有世界中[[{{tr|NPC spawning}}|NPC]]小于 100 个时，{{tr|Bee hive}}才会{{tr|Spawn}}{{tr|Bee}}。（例如，在没有任何其他[[{{tr|enemy}}]]、友好[[NPC]]、[[{{tr|critter}}]]等的情况下，{{tr|Bee hive}}最多可以{{tr|Spawn}} 100 只{{tr|Bee}}）。<ref name="kill"/>
+* {{tr|Bee hive}}可以生成在{{tr|water}}中。
+* 由于{{tr|bees}}是在{{tr|Bee hive}}破裂时{{tr|Spawn}}的，长距离下落可能让它们距离玩家足够远从而立刻消失。
+* 放置的{{tr|Bee hives}}是不可回收的，因为用[[{{tr|pickaxe}}]]或[[{{tr|drill}}]]击打它（在其他情况下会破坏{{tr|tile}}并掉落{{tr|item}}）会导致其坠落并碎裂。
+* {{tr|Bee hive}}本身不会对接触的{{tr|player}}造成伤害。
+* [[{{tr|shaking}}]][[{{tr|Mahogany tree}}]]时有几率掉下{{tr|Bee Hives}}。它们会以{{tr|projectiles}}的形式掉下，而非可收集的{{tr|items}}。
+
+== 历史 ==
+{{history|Desktop 1.4.5.0|现在落入[[{{tr|liquid}}]]中会掉落 2-5 个[[{{tr|Hive|link=y}}]]。}}
+{{history|Desktop 1.4.4|{{tr|Stack limit}}由 999 提升至 9999。}}
+{{history|Desktop 1.4.1.2|如果世界中有超过 100 个活动[[{{tr|enemies}}]]、[[{{tr|critters}}]]和 [[{{tr|NPCs}}]]，就不再会生成{{tr|bees}}。}}
+{{history|Desktop 1.4.1|现在可制作。}}
+{{history|Desktop 1.4.0.1|
+** 撞击时不再有几率生成{{tr|Hornet}}。
+** 现在摇{{tr|Jungle tree}}时会掉下。}}
+{{history|Desktop 1.3.1|{{tr|Introduced.}}}}
+{{history|Console 1.0.1372.5|{{tr|Introduced.}}}}
+{{history|Switch 1.0.895.9|{{tr|Introduced.}}}}
+{{history|Mobile 1.4.0.5.0|{{tr|Introduced.}}}}
+
+== 参考 ==
+{{reflist}}
+
+{{Master Template Furniture
+| show-other = yes
+}}
+
+{{language info|en=Bee Hive}}

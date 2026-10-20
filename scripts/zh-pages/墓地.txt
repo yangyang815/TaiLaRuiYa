@@ -1,0 +1,366 @@
+{{exclusive|1.4.0.1}}
+{{screenshot banner}}
+{{for|{{tr|the painting}}|{{tr|Graveyard (Painting)}}}}
+
+'''{{tr|Graveyard}}'''是一个[[{{tr|mini-biome}}]]，当玩家附近有五个{{source code ref|v=1.4.5.6|method=Terraria.SceneState.UpdateGraveyard|field=Terraria.SceneMetrics.GraveyardTileMin}}及以上的[[{{tr|Tombstones}}]]时就会出现，达到七个{{tr|Tombstones}}时完全成型。{{tr|Graveyard}}会出现一些特殊的的视觉效果，这些效果会随着{{tr|Tombstone}}的数量逐渐增强，上限为九个{{tr|Tombstones}}：颜色饱和度降低，背景中随机劈下闪电，{{tr|Ecto Mist}}在地面上积累。
+
+当附近有至少七个{{tr|Tombstones}}时，{{tr|Graveyard biome}}将获得额外的功能性效果：[[{{tr|Day and night cycle}}|全天]]都会生成独特的{{tr|Graveyard}}[[{{tr|enemies}}]]，以及{{tr|night}}的普通{{tr|enemy}}。[[{{tr|spawn rate}}]]没有提升，但[[{{tr|towns}}]]对{{tr|enemy}}生成的抑制效果会减弱。[[{{tr|NPC}}]] 商贩会在此处售卖独特物品，地面上的[[{{tr|Ecto Mist}}]]可以使玩家获得[[{{tr|Ecto Mist}}#{{tr|Crafting}}|独特的{{tr|crafting recipes}}]]。
+
+[[{{tr|Sunflower}}]]对{{tr|Graveyard}}的效果有反作用：每个{{tr|Sunflower}}会抵消一个{{tr|Tombstone}}的存在。{{source code ref|v=1.4.1.2|method=Terraria.SceneMetrics.ExportTileCountsToMain}}
+
+== 内容 ==
+{{for|在{{tr|Graveyard}}中制作的{{tr|item}}的信息|{{tr|Ecto Mist}}#{{tr|Crafting}}}}
+{{options/set|item|small=y|scale=0.75}}{{dotlist/options|dot=no|space=l}}{{options/set|eicons|small=y}}<!--
+-->{{infocard/start|class=compact small biome}}<!--
+
+	-->{{infocard/mainheading|角色}}<!--
+	--><div><!--
+		-->{{infocard/box|title=[[{{tr|Pre-Hardmode}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Moss Zombie}}<!--
+			-->|{{item|Maggot Zombie}}<!--
+			-->|{{item|Zombie}}<!--
+			-->|{{item|Raincoat Zombie|note2=（下{{tr|rain}}）}}<!--
+			-->|{{item|Frozen Zombie|note2=（[[{{tr|Snow biome}}]]）}}<!--
+			-->|{{item|The Groom|note2=（罕见）}}<!--
+			-->|{{item|The Bride|note2=（罕见）}}<!--
+			-->|{{item|Demon Eye}}<!--
+			-->|{{item|Raven}}<!--
+			-->|{{item|Ghost (enemy)|Ghost|note2=（不常见）}}<!--
+			-->|{{item|Spore Zombie|note2=（[[{{tr|Glowing Mushroom biome}}]]）}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=打败[[{{tr|Skeletron}}]]后：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Statue (enemy)}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=[[{{tr|Hardmode}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Hoppin' Jack}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=[[{{tr|Critters}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Rat}}<!--
+			-->|{{item|Maggot|note2=（{{tr|Maggot Zombies}}）}}<!--
+			-->}}<!--
+		-->}}<!--
+	--></div><!--
+
+	-->{{infocard/mainheading|独特掉落}}<!--
+	--><div><!--
+		-->{{infocard/box|title=来自[[{{tr|Raincoat Zombie}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Rain Hat}}<!--
+			-->|{{item|Rain Coat}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Frozen Zombie}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Snow Hood}}<!--
+			-->|{{item|Snow Coat}}<!--
+			-->|{{item|Snow Pants}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|The Groom}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Top Hat}}<!--
+			-->|{{item|Bloody Tear}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|The Bride}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Wedding Veil}}<!--
+			-->|{{item|Wedding Dress}}<!--
+			-->|{{item|Bloody Tear}}<!--
+			-->}}<!--
+	    -->}}<!--
+        -->{{infocard/box|title=来自[[{{tr|Raven}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Raven Feather}}<!--
+			-->}}<!--
+		-->}}<!--
+	--></div><!--
+
+	-->{{infocard/mainheading|售卖}}<!--
+	--><div><!--
+		-->{{infocard/box|title=来自[[{{tr|Arms Dealer}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Quad-Barrel Shotgun|note2=（[[{{tr|Skeletron}}]]后）}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Dye Trader}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Fogbound Dye}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Steampunker}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Bone Welder}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Mechanic}}]]或[[{{tr|Cyborg}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Spectre Goggles}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Cyborg}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Echo Block}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Painter}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Illuminant Coating}}<!--
+			-->|{{item|Echo Coating|note2=（[[{{tr|Plantera}}]]后）}}<!--
+			-->|{{item|Nevermore}}<!--
+			-->|{{item|Reborn}}<!--
+			-->|{{item|Graveyard (Painting)|Graveyard}}<!--
+			-->|{{item|Ghost Manifestation}}<!--
+			-->|{{item|Wicked Undead}}<!--
+			-->|{{item|Bloody Goblet}}<!--
+			-->|{{item|Still Life}}<!--
+			-->|{{item|Hail to the King}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Party Girl}}]]：|<!--
+		-->{{dotlist<!--
+		-->|{{item|Release Doves}}<!--
+		-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Clothier}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Gravedigger Hat}}<!--
+			-->|{{item|Gravedigger Coat}}<!--
+			-->|{{item|Funeral Hat}}<!--
+			-->|{{item|Funeral Coat}}<!--
+			-->|{{item|Funeral Pants}}<!--
+			-->|{{item|Tragic Umbrella}}<!--
+			-->|{{item|Victorian Goth Hat}}<!--
+			-->|{{item|Victorian Goth Dress}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Dryad}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Corrupt Seeds|note2=（{{tr|Hardmode}}，带有[[{{tr|Crimson}}]]的{{tr|world}}）}}<!--
+			-->|{{item|Crimson Seeds|note2=（{{tr|Hardmode}}，带有[[{{tr|Corruption}}]]的{{tr|world}}）}}<!--
+			-->}}<!--
+		-->}}<!--
+		-->{{infocard/box|title=来自[[{{tr|Pirate}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Jellyfish Block}}<!--
+			-->}}<!--
+			-->}}<!--
+			-->{{infocard/box|title=来自[[{{tr|Stylist}}]]：|<!--
+			-->{{dotlist<!--
+			-->|{{item|Pretty Mirror}}<!--
+			-->}}<!--
+			-->}}<!--
+	--></div><!--
+
+	-->{{infocard/mainheading|音乐}}<!--
+	--><div><!--
+		-->{{infocard/box|<!--
+			-->{{dotlist<!--
+			-->|{{item|Music Box (Graveyard)| {{sound|track=Graveyard}} |icons={{eicons|1.4.0.1}} }}<!--
+			-->|{{item|Otherworldly Music Box (Eerie)| {{sound|track=Eerie (Otherworldly)}} |icons={{eicons|1.4.0.1}} }} <!--
+			-->}}<!--
+		-->}}<!--
+	--></div><!--
+
+-->{{infocard/end}}<!--
+-->{{options/reset|item}}{{dotlist/options|reset}}{{options/reset|eicons}}
+
+=== NPC 对话 ===
+大多数 [[{{tr|NPC}}]] 在{{tr|Graveyard}}交谈时会显示独特的对话。
+{{options/set|item|class=mirror|icons=n}}
+{| class="terraria lined mw-collapsible"
+! width="140px" | {{tr|NPC}} !! 对话&emsp;
+|-
+| {{item|Angler}} ||
+{{gameText|AnglerSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|AnglerSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Arms Dealer}} ||
+{{gameText|ArmsDealerSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|ArmsDealerSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Clothier}} ||
+{{gameText|ClothierSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|ClothierSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Cyborg}} ||
+{{gameText|CyborgSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|CyborgSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Demolitionist}} ||
+{{gameText|DemolitionistSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|DemolitionistSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Dryad}} ||
+{{gameText|DryadSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|DryadSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Dye Trader}} ||
+{{gameText|DyeTraderSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|DyeTraderSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Goblin Tinkerer}} ||
+{{gameText|GoblinTinkererSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|GoblinTinkererSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Golfer}} ||
+{{gameText|GolferSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|GolferSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Guide}} ||
+{{gameText|GuideSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|GuideSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Mechanic}} ||
+{{gameText|MechanicSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|MechanicSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Merchant}} ||
+{{gameText|MerchantSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|MerchantSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Nurse}} ||
+{{gameText|NurseSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|NurseSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Painter}} ||
+{{gameText|PainterSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|PainterSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Party Girl}} ||
+{{gameText|PartyGirlSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|PartyGirlSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Pirate}} ||
+{{gameText|PirateSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|PirateSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Princess}} ||
+{{gameText|PrincessSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|PrincessSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Santa Claus}} ||
+{{gameText|SantaSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|SantaSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Skeleton Merchant}} ||
+{{gameText|SkeletonMerchantSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|SkeletonMerchantSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Steampunker}} ||
+{{gameText|SteampunkerSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|SteampunkerSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Stylist}} ||
+{{gameText|StylistSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|StylistSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Tavernkeep}} ||
+{{gameText|BartenderSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|BartenderSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Tax Collector}} ||
+{{gameText|TaxCollectorSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|TaxCollectorSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Traveling Merchant}} ||
+{{gameText|TravellingMerchantSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|TravellingMerchantSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Truffle}} ||
+{{gameText|TruffleSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|TruffleSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Witch Doctor}} ||
+{{gameText|WitchDoctorSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|WitchDoctorSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Wizard}} ||
+{{gameText|WizardSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|WizardSpecialText.Graveyard2|quote=yes}}
+|-
+| {{item|Zoologist}} ||
+{{gameText|BestiaryGirlSpecialText.Graveyard1|quote=yes}}
+
+{{gameText|BestiaryGirlSpecialText.Graveyard2|quote=yes}}
+|}{{options/reset|item}}
+
+== 备注 ==
+* 所有以玩家为中心{{buff area}}的区域内的{{tr|Tombstones}}会被计入{{tr|Graveyard biome}}的形成判定中。
+** 该区域内每株{{tr|Sunflower}}都会使{{tr|Graveyard biome}}多需要一个{{tr|Tombstones}}才能形成（例如，若附近有一株{{tr|Sunflower}}，则需六个{{tr|Tombstones}}才能形成该{{tr|biome}}）；此外，若该区域内存在至少五个{{tr|Tombstones}}，{{tr|Sunflower}}将不会提供[[{{tr|Happy!}}]][[{{tr|buff}}]]。
+* 虽然[[{{tr|night}}]]专属的[[{{tr|enemies}}]]能在{{tr|daytime}}于{{tr|Graveyard}}中生成，但夜间的 [[{{tr|bosses}}]] 仍不能在{{tr|day}}召唤。
+* {{tr|world}}中存在[[{{tr|Hardcore}}]]{{tr|characters}}时，[[{{tr|NPCs}}]] 被杀死时会掉落{{tr|Tombstones}}，允许玩家无需牺牲{{tr|character}}就能创造{{tr|Graveyard biome}}。
+* 虽然 {{tr|NPCs}} 在{{tr|Graveyard}}中时会抱怨，但是这并不会影响他们的[[{{tr|happiness}}]]。由于{{tr|Graveyard}}总是与其他{{tr|biome}}共存，他们的{{tr|happiness}}会取决于当前的另一{{tr|biome}}。
+** 然而，[[{{tr|Painter}}]]在{{tr|Graveyard}}中不会出售[[{{tr|Daylight}}]]、[[{{tr|First Encounter}}]]、[[{{tr|Good Morning}}]]、[[{{tr|Underground Reward}}]]、[[{{tr|Through the Window}}]]、[[{{tr|Place Above the Clouds}}]]、和[[{{tr|Sky Guardian}}]]。
+* 通常，带有[[{{tr|Fighter AI}}]] 的某些{{tr|enemies}}无法开启[[{{tr|doors}}]]和[[{{tr|Tall Gate}}]]，除非是在[[{{tr|Blood Moon}}]]期间。但在{{tr|Graveyard}}中，这些{{tr|enemies}}即使不在{{tr|Blood Moon}}期间也有 {{chance|1/60}} 的几率开启{{tr|doors}}或{{tr|Tall Gate}}。{{source code ref|v=1.4.4.9|method=Terraria.NPC.AI_003_Fighters}}
+* 位于{{tr|underground}}的{{tr|Graveyard}}会生成{{tr|Ecto Mist}}，但不会生成独特{{tr|enemies}}。
+
+== 成就 ==
+{{achievement|name=Quiet Neighborhood}}
+
+== 小贴士 ==
+* 大量的[[{{tr|Ecto Mist}}]]会在{{tr|Graveyard biomes}}中覆盖住地面，可能会阻挡如[[{{tr|Pressure Plates}}]]之类的物品。<!--This could previously be toggled on and off with the "Blood and Gore" [[Settings|setting]], but this appears to have been patched.-->
+* 大量的{{tr|enemies}}生成，包括特别强大的[[{{tr|Ghost (enemy)}}|{{tr|Ghosts}}]]，可能会使{{tr|Graveyard}}在游戏早期相当危险。玩家会希望避免让{{tr|Tombstones}}在他们的基地和[[{{tr|spawn point}}]]周围堆积。
+** [[{{tr|Mediumcore}}]]{{tr|players}}来说尤其要注意这一点，因为在同一个{{tr|spawn point}}积累太多{{tr|Tombstones}}，可能会导致一种软锁死的局面，玩家很难在不受到攻击的情况下取回物品。
+* {{tr|Tombstones}}需要两个相邻的空{{tr|tiles}}才能放置。通过使地面上至少每隔一个{{tr|block}}无效，就可以完全阻止它们的放置，这包括放置[[{{tr|platforms}}]]、[[{{tr|Torches}}]]、[[{{tr|furniture}}]]、或[[{{tr|saplings}}]]，用[[{{tr|hammer}}]]将这些物块变成[[{{tr|Slope}}]]，用[[{{tr|Actuator}}]]使它们无效，或者简单地把它们挖掉。
+* 在诸如[[{{tr|arena}}]]等常见死亡地点放置一些[[{{tr|Sunflower}}]]可以帮助阻止{{tr|Graveyard}}形成，不需要频繁挖掉{{tr|Tombstones}}。
+** 战略性地放置半径重叠的{{tr|Sunflower}}，也可以在该{{tr|biomes}}内创造出一片非{{tr|Graveyard}}区域。这在启用了[[{{tr|secret world seed}}]] [[{{tr|What a horrible night to have a curse@Seed}}]] 的世界中尤为有用，允许玩家在白天走到建筑物的外面，而不会在那里生成{{tr|Graveyard}}{{tr|enemies}}。
+* 在游戏早期收集{{tr|Tombstones}}并建造{{tr|graveyard}}，可以作为一种轻松获取[[{{tr|Abigail's Flower}}]]以及从[[{{tr|Maggot Zombie}}]]处刷取[[{{tr|Maggot}}]]作为[[{{tr|bait}}]]的方法。
+* [[{{tr|Hardmode}}]]下，[[{{tr|Dryad}}]]居住在{{tr|Graveyard biome}}中时会在[[{{tr|The Corruption}}|{{tr|Corrupt}}]]{{tr|world}}售卖[[{{tr|Crimson Seeds}}]]，在[[{{tr|The Crimson}}|{{tr|Crimson}}]]{{tr|world}}中售卖[[{{tr|Corrupt Seeds}}]]，这会促进[[{{tr|evil biome}}]]共存于同一世界中，而无需从其它世界带来物品。
+
+== 历史 ==
+{{history|Desktop 1.4.5.0|
+** [[{{tr|Peace Candle}}]]现在会将{{tr|Graveyard biome}}加速的{{tr|spawn rate}}降低 33%。
+** [[{{tr|Statue (enemy)}}|{{tr|Statue}}]]{{tr|enemies}}和[[{{tr|Moss Zombie}}]]现在会生成于{{tr|Graveyard biome}}。
+** [[{{tr|Spectre Goggles}}]]现在也由[[{{tr|Mechanic}}]]在{{tr|Graveyard}}出售。
+** [[{{tr|Echo Coating}}]]现在在击败[[{{tr|Plantera}}]]前也有售，前提是{{tr|world}}中存在{{tr|Mechanic}}。}}
+{{history|Desktop 1.4.1|
+** [[{{tr|Hoppin' Jack}}]]现在能在一年中任何时间在[[{{tr|Hardmode}}]]下的{{tr|Graveyard}}生成。
+** 形成{{tr|Graveyard}}所需的{{tr|Tombstones}}数量增加 1 个。
+** 加入了相关{{tr|achievement}}。}}
+{{history|Desktop 1.4.0.3|{{tr|Ecto Mist}}的云雾效果不再能通过关闭[[{{tr|Blood and Gore}}]]移除。}}
+{{history|Desktop 1.4.0.1|{{tr|Introduced.}}}}
+{{history|Console 1.4.0.5.4.1|Introduced=y|和{{tr|Desktop}} 1.4.0.3 的更改一并引入。}}
+{{history|Switch 1.4.0.5.5|Introduced=y|和{{tr|Desktop}} 1.4.0.3 的更改一并引入。}}
+{{history|Mobile 1.4.0.5.0|Introduced=y|和{{tr|Desktop}} 1.4.0.3 的更改一并引入。}}
+
+== 参考 ==
+{{reflist}}
+
+{{Biomes}}
+
+{{language info|en=Graveyard}}

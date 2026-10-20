@@ -1,0 +1,117 @@
+{{buff infobox
+| auto = 22
+}}
+{{about|the debuff|the [[painting]]|Darkness (item)}}
+
+'''Darkness''' is a [[Debuffs|debuff]] that decreases the player's light vision, which functions much like a reverse [[Night Owl]] [[Buffs|buff]], dimming rather than amplifying provided light.
+
+Visually, the debuff causes the player to gain a blue tint, {{eicons|1.4.0.1}} and their eyes will appear to close for the debuff's duration.
+
+The debuff can prevented by equipping the [[Blindfold]] or its derivatives.
+
+== Causes ==
+=== From enemy ===
+{| class="terraria"
+! colspan=2 |From
+! Duration
+! Chance
+|-
+| {{item|mode=table|class=block aligncenter textleft|Black Slime}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/4}}
+|-
+| {{item|mode=table|class=block aligncenter textleft|Corrupt Slime}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/4}}
+|-
+| {{item|mode=table|class=block aligncenter textleft|Slimer|note=(without wings)|image=Corrupt Slime.png|size=x{{#expr:30*0.9 round 0}}px}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/4}}
+|-
+| {{item|mode=table|class=block aligncenter textleft|Slimeling}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/4}}
+|-
+| {{item|mode=table|class=block aligncenter textleft|Crimslime}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/4}} {{eicons|1.4.0.1|small=y}}
+|-
+| {{item|mode=table|class=block aligncenter textleft|Dark Mummy}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/4}}
+|-
+| {{item|mode=table|class=block aligncenter textleft|Blood Mummy}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/4}}
+|-
+| {{item|mode=table|class=block aligncenter textleft|Demon}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/3}} <small>(Scythe attack)</small>
+|-
+| {{item|mode=table|class=block aligncenter textleft|Voodoo Demon}}
+| 15 / {{expert|30}} / {{master|37.5}} seconds
+| {{chance|1/3}} <small>(Scythe attack)</small>
+|-
+| {{item|mode=table|class=block aligncenter textleft|Arch Demon}}
+| 15 seconds
+| {{chance|1/3}} <small>(Scythe attack)</small>
+|-
+| {{item|mode=table|class=block aligncenter textleft|Brain of Cthulhu|size=100px}}
+| {{expert|3–6}} / {{master|3.75–7.5}} seconds
+| {{expert|{{chance|11/243}}}}
+|-
+| {{item|mode=table|class=block aligncenter textleft|Creeper}}
+| {{expert|3–6}} / {{master|3.75–7.5}} seconds
+| {{expert|{{chance|11/81}}}}
+|}
+
+=== From debuff ===
+{| class="terraria"
+! colspan=2 | From
+! Duration
+! Chance
+|-
+| {{item|mode=table|class=block aligncenter textleft|Feral Bite}}
+| 1.8–3 / {{expert|3.6–6}} / {{master|4.5–7.5}} seconds
+| {{expert|{{chance|1/6}}}}, <small>{{chance|1/20}} every second</small>
+|}
+
+=== Other ===
+{| class="terraria"
+! colspan=2 | From
+! Duration
+! Chance
+|-
+| {{item|Red Potion|mode=table|note2={{note|paren=y|except [[For the Worthy]] worlds}}}}
+| 1 / {{expert|2}} / {{master|3}} hours
+| {{chance|1/1}}
+|}
+
+== History ==
+{{history|Desktop 1.4.0.1|
+** Now causes the player's eyes to close while active.
+** Now lasts for 3 hours in [[Master Mode]] if inflicted by the [[Red Potion]].
+** Can now be inflicted by the [[Crimslime]] and the new [[Blood Mummy]] enemy.}}
+{{history|Desktop 1.3.0.1|
+** Can now be inflicted by the [[Brain of Cthulhu]] and its [[Creeper]] minions in [[Expert Mode]] for 5 to 10 seconds at a 1/8 and 1/24 chance, respectively.
+** Now has a {{chance|1/6}} chance of being inflicted each second by the new [[Feral Bite]] debuff, which is inflicted by [[Bats]] in Expert Mode.
+** Now lasts for 30 seconds in Expert Mode (and for 2 hours if inflicted by the [[Red Potion]]).}}
+{{history|Desktop 1.2.2|Can now be inflicted for one hour by the [[Red Potion]].}}
+{{history|Desktop 1.1|Can now be inflicted by the new [[Corrupt Slime]] and [[Mummies#Variants|Dark Mummy]] enemies.}}
+{{history|Desktop 1.0.6|Introduced.}}
+{{history|Console 1.0.933.1|Made corresponding updates from {{icon|ps4}}'s 1.0.750.0 update. ({{icon|xb1}})}}
+{{history|Console 1.0.750.0|
+** Can no longer be inflicted by the [[Demon|Arch Demon]] enemy, as it has been removed.
+** Can now be inflicted by the [[Brain of Cthulhu]] and its [[Creeper]] minions in [[Expert Mode]] for 5 to 10 seconds at a 1/8 and 1/24 chance, respectively.
+** Now has a {{chance|1/6}} chance of being inflicted each second by the new [[Feral Bite]] debuff, which is inflicted by [[Bats]] in Expert Mode.
+** Now lasts for 30 seconds in Expert Mode (and for 2 hours if inflicted by the [[Red Potion]]). ({{icon|ps4}})}}
+{{history|Console-Release|Introduced.}}
+{{history|Switch 1.0.711.6|Introduced.}}
+{{history|Mobile-Release|Introduced.}}
+{{history|3DS-Release|Introduced.}}
+
+{{Master Template Buffs
+| show-debuffs = yes
+}}
+
+{{language info|en=Darkness}}
