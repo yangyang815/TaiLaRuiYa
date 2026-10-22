@@ -15,7 +15,8 @@
     "pages/bossguide/detail",
     "pages/acq/acq",
     "pages/catalog/catalog",
-    "pages/theme/theme"
+    "pages/theme/theme",
+    "pages/feedback/feedback"
   ],
   "window": {
     "navigationStyle": "custom",

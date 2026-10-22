@@ -218,7 +218,7 @@
       <text class="ab-law">· 本工具独立制作，非官方出品，内容仅供玩家学习交流</text>
       <text class="ab-law" bindtap="copyEmail">· 如有侵权请联系：1990909398@qq.com（点击复制，将立即处理）</text>
       <view class="hr" />
-      <text class="ab-line">· 反馈建议：在各大应用市场或微信"关于"中留言</text>
+      <text class="ab-line tappable" bindtap="goFeedback">· 意见反馈：点这里直接给开发者留言（建议 / Bug / 内容纠错）</text>
       <view class="btn-gold ab-btn" bindtap="closeAbout">继续冒险</view>
     </view>
   </view>

@@ -1,0 +1,69 @@
+<view class="page-root {{themeClass}} fb-root">
+
+  <!-- 导航 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">意见反馈</text>
+    <view class="nav-ph"></view>
+  </view>
+
+  <!-- 类型选择 -->
+  <view class="sec">
+    <text class="sec-t">反馈类型</text>
+    <view class="type-grid">
+      <view
+        wx:for="{{types}}"
+        wx:key="k"
+        class="type-chip tappable {{type === item.k ? 'on' : ''}}"
+        bindtap="pickType"
+        data-k="{{item.k}}"
+      >
+        <text class="tc-ico">{{item.ico}}</text>
+        <text class="tc-n">{{item.n}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 纠错上下文 -->
+  <view class="ctx-card" wx:if="{{ctx}}">
+    <text class="ctx-t">📝 正在纠错</text>
+    <text class="ctx-name">{{ctx.name}}（{{ctx.cat}}）</text>
+    <text class="ctx-text" wx:if="{{ctx.currentText}}">当前文案：{{ctx.currentText}}</text>
+  </view>
+
+  <!-- 内容 -->
+  <view class="sec">
+    <text class="sec-t">反馈内容</text>
+    <view class="input-box">
+      <textarea
+        class="ta"
+        value="{{content}}"
+        placeholder="{{placeholder}}"
+        placeholder-class="ta-ph"
+        maxlength="{{maxLen}}"
+        bindinput="onInput"
+        disabled="{{submitting}}"
+      ></textarea>
+      <text class="len">{{len}}/{{maxLen}}</text>
+    </view>
+  </view>
+
+  <!-- 截图 -->
+  <view class="sec">
+    <text class="sec-t">截图（可选）</text>
+    <view class="shot-row">
+      <view class="shot" wx:if="{{shot}}">
+        <image class="shot-img" src="{{shot}}" mode="aspectFill" />
+        <view class="shot-del tappable" catchtap="removeShot">×</view>
+      </view>
+      <view class="shot-add tappable" wx:else bindtap="chooseShot">＋</view>
+    </view>
+  </view>
+
+  <!-- 提交 -->
+  <view class="btn-gold fb-submit tappable {{submitting ? 'dis' : ''}}" bindtap="submit">
+    {{submitting ? '提交中…' : '提交反馈'}}
+  </view>
+  <text class="fb-hint">反馈直达开发者 · 每天最多 5 条 · 涉及个人隐私的内容请不要填写</text>
+
+</view>
