@@ -24,6 +24,9 @@
           <text class="q-ico">🎨</text>
           <view class="q-dot" wx:if="{{themeBadge}}" />
         </view>
+        <view class="q-btn tappable" bindtap="goFeedback" aria-label="意见反馈">
+          <text class="q-ico">💬</text>
+        </view>
         <view class="q-btn tappable" bindtap="goMsgs" aria-label="消息中心">
           <text class="q-ico">🔔</text>
           <view class="q-dot" wx:if="{{hasMsgs}}" />
