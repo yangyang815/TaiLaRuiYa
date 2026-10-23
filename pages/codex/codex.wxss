@@ -159,3 +159,6 @@
 .sprite-img { width: 48rpx; height: 48rpx; }
 .sprite-img-lg { width: 100rpx; height: 100rpx; }
 .sprite-img-xl { width: 120rpx; height: 120rpx; }
+
+/* 纠错入口 */
+.cd-cor { margin-left: auto; font-size: 20rpx; color: var(--text-faint); }
