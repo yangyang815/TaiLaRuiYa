@@ -174,7 +174,7 @@
       </view>
 
       <view class="sh-sec" wx:if="{{sheet.obtain}}">
-        <view class="sec-title"><view class="diamond" /><text class="t">{{sheet.obtainTitle}}</text><text class="cd-cor tappable" bindtap="goCorrection">数据有误？</text></view>
+        <view class="sec-title"><view class="diamond" /><text class="t">{{sheet.obtainTitle}}</text><text class="cd-cor tappable" bindtap="goCorrection">信息/数据有误？</text></view>
         <view class="sh-line"><block wx:for="{{sheet.obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}">{{item.s}}</text></block></view>
       </view>
 
