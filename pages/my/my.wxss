@@ -118,3 +118,7 @@
 .qr-hint { display: block; margin-top: 16rpx; font-size: 20rpx; color: var(--text-faint);
   text-align: center; line-height: 1.6; }
 .qr-btn { margin-top: 20rpx; }
+
+/* 微信原生反馈按钮（重置 button 默认样式） */
+.ab-fb { display: block; width: auto; margin: 0; padding: 0; background: none; border: none; border-radius: 0; line-height: 2; text-align: left; font-weight: normal; }
+.ab-fb::after { border: none; }
