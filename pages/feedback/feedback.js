@@ -44,8 +44,8 @@ Page({
         placeholder: PLACEHOLDER.correction,
         ctx: {
           itemId: options.itemId || '',
-          name: options.name || '',
-          cat: options.cat || '',
+          name: options.name ? decodeURIComponent(options.name) : '',
+          cat: options.cat ? decodeURIComponent(options.cat) : '',
           currentText: options.text ? decodeURIComponent(options.text) : '',
         },
       });
