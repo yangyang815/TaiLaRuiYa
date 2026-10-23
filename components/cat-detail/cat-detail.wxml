@@ -26,7 +26,7 @@
       </view>
 
       <view class="sh-sec">
-        <view class="sec-title"><view class="diamond" /><text class="t">获得方式</text></view>
+        <view class="sec-title"><view class="diamond" /><text class="t">获得方式</text><text class="cd-cor tappable" bindtap="goCorrection">数据有误？</text></view>
         <view class="sh-line"><block wx:for="{{vm.obtainLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}" data-name="{{item.s}}">{{item.s}}</text></block></view>
       </view>
 

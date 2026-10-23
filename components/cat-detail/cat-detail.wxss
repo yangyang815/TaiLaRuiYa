@@ -68,3 +68,6 @@
 .btn-ghost { color: var(--gold); background: rgba(255, 215, 0, 0.08); border: 2rpx solid var(--gold-faint); }
 .btn-gold { background: linear-gradient(180deg, #FFE55C 0%, #FFD700 45%, #C9A400 100%); color: #4A2B00; }
 .cd-light .btn-gold { color: #4A2B00; }
+
+/* 纠错入口 */
+.cd-cor { margin-left: auto; font-size: 20rpx; color: var(--text-faint); }

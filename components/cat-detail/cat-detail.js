@@ -47,7 +47,7 @@ Component({
         fav: store.isFav(id)
       })
     },
-    onClose() { this.triggerEvent("close") },
+    goCorrection() { const vm = this.data.vm; if (!vm) return; const text = encodeURIComponent((vm.obtain || "").slice(0, 200)); wx.navigateTo({ url: "/pages/feedback/feedback?type=correction&itemId=" + vm.id + "&name=" + encodeURIComponent(vm.name) + "&cat=" + encodeURIComponent(vm.catName || "") + "&text=" + text, fail: () => wx.showToast({ title: "页面打开失败", icon: "none" }) }) },onClose() { this.triggerEvent("close") },
     onGo(e) { this.triggerEvent("go", { id: e.currentTarget.dataset.id }) },
     onFav() {
       const vm = this.data.vm
