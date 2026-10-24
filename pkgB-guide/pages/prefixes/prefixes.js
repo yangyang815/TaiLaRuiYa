@@ -35,7 +35,9 @@ Page({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
       capsuleRight: app.globalData.capsuleRight || 100,
       themeClass: app.themeClass(),
-      wTotal: PREFIXES.length
+      wTotal: PREFIXES.length,
+    accSys: ACCESSORY_LINES.length,
+    accTiers: ACCESSORY_LINES.reduce((n, l) => n + l.tiers.length, 0)
     })
     this.load()
   },

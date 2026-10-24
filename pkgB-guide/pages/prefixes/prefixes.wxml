@@ -13,7 +13,7 @@
     <view class="col flex-1">
       <text class="hero-t px">REFORGE PREFIX</text>
       <text class="hero-s">传说 · 虚幻 · 神话 · 凶残 · 庇护</text>
-      <text class="hero-stat px">{{wTotal}} 个武器词条 · 4 系 16 档饰品词条</text>
+      <text class="hero-stat px">{{wTotal}} 个武器词条 · {{accSys}} 系 {{accTiers}} 档饰品词条</text>
     </view>
   </view>
 
@@ -50,7 +50,7 @@
 
   <!-- 饰品词条 -->
   <block wx:if="{{showAcc}}">
-    <view class="sec-title"><view class="diamond" /><text class="t">饰品词条 · 四系成长</text></view>
+    <view class="sec-title"><view class="diamond" /><text class="t">饰品词条 · 六系成长</text></view>
     <view class="acc-card card" wx:for="{{accLines}}" wx:key="key" wx:for-item="line">
       <view class="row acc-head">
         <view class="acc-ico"><pixel-icon art-id="{{line.icon}}" size="72" /></view>
