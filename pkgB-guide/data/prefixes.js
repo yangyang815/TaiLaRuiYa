@@ -56,6 +56,90 @@ const PREFIXES = [
     detail: '公共池的攻速专精词条：+10% 攻速，不改伤害面板。对攻速阈值敏感的武器（连枷、悠悠球、磨刀石叠加流）收益明显，也适合过渡期凑合用。'
   },
   {
+    id: 'px_superior', name: '高端', en: 'Superior', cat: 'common', cls: 'all', art: 'ankh_shield',
+    stats: [['伤害', '+10%'], ['暴击', '+3%'], ['击退', '+10%']],
+    note: '通用池里攻守最均衡的过渡词条。',
+    detail: '伤害、暴击、击退三项齐涨，整体价值在通用池中数一数二。刷不到神级/恶魔时的优秀过渡选择。'
+  },
+  {
+    id: 'px_zealous', name: '狂热', en: 'Zealous', cat: 'common', cls: 'all', art: 'ankh_shield',
+    stats: [['暴击', '+5%']],
+    note: '纯暴击词条，走暴击流的过渡用。',
+    detail: '通用池的暴击专精词条：+5% 暴击，不改其他面板。适合搭配高基础暴击的武器走暴击流。'
+  },
+  {
+    id: 'px_murderous', name: '残暴', en: 'Murderous', cat: 'common', cls: 'all', art: 'megashark',
+    stats: [['伤害', '+7%'], ['攻速', '+6%'], ['暴击', '+3%']],
+    note: '公共池的三项全能词条，小加成叠出大收益。',
+    detail: '近战/远程/魔法共享池里少有的三属性词条：伤害、攻速、暴击各涨一截，综合收益仅次于致命。适合追求均衡的玩家。'
+  },
+  {
+    id: 'px_agile', name: '灵活', en: 'Agile', cat: 'common', cls: 'all', art: 'megashark',
+    stats: [['攻速', '+10%'], ['暴击', '+3%']],
+    note: '攻速带一点暴击的公共词条。',
+    detail: '公共池的速度向词条：+10% 攻速外加 +3% 暴击，比纯迅捷多一点输出，过渡期好用。'
+  },
+  {
+    id: 'px_savage', name: '凶残', en: 'Savage', cat: 'common', cls: 'melee', art: 'terra_blade',
+    stats: [['伤害', '+10%'], ['体积', '+10%'], ['击退', '+10%']],
+    note: '近战池的均衡型词条，三项 +10%。',
+    detail: '近战池里少有的三属性词条：伤害、武器体积、击退全部 +10%。刷不到神级时的稳定过渡，体积加成还能扩大判定。'
+  },
+  {
+    id: 'px_sharp', name: '锋利', en: 'Sharp', cat: 'common', cls: 'melee', art: 'terra_blade',
+    stats: [['伤害', '+15%']],
+    note: '纯伤害词条，数值与神级的伤害档持平。',
+    detail: '近战池的伤害专精：+15% 伤害，其他属性不动。适合已经满意武器速度和击退、只想拉伤害的玩家。'
+  },
+  {
+    id: 'px_dangerous', name: '危险', en: 'Dangerous', cat: 'common', cls: 'melee', art: 'terra_blade',
+    stats: [['伤害', '+5%'], ['暴击', '+2%'], ['体积', '+5%']],
+    note: '三项小加成的温和过渡词条。',
+    detail: '近战池的低配全能：伤害、暴击、体积各小幅上涨。前期随便刷刷就有，中期尽快换掉。'
+  },
+  {
+    id: 'px_rapid', name: '迅速', en: 'Rapid', cat: 'common', cls: 'ranged', art: 'megashark',
+    stats: [['攻速', '+15%'], ['弹速', '+10%']],
+    note: '链式机枪的专属毕业词条。',
+    detail: '远程池的速度顶点：+15% 攻速外加 +10% 弹速。链式机枪因为射速太快刷不到提速类词条，迅速是它的毕业选择；其他高射速武器也常拿它当过渡虚幻。'
+  },
+  {
+    id: 'px_sighted', name: '精准', en: 'Sighted', cat: 'common', cls: 'ranged', art: 'megashark',
+    stats: [['伤害', '+10%'], ['暴击', '+3%']],
+    note: '远程池的伤害暴击双加成过渡。',
+    detail: '远程池里攻暴双涨的实用词条，虚幻之前的稳定过渡选择。'
+  },
+  {
+    id: 'px_staunch', name: '可靠', en: 'Staunch', cat: 'common', cls: 'ranged', art: 'megashark',
+    stats: [['伤害', '+10%'], ['击退', '+15%']],
+    note: '远程池的伤害击退双加成。',
+    detail: '远程池里伤害与击退齐涨的词条，+15% 击退能显著改善控制感，适合喜欢把怪推开的玩家。'
+  },
+  {
+    id: 'px_mystic', name: '神秘', en: 'Mystic', cat: 'common', cls: 'magic', art: 'crystal_storm',
+    stats: [['伤害', '+10%'], ['魔耗', '-15%']],
+    note: '省蓝流魔法武器过渡词条。',
+    detail: '魔法池里伤害与魔耗双优的词条：+10% 伤害还省 15% 魔力。魔力上限吃紧的前中期非常实用。'
+  },
+  {
+    id: 'px_masterful', name: '精湛', en: 'Masterful', cat: 'common', cls: 'magic', art: 'crystal_storm',
+    stats: [['伤害', '+15%'], ['魔耗', '-15%'], ['击退', '+5%']],
+    note: '神话之下的魔法全能词条。',
+    detail: '魔法池里伤害与神话持平（+15%）、还省 15% 魔力的强力词条，只是暴击和击退加成略逊。魔力上限偏低的法师刷出精湛可以先用到毕业。'
+  },
+  {
+    id: 'px_eager', name: '热切', en: 'Eager', cat: 'common', cls: 'summon', art: 'imp_staff',
+    stats: [['穿透', '+25']],
+    note: '纯穿透词条，不依赖鞭子的召唤流优选。',
+    detail: '召唤专属池的穿透顶点：+25 盔甲穿透，无视敌方防御直接增伤。不常用鞭子（用不上标记伤害）的玩家，热切的实战伤害常常比传说更稳；对防御不高的敌人也表现优秀。'
+  },
+  {
+    id: 'px_loyal', name: '忠诚', en: 'Loyal', cat: 'common', cls: 'summon', art: 'imp_staff',
+    stats: [['伤害', '+10%'], ['穿透', '+5'], ['标记伤害', '+3'], ['击退', '+5%']],
+    note: '召唤池的均衡型过渡词条。',
+    detail: '召唤池里四项小加成齐全的词条：伤害、穿透、标记伤害、击退全有。刷不到传说时的靠谱过渡。'
+  },
+  {
     id: 'px_broken', name: '碎裂', en: 'Broken', cat: 'bad', cls: 'all', art: 'terra_blade',
     stats: [['伤害', '-30%'], ['击退', '-20%']],
     note: '伤害与击退双砍的负面词条。',
