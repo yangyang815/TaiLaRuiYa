@@ -269,22 +269,6 @@
 .sp-emoji { font-size: 40rpx; line-height: 1.2; margin-right: 16rpx; flex-shrink: 0; }
 
 .sp-img { width: 56rpx; height: 56rpx; margin-right: 16rpx; flex-shrink: 0; }
-
-/* ---------- 版本公告弹窗 ---------- */
-.ann-mask { position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.62); z-index: 1200; display: flex; align-items: center; justify-content: center; padding: 56rpx; }
-.ann-card { width: 100%; background: var(--card-solid); border: 2rpx solid var(--line); border-radius: 22rpx; padding: 30rpx 30rpx 24rpx; box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.5); }
-.ann-head { display: flex; align-items: center; }
-.ann-tag { font-size: 20rpx; font-weight: 700; padding: 6rpx 16rpx; border-radius: 8rpx; }
 .tg-update  { color: #FFD700; background: rgba(255, 215, 0, 0.12); }
 .tg-notice  { color: #4CE0E0; background: rgba(76, 224, 224, 0.12); }
 .tg-feature { color: #7CE87C; background: rgba(60, 200, 90, 0.14); }
-.ann-date { margin-left: auto; font-size: 19rpx; color: var(--text-faint); }
-.ann-title-row { display: flex; align-items: center; margin-top: 20rpx; }
-.ann-ico { font-size: 38rpx; margin-right: 14rpx; }
-.ann-title { font-size: 32rpx; font-weight: 700; color: var(--text); }
-.ann-body { max-height: 420rpx; margin-top: 18rpx; }
-.ann-text { font-size: 25rpx; line-height: 1.9; color: var(--text-dim); white-space: pre-wrap; }
-.ann-btns { display: flex; gap: 18rpx; margin-top: 26rpx; }
-.ann-btn { flex: 1; text-align: center; padding: 16rpx 0; border-radius: 14rpx; font-size: 26rpx; font-weight: 700; }
-.ann-ghost { color: var(--text-dim); border: 2rpx solid var(--line); }
-.ann-main { color: #1A0E2E; background: var(--gold); }

@@ -1,1 +1,7 @@
-/* 重定向兼容页 */
+/* 数据装载页：居中加载动画 */
+page { background: #120925; }
+.ld-wrap { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ld-ring { width: 72rpx; height: 72rpx; border-radius: 50%; border: 6rpx solid rgba(255, 215, 0, 0.18); border-top-color: #FFD700; animation: ldspin 0.9s linear infinite; }
+@keyframes ldspin { to { transform: rotate(360deg); } }
+.ld-t { margin-top: 28rpx; color: #d8cbf0; font-size: 30rpx; font-weight: 700; }
+.ld-s { margin-top: 12rpx; color: #8e7fa6; font-size: 24rpx; }

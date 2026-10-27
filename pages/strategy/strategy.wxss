@@ -68,6 +68,7 @@
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 8rpx; }
 
 .pad-bottom { height: 200rpx; }
+.ad-slot { margin: 20rpx 30rpx 0; border-radius: 16rpx; overflow: hidden; }
 
 /* 悬浮按钮 */
 .float-btns { position: fixed; left: 30rpx; right: 30rpx; bottom: calc(env(safe-area-inset-bottom) + 24rpx);

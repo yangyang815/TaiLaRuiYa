@@ -1,1 +1,5 @@
-<view />
+<view class="ld-wrap">
+  <view class="ld-ring"></view>
+  <text class="ld-t">正在装载图鉴数据…</text>
+  <text class="ld-s">首次装载需要一点时间，之后即可秒开</text>
+</view>

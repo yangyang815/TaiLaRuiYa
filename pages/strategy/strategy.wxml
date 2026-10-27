@@ -49,7 +49,7 @@
         <text class="d-time px">阅读约 {{s.time}}</text>
       </view>
       <text class="d-title">{{s.title}}</text>
-      <text class="d-sum">{{s.summary}}</text>
+      <text class="d-sum" user-select="{{true}}">{{s.summary}}</text>
     </view>
 
     <view class="d-body">
@@ -59,7 +59,7 @@
         <view class="step-no px">{{item.i}}</view>
         <view class="col flex-1">
           <text class="step-t">{{item.t}}</text>
-          <text class="step-d">{{item.d}}</text>
+          <text class="step-d" user-select="{{true}}">{{item.d}}</text>
         </view>
       </view>
 
@@ -67,7 +67,7 @@
       <view class="sec-title"><view class="diamond" /><text class="t">老兵要诀</text></view>
       <view class="tip card" wx:for="{{s.tips}}" wx:key="*this">
         <text class="tip-star">★</text>
-        <text class="tip-t">{{item}}</text>
+        <text class="tip-t" user-select="{{true}}">{{item}}</text>
       </view>
 
       <!-- 职业路线联动入口 -->
@@ -93,6 +93,11 @@
             {{item.type === 'boss' ? 'BOSS' : (item.type === 'mon' ? '敌怪' : '物品')}}</text>
         </view>
       </scroll-view>
+
+      <!-- 原生模板广告：内容末尾、固定按钮栏上方 -->
+      <view class="ad-slot">
+        <ad unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
+      </view>
 
       <view class="pad-bottom" />
     </view>

@@ -5,8 +5,20 @@ Page({
   onLoad (q) {
     try { const app = getApp(); if (app) app.globalData['catVol' + 2] = batch } catch (e) {}
     if (q && q.loader) {
-      // 装载模式：由图鉴页导航而来，写完数据即返回
-      setTimeout(() => wx.navigateBack({ fail: () => wx.switchTab({ url: "/pages/codex/codex" }) }), 500)
+      // 装载模式：由图鉴页导航而来；带 next 队列时重定向到下一卷（整条链只进出页面栈一次，减少来回闪跳）
+      const parts = ((q.next || '') + '').split(',')
+      const next = parseInt(parts[0], 10) || 0
+      const rest = parts.slice(1).join(',')
+      setTimeout(() => {
+        if (next > 0) {
+          wx.redirectTo({
+            url: '/pkg-cat-' + next + '/pages/index/index?loader=1&next=' + rest,
+            fail: () => wx.navigateBack({ fail: () => wx.switchTab({ url: '/pages/codex/codex' }) })
+          })
+          return
+        }
+        wx.navigateBack({ fail: () => wx.switchTab({ url: '/pages/codex/codex' }) })
+      }, 150)
       return
     }
     const qs = q && Object.keys(q).length

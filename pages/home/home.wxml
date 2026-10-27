@@ -260,5 +260,5 @@
   <cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" lift="{{true}}" bind:close="onCatDetailClose" bind:go="onCatGo" bind:craft="onCatDetailCraft" />
 
   <!-- 分享海报 -->
-  <poster wx:if="{{posterData}}" show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" /> <!-- 版本公告弹窗：发布新版本后在 data/messages.js 加一条新消息（更大 ts）即自动弹出 --> <view class="ann-mask" wx:if="{{announceShow}}" bindtap="announceClose"> <view class="ann-card" catchtap="noop"> <view class="ann-head"> <text class="ann-tag {{announce.tagInfo.cls}}">{{announce.tagInfo.n}}</text> <text class="ann-date px">{{announce.date}}</text> </view> <view class="ann-title-row"> <text class="ann-ico">{{announce.icon}}</text> <text class="ann-title">{{announce.title}}</text> </view> <scroll-view scroll-y class="ann-body"><text class="ann-text">{{announce.body}}</text></scroll-view> <view class="ann-btns"> <view class="ann-btn ann-ghost tappable" catchtap="announceAll">查看全部</view> <view class="ann-btn ann-main tappable" catchtap="announceClose">知道了</view> </view> </view> </view>
+  <poster wx:if="{{posterData}}" show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
 </view>
