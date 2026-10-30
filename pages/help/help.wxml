@@ -1,0 +1,34 @@
+<view class="page-root {{themeClass}} help-root">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">使用帮助</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="hero">
+    <text class="hero-t">新用户快速上手</text>
+    <text class="hero-s">几个小提示，让你用起来更顺手</text>
+  </view>
+
+  <view class="faq card" wx:for="{{faqs}}" wx:key="t">
+    <view class="f-head">
+      <text class="f-ico">{{item.ico}}</text>
+      <text class="f-t">{{item.t}}</text>
+    </view>
+    <text class="f-d" user-select="{{true}}">{{item.d}}</text>
+  </view>
+
+  <view class="cta card tappable" bindtap="goCodex">
+    <text class="cta-t">🗂️ 去逛逛全物品图鉴</text>
+    <text class="cta-s">6300+ 条数据，首次装载后秒开</text>
+  </view>
+
+  <view class="cta card tappable" bindtap="goFeedback">
+    <text class="cta-t">💬 有问题或建议？</text>
+    <text class="cta-s">点这里给开发者留言，或用详情页的纠错入口</text>
+  </view>
+
+  <view class="foot px">数据基准 Terraria 1.4.5.8 · 参考官方 Wiki 持续修正</view>
+  <view class="pad-bottom" />
+</view>

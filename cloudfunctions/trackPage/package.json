@@ -1,0 +1,9 @@
+{
+  "name": "trackPage",
+  "version": "1.0.0",
+  "description": "轻量使用统计：按自然日+聚合键原子累加，不采集任何个人数据",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

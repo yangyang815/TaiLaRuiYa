@@ -1,0 +1,22 @@
+/* 使用帮助页 */
+.nav { display: flex; align-items: center; padding: 12rpx 24rpx; position: sticky; top: 0; z-index: 50; }
+.back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint); color: var(--text); font-size: 40rpx; display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx; }
+.nav-t { flex: 1; text-align: center; font-size: 30rpx; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10rpx; }
+.nav-ph { width: 64rpx; flex-shrink: 0; }
+
+.hero { padding: 24rpx 30rpx 8rpx; display: flex; flex-direction: column; }
+.hero-t { font-size: 40rpx; font-weight: 800; color: var(--text); }
+.hero-s { margin-top: 8rpx; font-size: 25rpx; color: var(--text-dim); }
+
+.faq { padding: 22rpx 24rpx; margin: 20rpx 30rpx 0; }
+.f-head { display: flex; align-items: center; gap: 14rpx; }
+.f-ico { font-size: 34rpx; }
+.f-t { font-size: 29rpx; font-weight: 700; color: var(--text); }
+.f-d { display: block; margin-top: 12rpx; font-size: 25rpx; line-height: 1.8; color: var(--text-dim); }
+
+.cta { display: flex; flex-direction: column; gap: 6rpx; padding: 22rpx 24rpx; margin: 20rpx 30rpx 0; border: 2rpx solid var(--gold-faint); }
+.cta-t { font-size: 29rpx; font-weight: 700; color: var(--gold); }
+.cta-s { font-size: 24rpx; color: var(--text-dim); }
+
+.foot { padding: 30rpx 0 10rpx; text-align: center; font-size: 20rpx; color: var(--text-dim); }
+.pad-bottom { height: 60rpx; }

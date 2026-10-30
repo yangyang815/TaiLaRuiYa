@@ -1,1 +1,18 @@
-const THRESHOLD=600;const bt=typeof Behavior==="function"?Behavior({data:{showBackTop:false},onPageScroll(e){const show=e.scrollTop>THRESHOLD;if(show!==this.data.showBackTop)this.setData({showBackTop:show})}}):{data:{showBackTop:false},onPageScroll(e){const show=e.scrollTop>THRESHOLD;if(show!==this.data.showBackTop)this.setData({showBackTop:show})}};module.exports=bt;
+const THRESHOLD = 600;
+const bt =
+  typeof Behavior === "function"
+    ? Behavior({
+        data: { showBackTop: false },
+        onPageScroll(e) {
+          const show = e.scrollTop > THRESHOLD;
+          if (show !== this.data.showBackTop) this.setData({ showBackTop: show });
+        }
+      })
+    : {
+        data: { showBackTop: false },
+        onPageScroll(e) {
+          const show = e.scrollTop > THRESHOLD;
+          if (show !== this.data.showBackTop) this.setData({ showBackTop: show });
+        }
+      };
+module.exports = bt;

@@ -1,1 +1,8 @@
-Component({methods:{go(){wx.pageScrollTo({scrollTop:0,duration:300});wx.vibrateShort({type:"light"})}}});
+Component({
+  methods: {
+    go() {
+      wx.pageScrollTo({ scrollTop: 0, duration: 300 });
+      wx.vibrateShort({ type: "light" });
+    }
+  }
+});

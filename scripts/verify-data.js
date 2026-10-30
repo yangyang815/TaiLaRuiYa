@@ -228,6 +228,32 @@ const pkgSizes = {}
 })
 Object.keys(pkgSizes).forEach(k => ok('分包 ' + k + ': ' + pkgSizes[k] + 'KB / 2048KB'))
 
+/* ========== 7. 图鉴分卷版本一致性 ========== */
+sec('7. 图鉴分卷版本一致性')
+try {
+  const crypto = require('crypto')
+  const catvols = require('../utils/cat-vols')
+  const dv = require('../utils/cat-data-ver')
+  if (typeof dv !== 'object' || dv === null) {
+    fail('cat-data-ver 仍是旧字符串格式，请运行 node scripts/bump-cat-ver.js 更新为分卷对象')
+  } else {
+    let verOk = 0
+    for (let i = 1; i <= catvols; i++) {
+      const df = path.join('pkg-cat-' + i, 'data', 'data-v' + i + '.js')
+      const cur = crypto.createHash('md5').update(fs.readFileSync(df)).digest('hex').slice(0, 10)
+      if (dv['v' + i] === cur) {
+        verOk++
+        ok('卷 ' + i + ' 版本一致 (' + cur + ')')
+      } else {
+        fail('卷 ' + i + ' 版本过期：cat-data-ver=' + dv['v' + i] + ' 数据文件当前 hash=' + cur + '，请运行 node scripts/bump-cat-ver.js')
+      }
+    }
+    verOk === catvols ? ok('分卷版本与数据文件全部一致') : null
+  }
+} catch (e) {
+  fail('分卷版本检查异常: ' + e.message)
+}
+
 /* ========== 汇总 ========== */
 console.log('\n========== 检查结果 ==========')
 oks.forEach(m => console.log('  [PASS] ' + m))

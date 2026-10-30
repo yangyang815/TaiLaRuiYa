@@ -1,1 +1,3 @@
-require("./bossart");require("./buildart");module.exports=require("./pixelart");
+require("./bossart");
+require("./buildart");
+module.exports = require("./pixelart");

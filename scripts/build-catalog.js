@@ -572,9 +572,17 @@ async function build () {
   // 卷数常量（运行时按此探测，避免探测不存在的卷）
   fs.writeFileSync(path.join(ROOT, 'utils', 'cat-vols.js'),
     '// 自动生成：全物品图鉴数据卷数（勿手改）\nmodule.exports = ' + volumes.length + '\n')
-  // 数据版本号：客户端缓存键带上它，数据重新生成后旧缓存自动作废
+  // 数据版本号：按各卷数据文件内容 hash 生成分卷版本（改哪卷只失效哪卷缓存）
+  const crypto = require('crypto')
+  const vers = {}
+  for (let vi = 0; vi < volumes.length; vi++) {
+    const df = path.join(ROOT, 'pkg-cat-' + (vi + 1), 'data', 'data-v' + (vi + 1) + '.js')
+    vers['v' + (vi + 1)] = fs.existsSync(df)
+      ? crypto.createHash('md5').update(fs.readFileSync(df)).digest('hex').slice(0, 10)
+      : 'none'
+  }
   fs.writeFileSync(path.join(ROOT, 'utils', 'cat-data-ver.js'),
-    '// 自动生成：图鉴数据版本（勿手改）\nmodule.exports = "v' + Date.now() + '"\n')
+    '// 自动生成：图鉴数据分卷版本（内容 hash，勿手改；改哪卷失效哪卷缓存）\nmodule.exports = ' + JSON.stringify(vers) + '\n')
   console.log('app.json 已注册 ' + volumes.length + ' 个数据分包')
 }
 

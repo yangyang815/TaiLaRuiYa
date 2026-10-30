@@ -1,1 +1,59 @@
-const{renderArt:renderArt}=require("../../utils/png");const{ARTS:ARTS}=require("../../utils/arts");const SPRITES=require("../../data/spritemap");let dpr=2,winW=375;try{const si=wx.getWindowInfo?wx.getWindowInfo():wx.getSystemInfoSync();dpr=Math.min(si.pixelRatio||2,3);winW=si.windowWidth||375}catch(e){}Component({properties:{art:{type:Object,value:null},artId:{type:String,value:""},size:{type:Number,value:96}},data:{src:"",w:0,h:0,fit:false},observers:{"art, artId, size":function(){this.render()}},lifetimes:{attached(){if(!this._done)this.render()}},methods:{render(){this._done=true;const p=this.properties;if(this._lastArtId!==p.artId){this._err=false;this._lastArtId=p.artId}const cssPx=Math.max(2,(p.size||96)/750*winW);if(p.artId&&SPRITES[p.artId]&&!this._err){const src="/assets/sprites/"+p.artId+"."+SPRITES[p.artId];if(src!==this.data.src||cssPx!==this.data.w)this.setData({src:src,w:cssPx,h:cssPx,fit:true});return}const art=p.artId?ARTS[p.artId]||ARTS.stone:p.art;if(!art||!art.rows)return;const per=Math.max(1,Math.round(cssPx*dpr/art.w));const w=art.w*per/dpr;const h=art.h*per/dpr;const src=renderArt(art,per);if(src!==this.data.src)this.setData({src:src,w:w,h:h,fit:false});else if(w!==this.data.w||h!==this.data.h)this.setData({w:w,h:h})},onImgError(){const p=this.properties;if(this._err||!p.artId)return;this._err=true;this.render()}}});
+const { renderArt: renderArt } = require("../../utils/png");
+const { ARTS: ARTS } = require("../../utils/arts");
+const SPRITES = require("../../data/spritemap");
+let dpr = 2,
+  winW = 375;
+try {
+  const si = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
+  dpr = Math.min(si.pixelRatio || 2, 3);
+  winW = si.windowWidth || 375;
+} catch (e) {}
+Component({
+  properties: {
+    art: { type: Object, value: null },
+    artId: { type: String, value: "" },
+    size: { type: Number, value: 96 }
+  },
+  data: { src: "", w: 0, h: 0, fit: false },
+  observers: {
+    "art, artId, size": function () {
+      this.render();
+    }
+  },
+  lifetimes: {
+    attached() {
+      if (!this._done) this.render();
+    }
+  },
+  methods: {
+    render() {
+      this._done = true;
+      const p = this.properties;
+      if (this._lastArtId !== p.artId) {
+        this._err = false;
+        this._lastArtId = p.artId;
+      }
+      const cssPx = Math.max(2, ((p.size || 96) / 750) * winW);
+      if (p.artId && SPRITES[p.artId] && !this._err) {
+        const src = "/assets/sprites/" + p.artId + "." + SPRITES[p.artId];
+        if (src !== this.data.src || cssPx !== this.data.w)
+          this.setData({ src: src, w: cssPx, h: cssPx, fit: true });
+        return;
+      }
+      const art = p.artId ? ARTS[p.artId] || ARTS.stone : p.art;
+      if (!art || !art.rows) return;
+      const per = Math.max(1, Math.round((cssPx * dpr) / art.w));
+      const w = (art.w * per) / dpr;
+      const h = (art.h * per) / dpr;
+      const src = renderArt(art, per);
+      if (src !== this.data.src) this.setData({ src: src, w: w, h: h, fit: false });
+      else if (w !== this.data.w || h !== this.data.h) this.setData({ w: w, h: h });
+    },
+    onImgError() {
+      const p = this.properties;
+      if (this._err || !p.artId) return;
+      this._err = true;
+      this.render();
+    }
+  }
+});

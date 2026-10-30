@@ -1,1 +1,46 @@
-const D=require("../../data/building");const BASE_TILES={V:"glass",T:"torch",A:"workbench"};const FIT_CHARS={A:1,T:1};Component({properties:{caseId:{type:String,value:""},tpl:{type:String,value:""},width:{type:Number,value:640}},data:{rows:[],height:440},observers:{"caseId, tpl, width":function(){this.render()}},lifetimes:{attached(){this.render()}},methods:{render(){const c=D.CASES.find(x=>x.id===this.properties.caseId);if(!c)return;const tpl=D.TPL[this.properties.tpl||c.thumb];if(!tpl)return;const pal=Object.assign({},D.FIXED,c.pal);const tiles=Object.assign({},BASE_TILES,c.tiles);const rows=tpl.map(line=>{const cells=[];for(let x=0;x<16;x++){const ch=line[x];if(!ch||ch==="."){cells.push(null);continue}const sp=tiles[ch];if(sp)cells.push({img:"/assets/sprites/"+sp+".png",fit:!!FIT_CHARS[ch]});else cells.push({c:pal[ch]||"#888"})}return cells});this.setData({rows:rows,height:Math.round(this.properties.width*11/16)})}}});
+const D = require("../../data/building");
+const BASE_TILES = { V: "glass", T: "torch", A: "workbench" };
+const FIT_CHARS = { A: 1, T: 1 };
+Component({
+  properties: {
+    caseId: { type: String, value: "" },
+    tpl: { type: String, value: "" },
+    width: { type: Number, value: 640 }
+  },
+  data: { rows: [], height: 440 },
+  observers: {
+    "caseId, tpl, width": function () {
+      this.render();
+    }
+  },
+  lifetimes: {
+    attached() {
+      this.render();
+    }
+  },
+  methods: {
+    render() {
+      const c = D.CASES.find((x) => x.id === this.properties.caseId);
+      if (!c) return;
+      const tpl = D.TPL[this.properties.tpl || c.thumb];
+      if (!tpl) return;
+      const pal = Object.assign({}, D.FIXED, c.pal);
+      const tiles = Object.assign({}, BASE_TILES, c.tiles);
+      const rows = tpl.map((line) => {
+        const cells = [];
+        for (let x = 0; x < 16; x++) {
+          const ch = line[x];
+          if (!ch || ch === ".") {
+            cells.push(null);
+            continue;
+          }
+          const sp = tiles[ch];
+          if (sp) cells.push({ img: "/assets/sprites/" + sp + ".png", fit: !!FIT_CHARS[ch] });
+          else cells.push({ c: pal[ch] || "#888" });
+        }
+        return cells;
+      });
+      this.setData({ rows: rows, height: Math.round((this.properties.width * 11) / 16) });
+    }
+  }
+});

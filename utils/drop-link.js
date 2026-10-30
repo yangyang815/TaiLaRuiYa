@@ -5,14 +5,14 @@ const catSearch = require("./catalog-search");
 
 // monsters.js 历史掉落物名 → 图鉴官方名
 const ALIAS = {
-  "守护者勋章": "护卫奖章",
-  "诡异木": "阴森木",
-  "蜘蛛毒牙": "蜘蛛牙",
-  "僵尸手臂": "僵尸臂",
-  "血腥鱼饵桶": "鱼饵桶",
-  "符文法师帽": "符文帽",
-  "符文法师袍": "符文长袍",
-  "花岗岩": "花岗岩块"
+  守护者勋章: "护卫奖章",
+  诡异木: "阴森木",
+  蜘蛛毒牙: "蜘蛛牙",
+  僵尸手臂: "僵尸臂",
+  血腥鱼饵桶: "鱼饵桶",
+  符文法师帽: "符文帽",
+  符文法师袍: "符文长袍",
+  花岗岩: "花岗岩块"
 };
 
 // 清洗掉落物名："蜘蛛牙×2~5"→"蜘蛛牙"、"符文帽（时装）"→"符文帽"
@@ -30,11 +30,18 @@ function resolve(name) {
   if (c) cands.push(c);
   const r = (name || "").trim();
   if (r && cands.indexOf(r) < 0) cands.push(r);
-  return cands.reduce((acc, n) => acc.then(hit => {
-    if (hit) return hit;
-    const t = ALIAS[n];
-    return catSearch.findByName(t || n).then(e => e || null).catch(() => null);
-  }), Promise.resolve(null));
+  return cands.reduce(
+    (acc, n) =>
+      acc.then((hit) => {
+        if (hit) return hit;
+        const t = ALIAS[n];
+        return catSearch
+          .findByName(t || n)
+          .then((e) => e || null)
+          .catch(() => null);
+      }),
+    Promise.resolve(null)
+  );
 }
 
 module.exports = { resolve: resolve, clean: clean, ALIAS: ALIAS };

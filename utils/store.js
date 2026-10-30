@@ -1,1 +1,388 @@
-const K={fav:"terr_favs",theme:"terr_theme",ver:"terr_ver",hist:"terr_hist",cmts:"terr_cmts",stats:"terr_stats",profile:"terr_profile",recent:"terr_recent",boss:"terr_boss",checks:"terr_checks",gachv:"terr_gachv",fish:"terr_fish",build:"terr_build",career:"terr_career",flags:"terr_flags",grid:"terr_grid",msgRead:"terr_msg_read"};function get(key,def){try{const v=wx.getStorageSync(key);return v===""||v===undefined||v===null?def:v}catch(e){return def}}function set(key,val){try{wx.setStorageSync(key,val)}catch(e){}}function getFavs(){return get(K.fav,[])}function isFav(id){return getFavs().some(f=>f.id===id)}function toggleFav(id,type){const favs=getFavs();const idx=favs.findIndex(f=>f.id===id);let added;if(idx>=0){favs.splice(idx,1);added=false}else{favs.unshift({id:id,type:type,ts:Date.now()});added=true}set(K.fav,favs);return added}function getTheme(){return get(K.theme,"dark")}function setTheme(t){set(K.theme,t)}function getVersion(){let v=get(K.ver,"");if(!v)v="1.4.5";if(v==="1.4.4"){const f=get(K.flags,{});if(!f.versionSwitched){v="1.4.5";set(K.ver,v)}}return v}function setVersion(v){set(K.ver,v)}function getRecents(){return get(K.recent,[]).filter(r=>r&&r.id)}function pushRecent(id,type){if(!id)return;let list=getRecents().filter(r=>r.id!==id);list.unshift({id:id,type:type||"item",ts:Date.now()});set(K.recent,list.slice(0,30))}function getHist(){return get(K.hist,[])}function pushHist(kw){kw=(kw||"").trim();if(!kw)return;let h=getHist().filter(x=>x!==kw);h.unshift(kw);set(K.hist,h.slice(0,10))}function clearHist(){set(K.hist,[])}function getCmts(pageId,seed){const all=get(K.cmts,{});if(!all[pageId]&&seed&&seed.length){all[pageId]=seed;set(K.cmts,all)}return all[pageId]||[]}function addCmt(pageId,cmt){const all=get(K.cmts,{});all[pageId]=all[pageId]||[];all[pageId].unshift(cmt);set(K.cmts,all)}function delCmt(pageId,ts){const all=get(K.cmts,{});if(all[pageId]){all[pageId]=all[pageId].filter(c=>c.ts!==ts);set(K.cmts,all)}}function getProfile(){return get(K.profile,{avatar:"ava_knight",nick:"无名冒险家"})}function setProfile(p){set(K.profile,Object.assign(getProfile(),p))}function getDefeated(){return get(K.boss,{})}function isDefeated(id){return!!getDefeated()[id]}function toggleDefeated(id){const all=getDefeated();const added=!all[id];if(added)all[id]=Date.now();else delete all[id];set(K.boss,all);return added}function getChecks(){return get(K.checks,{})}function getBossChecks(bossId){return getChecks()[bossId]||{}}function toggleCheck(bossId,itemId){const all=getChecks();const m=all[bossId]||{};const added=!m[itemId];if(added)m[itemId]=1;else delete m[itemId];all[bossId]=m;set(K.checks,all);return added}function getGameAchv(){return get(K.gachv,{})}function isGameAchvDone(id){return!!getGameAchv()[id]}function toggleGameAchv(id){const all=getGameAchv();const added=!all[id];if(added)all[id]=Date.now();else delete all[id];set(K.gachv,all);return added}function getFishDone(){return get(K.fish,[])}function isFishDone(id){return getFishDone().indexOf(id)>=0}function toggleFish(id){const all=getFishDone();const i=all.indexOf(id);if(i>=0)all.splice(i,1);else all.push(id);set(K.fish,all);return i<0}function getBuildDone(){return get(K.build,[])}function isBuildDone(id){return getBuildDone().indexOf(id)>=0}function toggleBuild(id){const all=getBuildDone();const i=all.indexOf(id);if(i>=0)all.splice(i,1);else all.push(id);set(K.build,all);return i<0}function getCareer(){return get(K.career,{cls:"melee",done:{}})}function setCareerCls(cls){const c=getCareer();c.cls=cls;set(K.career,c)}function toggleCareerStage(stageId){const c=getCareer();const added=!c.done[stageId];if(added)c.done[stageId]=Date.now();else delete c.done[stageId];set(K.career,c);return added}function getFlags(){return get(K.flags,{})}function markFlag(key){const f=getFlags();if(f[key])return;f[key]=Date.now();set(K.flags,f)}const LEVELS=["见习冒险家","铜镐矿工","银甲剑士","金冠勇士","暗影猎手","神圣骑士","丛林之主","月主终结者","泰拉传奇","天顶大师"];function getStats(){const s=get(K.stats,{opens:0,firstTs:Date.now()});return s}function trackOpen(){const s=getStats();s.opens+=1;set(K.stats,s)}function getLevel(){const stats=getStats();const pts=stats.opens*5+getFavs().length*15;const lv=Math.min(LEVELS.length,Math.floor(pts/60)+1);const cur=pts-(lv-1)*60;return{lv:lv,title:LEVELS[lv-1],pts:pts,cur:cur,need:60}}function getGrid(){const g=get(K.grid,null);if(!g||typeof g!=="object")return{use:{},recent:[],order:null,open:false};return{use:g.use||{},recent:g.recent||[],order:Array.isArray(g.order)?g.order:null,open:!!g.open}}function tapGrid(k){const g=getGrid();g.use[k]=(g.use[k]||0)+1;g.recent=[k].concat(g.recent.filter(x=>x!==k)).slice(0,3);set(K.grid,g)}function saveGridOrder(order){const g=getGrid();g.order=order;set(K.grid,g)}function resetGridOrder(){const g=getGrid();g.order=null;set(K.grid,g)}function toggleGridOpen(open){const g=getGrid();g.open=!!open;set(K.grid,g)}function getMsgRead(){return get(K.msgRead,0)}function setMsgRead(ts){set(K.msgRead,ts||Date.now())}const SAVE_KEYS=["fav","recent","boss","checks","gachv","fish","build","career","grid","profile","flags","msgRead","ver","theme","stats","hist"];const SAVE_TAG="terra-handbook-save";const SAVE_VER=1;function exportAll(){const data={};SAVE_KEYS.forEach(k=>{let v;try{v=wx.getStorageSync(K[k])}catch(e){return}if(v!==""&&v!==undefined&&v!==null)data[k]=v});return{app:SAVE_TAG,ver:SAVE_VER,time:(new Date).toLocaleString("zh-CN",{hour12:false}),data:data}}function checkSave(obj){if(!obj||typeof obj!=="object"||obj.app!==SAVE_TAG||!obj.data){return{ok:false,err:"不是本小程序的存档"}}const keys=SAVE_KEYS.filter(k=>obj.data[k]!==undefined);if(!keys.length)return{ok:false,err:"存档内容为空"};return{ok:true,keys:keys,time:obj.time||""}}function applySave(obj){const chk=checkSave(obj);if(!chk.ok)return chk;chk.keys.forEach(k=>set(K[k],obj.data[k]));return chk}module.exports={getFavs:getFavs,isFav:isFav,toggleFav:toggleFav,getTheme:getTheme,setTheme:setTheme,getVersion:getVersion,setVersion:setVersion,getHist:getHist,pushHist:pushHist,clearHist:clearHist,getRecents:getRecents,pushRecent:pushRecent,getDefeated:getDefeated,isDefeated:isDefeated,toggleDefeated:toggleDefeated,getChecks:getChecks,getBossChecks:getBossChecks,toggleCheck:toggleCheck,getGameAchv:getGameAchv,isGameAchvDone:isGameAchvDone,toggleGameAchv:toggleGameAchv,getFishDone:getFishDone,isFishDone:isFishDone,toggleFish:toggleFish,getBuildDone:getBuildDone,isBuildDone:isBuildDone,toggleBuild:toggleBuild,getCareer:getCareer,setCareerCls:setCareerCls,toggleCareerStage:toggleCareerStage,getFlags:getFlags,markFlag:markFlag,getGrid:getGrid,tapGrid:tapGrid,saveGridOrder:saveGridOrder,resetGridOrder:resetGridOrder,toggleGridOpen:toggleGridOpen,exportAll:exportAll,checkSave:checkSave,applySave:applySave,getCmts:getCmts,addCmt:addCmt,delCmt:delCmt,getProfile:getProfile,setProfile:setProfile,getStats:getStats,trackOpen:trackOpen,getLevel:getLevel,getMsgRead:getMsgRead,setMsgRead:setMsgRead};
+const K = {
+  fav: "terr_favs",
+  theme: "terr_theme",
+  ver: "terr_ver",
+  hist: "terr_hist",
+  cmts: "terr_cmts",
+  stats: "terr_stats",
+  profile: "terr_profile",
+  recent: "terr_recent",
+  boss: "terr_boss",
+  checks: "terr_checks",
+  gachv: "terr_gachv",
+  fish: "terr_fish",
+  build: "terr_build",
+  career: "terr_career",
+  flags: "terr_flags",
+  grid: "terr_grid",
+  msgRead: "terr_msg_read"
+};
+function get(key, def) {
+  try {
+    const v = wx.getStorageSync(key);
+    return v === "" || v === undefined || v === null ? def : v;
+  } catch (e) {
+    return def;
+  }
+}
+function set(key, val) {
+  try {
+    wx.setStorageSync(key, val);
+  } catch (e) {}
+}
+function getFavs() {
+  return get(K.fav, []);
+}
+function isFav(id) {
+  return getFavs().some((f) => f.id === id);
+}
+function toggleFav(id, type) {
+  const favs = getFavs();
+  const idx = favs.findIndex((f) => f.id === id);
+  let added;
+  if (idx >= 0) {
+    favs.splice(idx, 1);
+    added = false;
+  } else {
+    favs.unshift({ id: id, type: type, ts: Date.now() });
+    added = true;
+  }
+  set(K.fav, favs);
+  return added;
+}
+function getTheme() {
+  return get(K.theme, "dark");
+}
+function setTheme(t) {
+  set(K.theme, t);
+}
+function getVersion() {
+  let v = get(K.ver, "");
+  if (!v) v = "1.4.5";
+  if (v === "1.4.4") {
+    const f = get(K.flags, {});
+    if (!f.versionSwitched) {
+      v = "1.4.5";
+      set(K.ver, v);
+    }
+  }
+  return v;
+}
+function setVersion(v) {
+  set(K.ver, v);
+}
+function getRecents() {
+  return get(K.recent, []).filter((r) => r && r.id);
+}
+function pushRecent(id, type) {
+  if (!id) return;
+  let list = getRecents().filter((r) => r.id !== id);
+  list.unshift({ id: id, type: type || "item", ts: Date.now() });
+  set(K.recent, list.slice(0, 30));
+}
+function getHist() {
+  return get(K.hist, []);
+}
+function pushHist(kw) {
+  kw = (kw || "").trim();
+  if (!kw) return;
+  let h = getHist().filter((x) => x !== kw);
+  h.unshift(kw);
+  set(K.hist, h.slice(0, 10));
+}
+function clearHist() {
+  set(K.hist, []);
+}
+function getCmts(pageId, seed) {
+  const all = get(K.cmts, {});
+  if (!all[pageId] && seed && seed.length) {
+    all[pageId] = seed;
+    set(K.cmts, all);
+  }
+  return all[pageId] || [];
+}
+function addCmt(pageId, cmt) {
+  const all = get(K.cmts, {});
+  all[pageId] = all[pageId] || [];
+  all[pageId].unshift(cmt);
+  set(K.cmts, all);
+}
+function delCmt(pageId, ts) {
+  const all = get(K.cmts, {});
+  if (all[pageId]) {
+    all[pageId] = all[pageId].filter((c) => c.ts !== ts);
+    set(K.cmts, all);
+  }
+}
+function getProfile() {
+  return get(K.profile, { avatar: "ava_knight", nick: "无名冒险家" });
+}
+function setProfile(p) {
+  set(K.profile, Object.assign(getProfile(), p));
+}
+function getDefeated() {
+  return get(K.boss, {});
+}
+function isDefeated(id) {
+  return !!getDefeated()[id];
+}
+function toggleDefeated(id) {
+  const all = getDefeated();
+  const added = !all[id];
+  if (added) all[id] = Date.now();
+  else delete all[id];
+  set(K.boss, all);
+  return added;
+}
+function getChecks() {
+  return get(K.checks, {});
+}
+function getBossChecks(bossId) {
+  return getChecks()[bossId] || {};
+}
+function toggleCheck(bossId, itemId) {
+  const all = getChecks();
+  const m = all[bossId] || {};
+  const added = !m[itemId];
+  if (added) m[itemId] = 1;
+  else delete m[itemId];
+  all[bossId] = m;
+  set(K.checks, all);
+  return added;
+}
+function getGameAchv() {
+  return get(K.gachv, {});
+}
+function isGameAchvDone(id) {
+  return !!getGameAchv()[id];
+}
+function toggleGameAchv(id) {
+  const all = getGameAchv();
+  const added = !all[id];
+  if (added) all[id] = Date.now();
+  else delete all[id];
+  set(K.gachv, all);
+  return added;
+}
+function getFishDone() {
+  return get(K.fish, []);
+}
+function isFishDone(id) {
+  return getFishDone().indexOf(id) >= 0;
+}
+function toggleFish(id) {
+  const all = getFishDone();
+  const i = all.indexOf(id);
+  if (i >= 0) all.splice(i, 1);
+  else all.push(id);
+  set(K.fish, all);
+  return i < 0;
+}
+function getBuildDone() {
+  return get(K.build, []);
+}
+function isBuildDone(id) {
+  return getBuildDone().indexOf(id) >= 0;
+}
+function toggleBuild(id) {
+  const all = getBuildDone();
+  const i = all.indexOf(id);
+  if (i >= 0) all.splice(i, 1);
+  else all.push(id);
+  set(K.build, all);
+  return i < 0;
+}
+function getCareer() {
+  return get(K.career, { cls: "melee", done: {} });
+}
+function setCareerCls(cls) {
+  const c = getCareer();
+  c.cls = cls;
+  set(K.career, c);
+}
+function toggleCareerStage(stageId) {
+  const c = getCareer();
+  const added = !c.done[stageId];
+  if (added) c.done[stageId] = Date.now();
+  else delete c.done[stageId];
+  set(K.career, c);
+  return added;
+}
+function getFlags() {
+  return get(K.flags, {});
+}
+function markFlag(key) {
+  const f = getFlags();
+  if (f[key]) return;
+  f[key] = Date.now();
+  set(K.flags, f);
+}
+const LEVELS = [
+  "见习冒险家",
+  "铜镐矿工",
+  "银甲剑士",
+  "金冠勇士",
+  "暗影猎手",
+  "神圣骑士",
+  "丛林之主",
+  "月主终结者",
+  "泰拉传奇",
+  "天顶大师"
+];
+function getStats() {
+  const s = get(K.stats, { opens: 0, firstTs: Date.now() });
+  return s;
+}
+function trackOpen() {
+  const s = getStats();
+  s.opens += 1;
+  set(K.stats, s);
+}
+function getLevel() {
+  const stats = getStats();
+  const pts = stats.opens * 5 + getFavs().length * 15;
+  const lv = Math.min(LEVELS.length, Math.floor(pts / 60) + 1);
+  const cur = pts - (lv - 1) * 60;
+  return { lv: lv, title: LEVELS[lv - 1], pts: pts, cur: cur, need: 60 };
+}
+function getGrid() {
+  const g = get(K.grid, null);
+  if (!g || typeof g !== "object") return { use: {}, recent: [], order: null, open: false };
+  return {
+    use: g.use || {},
+    recent: g.recent || [],
+    order: Array.isArray(g.order) ? g.order : null,
+    open: !!g.open
+  };
+}
+function tapGrid(k) {
+  const g = getGrid();
+  g.use[k] = (g.use[k] || 0) + 1;
+  g.recent = [k].concat(g.recent.filter((x) => x !== k)).slice(0, 3);
+  set(K.grid, g);
+}
+function saveGridOrder(order) {
+  const g = getGrid();
+  g.order = order;
+  set(K.grid, g);
+}
+function resetGridOrder() {
+  const g = getGrid();
+  g.order = null;
+  set(K.grid, g);
+}
+function toggleGridOpen(open) {
+  const g = getGrid();
+  g.open = !!open;
+  set(K.grid, g);
+}
+function getMsgRead() {
+  return get(K.msgRead, 0);
+}
+function setMsgRead(ts) {
+  set(K.msgRead, ts || Date.now());
+}
+const SAVE_KEYS = [
+  "fav",
+  "recent",
+  "boss",
+  "checks",
+  "gachv",
+  "fish",
+  "build",
+  "career",
+  "grid",
+  "profile",
+  "flags",
+  "msgRead",
+  "ver",
+  "theme",
+  "stats",
+  "hist"
+];
+const SAVE_TAG = "terra-handbook-save";
+const SAVE_VER = 1;
+function exportAll() {
+  const data = {};
+  SAVE_KEYS.forEach((k) => {
+    let v;
+    try {
+      v = wx.getStorageSync(K[k]);
+    } catch (e) {
+      return;
+    }
+    if (v !== "" && v !== undefined && v !== null) data[k] = v;
+  });
+  return {
+    app: SAVE_TAG,
+    ver: SAVE_VER,
+    time: new Date().toLocaleString("zh-CN", { hour12: false }),
+    data: data
+  };
+}
+function checkSave(obj) {
+  if (!obj || typeof obj !== "object" || obj.app !== SAVE_TAG || !obj.data) {
+    return { ok: false, err: "不是本小程序的存档" };
+  }
+  const keys = SAVE_KEYS.filter((k) => obj.data[k] !== undefined);
+  if (!keys.length) return { ok: false, err: "存档内容为空" };
+  return { ok: true, keys: keys, time: obj.time || "" };
+}
+function applySave(obj) {
+  const chk = checkSave(obj);
+  if (!chk.ok) return chk;
+  chk.keys.forEach((k) => set(K[k], obj.data[k]));
+  return chk;
+}
+module.exports = {
+  getFavs: getFavs,
+  isFav: isFav,
+  toggleFav: toggleFav,
+  getTheme: getTheme,
+  setTheme: setTheme,
+  getVersion: getVersion,
+  setVersion: setVersion,
+  getHist: getHist,
+  pushHist: pushHist,
+  clearHist: clearHist,
+  getRecents: getRecents,
+  pushRecent: pushRecent,
+  getDefeated: getDefeated,
+  isDefeated: isDefeated,
+  toggleDefeated: toggleDefeated,
+  getChecks: getChecks,
+  getBossChecks: getBossChecks,
+  toggleCheck: toggleCheck,
+  getGameAchv: getGameAchv,
+  isGameAchvDone: isGameAchvDone,
+  toggleGameAchv: toggleGameAchv,
+  getFishDone: getFishDone,
+  isFishDone: isFishDone,
+  toggleFish: toggleFish,
+  getBuildDone: getBuildDone,
+  isBuildDone: isBuildDone,
+  toggleBuild: toggleBuild,
+  getCareer: getCareer,
+  setCareerCls: setCareerCls,
+  toggleCareerStage: toggleCareerStage,
+  getFlags: getFlags,
+  markFlag: markFlag,
+  getGrid: getGrid,
+  tapGrid: tapGrid,
+  saveGridOrder: saveGridOrder,
+  resetGridOrder: resetGridOrder,
+  toggleGridOpen: toggleGridOpen,
+  exportAll: exportAll,
+  checkSave: checkSave,
+  applySave: applySave,
+  getCmts: getCmts,
+  addCmt: addCmt,
+  delCmt: delCmt,
+  getProfile: getProfile,
+  setProfile: setProfile,
+  getStats: getStats,
+  trackOpen: trackOpen,
+  getLevel: getLevel,
+  getMsgRead: getMsgRead,
+  setMsgRead: setMsgRead
+};

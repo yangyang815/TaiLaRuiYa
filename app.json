@@ -16,7 +16,8 @@
     "pages/acq/acq",
     "pages/catalog/catalog",
     "pages/theme/theme",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/help/help"
   ],
   "window": {
     "navigationStyle": "custom",

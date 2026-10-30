@@ -1,1 +1,40 @@
-function pad2(n){return String(n).padStart(2,"0")}function toDate(d){return d instanceof Date?d:new Date(d)}function fmtClock(d){d=toDate(d);return pad2(d.getHours())+":"+pad2(d.getMinutes())}function fmtDateCn(d){d=toDate(d);const wk=["日","一","二","三","四","五","六"][d.getDay()];return d.getMonth()+1+"月"+d.getDate()+"日 · 周"+wk}function fmtDateIso(d){d=toDate(d);return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate())}function fmtDateShort(d){d=toDate(d);return d.getMonth()+1+"/"+d.getDate()}function hash(s){let h=0;for(let i=0;i<s.length;i++)h=h*31+s.charCodeAt(i)>>>0;return h}const FISH_EMOJI=["🐟","🐠","🐡","🦈","🦐","🦀","🐋","🐙"];function emojiOf(id){return FISH_EMOJI[hash(id)%FISH_EMOJI.length]}module.exports={fmtClock:fmtClock,fmtDateCn:fmtDateCn,fmtDateIso:fmtDateIso,fmtDateShort:fmtDateShort,hash:hash,emojiOf:emojiOf};
+function pad2(n) {
+  return String(n).padStart(2, "0");
+}
+function toDate(d) {
+  return d instanceof Date ? d : new Date(d);
+}
+function fmtClock(d) {
+  d = toDate(d);
+  return pad2(d.getHours()) + ":" + pad2(d.getMinutes());
+}
+function fmtDateCn(d) {
+  d = toDate(d);
+  const wk = ["日", "一", "二", "三", "四", "五", "六"][d.getDay()];
+  return d.getMonth() + 1 + "月" + d.getDate() + "日 · 周" + wk;
+}
+function fmtDateIso(d) {
+  d = toDate(d);
+  return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+}
+function fmtDateShort(d) {
+  d = toDate(d);
+  return d.getMonth() + 1 + "/" + d.getDate();
+}
+function hash(s) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h;
+}
+const FISH_EMOJI = ["🐟", "🐠", "🐡", "🦈", "🦐", "🦀", "🐋", "🐙"];
+function emojiOf(id) {
+  return FISH_EMOJI[hash(id) % FISH_EMOJI.length];
+}
+module.exports = {
+  fmtClock: fmtClock,
+  fmtDateCn: fmtDateCn,
+  fmtDateIso: fmtDateIso,
+  fmtDateShort: fmtDateShort,
+  hash: hash,
+  emojiOf: emojiOf
+};

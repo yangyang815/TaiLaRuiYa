@@ -1,1 +1,24 @@
-function startClock(onTick){let handle=null;const delay=()=>6e4-Date.now()%6e4+120;const tick=()=>{onTick(new Date);handle=setTimeout(tick,delay())};handle=setTimeout(tick,delay());return{stop(){if(handle){clearTimeout(handle);handle=null}}}}function nowClock(){const d=new Date;const h=String(d.getHours()).padStart(2,"0");const m=String(d.getMinutes()).padStart(2,"0");return h+":"+m}module.exports={startClock:startClock,nowClock:nowClock};
+function startClock(onTick) {
+  let handle = null;
+  const delay = () => 6e4 - (Date.now() % 6e4) + 120;
+  const tick = () => {
+    onTick(new Date());
+    handle = setTimeout(tick, delay());
+  };
+  handle = setTimeout(tick, delay());
+  return {
+    stop() {
+      if (handle) {
+        clearTimeout(handle);
+        handle = null;
+      }
+    }
+  };
+}
+function nowClock() {
+  const d = new Date();
+  const h = String(d.getHours()).padStart(2, "0");
+  const m = String(d.getMinutes()).padStart(2, "0");
+  return h + ":" + m;
+}
+module.exports = { startClock: startClock, nowClock: nowClock };

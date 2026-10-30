@@ -1,1 +1,10 @@
-const{A:A,reg:reg}=require("./pixelart");const{FIXED:FIXED,TPL:TPL,CASES:CASES}=require("../data/building");CASES.forEach(c=>{const pal=Object.assign({},FIXED,c.pal);const tpls=new Set((c.steps||[]).map(s=>s.tpl));tpls.add(c.thumb);tpls.forEach(t=>{if(TPL[t])reg("bld_"+c.id+"_"+t,A(16,11,pal,TPL[t]))})});
+const { A: A, reg: reg } = require("./pixelart");
+const { FIXED: FIXED, TPL: TPL, CASES: CASES } = require("../data/building");
+CASES.forEach((c) => {
+  const pal = Object.assign({}, FIXED, c.pal);
+  const tpls = new Set((c.steps || []).map((s) => s.tpl));
+  tpls.add(c.thumb);
+  tpls.forEach((t) => {
+    if (TPL[t]) reg("bld_" + c.id + "_" + t, A(16, 11, pal, TPL[t]));
+  });
+});
