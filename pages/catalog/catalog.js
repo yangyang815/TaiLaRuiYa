@@ -100,6 +100,7 @@ Page({
       .catch(() => this.setData({ loading: false, loadFail: true, diag: "诊断 加载异常" }));
   },
   retry() {
+    this._imgRetry = {};
     this.loadData();
   },
   applyFilter(kw) {
@@ -137,6 +138,35 @@ Page({
   more() {
     const next = Math.min(this._hit.length, this.data.rows.length + 80);
     this.setData({ rows: this._hit.slice(0, next), shown: next });
+  },
+  // 列表/弹窗图标加载失败自动重试：分包未就绪（首次使用/清缓存后）时图片 URL 无效，
+  // 且微信 image 失败后不会自行恢复。三轮延迟重试（1.5s/5s/12s）覆盖分包下载窗口；
+  // 重试方式为先置空再复原原路径（同值 setData 会被 diff 掉，无法触发重新加载）
+  onImgErr(e) {
+    try {
+      const d = e.currentTarget.dataset;
+      const arr = d.arr || "rows";
+      const idx = d.idx;
+      this._imgRetry = this._imgRetry || {};
+      const k = arr + ":" + (idx === undefined ? "d" : idx);
+      const n = (this._imgRetry[k] || 0) + 1;
+      this._imgRetry[k] = n;
+      if (n > 3) return;
+      const delay = [1500, 5000, 12000][n - 1];
+      const isObj = arr === "detail";
+      setTimeout(() => {
+        const cur = isObj ? this.data.detail : (this.data[arr] || [])[idx];
+        const base = String((cur && cur.sprite) || "").replace(/\?r=\d+$/, "");
+        if (!base) return;
+        const emptyPath = isObj ? "detail.sprite" : arr + "[" + idx + "].sprite";
+        this.setData({ [emptyPath]: "" });
+        setTimeout(() => {
+          const cur2 = isObj ? this.data.detail : (this.data[arr] || [])[idx];
+          if (!cur2) return; // 弹窗已关闭 / 列表已重建
+          this.setData({ [emptyPath]: base });
+        }, 250);
+      }, delay);
+    } catch (e2) {}
   },
   onRow(e) {
     const it = this._hit[Number(e.currentTarget.dataset.i)];

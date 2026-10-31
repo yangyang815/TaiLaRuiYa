@@ -33,7 +33,7 @@
     <view class="suggest card pop-in" wx:if="{{suggests.length}}">
       <view class="sg-item" wx:for="{{suggests}}" wx:key="id" bindtap="onSuggestTap" data-id="{{item.id}}">
         <view class="sg-art" style="box-shadow: 0 0 14rpx {{item.glow}}55;">
-          <image wx:if="{{item.sprite}}" class="sprite-img" src="{{item.sprite}}" mode="aspectFit" lazy-load />
+          <image wx:if="{{item.sprite}}" class="sprite-img" src="{{item.sprite}}" mode="aspectFit" lazy-load binderror="onImgErr" data-arr="suggests" data-idx="{{index}}" />
           <pixel-icon wx:else art-id="{{item.artId}}" size="64" />
         </view>
         <view class="col flex-1">
@@ -92,7 +92,7 @@
             bindtap="onCardTap" bindlongpress="onCardLong" data-id="{{item.id}}">
             <view class="m-glow" style="background: radial-gradient(circle at 50% 38%, {{item.glow}}3D 0%, transparent 68%);" />
             <view class="m-art">
-              <image wx:if="{{item.sprite}}" class="sprite-img-lg" src="{{item.sprite}}" mode="aspectFit" lazy-load />
+              <image wx:if="{{item.sprite}}" class="sprite-img-lg" src="{{item.sprite}}" mode="aspectFit" lazy-load binderror="onImgErr" data-arr="list" data-idx="{{index}}" />
               <pixel-icon wx:else art-id="{{item.artId}}" size="112" />
             </view>
             <view class="col">
@@ -110,7 +110,7 @@
             bindtap="onCardTap" bindlongpress="onCardLong" data-id="{{item.id}}">
             <view class="m-glow" style="background: radial-gradient(circle at 50% 38%, {{item.glow}}3D 0%, transparent 68%);" />
             <view class="m-art">
-              <image wx:if="{{item.sprite}}" class="sprite-img-lg" src="{{item.sprite}}" mode="aspectFit" lazy-load />
+              <image wx:if="{{item.sprite}}" class="sprite-img-lg" src="{{item.sprite}}" mode="aspectFit" lazy-load binderror="onImgErr" data-arr="list" data-idx="{{index}}" />
               <pixel-icon wx:else art-id="{{item.artId}}" size="112" />
             </view>
             <view class="col">
@@ -150,7 +150,7 @@
     <view class="sheet-handle" bindtap="closeSheet" />
     <view class="sh-head">
       <view class="sh-art" style="box-shadow: 0 0 30rpx {{sheet.glow}}66;">
-        <image wx:if="{{sheet.sprite}}" class="sprite-img-xl" src="{{sheet.sprite}}" mode="aspectFit" />
+        <image wx:if="{{sheet.sprite}}" class="sprite-img-xl" src="{{sheet.sprite}}" mode="aspectFit" binderror="onImgErr" data-arr="sheet" />
         <pixel-icon wx:else art-id="{{sheet.artId}}" size="140" />
       </view>
       <view class="col flex-1">

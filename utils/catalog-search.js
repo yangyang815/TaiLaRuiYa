@@ -241,6 +241,11 @@ function loadVol(i, force) {
       const cached = loadVolStorage(i);
       if (cached.length) {
         _lastStats["v" + i] = cached.length + " (cache)";
+        // 后台预热分包：列表图标指向分包内静态资源（/pkg-cat-N/assets/*），
+        // 分包就绪后图片才可加载；已就绪时 require.async 本地秒回，无网络开销
+        try {
+          rawVol(i).catch(() => {});
+        } catch (e0) {}
         return mapEntries(cached, i);
       }
       // 未命中（首次 / 该卷数据更新过 / 坏缓存自愈后）：读分包数据文件

@@ -274,9 +274,39 @@ Page({
   },
   retryAll() {
     this._vols = {};
+    this._imgRetry = {};
     catSearch.resetVols();
     this.setData({ allLoadFail: false, allLoading: true, allDiag: "" });
     this.loadAllItems();
+  },
+  // 列表/弹窗图标加载失败自动重试：图标指向分包内静态资源（/pkg-cat-N/assets/*），
+  // 首次使用或清缓存后分包按需下载，未就绪窗口内失败的 image 不会自行恢复。
+  // 三轮延迟重试（1.5s/5s/12s）覆盖分包下载窗口；两段式置空-复原触发重新加载
+  onImgErr(e) {
+    try {
+      const d = e.currentTarget.dataset;
+      const arr = d.arr || "list";
+      const idx = d.idx;
+      this._imgRetry = this._imgRetry || {};
+      const k = arr + ":" + (idx === undefined ? "d" : idx);
+      const n = (this._imgRetry[k] || 0) + 1;
+      this._imgRetry[k] = n;
+      if (n > 3) return;
+      const delay = [1500, 5000, 12000][n - 1];
+      const isObj = arr === "sheet";
+      setTimeout(() => {
+        const cur = isObj ? this.data.sheet : (this.data[arr] || [])[idx];
+        const base = String((cur && cur.sprite) || "").replace(/\?r=\d+$/, "");
+        if (!base) return;
+        const emptyPath = isObj ? "sheet.sprite" : arr + "[" + idx + "].sprite";
+        this.setData({ [emptyPath]: "" });
+        setTimeout(() => {
+          const cur2 = isObj ? this.data.sheet : (this.data[arr] || [])[idx];
+          if (!cur2) return; // 弹窗已关闭 / 列表已切换
+          this.setData({ [emptyPath]: base });
+        }, 250);
+      }, delay);
+    } catch (e2) {}
   },
   allItemChips() {
     if (this._catChips) return this._catChips;

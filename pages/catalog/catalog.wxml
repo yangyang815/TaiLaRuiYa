@@ -30,7 +30,7 @@
   <view class="rows" wx:if="{{rows.length}}">
     <view class="row card tappable" wx:for="{{rows}}" wx:key="index" bindtap="onRow" data-i="{{index}}">
       <view class="r-art" style="box-shadow: 0 0 16rpx {{item.rcol}}55;">
-        <image class="r-img" src="{{item.sprite}}" mode="aspectFit" lazy-load />
+        <image class="r-img" src="{{item.sprite}}" mode="aspectFit" lazy-load binderror="onImgErr" data-arr="rows" data-idx="{{index}}" />
       </view>
       <view class="col flex-1">
         <text class="r-n">{{item.n}}</text>
@@ -59,7 +59,7 @@
     <view class="sheet-handle" />
     <view class="d-head">
       <view class="d-imgbox" style="box-shadow: 0 0 20rpx {{detail.rcol}}55;">
-        <image class="d-img" src="{{detail.sprite}}" mode="aspectFit" />
+        <image class="d-img" src="{{detail.sprite}}" mode="aspectFit" binderror="onImgErr" data-arr="detail" />
       </view>
       <view class="col flex-1">
         <text class="d-n">{{detail.n}}</text>
