@@ -236,16 +236,21 @@ const volP = {};
 function loadVol(i, force) {
   if (force) delete volP[i];
   if (!volP[i]) {
-    volP[i] = Promise.resolve().then(() => {
+    // 错帧调度：三卷的同步缓存读取（storage 分片读 + JSON.parse）按卷分散到不同帧，
+    // 避免进图鉴瞬间 2.6MB 解析连发造成主线程长阻塞（每帧只承担约 1MB 的解析）
+    volP[i] = new Promise((res) => setTimeout(res, (i - 1) * 40)).then(() => {
       // 主源：本地分片缓存（分卷版本匹配即命中，秒开、零分包依赖）
       const cached = loadVolStorage(i);
       if (cached.length) {
         _lastStats["v" + i] = cached.length + " (cache)";
         // 后台预热分包：列表图标指向分包内静态资源（/pkg-cat-N/assets/*），
-        // 分包就绪后图片才可加载；已就绪时 require.async 本地秒回，无网络开销
-        try {
-          rawVol(i).catch(() => {});
-        } catch (e0) {}
+        // 分包就绪后图片才可加载；已就绪时 require.async 本地秒回，无网络开销。
+        // 三卷按 300ms 阶梯错开启动，摊平数据模块构造的 CPU 峰值
+        setTimeout(() => {
+          try {
+            rawVol(i).catch(() => {});
+          } catch (e0) {}
+        }, 300 * i);
         return mapEntries(cached, i);
       }
       // 未命中（首次 / 该卷数据更新过 / 坏缓存自愈后）：读分包数据文件
