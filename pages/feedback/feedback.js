@@ -115,18 +115,31 @@ Page({
       system = "",
       platform = "";
     try {
-      const di = wx.getDeviceInfo ? wx.getDeviceInfo() : wx.getSystemInfoSync();
-      model = di.model || "";
-      system = di.system || "";
-      platform = di.platform || "";
+      const di = wx.getDeviceInfo ? wx.getDeviceInfo() : null;
+      if (di) {
+        model = di.model || "";
+        system = di.system || "";
+        platform = di.platform || "";
+      }
     } catch (e) {
-      /* ignore */
+      /* PC 端部分版本缺失/异常，走下方降级 */
+    }
+    if (!model && !system && !platform) {
+      // 降级：PC 端微信等环境 getDeviceInfo 缺失时用 getSystemInfoSync 兜底
+      try {
+        const si = wx.getSystemInfoSync();
+        model = si.model || "";
+        system = si.system || "";
+        platform = si.platform || "";
+      } catch (e2) {
+        /* ignore */
+      }
     }
     return {
-      version: version || (envVersion ? "dev-" + envVersion : ""),
-      model,
-      system,
-      platform
+      version: version || (envVersion ? "dev-" + envVersion : "unknown"),
+      model: model || "unknown",
+      system: system || "unknown",
+      platform: platform || "unknown"
     };
   },
 

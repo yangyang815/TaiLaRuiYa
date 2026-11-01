@@ -5,4 +5,18 @@ if(wx.cloud){try{wx.cloud.init({env:"cloud1-d7g0njk142e43e907",traceUser:true})}
 // 轻量使用统计：包装全局 Page，onShow 时按"路由+白名单参数"聚合计数（不含任何个人信息，详见 utils/track.js）
 const rawPage=Page;
 Page=function(cfg){try{const userLoad=cfg.onLoad;cfg.onLoad=function(opts){try{this._tkOpts=opts||null}catch(e){}if(userLoad)userLoad.apply(this,arguments)};const userShow=cfg.onShow;cfg.onShow=function(){try{track.track(this.route||this.__route__||"",this._tkOpts||null)}catch(e){}if(userShow)userShow.apply(this,arguments)}}catch(e){}return rawPage(cfg)};
+// 路由保护：栈深不足（如从分享卡片直达详情页后点返回）时 navigateBack 会报
+// "navigateBack with an invalid tabbar page" 且用户点击无响应。统一降级回首页 tab
+const rawNavigateBack = wx.navigateBack;
+wx.navigateBack = function (opts) {
+  try {
+    const pages = getCurrentPages();
+    const delta = (opts && opts.delta) || 1;
+    if (pages && pages.length <= delta) {
+      wx.switchTab({ url: "/pages/home/home" });
+      return;
+    }
+  } catch (e) {}
+  return rawNavigateBack.call(wx, opts);
+};
 App({globalData:{sys:null,theme:"dark",version:"1.4.4",pendingCodex:null},onError(err){try{console.warn("[app] 全局异常:",String(err&&err.message||err).slice(0,200))}catch(e){}},onUnhandledRejection(res){try{const r=res&&res.reason;console.warn("[app] Promise未处理拒绝:",String(r&&r.message||r).slice(0,200))}catch(e){}},onLaunch(){try{const info=wx.getWindowInfo?wx.getWindowInfo():wx.getSystemInfoSync();this.globalData.sys=info;let navTop=(info.statusBarHeight||20)+44;let capsuleRight=100;try{const rect=wx.getMenuButtonBoundingClientRect&&wx.getMenuButtonBoundingClientRect();if(rect&&rect.bottom)navTop=rect.bottom+8;if(rect&&rect.left)capsuleRight=(info.windowWidth||375)-rect.left+8}catch(e2){}this.globalData.navTop=navTop;this.globalData.capsuleRight=capsuleRight}catch(e){this.globalData.sys={windowWidth:375,windowHeight:812,pixelRatio:2};this.globalData.navTop=64;this.globalData.capsuleRight=100}this.globalData.theme=store.getTheme();this.globalData.version=store.getVersion();store.trackOpen();track.restore()},onHide(){try{track.flush("hide")}catch(e){}},onPageNotFound(r){wx.reLaunch({url:"/pages/home/home"})},setTheme(t){this.globalData.theme=t;store.setTheme(t)},setVersion(v){this.globalData.version=v;store.setVersion(v)},themeClass(){const t=this.globalData.theme||"dark";return t==="dark"?"":"theme-"+t+(t==="hallow"?" theme-light":"")}});

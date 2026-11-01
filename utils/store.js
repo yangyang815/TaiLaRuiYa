@@ -17,15 +17,26 @@ const K = {
   grid: "terr_grid",
   msgRead: "terr_msg_read"
 };
+// 内存镜像缓存：storage 同步读是真机首屏阻塞的主因（We 分析实测 home 页启动 54 次
+// getStorageSync 429ms，其中同一 key 被反复读 19 次）。本层保证每个 key 每会话只真读
+// 一次 storage，之后全部走内存（写时双写）。注意：返回值可能是缓存对象引用，
+// 调用方如需修改请走对应的 set/toggle 接口，不要原地改后不回写。
+const _mem = Object.create(null);
 function get(key, def) {
   try {
+    if (key in _mem) {
+      const v = _mem[key];
+      return v === "" || v === undefined || v === null ? def : v;
+    }
     const v = wx.getStorageSync(key);
+    _mem[key] = v === undefined ? null : v;
     return v === "" || v === undefined || v === null ? def : v;
   } catch (e) {
     return def;
   }
 }
 function set(key, val) {
+  _mem[key] = val === undefined ? null : val;
   try {
     wx.setStorageSync(key, val);
   } catch (e) {}
@@ -307,7 +318,7 @@ function exportAll() {
   SAVE_KEYS.forEach((k) => {
     let v;
     try {
-      v = wx.getStorageSync(K[k]);
+      v = get(K[k], null);
     } catch (e) {
       return;
     }
