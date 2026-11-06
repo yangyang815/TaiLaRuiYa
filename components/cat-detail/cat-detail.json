@@ -1,3 +1,6 @@
 {
-  "component": true
+  "component": true,
+  "usingComponents": {
+    "shimmer-box": "../shimmer-box/shimmer-box"
+  }
 }

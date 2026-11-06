@@ -254,6 +254,33 @@ try {
   fail('分卷版本检查异常: ' + e.message)
 }
 
+/* ========== 8. 微光嬗变数据一致性 ========== */
+sec('8. 微光嬗变数据一致性')
+try {
+  const shimmer = require('../data/shimmer.js')
+  const nameSet = new Set()
+  entities.forEach((e) => { if (e.n) nameSet.add(e.n) })
+  const catMods = [1, 2, 3].map((i) => {
+    const mod = { exports: null }
+    new Function('module', fs.readFileSync(path.join('pkg-cat-' + i, 'data', 'data-v' + i + '.js'), 'utf8'))(mod)
+    return mod.exports
+  })
+  catMods.forEach((arr) => arr.forEach((x) => { if (x.n) nameSet.add(x.n) }))
+  const miss = []
+  shimmer.pairs.forEach((p) => {
+    if (!nameSet.has(p.from)) miss.push('from:' + p.from)
+    if (!nameSet.has(p.to)) miss.push('to:' + p.to)
+  })
+  const totalEnds = shimmer.pairs.length * 2
+  const okEnds = totalEnds - miss.length
+  const rate = Math.round((okEnds / totalEnds) * 100)
+  if (rate >= 90) ok('微光嬗变 ' + shimmer.pairs.length + ' 对，名称匹配率 ' + rate + '%')
+  else fail('微光嬗变名称匹配率仅 ' + rate + '%（' + miss.length + ' 端缺失）: ' + miss.slice(0, 6).join(', '))
+  if (!shimmer.aether || shimmer.aether.length < 20) warn('缺少以太位置说明')
+} catch (e) {
+  fail('微光嬗变检查异常: ' + e.message)
+}
+
 /* ========== 汇总 ========== */
 console.log('\n========== 检查结果 ==========')
 oks.forEach(m => console.log('  [PASS] ' + m))

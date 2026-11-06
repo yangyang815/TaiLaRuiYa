@@ -1,0 +1,35 @@
+<view class="sh-box" wx:if="{{fwd.length || rev.length}}">
+  <view class="shb-head">
+    <view class="shb-diamond" />
+    <text class="shb-t">微光嬗变</text>
+    <text class="shb-sub">投入以太微光湖</text>
+  </view>
+
+  <block wx:if="{{fwd.length}}">
+    <view class="shb-cap">投入微光后转化为</view>
+    <view class="shb-item" wx:for="{{fwd}}" wx:key="name" data-n="{{item.name}}" bindtap="onTapItem">
+      <image wx:if="{{item.sprite}}" class="shb-ico" src="{{item.sprite}}" mode="aspectFit" />
+      <view class="shb-ico shb-ico-ph" wx:else />
+      <view class="shb-info">
+        <text class="shb-n">{{item.name}}</text>
+        <text class="shb-tip" wx:if="{{item.tip}}">{{item.tip}}</text>
+      </view>
+      <text class="shb-cond" wx:if="{{item.cond}}">{{item.cond}}</text>
+      <text class="shb-go">›</text>
+    </view>
+  </block>
+
+  <block wx:if="{{rev.length}}">
+    <view class="shb-cap">由以下物品嬗变而来</view>
+    <view class="shb-item" wx:for="{{rev}}" wx:key="name" data-n="{{item.name}}" bindtap="onTapItem">
+      <image wx:if="{{item.sprite}}" class="shb-ico" src="{{item.sprite}}" mode="aspectFit" />
+      <view class="shb-ico shb-ico-ph" wx:else />
+      <view class="shb-info">
+        <text class="shb-n">{{item.name}}</text>
+        <text class="shb-tip" wx:if="{{item.tip}}">{{item.tip}}</text>
+      </view>
+      <text class="shb-cond" wx:if="{{item.cond}}">{{item.cond}}</text>
+      <text class="shb-go">›</text>
+    </view>
+  </block>
+</view>

@@ -110,6 +110,9 @@
       </view>
     </block>
 
+    <!-- 微光嬗变：能嬗变的物品才显示（组件内自判） -->
+    <shimmer-box name="{{e.name}}" />
+
     <!-- 用途 -->
     <block wx:if="{{e.use}}">
       <view class="sec-title"><view class="diamond" /><text class="t">用途</text></view>

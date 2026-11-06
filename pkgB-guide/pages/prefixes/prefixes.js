@@ -23,9 +23,9 @@ Page({
     cat: '',
     wTotal: 0,
     list: [],
-    accLines: ACCESSORY_LINES,
+    accLines: [],
     showAcc: true,
-    tips: TIPS,
+    tips: [],
     sheet: null
   },
 
@@ -40,6 +40,11 @@ Page({
     accTiers: ACCESSORY_LINES.reduce((n, l) => n + l.tiers.length, 0)
     })
     this.load()
+    // 大块静态内容（小贴士/饰品词条线）延后一帧渲染：词条列表为主内容优先上屏，
+    // 避免首屏一次性 setData 大文本拖慢切换耗时
+    setTimeout(() => {
+      this.setData({ tips: TIPS, accLines: ACCESSORY_LINES })
+    }, 80)
   },
 
   onShow () {

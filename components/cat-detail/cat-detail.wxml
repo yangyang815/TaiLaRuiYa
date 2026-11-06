@@ -34,6 +34,8 @@
         <view class="sec-title"><view class="diamond" /><text class="t">用途</text></view>
         <view class="sh-line"><block wx:for="{{vm.useLinks}}" wx:key="index"><text wx:if="{{!item.ref}}">{{item.s}}</text><text wx:else class="lnk" bindtap="onSheetLink" data-id="{{item.id}}" data-name="{{item.s}}">{{item.s}}</text></block></view>
       </block>
+
+      <shimmer-box name="{{vm.name}}" />
     </scroll-view>
 
     <view class="sh-btns">

@@ -1,0 +1,81 @@
+.sh-box {
+  background: var(--card, #221b3a);
+  border: 1rpx solid var(--gold-faint, rgba(229, 184, 0, 0.35));
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin: 20rpx 0;
+}
+.shb-head {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 12rpx;
+}
+.shb-diamond {
+  width: 14rpx;
+  height: 14rpx;
+  background: var(--gold, #e5b800);
+  transform: rotate(45deg);
+}
+.shb-t {
+  color: var(--gold, #e5b800);
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.shb-sub {
+  margin-left: auto;
+  color: var(--text-dim, #8887c8);
+  font-size: 20rpx;
+}
+.shb-cap {
+  color: var(--text-dim, #8887c8);
+  font-size: 22rpx;
+  margin: 8rpx 0;
+}
+.shb-item {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  background: var(--card-inset, #2a2347);
+  border-radius: 12rpx;
+  padding: 14rpx;
+  margin-bottom: 10rpx;
+}
+.shb-ico {
+  width: 64rpx;
+  height: 64rpx;
+  flex-shrink: 0;
+}
+.shb-ico-ph {
+  border-radius: 8rpx;
+  background: var(--line, rgba(255, 255, 255, 0.08));
+}
+.shb-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  min-width: 0;
+}
+.shb-n {
+  color: var(--text, #ededf7);
+  font-size: 26rpx;
+  font-weight: 500;
+}
+.shb-tip {
+  color: var(--text-dim, #8887c8);
+  font-size: 20rpx;
+}
+.shb-cond {
+  color: #c8a84b;
+  font-size: 20rpx;
+  margin-left: auto;
+  flex-shrink: 0;
+  max-width: 200rpx;
+  text-align: right;
+}
+.shb-go {
+  color: var(--gold, #e5b800);
+  font-size: 30rpx;
+  flex-shrink: 0;
+}
