@@ -1,6 +1,6 @@
 // 主题皮肤系统：主题定义 + 本地存储 + 激励视频解锁
-// 广告位说明：上线前请在 mp后台-流量主 新建「激励视频」广告位，
-// 并将 adUnitId 填入下方 REWARDED_AD_UNIT（当前为空 = 测试模式，点击直接解锁）。
+// 广告位：mp后台-流量主「激励视频」（adunit-a76baee37ea2f34c，已配置）。
+// 注意：AD_UNIT_ID 置空才会进入测试模式（点击直接解锁），勿随意清空。
 const AD_UNIT_ID = "adunit-a76baee37ea2f34c"; // 激励视频广告位（mp后台-流量主-主题皮肤解锁）
 
 const STORE_KEY_UNLOCKED = "terr_theme_unlocked";

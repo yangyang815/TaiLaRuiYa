@@ -141,6 +141,8 @@
     </view>
   </view>
 
+  <ad unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
+
   <view class="count px">TOTAL {{total}}</view>
   <view class="pad-bottom" />
 

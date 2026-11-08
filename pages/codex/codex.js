@@ -282,6 +282,10 @@ Page({
   // 列表/弹窗图标加载失败自动重试：图标指向分包内静态资源（/pkg-cat-N/assets/*），
   // 首次使用或清缓存后分包按需下载，未就绪窗口内失败的 image 不会自行恢复。
   // 三轮延迟重试（1.5s/5s/12s）覆盖分包下载窗口；两段式置空-复原触发重新加载
+  // 广告加载失败静默降级（无广告填充是正常现象，约 1/3 概率发生，页面自动留白）
+  onAdError(e) {
+    console.warn("[codex] banner广告错误:", (e && e.detail && e.detail.errMsg) || e);
+  },
   onImgErr(e) {
     try {
       const d = e.currentTarget.dataset;
