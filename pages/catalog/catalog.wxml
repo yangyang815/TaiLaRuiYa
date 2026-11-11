@@ -53,7 +53,7 @@
   </view>
   <view class="empty" wx:elif="{{!loading && !loadFail}}"><text class="px">没有匹配「{{kw}}」的条目</text></view>
 
-  <ad wx:if="{{rows.length}}" unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
+  <ad wx:if="{{rows.length && !isPro}}" unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
 
   <!-- 详情 -->
   <view class="mask" wx:if="{{detail}}" bindtap="closeDetail" />

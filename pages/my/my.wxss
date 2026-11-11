@@ -62,6 +62,14 @@
 
 /* 功能列表 */
 .menu { margin: 24rpx 30rpx 0; padding: 4rpx 26rpx; }
+.reward-card { display: flex; flex-direction: column; gap: 8rpx; padding: 24rpx 26rpx; margin: 24rpx 30rpx 0; border: 2rpx solid var(--gold-faint); }
+.support-card { display: flex; flex-direction: column; gap: 4rpx; padding: 24rpx 26rpx; margin: 24rpx 30rpx 0; border: 2rpx solid var(--gold-faint); }
+.sp-row { display: flex; align-items: center; gap: 16rpx; padding: 14rpx 0; border-top: 2rpx solid var(--line); }
+.sp-row:first-of-type { border-top: none; }
+.sp-price { font-size: 27rpx; font-weight: 700; color: var(--gold); white-space: nowrap; }
+.rc-t { font-size: 27rpx; font-weight: 700; color: var(--gold); }
+.rc-s { font-size: 24rpx; color: var(--text-dim); }
+/* reward 为官方「喜欢开发者」内置组件：未开通/低版本基础库(<3.17.5)时自动不渲染不占高度，无需兼容逻辑；单小程序仅允许一个 */
 .menu:first-of-type { margin-top: 28rpx; }
 .m-row { display: flex; align-items: center; padding: 26rpx 0; }
 .m-row + .m-row { border-top: 2rpx solid var(--line); }

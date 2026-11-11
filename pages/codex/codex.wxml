@@ -80,7 +80,7 @@
     </view>
 
     <!-- 广告：原智能接入位（最近浏览与全部图鉴之间） -->
-    <ad unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
+    <ad wx:if="{{!isPro}}" unit-id="adunit-15985168d5e58c19" binderror="onAdError" />
 
     <!-- 全部图鉴 -->
     <view class="sec-head">

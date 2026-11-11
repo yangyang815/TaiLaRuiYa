@@ -181,6 +181,30 @@
     </view>
   </view>
 
+  <view class="support-card card">
+    <text class="rc-t">🎁 支持开发者</text>
+    <view class="sp-row tappable" bindtap="onBuyPro" data-key="noads">
+      <view class="col flex-1">
+        <text class="rc-t">去广告（永久）</text>
+        <text class="rc-s">移除全部广告位与插屏，一次购买终身有效</text>
+      </view>
+      <text class="sp-price">{{proEnt.noads ? '✓ 已解锁' : '¥8'}}</text>
+    </view>
+    <view class="sp-row tappable" bindtap="onBuyPro" data-key="themes">
+      <view class="col flex-1">
+        <text class="rc-t">全主题礼包</text>
+        <text class="rc-s">解锁全部主题皮肤，无需再看激励视频</text>
+      </view>
+      <text class="sp-price">{{proEnt.themes ? '✓ 已解锁' : '¥3'}}</text>
+    </view>
+  </view>
+
+  <view class="reward-card card">
+    <text class="rc-t">❤️ 觉得这个工具做得用心？</text>
+    <text class="rc-s">点下方「喜欢开发者」支持一下，数据会持续更新</text>
+    <reward />
+  </view>
+
   <!-- 导入面板 -->
   <view class="import-panel card" wx:if="{{showImport}}">
     <text class="ip-t">粘贴另一台设备导出的存档 JSON，或扫描其上的存档二维码</text>

@@ -22,6 +22,11 @@ function getAd() {
 // 频控判断 + 展示（在页面 onUnload 中调用，异步展示不影响导航）
 function maybeShow(scene) {
   try {
+    // 去广告权益持有者跳过全部插屏
+    try {
+      const p = wx.getStorageSync("terr_pro");
+      if (p && p.noads) return;
+    } catch (pe) {}
     if (!AD_UNIT_ID) return;
     const now = Date.now();
     if (now - LAUNCH_TS < MIN_AGE_MS) return;

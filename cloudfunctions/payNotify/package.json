@@ -1,0 +1,9 @@
+{
+  "name": "payNotify",
+  "version": "1.0.0",
+  "description": "虚拟支付发货推送接收（消息推送触发器）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -6,6 +6,7 @@ const fishing = require("../../utils/fishing");
 const { startClock: startClock } = require("../../utils/clock");
 const { CASES: BUILD_CASES } = require("../../data/building");
 const { LIST: GACHV_LIST } = require("../../data/gameAchievements");
+const pro = require("../../utils/pro");
 const AVATARS = ["ava_knight", "ava_wizard", "ava_slime", "ava_eye", "ava_bunny", "ava_moon"];
 const MINI_APPS = {
   toolbox: { name: "杨扬工具箱", appId: "wxdbfe6f4bc45f8f28" },
@@ -64,7 +65,7 @@ Page({
   onShow() {
     if (typeof this.getTabBar === "function" && this.getTabBar()) this.getTabBar().init(3);
     const app = getApp();
-    this.setData({ themeClass: app.themeClass(), clock: fmt.fmtClock(new Date()) });
+    this.setData({ themeClass: app.themeClass(), clock: fmt.fmtClock(new Date()), proEnt: pro.ent() });
     this.refresh();
   },
   refresh() {
@@ -401,6 +402,25 @@ Page({
     wx.navigateTo({
       url: "/pages/help/help",
       fail: () => wx.showToast({ title: "页面打开失败", icon: "none" })
+    });
+  },
+  // 购买虚拟商品（去广告 / 全主题礼包）：走个人主体虚拟支付道具直购
+  onBuyPro(e) {
+    const key = (e && e.currentTarget && e.currentTarget.dataset.key) || "";
+    if (pro.has(key)) {
+      wx.showToast({ title: "已解锁", icon: "none" });
+      return;
+    }
+    wx.showModal({
+      title: pro.PRODUCTS[key].name,
+      content: pro.PRODUCTS[key].desc + "（" + pro.PRODUCTS[key].priceText + "，一次性买断）",
+      confirmText: "购买",
+      success: (r) => {
+        if (!r.confirm) return;
+        pro.buy(key).then((res) => {
+          if (res.ok) this.setData({ proEnt: pro.ent() });
+        });
+      }
     });
   },
   goFeedback() {

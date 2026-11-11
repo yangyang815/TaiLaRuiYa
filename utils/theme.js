@@ -134,6 +134,11 @@ function getUnlocked() {
 function isUnlocked(id) {
   const t = THEMES.find((x) => x.id === id);
   if (t && t.free) return true;
+  // 全主题礼包持有者：全部主题直接解锁（权益来自虚拟支付发货，缓存在 terr_pro）
+  try {
+    const p = wx.getStorageSync("terr_pro");
+    if (p && p.themes) return true;
+  } catch (e) {}
   return getUnlocked().indexOf(id) >= 0;
 }
 
