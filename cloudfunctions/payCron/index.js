@@ -89,12 +89,21 @@ exports.main = async () => {
         const sig = calcPaySig("/xpay/query_order", body);
         const r = await httpsPostJson("https://api.weixin.qq.com/xpay/query_order?access_token=" +
           encodeURIComponent(tokenRes.access_token) + "&pay_sig=" + encodeURIComponent(sig), { openid: o.openid, env: 0, order_id: o.outTradeNo });
-        // 平台已支付则补发货；响应字段以真单为准，先宽容解析常见形态
-        const st = r && (r.pay_status || (r.order && r.order.pay_status) || (r.order && r.order.status) || r.status);
-        if (String(st).toUpperCase().indexOf("PAID") >= 0 || String(st).toUpperCase() === "SUCCESS") {
-          const wxOrderId = (r.order && (r.order.wx_order_id || r.order.MchOrderNo)) || r.wx_order_id || o.outTradeNo;
+        // 已支付判定与 payx 一致：实测 status:3=已支付（含 paid_fee）、status:6=已关闭未支付（无 paid_fee）
+        // 兼容 status / paid_status 两种字段名；严禁匹配信封层 "SUCCESS"——未支付订单同样返回 SUCCESS
+        const order = (r && r.order) || {};
+        const paidTime = Number(order.paid_time || 0);
+        const st = Math.max(Number(order.status) || 0, Number(order.paid_status) || 0);
+        if (paidTime > 0 || (st >= 2 && st <= 4)) {
+          const wxOrderId = order.wx_order_id || r.wx_order_id || o.outTradeNo;
           const ent = PRODUCTS[o.productId];
           if (ent) { await grant(o.openid, ent, wxOrderId, o.outTradeNo); paid++; }
+        } else if (Date.now() - (o.createdAt || 0) > 24 * 3600 * 1000) {
+          // 查单确认未支付 + 下单超 24h → 过期落定，不再重复查询
+          await db.collection("orders").where({ outTradeNo: o.outTradeNo }).update({
+            data: { status: "expired", expiredAt: Date.now() }
+          });
+          console.log("[payCron] 订单过期:", o.outTradeNo);
         }
       } catch (e) {
         console.warn("[payCron] 单笔查单异常:", o.outTradeNo, e.message);

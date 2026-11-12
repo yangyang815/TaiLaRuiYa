@@ -43,10 +43,11 @@ function _saveCache(ent) {
     wx.setStorageSync(CACHE_KEY, _ent);
   } catch (e) {}
 }
-// 启动时刷新权益（云函数未部署/网络失败时静默降级为本地缓存）
+// 启动时刷新权益：走 confirmOrder（顺带补发历史 pending 订单——用户异常退出等场景的订单不丢单）
+// 云函数未部署/网络失败时静默降级为本地缓存
 function init() {
   if (!wx.cloud) return;
-  wx.cloud.callFunction({ name: "payx", data: { action: "getEntitlements" } })
+  wx.cloud.callFunction({ name: "payx", data: { action: "confirmOrder" } })
     .then((r) => {
       const d = r && r.result;
       if (d && d.ok && d.ent) _saveCache(d.ent);
@@ -96,8 +97,13 @@ function buy(key) {
             wx.requestVirtualPayment(Object.assign({}, d.payData, {
               success: () => {
                 _saveCache(Object.assign({}, _readCache(), key === "noads" ? { noads: true } : { themes: true }));
-                // 稍后由 init() 向云端核对权威状态；本地先行生效保证体验
-                init();
+                // 双保险：先主动触发服务端查单补发货（不依赖推送），再向云端核对权益
+                wx.cloud.callFunction({ name: "payx", data: { action: "confirmOrder" } })
+                  .then((r2) => {
+                    const d2 = r2 && r2.result;
+                    if (d2 && d2.ok && d2.ent) _saveCache(d2.ent);
+                  })
+                  .catch(() => {});
                 wx.showToast({ title: "购买成功", icon: "success" });
                 resolve({ ok: true });
               },
