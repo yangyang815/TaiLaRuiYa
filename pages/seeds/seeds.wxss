@@ -49,7 +49,7 @@
 .mask { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: 60; }
 .sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 61;
   max-height: 82vh; display: flex; flex-direction: column;
-  background: var(--bg); border-top: 2rpx solid var(--line);
+  background: var(--sheet-bg, var(--bg)); border-top: 2rpx solid var(--line);
   border-radius: 28rpx 28rpx 0 0; padding: 12rpx 24rpx 0; box-sizing: border-box; }
 .sheet-handle { width: 72rpx; height: 8rpx; border-radius: 4rpx;
   background: var(--line); margin: 8rpx auto 14rpx; }

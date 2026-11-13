@@ -2,11 +2,9 @@
 .codex-root { min-height: 100vh; padding-bottom: env(safe-area-inset-bottom); }
 
 .head { position: sticky; top: 0; z-index: 50; padding: 16rpx 30rpx 0;
-  background: rgba(18, 9, 37, 0.98); }
-.page-root.theme-light .head { background: rgba(231, 221, 198, 0.97); }
+  background: var(--head-bg, var(--bg-deep)); }
 .head-fade { height: 22rpx; margin: 0 -30rpx;
-  background: linear-gradient(180deg, rgba(18, 9, 37, 0.98), rgba(18, 9, 37, 0)); }
-.page-root.theme-light .head-fade { background: linear-gradient(180deg, rgba(231, 221, 198, 0.97), rgba(231, 221, 198, 0)); }
+  background: linear-gradient(180deg, var(--head-bg, var(--bg-deep)), rgba(0, 0, 0, 0)); }
 
 /* 品牌区 */
 .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 4rpx 0 16rpx; }

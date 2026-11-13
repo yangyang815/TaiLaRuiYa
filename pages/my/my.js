@@ -7,6 +7,7 @@ const { startClock: startClock } = require("../../utils/clock");
 const { CASES: BUILD_CASES } = require("../../data/building");
 const { LIST: GACHV_LIST } = require("../../data/gameAchievements");
 const pro = require("../../utils/pro");
+const notify = require("../../utils/notify");
 const AVATARS = ["ava_knight", "ava_wizard", "ava_slime", "ava_eye", "ava_bunny", "ava_moon"];
 const MINI_APPS = {
   toolbox: { name: "杨扬工具箱", appId: "wxdbfe6f4bc45f8f28" },
@@ -402,6 +403,22 @@ Page({
     wx.navigateTo({
       url: "/pages/help/help",
       fail: () => wx.showToast({ title: "页面打开失败", icon: "none" })
+    });
+  },
+  // 订阅消息：数据更新时提醒（一次性订阅，可重复点击累积发送额度）
+  onNotifyTap() {
+    notify.requestUpdate().then((r) => {
+      if (r.ok) return wx.showToast({ title: "已订阅更新提醒", icon: "success" });
+      if (r.reason === "reject") return wx.showToast({ title: "已取消订阅", icon: "none" });
+      if (r.reason === "unconfig") return wx.showToast({ title: "订阅模板未配置", icon: "none" });
+      if (r.reason === "oldwx") return wx.showToast({ title: "微信版本过低", icon: "none" });
+      if (r.reason === "off") return; // 主开关关闭：notify 内已弹窗说明
+      // 其余失败：弹窗透出完整原因（模板ID无效/工具不支持等），便于截图排查
+      wx.showModal({
+        title: "订阅失败",
+        content: (r.msg || r.reason || "未知原因") + "",
+        showCancel: false
+      });
     });
   },
   // 购买虚拟商品（去广告 / 全主题礼包）：走个人主体虚拟支付道具直购

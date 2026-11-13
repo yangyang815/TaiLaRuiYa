@@ -157,6 +157,12 @@
       <text class="m-v">新用户快速上手</text>
       <text class="m-arrow">›</text>
     </view>
+    <view class="m-row tappable" bindtap="onNotifyTap">
+      <text class="m-icon">🔔</text>
+      <text class="m-n flex-1">更新提醒</text>
+      <text class="m-v">数据更新时推送</text>
+      <text class="m-arrow">›</text>
+    </view>
     <view class="m-row tappable" bindtap="onExportSave">
       <text class="m-icon">📤</text>
       <text class="m-n flex-1">导出存档</text>
@@ -176,7 +182,7 @@
     <view class="m-row tappable" bindtap="openAbout">
       <text class="m-icon">💬</text>
       <text class="m-n flex-1">关于与反馈</text>
-      <text class="m-v">v1.0.0</text>
+      <text class="m-v">v1.1.0</text>
       <text class="m-arrow">›</text>
     </view>
   </view>

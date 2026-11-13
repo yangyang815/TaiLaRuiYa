@@ -3,8 +3,7 @@
 
 .bar { display: flex; align-items: center; padding: 12rpx 24rpx 16rpx;
   position: relative; z-index: 5;
-  background: linear-gradient(180deg, rgba(18, 9, 37, 0.96) 70%, rgba(18, 9, 37, 0)); }
-.page-root.theme-light .bar { background: linear-gradient(180deg, rgba(231, 221, 198, 0.96) 70%, rgba(231, 221, 198, 0)); }
+  background: linear-gradient(180deg, var(--head-bg, var(--bg-deep)) 70%, rgba(0, 0, 0, 0)); }
 .back { width: 64rpx; height: 64rpx; border-radius: 14rpx; border: 2rpx solid var(--gold-faint);
   background: rgba(10, 5, 24, 0.5); color: var(--gold); font-size: 40rpx;
   display: flex; align-items: center; justify-content: center; line-height: 1; padding-bottom: 6rpx;

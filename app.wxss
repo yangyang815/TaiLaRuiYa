@@ -33,6 +33,8 @@ page {
   --line: rgba(255, 215, 0, 0.25);
   --shadow: rgba(0, 0, 0, 0.45);
   --hero: linear-gradient(180deg, #3A2C58 0%, #1A0E2E 42%, #120925 100%);
+  --head-bg: #120925;
+  --sheet-bg: linear-gradient(180deg, #2E1C4D 0%, #1E1136 100%);
   min-height: 100vh;
   background: var(--bg-deep);
   box-sizing: border-box;
@@ -57,6 +59,8 @@ page {
   --line: rgba(140, 104, 24, 0.35);
   --shadow: rgba(90, 70, 30, 0.25);
   --hero: linear-gradient(180deg, #C8E4FA 0%, #FFF3D6 60%, #F1EADA 100%);
+  --head-bg: #E7DDC6;
+  --sheet-bg: linear-gradient(180deg, #FFFCF0, #F3EBD5);
 }
 
 /* ---------- 像素字体（英文/数字） ---------- */
@@ -330,6 +334,8 @@ page {
   --text: #D8E8B8; --text-dim: #8FB060; --text-faint: #5C7A3E;
   --line: rgba(200, 232, 90, 0.28); --shadow: rgba(0, 0, 0, 0.5);
   --hero: linear-gradient(180deg, #3E7A30 0%, #1E4418 46%, #0A1D0C 100%);
+  --head-bg: #2E5A24;
+  --sheet-bg: linear-gradient(180deg, #1C3D1C 0%, #0A1D0C 100%);
   background: linear-gradient(180deg, #2E5A24 0%, #142E12 46%, #0A1D0C 100%);
 }
 .page-root.theme-jungle .sheet { background: linear-gradient(180deg, #1C3D1C 0%, #0A1D0C 100%); }
@@ -344,6 +350,8 @@ page {
   --text: #DCC8F5; --text-dim: #9B7FC8; --text-faint: #65508C;
   --line: rgba(199, 125, 255, 0.28); --shadow: rgba(0, 0, 0, 0.5);
   --hero: linear-gradient(180deg, #4A2A7E 0%, #2A1550 46%, #120A20 100%);
+  --head-bg: #3D2266;
+  --sheet-bg: linear-gradient(180deg, #2E1B4A 0%, #120A20 100%);
   background: linear-gradient(180deg, #3D2266 0%, #241243 46%, #120A20 100%);
 }
 .page-root.theme-corruption .sheet { background: linear-gradient(180deg, #2E1B4A 0%, #120A20 100%); }
@@ -358,6 +366,8 @@ page {
   --text: #F0D4C8; --text-dim: #B88478; --text-faint: #7E564C;
   --line: rgba(255, 158, 107, 0.28); --shadow: rgba(0, 0, 0, 0.5);
   --hero: linear-gradient(180deg, #7A2832 0%, #461520 46%, #1B080C 100%);
+  --head-bg: #5E1E28;
+  --sheet-bg: linear-gradient(180deg, #40161E 0%, #1B080C 100%);
   background: linear-gradient(180deg, #5E1E28 0%, #38121A 46%, #1B080C 100%);
 }
 .page-root.theme-crimson .sheet { background: linear-gradient(180deg, #40161E 0%, #1B080C 100%); }
@@ -372,6 +382,8 @@ page {
   --text: #40305C; --text-dim: #7E6E9A; --text-faint: #ACA0C4;
   --line: rgba(140, 110, 180, 0.32); --shadow: rgba(110, 80, 160, 0.25);
   --hero: linear-gradient(135deg, #9CC2F8 0%, #C8A8F4 45%, #F2B8DC 100%);
+  --head-bg: #B8D0FA;
+  --sheet-bg: linear-gradient(180deg, #FFFFFF 0%, #F2E4F6 100%);
   background: linear-gradient(180deg, #B8D0FA 0%, #E4C6F6 38%, #F8D4E8 66%, #CDEEE4 100%);
 }
 /* 彩虹光带：神圣主题专属身份标识 */
@@ -393,6 +405,8 @@ page {
   --text: #C8DEF2; --text-dim: #6E96C0; --text-faint: #426084;
   --line: rgba(98, 224, 240, 0.28); --shadow: rgba(0, 0, 0, 0.55);
   --hero: linear-gradient(180deg, #1A3E74 0%, #0E2244 46%, #040B18 100%);
+  --head-bg: #12305E;
+  --sheet-bg: linear-gradient(180deg, #10233E 0%, #040B18 100%);
   background: linear-gradient(180deg, #12305E 0%, #0A1B36 46%, #040B18 100%);
 }
 .page-root.theme-lunar .sheet { background: linear-gradient(180deg, #10233E 0%, #040B18 100%); }
@@ -407,6 +421,8 @@ page {
   --text: #F2DFC0; --text-dim: #BC9660; --text-faint: #7E643E;
   --line: rgba(255, 174, 66, 0.28); --shadow: rgba(0, 0, 0, 0.5);
   --hero: linear-gradient(180deg, #7A4E18 0%, #462A10 46%, #180E05 100%);
+  --head-bg: #5E3A12;
+  --sheet-bg: linear-gradient(180deg, #3A240E 0%, #180E05 100%);
   background: linear-gradient(180deg, #5E3A12 0%, #36200C 46%, #180E05 100%);
 }
 .page-root.theme-halloween .sheet { background: linear-gradient(180deg, #3A240E 0%, #180E05 100%); }

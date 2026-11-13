@@ -27,8 +27,7 @@
 .s-clear { padding: 4rpx 8rpx; color: var(--text-faint); font-size: 24rpx; }
 .sg-en { font-size: 16rpx; color: var(--text-faint); margin-top: 4rpx; }
 .head-fade { height: 20rpx; margin: 16rpx -30rpx 0;
-  background: linear-gradient(180deg, rgba(18, 9, 37, 0.9), rgba(18, 9, 37, 0)); }
-.page-root.theme-light .head-fade { background: linear-gradient(180deg, rgba(231, 221, 198, 0.9), rgba(231, 221, 198, 0)); }
+  background: linear-gradient(180deg, var(--head-bg, var(--bg-deep)), rgba(0, 0, 0, 0)); }
 
 .guide { padding: 26rpx 26rpx 22rpx; }
 .g-row { display: flex; align-items: center; }
