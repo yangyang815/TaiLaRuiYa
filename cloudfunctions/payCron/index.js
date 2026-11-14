@@ -14,6 +14,8 @@ const PRODUCTS = {
   VP_NOADS: "noads",
   VP_THEMES: "themes"
 };
+// 订阅消息模板：版本更新通知（notices.tmplId 优先，其次此常量）
+const TMPL_ID = "sbRiWraUh5_03e7WVB10Jfhr5ZPgB1P059n0RK6Vq6U";
 function httpsGetJson(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
@@ -82,7 +84,7 @@ async function runBroadcast(token) {
   if (!notices.data || !notices.data.length) return { sent: 0 };
   const results = [];
   for (const n of notices.data) {
-    const tmplId = n.tmplId || process.env.TMPL_SUB_ID || "";
+    const tmplId = n.tmplId || TMPL_ID;
     if (!tmplId) { results.push({ id: n._id, skip: "模板ID未配置" }); continue; }
     const page = n.page || "pages/home/home";
     const fields = n.fields || {};
