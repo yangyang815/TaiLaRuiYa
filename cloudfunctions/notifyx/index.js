@@ -44,15 +44,17 @@ exports.main = async (event) => {
     if (action === "seedNotice") {
       // 运维入口：云端测试调用，服务端创建广播公告（绕开控制台添加记录丢字段的 UI 问题）
       // 可选参数：event.fields（默认测试文案）、event.page
+      // 注意：page 不能是 tabBar 页面（tab 页跳转路由非法 → 47001 data format error）；
+      //       thing 类内容避免 "+" 等特殊符号（纯汉字/数字最稳）
       // 自动清理历史空文档（无 fields 字段的废记录）
       await ensureCollections();
       const cleaned = await db.collection("notices").where({ fields: _.exists(false) }).remove();
       const doc = {
         type: "broadcast",
         tmplId: TMPL_ID,
-        page: (event && event.page) || "pages/home/home",
+        page: (event && event.page) || "pages/help/help",
         fields: (event && event.fields) || {
-          thing2: "图鉴秒开+微光嬗变上线",
+          thing2: "图鉴数据已更新",
           character_string1: "1.1.0"
         },
         sent: false,

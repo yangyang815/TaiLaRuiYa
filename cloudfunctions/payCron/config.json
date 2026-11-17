@@ -5,5 +5,10 @@
       "type": "timer",
       "config": "0 */5 * * * * *"
     }
-  ]
+  ],
+  "permissions": {
+    "openapi": [
+      "subscribeMessage.send"
+    ]
+  }
 }

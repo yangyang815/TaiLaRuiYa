@@ -86,7 +86,7 @@ async function runBroadcast(token) {
   for (const n of notices.data) {
     const tmplId = n.tmplId || TMPL_ID;
     if (!tmplId) { results.push({ id: n._id, skip: "模板ID未配置" }); continue; }
-    const page = n.page || "pages/home/home";
+    const page = n.page || "pages/help/help";
     const fields = n.fields || {};
     const data = {};
     Object.keys(fields).forEach((k) => { data[k] = { value: String(fields[k]) }; });
@@ -94,35 +94,63 @@ async function runBroadcast(token) {
     const subs = await db.collection("subscribers")
       .where({ count: db.command.gt(0), lastNoticeId: db.command.neq(n._id) })
       .limit(200).get();
-    let ok = 0, fail = 0;
+    let ok = 0, fail = 0, lastErr = null;
     for (const s of subs.data || []) {
       try {
-        const body = JSON.stringify({ touser: s.openid, template_id: tmplId, page, data, miniprogram_state: "formal" });
-        const r = await httpsPostJson("https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=" +
-          encodeURIComponent(token), body);
-        if (r && r.errcode === 0) {
+        // 订阅消息推送：官方云调用（cloud.openapi），免 access_token、中文编码与鉴权由云开发处理；
+        // 手写 HTTP 版本在中文 payload 下持续被拒 47001 data format error，已废弃
+        // 注意：入参 snake_case 实测可用；返回字段是 camelCase errCode/errMsg，
+        // 且数值字段可能为 BigInt —— 判定与日志一律 Number/String 归一，严禁 JSON.stringify 原始返回
+        //（踩坑实录：errCode=0 的成功被误判为失败后，JSON.stringify(返回值) 抛
+        //  "Do not know how to serialize a BigInt"，一次迭代 fail 被加两次，还掩盖了推送成功的事实）
+        const r = await cloud.openapi.subscribeMessage.send({
+          touser: s.openid,
+          template_id: tmplId,
+          page,
+          data,
+          miniprogram_state: "formal"
+        });
+        const code = r ? Number(r.errCode !== undefined ? r.errCode : r.errcode) : NaN;
+        const msg = String((r && (r.errMsg !== undefined ? r.errMsg : r.errmsg)) || "");
+        if (code === 0) {
+          // 推送成功立即计数；随后的记账若失败单独兜底，不改判推送结果
           ok++;
-          await db.collection("subscribers").doc(s._id).update({
-            data: { count: db.command.inc(-1), lastNoticeId: n._id, lastSentAt: Date.now() }
-          });
-        } else if (r && r.errcode === 43101) {
+          try {
+            await db.collection("subscribers").doc(s._id).update({
+              data: { count: db.command.inc(-1), lastNoticeId: n._id, lastSentAt: Date.now(), updatedAt: Date.now() }
+            });
+          } catch (eu) {
+            console.warn("[payCron] 订阅者记账失败(推送已送达):", s.openid, (eu && eu.message) || "");
+          }
+        } else if (code === 43101) {
           fail++;
-          await db.collection("subscribers").doc(s._id).update({
-            data: { count: 0, lastNoticeId: n._id }
-          });
+          lastErr = { errcode: code, errmsg: msg };
+          try {
+            await db.collection("subscribers").doc(s._id).update({
+              data: { count: 0, lastNoticeId: n._id }
+            });
+          } catch (eu) {}
         } else {
           fail++;
-          console.warn("[payCron] 广播单笔失败:", s.openid, JSON.stringify(r).slice(0, 120));
+          lastErr = { errcode: isNaN(code) ? "unknown" : code, errmsg: msg };
+          console.warn("[payCron] 广播单笔失败:", s.openid, code, msg);
         }
-      } catch (e) { fail++; }
+      } catch (e) {
+        fail++;
+        lastErr = { errcode: "exception", errmsg: (e && e.message) || "" };
+      }
       await new Promise((res) => setTimeout(res, 60)); // 频控保护
     }
     // 每批最多 200 人；订阅者更多时保持 sent:false，下一轮靠 lastNoticeId 续发
     const hasMore = (subs.data || []).length >= 200;
-    await db.collection("notices").doc(n._id).update({
-      data: { sent: !hasMore, sentAt: Date.now(), sentCount: db.command.inc(ok), failCount: db.command.inc(fail) }
-    });
-    results.push({ id: n._id, ok, fail, more: hasMore });
+    const patch = { sent: !hasMore, sentAt: Date.now(), sentCount: db.command.inc(ok), failCount: db.command.inc(fail) };
+    if (lastErr) {
+      // 发送失败原因直接写进公告文档，控制台点开即可见，无需翻日志
+      patch.lastErrCode = String(lastErr.errcode === undefined ? "unknown" : lastErr.errcode);
+      patch.lastErrMsg = String(lastErr.errmsg || "").slice(0, 160);
+    }
+    await db.collection("notices").doc(n._id).update({ data: patch });
+    results.push({ id: n._id, ok, fail, more: hasMore, lastErr: lastErr ? { errcode: String(lastErr.errcode), errmsg: String(lastErr.errmsg || "").slice(0, 80) } : null });
   }
   return { notices: results };
 }
