@@ -110,6 +110,6 @@ Page({
     }
   },
   onShareTimeline () {
-    return { title: '泰拉瑞亚手册 · 泰拉成就' }
+    return { title: '向导之书 · 泰拉成就' }
   }
 })

@@ -422,10 +422,10 @@ Component({
     },
     async paintBrand(ctx, canvas, d, color, seq) {
       const cx = W / 2;
-      this.drawTag(ctx, d.tag || "泰拉瑞亚手册", color, 64);
+      this.drawTag(ctx, d.tag || "向导之书", color, 64);
       await this.drawSprite(ctx, canvas, d.artId, color, cx, 296, 230, 138);
       if (seq !== undefined && seq !== this._paintSeq) return;
-      const title = d.title || "泰拉瑞亚手册";
+      const title = d.title || "向导之书";
       const fs = this.fitFont(ctx, title, 40, 460);
       this.shimmerText(ctx, title, cx, 486, fs, color);
       ctx.textAlign = "center";
@@ -620,21 +620,21 @@ Component({
         ctx.restore();
         ctx.font = "11px sans-serif";
         ctx.fillStyle = "rgba(142,127,166,0.95)";
-        ctx.fillText("微信搜索小程序「泰拉瑞亚手册」", cx, by + 56);
+        ctx.fillText("微信搜索小程序「向导之书」", cx, by + 56);
       } else {
         ctx.font = "bold 19px sans-serif";
         ctx.save();
         ctx.shadowColor = "rgba(255,215,0,0.5)";
         ctx.shadowBlur = 12;
         ctx.fillStyle = "#FFD700";
-        ctx.fillText("泰拉瑞亚手册", cx, by + 34);
+        ctx.fillText("向导之书", cx, by + 34);
         ctx.restore();
         ctx.font = "11px sans-serif";
         ctx.fillStyle = "rgba(142,127,166,0.95)";
         ctx.fillText("冒险者的随身百科 · 物品 / Boss / 合成一查便知", cx, by + 58);
         ctx.font = "10px sans-serif";
         ctx.fillStyle = "rgba(142,127,166,0.5)";
-        ctx.fillText("微信搜索小程序「泰拉瑞亚手册」", cx, by + 78);
+        ctx.fillText("微信搜索小程序「向导之书」", cx, by + 78);
       }
     },
     save() {

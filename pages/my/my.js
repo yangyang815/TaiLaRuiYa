@@ -449,12 +449,12 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: "泰拉瑞亚手册 · 我的冒险等级 Lv." + this.data.level.lv,
+      title: "向导之书 · 我的冒险等级 Lv." + this.data.level.lv,
       path: "/pages/home/home"
     };
   },
   onShareTimeline() {
-    return { title: "泰拉瑞亚手册 · 我的冒险等级 Lv." + this.data.level.lv };
+    return { title: "向导之书 · 我的冒险等级 Lv." + this.data.level.lv };
   },
   openPoster() {
     const p = store.getProfile();
@@ -475,7 +475,7 @@ Page({
           ["击败Boss", Object.keys(store.getDefeated()).length + " 只"],
           ["冒险值", lv.pts + " 分"]
         ],
-        desc: "在泰拉瑞亚手册查询图鉴 · 追踪合成 · 攻略全流程"
+        desc: "在向导之书查询图鉴 · 追踪合成 · 攻略全流程"
       },
       posterShow: true
     });

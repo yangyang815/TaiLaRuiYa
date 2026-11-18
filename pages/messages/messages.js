@@ -34,9 +34,9 @@ Page({
     wx.navigateBack();
   },
   onShareAppMessage() {
-    return { title: "泰拉瑞亚手册 · 最新动态与更新公告", path: "/pages/messages/messages" };
+    return { title: "向导之书 · 最新动态与更新公告", path: "/pages/messages/messages" };
   },
   onShareTimeline() {
-    return { title: "泰拉瑞亚手册 · 最新动态与更新公告" };
+    return { title: "向导之书 · 最新动态与更新公告" };
   }
 });

@@ -174,9 +174,9 @@ Page({
     wx.navigateBack();
   },
   onShareAppMessage() {
-    return { title: "泰拉瑞亚手册 · 搜你想搜", path: "/pages/home/home" };
+    return { title: "向导之书 · 搜你想搜", path: "/pages/home/home" };
   },
   onShareTimeline() {
-    return { title: "泰拉瑞亚手册 · 搜你想搜" };
+    return { title: "向导之书 · 搜你想搜" };
   }
 });

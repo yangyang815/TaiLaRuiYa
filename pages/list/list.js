@@ -98,11 +98,11 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: "泰拉瑞亚手册 · " + (this.data.conf ? this.data.conf.title : ""),
+      title: "向导之书 · " + (this.data.conf ? this.data.conf.title : ""),
       path: "/pages/home/home"
     };
   },
   onShareTimeline() {
-    return { title: "泰拉瑞亚手册 · " + (this.data.conf ? this.data.conf.title : "") };
+    return { title: "向导之书 · " + (this.data.conf ? this.data.conf.title : "") };
   }
 });

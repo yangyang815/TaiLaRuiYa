@@ -318,14 +318,14 @@ Page({
   onShareAppMessage() {
     const e = this.data.e;
     return {
-      title: "泰拉瑞亚手册 · " + (e ? e.name : ""),
+      title: "向导之书 · " + (e ? e.name : ""),
       path: "/pages/detail/detail?type=" + (e ? e.type : "item") + "&id=" + (e ? e.id : "")
     };
   },
   onShareTimeline() {
     const e = this.data.e;
     return {
-      title: e ? e.name + " · 泰拉瑞亚图鉴" : "泰拉瑞亚手册 · 冒险者的随身百科",
+      title: e ? e.name + " · 泰拉瑞亚图鉴" : "向导之书 · 冒险者的随身百科",
       query: e ? "type=" + e.type + "&id=" + e.id : ""
     };
   }

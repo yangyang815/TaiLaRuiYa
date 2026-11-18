@@ -41,7 +41,7 @@ Page({
 
   onShareAppMessage () {
     return {
-      title: '我已解锁 ' + this.data.unlocked + '/' + this.data.total + ' 个成就 · 泰拉瑞亚手册',
+      title: '我已解锁 ' + this.data.unlocked + '/' + this.data.total + ' 个成就 · 向导之书',
       path: '/pages/my/my'
     }
   }

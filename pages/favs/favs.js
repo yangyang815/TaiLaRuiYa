@@ -121,6 +121,6 @@ Page({
     this.loadFavs();
   },
   onShareAppMessage() {
-    return { title: "泰拉瑞亚手册 · 我的收藏", path: "/pages/my/my" };
+    return { title: "向导之书 · 我的收藏", path: "/pages/my/my" };
   }
 });

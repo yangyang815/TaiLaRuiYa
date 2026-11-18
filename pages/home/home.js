@@ -692,10 +692,10 @@ Page({
     this.setData({ [k]: on });
   },
   onShareAppMessage() {
-    return { title: "泰拉瑞亚手册 · 冒险者的随身百科", path: "/pages/home/home" };
+    return { title: "向导之书 · 冒险者的随身百科", path: "/pages/home/home" };
   },
   onShareTimeline() {
-    return { title: "泰拉瑞亚手册 · 冒险者的随身百科" };
+    return { title: "向导之书 · 冒险者的随身百科" };
   },
   openPoster() {
     const nMon = dex.ALL.filter((e) => e.type === "mon").length;
@@ -706,7 +706,7 @@ Page({
         tag: "随身百科",
         artId: "zenith",
         color: "#FFD700",
-        title: "泰拉瑞亚手册",
+        title: "向导之书",
         sub: "冒险者的随身百科",
         features: [
           ["物品图鉴", "统计中…"],

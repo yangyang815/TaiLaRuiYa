@@ -66,9 +66,9 @@ Page({
     wx.navigateBack();
   },
   onShareAppMessage() {
-    return { title: "泰拉瑞亚手册 · Boss 攻略清单", path: "/pages/bossguide/bossguide" };
+    return { title: "向导之书 · Boss 攻略清单", path: "/pages/bossguide/bossguide" };
   },
   onShareTimeline() {
-    return { title: "泰拉瑞亚手册 · Boss 攻略清单" };
+    return { title: "向导之书 · Boss 攻略清单" };
   }
 });
