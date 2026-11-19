@@ -182,8 +182,9 @@
     <view class="fb defeated {{defeated ? 'on' : ''}}" wx:if="{{isBoss}}" bindtap="toggleDefeated">{{defeated ? '⚔ 已击败' : '⚔ 标记击败'}}</view>
     <button class="fb share" open-type="share">↗ 分享</button>
   </view>
+
+  <!-- 全物品图鉴详情弹窗：必须挂在 page-root 内（CSS 变量沿节点树继承，挂在外面主题变量全部断裂） -->
+  <cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" bind:close="onCatDetailClose" bind:go="onCatGo" />
 </view>
 
 <back-top show="{{showBackTop}}" />
-
-<cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" theme="{{themeClass === 'theme-light' ? 'light' : 'dark'}}" bind:close="onCatDetailClose" bind:go="onCatGo" />

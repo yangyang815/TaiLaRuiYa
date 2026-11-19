@@ -158,10 +158,36 @@ function buildSlides(weekly) {
   ];
   return slides.filter(Boolean);
 }
+// 灾厄专区悬浮球初始位置：优先读本地记忆（store.calFab，用户上次拖放点），越界则回退默认右下
+function fabInitPos(sys) {
+  const sw = (sys && sys.windowWidth) || 375;
+  const sh = (sys && sys.windowHeight) || 700;
+  const size = sw * 0.128; // 96rpx 换算 px（与 wxss 尺寸一致）
+  const topMin = ((sys && sys.statusBarHeight) || 20) + 56; // 避开导航/胶囊区
+  let x = sw - size - 12;
+  let y = sh - 190; // 默认落在 tabBar 上方
+  const saved = store.getCalFab();
+  if (saved) {
+    x = saved.x;
+    y = saved.y;
+  }
+  x = Math.min(Math.max(x, FAB_MARGIN), sw - size - FAB_MARGIN);
+  y = Math.min(Math.max(y, topMin), Math.max(topMin, sh - 130 - size)); // 底部避开 tabBar
+  return { x: Math.round(x), y: Math.round(y), sw: sw, sh: sh, topMin: topMin };
+}
+const FAB_MARGIN = 8;
+
 Page({
   data: {
     statusBarHeight: 20,
     navTop: 64,
+    fabX: -99,
+    fabY: -99,
+    fabShow: false,
+    fabSW: 375,
+    fabSH: 700,
+    fabTopMin: 80,
+    fabMenu: false,
     themeClass: "",
     daytime: false,
     greet: "",
@@ -215,8 +241,15 @@ Page({
         op: (0.4 + Math.random() * 0.6).toFixed(2)
       });
     }
+    const fab = fabInitPos(app.globalData.sys);
     this.setData({
       statusBarHeight: (app.globalData.sys && app.globalData.sys.statusBarHeight) || 20,
+      fabX: fab.x,
+      fabY: fab.y,
+      fabSW: fab.sw,
+      fabSH: fab.sh,
+      fabTopMin: fab.topMin,
+      fabShow: true,
       navTop: app.globalData.navTop || 64,
       themeClass: app.themeClass(),
       daytime: daytime,
@@ -510,6 +543,27 @@ Page({
   },
   goFeedback() {
     wx.navigateTo({ url: "/pages/feedback/feedback" });
+  },
+  // 灾厄专区：点词条进入（气泡由 onFabTap 弹出）；跳转后收起，返回首页时不残留展开态
+  goCalamity() {
+    this.setData({ fabMenu: false });
+    wx.navigateTo({
+      url: "/pkg-cal/pages/calamity/calamity",
+      fail: () => wx.showToast({ title: "页面打开失败", icon: "none" })
+    });
+  },
+  // 点按悬浮球：弹出/收起「灾厄专区」快捷词条（由 fab.wxs 在非拖动 touchend 时触发）
+  onFabTap() {
+    this.setData({ fabMenu: !this.data.fabMenu });
+  },
+  closeFabMenu() {
+    if (this.data.fabMenu) this.setData({ fabMenu: false });
+  },
+  // 悬浮球拖放落位：更新渲染基准 + 本地记忆（下次启动保持原位）；拖走时顺带收起词条
+  onFabDrop(p) {
+    if (!p || typeof p.x !== "number" || typeof p.y !== "number") return;
+    this.setData({ fabX: p.x, fabY: p.y, fabMenu: false });
+    store.setCalFab({ x: p.x, y: p.y });
   },
   noop() {},
   goAchv() {

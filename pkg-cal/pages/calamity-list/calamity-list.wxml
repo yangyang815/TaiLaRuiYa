@@ -1,0 +1,83 @@
+<view class="page-root {{themeClass}} cal-root">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">{{title}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="list-sub px">{{sub}}</view>
+
+  <!-- BOSS 大全：三个阶段分区，全部 Boss 卡片 -->
+  <block wx:if="{{kind === 'all'}}">
+    <block wx:for="{{stages}}" wx:for-item="st" wx:key="id">
+      <view class="stage-head">
+        <text class="stage-t">{{st.n}}</text>
+        <text class="stage-en px">{{st.en}}</text>
+      </view>
+      <view class="b-grid">
+        <view class="b-card tappable" wx:for="{{st.bosses}}" wx:for-item="b" wx:key="id" bindtap="onBoss" data-id="{{b.id}}" aria-label="{{b.n}}速查">
+          <text class="b-world {{b.worldCls}}" wx:if="{{b.worldTag}}">{{b.worldTag}}</text>
+          <image class="b-img" src="{{b.icon}}" mode="aspectFit" />
+          <text class="b-n">{{b.n}}</text>
+          <text class="b-en px">{{b.en}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+
+  <!-- 单阶段 Boss 卡片网格：点卡进速查详情 -->
+  <block wx:elif="{{kind === 'boss'}}">
+    <view class="b-grid">
+      <view class="b-card tappable" wx:for="{{bosses}}" wx:for-item="b" wx:key="id" bindtap="onBoss" data-id="{{b.id}}" aria-label="{{b.n}}速查">
+        <text class="b-world {{b.worldCls}}" wx:if="{{b.worldTag}}">{{b.worldTag}}</text>
+        <image class="b-img" src="{{b.icon}}" mode="aspectFit" />
+        <text class="b-n">{{b.n}}</text>
+        <text class="b-en px">{{b.en}}</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 文本清单：小 Boss / 原版路标 -->
+  <block wx:else>
+    <view class="mb-box card">
+      <view class="mb-row" wx:for="{{rows}}" wx:for-item="r" wx:key="k">
+        <text class="mb-n">{{r.k || r.n}}</text>
+        <text class="mb-d">{{r.d}}</text>
+      </view>
+      <text class="mb-note" wx:if="{{hiddenNote}}">{{hiddenNote}}</text>
+    </view>
+  </block>
+
+  <!-- 相关内容入口：小 Boss / 原版路标 / 机制 FAQ（从专区首页移入） -->
+  <view class="stage-head"><text class="stage-t">相关内容</text><text class="stage-en px">MORE</text></view>
+
+  <view class="x-card tappable" bindtap="onMinor" data-type="minis" aria-label="小 Boss 与隐藏 Boss">
+    <text class="x-ico">🦪</text>
+    <view class="x-col">
+      <text class="x-t">小 Boss 与隐藏 Boss</text>
+      <text class="x-s">{{miniSub}}</text>
+    </view>
+    <text class="x-arrow">›</text>
+  </view>
+
+  <view class="x-card tappable" bindtap="onMinor" data-type="vpath" aria-label="原版 Boss 路标">
+    <text class="x-ico">🧭</text>
+    <view class="x-col">
+      <text class="x-t">原版 Boss 路标</text>
+      <text class="x-s">肉前到月主后的原版推进顺序</text>
+    </view>
+    <text class="x-arrow">›</text>
+  </view>
+
+  <view class="x-card tappable" bindtap="onMinor" data-type="guide" aria-label="灾厄机制与新手 FAQ">
+    <text class="x-ico">⚙️</text>
+    <view class="x-col">
+      <text class="x-t">灾厄机制与新手 FAQ</text>
+      <text class="x-s">难度选择 · 盗贼职业 · 怒气与肾上腺素</text>
+    </view>
+    <text class="x-arrow">›</text>
+  </view>
+
+  <view class="foot px">内容对照官方 Wiki 核对 · 中文名为社区通用译名</view>
+</view>

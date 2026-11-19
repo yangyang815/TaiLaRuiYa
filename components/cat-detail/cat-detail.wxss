@@ -7,7 +7,7 @@
   bottom: env(safe-area-inset-bottom);
   z-index: 1201;
   background: var(--sheet-bg, linear-gradient(180deg, #2E1C4D 0%, #1E1136 100%));
-  border-top: 3rpx solid var(--gold-soft);
+  border-top: 3rpx solid var(--gold-soft, rgba(255, 215, 0, 0.45));
   border-radius: 30rpx 30rpx 0 0;
   box-shadow: 0 -10rpx 60rpx rgba(0, 0, 0, 0.6), 0 0 40rpx rgba(255, 215, 0, 0.08);
   padding-bottom: 24rpx;
@@ -15,37 +15,37 @@
 /* tabBar 页（合成/首页）：自定义 tabBar 渲染在页面层之上，弹窗需整体上移避开 */
 .cd-lift .sheet { bottom: calc(env(safe-area-inset-bottom) + 145rpx); }
 
-.sheet-handle { width: 72rpx; height: 8rpx; border-radius: 8rpx; background: var(--gold-faint); margin: 18rpx auto 6rpx; flex-shrink: 0; }
+.sheet-handle { width: 72rpx; height: 8rpx; border-radius: 8rpx; background: var(--gold-faint, rgba(255, 215, 0, 0.22)); margin: 18rpx auto 6rpx; flex-shrink: 0; }
 .sh-head { display: flex; align-items: center; padding: 14rpx 34rpx 20rpx; flex-shrink: 0; }
 .sh-art { width: 140rpx; height: 140rpx; border-radius: 16rpx; background: rgba(0, 0, 0, 0.3);
   display: flex; align-items: center; justify-content: center; margin-right: 26rpx; flex-shrink: 0; }
 .sprite-img-xl { width: 120rpx; height: 120rpx; }
-.sh-name { font-size: 38rpx; font-weight: 900; color: var(--text); margin-right: 14rpx; }
+.sh-name { font-size: 38rpx; font-weight: 900; color: var(--text, #E0D6C8); margin-right: 14rpx; }
 .sh-tag { margin-top: 6rpx; }
-.sh-en { font-size: 16rpx; color: var(--text-faint); margin-top: 8rpx; }
+.sh-en { font-size: 16rpx; color: var(--text-faint, #6E5F86); margin-top: 8rpx; }
 
 .sh-body { max-height: 52vh; padding: 0 34rpx; box-sizing: border-box; }
-.sh-desc { font-size: 26rpx; color: var(--text-dim); line-height: 1.7; margin-bottom: 6rpx; }
+.sh-desc { font-size: 26rpx; color: var(--text-dim, #A08FB8); line-height: 1.7; margin-bottom: 6rpx; }
 .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14rpx; padding: 10rpx 0 4rpx; }
 .stat { min-width: 0; padding: 16rpx 20rpx; display: flex; flex-direction: column; box-sizing: border-box;
-  background: var(--card); border: 2rpx solid var(--line); border-radius: 14rpx; }
-.st-k { font-size: 20rpx; color: var(--text-faint); }
-.st-v { font-size: 26rpx; color: var(--gold); font-weight: 800; margin-top: 6rpx; word-break: break-all; }
+  background: var(--card, rgba(64, 40, 104, 0.45)); border: 2rpx solid var(--line, rgba(255, 215, 0, 0.25)); border-radius: 14rpx; }
+.st-k { font-size: 20rpx; color: var(--text-faint, #6E5F86); }
+.st-v { font-size: 26rpx; color: var(--gold, #FFD700); font-weight: 800; margin-top: 6rpx; word-break: break-all; }
 
 .sec-title { display: flex; align-items: center; padding: 26rpx 8rpx 20rpx; }
-.sec-title .diamond { width: 16rpx; height: 16rpx; background: var(--gold); margin-right: 14rpx; box-shadow: 0 0 12rpx var(--gold-soft); transform: rotate(45deg); }
-.sec-title .t { font-size: 32rpx; font-weight: 800; color: var(--text); letter-spacing: 2rpx; }
+.sec-title .diamond { width: 16rpx; height: 16rpx; background: var(--gold, #FFD700); margin-right: 14rpx; box-shadow: 0 0 12rpx var(--gold-soft, rgba(255, 215, 0, 0.45)); transform: rotate(45deg); }
+.sec-title .t { font-size: 32rpx; font-weight: 800; color: var(--text, #E0D6C8); letter-spacing: 2rpx; }
 .sh-sec { margin-bottom: 4rpx; }
-.sh-line { font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
-.lnk { color: var(--gold); font-weight: 700; border-bottom: 2rpx solid var(--gold-faint); padding-bottom: 2rpx; }
+.sh-line { font-size: 25rpx; color: var(--text-dim, #A08FB8); line-height: 1.7; }
+.lnk { color: var(--gold, #FFD700); font-weight: 700; border-bottom: 2rpx solid var(--gold-faint, rgba(255, 215, 0, 0.22)); padding-bottom: 2rpx; }
 
 .tag { display: inline-block; padding: 4rpx 12rpx; font-size: 20rpx; border-radius: 6rpx; border: 1rpx solid currentColor; line-height: 1.5; }
-.tag-item { color: var(--gold); background: var(--gold-faint); }
+.tag-item { color: var(--gold, #FFD700); background: var(--gold-faint, rgba(255, 215, 0, 0.22)); }
 
 .sh-btns { display: flex; gap: 20rpx; padding: 24rpx 34rpx 6rpx; flex-shrink: 0; }
 .sh-btn { flex: 1; text-align: center; padding: 16rpx 0; border-radius: 12rpx; font-size: 26rpx; font-weight: 700; }
-.btn-ghost { color: var(--gold); background: rgba(255, 215, 0, 0.08); border: 2rpx solid var(--gold-faint); }
+.btn-ghost { color: var(--gold, #FFD700); background: rgba(255, 215, 0, 0.08); border: 2rpx solid var(--gold-faint, rgba(255, 215, 0, 0.22)); }
 .btn-gold { background: linear-gradient(180deg, #FFE55C 0%, #FFD700 45%, #C9A400 100%); color: #4A2B00; }
 
 /* 纠错入口 */
-.cd-cor { margin-left: auto; font-size: 20rpx; color: var(--text-faint); }
+.cd-cor { margin-left: auto; font-size: 20rpx; color: var(--text-faint, #6E5F86); }

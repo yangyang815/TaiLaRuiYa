@@ -261,4 +261,29 @@
 
   <!-- 分享海报 -->
   <poster wx:if="{{posterData}}" show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
+
+  <!-- 灾厄专区悬浮球：可拖动换位（位置本地记忆）；点按弹出「灾厄专区」词条，点词条进入。
+       手势由 fab.wxs 视图层处理，touch 用 catch 前缀拦截冒泡——按住球拖动时页面不滚动 -->
+  <wxs src="./fab.wxs" module="fabTouch" />
+  <view class="cal-fab-mask" wx:if="{{fabMenu}}" catchtap="closeFabMenu" />
+  <view class="cal-fab-tip {{fabMenu ? 'on' : ''}} {{fabX > fabSW / 2 ? '' : 'flip'}}"
+    style="left:{{fabX > fabSW / 2 ? fabX - 92 : fabX + 58}}px; top:{{fabY + 3}}px;"
+    catchtap="goCalamity" aria-label="进入灾厄专区">
+    <text class="cal-fab-tip-t">灾厄专区</text>
+    <text class="cal-fab-tip-a">›</text>
+  </view>
+  <view id="calFab"
+    class="cal-fab"
+    hidden="{{!fabShow}}"
+    style="transform:translate3d({{fabX}}px,{{fabY}}px,0);"
+    data-fx="{{fabX}}" data-fy="{{fabY}}"
+    data-sw="{{fabSW}}" data-sh="{{fabSH}}" data-top-min="{{fabTopMin}}"
+    catch:touchstart="{{fabTouch.start}}"
+    catch:touchmove="{{fabTouch.move}}"
+    catch:touchend="{{fabTouch.end}}"
+    catch:touchcancel="{{fabTouch.end}}"
+    aria-label="灾厄专区菜单">
+    <view class="cal-fab-halo" />
+    <pixel-icon art-id="crimtane_ore" size="56" />
+  </view>
 </view>

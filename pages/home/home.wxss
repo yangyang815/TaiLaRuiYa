@@ -272,3 +272,45 @@
 .tg-update  { color: #FFD700; background: rgba(255, 215, 0, 0.12); }
 .tg-notice  { color: #4CE0E0; background: rgba(76, 224, 224, 0.12); }
 .tg-feature { color: #7CE87C; background: rgba(60, 200, 90, 0.14); }
+
+/* 灾厄专区悬浮球：猩红矿配色（异世界入口专属色，不随主题变化），可拖动，位置本地记忆 */
+.cal-fab {
+  position: fixed; left: 0; top: 0; z-index: 500;
+  width: 96rpx; height: 96rpx; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #E8736A 0%, #C24B44 46%, #7E2320 100%);
+  border: 3rpx solid rgba(255, 178, 160, 0.55);
+  box-shadow: 0 6rpx 22rpx rgba(0, 0, 0, 0.45), 0 0 26rpx rgba(226, 88, 66, 0.4);
+  display: flex; align-items: center; justify-content: center;
+  will-change: transform;
+}
+.cal-fab-halo {
+  position: absolute; inset: -10rpx; border-radius: 50%;
+  border: 2rpx solid rgba(232, 115, 106, 0.5);
+  animation: calFabBreath 2.4s ease-in-out infinite;
+}
+@keyframes calFabBreath {
+  0%, 100% { transform: scale(1); opacity: 0.45; }
+  50% { transform: scale(1.15); opacity: 0.95; }
+}
+/* 亮色主题下光晕略收，避免过曝 */
+.page-root.theme-light .cal-fab-halo { border-color: rgba(190, 70, 50, 0.35); }
+
+/* 悬浮球展开态：点按弹出「灾厄专区」词条（从球侧拉出），点词条进入；透明遮罩收起 */
+.cal-fab-mask { position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 499; }
+.cal-fab-tip {
+  position: fixed; z-index: 501;
+  height: 56rpx; padding: 0 20rpx 0 24rpx; border-radius: 28rpx;
+  background: linear-gradient(180deg, #D25A50 0%, #A03328 100%);
+  border: 2rpx solid rgba(255, 190, 170, 0.6);
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.4), 0 0 18rpx rgba(226, 88, 66, 0.35);
+  display: flex; align-items: center;
+  transform: scale(0.4); opacity: 0; pointer-events: none;
+  transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+  will-change: transform, opacity;
+}
+.cal-fab-tip.on { transform: scale(1); opacity: 1; pointer-events: auto; }
+.cal-fab-tip-t { font-size: 24rpx; color: #FFE9C8; letter-spacing: 2rpx; }
+.cal-fab-tip-a { font-size: 26rpx; color: #FFD9A8; margin-left: 8rpx; }
+/* 弹出方向跟随球在屏幕的左右半区：默认球在右半区 → 词条从球左侧长出 */
+.cal-fab-tip { transform-origin: right center; }
+.cal-fab-tip.flip { transform-origin: left center; }

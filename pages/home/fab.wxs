@@ -1,0 +1,42 @@
+// 灾厄悬浮球拖拽：WXS 响应事件（视图层直接处理手势，不经过 setData 通信链路，真机跟手无漂移）
+// 约定：位移 8px 内视为点按 → callMethod("goCalamity")；否则为拖动 → 实时位移 + 抬手落位记忆
+var SX = 0, SY = 0, BX = 0, BY = 0, LW = 0, LT = 0, moved = false;
+
+function clamp(v, a, b) {
+  return v < a ? a : v > b ? b : v;
+}
+
+function start(e, ins) {
+  var t = e.touches[0];
+  var d = e.currentTarget.dataset;
+  SX = t.pageX;
+  SY = t.pageY;
+  BX = d.fx; // 拖动前基准位置（来自页面 data，落位后已同步）
+  BY = d.fy;
+  moved = false;
+}
+
+function move(e, ins) {
+  var t = e.touches[0];
+  var dx = t.pageX - SX;
+  var dy = t.pageY - SY;
+  if (dx * dx + dy * dy > 64) moved = true; // 8px 阈值
+  var d = e.currentTarget.dataset;
+  var size = d.sw * 0.128; // 96rpx 换算 px，与 wxss 一致
+  LW = clamp(BX + dx, 8, d.sw - size - 8);
+  LT = clamp(BY + dy, d.topMin, d.sh - 130 - size); // 底部避开 tabBar
+  ins.selectComponent("#calFab").setStyle("transform:translate3d(" + LW + "px," + LT + "px,0)");
+}
+
+function end(e, ins) {
+  if (!ins) return;
+  if (moved) {
+    ins.callMethod("onFabDrop", { x: Math.round(LW), y: Math.round(LT) });
+  } else {
+    // 点按：不直接跳转，弹出/收起「灾厄专区」快捷词条，点词条才进入
+    ins.callMethod("onFabTap");
+  }
+  moved = false;
+}
+
+module.exports = { start: start, move: move, end: end };

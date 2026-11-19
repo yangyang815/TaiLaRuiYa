@@ -1,0 +1,18 @@
+@import "../../style/cal-common.wxss";
+
+.list-sub {
+  display: block; font-size: 20rpx; color: var(--text-dim);
+  letter-spacing: 2rpx; margin: 2rpx 6rpx 14rpx;
+}
+
+/* 相关内容入口横条（BOSS 大全页底部） */
+.x-card {
+  display: flex; align-items: center;
+  padding: 20rpx 22rpx; margin-bottom: 14rpx;
+  border: 2rpx solid var(--line); border-radius: 16rpx; background: var(--card);
+}
+.x-ico { font-size: 40rpx; margin-right: 18rpx; flex-shrink: 0; }
+.x-col { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.x-t { font-size: 27rpx; font-weight: 800; color: var(--text); }
+.x-s { font-size: 21rpx; color: var(--text-dim); margin-top: 6rpx; }
+.x-arrow { font-size: 30rpx; color: var(--text-dim); margin-left: 12rpx; }

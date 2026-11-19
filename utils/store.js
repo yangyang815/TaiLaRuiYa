@@ -15,7 +15,8 @@ const K = {
   career: "terr_career",
   flags: "terr_flags",
   grid: "terr_grid",
-  msgRead: "terr_msg_read"
+  msgRead: "terr_msg_read",
+  calFab: "terr_cal_fab"
 };
 // 内存镜像缓存：storage 同步读是真机首屏阻塞的主因（We 分析实测 home 页启动 54 次
 // getStorageSync 429ms，其中同一 key 被反复读 19 次）。本层保证每个 key 每会话只真读
@@ -40,6 +41,14 @@ function set(key, val) {
   try {
     wx.setStorageSync(key, val);
   } catch (e) {}
+}
+// 灾厄悬浮球位置（{x,y} px）：拖放落位记忆，下次启动恢复
+function getCalFab() {
+  const v = get(K.calFab, null);
+  return v && typeof v.x === "number" && typeof v.y === "number" ? v : null;
+}
+function setCalFab(pos) {
+  set(K.calFab, pos);
 }
 function getFavs() {
   return get(K.fav, []);
@@ -346,6 +355,8 @@ function applySave(obj) {
   return chk;
 }
 module.exports = {
+  getCalFab: getCalFab,
+  setCalFab: setCalFab,
   getFavs: getFavs,
   isFav: isFav,
   toggleFav: toggleFav,

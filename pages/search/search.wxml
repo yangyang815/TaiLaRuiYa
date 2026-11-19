@@ -110,8 +110,9 @@
     </block>
     <view class="pad-bottom" />
   </scroll-view>
-</view>
 
-<cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" bind:close="onCatDetailClose" bind:craft="onCatDetailCraft" />
+  <!-- 详情弹窗：挂 page-root 内（CSS 变量继承需要） -->
+  <cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" bind:close="onCatDetailClose" bind:craft="onCatDetailCraft" />
+</view>
 
 <back-top show="{{showBackTop}}" />

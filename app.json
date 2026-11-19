@@ -112,6 +112,16 @@
         "pages/index/index",
         "pages/blank/blank"
       ]
+    },
+    {
+      "root": "pkg-cal",
+      "name": "calamity",
+      "pages": [
+        "pages/calamity/calamity",
+        "pages/calamity-list/calamity-list",
+        "pages/calamity-boss/calamity-boss",
+        "pages/calamity-guide/calamity-guide"
+      ]
     }
   ],
   "preloadRule": {

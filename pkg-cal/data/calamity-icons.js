@@ -1,0 +1,30 @@
+// 灾厄 Boss 图标路径映射（官方 Wiki 图标，pkg-cal/assets/boss/，png 统一 128px（256 色调色板压缩，webp 本地文件 iOS 真机不渲染），至尊灾厄为 gif 动图）
+// 供 calamity-list（Boss 卡片）与 calamity-boss（速查详情头图）共用
+module.exports = {
+  cal_desert_scourge: "/pkg-cal/assets/boss/cal_desert_scourge.png",
+  cal_crabulon: "/pkg-cal/assets/boss/cal_crabulon.png",
+  cal_hive_mind: "/pkg-cal/assets/boss/cal_hive_mind.png",
+  cal_perforators: "/pkg-cal/assets/boss/cal_perforators.png",
+  cal_slime_god: "/pkg-cal/assets/boss/cal_slime_god.png",
+  cal_cryogen: "/pkg-cal/assets/boss/cal_cryogen.png",
+  cal_aquatic_scourge: "/pkg-cal/assets/boss/cal_aquatic_scourge.png",
+  cal_brimstone: "/pkg-cal/assets/boss/cal_brimstone.png",
+  cal_calamitas_clone: "/pkg-cal/assets/boss/cal_calamitas_clone.png",
+  cal_leviathan: "/pkg-cal/assets/boss/cal_leviathan.png",
+  cal_astrum_aureus: "/pkg-cal/assets/boss/cal_astrum_aureus.png",
+  cal_pbg: "/pkg-cal/assets/boss/cal_pbg.png",
+  cal_ravager: "/pkg-cal/assets/boss/cal_ravager.png",
+  cal_astrum_deus: "/pkg-cal/assets/boss/cal_astrum_deus.png",
+  cal_profaned_guardians: "/pkg-cal/assets/boss/cal_profaned_guardians.png",
+  cal_dragonfolly: "/pkg-cal/assets/boss/cal_dragonfolly.png",
+  cal_providence: "/pkg-cal/assets/boss/cal_providence.png",
+  cal_storm_weaver: "/pkg-cal/assets/boss/cal_storm_weaver.png",
+  cal_ceaseless_void: "/pkg-cal/assets/boss/cal_ceaseless_void.png",
+  cal_signus: "/pkg-cal/assets/boss/cal_signus.png",
+  cal_polterghast: "/pkg-cal/assets/boss/cal_polterghast.png",
+  cal_old_duke: "/pkg-cal/assets/boss/cal_old_duke.png",
+  cal_devourer: "/pkg-cal/assets/boss/cal_devourer.png",
+  cal_yharon: "/pkg-cal/assets/boss/cal_yharon.png",
+  cal_exo_mechs: "/pkg-cal/assets/boss/cal_exo_mechs.png",
+  cal_supreme_calamitas: "/pkg-cal/assets/boss/cal_supreme_calamitas.gif"
+}

@@ -1,0 +1,15 @@
+@import "../../style/cal-common.wxss";
+
+/* BOSS 大全入口卡：与首页冒险手册宫格卡同款尺寸/样式（g-cell/g-art/g-name），经典 Boss 图标 */
+.grid { display: flex; flex-wrap: wrap; padding: 0 4rpx; gap: 20rpx; }
+.g-cell {
+  width: calc((100% - 60rpx) / 4);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 24rpx 0 18rpx;
+  transition: transform 0.16s ease-out;
+}
+.g-cell:active { transform: scale(0.94); }
+.g-art { height: 88rpx; display: flex; align-items: center; margin-bottom: 12rpx; }
+/* 灾厄官方图标（神明吞噬者）：深色蠕虫造型，微红光晕呼应专区主题 */
+.g-img { width: 88rpx; height: 88rpx; filter: drop-shadow(0 0 10rpx rgba(224, 82, 82, 0.35)); }
+.g-name { font-size: 24rpx; color: var(--text); font-weight: 700; text-align: center; }

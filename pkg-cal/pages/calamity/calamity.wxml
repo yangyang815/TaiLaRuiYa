@@ -1,0 +1,23 @@
+<view class="page-root {{themeClass}} cal-root">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">灾厄专区</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="hero">
+    <text class="hero-t px">CALAMITY MOD</text>
+    <text class="hero-s">灾厄模式 · 与原版完全独立的平行世界</text>
+  </view>
+
+  <!-- 主体：BOSS 大全入口卡（与首页冒险手册宫格卡同款尺寸/样式，图标=灾厄标志性 Boss「神明吞噬者」官方图标） -->
+  <view class="grid">
+    <view class="g-cell card tappable" bindtap="onBossAll" aria-label="BOSS 大全">
+      <view class="g-art"><image class="g-img" src="/pkg-cal/assets/boss/cal_devourer.png" mode="aspectFit" /></view>
+      <text class="g-name">BOSS 大全</text>
+    </view>
+  </view>
+
+  <view class="foot px">数据基准 {{base}} · {{ver}} 对照官方 Wiki 核对 · 中文名为社区通用译名</view>
+</view>

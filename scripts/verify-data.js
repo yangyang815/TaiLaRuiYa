@@ -281,6 +281,34 @@ try {
   fail('微光嬗变检查异常: ' + e.message)
 }
 
+/* ========== 9. 灾厄专区数据 ========== */
+try {
+  const cal = require('../pkg-cal/data/calamity-bosses')
+  const calMech = require('../pkg-cal/data/calamity-mechanics')
+  if (cal.mode !== 'calamity') throw new Error('mode 字段应为 calamity')
+  const ids = cal.bosses.map(b => b.id)
+  const dup = ids.filter((x, i) => ids.indexOf(x) !== i)
+  if (dup.length) fail('灾厄 Boss id 重复: ' + dup.join(', '))
+  else ok('灾厄 Boss id 无重复（' + ids.length + ' 个）')
+  const bad = cal.bosses.filter(b => !b.n || !b.en || !['pre', 'hm', 'ml'].includes(b.stage) || !b.summon || !b.points || b.points.length < 3 || !b.drops || b.drops.length < 2)
+  if (bad.length) fail('灾厄 Boss 卡字段缺失: ' + bad.map(b => b.id).join(', '))
+  else if (cal.bosses.length !== 26) fail('灾厄 Boss 数量应为 26，实际 ' + cal.bosses.length)
+  else ok('灾厄 Boss 卡 26 张字段完整')
+  const stageCnt = { pre: 5, hm: 9, ml: 12 }
+  Object.keys(stageCnt).forEach(k => {
+    const c = cal.bosses.filter(b => b.stage === k).length
+    if (c !== stageCnt[k]) fail('灾厄阶段 ' + k + ' 数量不符: ' + c + '（应为 ' + stageCnt[k] + '）')
+  })
+  const badNext = cal.bosses.filter(b => b.nextId && !ids.includes(b.nextId))
+  if (badNext.length) fail('灾厄 nextId 指向不存在的 Boss: ' + badNext.map(b => b.id).join(', '))
+  else ok('灾厄下一站链路有效')
+  if (calMech.guides.length !== 4) fail('灾厄机制应为 4 篇，实际 ' + calMech.guides.length)
+  else if (calMech.faq.length < 6) fail('灾厄 FAQ 不足 6 条')
+  else ok('灾厄机制 4 篇 + FAQ ' + calMech.faq.length + ' 条')
+} catch (e) {
+  fail('灾厄专区检查异常: ' + e.message)
+}
+
 /* ========== 汇总 ========== */
 console.log('\n========== 检查结果 ==========')
 oks.forEach(m => console.log('  [PASS] ' + m))

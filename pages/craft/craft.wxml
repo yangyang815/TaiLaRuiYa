@@ -308,8 +308,9 @@
 
   <!-- 分享海报 -->
   <poster wx:if="{{posterData}}" show="{{posterShow}}" info="{{posterData}}" bind:close="closePoster" />
-</view>
 
-<cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" lift="{{true}}" bind:close="onCatDetailClose" bind:go="onCatGo" />
+  <!-- 详情弹窗：挂 page-root 内（CSS 变量继承需要） -->
+  <cat-detail wx:if="{{catDetail}}" item="{{catDetail}}" lift="{{true}}" bind:close="onCatDetailClose" bind:go="onCatGo" />
+</view>
 
 <back-top show="{{showBackTop}}" />

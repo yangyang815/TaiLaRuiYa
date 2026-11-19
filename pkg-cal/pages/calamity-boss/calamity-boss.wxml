@@ -1,0 +1,57 @@
+<view class="page-root {{themeClass}} cal-root" wx:if="{{b}}">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">Boss 速查</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="d-head">
+    <image class="d-ico" src="{{b.icon}}" mode="aspectFit" />
+    <view class="d-headcol">
+      <view class="d-nameline">
+        <text class="d-name">{{b.n}}</text>
+        <text class="d-en px">{{b.en}}</text>
+      </view>
+      <view class="d-badges">
+        <text class="d-badge">{{stageN}}</text>
+        <text class="d-badge warn" wx:if="{{worldTag}}">{{worldTag}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基本信息：Wiki 数据（生命值/防御/击退抗性等，经典/专家/复仇/死亡四档） -->
+  <view class="sec-title" wx:if="{{b.info && b.info.length}}"><view class="diamond" /><text class="sec-t">基本信息</text></view>
+  <view class="info-box card" wx:if="{{b.info && b.info.length}}">
+    <view class="info-row" wx:for="{{b.info}}" wx:for-item="r" wx:key="index">
+      <text class="info-k">{{r[0]}}</text>
+      <text class="info-v">{{r[1]}}</text>
+    </view>
+  </view>
+
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">召唤方式</text></view>
+  <view class="summon-box">{{b.summon}}</view>
+
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">战斗要点</text></view>
+  <view class="p-box card">
+    <text class="p-item" wx:for="{{b.points}}" wx:for-item="p" wx:key="index">· {{p}}</text>
+  </view>
+
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">主要掉落</text></view>
+  <view class="p-box card">
+    <text class="p-item" wx:for="{{b.drops}}" wx:for-item="p" wx:key="index">· {{p}}</text>
+  </view>
+
+  <view class="sec-title" wx:if="{{next}}"><view class="diamond" /><text class="sec-t">下一站</text></view>
+  <view class="next-row tappable" wx:if="{{next}}" bindtap="onNext" data-id="{{next.id}}">
+    <image class="next-ico" src="{{next.icon}}" mode="aspectFit" />
+    <view class="col flex-1">
+      <text class="next-n">{{next.n}}</text>
+      <text class="next-en px">{{next.en}}</text>
+    </view>
+    <text class="b-arrow">›</text>
+  </view>
+  <text class="mb-note" wx:if="{{!next}}">{{b.nextText}}</text>
+
+  <view class="foot px">内容对照官方 Wiki 核对 · 如有出入欢迎通过反馈入口提交</view>
+</view>

@@ -1,0 +1,25 @@
+<view class="page-root {{themeClass}} cal-root">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">灾厄机制与 FAQ</text>
+    <view class="nav-ph" />
+  </view>
+
+  <block wx:for="{{guides}}" wx:for-item="g" wx:key="id">
+    <view class="sec-title"><view class="diamond" /><text class="sec-t">{{g.n}}</text></view>
+    <view class="p-box card">
+      <text class="p-item" wx:for="{{g.paras}}" wx:for-item="p" wx:key="index">{{p}}</text>
+    </view>
+  </block>
+
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">新手 FAQ</text></view>
+  <view class="faq-box card">
+    <view class="faq-item" wx:for="{{faq}}" wx:for-item="f" wx:key="q">
+      <text class="faq-q">Q：{{f.q}}</text>
+      <text class="faq-a">{{f.a}}</text>
+    </view>
+  </view>
+
+  <view class="foot px">内容对照官方 Wiki 核对（{{ver}}） · 有疑问欢迎通过反馈入口提交</view>
+</view>
