@@ -223,6 +223,8 @@ const ALIAS = [
   ["空桶", "empty_bucket"],
   ["音乐盒", "music_box"],
   ["天云磁石", "celestial_magnet"],
+  ["天柱", "celestial_pillars"],
+  ["四柱", "celestial_pillars"],
   ["幼雏之翼", "fledgling_wings"],
   ["冰鞋", "ice_skates"],
   ["冰雪镜", "ice_mirror"],
