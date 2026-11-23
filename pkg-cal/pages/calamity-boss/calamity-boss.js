@@ -47,5 +47,31 @@ Page({
     const pages = getCurrentPages()
     if (pages.length > 1) wx.navigateBack()
     else wx.switchTab({ url: "/pages/home/home" })
+  },
+  onShareAppMessage () {
+    // 分享卡片：灾厄红主题，Boss 官方图标 + 速查名（离屏 canvas 生成，失败回退截屏）
+    // 注意：promise resolve 的对象会整体替换分享内容，必须带全 title/path
+    const shareCard = require("../../../utils/share-card")
+    const b = this.data.b
+    const title = (b ? b.n : "灾厄 Boss") + "灾厄速查 · 打法要点与掉落物"
+    const path = "/pkg-cal/pages/calamity-boss/calamity-boss?id=" + (b ? b.id : "")
+    return {
+      title: title,
+      path: path,
+      promise: shareCard.makeCard({
+        title: b ? b.n : "灾厄 Boss",
+        sub: "打法要点 · 掉落物 · 灾厄速查",
+        icon: b ? b.icon : "",
+        accent: "#E85555",
+        style: "calamity"
+      }).then((p) => {
+        const r = { title: title, path: path }
+        if (p) r.imageUrl = p
+        return r
+      })
+    };
+  },
+  onShareTimeline () {
+    return { title: (this.data.b ? this.data.b.n : "灾厄 Boss") + "灾厄速查 · 向导之书", query: this.data.b ? "id=" + this.data.b.id : "" };
   }
 })

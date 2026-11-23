@@ -115,7 +115,7 @@ Page({
   onShareAppMessage() {
     const s = this.data.s;
     return {
-      title: s ? "泰拉瑞亚攻略 · " + s.title : "泰拉瑞亚攻略合集",
+      title: s ? s.title + " · 泰拉瑞亚攻略免费看" : "泰拉瑞亚攻略合集",
       path: s ? "/pages/strategy/strategy?id=" + s.id : "/pages/strategy/strategy"
     };
   },

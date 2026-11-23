@@ -317,15 +317,34 @@ Page({
   },
   onShareAppMessage() {
     const e = this.data.e;
+    if (!e) return { title: "泰拉瑞亚1.4.5全物品图鉴 · 免费查", path: "/pages/home/home" };
+    // 分享卡片：离屏 canvas 动态生成「精灵图 + 条目名」专属图（失败自动回退页面截屏）
+    const shareCard = require("../../utils/share-card");
+    const tail = shareCard.SELL[e.type] || "的全图鉴资料";
+    const title = e.name + tail + " · 泰拉瑞亚图鉴免费查";
+    const path = "/pages/detail/detail?type=" + e.type + "&id=" + e.id;
     return {
-      title: "向导之书 · " + (e ? e.name : ""),
-      path: "/pages/detail/detail?type=" + (e ? e.type : "item") + "&id=" + (e ? e.id : "")
+      title: title,
+      path: path,
+      // promise resolve 的对象会整体替换分享内容：必须带全 title/path，imageUrl 失败时缺省走截屏
+      promise: shareCard
+        .makeCard({
+          title: e.name,
+          sub: shareCard.SUB[e.type] || "全图鉴资料免费查",
+          icon: shareCard.spriteIcon(e.artId),
+          accent: e.glow
+        })
+        .then((p) => {
+          const r = { title: title, path: path };
+          if (p) r.imageUrl = p;
+          return r;
+        })
     };
   },
   onShareTimeline() {
     const e = this.data.e;
     return {
-      title: e ? e.name + " · 泰拉瑞亚图鉴" : "向导之书 · 冒险者的随身百科",
+      title: e ? e.name + " · 泰拉瑞亚图鉴免费查" : "泰拉瑞亚1.4.5全物品图鉴 · 免费查",
       query: e ? "type=" + e.type + "&id=" + e.id : ""
     };
   }

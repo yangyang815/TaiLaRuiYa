@@ -6,6 +6,12 @@ const AD_UNIT_ID = "adunit-a76baee37ea2f34c"; // 激励视频广告位（mp后�
 const STORE_KEY_UNLOCKED = "terr_theme_unlocked";
 const STORE_KEY_CURRENT = "terr_theme";
 
+// 内存缓存：getCurrent/getUnlocked 会被多个页面反复调用，同步读 storage 是
+// We 分析实测的重复读点（每 key 每会话只真读一次，写时同步更新缓存）。
+let _cur = null;
+let _unlocked = null;
+let _seen = null;
+
 // 主题清单：swatch 用于选择页预览色条
 const THEMES = [
   {
@@ -123,21 +129,22 @@ const THEMES = [
 ];
 
 function getUnlocked() {
+  if (_unlocked) return _unlocked;
+  let arr = null;
   try {
-    const arr = wx.getStorageSync(STORE_KEY_UNLOCKED);
-    return Array.isArray(arr) ? arr : ["dark", "light"];
-  } catch (e) {
-    return ["dark", "light"];
-  }
+    arr = wx.getStorageSync(STORE_KEY_UNLOCKED);
+  } catch (e) {}
+  _unlocked = Array.isArray(arr) ? arr : ["dark", "light"];
+  return _unlocked;
 }
 
 function isUnlocked(id) {
   const t = THEMES.find((x) => x.id === id);
   if (t && t.free) return true;
-  // 全主题礼包持有者：全部主题直接解锁（权益来自虚拟支付发货，缓存在 terr_pro）
+  // 全主题礼包持有者：全部主题直接解锁（权益来自虚拟支付发货，pro 模块有内存缓存）
   try {
-    const p = wx.getStorageSync("terr_pro");
-    if (p && p.themes) return true;
+    const pro = require("./pro");
+    if (pro.has("themes")) return true;
   } catch (e) {}
   return getUnlocked().indexOf(id) >= 0;
 }
@@ -146,6 +153,7 @@ function unlock(id) {
   const arr = getUnlocked();
   if (arr.indexOf(id) < 0) {
     arr.push(id);
+    _unlocked = arr;
     try {
       wx.setStorageSync(STORE_KEY_UNLOCKED, arr);
     } catch (e) {}
@@ -154,15 +162,17 @@ function unlock(id) {
 }
 
 function getCurrent() {
+  if (_cur) return _cur;
+  let t = null;
   try {
-    const t = wx.getStorageSync(STORE_KEY_CURRENT);
-    return t || "dark";
-  } catch (e) {
-    return "dark";
-  }
+    t = wx.getStorageSync(STORE_KEY_CURRENT);
+  } catch (e) {}
+  _cur = t || "dark";
+  return _cur;
 }
 
 function setCurrent(id) {
+  _cur = id;
   try {
     wx.setStorageSync(STORE_KEY_CURRENT, id);
   } catch (e) {}
@@ -229,16 +239,19 @@ function unlockByAd(themeId) {
 }
 
 function markThemeSeen() {
+  _seen = true;
   try {
     wx.setStorageSync("terr_theme_seen", 1);
   } catch (e) {}
 }
 function hasSeenTheme() {
+  if (_seen !== null) return _seen;
+  let v = true;
   try {
-    return !!wx.getStorageSync("terr_theme_seen");
-  } catch (e) {
-    return true;
-  }
+    v = !!wx.getStorageSync("terr_theme_seen");
+  } catch (e) {}
+  _seen = v;
+  return v;
 }
 module.exports = {
   THEMES: THEMES,

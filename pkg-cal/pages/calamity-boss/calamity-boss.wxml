@@ -53,5 +53,7 @@
   </view>
   <text class="mb-note" wx:if="{{!next}}">{{b.nextText}}</text>
 
+  <button class="share-cta" open-type="share">↗ 把这份速查分享给队友</button>
+
   <view class="foot px">内容对照官方 Wiki 核对 · 如有出入欢迎通过反馈入口提交</view>
 </view>

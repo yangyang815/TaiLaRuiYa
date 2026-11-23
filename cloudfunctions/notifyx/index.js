@@ -65,6 +65,30 @@ exports.main = async (event) => {
       return { ok: true, id: added._id, doc };
     }
 
+    if (action === "seedMessage") {
+      // 运维入口：云端测试调用，服务端创建站内公告（messages 集合），绕开控制台添加记录丢字段的 UI 问题
+      // 参数：event.fields = { title(必填), body, tag(feature/update/notice), icon, ts(毫秒，缺省当前) }
+      await ensureCollections();
+      const f = (event && event.fields) || {};
+      if (!f.title) return { ok: false, err: "缺少 title 字段" };
+      // 顺手清理历史空文档（无 title 字段的废记录——控制台表单模式遗留坑）
+      let cleanedEmpty = 0;
+      try {
+        const r = await db.collection("messages").where({ title: _.exists(false) }).remove();
+        cleanedEmpty = (r.stats && r.stats.removed) || 0;
+      } catch (e) {}
+      const doc = {
+        tag: f.tag || "notice",
+        icon: f.icon || "📢",
+        title: String(f.title),
+        body: String(f.body || ""),
+        ts: Number(f.ts) || Date.now()
+      };
+      const added = await db.collection("messages").add({ data: doc });
+      console.log("[notifyx] seedMessage 已创建:", added._id, doc.title);
+      return { ok: true, id: added._id, doc: doc, cleanedEmpty: cleanedEmpty };
+    }
+
     return { ok: false, err: "未知 action: " + action };
   } catch (e) {
     console.error("[notifyx]", action, e.message);
@@ -73,7 +97,7 @@ exports.main = async (event) => {
 };
 
 async function ensureCollections() {
-  for (const name of ["subscribers", "notices"]) {
+  for (const name of ["subscribers", "notices", "messages"]) {
     try { await db.createCollection(name); } catch (e) { /* 已存在 */ }
   }
 }

@@ -223,10 +223,6 @@ Page({
   _touchActive: false,
   onLoad() {
     const app = getApp();
-    this._biEn = new Set(
-      dex.ALL.filter((e) => e.type === "item").map((e) => (e.en || "").toLowerCase())
-    );
-    this._catPreload();
     const hour = new Date().getHours();
     const daytime = hour >= 6 && hour < 18;
     const gs = store.getGrid();
@@ -277,9 +273,17 @@ Page({
         hello: helloOf(now.getHours()) + "，冒险者！"
       });
     });
-    this.loadHot();
-    this.loadTopBadges();
-    this.refreshThemeBadge();
+    // 非首屏任务延后一帧：先让首屏 setData 与渲染走完，再挂角标/热门/搜索预载
+    //（We 分析实测首页 onLoad 存在 139ms 长任务，这几项均不阻塞首屏可见内容）
+    setTimeout(() => {
+      this._biEn = new Set(
+        dex.ALL.filter((e) => e.type === "item").map((e) => (e.en || "").toLowerCase())
+      );
+      this._catPreload();
+      this.loadHot();
+      this.loadTopBadges();
+      this.refreshThemeBadge();
+    }, 0);
   },
   buildRecents() {
     return store
@@ -746,10 +750,10 @@ Page({
     this.setData({ [k]: on });
   },
   onShareAppMessage() {
-    return { title: "向导之书 · 冒险者的随身百科", path: "/pages/home/home" };
+    return { title: "泰拉瑞亚1.4.5全物品图鉴与攻略 · 免费查", path: "/pages/home/home" };
   },
   onShareTimeline() {
-    return { title: "向导之书 · 冒险者的随身百科" };
+    return { title: "泰拉瑞亚1.4.5全物品图鉴与攻略 · 免费查" };
   },
   openPoster() {
     const nMon = dex.ALL.filter((e) => e.type === "mon").length;

@@ -4,9 +4,10 @@ const biomes = require('../../data/biomes')
 
 const CATS = [
   { k: '', n: '全部' }, { k: 'surface', n: '地表层' }, { k: 'under', n: '地下层' },
-  { k: 'spread', n: '蔓延群系' }, { k: 'hard', n: '困难模式' }
+  { k: 'mini', n: '迷你群系' }, { k: 'spread', n: '蔓延群系' },
+  { k: 'hard', n: '困难模式' }, { k: 'struct', n: '结构奇观' }
 ]
-const CAT_NAME = { surface: '地表层', under: '地下层', spread: '蔓延群系', hard: '困难模式' }
+const CAT_NAME = { surface: '地表层', under: '地下层', mini: '迷你群系', spread: '蔓延群系', hard: '困难模式', struct: '结构奇观' }
 const DANGER_NAME = ['', '安全', '低危', '中危', '高危', '极危']
 
 function dotsOf (danger) {

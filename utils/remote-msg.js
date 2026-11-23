@@ -32,14 +32,20 @@ function normalize(list, src) {
       src: src
     }));
 }
+// currentList 结果缓存：home 每次 onShow 都会算 unreadCount（真读 storage + 全量 merged 排序），
+// We 分析实测为启动/跳页高频读点。消息列表极少变化，每会话缓存一份，refresh 落库时重建。
+let _cur = null;
 function currentList() {
+  if (_cur) return _cur;
+  let out = null;
   try {
     const c = wx.getStorageSync(CACHE_KEY);
     if (c && Date.now() - c.ts < MAX_AGE && Array.isArray(c.list) && c.list.length) {
-      return merged(c.list, "cache");
+      out = merged(c.list, "cache");
     }
   } catch (e) {}
-  return merged(null, "builtin");
+  _cur = out || merged(null, "builtin");
+  return _cur;
 }
 function unreadCount(lastReadTs) {
   return currentList().filter((m) => m.ts > (lastReadTs || 0)).length;
@@ -62,7 +68,8 @@ function refresh(onUpdate, force) {
     try {
       wx.setStorageSync(FETCH_AT, Date.now());
     } catch (e) {}
-    onUpdate && onUpdate(merged(list, "remote"));
+    _cur = merged(list, "remote");
+    onUpdate && onUpdate(_cur);
   };
   try {
     if (typeof wx.cloud !== "undefined") {

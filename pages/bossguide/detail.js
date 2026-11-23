@@ -142,12 +142,30 @@ Page({
     wx.navigateBack();
   },
   onShareAppMessage() {
+    // 分享卡片：Boss 精灵图 + 攻略名（离屏 canvas 生成，失败回退截屏）
+    // 注意：promise resolve 的对象会整体替换分享内容，必须带全 title/path
+    const shareCard = require("../../utils/share-card");
+    const be = dex.byId[this.data.id] || {};
+    const title = (this.data.name || "Boss") + "完整攻略 · 打法准备掉落一应俱全";
+    const path = "/pages/bossguide/detail?id=" + this.data.id;
     return {
-      title: "泰拉瑞亚攻略 · " + this.data.name,
-      path: "/pages/bossguide/detail?id=" + this.data.id
+      title: title,
+      path: path,
+      promise: shareCard
+        .makeCard({
+          title: this.data.name || "Boss",
+          sub: "完整攻略 · 打法准备掉落",
+          icon: shareCard.spriteIcon(be.artId),
+          accent: be.glow
+        })
+        .then((p) => {
+          const r = { title: title, path: path };
+          if (p) r.imageUrl = p;
+          return r;
+        })
     };
   },
   onShareTimeline() {
-    return { title: "泰拉瑞亚攻略 · " + this.data.name };
+    return { title: (this.data.name || "Boss") + "完整攻略 · 泰拉瑞亚攻略免费看" };
   }
 });

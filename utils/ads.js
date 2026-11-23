@@ -22,10 +22,10 @@ function getAd() {
 // 频控判断 + 展示（在页面 onUnload 中调用，异步展示不影响导航）
 function maybeShow(scene) {
   try {
-    // 去广告权益持有者跳过全部插屏
+    // 去广告权益持有者跳过全部插屏（pro 模块有内存缓存，避免真读 storage）
     try {
-      const p = wx.getStorageSync("terr_pro");
-      if (p && p.noads) return;
+      const pro = require("./pro");
+      if (pro.has("noads")) return;
     } catch (pe) {}
     if (!AD_UNIT_ID) return;
     const now = Date.now();
