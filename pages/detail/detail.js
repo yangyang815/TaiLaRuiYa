@@ -178,6 +178,9 @@ Page({
   goGuide() {
     wx.navigateTo({ url: "/pages/bossguide/detail?id=" + this.data.e.id });
   },
+  goGuideList() {
+    wx.navigateTo({ url: "/pages/bossguide/bossguide" });
+  },
   goAcq() {
     wx.navigateTo({ url: "/pages/acq/acq?id=" + this.data.e.id });
   },

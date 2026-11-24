@@ -37,9 +37,11 @@
     <text class="p-item" wx:for="{{b.points}}" wx:for-item="p" wx:key="index">· {{p}}</text>
   </view>
 
-  <view class="sec-title"><view class="diamond" /><text class="sec-t">主要掉落</text></view>
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">主要掉落</text><text class="d-hint px" wx:if="{{hasDropLink}}">点击物品名可跳转</text></view>
   <view class="p-box card">
-    <text class="p-item" wx:for="{{b.drops}}" wx:for-item="p" wx:key="index">· {{p}}</text>
+    <view class="p-item" wx:for="{{dropLinks}}" wx:for-item="row" wx:key="index">
+      <text class="p-dash">· </text><block wx:for="{{row}}" wx:for-item="seg" wx:for-index="si" wx:key="si"><text wx:if="{{!seg.ref}}">{{seg.s}}</text><text wx:else class="lnk tappable" bindtap="onLinkTap" data-id="{{seg.id}}">{{seg.s}}</text></block>
+    </view>
   </view>
 
   <view class="sec-title" wx:if="{{next}}"><view class="diamond" /><text class="sec-t">下一站</text></view>

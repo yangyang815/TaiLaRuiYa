@@ -305,6 +305,22 @@ try {
   if (calMech.guides.length !== 4) fail('灾厄机制应为 4 篇，实际 ' + calMech.guides.length)
   else if (calMech.faq.length < 6) fail('灾厄 FAQ 不足 6 条')
   else ok('灾厄机制 4 篇 + FAQ ' + calMech.faq.length + ' 条')
+
+  // 物品图鉴（批次1：Boss 掉落武器/饰品/药水/召唤物）
+  const calItems = require('../pkg-cal/data/calamity-items')
+  if (!Array.isArray(calItems.items) || calItems.items.length < 250) throw new Error('物品条目应 ≥ 250，实际 ' + (calItems.items || []).length)
+  const badItems = calItems.items.filter(i => !i.id || !i.n || !i.cat)
+  if (badItems.length) throw new Error('物品字段缺失: ' + badItems.slice(0, 5).map(i => i.id || i.n).join(', '))
+  const dupItems = calItems.items.map(i => i.id).filter((v, i, a) => a.indexOf(v) !== i)
+  if (dupItems.length) throw new Error('物品 id 重复: ' + dupItems.join(', '))
+  const badBoss = calItems.items.filter(i => i.boss && !ids.includes(i.boss))
+  if (badBoss.length) throw new Error('物品 boss 引用悬空: ' + badBoss.map(i => i.id).join(', '))
+  ok('灾厄物品图鉴 ' + calItems.items.length + ' 条字段完整、boss 引用有效')
+  const iconManifest = require('../pkg-cal/data/calamity-item-icons')
+  const iconKeys = Object.keys(iconManifest)
+  const iconMissing = iconKeys.filter(k => !fs.existsSync(path.join(__dirname, '..', 'pkg-cal', 'assets', 'item', k + '.png')))
+  if (iconMissing.length) throw new Error('图标清单与文件不一致: ' + iconMissing.slice(0, 5).join(', '))
+  ok('灾厄物品图标清单 ' + iconKeys.length + ' 条与文件一致')
 } catch (e) {
   fail('灾厄专区检查异常: ' + e.message)
 }

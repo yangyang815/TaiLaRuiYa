@@ -1,0 +1,9 @@
+{
+  "name": "statsReport",
+  "version": "1.0.0",
+  "description": "全站页面访问统计报表（只读 stats_daily，管理员自查工具）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

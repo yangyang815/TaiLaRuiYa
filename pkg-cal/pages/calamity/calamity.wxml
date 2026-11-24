@@ -11,11 +11,15 @@
     <text class="hero-s">灾厄模式 · 与原版完全独立的平行世界</text>
   </view>
 
-  <!-- 主体：BOSS 大全入口卡（与首页冒险手册宫格卡同款尺寸/样式，图标=灾厄标志性 Boss「神明吞噬者」官方图标） -->
+  <!-- 主体：两张入口卡（与首页冒险手册宫格卡同款尺寸/样式） -->
   <view class="grid">
     <view class="g-cell card tappable" bindtap="onBossAll" aria-label="BOSS 大全">
       <view class="g-art"><image class="g-img" src="/pkg-cal/assets/boss/cal_devourer.png" mode="aspectFit" /></view>
       <text class="g-name">BOSS 大全</text>
+    </view>
+    <view class="g-cell card tappable" bindtap="onItems" aria-label="物品图鉴">
+      <view class="g-art"><image class="g-img" src="{{itemIcon}}" mode="aspectFit" /></view>
+      <text class="g-name">物品图鉴</text>
     </view>
   </view>
 

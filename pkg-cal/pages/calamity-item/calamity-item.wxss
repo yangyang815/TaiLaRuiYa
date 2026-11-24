@@ -1,0 +1,63 @@
+@import "../../style/cal-common.wxss";
+
+/* 分类 tab */
+.tabs { white-space: nowrap; padding: 4rpx 20rpx 0; }
+.tab {
+  display: inline-block; padding: 12rpx 26rpx; margin-right: 14rpx;
+  font-size: 26rpx; color: var(--text-faint);
+  border: 2rpx solid var(--line); border-radius: 999rpx; background: var(--card);
+}
+.tab.on { color: #fff; font-weight: 700; background: rgba(224, 82, 82, 0.9); border-color: rgba(224, 82, 82, 0.9); }
+
+/* 阶段筛选 */
+.stgs { display: flex; flex-wrap: wrap; padding: 14rpx 20rpx 0; }
+.stg {
+  padding: 8rpx 22rpx; margin: 0 14rpx 12rpx 0;
+  font-size: 24rpx; color: var(--text-faint);
+  border: 2rpx solid var(--line); border-radius: 999rpx;
+}
+.stg.on { color: #FF9C8A; border-color: rgba(224, 82, 82, 0.55); background: rgba(224, 82, 82, 0.12); font-weight: 700; }
+
+/* 搜索框 */
+.kwbox {
+  margin: 6rpx 20rpx 0; padding: 14rpx 22rpx;
+  border: 2rpx solid var(--line); border-radius: 14rpx; background: var(--card);
+  display: flex; align-items: center;
+}
+.kw { flex: 1; font-size: 26rpx; color: var(--text); }
+.kw-clear { padding: 0 8rpx; font-size: 32rpx; color: var(--text-faint); }
+
+.cnt { padding: 16rpx 24rpx 0; font-size: 20rpx; color: var(--text-faint); }
+
+/* 物品行 */
+.rows { padding: 10rpx 20rpx 0; }
+.row {
+  display: flex; align-items: center;
+  padding: 20rpx 18rpx; margin-bottom: 14rpx;
+  border: 2rpx solid var(--line); border-radius: 16rpx; background: var(--card);
+}
+.row:active { transform: scale(0.985); }
+.r-img { width: 76rpx; height: 76rpx; margin-right: 18rpx; flex-shrink: 0; }
+.r-tile {
+  width: 76rpx; height: 76rpx; margin-right: 18rpx; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12rpx; background: rgba(224, 82, 82, 0.14);
+}
+.r-tile-t { font-size: 34rpx; font-weight: 800; color: #FF9C8A; }
+.r-main { overflow: hidden; }
+.r-nameline { display: flex; align-items: center; flex-wrap: wrap; }
+.r-n { font-size: 28rpx; font-weight: 800; color: var(--text); margin-right: 10rpx; }
+.r-cls {
+  font-size: 18rpx; padding: 2rpx 10rpx; border-radius: 6rpx;
+  color: #FF9C8A; background: rgba(224, 82, 82, 0.12);
+}
+.r-en { display: block; font-size: 18rpx; color: var(--text-faint); margin-top: 4rpx; }
+.r-tip {
+  display: block; font-size: 22rpx; color: var(--text-faint); margin-top: 6rpx;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.r-side { flex-shrink: 0; text-align: right; margin-left: 12rpx; }
+.r-cat { display: block; font-size: 20rpx; color: var(--text-faint); }
+.r-rate { display: block; font-size: 20rpx; color: #FFD24A; margin-top: 6rpx; }
+
+.end { text-align: center; padding: 20rpx 0 6rpx; font-size: 20rpx; color: var(--text-faint); }

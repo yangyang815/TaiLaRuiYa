@@ -9,7 +9,8 @@ Page({
     capsuleRight: 100,
     themeClass: "",
     ver: cal.ver,
-    base: cal.base
+    base: cal.base,
+    itemIcon: "/pkg-cal/assets/item/draedons_heart.png"
   },
   onLoad () {
     const app = getApp()
@@ -25,6 +26,9 @@ Page({
   },
   onBossAll () {
     wx.navigateTo({ url: "/pkg-cal/pages/calamity-list/calamity-list?type=all" })
+  },
+  onItems () {
+    wx.navigateTo({ url: "/pkg-cal/pages/calamity-item/calamity-item" })
   },
   back () {
     const pages = getCurrentPages()

@@ -95,3 +95,6 @@
 
 /* 原生模板广告槽 */
 .ad-slot { margin: 20rpx 30rpx 0; border-radius: 16rpx; overflow: hidden; }
+
+/* 全部 Boss 攻略清单入口（攻略卡片下方小链接） */
+.guide-more { padding: 14rpx 0 2rpx; text-align: center; font-size: 24rpx; color: var(--text-faint); }

@@ -1,0 +1,87 @@
+<view class="page-root {{themeClass}} cal-root" wx:if="{{e}}">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">灾厄图鉴 · {{catName}}</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头图：对齐原版 detail 的 hero 布局（大图标 + 径向渐变光 + 类型角标 + 英文名） -->
+  <view class="hero">
+    <view class="hero-glow" />
+    <view class="hero-art pop-in">
+      <image class="hero-img" wx:if="{{icon}}" src="{{icon}}" mode="aspectFit" />
+      <view class="hero-tile" wx:else><text class="hero-tile-t">{{initial}}</text></view>
+    </view>
+    <view class="hero-meta">
+      <text class="tag">{{catName}}</text>
+      <text class="hero-en px" wx:if="{{e.en}}">{{e.en}}</text>
+    </view>
+    <text class="hero-name">{{e.n}}</text>
+  </view>
+
+  <view class="body">
+    <!-- 关键数据：2 列卡片网格（对齐原版 stat-grid） -->
+    <block wx:if="{{stats.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="sec-t">关键数据</text></view>
+      <view class="stat-grid">
+        <view class="stat card" wx:for="{{stats}}" wx:key="index">
+          <text class="st-k">{{item[0]}}</text>
+          <text class="st-v">{{item[1]}}</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 物品效果：官方工具提示 -->
+    <block wx:if="{{e.tip}}">
+      <view class="sec-title"><view class="diamond" /><text class="sec-t">物品效果</text></view>
+      <view class="tipbox card">
+        <text class="tip-line" wx:for="{{tipLines}}" wx:for-item="line" wx:for-index="li" wx:key="*this">{{line}}</text>
+      </view>
+    </block>
+
+    <!-- 效果详解：Wiki 正文核录的机制细节（仅补录条目显示） -->
+    <block wx:if="{{detailLines.length}}">
+      <view class="sec-title"><view class="diamond" /><text class="sec-t">效果详解</text><text class="sec-more px">据官方 Wiki 核录</text></view>
+      <view class="dtl card" wx:for="{{detailLines}}" wx:for-item="line" wx:for-index="li" wx:key="*this">
+        <text class="dtl-i px">{{li + 1}}</text>
+        <text class="dtl-t">{{line}}</text>
+      </view>
+    </block>
+
+    <!-- 获取方式：正文说明（对齐原版 obtain 区块） -->
+    <block wx:if="{{obText}}">
+      <view class="sec-title"><view class="diamond" /><text class="sec-t">获取方式</text></view>
+      <view class="ob-line card">{{obText}}</view>
+    </block>
+
+    <!-- 来源 Boss 入口 -->
+    <block wx:if="{{e.boss}}">
+      <view class="src card card-gold tappable" bindtap="onBoss">
+        <view class="src-col flex-1">
+          <text class="src-t">「{{bossName}}」速查与打法</text>
+          <text class="src-s">四档生命 · 召唤方式 · 打法要点 · 掉落一览</text>
+        </view>
+        <text class="src-go">›</text>
+      </view>
+    </block>
+
+    <view class="foot px">名称与效果为灾厄官方汉化原文 · 数据对照官方 Wiki 核对 · 如有出入欢迎反馈</view>
+    <view class="pad-bottom" />
+  </view>
+
+  <!-- 底部悬浮：返回列表 + 分享（对齐原版 float-btns） -->
+  <view class="float-btns safe-bottom">
+    <view class="fb fb-back tappable" bindtap="back">‹ 返回列表</view>
+    <button class="fb fb-share" open-type="share">↗ 分享</button>
+  </view>
+</view>
+
+<view class="page-root {{themeClass}} cal-root" wx:else>
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">灾厄图鉴</text>
+    <view class="nav-ph" />
+  </view>
+  <view class="miss card"><text class="miss-t">未找到该物品，可能条目已更新</text></view>
+</view>

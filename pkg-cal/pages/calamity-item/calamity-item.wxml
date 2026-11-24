@@ -1,0 +1,54 @@
+<view class="page-root {{themeClass}} cal-root">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">灾厄物品图鉴</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="hero">
+    <text class="hero-t px">ITEM CODEX</text>
+    <text class="hero-s">共 {{totalAll}} 条 · 官方译名与工具提示</text>
+  </view>
+
+  <!-- 分类 tab -->
+  <scroll-view class="tabs" scroll-x show-scrollbar="{{false}}">
+    <view class="tab {{cat === t.k ? 'on' : ''}} tappable" wx:for="{{tabs}}" wx:for-item="t" wx:key="k" bindtap="onCat" data-k="{{t.k}}">{{t.n}}</view>
+  </scroll-view>
+
+  <!-- 阶段筛选 -->
+  <view class="stgs">
+    <view class="stg {{stg === s.k ? 'on' : ''}} tappable" wx:for="{{stgs}}" wx:for-item="s" wx:key="k" bindtap="onStg" data-k="{{s.k}}">{{s.n}}</view>
+  </view>
+
+  <!-- 本地搜索 -->
+  <view class="kwbox">
+    <input class="kw" value="{{kw}}" placeholder="搜名称 / 英文名" confirm-type="search" bindinput="onKw" />
+    <text class="kw-clear tappable" wx:if="{{kw}}" bindtap="clearKw">×</text>
+  </view>
+
+  <view class="cnt px">匹配 {{rows.length || shown}} 件</view>
+
+  <!-- 物品行 -->
+  <view class="rows">
+    <view class="row card tappable" wx:for="{{rows}}" wx:key="id" bindtap="onItem" data-id="{{item.id}}">
+      <image class="r-img" wx:if="{{item.hasIcon}}" src="{{item.icon}}" mode="aspectFit" />
+      <view class="r-tile" wx:else><text class="r-tile-t">{{item.initial}}</text></view>
+      <view class="r-main flex-1">
+        <view class="r-nameline">
+          <text class="r-n">{{item.n}}</text>
+          <text class="r-cls" wx:if="{{item.clsName}}">{{item.clsName}}</text>
+        </view>
+        <text class="r-en px">{{item.en}}</text>
+        <text class="r-tip px" wx:if="{{item.tip1}}">{{item.tip1}}</text>
+      </view>
+      <view class="r-side">
+        <text class="r-cat">{{item.catName}}</text>
+        <text class="r-rate" wx:if="{{item.rate}}">{{item.rate}}</text>
+      </view>
+    </view>
+    <view class="end px" wx:if="{{shown >= rows.length && rows.length}}">— 已加载全部 {{shown}} 件 —</view>
+  </view>
+
+  <view class="foot px">名称与效果取自灾厄官方汉化包 · 掉率对照官方 Wiki · ver {{ver}}</view>
+</view>

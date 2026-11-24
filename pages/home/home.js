@@ -154,6 +154,16 @@ function buildSlides(weekly) {
       artId: "npc_guide",
       glow: "#4CE0E0",
       go: "guide"
+    },
+    {
+      k: "bossguide",
+      ico: "📖",
+      tag: "深度攻略",
+      title: Object.keys(bossGuides.GUIDES).length + " 个 Boss 图文攻略",
+      sub: "打法准备 · 攻击方式 · 掉落一应俱全",
+      artId: "boss_moon_lord",
+      glow: "#B06BE0",
+      go: "bossguide"
     }
   ];
   return slides.filter(Boolean);
@@ -582,6 +592,7 @@ Page({
     if (slide.go === "msgs") this.goMsgs();
     else if (slide.go === "weekly") this.onWeeklyTap();
     else if (slide.go === "guide") this.goGuide();
+    else if (slide.go === "bossguide") wx.navigateTo({ url: "/pages/bossguide/bossguide" });
   },
   onRecentTap(e) {
     const id = e.currentTarget.dataset.id;

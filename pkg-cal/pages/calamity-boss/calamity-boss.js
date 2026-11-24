@@ -1,6 +1,41 @@
 // 灾厄 Boss 速查详情页：一个页面按 id 渲染全部 26 张卡
 const cal = require("../../data/calamity-bosses")
 const BOSS_ICONS = require("../../data/calamity-icons")
+const ITEMS = require("../../data/calamity-items")
+
+// 灾厄物品名 → id 索引（长度降序正则，对齐原版 dex.linkify 模式）：掉落文本里的物品名自动可点
+let _lk = null
+function calLinkIndex () {
+  if (_lk) return _lk
+  const names = []
+  const map = {}
+  ITEMS.items.forEach((i) => {
+    if (i.n && i.n.length >= 2 && !map[i.n]) { map[i.n] = i.id; names.push(i.n) }
+  })
+  names.sort((a, b) => b.length - a.length)
+  const re = new RegExp(
+    "(" + names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")",
+    "g"
+  )
+  _lk = { re: re, map: map }
+  return _lk
+}
+function linkify (text) {
+  const out = []
+  if (!text) return out
+  const s = String(text)
+  const lk = calLinkIndex()
+  lk.re.lastIndex = 0
+  let last = 0
+  let m
+  while ((m = lk.re.exec(s)) !== null) {
+    if (m.index > last) out.push({ ref: false, s: s.slice(last, m.index) })
+    out.push({ ref: true, s: m[0], id: lk.map[m[0]] })
+    last = m.index + m[0].length
+  }
+  if (last < s.length) out.push({ ref: false, s: s.slice(last) })
+  return out
+}
 
 Page({
   data: {
@@ -10,7 +45,9 @@ Page({
     b: null,
     stageN: "",
     worldTag: "",
-    next: null
+    next: null,
+    dropLinks: [],
+    hasDropLink: false
   },
   onLoad (options) {
     const app = getApp()
@@ -30,12 +67,19 @@ Page({
     if (!b) { wx.navigateBack(); return }
     const st = cal.stages.find(s => s.id === b.stage) || { n: "" }
     const nb = b.nextId ? cal.bosses.find(x => x.id === b.nextId) : null
+    const dropLinks = (b.drops || []).map(line => linkify(line))
     this.setData({
       b: Object.assign({}, b, { icon: BOSS_ICONS[b.id] || "" }),
       stageN: st.n,
       worldTag: b.world ? cal.worldName[b.world] : "",
-      next: nb ? { id: nb.id, n: nb.n, en: nb.en, icon: BOSS_ICONS[nb.id] || "" } : null
+      next: nb ? { id: nb.id, n: nb.n, en: nb.en, icon: BOSS_ICONS[nb.id] || "" } : null,
+      dropLinks: dropLinks,
+      hasDropLink: dropLinks.some(row => row.some(seg => seg.ref))
     })
+  },
+  onLinkTap (e) {
+    const id = e.currentTarget.dataset.id
+    if (id) wx.navigateTo({ url: "/pkg-cal/pages/calamity-item-detail/calamity-item-detail?id=" + id })
   },
   onNext (e) {
     const id = e.currentTarget.dataset.id

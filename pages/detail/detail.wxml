@@ -137,6 +137,9 @@
       </view>
       <text class="ce-go">›</text>
     </view>
+    <view class="guide-more tappable" wx:if="{{isBoss && hasGuide}}" bindtap="goGuideList">
+      <text>浏览全部 Boss 图文攻略 ›</text>
+    </view>
 
     <!-- 获取方式速查入口 -->
     <view class="craft-entry card card-gold tappable" wx:if="{{isItem && hasAcq}}" bindtap="goAcq">

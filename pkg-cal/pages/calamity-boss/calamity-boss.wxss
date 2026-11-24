@@ -16,3 +16,7 @@
   border-radius: 16rpx;
 }
 .share-cta::after { border: none; }
+
+/* 掉落物内嵌链接（对齐原版 detail 页 lnk，灾厄金配色） */
+.lnk { color: #FFD24A; font-weight: 700; border-bottom: 2rpx solid rgba(255, 210, 74, 0.45); }
+.d-hint { margin-left: auto; font-size: 20rpx; color: var(--text-faint); }
