@@ -437,7 +437,7 @@ Page({
     if (!e.currentTarget.dataset.expandable) return;
     if (this._wikiOpen.has(key)) this._wikiOpen.delete(key);
     else this._wikiOpen.add(key);
-    this.setData({ wikiRows: wikiCraft.rows(this._wikiIdx, this._wikiEn, this._wikiOpen) });
+    this.setData({ wikiRows: wikiCraft.rows(this._wikiIdx, this._wikiEn, this._wikiOpen, this._wikiVarI) });
   },
   onWikiMatTap(e) {
     const { f: f, en: en } = e.currentTarget.dataset;

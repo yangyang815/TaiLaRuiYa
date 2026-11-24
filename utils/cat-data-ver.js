@@ -1,2 +1,2 @@
 // 自动生成：图鉴数据分卷版本（内容 hash，勿手改；改哪卷失效哪卷缓存）
-module.exports = {"v1":"77accd131b","v2":"4af1b34d52","v3":"552f550f32"}
+module.exports = {"v1":"77accd131b","v2":"ca638cc6c1","v3":"552f550f32"}

@@ -34,11 +34,12 @@ function rows(idx, rootEn, openSet, variantIdx) {
   const rootRec = idx.rec[rootEn];
   if (!rootRec || !rootRec.length) return out;
   const v = rootRec[Math.min(variantIdx || 0, rootRec.length - 1)];
-  const walk = (en, depth, path, keyPrefix) => {
+  const walk = (en, depth, path, keyPrefix, isRoot) => {
     if (depth > 12) return;
     const rec = idx.rec[en];
-    const v2 = rec && rec[0];
-    if (!v2) return;
+    if (!rec || !rec.length) return;
+    // 根节点用所选变体（切换配方按钮生效），嵌套材料节点恒用首个变体（现行版本配方）
+    const v2 = isRoot ? v : rec[0];
     (v2.i || []).forEach((slot, si) => {
       const key = keyPrefix + "/" + si;
       const alt = craftableAlt(idx, slot);
@@ -78,7 +79,7 @@ function rows(idx, rootEn, openSet, variantIdx) {
       });
     }
   };
-  walk(rootEn, 0, [], "r");
+  walk(rootEn, 0, [], "r", true);
   return out;
 }
 function rootInfo(idx, rootEn) {
