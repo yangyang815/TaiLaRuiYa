@@ -1,0 +1,50 @@
+@import "../../style/cal-common.wxss";
+
+/* 职业切换 chips（对齐 pkgA-tool 职业养成页的 chip 风格，灾厄配色） */
+.cls-row { display: flex; flex-wrap: wrap; margin: 14rpx 4rpx 4rpx; }
+.cls-chip {
+  display: flex; align-items: center;
+  padding: 12rpx 24rpx; margin: 0 14rpx 14rpx 0;
+  border: 2rpx solid var(--line); border-radius: 14rpx; background: var(--card);
+}
+.cls-chip.on { border-color: rgba(224, 82, 82, 0.55); background: rgba(224, 82, 82, 0.12); }
+.cls-chip-ico { font-size: 26rpx; margin-right: 8rpx; }
+.cls-chip-n { font-size: 25rpx; font-weight: 700; color: var(--text); }
+.cls-chip.on .cls-chip-n { color: #FF9C8A; }
+
+.intro { margin-top: 10rpx; font-size: 23rpx; color: var(--text-dim); }
+
+/* 节点卡 */
+.nd { padding: 20rpx 24rpx; margin-bottom: 14rpx; }
+.nd-head { display: flex; align-items: center; margin-bottom: 12rpx; }
+.nd-t { font-size: 28rpx; font-weight: 800; color: #FF9C8A; }
+.nd-row { display: flex; align-items: flex-start; padding: 8rpx 0; }
+.nd-k {
+  flex-shrink: 0; width: 108rpx;
+  font-size: 21rpx; color: var(--text-faint);
+  padding-top: 4rpx;
+}
+.nd-items { flex: 1; display: flex; flex-wrap: wrap; align-items: center; }
+.lnk {
+  font-size: 24rpx; font-weight: 700; color: #FFD24A;
+  border-bottom: 2rpx solid rgba(255, 210, 74, 0.45);
+  margin: 2rpx 14rpx 2rpx 0; line-height: 1.5;
+}
+.it-plain { font-size: 24rpx; color: var(--text-dim); margin: 2rpx 14rpx 2rpx 0; line-height: 1.5; }
+
+.nd-tip {
+  display: flex; align-items: flex-start;
+  margin-top: 10rpx; padding-top: 14rpx;
+  border-top: 2rpx solid var(--line);
+}
+.nd-tip-i {
+  flex-shrink: 0; font-size: 18rpx; color: #3A1410;
+  background: #E85555; padding: 2rpx 10rpx; border-radius: 6rpx; margin-right: 14rpx;
+  font-weight: 700;
+}
+.nd-tip-t { font-size: 23rpx; color: var(--text-dim); line-height: 1.7; }
+
+.pad-bottom { height: 40rpx; }
+
+/* 复合散搭分隔符 */
+.it-plus { font-size: 22rpx; color: var(--text-faint); margin: 2rpx 8rpx 2rpx 0; }

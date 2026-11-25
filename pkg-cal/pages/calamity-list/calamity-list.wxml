@@ -49,8 +49,17 @@
     </view>
   </block>
 
-  <!-- 相关内容入口：小 Boss / 原版路标 / 机制 FAQ（从专区首页移入） -->
+  <!-- 相关内容入口：深度攻略 / 小 Boss / 原版路标 / 机制 FAQ（从专区首页移入） -->
   <view class="stage-head"><text class="stage-t">相关内容</text><text class="stage-en px">MORE</text></view>
+
+  <view class="x-card tappable" bindtap="onMinor" data-type="strategy" aria-label="Boss 深度图文攻略">
+    <text class="x-ico">📖</text>
+    <view class="x-col">
+      <text class="x-t">Boss 深度图文攻略</text>
+      <text class="x-s">26 篇 · 阶段机制 / 攻击全表 / 分职业武器</text>
+    </view>
+    <text class="x-arrow">›</text>
+  </view>
 
   <view class="x-card tappable" bindtap="onMinor" data-type="minis" aria-label="小 Boss 与隐藏 Boss">
     <text class="x-ico">🦪</text>

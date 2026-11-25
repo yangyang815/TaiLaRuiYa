@@ -30,6 +30,9 @@ Page({
   onItems () {
     wx.navigateTo({ url: "/pkg-cal/pages/calamity-item/calamity-item" })
   },
+  onCareer () {
+    wx.navigateTo({ url: "/pkg-cal/pages/calamity-career/calamity-career" })
+  },
   back () {
     const pages = getCurrentPages()
     if (pages.length > 1) wx.navigateBack()

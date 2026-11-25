@@ -56,13 +56,14 @@
 .dtl-t { font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
 .sec-more { margin-left: auto; font-size: 20rpx; color: var(--text-faint); }
 
-/* 获取方式正文（对齐原版 obtain line 卡） */
-.ob-line { padding: 20rpx 26rpx; font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
+/* 获取方式正文（对齐原版 obtain line 卡；物品名可点击，灾厄金配色） */
+.ob-line { padding: 20rpx 26rpx; margin-bottom: 16rpx; font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
+.lnk { color: #FFD24A; font-weight: 700; border-bottom: 2rpx solid rgba(255, 210, 74, 0.45); }
 
 /* 来源 Boss 入口卡 */
 .src {
   position: relative; display: flex; align-items: center;
-  padding: 22rpx 24rpx;
+  padding: 22rpx 24rpx; margin-bottom: 8rpx;
 }
 .src-col { min-width: 0; }
 .src-t { font-size: 27rpx; font-weight: 800; color: var(--gold); }

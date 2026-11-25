@@ -1,0 +1,116 @@
+<view class="page-root {{themeClass}} cal-root" wx:if="{{st}}">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">深度攻略</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头部：Boss 图标 + 标题 -->
+  <view class="d-head">
+    <image class="d-ico" src="{{icon}}" mode="aspectFit" />
+    <view class="d-headcol">
+      <view class="d-nameline">
+        <text class="d-name">{{b.n}}</text>
+        <text class="d-en px">{{b.en}}</text>
+      </view>
+      <view class="d-badges"><text class="d-badge warn">开战前 5 分钟阅读</text></view>
+    </view>
+  </view>
+
+  <!-- ① Boss 概述与阶段机制 -->
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">阶段机制</text></view>
+  <view class="txt-box card">{{st.phases}}</view>
+
+  <!-- ② 攻击方式全表 -->
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">攻击方式全表</text></view>
+  <view class="atk card" wx:for="{{st.attacks}}" wx:key="index">
+    <view class="atk-head">
+      <text class="atk-n">{{item.name}}</text>
+      <text class="atk-dmg px">{{item.dmg}}</text>
+    </view>
+    <text class="atk-d">{{item.dodge}}</text>
+  </view>
+
+  <!-- ③ 场地与准备 -->
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">场地与准备</text></view>
+  <view class="txt-box card">{{st.prep}}</view>
+
+  <!-- ④ 分职业武器推荐 -->
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">分职业武器推荐</text><text class="sec-more px">点击查看详情</text></view>
+  <view class="cls-rec card" wx:for="{{classRecs}}" wx:for-item="grp" wx:key="clsName">
+    <text class="cls-tag">{{grp.clsName}}</text>
+    <view class="cls-items">
+      <view class="cls-item tappable" wx:for="{{grp.items}}" wx:for-item="w" wx:key="id" bindtap="onItem" data-id="{{w.id}}">
+        <image class="cls-ico" src="{{w.icon}}" mode="aspectFit" />
+        <text class="cls-n">{{w.n}}</text>
+        <text class="cls-dmg px" wx:if="{{w.dmg}}">{{w.dmg}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ⑤ 常见死因与对策 -->
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">常见死因与对策</text></view>
+  <view class="dtl card" wx:for="{{st.deaths}}" wx:for-item="line" wx:for-index="di" wx:key="*this">
+    <text class="dtl-i px">{{di + 1}}</text>
+    <text class="dtl-t">{{line}}</text>
+  </view>
+
+  <!-- ⑥ 战后发展 -->
+  <view class="sec-title"><view class="diamond" /><text class="sec-t">战后发展</text></view>
+  <view class="txt-box card">{{st.after}}</view>
+
+  <!-- 下一站 -->
+  <view class="sec-title" wx:if="{{next}}"><view class="diamond" /><text class="sec-t">下一站</text></view>
+  <view class="next-row tappable" wx:if="{{next}}" bindtap="onNext" data-id="{{next.id}}">
+    <image class="next-ico" src="{{next.icon}}" mode="aspectFit" />
+    <view class="col flex-1">
+      <text class="next-n">{{next.n}}</text>
+      <text class="next-sub px">查看该 Boss 的深度攻略 ›</text>
+    </view>
+  </view>
+
+  <view class="foot px">数据对照灾厄中文维基核对 · 伤害为经典/专家两档 · 如有出入欢迎反馈</view>
+  <view class="pad-bottom" />
+</view>
+
+<view class="page-root {{themeClass}} cal-root" wx:elif="{{mode === 'index'}}">
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">深度攻略</text>
+    <view class="nav-ph" />
+  </view>
+
+  <view class="d-head">
+    <view class="d-headcol">
+      <view class="d-nameline"><text class="d-name">Boss 深度攻略</text></view>
+      <view class="d-badges"><text class="d-badge warn">全部 {{total}} 篇 · 开战前 5 分钟阅读</text></view>
+    </view>
+  </view>
+
+  <view class="txt-box card idx-intro">每篇含：阶段机制（血量阈值）· 攻击方式全表 · 场地准备 · 分职业武器推荐（可点跳图鉴）· 常见死因对策 · 战后发展。也可在各 Boss 速查页底部进入。</view>
+
+  <block wx:for="{{indexRows}}" wx:for-item="grp" wx:key="stgN">
+    <view class="stage-head"><text class="stage-t">{{grp.stgN}}</text><text class="stage-en px">{{grp.rows.length}} 篇</text></view>
+    <view class="idx-row tappable" wx:for="{{grp.rows}}" wx:for-item="b" wx:key="id" bindtap="onPick" data-id="{{b.id}}" aria-label="{{b.n}}深度攻略">
+      <image class="idx-ico" src="{{b.icon}}" mode="aspectFit" />
+      <view class="col flex-1">
+        <text class="idx-n">{{b.n}}</text>
+        <text class="idx-en px">{{b.en}}</text>
+      </view>
+      <text class="idx-go">›</text>
+    </view>
+  </block>
+
+  <view class="foot px">数据对照灾厄中文维基核对 · 伤害为经典/专家两档</view>
+  <view class="pad-bottom" />
+</view>
+
+<view class="page-root {{themeClass}} cal-root" wx:else>
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">深度攻略</text>
+    <view class="nav-ph" />
+  </view>
+  <view class="miss card"><text class="miss-t">该 Boss 的深度攻略正在整理中</text></view>
+</view>

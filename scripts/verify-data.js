@@ -316,6 +316,30 @@ try {
   const badBoss = calItems.items.filter(i => i.boss && !ids.includes(i.boss))
   if (badBoss.length) throw new Error('物品 boss 引用悬空: ' + badBoss.map(i => i.id).join(', '))
   ok('灾厄物品图鉴 ' + calItems.items.length + ' 条字段完整、boss 引用有效')
+  // 模块 B：26 篇深度攻略全覆盖断言
+  const strat = require('../pkg-cal/data/calamity-strategies')
+  const stratMiss = ids.filter(id => !strat.strategies[id])
+  if (stratMiss.length) throw new Error('深度攻略缺篇: ' + stratMiss.join(', '))
+  const stratBad = Object.entries(strat.strategies).filter(([k, v]) => !v.phases || !(v.attacks || []).length || !v.prep || !(v.deaths || []).length || !v.after)
+  if (stratBad.length) throw new Error('攻略字段不完整: ' + stratBad.map(([k]) => k).join(', '))
+  ok('Boss 深度攻略 ' + Object.keys(strat.strategies).length + ' 篇全覆盖、字段完整')
+  // 模块 C：职业配装断言（5 职业 × 每组 5/7/7 节点，物品名非空）
+  const careers = require('../pkg-cal/data/calamity-careers')
+  if (careers.classes.length !== 5) throw new Error('职业配装应为 5 职业，实际 ' + careers.classes.length)
+  const EXPECT = { pre: 5, hm: 7, ml: 7 }
+  const carBad = []
+  careers.classes.forEach((c) => {
+    EXPECT.pre !== void 0 && ['pre', 'hm', 'ml'].forEach((g) => {
+      const n = c.nodes.filter((nd) => nd.g === g).length
+      if (n !== EXPECT[g]) carBad.push(c.id + '/' + g + '=' + n)
+    })
+    c.nodes.forEach((nd) => {
+      if (!nd.n || !nd.tip) carBad.push(c.id + '/' + nd.n + ' 缺 n/tip')
+      ;[].concat(nd.armor || [], nd.weapons || [], nd.accs || []).forEach((x) => { if (!x || typeof x !== 'string') carBad.push(c.id + ' 空物品名') })
+    })
+  })
+  if (carBad.length) throw new Error('职业配装异常: ' + carBad.slice(0, 6).join('; '))
+  ok('职业配装 5 职业 × ' + careers.classes[0].nodes.length + ' 节点全覆盖、字段完整')
   const iconManifest = require('../pkg-cal/data/calamity-item-icons')
   const iconKeys = Object.keys(iconManifest)
   const iconMissing = iconKeys.filter(k => !fs.existsSync(path.join(__dirname, '..', 'pkg-cal', 'assets', 'item', k + '.png')))

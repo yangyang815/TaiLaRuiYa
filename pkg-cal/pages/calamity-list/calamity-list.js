@@ -99,7 +99,10 @@ Page({
   // 相关内容入口（BOSS 大全页底部）：小 Boss / 原版路标 → 本页其它 type；机制 FAQ → 独立页
   onMinor (e) {
     const type = e.currentTarget.dataset.type
-    if (type === "guide") {
+    if (type === "strategy") {
+      // 无 id → 攻略页目录模式（26 篇分组列表）
+      wx.navigateTo({ url: "/pkg-cal/pages/calamity-strategy/calamity-strategy" })
+    } else if (type === "guide") {
       wx.navigateTo({ url: "/pkg-cal/pages/calamity-guide/calamity-guide" })
     } else {
       wx.navigateTo({ url: "/pkg-cal/pages/calamity-list/calamity-list?type=" + type })

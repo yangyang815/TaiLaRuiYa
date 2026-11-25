@@ -1,1 +1,12 @@
 @import "../../style/cal-common.wxss";
+
+/* 职业配装入口卡（复用 Boss 页 strat-cta 风格） */
+.strat-cta {
+  display: flex; align-items: center;
+  padding: 22rpx 24rpx; margin-top: 16rpx;
+  border: 2rpx solid rgba(224, 82, 82, 0.45); border-radius: 16rpx;
+  background: linear-gradient(120deg, rgba(224, 82, 82, 0.14), rgba(122, 66, 204, 0.10));
+}
+.strat-t { font-size: 27rpx; font-weight: 800; color: #FF9C8A; }
+.strat-s { display: block; font-size: 20rpx; color: var(--text-faint); margin-top: 6rpx; }
+.strat-go { color: #FF9C8A; font-size: 36rpx; margin-left: 16rpx; }

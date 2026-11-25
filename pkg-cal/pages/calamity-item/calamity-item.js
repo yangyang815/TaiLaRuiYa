@@ -8,6 +8,7 @@ const TABS = [
   { k: "weapon", n: "武器" },
   { k: "accessory", n: "饰品" },
   { k: "potion", n: "药水" },
+  { k: "material", n: "材料" },
   { k: "summon", n: "召唤宠物", cats: ["summon", "pet", "mount"] },
   { k: "armor", n: "盔甲" }
 ]

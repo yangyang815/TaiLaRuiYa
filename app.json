@@ -120,6 +120,8 @@
         "pages/calamity/calamity",
         "pages/calamity-list/calamity-list",
         "pages/calamity-boss/calamity-boss",
+        "pages/calamity-strategy/calamity-strategy",
+        "pages/calamity-career/calamity-career",
         "pages/calamity-guide/calamity-guide",
         "pages/calamity-item/calamity-item",
         "pages/calamity-item-detail/calamity-item-detail"
@@ -149,7 +151,7 @@
     "pages/home/home": {
       "network": "wifi",
       "packages": [
-        "cat1"
+        "pkg-cal"
       ]
     },
     "pages/search/search": {

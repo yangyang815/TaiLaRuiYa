@@ -21,6 +21,10 @@
       <view class="g-art"><image class="g-img" src="{{itemIcon}}" mode="aspectFit" /></view>
       <text class="g-name">物品图鉴</text>
     </view>
+    <view class="g-cell card tappable" bindtap="onCareer" aria-label="职业配装">
+      <view class="g-art"><image class="g-img" src="/pkg-cal/assets/boss/cal_providence.png" mode="aspectFit" /></view>
+      <text class="g-name">职业配装</text>
+    </view>
   </view>
 
   <view class="foot px">数据基准 {{base}} · {{ver}} 对照官方 Wiki 核对 · 中文名为社区通用译名</view>

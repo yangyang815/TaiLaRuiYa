@@ -13,6 +13,15 @@
     </view>
   </block>
 
+  <!-- 职业配装入口（二期模块 C） -->
+  <view class="strat-cta tappable" bindtap="goCareer">
+    <view class="col flex-1">
+      <text class="strat-t">⚔️ 查看「五职业配装指南」</text>
+      <text class="strat-s">近战 / 远程 / 魔法 / 召唤 / 盗贼 · 14 个进度节点</text>
+    </view>
+    <text class="strat-go">›</text>
+  </view>
+
   <view class="sec-title"><view class="diamond" /><text class="sec-t">新手 FAQ</text></view>
   <view class="faq-box card">
     <view class="faq-item" wx:for="{{faq}}" wx:for-item="f" wx:key="q">

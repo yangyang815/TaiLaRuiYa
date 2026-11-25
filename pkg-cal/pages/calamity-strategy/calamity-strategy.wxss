@@ -1,0 +1,66 @@
+@import "../../style/cal-common.wxss";
+
+/* 头部（复用 cal-common 的 d-head/d-ico） */
+.d-head { padding: 8rpx 4rpx 4rpx; display: flex; align-items: center; }
+
+/* 文本区块（阶段机制/场地准备/战后发展） */
+.txt-box { padding: 20rpx 24rpx; font-size: 25rpx; color: var(--text); line-height: 1.75; }
+
+/* 攻击方式全表 */
+.atk { padding: 16rpx 22rpx; margin-bottom: 14rpx; }
+.atk-head { display: flex; align-items: center; justify-content: space-between; }
+.atk-n { font-size: 26rpx; font-weight: 700; color: var(--text); }
+.atk-dmg { font-size: 20rpx; color: #FF9C8A; }
+.atk-d { display: block; margin-top: 8rpx; font-size: 24rpx; color: var(--text-dim); line-height: 1.6; }
+
+/* 分职业武器推荐 */
+.cls-rec { padding: 18rpx 22rpx; margin-bottom: 14rpx; }
+.cls-tag {
+  display: inline-block; font-size: 20rpx; font-weight: 700; color: #FFD24A;
+  border: 2rpx solid rgba(255, 210, 74, 0.45); background: rgba(255, 210, 74, 0.1);
+  padding: 4rpx 14rpx; border-radius: 8rpx;
+}
+.cls-items { display: flex; flex-wrap: wrap; margin-top: 14rpx; }
+.cls-item {
+  display: flex; align-items: center;
+  border: 2rpx solid var(--line); border-radius: 10rpx;
+  background: var(--card); padding: 8rpx 14rpx; margin: 0 12rpx 10rpx 0;
+}
+.cls-ico { width: 44rpx; height: 44rpx; margin-right: 10rpx; }
+.cls-n { font-size: 24rpx; color: var(--text); }
+.cls-dmg { font-size: 18rpx; color: var(--text-faint); margin-left: 10rpx; }
+
+/* 死因对策（复用详情页 dtl 卡风格） */
+.dtl { display: flex; align-items: flex-start; padding: 16rpx 22rpx; margin-bottom: 14rpx; }
+.dtl-i {
+  flex-shrink: 0; font-size: 18rpx; color: #3A1410;
+  background: #E85555; padding: 2rpx 10rpx; border-radius: 6rpx; margin-right: 16rpx;
+  font-weight: 700;
+}
+.dtl-t { font-size: 25rpx; color: var(--text-dim); line-height: 1.7; }
+.sec-more { margin-left: auto; font-size: 20rpx; color: var(--text-faint); }
+
+/* 下一站 */
+.next-row {
+  display: flex; align-items: center; padding: 20rpx 24rpx;
+  border: 2rpx solid rgba(255, 215, 0, 0.35); border-radius: 16rpx; background: var(--card);
+}
+.next-n { font-size: 28rpx; font-weight: 800; color: var(--gold, #FFD700); }
+.next-sub { font-size: 20rpx; color: var(--text-dim); margin-top: 6rpx; display: block; }
+
+.miss { margin: 30rpx 0; padding: 30rpx; text-align: center; }
+.miss-t { font-size: 26rpx; color: var(--text-faint); }
+
+.pad-bottom { height: 40rpx; }
+
+/* 目录模式（无 id 进入）：26 篇按阶段分组 */
+.idx-intro { margin-top: 10rpx; font-size: 23rpx; color: var(--text-dim); }
+.idx-row {
+  display: flex; align-items: center;
+  padding: 18rpx 22rpx; margin-bottom: 12rpx;
+  border: 2rpx solid var(--line); border-radius: 14rpx; background: var(--card);
+}
+.idx-ico { width: 72rpx; height: 72rpx; margin-right: 18rpx; flex-shrink: 0; }
+.idx-n { font-size: 27rpx; font-weight: 700; color: var(--text); }
+.idx-en { display: block; font-size: 20rpx; color: var(--text-faint); margin-top: 4rpx; }
+.idx-go { color: #FF9C8A; font-size: 34rpx; margin-left: 12rpx; }

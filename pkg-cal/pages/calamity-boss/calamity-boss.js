@@ -87,6 +87,10 @@ Page({
     this.load(id)
     wx.pageScrollTo({ scrollTop: 0, duration: 0 })
   },
+  goStrategy () {
+    const b = this.data.b
+    if (b && b.id) wx.navigateTo({ url: "/pkg-cal/pages/calamity-strategy/calamity-strategy?id=" + b.id })
+  },
   back () {
     const pages = getCurrentPages()
     if (pages.length > 1) wx.navigateBack()

@@ -32,7 +32,7 @@
   <!-- 物品行 -->
   <view class="rows">
     <view class="row card tappable" wx:for="{{rows}}" wx:key="id" bindtap="onItem" data-id="{{item.id}}">
-      <image class="r-img" wx:if="{{item.hasIcon}}" src="{{item.icon}}" mode="aspectFit" />
+      <image class="r-img" wx:if="{{item.hasIcon}}" src="{{item.icon}}" mode="aspectFit" lazy-load="{{true}}" />
       <view class="r-tile" wx:else><text class="r-tile-t">{{item.initial}}</text></view>
       <view class="r-main flex-1">
         <view class="r-nameline">

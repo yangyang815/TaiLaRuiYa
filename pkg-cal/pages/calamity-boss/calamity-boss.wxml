@@ -45,8 +45,7 @@
   </view>
 
   <view class="sec-title" wx:if="{{next}}"><view class="diamond" /><text class="sec-t">下一站</text></view>
-  <view class="next-row tappable" wx:if="{{next}}" bindtap="onNext" data-id="{{next.id}}">
-    <image class="next-ico" src="{{next.icon}}" mode="aspectFit" />
+  <view class="next-row tappable" wx:if="{{next}}" bindtap="onNext" data-id="{{next.id}}">    <image class="next-ico" src="{{next.icon}}" mode="aspectFit" />
     <view class="col flex-1">
       <text class="next-n">{{next.n}}</text>
       <text class="next-en px">{{next.en}}</text>
@@ -54,6 +53,15 @@
     <text class="b-arrow">›</text>
   </view>
   <text class="mb-note" wx:if="{{!next}}">{{b.nextText}}</text>
+
+  <!-- 深度攻略入口（二期模块 B）：开战前 5 分钟阅读 -->
+  <view class="strat-cta tappable" bindtap="goStrategy">
+    <view class="col flex-1">
+      <text class="strat-t">📖 查看「{{b.n}}」深度攻略</text>
+      <text class="strat-s">阶段机制 · 攻击全表 · 分职业武器 · 死因对策</text>
+    </view>
+    <text class="strat-go">›</text>
+  </view>
 
   <button class="share-cta" open-type="share">↗ 把这份速查分享给队友</button>
 

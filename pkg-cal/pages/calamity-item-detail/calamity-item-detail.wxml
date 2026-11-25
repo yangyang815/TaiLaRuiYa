@@ -49,10 +49,18 @@
       </view>
     </block>
 
-    <!-- 获取方式：正文说明（对齐原版 obtain 区块） -->
+    <!-- 用途：合成去向（材料条目反查生成） -->
+    <block wx:if="{{e.use}}">
+      <view class="sec-title"><view class="diamond" /><text class="sec-t">用途</text></view>
+      <view class="ob-line card">{{e.use}}</view>
+    </block>
+
+    <!-- 获取方式：正文说明（对齐原版 obtain 区块，物品名可点击跳转） -->
     <block wx:if="{{obText}}">
-      <view class="sec-title"><view class="diamond" /><text class="sec-t">获取方式</text></view>
-      <view class="ob-line card">{{obText}}</view>
+      <view class="sec-title"><view class="diamond" /><text class="sec-t">获取方式</text><text class="sec-more px">点击物品名可跳转</text></view>
+      <view class="ob-line card">
+        <block wx:for="{{obLinks}}" wx:for-item="seg" wx:for-index="si" wx:key="si"><text wx:if="{{!seg.cal && !seg.dex}}">{{seg.s}}</text><text wx:else class="lnk tappable" bindtap="onLinkTap" data-cal="{{seg.cal}}" data-dex="{{seg.dex}}">{{seg.s}}</text></block>
+      </view>
     </block>
 
     <!-- 来源 Boss 入口 -->

@@ -34,8 +34,8 @@ module.exports = {
         "材料（100%）：珍珠碎片 25-30、珊瑚 25-30、贝壳 25-30、海星 25-30、沙块 5-15",
         "沙尘披风 25%；海波项链 100%（专家）；战后解锁沙暴与巨蛤生成"
       ],
-      nextText: "史莱姆之神（灾厄肉前收尾）",
-      nextId: "cal_slime_god"
+      nextText: "菌生蟹（Crabulon）",
+      nextId: "cal_crabulon"
     },
     {
       id: "cal_crabulon", n: "菌生蟹", en: "Crabulon", stage: "pre", order: 2, world: "",
@@ -342,8 +342,8 @@ module.exports = {
         "浊火精华 15-20（100%）；正义战旗 100%（专家）",
         "超级治疗药水"
       ],
-      nextText: "亵渎天神（Providence）",
-      nextId: "cal_providence"
+      nextText: "痴愚金龙（Dragonfolly）",
+      nextId: "cal_dragonfolly"
     },
     {
       id: "cal_dragonfolly", n: "痴愚金龙", en: "Dragonfolly", stage: "ml", order: 2, world: "",
@@ -387,8 +387,8 @@ module.exports = {
         "神圣晶石 50-60、浊火精华 30-40（100%）；纯元怒焰 10%",
         "极乐之翼、极乐之庇护 100%；普罗维登斯神印（首杀 100%，解锁三神之仆从）"
       ],
-      nextText: "风暴编织者 / 无尽虚空 / 神之使徒西格纳斯（三选一顺序自由）",
-      nextId: "cal_storm_weaver"
+      nextText: "无尽虚空（Ceaseless Void），三使徒顺序可自由选择",
+      nextId: "cal_ceaseless_void"
     },
     {
       id: "cal_storm_weaver", n: "风暴编织者", en: "Storm Weaver", stage: "ml", order: 4, world: "",
@@ -409,8 +409,8 @@ module.exports = {
         "装甲外壳 10-12（100%，合成宇宙之虫召唤神明吞噬者）",
         "弧光指环 100%（专家）；远古弑神套装三件 5%（同掉）"
       ],
-      nextText: "无尽虚空（Ceaseless Void）",
-      nextId: "cal_ceaseless_void"
+      nextText: "神之使徒西格纳斯（Signus）",
+      nextId: "cal_signus"
     },
     {
       id: "cal_ceaseless_void", n: "无尽虚空", en: "Ceaseless Void", stage: "ml", order: 5, world: "",
@@ -431,8 +431,8 @@ module.exports = {
         "暗离子体 10-12（100%，合成宇宙之虫材料）",
         "进化者 100%（专家）；远古弑神套装三件 5%（同掉）"
       ],
-      nextText: "神之使徒西格纳斯（Signus）",
-      nextId: "cal_signus"
+      nextText: "风暴编织者（Storm Weaver）",
+      nextId: "cal_storm_weaver"
     },
     {
       id: "cal_signus", n: "神之使徒西格纳斯", en: "Signus, Envoy of the Devourer", stage: "ml", order: 6, world: "",
@@ -453,8 +453,8 @@ module.exports = {
         "扭曲虚空 10-12（100%，合成宇宙之虫材料）",
         "幽灵披风 100%（专家）；远古弑神套装三件 5%（同掉）"
       ],
-      nextText: "神明吞噬者（The Devourer of Gods）",
-      nextId: "cal_devourer"
+      nextText: "噬魂幽花（Polterghast）",
+      nextId: "cal_polterghast"
     },
     {
       id: "cal_polterghast", n: "噬魂幽花", en: "Polterghast", stage: "ml", order: 7, world: "",
@@ -475,8 +475,8 @@ module.exports = {
         "毁灭之灵 20-25、灵质 30-40（100%）",
         "灾劫之尖啸 100%（专家宝袋）；战败后解锁深渊小 Boss 武器与酸雨第三层级"
       ],
-      nextText: "硫海遗爵（酸雨/钓鱼，可选）或 神明吞噬者",
-      nextId: "cal_devourer"
+      nextText: "硫海遗爵（The Old Duke）",
+      nextId: "cal_old_duke"
     },
     {
       id: "cal_old_duke", n: "硫海遗爵", en: "The Old Duke", stage: "ml", order: 8, world: "",

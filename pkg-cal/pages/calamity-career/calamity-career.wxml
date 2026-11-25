@@ -1,0 +1,100 @@
+<view class="page-root {{themeClass}} cal-root">
+
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px;">
+    <view class="back tappable" bindtap="back">‹</view>
+    <text class="nav-t">职业配装</text>
+    <view class="nav-ph" />
+  </view>
+
+  <!-- 头部：职业切换 -->
+  <view class="d-head">
+    <view class="d-headcol">
+      <view class="d-nameline">
+        <text class="d-name">{{clsIco}} {{clsN}}配装</text>
+        <text class="d-en px">{{clsEn}}</text>
+      </view>
+      <view class="d-badges"><text class="d-badge warn">{{clsDesc}}</text></view>
+    </view>
+  </view>
+  <view class="cls-row">
+    <view class="cls-chip tappable {{cls === c.id ? 'on' : ''}}" wx:for="{{classes}}" wx:key="id" wx:for-item="c" bindtap="onCls" data-id="{{c.id}}">
+      <text class="cls-chip-ico">{{c.ico}}</text>
+      <text class="cls-chip-n">{{c.n}}</text>
+    </view>
+  </view>
+
+  <view class="txt-box card intro">推荐内容对照灾厄中文维基各职业发展路线逐节点核录；物品名可点击跳转对应图鉴详情，复合散搭方案（如「头盔+胸甲+护胫」）逐件可点。</view>
+
+  <block wx:for="{{groups}}" wx:for-item="grp" wx:key="k">
+    <view class="stage-head"><text class="stage-t">{{grp.n}}</text><text class="stage-en px">{{grp.nodes.length}} 个节点</text></view>
+
+    <view class="nd card" wx:for="{{grp.nodes}}" wx:for-item="nd" wx:for-index="ni" wx:key="n">
+      <view class="nd-head"><view class="diamond" /><text class="nd-t">{{nd.n}}</text></view>
+
+      <view class="nd-row" wx:if="{{nd.armor.length}}">
+        <text class="nd-k px">盔甲</text>
+        <view class="nd-items">
+          <block wx:for="{{nd.armor}}" wx:for-item="e" wx:for-index="ei" wx:key="ei">
+            <block wx:for="{{e.parts}}" wx:for-item="s" wx:for-index="pi" wx:key="pi">
+              <text wx:if="{{pi > 0}}" class="it-plus">+</text>
+              <text wx:if="{{s.cal}}" class="lnk tappable" bindtap="onItem" data-cal="{{s.cal}}">{{s.n}}</text>
+              <text wx:elif="{{s.dex}}" class="lnk tappable" bindtap="onItem" data-dex="{{s.dex}}" data-t="{{s.t}}">{{s.n}}</text>
+              <text wx:elif="{{s.cat}}" class="lnk tappable" bindtap="onItem" data-cat="{{s.cat}}">{{s.n}}</text>
+              <text wx:else class="it-plain">{{s.n}}</text>
+            </block>
+          </block>
+        </view>
+      </view>
+
+      <view class="nd-row" wx:if="{{nd.weapons.length}}">
+        <text class="nd-k px">武器</text>
+        <view class="nd-items">
+          <block wx:for="{{nd.weapons}}" wx:for-item="e" wx:for-index="ei" wx:key="ei">
+            <block wx:for="{{e.parts}}" wx:for-item="s" wx:for-index="pi" wx:key="pi">
+              <text wx:if="{{pi > 0}}" class="it-plus">+</text>
+              <text wx:if="{{s.cal}}" class="lnk tappable" bindtap="onItem" data-cal="{{s.cal}}">{{s.n}}</text>
+              <text wx:elif="{{s.dex}}" class="lnk tappable" bindtap="onItem" data-dex="{{s.dex}}" data-t="{{s.t}}">{{s.n}}</text>
+              <text wx:elif="{{s.cat}}" class="lnk tappable" bindtap="onItem" data-cat="{{s.cat}}">{{s.n}}</text>
+              <text wx:else class="it-plain">{{s.n}}</text>
+            </block>
+          </block>
+        </view>
+      </view>
+
+      <view class="nd-row" wx:if="{{nd.accs.length}}">
+        <text class="nd-k px">饰品</text>
+        <view class="nd-items">
+          <block wx:for="{{nd.accs}}" wx:for-item="e" wx:for-index="ei" wx:key="ei">
+            <block wx:for="{{e.parts}}" wx:for-item="s" wx:for-index="pi" wx:key="pi">
+              <text wx:if="{{pi > 0}}" class="it-plus">+</text>
+              <text wx:if="{{s.cal}}" class="lnk tappable" bindtap="onItem" data-cal="{{s.cal}}">{{s.n}}</text>
+              <text wx:elif="{{s.dex}}" class="lnk tappable" bindtap="onItem" data-dex="{{s.dex}}" data-t="{{s.t}}">{{s.n}}</text>
+              <text wx:elif="{{s.cat}}" class="lnk tappable" bindtap="onItem" data-cat="{{s.cat}}">{{s.n}}</text>
+              <text wx:else class="it-plain">{{s.n}}</text>
+            </block>
+          </block>
+        </view>
+      </view>
+
+      <view class="nd-row" wx:if="{{nd.buffs.length}}">
+        <text class="nd-k px">增益</text>
+        <view class="nd-items">
+          <block wx:for="{{nd.buffs}}" wx:for-item="e" wx:for-index="ei" wx:key="ei">
+            <block wx:for="{{e.parts}}" wx:for-item="s" wx:for-index="pi" wx:key="pi">
+              <text wx:if="{{pi > 0}}" class="it-plus">+</text>
+              <text wx:if="{{s.cal}}" class="lnk tappable" bindtap="onItem" data-cal="{{s.cal}}">{{s.n}}</text>
+              <text wx:elif="{{s.dex}}" class="lnk tappable" bindtap="onItem" data-dex="{{s.dex}}" data-t="{{s.t}}">{{s.n}}</text>
+              <text wx:elif="{{s.cat}}" class="lnk tappable" bindtap="onItem" data-cat="{{s.cat}}">{{s.n}}</text>
+              <text wx:else class="it-plain">{{s.n}}</text>
+            </block>
+          </block>
+        </view>
+      </view>
+
+      <view class="nd-tip"><text class="nd-tip-i px">要点</text><text class="nd-tip-t">{{nd.tip}}</text></view>
+    </view>
+  </block>
+
+  <view class="foot px">推荐内容对照灾厄中文维基「各职业发展路线」逐节点核录 · 维基未给出推荐的项目省略对应行 · 未入库物品为纯文本 · 如有出入欢迎反馈</view>
+  <view class="pad-bottom" />
+</view>
